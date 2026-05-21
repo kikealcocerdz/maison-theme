@@ -1,12 +1,42 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
-  "current": {}
+  "current": {
+    "logo": null,
+    "logo_light": null,
+    "logo_width": 88,
+    "logo_alt": "La Cartuja de Sevilla",
+    "color_paper": "#FFFFFF",
+    "color_ink": "#0F1A2E",
+    "color_ink_soft": "#1F2A40",
+    "color_muted": "#6B7280",
+    "color_rule": "#D9DDE4",
+    "color_accent_1": "#9B2C3A",
+    "color_accent_2": "#B07A3B",
+    "color_accent_3": "#1F3A5F",
+    "font_serif": "eb_garamond_n4",
+    "font_sans": "montserrat_n3",
+    "fs_body": 15,
+    "content_max_width": 1600,
+    "content_viewport_width": 70,
+    "header_height_desktop": 104,
+    "header_height_mobile": 66,
+    "button_default_style": "ghost",
+    "button_border_width": 0.5,
+    "social_instagram": "",
+    "social_facebook": "",
+    "social_pinterest": "",
+    "social_youtube": "",
+    "favicon": null
+  },
+  "presets": {
+    "Default": {
+      "color_paper": "#FFFFFF",
+      "color_ink": "#0F1A2E",
+      "color_ink_soft": "#1F2A40",
+      "color_muted": "#6B7280",
+      "color_rule": "#D9DDE4",
+      "color_accent_1": "#9B2C3A",
+      "color_accent_2": "#B07A3B",
+      "color_accent_3": "#1F3A5F"
+    }
+  }
 }
