@@ -1,25 +1,32 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "type": "footer",
-  "name": "t:general.footer",
+  "name": "Footer",
   "sections": {
-    "footer": {
-      "type": "footer",
+    "footer-multicol": {
+      "type": "footer-multicol",
       "settings": {
-        "menu": "",
-        "show_payment_icons": true
-      }
+        "tagline": "La Cartuja\nde Sevilla",
+        "tagline_bottom": "Hecho en España. Editado con calma."
+      },
+      "blocks": {
+        "col-1": {
+          "type": "column",
+          "settings": { "heading": "Comprar" }
+        },
+        "col-2": {
+          "type": "column",
+          "settings": { "heading": "La casa" }
+        },
+        "col-3": {
+          "type": "text_column",
+          "settings": {
+            "heading": "Contacto",
+            "content": "<p>Atención al cliente<br>Newsletter<br>ES / EN</p>"
+          }
+        }
+      },
+      "block_order": ["col-1", "col-2", "col-3"]
     }
   },
-  "order": [
-    "footer"
-  ]
+  "order": ["footer-multicol"]
 }
