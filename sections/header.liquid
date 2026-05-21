@@ -1,7 +1,6 @@
 {%- liquid
   assign menu = linklists[section.settings.menu]
   assign logo_dark = section.settings.logo_override | default: settings.logo
-  assign logo_light = section.settings.logo_light_override | default: settings.logo_light
   assign logo_width = section.settings.logo_width_override | default: settings.logo_width
   assign logo_alt = settings.logo_alt | default: shop.name
 -%}
