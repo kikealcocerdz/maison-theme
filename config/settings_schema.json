@@ -1,82 +1,165 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Skeleton",
+    "theme_name": "Maison",
     "theme_version": "0.1.0",
-    "theme_author": "Shopify",
-    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
-    "theme_support_url": "https://support.shopify.com/"
+    "theme_author": "kikealcocerdz",
+    "theme_documentation_url": "https://github.com/kikealcocerdz/maison-theme",
+    "theme_support_url": "https://github.com/kikealcocerdz/maison-theme/issues"
   },
   {
-    "name": "t:general.typography",
+    "name": "Logo",
     "settings": [
       {
-        "type": "header",
-        "content": "t:general.fonts"
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo (dark — for light backgrounds)"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_light",
+        "label": "Logo (light — for dark backgrounds)",
+        "info": "Used over hero or other dark sections. Falls back to dark logo with CSS filter if not set."
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo width (px)",
+        "min": 40,
+        "max": 200,
+        "step": 4,
+        "default": 88
+      },
+      {
+        "type": "text",
+        "id": "logo_alt",
+        "label": "Logo alt text",
+        "default": "Maison"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_paper", "label": "Paper (page background)", "default": "#FFFFFF" },
+      { "type": "color", "id": "color_ink", "label": "Ink (primary text)", "default": "#0F1A2E" },
+      { "type": "color", "id": "color_ink_soft", "label": "Ink soft (secondary text)", "default": "#1F2A40" },
+      { "type": "color", "id": "color_muted", "label": "Muted (captions, eyebrows)", "default": "#6B7280" },
+      { "type": "color", "id": "color_rule", "label": "Rule (hairlines, borders)", "default": "#D9DDE4" },
+      { "type": "color", "id": "color_accent_1", "label": "Accent 1", "default": "#9B2C3A", "info": "Cartuja: Aurora" },
+      { "type": "color", "id": "color_accent_2", "label": "Accent 2", "default": "#B07A3B", "info": "Cartuja: Peces" },
+      { "type": "color", "id": "color_accent_3", "label": "Accent 3", "default": "#1F3A5F", "info": "Cartuja: Bellavista" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_serif",
+        "label": "Serif (display, italic quotes)",
+        "default": "eb_garamond_n4"
       },
       {
         "type": "font_picker",
-        "id": "type_primary_font",
-        "default": "work_sans_n4",
-        "label": "t:general.primary"
+        "id": "font_sans",
+        "label": "Sans-serif (body, eyebrows, CTAs)",
+        "default": "montserrat_n3"
+      },
+      {
+        "type": "range",
+        "id": "fs_body",
+        "label": "Body font size (px)",
+        "min": 13,
+        "max": 17,
+        "step": 1,
+        "default": 15
       }
     ]
   },
   {
-    "name": "t:general.layout",
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "content_max_width",
+        "label": "Content max width (px)",
+        "min": 1200,
+        "max": 1800,
+        "step": 50,
+        "default": 1600
+      },
+      {
+        "type": "range",
+        "id": "content_viewport_width",
+        "label": "Content viewport width (%)",
+        "min": 60,
+        "max": 90,
+        "step": 2,
+        "default": 70
+      },
+      {
+        "type": "range",
+        "id": "header_height_desktop",
+        "label": "Header height desktop (px)",
+        "min": 72,
+        "max": 140,
+        "step": 4,
+        "default": 104
+      },
+      {
+        "type": "range",
+        "id": "header_height_mobile",
+        "label": "Header height mobile (px)",
+        "min": 56,
+        "max": 88,
+        "step": 2,
+        "default": 66
+      }
+    ]
+  },
+  {
+    "name": "Buttons",
     "settings": [
       {
         "type": "select",
-        "id": "max_page_width",
-        "label": "t:labels.page_width",
+        "id": "button_default_style",
+        "label": "Default button style",
         "options": [
-          {
-            "value": "90rem",
-            "label": "t:options.page_width.narrow"
-          },
-          {
-            "value": "110rem",
-            "label": "t:options.page_width.wide"
-          }
+          { "value": "ghost", "label": "Ghost (outline)" },
+          { "value": "filled", "label": "Filled" },
+          { "value": "underline", "label": "Underline link (CTA)" }
         ],
-        "default": "90rem"
+        "default": "ghost"
       },
       {
         "type": "range",
-        "id": "min_page_margin",
-        "min": 10,
-        "max": 100,
-        "step": 1,
-        "unit": "px",
-        "label": "t:labels.page_margin",
-        "default": 20
+        "id": "button_border_width",
+        "label": "Ghost button border width (px)",
+        "min": 0,
+        "max": 2,
+        "step": 0.5,
+        "default": 0.5
       }
     ]
   },
   {
-    "name": "t:general.colors",
+    "name": "Social",
+    "settings": [
+      { "type": "url", "id": "social_instagram", "label": "Instagram URL" },
+      { "type": "url", "id": "social_facebook", "label": "Facebook URL" },
+      { "type": "url", "id": "social_pinterest", "label": "Pinterest URL" },
+      { "type": "url", "id": "social_youtube", "label": "YouTube URL" }
+    ]
+  },
+  {
+    "name": "Favicon",
     "settings": [
       {
-        "type": "color",
-        "id": "background_color",
-        "default": "#FFFFFF",
-        "label": "t:labels.background"
-      },
-      {
-        "type": "color",
-        "id": "foreground_color",
-        "default": "#333333",
-        "label": "t:labels.foreground"
-      },
-      {
-        "type": "range",
-        "id": "input_corner_radius",
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "unit": "px",
-        "label": "t:labels.input_corner_radius",
-        "default": 4
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "32×32 px PNG recommended."
       }
     ]
   }
