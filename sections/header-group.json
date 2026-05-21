@@ -1,22 +1,24 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "type": "header",
-  "name": "t:general.header",
+  "name": "Header",
   "sections": {
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "nav_left_limit": 2
+      }
+    },
+    "mega-menu": {
+      "type": "mega-menu",
+      "blocks": {
+        "col-1": { "type": "column", "settings": { "heading": "Producto" } },
+        "col-2": { "type": "column", "settings": { "heading": "Colecciones" } },
+        "col-3": { "type": "column", "settings": { "heading": "Editorial" } },
+        "col-4": { "type": "column", "settings": { "heading": "La casa" } },
+        "card-1": { "type": "feature_card", "settings": {} }
+      },
+      "block_order": ["col-1", "col-2", "col-3", "col-4", "card-1"]
     }
   },
-  "order": [
-    "header"
-  ],
+  "order": ["header", "mega-menu"]
 }
