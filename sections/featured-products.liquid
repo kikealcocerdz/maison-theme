@@ -1,0 +1,185 @@
+{%- liquid
+  assign cards_per_row = section.settings.cards_per_row | default: 3
+  assign collection_handle = section.settings.collection
+  assign collection_obj = collections[collection_handle]
+  assign show_arrows = section.settings.show_arrows
+  assign auto_from_collection = false
+  if collection_obj != blank and collection_obj.products.size > 0
+    assign auto_from_collection = true
+  endif
+-%}
+
+<section class="featured-products {% if section.settings.soft_bg %}soft-bg{% endif %}" data-section-id="{{ section.id }}" data-cards-per-row="{{ cards_per_row }}">
+  {%- if section.settings.heading != blank or section.settings.eyebrow != blank or section.settings.description != blank -%}
+    <div class="section-head reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
+      {%- if section.settings.description != blank -%}<p>{{ section.settings.description }}</p>{%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="featured-products__window reveal">
+    {%- if show_arrows -%}
+      <button class="nav-arrow nav-arrow--left" data-carousel-prev aria-label="{{ 'general.accessibility.previous' | t }}">{% render 'icon-arrow-left' %}</button>
+    {%- endif -%}
+    <div class="featured-products__viewport">
+      <div class="featured-products__track" data-carousel-track>
+        {%- if auto_from_collection -%}
+          {%- for product in collection_obj.products limit: 12 -%}
+            <article class="featured-products__card">
+              <a href="{{ product.url }}" class="block-product-card__link">
+                <div class="block-product-card__media block-product-card__media--portrait">
+                  {%- if product.featured_image -%}
+                    {% render 'image-responsive', image: product.featured_image, alt: product.title, sizes: '(max-width: 680px) 50vw, 25vw' %}
+                  {%- endif -%}
+                </div>
+                {%- assign meta = product.metafields.custom.meta_line | metafield_text -%}
+                {%- if meta != blank -%}<p class="block-product-card__meta">{{ meta | escape }}</p>{%- endif -%}
+                <h3 class="block-product-card__title">{{ product.title | escape }}</h3>
+                <span class="block-product-card__price">{{ product.price | money }}</span>
+              </a>
+            </article>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for block in section.blocks -%}
+            <div class="featured-products__card" {{ block.shopify_attributes }}>
+              {%- render block -%}
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+    {%- if show_arrows -%}
+      <button class="nav-arrow nav-arrow--right" data-carousel-next aria-label="{{ 'general.accessibility.next' | t }}">{% render 'icon-arrow-right' %}</button>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+.featured-products { padding: 90px 0 140px; }
+.featured-products.soft-bg { padding-top: 128px; }
+.featured-products__window { position: relative; width: var(--content); margin: 0 auto; }
+.featured-products__viewport { overflow: hidden; }
+.featured-products__track { display: flex; transition: transform 680ms var(--ease-long); }
+.featured-products__card { flex: 0 0 calc(100% / 3); padding: 0 18px; text-align: center; }
+
+.featured-products[data-cards-per-row="2"] .featured-products__card { flex-basis: 50%; }
+.featured-products[data-cards-per-row="4"] .featured-products__card { flex-basis: 25%; }
+
+.nav-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px;
+  border: 0.5px solid var(--ink); border-radius: 999px;
+  background: transparent; display: grid; place-items: center;
+  color: var(--ink); transition: all 240ms var(--ease); z-index: 3;
+}
+.nav-arrow:hover { transform: translateY(-50%) scale(1.08); }
+.nav-arrow--left { left: -64px; }
+.nav-arrow--right { right: -64px; }
+
+@media (max-width: 1100px) {
+  .featured-products__card { flex-basis: 50%; }
+  .nav-arrow--left { left: 6px; }
+  .nav-arrow--right { right: 6px; }
+}
+
+@media (max-width: 680px) {
+  .featured-products__viewport { overflow: visible; }
+  .featured-products__track {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 14px;
+    transform: none !important;
+  }
+  .featured-products__card { flex: initial !important; padding: 0 !important; min-width: 0; }
+  .featured-products__card:nth-child(n+5) { display: none; }
+  .nav-arrow { display: none; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+(function () {
+  const section = document.currentScript.previousElementSibling?.closest('.featured-products') || document.querySelector('.featured-products:not([data-init])');
+  document.querySelectorAll('.featured-products:not([data-init])').forEach(initCarousel);
+
+  function initCarousel(root) {
+    root.dataset.init = '1';
+    const track = root.querySelector('[data-carousel-track]');
+    const prev = root.querySelector('[data-carousel-prev]');
+    const next = root.querySelector('[data-carousel-next]');
+    const cardsPerRow = Number(root.dataset.cardsPerRow || 3);
+    if (!track || !prev || !next) return;
+
+    let index = 0;
+    function update() {
+      const count = track.children.length;
+      const max = Math.max(count - cardsPerRow, 0);
+      index = Math.max(0, Math.min(index, max));
+      const stepPct = 100 / cardsPerRow;
+      track.style.transform = `translateX(${-index * stepPct}%)`;
+    }
+    prev.addEventListener('click', () => { index -= 1; update(); });
+    next.addEventListener('click', () => { index += 1; update(); });
+    update();
+  }
+
+  document.addEventListener('shopify:section:load', (e) => {
+    e.target.querySelectorAll('.featured-products:not([data-init])').forEach(initCarousel);
+  });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Featured products",
+  "max_blocks": 12,
+  "blocks": [
+    { "type": "product-card" },
+    { "type": "text" },
+    { "type": "button" }
+  ],
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Emblemas de la casa" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Bestsellers" },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection (optional — overrides blocks)",
+      "info": "If set, products auto-populate from this collection (up to 12) and manual blocks are ignored."
+    },
+    {
+      "type": "range",
+      "id": "cards_per_row",
+      "label": "Cards per row (desktop)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    { "type": "checkbox", "id": "show_arrows", "label": "Show navigation arrows", "default": true },
+    { "type": "checkbox", "id": "soft_bg", "label": "Soft background", "default": false }
+  ],
+  "presets": [
+    {
+      "name": "Featured products (3-up)",
+      "settings": { "cards_per_row": 3, "soft_bg": true },
+      "blocks": [
+        { "type": "product-card" },
+        { "type": "product-card" },
+        { "type": "product-card" }
+      ]
+    },
+    {
+      "name": "Featured products (4-up)",
+      "settings": { "cards_per_row": 4, "soft_bg": false },
+      "blocks": [
+        { "type": "product-card" },
+        { "type": "product-card" },
+        { "type": "product-card" },
+        { "type": "product-card" }
+      ]
+    }
+  ]
+}
+{% endschema %}
