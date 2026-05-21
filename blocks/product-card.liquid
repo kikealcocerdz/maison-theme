@@ -1,0 +1,107 @@
+{%- liquid
+  assign product = all_products[block.settings.product]
+  assign show_price = block.settings.show_price
+  assign aspect = block.settings.aspect | default: 'portrait'
+  assign meta_line = block.settings.meta_line_override
+  if meta_line == blank and product.metafields.custom.meta_line
+    assign meta_line = product.metafields.custom.meta_line | metafield_text
+  endif
+-%}
+
+{%- if product != blank -%}
+<article class="block-product-card" {{ block.shopify_attributes }}>
+  <a href="{{ product.url }}" class="block-product-card__link">
+    <div class="block-product-card__media block-product-card__media--{{ aspect }}">
+      {%- if product.featured_image -%}
+        {% render 'image-responsive', image: product.featured_image, alt: product.title, sizes: '(max-width: 680px) 50vw, 25vw' %}
+      {%- else -%}
+        <div class="block-product-card__placeholder" aria-hidden="true"></div>
+      {%- endif -%}
+    </div>
+    {%- if meta_line != blank -%}<p class="block-product-card__meta">{{ meta_line | escape }}</p>{%- endif -%}
+    <h3 class="block-product-card__title">{{ product.title | escape }}</h3>
+    {%- if show_price -%}
+      <span class="block-product-card__price">{{ product.price | money }}</span>
+    {%- endif -%}
+  </a>
+</article>
+{%- else -%}
+  {%- comment -%} No product selected — render an empty placeholder card in theme editor only {%- endcomment -%}
+  {%- if request.design_mode -%}
+    <article class="block-product-card block-product-card--empty" {{ block.shopify_attributes }}>
+      <div class="block-product-card__placeholder block-product-card__placeholder--editor">
+        <span>Select a product</span>
+      </div>
+    </article>
+  {%- endif -%}
+{%- endif -%}
+
+{% stylesheet %}
+.block-product-card { text-align: center; }
+.block-product-card__link { display: block; }
+.block-product-card__media {
+  position: relative; overflow: hidden; background: transparent;
+  display: grid; place-items: center;
+}
+.block-product-card__media--portrait { aspect-ratio: 4/5; }
+.block-product-card__media--square { aspect-ratio: 1/1; }
+.block-product-card__media::after {
+  content: ""; position: absolute; width: 44%; height: 28px; bottom: 44px; left: 28%;
+  background: radial-gradient(ellipse, rgba(15, 26, 46, 0.12), transparent 68%);
+  filter: blur(9px);
+}
+.block-product-card__media img {
+  max-height: 300px; max-width: 80%; object-fit: contain; position: relative; z-index: 2;
+  transition: transform 700ms var(--ease); will-change: transform;
+  width: auto; height: auto;
+}
+.block-product-card:hover .block-product-card__media img { transform: translateY(-6px) scale(1.03); }
+
+.block-product-card__meta {
+  font-family: var(--sans); font-weight: 400; font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--muted); margin: 14px 0 4px;
+}
+.block-product-card__title {
+  font-family: var(--serif); font-weight: 400; font-size: 16px; line-height: 1.2;
+  color: var(--ink); margin: 0;
+}
+.block-product-card__price {
+  display: block; margin-top: 8px; font-family: var(--sans); font-weight: 300; font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.block-product-card__placeholder {
+  width: 100%; aspect-ratio: 4/5; background: var(--ink-faint-20);
+  display: grid; place-items: center;
+}
+.block-product-card__placeholder--editor {
+  font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--muted);
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product card",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    {
+      "type": "select",
+      "id": "aspect",
+      "label": "Image aspect",
+      "options": [
+        { "value": "portrait", "label": "Portrait (4:5)" },
+        { "value": "square", "label": "Square (1:1)" }
+      ],
+      "default": "portrait"
+    },
+    { "type": "checkbox", "id": "show_price", "label": "Show price", "default": true },
+    {
+      "type": "text",
+      "id": "meta_line_override",
+      "label": "Meta line override",
+      "info": "Falls back to product metafield custom.meta_line if empty."
+    }
+  ]
+}
+{% endschema %}
