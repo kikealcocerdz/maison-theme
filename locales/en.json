@@ -80,6 +80,10 @@
       "copyright": "© {{ year }} {{ shop_name }}. Made in Spain. Crafted slowly.",
       "language": "Language",
       "currency": "Currency"
+    },
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
     }
   },
   "products": {
