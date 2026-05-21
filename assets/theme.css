@@ -1,0 +1,46 @@
+/* Maison component CSS — layered below critical.css. Each section/block appends its own rules here. */
+
+/* === Layout === */
+main {
+  display: block;
+  min-height: 60vh;
+}
+
+/* === Sections placeholder === */
+.section {
+  padding: 128px 0;
+}
+
+.section.compact {
+  padding: 90px 0;
+}
+
+.section-head {
+  text-align: center;
+  margin: 0 auto 54px;
+  max-width: 820px;
+}
+
+.section-head h2 {
+  font-family: var(--serif);
+  font-size: var(--fs-h2);
+  line-height: 1.12;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  margin: 10px 0 16px;
+  color: var(--ink);
+}
+
+.section-head p {
+  margin: 0 auto;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 580px;
+}
+
+.soft-bg { background: var(--ink-faint-20); }
+
+/* Per-section CSS gets appended below in subsequent tasks. */
