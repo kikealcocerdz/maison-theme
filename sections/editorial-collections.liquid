@@ -1,0 +1,64 @@
+<section class="editorial-collections" data-section-id="{{ section.id }}">
+  {%- if section.settings.heading != blank or section.settings.eyebrow != blank or section.settings.description != blank -%}
+    <div class="section-head reveal">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
+      {%- if section.settings.description != blank -%}<p>{{ section.settings.description }}</p>{%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="editorial-collections__grid">
+    {%- for block in section.blocks -%}
+      <div class="editorial-collections__item reveal">
+        {%- render block -%}
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+    <div class="editorial-collections__cta reveal">
+      <a href="{{ section.settings.cta_link }}" class="cta">{{ section.settings.cta_label | escape }} <span aria-hidden="true">→</span></a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+.editorial-collections { padding: 142px 0 122px; background: var(--paper); }
+.editorial-collections__grid {
+  width: var(--content); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px 72px;
+}
+.editorial-collections__cta { text-align: center; margin-top: 64px; }
+
+@media (max-width: 1100px) {
+  .editorial-collections__grid { grid-template-columns: 1fr; gap: 46px; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Editorial collections",
+  "max_blocks": 6,
+  "blocks": [
+    { "type": "chapter-card" },
+    { "type": "text" }
+  ],
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Colecciones esenciales" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Tres relatos de mesa" },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Tres entradas al nuevo universo Cartuja.</p>" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Ver todas las colecciones" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "presets": [
+    {
+      "name": "Editorial triptych",
+      "blocks": [
+        { "type": "chapter-card", "settings": { "chapter": "Capítulo 01", "title": "Aurora 202 Rosa" } },
+        { "type": "chapter-card", "settings": { "chapter": "Capítulo 02", "title": "Peces" } },
+        { "type": "chapter-card", "settings": { "chapter": "Capítulo 03", "title": "Bellavista" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
