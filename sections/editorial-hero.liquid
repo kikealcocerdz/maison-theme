@@ -1,0 +1,240 @@
+<section class="editorial-hero" id="editorialHero-{{ section.id }}" data-section-id="{{ section.id }}" data-header-variant="light" aria-label="{{ section.settings.heading | escape | default: 'Hero' }}">
+  <div class="editorial-hero__sticky">
+    <div class="editorial-hero__frame">
+      {%- if section.settings.video != blank -%}
+        <video class="editorial-hero__media" autoplay muted loop playsinline poster="{%- if section.settings.image != blank -%}{{ section.settings.image | image_url: width: 1920 }}{%- endif -%}">
+          <source src="{{ section.settings.video }}" type="video/mp4">
+        </video>
+      {%- elsif section.settings.image != blank -%}
+        <img class="editorial-hero__media" src="{{ section.settings.image | image_url: width: 1920 }}"
+          srcset="{{ section.settings.image | image_url: width: 720 }} 720w, {{ section.settings.image | image_url: width: 1080 }} 1080w, {{ section.settings.image | image_url: width: 1440 }} 1440w, {{ section.settings.image | image_url: width: 1920 }} 1920w"
+          sizes="100vw"
+          alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+          loading="eager" fetchpriority="high" decoding="async"
+          width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}">
+      {%- else -%}
+        <div class="editorial-hero__placeholder" aria-hidden="true"></div>
+      {%- endif -%}
+
+      <div class="editorial-hero__noise" aria-hidden="true"></div>
+
+      <div class="editorial-hero__title">
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow editorial-hero__eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h1 class="display">{{ section.settings.heading }}</h1>{%- endif -%}
+        {%- if section.settings.subheading != blank -%}<p>{{ section.settings.subheading }}</p>{%- endif -%}
+      </div>
+
+      <div class="editorial-hero__progress" aria-hidden="true"><span></span></div>
+      <div class="editorial-hero__scroll-cue" aria-label="{{ 'general.accessibility.scroll_down' | t }}"><span></span></div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.editorial-hero {
+  height: 610vh;
+  position: relative;
+  background: var(--paper);
+}
+.editorial-hero__sticky {
+  position: sticky; top: 0; height: 100vh;
+  background: var(--paper); overflow: hidden;
+  contain: layout paint style;
+}
+.editorial-hero__frame {
+  position: absolute; inset: 0;
+  width: 100vw; height: 100vh; overflow: hidden;
+  background: #dbe1e8;
+  isolation: isolate;
+  clip-path: polygon(
+    var(--hero-clip-left, 15%) var(--hero-clip-top, 12%),
+    var(--hero-clip-right, 85%) var(--hero-clip-top, 12%),
+    var(--hero-clip-right, 85%) var(--hero-clip-bottom, 92%),
+    var(--hero-clip-left, 15%) var(--hero-clip-bottom, 92%)
+  );
+  will-change: clip-path;
+  transform: translateZ(0);
+}
+.editorial-hero__frame::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    rgba(15, 26, 46, 0.32) 0%,
+    rgba(15, 26, 46, 0.13) 18%,
+    rgba(15, 26, 46, 0.03) 52%,
+    rgba(15, 26, 46, 0.20) 100%);
+  z-index: 2; pointer-events: none;
+}
+.editorial-hero__frame::after {
+  content: ""; position: absolute; inset: 0;
+  background: rgba(15, 26, 46, 0.48);
+  opacity: var(--hero-dim, 0);
+  z-index: 4; pointer-events: none;
+  transition: opacity 80ms linear;
+}
+
+.editorial-hero__media {
+  width: 100%; height: 100%; object-fit: cover; object-position: center;
+  transform: translate3d(0, 0, 0) scale(var(--hero-media-scale, 1.08));
+  filter: saturate(0.96);
+  will-change: transform;
+}
+
+.editorial-hero__placeholder {
+  width: 100%; height: 100%; background: linear-gradient(180deg, #dbe1e8 0%, #b9c2cc 100%);
+}
+
+.editorial-hero__noise {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.12) 1px, transparent 0);
+  background-size: 12px 12px; opacity: 0.10; z-index: 3; pointer-events: none;
+}
+
+.editorial-hero__title {
+  position: absolute; z-index: 6;
+  left: 50%; bottom: 7.2vh;
+  transform: translate3d(-50%, calc((1 - var(--hero-title-opacity, 0)) * 18px), 0);
+  width: min(880px, 88vw);
+  text-align: center; color: var(--paper);
+  opacity: var(--hero-title-opacity, 0);
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+.editorial-hero__title h1 {
+  font-size: clamp(56px, 7.5vw, 128px);
+  line-height: 1;
+  margin: 0 0 16px;
+  text-wrap: balance;
+  letter-spacing: -0.005em;
+}
+.editorial-hero__title p {
+  font-size: clamp(10px, 0.85vw, 13px);
+  line-height: 1.8; letter-spacing: 0.04em;
+  margin: 0 auto; max-width: 560px;
+}
+.editorial-hero__eyebrow { color: var(--paper); display: block; margin-bottom: 18px; }
+
+.editorial-hero__progress {
+  position: absolute; left: 50%; bottom: 28px;
+  transform: translateX(-50%); z-index: 8;
+  width: min(260px, 24vw); height: 0.5px;
+  background: rgba(255, 255, 255, 0.35);
+  opacity: var(--hero-title-opacity, 0);
+}
+.editorial-hero__progress span {
+  display: block; height: 100%; background: var(--paper);
+  width: calc(var(--hero-progress, 0) * 100%);
+}
+
+.editorial-hero__scroll-cue {
+  position: absolute; right: 4vw; bottom: 26px; z-index: 8;
+  width: 26px; height: 42px;
+  border: 0.5px solid rgba(255, 255, 255, 0.72);
+  border-radius: 999px; color: var(--paper);
+  opacity: calc(var(--hero-title-opacity, 0) * 0.72);
+  display: grid; place-items: start center; padding-top: 8px;
+}
+.editorial-hero__scroll-cue span {
+  display: block; width: 3px; height: 3px;
+  border-radius: 999px; background: currentColor;
+  animation: heroScrollDot 1600ms cubic-bezier(.22,.61,.36,1) infinite;
+}
+.editorial-hero__scroll-cue::after {
+  content: ""; position: absolute; left: 50%; bottom: -12px;
+  width: 7px; height: 7px;
+  border-right: 0.5px solid currentColor; border-bottom: 0.5px solid currentColor;
+  transform: translateX(-50%) rotate(45deg); opacity: 0.72;
+}
+@keyframes heroScrollDot {
+  0% { transform: translateY(0); opacity: 0; }
+  28% { opacity: 1; }
+  72% { opacity: 1; }
+  100% { transform: translateY(18px); opacity: 0; }
+}
+
+@media (max-width: 680px) {
+  .editorial-hero { height: 100vh; }
+  .editorial-hero__sticky { position: relative; }
+  .editorial-hero__frame {
+    clip-path: none !important;
+  }
+  .editorial-hero__title {
+    opacity: 1 !important;
+    transform: translate3d(-50%, 0, 0) !important;
+    bottom: 12vh;
+  }
+  .editorial-hero__progress { display: none; }
+  .editorial-hero__scroll-cue { display: none; }
+  .editorial-hero__title h1 { font-size: 42px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editorial-hero__frame { clip-path: none !important; }
+  .editorial-hero__title { opacity: 1 !important; transform: translate3d(-50%, 0, 0) !important; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+(function () {
+  const sections = document.querySelectorAll('.editorial-hero:not([data-init])');
+  sections.forEach(initHero);
+
+  function initHero(root) {
+    root.dataset.init = '1';
+    const isMobile = window.matchMedia('(max-width: 680px)').matches;
+    if (isMobile) return; // mobile uses static hero, no scroll math
+
+    const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+    function update() {
+      const rect = root.getBoundingClientRect();
+      const max = Math.max(root.offsetHeight - window.innerHeight, 1);
+      const raw = clamp(-rect.top / max, 0, 1);
+      const expand = clamp(raw / 0.28, 0, 1);
+      const dim = clamp((raw - 0.28) / 0.22, 0, 0.54);
+      const titleOpacity = clamp((raw - 0.36) / 0.20, 0, 1);
+      const holdProgress = clamp(raw / 0.94, 0, 1);
+      const left = 15 * (1 - expand);
+      const right = 85 + (15 * expand);
+      const top = 12 * (1 - expand);
+      const bottom = 92 + (8 * expand);
+      const styles = document.documentElement.style;
+      styles.setProperty('--hero-progress', holdProgress.toFixed(3));
+      styles.setProperty('--hero-dim', dim.toFixed(3));
+      styles.setProperty('--hero-title-opacity', titleOpacity.toFixed(3));
+      styles.setProperty('--hero-clip-left', `${left.toFixed(3)}%`);
+      styles.setProperty('--hero-clip-right', `${right.toFixed(3)}%`);
+      styles.setProperty('--hero-clip-top', `${top.toFixed(3)}%`);
+      styles.setProperty('--hero-clip-bottom', `${bottom.toFixed(3)}%`);
+      styles.setProperty('--hero-media-scale', (1.08 - (expand * 0.05)).toFixed(3));
+    }
+
+    let ticking = false;
+    function tick() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { update(); ticking = false; });
+    }
+    window.addEventListener('scroll', tick, { passive: true });
+    window.addEventListener('resize', tick);
+    update();
+  }
+
+  document.addEventListener('shopify:section:load', (e) => {
+    e.target.querySelectorAll('.editorial-hero:not([data-init])').forEach(initHero);
+  });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Editorial hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Hero image (fallback for video, also LCP)" },
+    { "type": "url", "id": "video", "label": "Hero video URL (MP4, optional)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "La Cartuja de Sevilla · 1841" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Heritage, crafted for modern living.</p>" },
+    { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>El nuevo latir de una casa histórica.</p>" }
+  ],
+  "presets": [{ "name": "Editorial hero" }]
+}
+{% endschema %}
