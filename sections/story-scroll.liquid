@@ -1,0 +1,187 @@
+<section class="story-scroll" id="storyScroll-{{ section.id }}" data-section-id="{{ section.id }}" data-header-variant="light" aria-label="{{ section.settings.heading | escape | default: 'Story' }}">
+  <div class="story-scroll__sticky">
+    {%- if section.settings.image_first != blank -%}
+      <img class="story-scroll__image story-scroll__image--first" src="{{ section.settings.image_first | image_url: width: 1920 }}"
+        alt="{{ section.settings.image_first.alt | escape }}"
+        loading="lazy" decoding="async"
+        width="{{ section.settings.image_first.width }}" height="{{ section.settings.image_first.height }}">
+    {%- endif -%}
+    {%- if section.settings.image_second != blank -%}
+      <img class="story-scroll__image story-scroll__image--second" src="{{ section.settings.image_second | image_url: width: 1920 }}"
+        alt="{{ section.settings.image_second.alt | escape }}"
+        loading="lazy" decoding="async"
+        width="{{ section.settings.image_second.width }}" height="{{ section.settings.image_second.height }}">
+    {%- endif -%}
+
+    <div class="story-scroll__overlay" aria-hidden="true"></div>
+
+    <div class="story-scroll__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow story-scroll__eyebrow">{{ section.settings.eyebrow | escape }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2>{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.paragraph != blank -%}
+        <p>{{ section.settings.paragraph }}</p>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+        <a href="{{ section.settings.cta_link }}" class="ghost-btn story-scroll__cta">{{ section.settings.cta_label | escape }}</a>
+      {%- endif -%}
+    </div>
+
+    <div class="story-scroll__progress" aria-hidden="true"><span></span></div>
+  </div>
+</section>
+
+{% stylesheet %}
+.story-scroll {
+  position: relative;
+  height: 390vh;
+  background: #000;
+  overflow: clip;
+}
+.story-scroll__sticky {
+  position: sticky; top: 0;
+  height: 100vh; width: 100%;
+  overflow: hidden; background: #000;
+  isolation: isolate;
+}
+.story-scroll__image {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover; object-position: center;
+  z-index: 1;
+  will-change: opacity, transform;
+  transition: opacity 80ms linear;
+  filter: saturate(0.98);
+}
+.story-scroll__image--first {
+  opacity: calc(1 - var(--story-image-mix, 0));
+  transform: scale(calc(1.045 - (var(--story-progress, 0) * 0.018)));
+}
+.story-scroll__image--second {
+  opacity: var(--story-image-mix, 0);
+  transform: scale(calc(1.03 + (var(--story-progress, 0) * 0.012)));
+}
+.story-scroll__overlay {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(180deg, rgba(15, 26, 46, 0.10), rgba(15, 26, 46, 0.18));
+  pointer-events: none;
+}
+.story-scroll__overlay::after {
+  content: ""; position: absolute; inset: 0;
+  background: rgba(15, 26, 46, 0.68);
+  opacity: var(--story-dim, 0);
+  transition: opacity 80ms linear;
+}
+
+.story-scroll__content {
+  position: absolute; z-index: 4;
+  left: 50%; top: 50%;
+  transform: translate3d(-50%, calc(-50% + var(--story-text-y, 20px)), 0);
+  width: min(900px, 86vw);
+  text-align: center; color: var(--paper);
+  opacity: var(--story-text-opacity, 0);
+  will-change: opacity, transform;
+}
+.story-scroll__content .eyebrow,
+.story-scroll__eyebrow { color: rgba(255, 255, 255, 0.74); margin-bottom: 18px; display: block; }
+.story-scroll__content h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(38px, 3.8vw, 56px); line-height: 1.05;
+  letter-spacing: -0.005em; margin: 0 0 24px;
+  text-wrap: balance;
+}
+.story-scroll__content p {
+  font-family: var(--sans); font-weight: 300;
+  font-size: clamp(14px, 1vw, 17px); line-height: 1.75;
+  color: rgba(255, 255, 255, 0.88); max-width: 700px;
+  margin: 0 auto 34px;
+}
+.story-scroll__cta {
+  border-color: rgba(255, 255, 255, 0.82); color: var(--paper); background: transparent;
+}
+.story-scroll__cta:hover { background: var(--paper); color: var(--ink); }
+
+.story-scroll__progress {
+  position: absolute; z-index: 5;
+  left: 50%; bottom: 32px; transform: translateX(-50%);
+  width: min(260px, 24vw); height: 0.5px;
+  background: rgba(255, 255, 255, 0.28);
+  opacity: var(--story-text-opacity, 0);
+}
+.story-scroll__progress span {
+  display: block;
+  width: calc(var(--story-progress, 0) * 100%);
+  height: 100%;
+  background: var(--paper);
+}
+
+@media (max-width: 680px) {
+  .story-scroll { height: 320vh; }
+  .story-scroll__content h2 { font-size: 38px; }
+  .story-scroll__content p { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-scroll__image--first { opacity: 1; transform: none; }
+  .story-scroll__image--second { opacity: 0; }
+  .story-scroll__content { opacity: 1; transform: translate3d(-50%, -50%, 0); }
+}
+{% endstylesheet %}
+
+{% javascript %}
+(function () {
+  const sections = document.querySelectorAll('.story-scroll:not([data-init])');
+  sections.forEach(initStory);
+
+  function initStory(root) {
+    root.dataset.init = '1';
+    const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+    function update() {
+      const rect = root.getBoundingClientRect();
+      const max = Math.max(root.offsetHeight - window.innerHeight, 1);
+      const raw = clamp(-rect.top / max, 0, 1);
+      const textOpacity = clamp((raw - 0.20) / 0.18, 0, 1);
+      const dim = clamp((raw - 0.18) / 0.24, 0, 0.72);
+      const styles = document.documentElement.style;
+      styles.setProperty('--story-progress', raw.toFixed(3));
+      styles.setProperty('--story-image-mix', clamp((raw - 0.06) / 0.46, 0, 1).toFixed(3));
+      styles.setProperty('--story-dim', dim.toFixed(3));
+      styles.setProperty('--story-text-opacity', textOpacity.toFixed(3));
+      styles.setProperty('--story-text-y', `${(1 - textOpacity) * 22}px`);
+    }
+
+    let ticking = false;
+    function tick() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { update(); ticking = false; });
+    }
+    window.addEventListener('scroll', tick, { passive: true });
+    window.addEventListener('resize', tick);
+    update();
+  }
+
+  document.addEventListener('shopify:section:load', (e) => {
+    e.target.querySelectorAll('.story-scroll:not([data-init])').forEach(initStory);
+  });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Story scroll",
+  "settings": [
+    { "type": "image_picker", "id": "image_first", "label": "First image" },
+    { "type": "image_picker", "id": "image_second", "label": "Second image (crossfade target)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "185 años de historia" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>El nuevo latir de una casa histórica.</p>" },
+    { "type": "richtext", "id": "paragraph", "label": "Paragraph", "default": "<p>Fundada en Sevilla en 1841, La Cartuja se proyecta hoy como una lovemark.</p>" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Descubre nuestra historia" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "presets": [{ "name": "Story scroll" }]
+}
+{% endschema %}
