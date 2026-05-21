@@ -1,0 +1,186 @@
+<section class="shoppable-scene" data-section-id="{{ section.id }}">
+  <div class="shell">
+    {%- if section.settings.heading != blank or section.settings.eyebrow != blank or section.settings.description != blank -%}
+      <div class="section-head reveal">
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
+        {%- if section.settings.description != blank -%}<p>{{ section.settings.description }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="shoppable-scene__photo reveal">
+      {%- if section.settings.image != blank -%}
+        {% render 'image-responsive', image: section.settings.image, alt: section.settings.image.alt, sizes: '100vw' %}
+      {%- else -%}
+        <div class="shoppable-scene__placeholder" aria-hidden="true"></div>
+      {%- endif -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'spot' and block.settings.product != blank -%}
+          {%- assign spot_product = all_products[block.settings.product] -%}
+          {%- if spot_product != blank -%}
+            <a class="shoppable-scene__spot" style="top: {{ block.settings.top }}%; left: {{ block.settings.left }}%;" href="{{ spot_product.url }}" aria-label="{{ spot_product.title | escape }}" {{ block.shopify_attributes }}></a>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="shoppable-scene__carousel reveal">
+      <button class="nav-arrow nav-arrow--left" data-carousel-prev aria-label="{{ 'general.accessibility.previous' | t }}">{% render 'icon-arrow-left' %}</button>
+      <div class="shoppable-scene__viewport">
+        <div class="shoppable-scene__track" data-carousel-track>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'spot' and block.settings.product != blank -%}
+              {%- assign spot_product = all_products[block.settings.product] -%}
+              {%- if spot_product != blank -%}
+                <article class="shoppable-scene__item">
+                  <a href="{{ spot_product.url }}" class="block-product-card__link">
+                    <div class="block-product-card__media block-product-card__media--portrait">
+                      {%- if spot_product.featured_image -%}
+                        {% render 'image-responsive', image: spot_product.featured_image, alt: spot_product.title, sizes: '(max-width: 680px) 50vw, 25vw' %}
+                      {%- endif -%}
+                    </div>
+                    {%- if block.settings.meta_line != blank -%}<p class="block-product-card__meta">{{ block.settings.meta_line | escape }}</p>{%- endif -%}
+                    <h3 class="block-product-card__title">{{ spot_product.title | escape }}</h3>
+                    <span class="block-product-card__price">{{ spot_product.price | money }}</span>
+                  </a>
+                </article>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+      <button class="nav-arrow nav-arrow--right" data-carousel-next aria-label="{{ 'general.accessibility.next' | t }}">{% render 'icon-arrow-right' %}</button>
+    </div>
+
+    {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+      <div class="shoppable-scene__cta reveal">
+        <a href="{{ section.settings.cta_link }}" class="ghost-btn">{{ section.settings.cta_label | escape }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+.shoppable-scene { padding: 132px 0 220px; background: var(--paper); }
+.shoppable-scene__photo {
+  height: 58vh; min-height: 520px; position: relative;
+  overflow: hidden; background: var(--ink-faint-20);
+  margin: 0 auto 46px;
+}
+.shoppable-scene__photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1000ms var(--ease-long); }
+.shoppable-scene__photo:hover img { transform: scale(1.025); }
+.shoppable-scene__placeholder { width: 100%; height: 100%; background: var(--ink-faint-20); }
+
+.shoppable-scene__spot {
+  position: absolute;
+  width: 14px; height: 14px;
+  border: 0.5px solid var(--ink);
+  background: var(--paper);
+  box-shadow: 0 0 0 9px rgba(255, 255, 255, 0.45);
+  animation: shoppablePulse 2600ms infinite;
+  transform: translate(-50%, -50%);
+}
+@keyframes shoppablePulse {
+  50% { transform: translate(-50%, -50%) scale(1.28); opacity: 0.72; }
+}
+
+.shoppable-scene__carousel { position: relative; }
+.shoppable-scene__viewport { overflow: hidden; }
+.shoppable-scene__track { display: flex; transition: transform 680ms var(--ease-long); }
+.shoppable-scene__item { flex: 0 0 25%; padding-right: 22px; }
+.nav-arrow--left { left: -54px; }
+.nav-arrow--right { right: -54px; }
+
+.shoppable-scene__cta { text-align: center; margin-top: 72px; }
+
+@media (max-width: 1100px) {
+  .shoppable-scene__photo { height: 620px; }
+}
+
+@media (max-width: 680px) {
+  .shoppable-scene__photo { height: 46vh; min-height: 360px; margin-bottom: 28px; }
+  .shoppable-scene { padding-bottom: 130px; }
+  .shoppable-scene__cta { margin-top: 58px; }
+  .shoppable-scene__viewport { overflow: visible; }
+  .shoppable-scene__track {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 14px;
+    transform: none !important;
+  }
+  .shoppable-scene__item { flex: initial !important; padding: 0 !important; min-width: 0; }
+  .shoppable-scene__item:nth-child(n+5) { display: none; }
+  .shoppable-scene__carousel .nav-arrow { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shoppable-scene__spot { animation: none; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+(function () {
+  document.querySelectorAll('.shoppable-scene__carousel:not([data-init])').forEach(initCarousel);
+
+  function initCarousel(root) {
+    root.dataset.init = '1';
+    const track = root.querySelector('[data-carousel-track]');
+    const prev = root.querySelector('[data-carousel-prev]');
+    const next = root.querySelector('[data-carousel-next]');
+    if (!track || !prev || !next) return;
+    const cardsPerRow = 4;
+    let index = 0;
+    function update() {
+      const count = track.children.length;
+      const max = Math.max(count - cardsPerRow, 0);
+      index = Math.max(0, Math.min(index, max));
+      track.style.transform = `translateX(${-index * (100 / cardsPerRow)}%)`;
+    }
+    prev.addEventListener('click', () => { index -= 1; update(); });
+    next.addEventListener('click', () => { index += 1; update(); });
+    update();
+  }
+
+  document.addEventListener('shopify:section:load', (e) => {
+    e.target.querySelectorAll('.shoppable-scene__carousel:not([data-init])').forEach(initCarousel);
+  });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Shoppable scene",
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "spot",
+      "name": "Spot",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "range", "id": "top", "label": "Spot Y position (%)", "min": 5, "max": 95, "step": 1, "default": 50 },
+        { "type": "range", "id": "left", "label": "Spot X position (%)", "min": 5, "max": 95, "step": 1, "default": 50 },
+        { "type": "text", "id": "meta_line", "label": "Meta line (e.g. 'Plato principal')" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Nuestras mesas" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Una escena, cada pieza." },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "image_picker", "id": "image", "label": "Scene image" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Descubre nuestras mesas" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "presets": [
+    {
+      "name": "Shoppable scene",
+      "blocks": [
+        { "type": "spot", "settings": { "top": 38, "left": 34 } },
+        { "type": "spot", "settings": { "top": 50, "left": 58 } },
+        { "type": "spot", "settings": { "top": 64, "left": 48 } },
+        { "type": "spot", "settings": { "top": 27, "left": 70 } }
+      ]
+    }
+  ]
+}
+{% endschema %}
