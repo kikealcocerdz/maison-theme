@@ -1,18 +1,43 @@
-{% style %}
-  {% # Loads all font variantions with display: swap %}
-  {{ settings.type_primary_font | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-
+{%- comment -%}
+  Maps theme settings → CSS variables on :root.
+  Rendered inside <head> via {% render 'css-variables' %} in layout/theme.liquid.
+{%- endcomment -%}
+<style>
   :root {
-    --font-primary--family: {{ settings.type_primary_font.family }}, {{ settings.type_primary_font.fallback_families }};
-    --font-primary--style: {{ settings.type_primary_font.style }};
-    --font-primary--weight: {{ settings.type_primary_font.weight }};
-    --page-width: {{ settings.max_page_width }};
-    --page-margin: {{ settings.min_page_margin }}px;
-    --color-background: {{ settings.background_color }};
-    --color-foreground: {{ settings.foreground_color }};
-    --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
+    --paper: {{ settings.color_paper }};
+    --ink: {{ settings.color_ink }};
+    --ink-soft: {{ settings.color_ink_soft }};
+    --muted: {{ settings.color_muted }};
+    --rule: {{ settings.color_rule }};
+    --accent-1: {{ settings.color_accent_1 }};
+    --accent-2: {{ settings.color_accent_2 }};
+    --accent-3: {{ settings.color_accent_3 }};
+
+    --ink-faint-20: {{ settings.color_muted | color_modify: 'alpha', 0.20 }};
+
+    --serif: {{ settings.font_serif.family }}, {{ settings.font_serif.fallback_families }};
+    --sans: {{ settings.font_sans.family }}, {{ settings.font_sans.fallback_families }};
+
+    --fs-body: {{ settings.fs_body }}px;
+    --fs-display: clamp(56px, 7.5vw, 128px);
+    --fs-h2: clamp(28px, 2.6vw, 40px);
+
+    --content: min({{ settings.content_viewport_width }}vw, {{ settings.content_max_width }}px);
+    --header-h: {{ settings.header_height_desktop }}px;
+
+    --rule-width: {{ settings.button_border_width }}px;
+
+    --ease: cubic-bezier(.22,.61,.36,1);
+    --ease-long: cubic-bezier(.16,1,.3,1);
   }
-{% endstyle %}
+
+  @media (max-width: 680px) {
+    :root {
+      --header-h: {{ settings.header_height_mobile }}px;
+      --content: calc(100vw - 32px);
+    }
+  }
+
+  {{ settings.font_serif | font_face: font_display: 'swap' }}
+  {{ settings.font_sans | font_face: font_display: 'swap' }}
+</style>
