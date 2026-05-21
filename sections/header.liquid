@@ -1,77 +1,255 @@
-<header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
-  </h2>
+{%- liquid
+  assign menu = linklists[section.settings.menu]
+  assign logo_dark = section.settings.logo_override | default: settings.logo
+  assign logo_light = section.settings.logo_light_override | default: settings.logo_light
+  assign logo_width = section.settings.logo_width_override | default: settings.logo_width
+  assign logo_alt = settings.logo_alt | default: shop.name
+-%}
 
-  <div class="header__menu">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+<header class="site-header" id="siteHeader" data-section-id="{{ section.id }}">
+  <nav class="nav" aria-label="{{ 'sections.header.menu' | t }}">
+    <div class="nav-left">
+      <button class="menu-trigger" id="menuToggle" aria-label="{{ 'general.accessibility.open_menu' | t }}" aria-expanded="false" aria-controls="megaMenu">
+        {% render 'icon-hamburger' %}
+        <span>{{ 'sections.header.menu' | t }}</span>
+      </button>
+      {%- for link in menu.links limit: section.settings.nav_left_limit -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    </div>
 
-  <div class="header__icons">
-    {% if shop.customer_accounts_enabled %}
-      <shopify-account menu="{{ section.settings.customer_account_menu }}">
-        {{ 'icon-account.svg' | inline_asset_content }}
-      </shopify-account>
-    {% endif %}
-
-    <a href="{{ routes.cart_url }}">
-      {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
-      {% endif %}
-
-      {{ 'icon-cart.svg' | inline_asset_content }}
+    <a href="{{ routes.root_url }}" class="site-header__logo-link" aria-label="{{ logo_alt | escape }}">
+      {%- if logo_dark != blank -%}
+        <img class="logo" src="{{ logo_dark | image_url: width: 200 }}" alt="{{ logo_alt | escape }}" width="{{ logo_width }}" height="auto" loading="eager" fetchpriority="high">
+      {%- else -%}
+        <span class="logo logo--text">{{ shop.name }}</span>
+      {%- endif -%}
     </a>
-  </div>
+
+    <div class="nav-right">
+      {%- for link in menu.links offset: section.settings.nav_left_limit -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+      <a href="{{ routes.search_url }}" aria-label="{{ 'general.search.label' | t }}">{{ 'general.search.label' | t }}</a>
+      <a href="{{ routes.cart_url }}" class="header-cart" aria-label="{{ 'general.cart.label' | t }}">
+        {{ 'general.cart.count' | t: count: cart.item_count }}
+      </a>
+    </div>
+  </nav>
 </header>
 
 {% stylesheet %}
-  header {
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  header a {
-    position: relative;
-    text-decoration: none;
-    color: var(--color-foreground);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  header a sup {
-    position: absolute;
-    left: 100%;
-    overflow: hidden;
-    max-width: var(--page-margin);
-  }
-  header svg {
-    width: 2rem;
-  }
-  header .header__menu,
-  header .header__icons {
-    display: flex;
-    gap: 1rem;
-  }
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  color: var(--ink);
+  transition: color 420ms var(--ease), background 420ms var(--ease), border-color 420ms var(--ease), backdrop-filter 420ms var(--ease);
+  border-bottom: 0.5px solid transparent;
+}
+
+.site-header.scrolled {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  border-color: rgba(15, 26, 46, 0.08);
+}
+
+.site-header.light {
+  color: var(--paper);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.site-header.light.scrolled {
+  background: rgba(15, 26, 46, 0.12);
+  backdrop-filter: blur(12px);
+}
+
+.nav {
+  height: var(--header-h);
+  width: var(--content);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding-top: 14px;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  gap: 44px;
+  align-items: center;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.nav-right { justify-content: flex-end; }
+
+.logo {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  filter: none;
+}
+
+.site-header.light .logo { filter: brightness(0) invert(1); }
+
+.menu-open .site-header {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: rgba(15, 26, 46, 0.08);
+  backdrop-filter: blur(16px);
+}
+
+.menu-open .site-header .logo { filter: none; }
+
+.menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hamb {
+  width: 24px;
+  height: 14px;
+  display: inline-block;
+  position: relative;
+}
+
+.hamb::before,
+.hamb::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 24px;
+  height: 0.5px;
+  background: currentColor;
+  transition: transform 420ms var(--ease), top 420ms var(--ease);
+}
+
+.hamb::before { top: 2px; }
+.hamb::after { top: 12px; }
+
+.menu-open .hamb::before { top: 7px; transform: rotate(35deg); }
+.menu-open .hamb::after { top: 7px; transform: rotate(-35deg); }
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 12px 16px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  z-index: 1000;
+}
+
+.skip-link:focus { left: 16px; top: 16px; }
+
+@media (max-width: 1100px) {
+  .nav-left a,
+  .nav-right a:not(:last-child) { display: none; }
+}
+
+@media (max-width: 680px) {
+  .nav { height: var(--header-h); padding-top: 6px; }
+  .logo { height: 34px; }
+  .nav-right a { display: none; }
+}
 {% endstylesheet %}
+
+{% javascript %}
+(function () {
+  const header = document.getElementById('siteHeader');
+  const menuToggle = document.getElementById('menuToggle');
+  const body = document.body;
+
+  if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+      const open = body.classList.toggle('menu-open');
+      menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && body.classList.contains('menu-open')) {
+      body.classList.remove('menu-open');
+      if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  function updateHeaderState() {
+    const scrollY = window.scrollY;
+    const scrolled = scrollY > 40;
+
+    const probeY = (header.offsetHeight || 80) / 2;
+    let lightVariant = false;
+    document.querySelectorAll('[data-header-variant="light"]').forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= probeY && rect.bottom >= probeY) lightVariant = true;
+    });
+
+    header.classList.toggle('light', lightVariant);
+    header.classList.toggle('scrolled', scrolled && !lightVariant);
+  }
+
+  window.addEventListener('scroll', updateHeaderState, { passive: true });
+  window.addEventListener('resize', updateHeaderState);
+  document.addEventListener('shopify:section:load', updateHeaderState);
+  updateHeaderState();
+})();
+{% endjavascript %}
 
 {% schema %}
 {
-  "name": "t:general.header",
+  "name": "Header",
   "settings": [
     {
       "type": "link_list",
       "id": "menu",
-      "label": "t:labels.menu"
+      "label": "Navigation menu",
+      "info": "Used for both left- and right-side nav. First N links go on the left, rest on the right."
     },
     {
-      "type": "link_list",
-      "id": "customer_account_menu",
-      "label": "t:labels.customer_account_menu",
-      "default": "customer-account-main-menu"
+      "type": "range",
+      "id": "nav_left_limit",
+      "label": "Number of menu links on the left",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "header",
+      "content": "Overrides (optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_override",
+      "label": "Logo (overrides theme setting)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_light_override",
+      "label": "Logo light variant (overrides theme setting)"
+    },
+    {
+      "type": "range",
+      "id": "logo_width_override",
+      "label": "Logo width override (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 0,
+      "info": "0 = use theme setting."
     }
-  ]
+  ],
+  "presets": [{ "name": "Header" }],
+  "enabled_on": { "groups": ["header"] }
 }
 {% endschema %}
