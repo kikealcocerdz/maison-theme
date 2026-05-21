@@ -1,1 +1,24 @@
+# Theme Check config — Maison
+# Docs: https://shopify.dev/docs/themes/tools/theme-check
+
 extends: theme-check:recommended
+
+UndefinedObject:
+  enabled: true
+
+UnusedAssign:
+  enabled: true
+
+ParserBlockingJavaScript:
+  enabled: true
+
+ImgWidthAndHeight:
+  enabled: true
+
+AssetSizeCSS:
+  enabled: true
+  threshold_in_bytes: 100000
+
+AssetSizeJavaScript:
+  enabled: true
+  threshold_in_bytes: 50000
