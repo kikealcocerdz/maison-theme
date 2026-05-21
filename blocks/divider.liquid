@@ -1,0 +1,21 @@
+<hr class="block-divider" style="border-top-width: {{ block.settings.thickness }}px; margin-top: {{ block.settings.margin_top }}px; margin-bottom: {{ block.settings.margin_bottom }}px;" {{ block.shopify_attributes }}>
+
+{% stylesheet %}
+.block-divider {
+  border: 0;
+  border-top: 0.5px solid var(--rule);
+  width: 100%;
+  display: block;
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Divider",
+  "settings": [
+    { "type": "range", "id": "thickness", "label": "Thickness (px)", "min": 1, "max": 4, "step": 1, "default": 1 },
+    { "type": "range", "id": "margin_top", "label": "Margin top (px)", "min": 0, "max": 120, "step": 4, "default": 32 },
+    { "type": "range", "id": "margin_bottom", "label": "Margin bottom (px)", "min": 0, "max": 120, "step": 4, "default": 32 }
+  ]
+}
+{% endschema %}

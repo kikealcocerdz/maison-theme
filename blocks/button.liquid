@@ -1,0 +1,83 @@
+{%- liquid
+  assign style = block.settings.style | default: 'ghost'
+  assign btn_class = 'block-button block-button--' | append: style
+-%}
+<div class="block-button-wrap block-button-wrap--{{ block.settings.alignment }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.link != blank -%}
+    <a href="{{ block.settings.link }}" class="{{ btn_class }}">
+      {{ block.settings.label | escape }}{%- if style == 'underline' or style == 'cta' -%}<span aria-hidden="true">→</span>{%- endif -%}
+    </a>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+.block-button-wrap { display: flex; }
+.block-button-wrap--left { justify-content: flex-start; }
+.block-button-wrap--center { justify-content: center; }
+.block-button-wrap--right { justify-content: flex-end; }
+
+.block-button--ghost {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 46px; padding: 0 28px;
+  border: var(--rule-width) solid var(--ink);
+  font-family: var(--sans); font-weight: 500; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink); transition: all 240ms var(--ease); border-radius: 0;
+}
+.block-button--ghost:hover { background: var(--ink); color: var(--paper); }
+
+.block-button--filled {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 46px; padding: 0 28px; background: var(--ink); color: var(--paper);
+  font-family: var(--sans); font-weight: 500; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  transition: all 240ms var(--ease); border-radius: 0;
+}
+.block-button--filled:hover { background: var(--ink-soft); }
+
+.block-button--underline,
+.block-button--cta {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  font-family: var(--sans); font-weight: 500; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink); padding-bottom: 6px; position: relative;
+}
+.block-button--underline::after,
+.block-button--cta::after {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 0.5px;
+  background: currentColor; transform: scaleX(0.25); transform-origin: left;
+  transition: transform 420ms var(--ease);
+}
+.block-button--underline:hover::after,
+.block-button--cta:hover::after { transform: scaleX(1); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Button",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Discover" },
+    { "type": "url", "id": "link", "label": "Link" },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        { "value": "ghost", "label": "Ghost (outline)" },
+        { "value": "filled", "label": "Filled" },
+        { "value": "underline", "label": "Underline link" },
+        { "value": "cta", "label": "CTA arrow" }
+      ],
+      "default": "ghost"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    }
+  ]
+}
+{% endschema %}

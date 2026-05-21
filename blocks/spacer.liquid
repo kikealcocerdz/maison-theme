@@ -1,0 +1,32 @@
+{%- liquid
+  case block.settings.size
+    when 'small'
+      assign h = 24
+    when 'medium'
+      assign h = 60
+    when 'large'
+      assign h = 120
+    else
+      assign h = 60
+  endcase
+-%}
+<div class="block-spacer" style="height: {{ h }}px;" aria-hidden="true" {{ block.shopify_attributes }}></div>
+
+{% schema %}
+{
+  "name": "Spacer",
+  "settings": [
+    {
+      "type": "select",
+      "id": "size",
+      "label": "Size",
+      "options": [
+        { "value": "small", "label": "Small (24px)" },
+        { "value": "medium", "label": "Medium (60px)" },
+        { "value": "large", "label": "Large (120px)" }
+      ],
+      "default": "medium"
+    }
+  ]
+}
+{% endschema %}

@@ -1,59 +1,79 @@
-{% doc %}
-  Renders a text block.
-
-  @example
-  {% content_for 'block', type: 'text', id: 'text' %}
-{% enddoc %}
-
-<div
-  class="text {{ block.settings.text_style }}"
-  style="--text-align: {{ block.settings.alignment }}"
-  {{ block.shopify_attributes }}
->
-  {{ block.settings.text }}
+{%- liquid
+  assign heading_level = block.settings.heading_level | default: 'h2'
+-%}
+<div class="block-text block-text--{{ block.settings.alignment }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.eyebrow != blank -%}
+    <span class="eyebrow">{{ block.settings.eyebrow | escape }}</span>
+  {%- endif -%}
+  {%- if block.settings.heading != blank -%}
+    <{{ heading_level }} class="block-text__heading">{{ block.settings.heading | escape }}</{{ heading_level }}>
+  {%- endif -%}
+  {%- if block.settings.paragraph != blank -%}
+    <div class="block-text__paragraph">{{ block.settings.paragraph }}</div>
+  {%- endif -%}
 </div>
 
 {% stylesheet %}
-  .text {
-    text-align: var(--text-align);
-  }
-  .text--title {
-    font-size: 2rem;
-    font-weight: 700;
-  }
-  .text--subtitle {
-    font-size: 1.5rem;
-  }
+.block-text { max-width: var(--block-text-max-width, 580px); }
+.block-text--center { margin-left: auto; margin-right: auto; text-align: center; }
+.block-text--left { text-align: left; }
+.block-text--right { text-align: right; margin-left: auto; }
+
+.block-text__heading {
+  font-family: var(--serif);
+  font-size: var(--fs-h2);
+  line-height: 1.12;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  margin: 10px 0 16px;
+  color: var(--ink);
+}
+
+.block-text__heading.h1, h1.block-text__heading {
+  font-size: var(--fs-display);
+  line-height: 1.05;
+}
+
+.block-text__paragraph {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 0;
+}
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.text",
+  "name": "Text",
   "settings": [
-    {
-      "type": "text",
-      "id": "text",
-      "label": "t:labels.text",
-      "default": "Text"
-    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading" },
     {
       "type": "select",
-      "id": "text_style",
-      "label": "t:labels.text_style",
+      "id": "heading_level",
+      "label": "Heading level",
       "options": [
-        { "value": "text--title", "label": "t:options.text_style.title" },
-        { "value": "text--subtitle", "label": "t:options.text_style.subtitle" },
-        { "value": "text--normal", "label": "t:options.text_style.normal" }
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" }
       ],
-      "default": "text--title"
+      "default": "h2"
     },
+    { "type": "richtext", "id": "paragraph", "label": "Paragraph" },
     {
-      "type": "text_alignment",
+      "type": "select",
       "id": "alignment",
-      "label": "t:labels.alignment",
-      "default": "left"
+      "label": "Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
     }
-  ],
-  "presets": [{ "name": "t:general.text" }]
+  ]
 }
 {% endschema %}
