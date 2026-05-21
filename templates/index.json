@@ -1,9 +1,120 @@
 {
   "sections": {
-    "placeholder": {
-      "type": "main-page-placeholder",
+    "hero": {
+      "type": "editorial-hero",
+      "settings": {
+        "eyebrow": "La Cartuja de Sevilla · 1841",
+        "heading": "<p>Heritage, crafted for modern living.</p>",
+        "subheading": "<p>El nuevo latir de una casa histórica.</p>"
+      }
+    },
+    "lede": {
+      "type": "pull-quote",
+      "settings": {
+        "padding_top": 240,
+        "padding_bottom": 80
+      },
+      "blocks": {
+        "q1": {
+          "type": "quote",
+          "settings": {
+            "text": "<p>Una herencia que <em>trasciende</em> generaciones.<br>Una forma de vivir la mesa que <em>evoluciona</em> con el tiempo.</p>"
+          }
+        }
+      },
+      "block_order": ["q1"]
+    },
+    "bestsellers": {
+      "type": "featured-products",
+      "settings": {
+        "eyebrow": "Emblemas de la casa",
+        "heading": "Bestsellers",
+        "description": "<p>Piezas esenciales que condensan el oficio, la memoria y el nuevo lenguaje de La Cartuja.</p>",
+        "cards_per_row": 3,
+        "show_arrows": true,
+        "soft_bg": true
+      },
+      "blocks": {
+        "p1": { "type": "product-card", "settings": { "show_price": true } },
+        "p2": { "type": "product-card", "settings": { "show_price": true } },
+        "p3": { "type": "product-card", "settings": { "show_price": true } }
+      },
+      "block_order": ["p1", "p2", "p3"]
+    },
+    "triptych": {
+      "type": "editorial-collections",
+      "settings": {
+        "eyebrow": "Colecciones esenciales",
+        "heading": "Tres relatos de mesa",
+        "description": "<p>Tres entradas al nuevo universo Cartuja: el icono ornamental, la frescura marina y la delicadeza botánica.</p>",
+        "cta_label": "Ver todas las colecciones",
+        "cta_link": "/collections"
+      },
+      "blocks": {
+        "c1": { "type": "chapter-card", "settings": { "chapter": "Capítulo 01", "title": "Aurora 202 Rosa", "paragraph": "<p>El transferware sevillano. Wedgwood y Cartuja, en un mismo plato.</p>" } },
+        "c2": { "type": "chapter-card", "settings": { "chapter": "Capítulo 02", "title": "Peces", "paragraph": "<p>Mediterránea, viajera. Pintada plato por plato en Salteras.</p>" } },
+        "c3": { "type": "chapter-card", "settings": { "chapter": "Capítulo 03", "title": "Bellavista", "paragraph": "<p>Cobalto profundo sobre porcelana blanca. La firma más clásica.</p>" } }
+      },
+      "block_order": ["c1", "c2", "c3"]
+    },
+    "season_banner": {
+      "type": "image-banner",
+      "settings": {
+        "eyebrow": "Primavera · Verano 2026",
+        "heading": "Mesas de luz",
+        "description": "<p>Una edición estacional pensada para abrir la mesa al color, a las sobremesas largas y al gesto contemporáneo.</p>"
+      },
+      "blocks": {
+        "b1": { "type": "button", "settings": { "label": "Ver colección completa", "style": "ghost", "alignment": "center" } }
+      },
+      "block_order": ["b1"]
+    },
+    "season_products": {
+      "type": "featured-products",
+      "settings": {
+        "cards_per_row": 4,
+        "show_arrows": true,
+        "soft_bg": false
+      },
+      "blocks": {
+        "p1": { "type": "product-card", "settings": { "show_price": true } },
+        "p2": { "type": "product-card", "settings": { "show_price": true } },
+        "p3": { "type": "product-card", "settings": { "show_price": true } },
+        "p4": { "type": "product-card", "settings": { "show_price": true } }
+      },
+      "block_order": ["p1", "p2", "p3", "p4"]
+    },
+    "scene": {
+      "type": "shoppable-scene",
+      "settings": {
+        "eyebrow": "Nuestras mesas",
+        "heading": "Una escena, cada pieza.",
+        "description": "<p>Fotografías editoriales de mesas completas, con una pasarela de los productos que aparecen en cada composición.</p>",
+        "cta_label": "Descubre nuestras mesas",
+        "cta_link": "/pages/mesas"
+      },
+      "blocks": {
+        "s1": { "type": "spot", "settings": { "top": 38, "left": 34, "meta_line": "Plato principal" } },
+        "s2": { "type": "spot", "settings": { "top": 50, "left": 58, "meta_line": "Bol pequeño" } },
+        "s3": { "type": "spot", "settings": { "top": 64, "left": 48, "meta_line": "Fuente ovalada" } },
+        "s4": { "type": "spot", "settings": { "top": 27, "left": 70, "meta_line": "Set de mesa" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"]
+    },
+    "story": {
+      "type": "story-scroll",
+      "settings": {
+        "eyebrow": "185 años de historia",
+        "heading": "<p>El nuevo latir de una casa histórica.</p>",
+        "paragraph": "<p>Fundada en Sevilla en 1841, La Cartuja se proyecta hoy como una lovemark: una historia de oficio, memoria y amor por una marca que vuelve a ocupar su lugar en la mesa contemporánea.</p>",
+        "cta_label": "Descubre nuestra historia",
+        "cta_link": "/pages/historia"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
       "settings": {}
     }
   },
-  "order": ["placeholder"]
+  "order": ["hero", "lede", "bestsellers", "triptych", "season_banner", "season_products", "scene", "story", "newsletter"]
 }
