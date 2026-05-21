@@ -1,0 +1,9 @@
+{%- comment -%}
+  Wrap content in a .reveal container — fades up on scroll into view.
+  Usage:
+    {% capture reveal_content %}<p>...</p>{% endcapture %}
+    {% render 'reveal', content: reveal_content, class: 'extra-class' %}
+{%- endcomment -%}
+<div class="reveal {{ class }}">
+  {{ content }}
+</div>

@@ -1,0 +1,39 @@
+{%- comment -%}
+  Renders a responsive <img> with srcset, width, height, lazy loading.
+
+  Required:
+    image — Shopify image object (e.g. settings.hero_image, block.settings.image)
+
+  Optional:
+    alt — string (defaults to image.alt)
+    class — CSS class
+    loading — 'lazy' (default) or 'eager'
+    fetchpriority — 'auto' (default), 'high', or 'low'
+    sizes — sizes attribute (defaults to '100vw')
+    widths — comma-separated widths (defaults to "320,480,720,1080,1440")
+{%- endcomment -%}
+
+{%- liquid
+  assign img_alt = alt | default: image.alt | default: ''
+  assign img_class = class | default: ''
+  assign img_loading = loading | default: 'lazy'
+  assign img_fetchpriority = fetchpriority | default: 'auto'
+  assign img_sizes = sizes | default: '100vw'
+  assign img_widths = widths | default: '320,480,720,1080,1440'
+  assign widths_arr = img_widths | split: ','
+-%}
+
+{%- if image -%}
+<img
+  src="{{ image | image_url: width: 1080 }}"
+  srcset="{%- for w in widths_arr -%}{{ image | image_url: width: w }} {{ w }}w{%- unless forloop.last %}, {% endunless -%}{%- endfor -%}"
+  sizes="{{ img_sizes }}"
+  width="{{ image.width }}"
+  height="{{ image.height }}"
+  alt="{{ img_alt | escape }}"
+  loading="{{ img_loading }}"
+  fetchpriority="{{ img_fetchpriority }}"
+  decoding="async"
+  class="{{ img_class }}"
+>
+{%- endif -%}
