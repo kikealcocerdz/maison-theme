@@ -1,0 +1,94 @@
+{%- liquid
+  assign endpoint = section.settings.endpoint_url
+  if endpoint == blank
+    assign endpoint = '/contact#newsletter'
+  endif
+-%}
+
+<section class="newsletter" aria-label="Newsletter" data-section-id="{{ section.id }}">
+  <div class="newsletter__inner reveal">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2>{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.description != blank -%}
+      <p>{{ section.settings.description }}</p>
+    {%- endif -%}
+
+    {%- form 'customer', class: 'newsletter__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <input type="email" name="contact[email]" placeholder="{{ 'general.newsletter.placeholder' | t }}" aria-label="{{ 'general.newsletter.placeholder' | t }}" required>
+      <button type="submit">
+        {{ 'general.newsletter.submit' | t }} <span aria-hidden="true">→</span>
+      </button>
+
+      {%- if form.posted_successfully? -%}
+        <p class="newsletter__msg newsletter__msg--ok">{{ 'general.newsletter.success' | t }}</p>
+      {%- elsif form.errors -%}
+        <p class="newsletter__msg newsletter__msg--err">{{ 'general.newsletter.error' | t }}</p>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% stylesheet %}
+.newsletter {
+  background: var(--paper); border-top: 0.5px solid var(--rule);
+  padding: 112px 0 128px; text-align: center;
+}
+.newsletter__inner {
+  width: min(760px, var(--content)); margin: 0 auto;
+}
+.newsletter h2 {
+  font-family: var(--serif); font-size: var(--fs-h2); line-height: 1.12; font-weight: 400;
+  letter-spacing: -0.005em; margin: 24px 0 20px; color: var(--ink);
+}
+.newsletter h2 em { font-style: italic; }
+.newsletter p {
+  font-family: var(--sans); font-weight: 300; font-size: 15px; line-height: 1.65;
+  color: var(--ink-soft); margin: 0 auto 64px; max-width: 560px;
+}
+.newsletter__form {
+  display: grid; grid-template-columns: 1fr auto; align-items: end;
+  gap: 30px; border-bottom: 0.5px solid var(--ink); padding-bottom: 14px;
+  text-align: left;
+}
+.newsletter__form input[type="email"] {
+  border: 0; background: transparent; outline: 0;
+  font-family: var(--sans); font-weight: 300; font-size: 14px; color: var(--ink);
+  min-width: 0; padding: 0;
+}
+.newsletter__form input[type="email"]::placeholder { color: var(--muted); }
+.newsletter__form button {
+  font-family: var(--sans); font-weight: 500; font-size: 12px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--ink);
+  display: inline-flex; align-items: center; gap: 14px; white-space: nowrap;
+  background: transparent; border: 0; cursor: pointer;
+}
+.newsletter__msg {
+  grid-column: 1 / -1; margin-top: 12px;
+  font-family: var(--sans); font-size: 12px;
+}
+.newsletter__msg--ok { color: var(--ink); }
+.newsletter__msg--err { color: var(--accent-1); }
+
+@media (max-width: 680px) {
+  .newsletter { padding: 88px 0 104px; }
+  .newsletter__form { grid-template-columns: 1fr; gap: 18px; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Recibir nuestra carta" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Una <em>carta</em> cada estación.</p>" },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Cuatro envíos al año. Ediciones, talleres y conversaciones desde Sevilla.</p>" },
+    { "type": "url", "id": "endpoint_url", "label": "Form endpoint override", "info": "Defaults to Shopify customer signup. Replace with Klaviyo or other ESP URL if needed." }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}
