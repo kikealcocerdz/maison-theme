@@ -1,0 +1,50 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Saltar al contenido",
+      "open_menu": "Abrir menú",
+      "close_menu": "Cerrar menú",
+      "scroll_down": "Desplazar hacia abajo",
+      "previous": "Anterior",
+      "next": "Siguiente",
+      "loading": "Cargando"
+    },
+    "search": {
+      "placeholder": "Buscar productos",
+      "label": "Buscar",
+      "submit": "Buscar"
+    },
+    "cart": {
+      "label": "Cesta",
+      "count": "Cesta ({{ count }})",
+      "empty": "Cesta vacía"
+    },
+    "newsletter": {
+      "heading": "Recibir nuestra carta",
+      "placeholder": "Su correo electrónico",
+      "submit": "Suscribir",
+      "success": "Gracias por suscribirse",
+      "error": "Algo salió mal. Inténtalo de nuevo."
+    },
+    "footer": {
+      "copyright": "© {{ year }} {{ shop_name }}. Hecho en España. Editado con calma.",
+      "language": "Idioma",
+      "currency": "Moneda"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Añadir a la cesta",
+      "sold_out": "Agotado",
+      "unavailable": "No disponible",
+      "price_from": "Desde {{ price }}",
+      "view_details": "Ver detalles"
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menú",
+      "search": "Buscar"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "open_menu": "Open menu",
+      "close_menu": "Close menu",
+      "scroll_down": "Scroll down",
+      "previous": "Previous",
+      "next": "Next",
+      "loading": "Loading"
+    },
+    "search": {
+      "placeholder": "Search products",
+      "label": "Search",
+      "submit": "Search"
+    },
+    "cart": {
+      "label": "Cart",
+      "count": "Cart ({{ count }})",
+      "empty": "Cart is empty"
+    },
+    "newsletter": {
+      "heading": "Subscribe to our letter",
+      "placeholder": "Your email address",
+      "submit": "Subscribe",
+      "success": "Thanks for subscribing",
+      "error": "Something went wrong. Please try again."
+    },
+    "footer": {
+      "copyright": "© {{ year }} {{ shop_name }}. Made in Spain. Crafted slowly.",
+      "language": "Language",
+      "currency": "Currency"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "price_from": "From {{ price }}",
+      "view_details": "View details"
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu",
+      "search": "Search"
+    }
+  }
+}
