@@ -15,8 +15,8 @@
 
     --ink-faint-20: {{ settings.color_muted | color_modify: 'alpha', 0.20 }};
 
-    --serif: {{ settings.font_serif.family }}, {{ settings.font_serif.fallback_families }};
-    --sans: {{ settings.font_sans.family }}, {{ settings.font_sans.fallback_families }};
+    --serif: 'EB Garamond', Georgia, serif;
+    --sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
 
     --fs-body: {{ settings.fs_body }}px;
     --fs-display: clamp(56px, 7.5vw, 128px);
@@ -37,7 +37,4 @@
       --content: calc(100vw - 32px);
     }
   }
-
-  {{ settings.font_serif | font_face: font_display: 'swap' }}
-  {{ settings.font_sans | font_face: font_display: 'swap' }}
 </style>

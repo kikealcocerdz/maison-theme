@@ -55,16 +55,8 @@
     "name": "Typography",
     "settings": [
       {
-        "type": "font_picker",
-        "id": "font_serif",
-        "label": "Serif (display, italic quotes)",
-        "default": "eb_garamond_n4"
-      },
-      {
-        "type": "font_picker",
-        "id": "font_sans",
-        "label": "Sans-serif (body, eyebrows, CTAs)",
-        "default": "montserrat_n3"
+        "type": "paragraph",
+        "content": "Display serif (EB Garamond) and sans (Montserrat) are loaded from Google Fonts to match the brand. Edit them in snippets/css-variables.liquid."
       },
       {
         "type": "range",
