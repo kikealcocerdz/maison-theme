@@ -1,4 +1,4 @@
-<section class="editorial-hero" id="editorialHero-{{ section.id }}" data-section-id="{{ section.id }}" data-header-variant="light" aria-label="{{ section.settings.heading | escape | default: 'Hero' }}">
+<section class="editorial-hero" id="editorialHero-{{ section.id }}" data-section-id="{{ section.id }}" data-header-variant="light" aria-label="{{ section.settings.heading | strip_html | escape | default: 'Hero' }}">
   <div class="editorial-hero__sticky">
     <div class="editorial-hero__frame">
       {%- if section.settings.video != blank -%}
@@ -15,7 +15,7 @@
       {%- else -%}
         {%- comment -%} Demo fallback image (shipped in /assets) until a hero image is set. {%- endcomment -%}
         <img class="editorial-hero__media" src="{{ 'hero.webp' | asset_url }}"
-          alt="{{ section.settings.heading | escape }}"
+          alt="{{ section.settings.heading | strip_html | escape }}"
           width="2200" height="1257"
           loading="eager" fetchpriority="high" decoding="async">
       {%- endif -%}

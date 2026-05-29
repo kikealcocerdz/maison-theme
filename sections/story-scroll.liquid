@@ -1,4 +1,4 @@
-<section class="story-scroll" id="storyScroll-{{ section.id }}" data-section-id="{{ section.id }}" data-header-variant="light" aria-label="{{ section.settings.heading | escape | default: 'Story' }}">
+<section class="story-scroll" id="storyScroll-{{ section.id }}" data-section-id="{{ section.id }}" data-header-variant="light" aria-label="{{ section.settings.heading | strip_html | escape | default: 'Story' }}">
   <div class="story-scroll__sticky">
     {%- if section.settings.image_first != blank -%}
       <img class="story-scroll__image story-scroll__image--first" src="{{ section.settings.image_first | image_url: width: 1920 }}"
