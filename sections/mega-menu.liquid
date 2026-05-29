@@ -8,9 +8,23 @@
         <div {{ block.shopify_attributes }}>
           <h3>{{ block.settings.heading | escape }}</h3>
           <ul>
-            {%- for link in linklist.links -%}
-              <li><a href="{{ link.url }}"><span>{{ link.title }}</span><span aria-hidden="true">→</span></a></li>
-            {%- endfor -%}
+            {%- if linklist.links.size > 0 -%}
+              {%- for link in linklist.links -%}
+                <li><a href="{{ link.url }}"><span>{{ link.title }}</span><span aria-hidden="true">→</span></a></li>
+              {%- endfor -%}
+            {%- elsif block.settings.items != blank -%}
+              {%- comment -%} Demo items: one per line, "Label | meta" (meta defaults to →). {%- endcomment -%}
+              {%- assign lines = block.settings.items | strip | newline_to_br | split: '<br />' -%}
+              {%- for line in lines -%}
+                {%- assign row = line | strip -%}
+                {%- if row == blank -%}{%- continue -%}{%- endif -%}
+                {%- assign parts = row | split: '|' -%}
+                {%- assign label = parts[0] | strip -%}
+                {%- assign meta = '→' -%}
+                {%- if parts.size > 1 -%}{%- assign meta = parts[1] | strip -%}{%- endif -%}
+                <li><span>{{ label | escape }}</span><span aria-hidden="true">{{ meta | escape }}</span></li>
+              {%- endfor -%}
+            {%- endif -%}
           </ul>
         </div>
 
@@ -18,6 +32,9 @@
         <div class="mega-card" {{ block.shopify_attributes }}>
           {%- if block.settings.image != blank -%}
             {% render 'image-responsive', image: block.settings.image, alt: block.settings.image.alt, sizes: '(max-width: 1100px) 100vw, 25vw' %}
+          {%- else -%}
+            {%- comment -%} Demo fallback (shipped in /assets) until an image is set. {%- endcomment -%}
+            <img src="{{ 'craft.webp' | asset_url }}" alt="{{ block.settings.text | escape }}" width="1450" height="1800" loading="lazy" decoding="async">
           {%- endif -%}
           <p>{{ block.settings.text | escape }}</p>
           {%- if block.settings.link != blank -%}
@@ -80,7 +97,7 @@
   gap: 14px;
 }
 
-.mega li a {
+.mega li {
   font-size: 12px;
   letter-spacing: 0.08em;
   color: var(--ink-soft);
@@ -91,7 +108,15 @@
   border-bottom: 0.5px solid transparent;
 }
 
-.mega li a:hover { border-color: var(--rule); }
+.mega li:hover { border-color: var(--rule); }
+
+.mega li a {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+  color: inherit;
+}
 
 .mega-card {
   background: var(--ink-faint-20);
@@ -132,7 +157,8 @@
       "limit": 4,
       "settings": [
         { "type": "text", "id": "heading", "label": "Column heading", "default": "Producto" },
-        { "type": "link_list", "id": "menu", "label": "Menu" }
+        { "type": "link_list", "id": "menu", "label": "Menu" },
+        { "type": "textarea", "id": "items", "label": "Items (one per line: 'Label | meta')", "info": "Used when no menu is selected. The text after | is the right-side label; defaults to →." }
       ]
     },
     {

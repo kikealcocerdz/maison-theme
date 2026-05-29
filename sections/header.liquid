@@ -12,23 +12,35 @@
         {% render 'icon-hamburger' %}
         <span>{{ 'sections.header.menu' | t }}</span>
       </button>
-      {%- for link in menu.links limit: section.settings.nav_left_limit -%}
-        <a href="{{ link.url }}">{{ link.title }}</a>
-      {%- endfor -%}
+      {%- if menu.links.size > 0 -%}
+        {%- for link in menu.links limit: section.settings.nav_left_limit -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Demo nav (shown until a navigation menu is selected). {%- endcomment -%}
+        <a href="{{ routes.collections_url }}">Colecciones</a>
+        <a href="/pages/mesas">Nuestras mesas</a>
+      {%- endif -%}
     </div>
 
     <a href="{{ routes.root_url }}" class="site-header__logo-link" aria-label="{{ logo_alt | escape }}">
       {%- if logo_dark != blank -%}
         <img class="logo" src="{{ logo_dark | image_url: width: 200 }}" alt="{{ logo_alt | escape }}" width="{{ logo_width }}" height="auto" loading="eager" fetchpriority="high">
       {%- else -%}
-        <span class="logo logo--text">{{ shop.name }}</span>
+        {%- comment -%} Demo logo (shown until a logo is uploaded in theme settings). {%- endcomment -%}
+        <img class="logo" src="{{ 'logo-navy.png' | asset_url }}" alt="{{ logo_alt | escape }}" width="119" height="124" loading="eager" fetchpriority="high">
       {%- endif -%}
     </a>
 
     <div class="nav-right">
-      {%- for link in menu.links offset: section.settings.nav_left_limit -%}
-        <a href="{{ link.url }}">{{ link.title }}</a>
-      {%- endfor -%}
+      {%- if menu.links.size > 0 -%}
+        {%- for link in menu.links offset: section.settings.nav_left_limit -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="/pages/historia">Nuestra historia</a>
+        <a href="{{ routes.collections_url }}">Emblemas</a>
+      {%- endif -%}
       <a href="{{ routes.search_url }}" aria-label="{{ 'general.search.label' | t }}">{{ 'general.search.label' | t }}</a>
       <a href="{{ routes.cart_url }}" class="header-cart" aria-label="{{ 'general.cart.label' | t }}">
         {{ 'general.cart.count' | t: count: cart.item_count }}

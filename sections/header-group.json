@@ -11,11 +11,11 @@
     "mega-menu": {
       "type": "mega-menu",
       "blocks": {
-        "col-1": { "type": "column", "settings": { "heading": "Producto" } },
-        "col-2": { "type": "column", "settings": { "heading": "Colecciones" } },
-        "col-3": { "type": "column", "settings": { "heading": "Editorial" } },
-        "col-4": { "type": "column", "settings": { "heading": "La casa" } },
-        "card-1": { "type": "feature_card", "settings": {} }
+        "col-1": { "type": "column", "settings": { "heading": "Producto", "items": "Platos\nBowls\nJarras y teteras\nFuentes\nVajillas completas" } },
+        "col-2": { "type": "column", "settings": { "heading": "Colecciones", "items": "Aurora 202 Rosa | Icono\nPeces | Mar\nEdén | Botánica\nBellavista | Floral\nBone & White | Esencial" } },
+        "col-3": { "type": "column", "settings": { "heading": "Editorial", "items": "Nuestras mesas\nEmblemas\nArtesanía\nCuidados" } },
+        "col-4": { "type": "column", "settings": { "heading": "La casa", "items": "Nuestra historia | 1841\nPickman | Sevilla\nEl nuevo latir | Amor\nContacto" } },
+        "card-1": { "type": "feature_card", "settings": { "text": "Una casa histórica vuelve a latir.", "link": "/pages/historia", "link_label": "Descubrir historia" } }
       },
       "block_order": ["col-1", "col-2", "col-3", "col-4", "card-1"]
     }
