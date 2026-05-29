@@ -1,4 +1,4 @@
-<section class="image-banner hairline" data-section-id="{{ section.id }}">
+<section class="image-banner hairline" data-section-id="{{ section.id }}" style="padding-bottom: {{ section.settings.spacing_bottom }}px;">
   {%- if section.settings.heading != blank or section.settings.eyebrow != blank -%}
     <div class="section-head reveal">
       {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
@@ -11,7 +11,8 @@
     {%- if section.settings.image != blank -%}
       {% render 'image-responsive', image: section.settings.image, alt: section.settings.image.alt, sizes: '100vw', loading: 'lazy' %}
     {%- else -%}
-      <div class="image-banner__placeholder" aria-hidden="true"></div>
+      {%- comment -%} Demo fallback (shipped in /assets) until a banner image is set. {%- endcomment -%}
+      <img src="{{ 'summer-banner.webp' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1800" height="1005" loading="lazy" decoding="async">
     {%- endif -%}
   </div>
 
@@ -25,7 +26,7 @@
 </section>
 
 {% stylesheet %}
-.image-banner { padding: 92px 0 142px; }
+.image-banner { padding: 92px 0; }
 .image-banner__media {
   width: var(--content); margin: 0 auto;
   overflow: hidden; background: var(--ink-faint-20);
@@ -60,7 +61,17 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Primavera · Verano 2026" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Mesas de luz" },
     { "type": "richtext", "id": "description", "label": "Description" },
-    { "type": "image_picker", "id": "image", "label": "Banner image" }
+    { "type": "image_picker", "id": "image", "label": "Banner image" },
+    {
+      "type": "range",
+      "id": "spacing_bottom",
+      "label": "Bottom spacing (px)",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 142,
+      "info": "Set to 0 when a products carousel follows directly below."
+    }
   ],
   "presets": [
     {

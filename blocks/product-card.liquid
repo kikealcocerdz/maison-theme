@@ -25,6 +25,21 @@
     {%- endif -%}
   </a>
 </article>
+{%- elsif block.settings.demo_image != blank -%}
+  {%- comment -%} Demo card — used when no product is selected (e.g. before catalog migration). {%- endcomment -%}
+  <article class="block-product-card" {{ block.shopify_attributes }}>
+    <div class="block-product-card__link">
+      <div class="block-product-card__media block-product-card__media--{{ aspect }}">
+        <img src="{{ block.settings.demo_image | asset_url }}" alt="{{ block.settings.demo_title | escape }}" width="832" height="1109" loading="lazy" decoding="async">
+      </div>
+      {%- assign demo_meta = block.settings.meta_line_override -%}
+      {%- if demo_meta != blank -%}<p class="block-product-card__meta">{{ demo_meta | escape }}</p>{%- endif -%}
+      {%- if block.settings.demo_title != blank -%}<h3 class="block-product-card__title">{{ block.settings.demo_title | escape }}</h3>{%- endif -%}
+      {%- if show_price and block.settings.demo_price != blank -%}
+        <span class="block-product-card__price">{{ block.settings.demo_price | escape }}</span>
+      {%- endif -%}
+    </div>
+  </article>
 {%- else -%}
   {%- comment -%} No product selected — render an empty placeholder card in theme editor only {%- endcomment -%}
   {%- if request.design_mode -%}
@@ -66,7 +81,7 @@
   color: var(--ink); margin: 0;
 }
 .block-product-card__price {
-  display: block; margin-top: 8px; font-family: var(--sans); font-weight: 300; font-size: 13px;
+  display: block; margin-top: 4px; font-family: var(--sans); font-weight: 300; font-size: 13px;
   color: var(--ink-soft);
 }
 
@@ -101,7 +116,11 @@
       "id": "meta_line_override",
       "label": "Meta line override",
       "info": "Falls back to product metafield custom.meta_line if empty."
-    }
+    },
+    { "type": "header", "content": "Demo (when no product selected)" },
+    { "type": "text", "id": "demo_image", "label": "Demo image (asset filename)", "info": "e.g. aurora-plate.png — used only when no product is chosen." },
+    { "type": "text", "id": "demo_title", "label": "Demo title" },
+    { "type": "text", "id": "demo_price", "label": "Demo price (e.g. 68 €)" }
   ]
 }
 {% endschema %}

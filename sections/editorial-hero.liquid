@@ -13,7 +13,11 @@
           loading="eager" fetchpriority="high" decoding="async"
           width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}">
       {%- else -%}
-        <div class="editorial-hero__placeholder" aria-hidden="true"></div>
+        {%- comment -%} Demo fallback image (shipped in /assets) until a hero image is set. {%- endcomment -%}
+        <img class="editorial-hero__media" src="{{ 'hero.webp' | asset_url }}"
+          alt="{{ section.settings.heading | escape }}"
+          width="2200" height="1257"
+          loading="eager" fetchpriority="high" decoding="async">
       {%- endif -%}
 
       <div class="editorial-hero__noise" aria-hidden="true"></div>

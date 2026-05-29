@@ -12,13 +12,16 @@
       {%- if section.settings.image != blank -%}
         {% render 'image-responsive', image: section.settings.image, alt: section.settings.image.alt, sizes: '100vw' %}
       {%- else -%}
-        <div class="shoppable-scene__placeholder" aria-hidden="true"></div>
+        {%- comment -%} Demo fallback (shipped in /assets) until a scene image is set. {%- endcomment -%}
+        <img src="{{ 'scene-table.webp' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1344" height="768" loading="lazy" decoding="async">
       {%- endif -%}
       {%- for block in section.blocks -%}
-        {%- if block.type == 'spot' and block.settings.product != blank -%}
+        {%- if block.type == 'spot' -%}
           {%- assign spot_product = all_products[block.settings.product] -%}
           {%- if spot_product != blank -%}
             <a class="shoppable-scene__spot" style="top: {{ block.settings.top }}%; left: {{ block.settings.left }}%;" href="{{ spot_product.url }}" aria-label="{{ spot_product.title | escape }}" {{ block.shopify_attributes }}></a>
+          {%- else -%}
+            <span class="shoppable-scene__spot" style="top: {{ block.settings.top }}%; left: {{ block.settings.left }}%;" aria-hidden="true" {{ block.shopify_attributes }}></span>
           {%- endif -%}
         {%- endif -%}
       {%- endfor -%}
@@ -29,20 +32,32 @@
       <div class="shoppable-scene__viewport">
         <div class="shoppable-scene__track" data-carousel-track>
           {%- for block in section.blocks -%}
-            {%- if block.type == 'spot' and block.settings.product != blank -%}
-              {%- assign spot_product = all_products[block.settings.product] -%}
-              {%- if spot_product != blank -%}
-                <article class="shoppable-scene__item">
-                  <a href="{{ spot_product.url }}" class="block-product-card__link">
+            {%- if block.type == 'product' -%}
+              {%- assign scene_product = all_products[block.settings.product] -%}
+              {%- if scene_product != blank -%}
+                <article class="shoppable-scene__item" {{ block.shopify_attributes }}>
+                  <a href="{{ scene_product.url }}" class="block-product-card__link">
                     <div class="block-product-card__media block-product-card__media--portrait">
-                      {%- if spot_product.featured_image -%}
-                        {% render 'image-responsive', image: spot_product.featured_image, alt: spot_product.title, sizes: '(max-width: 680px) 50vw, 25vw' %}
+                      {%- if scene_product.featured_image -%}
+                        {% render 'image-responsive', image: scene_product.featured_image, alt: scene_product.title, sizes: '(max-width: 680px) 50vw, 25vw' %}
                       {%- endif -%}
                     </div>
                     {%- if block.settings.meta_line != blank -%}<p class="block-product-card__meta">{{ block.settings.meta_line | escape }}</p>{%- endif -%}
-                    <h3 class="block-product-card__title">{{ spot_product.title | escape }}</h3>
-                    <span class="block-product-card__price">{{ spot_product.price | money }}</span>
+                    <h3 class="block-product-card__title">{{ scene_product.title | escape }}</h3>
+                    <span class="block-product-card__price">{{ scene_product.price | money }}</span>
                   </a>
+                </article>
+              {%- elsif block.settings.demo_image != blank -%}
+                {%- comment -%} Demo card — used when no product is selected (e.g. before catalog migration). {%- endcomment -%}
+                <article class="shoppable-scene__item" {{ block.shopify_attributes }}>
+                  <div class="block-product-card__link">
+                    <div class="block-product-card__media block-product-card__media--portrait">
+                      <img src="{{ block.settings.demo_image | asset_url }}" alt="{{ block.settings.demo_title | escape }}" width="832" height="1109" loading="lazy" decoding="async">
+                    </div>
+                    {%- if block.settings.meta_line != blank -%}<p class="block-product-card__meta">{{ block.settings.meta_line | escape }}</p>{%- endif -%}
+                    {%- if block.settings.demo_title != blank -%}<h3 class="block-product-card__title">{{ block.settings.demo_title | escape }}</h3>{%- endif -%}
+                    {%- if block.settings.demo_price != blank -%}<span class="block-product-card__price">{{ block.settings.demo_price | escape }}</span>{%- endif -%}
+                  </div>
                 </article>
               {%- endif -%}
             {%- endif -%}
@@ -150,16 +165,27 @@
 {% schema %}
 {
   "name": "Shoppable scene",
-  "max_blocks": 6,
+  "max_blocks": 16,
   "blocks": [
     {
       "type": "spot",
-      "name": "Spot",
+      "name": "Spot (marker on photo)",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product (optional — links the marker)" },
+        { "type": "range", "id": "top", "label": "Spot Y position (%)", "min": 5, "max": 95, "step": 1, "default": 50 },
+        { "type": "range", "id": "left", "label": "Spot X position (%)", "min": 5, "max": 95, "step": 1, "default": 50 }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Carousel product",
       "settings": [
         { "type": "product", "id": "product", "label": "Product" },
-        { "type": "range", "id": "top", "label": "Spot Y position (%)", "min": 5, "max": 95, "step": 1, "default": 50 },
-        { "type": "range", "id": "left", "label": "Spot X position (%)", "min": 5, "max": 95, "step": 1, "default": 50 },
-        { "type": "text", "id": "meta_line", "label": "Meta line (e.g. 'Plato principal')" }
+        { "type": "text", "id": "meta_line", "label": "Meta line (e.g. 'Aurora 202 Rosa')" },
+        { "type": "header", "content": "Demo (when no product selected)" },
+        { "type": "text", "id": "demo_image", "label": "Demo image (asset filename)", "info": "e.g. aurora-plate.png" },
+        { "type": "text", "id": "demo_title", "label": "Demo title" },
+        { "type": "text", "id": "demo_price", "label": "Demo price", "default": "Consultar" }
       ]
     }
   ],
@@ -178,7 +204,11 @@
         { "type": "spot", "settings": { "top": 38, "left": 34 } },
         { "type": "spot", "settings": { "top": 50, "left": 58 } },
         { "type": "spot", "settings": { "top": 64, "left": 48 } },
-        { "type": "spot", "settings": { "top": 27, "left": 70 } }
+        { "type": "spot", "settings": { "top": 27, "left": 70 } },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" }
       ]
     }
   ]

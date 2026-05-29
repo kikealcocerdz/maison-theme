@@ -1,4 +1,4 @@
-<section class="section-lede reveal" data-section-id="{{ section.id }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+<section class="section-lede {% if section.settings.soft_bg %}soft-bg{% endif %} reveal" data-section-id="{{ section.id }}">
   <div class="shell">
     {%- content_for 'blocks' -%}
   </div>
@@ -8,9 +8,11 @@
 .section-lede {
   text-align: center;
   margin: 0 auto;
+  padding: 20vh 0;
 }
 .section-lede .shell {
   max-width: 820px;
+  margin: 0 auto;
 }
 {% endstylesheet %}
 
@@ -22,24 +24,7 @@
     { "type": "text" }
   ],
   "settings": [
-    {
-      "type": "range",
-      "id": "padding_top",
-      "label": "Padding top (px)",
-      "min": 0,
-      "max": 400,
-      "step": 10,
-      "default": 200
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Padding bottom (px)",
-      "min": 0,
-      "max": 400,
-      "step": 10,
-      "default": 200
-    }
+    { "type": "checkbox", "id": "soft_bg", "label": "Soft background", "default": false }
   ],
   "presets": [
     {

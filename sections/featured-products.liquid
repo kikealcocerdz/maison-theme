@@ -53,11 +53,18 @@
       <button class="nav-arrow nav-arrow--right" data-carousel-next aria-label="{{ 'general.accessibility.next' | t }}">{% render 'icon-arrow-right' %}</button>
     {%- endif -%}
   </div>
+
+  {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+    <div class="featured-products__cta reveal">
+      <a href="{{ section.settings.cta_link }}" class="ghost-btn">{{ section.settings.cta_label | escape }}</a>
+    </div>
+  {%- endif -%}
 </section>
 
 {% stylesheet %}
-.featured-products { padding: 90px 0 140px; }
-.featured-products.soft-bg { padding-top: 128px; }
+.featured-products { padding: 42px 0 142px; }
+.featured-products.soft-bg { padding: 0 0 152px; }
+.featured-products.soft-bg .section-head { margin-bottom: 18px; }
 .featured-products__window { position: relative; width: var(--content); margin: 0 auto; }
 .featured-products__viewport { overflow: hidden; }
 .featured-products__track { display: flex; transition: transform 680ms var(--ease-long); }
@@ -65,6 +72,13 @@
 
 .featured-products[data-cards-per-row="2"] .featured-products__card { flex-basis: 50%; }
 .featured-products[data-cards-per-row="4"] .featured-products__card { flex-basis: 25%; }
+
+/* 4-up cards are smaller than the 3-up bestsellers (matches mockup .mini-product) */
+.featured-products[data-cards-per-row="4"] .block-product-card__media img { max-height: 235px; }
+.featured-products[data-cards-per-row="4"] .block-product-card__media::after { height: 24px; bottom: 34px; }
+.featured-products[data-cards-per-row="4"] .block-product-card__title { margin-top: 14px; }
+
+.featured-products__cta { width: var(--content); margin: 74px auto 0; text-align: center; }
 
 .nav-arrow {
   position: absolute; top: 50%; transform: translateY(-50%);
@@ -158,7 +172,10 @@
       "default": 3
     },
     { "type": "checkbox", "id": "show_arrows", "label": "Show navigation arrows", "default": true },
-    { "type": "checkbox", "id": "soft_bg", "label": "Soft background", "default": false }
+    { "type": "checkbox", "id": "soft_bg", "label": "Soft background", "default": false },
+    { "type": "header", "content": "Footer CTA (optional)" },
+    { "type": "text", "id": "cta_label", "label": "CTA label" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
   ],
   "presets": [
     {

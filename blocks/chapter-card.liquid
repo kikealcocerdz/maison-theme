@@ -4,6 +4,9 @@
   <div class="block-chapter-card__media">
     {%- if block.settings.image != blank -%}
       {% render 'image-responsive', image: block.settings.image, alt: block.settings.title, sizes: '(max-width: 680px) 100vw, 33vw' %}
+    {%- elsif block.settings.demo_image != blank -%}
+      {%- comment -%} Demo fallback (shipped in /assets) until an image is set. {%- endcomment -%}
+      <img src="{{ block.settings.demo_image | asset_url }}" alt="{{ block.settings.title | escape }}" width="1800" height="1029" loading="lazy" decoding="async">
     {%- else -%}
       <div class="block-chapter-card__placeholder" aria-hidden="true"></div>
     {%- endif -%}
@@ -57,6 +60,7 @@
   "name": "Chapter card",
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Image (3:4 portrait)" },
+    { "type": "text", "id": "demo_image", "label": "Demo image (asset filename)", "info": "e.g. collection-aurora.webp — used only when no image is chosen." },
     { "type": "text", "id": "chapter", "label": "Chapter label", "default": "Capítulo 01" },
     { "type": "text", "id": "title", "label": "Title", "default": "Aurora 202 Rosa" },
     { "type": "richtext", "id": "paragraph", "label": "Paragraph", "default": "<p>Una historia.</p>" },

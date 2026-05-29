@@ -11,8 +11,7 @@
     "lede": {
       "type": "pull-quote",
       "settings": {
-        "padding_top": 240,
-        "padding_bottom": 80
+        "soft_bg": true
       },
       "blocks": {
         "q1": {
@@ -35,11 +34,17 @@
         "soft_bg": true
       },
       "blocks": {
-        "p1": { "type": "product-card", "settings": { "show_price": true } },
-        "p2": { "type": "product-card", "settings": { "show_price": true } },
-        "p3": { "type": "product-card", "settings": { "show_price": true } }
+        "p1": { "type": "product-card", "settings": { "show_price": true, "meta_line_override": "Icono histórico", "demo_image": "aurora-plate.png", "demo_title": "Aurora 202 Rosa", "demo_price": "68 €" } },
+        "p2": { "type": "product-card", "settings": { "show_price": true, "meta_line_override": "Transferware rosa", "demo_image": "aurora-table.png", "demo_title": "Jarra Aurora", "demo_price": "96 €" } },
+        "p3": { "type": "product-card", "settings": { "show_price": true, "meta_line_override": "Motivo marino", "demo_image": "bol-peces.png", "demo_title": "Bol Peces", "demo_price": "44 €" } },
+        "p4": { "type": "product-card", "settings": { "show_price": true, "meta_line_override": "Mesa contemporánea", "demo_image": "fuente-peces.png", "demo_title": "Fuente Peces", "demo_price": "72 €" } },
+        "p5": { "type": "product-card", "settings": { "show_price": true, "meta_line_override": "Vajilla completa", "demo_image": "set-peces.png", "demo_title": "Set Peces", "demo_price": "220 €" } },
+        "p6": { "type": "product-card", "settings": { "show_price": true, "meta_line_override": "Botánica luminosa", "demo_image": "taza-eden.png", "demo_title": "Taza Edén", "demo_price": "38 €" } },
+        "p7": { "type": "product-card", "settings": { "show_price": true, "meta_line_override": "Floral clásico", "demo_image": "bellavista-plate.png", "demo_title": "Bellavista", "demo_price": "52 €" } },
+        "p8": { "type": "product-card", "settings": { "show_price": true, "meta_line_override": "Blanco esencial", "demo_image": "bone-white.png", "demo_title": "Bone & White", "demo_price": "42 €" } },
+        "p9": { "type": "product-card", "settings": { "show_price": true, "meta_line_override": "Colección viva", "demo_image": "eden-banner.png", "demo_title": "Edén", "demo_price": "64 €" } }
       },
-      "block_order": ["p1", "p2", "p3"]
+      "block_order": ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9"]
     },
     "triptych": {
       "type": "editorial-collections",
@@ -51,9 +56,9 @@
         "cta_link": "/collections"
       },
       "blocks": {
-        "c1": { "type": "chapter-card", "settings": { "chapter": "Capítulo 01", "title": "Aurora 202 Rosa", "paragraph": "<p>El transferware sevillano. Wedgwood y Cartuja, en un mismo plato.</p>" } },
-        "c2": { "type": "chapter-card", "settings": { "chapter": "Capítulo 02", "title": "Peces", "paragraph": "<p>Mediterránea, viajera. Pintada plato por plato en Salteras.</p>" } },
-        "c3": { "type": "chapter-card", "settings": { "chapter": "Capítulo 03", "title": "Bellavista", "paragraph": "<p>Cobalto profundo sobre porcelana blanca. La firma más clásica.</p>" } }
+        "c1": { "type": "chapter-card", "settings": { "demo_image": "collection-aurora.webp", "chapter": "Capítulo 01", "title": "Aurora 202 Rosa", "paragraph": "<p>El transferware sevillano. Wedgwood y Cartuja, en un mismo plato.</p>" } },
+        "c2": { "type": "chapter-card", "settings": { "demo_image": "collection-peces.webp", "chapter": "Capítulo 02", "title": "Peces", "paragraph": "<p>Mediterránea, viajera. Pintada plato por plato en Salteras.</p>" } },
+        "c3": { "type": "chapter-card", "settings": { "demo_image": "collection-bellavista.webp", "chapter": "Capítulo 03", "title": "Bellavista", "paragraph": "<p>Cobalto profundo sobre porcelana blanca. La firma más clásica.</p>" } }
       },
       "block_order": ["c1", "c2", "c3"]
     },
@@ -62,27 +67,28 @@
       "settings": {
         "eyebrow": "Primavera · Verano 2026",
         "heading": "Mesas de luz",
-        "description": "<p>Una edición estacional pensada para abrir la mesa al color, a las sobremesas largas y al gesto contemporáneo.</p>"
-      },
-      "blocks": {
-        "b1": { "type": "button", "settings": { "label": "Ver colección completa", "style": "ghost", "alignment": "center" } }
-      },
-      "block_order": ["b1"]
+        "description": "<p>Una edición estacional pensada para abrir la mesa al color, a las sobremesas largas y al gesto contemporáneo.</p>",
+        "spacing_bottom": 0
+      }
     },
     "season_products": {
       "type": "featured-products",
       "settings": {
         "cards_per_row": 4,
         "show_arrows": true,
-        "soft_bg": false
+        "soft_bg": false,
+        "cta_label": "Ver colección completa",
+        "cta_link": "/collections"
       },
       "blocks": {
-        "p1": { "type": "product-card", "settings": { "show_price": true } },
-        "p2": { "type": "product-card", "settings": { "show_price": true } },
-        "p3": { "type": "product-card", "settings": { "show_price": true } },
-        "p4": { "type": "product-card", "settings": { "show_price": true } }
+        "p1": { "type": "product-card", "settings": { "show_price": true, "demo_image": "taza-eden.png", "demo_title": "Taza Edén", "demo_price": "38 €" } },
+        "p2": { "type": "product-card", "settings": { "show_price": true, "demo_image": "bol-peces.png", "demo_title": "Bol Peces", "demo_price": "44 €" } },
+        "p3": { "type": "product-card", "settings": { "show_price": true, "demo_image": "bellavista-plate.png", "demo_title": "Plato Bellavista", "demo_price": "52 €" } },
+        "p4": { "type": "product-card", "settings": { "show_price": true, "demo_image": "aurora-plate.png", "demo_title": "Aurora 202", "demo_price": "68 €" } },
+        "p5": { "type": "product-card", "settings": { "show_price": true, "demo_image": "fuente-peces.png", "demo_title": "Fuente Peces", "demo_price": "72 €" } },
+        "p6": { "type": "product-card", "settings": { "show_price": true, "demo_image": "bone-white.png", "demo_title": "Bone & White", "demo_price": "42 €" } }
       },
-      "block_order": ["p1", "p2", "p3", "p4"]
+      "block_order": ["p1", "p2", "p3", "p4", "p5", "p6"]
     },
     "scene": {
       "type": "shoppable-scene",
@@ -94,12 +100,19 @@
         "cta_link": "/pages/mesas"
       },
       "blocks": {
-        "s1": { "type": "spot", "settings": { "top": 38, "left": 34, "meta_line": "Plato principal" } },
-        "s2": { "type": "spot", "settings": { "top": 50, "left": 58, "meta_line": "Bol pequeño" } },
-        "s3": { "type": "spot", "settings": { "top": 64, "left": 48, "meta_line": "Fuente ovalada" } },
-        "s4": { "type": "spot", "settings": { "top": 27, "left": 70, "meta_line": "Set de mesa" } }
+        "s1": { "type": "spot", "settings": { "top": 38, "left": 34 } },
+        "s2": { "type": "spot", "settings": { "top": 50, "left": 58 } },
+        "s3": { "type": "spot", "settings": { "top": 64, "left": 48 } },
+        "s4": { "type": "spot", "settings": { "top": 27, "left": 70 } },
+        "i1": { "type": "product", "settings": { "meta_line": "Aurora 202 Rosa", "demo_image": "aurora-plate.png", "demo_title": "Plato principal", "demo_price": "Consultar" } },
+        "i2": { "type": "product", "settings": { "meta_line": "Peces", "demo_image": "bol-peces.png", "demo_title": "Bol pequeño", "demo_price": "Consultar" } },
+        "i3": { "type": "product", "settings": { "meta_line": "Peces", "demo_image": "fuente-peces.png", "demo_title": "Fuente ovalada", "demo_price": "Consultar" } },
+        "i4": { "type": "product", "settings": { "meta_line": "Peces", "demo_image": "set-peces.png", "demo_title": "Set de mesa", "demo_price": "Consultar" } },
+        "i5": { "type": "product", "settings": { "meta_line": "Edén", "demo_image": "taza-eden.png", "demo_title": "Taza de café", "demo_price": "Consultar" } },
+        "i6": { "type": "product", "settings": { "meta_line": "Bellavista", "demo_image": "bellavista-plate.png", "demo_title": "Plato floral", "demo_price": "Consultar" } },
+        "i7": { "type": "product", "settings": { "meta_line": "Bone & White", "demo_image": "bone-white.png", "demo_title": "Pieza esencial", "demo_price": "Consultar" } }
       },
-      "block_order": ["s1", "s2", "s3", "s4"]
+      "block_order": ["s1", "s2", "s3", "s4", "i1", "i2", "i3", "i4", "i5", "i6", "i7"]
     },
     "story": {
       "type": "story-scroll",
