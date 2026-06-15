@@ -7,14 +7,33 @@
     </div>
   {%- endif -%}
 
-  <div class="image-banner__media reveal">
+  {%- liquid
+    assign banner_link = section.settings.link
+    assign overlay_label = section.settings.overlay_label
+  -%}
+
+  {%- capture banner_media -%}
     {%- if section.settings.image != blank -%}
       {% render 'image-responsive', image: section.settings.image, alt: section.settings.image.alt, sizes: '100vw', loading: 'lazy' %}
     {%- else -%}
       {%- comment -%} Demo fallback (shipped in /assets) until a banner image is set. {%- endcomment -%}
       <img src="{{ 'summer-banner.webp' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1800" height="1005" loading="lazy" decoding="async">
     {%- endif -%}
-  </div>
+  {%- endcapture -%}
+
+  {%- if banner_link != blank -%}
+    <a class="image-banner__media image-banner__media--link reveal" href="{{ banner_link }}"{%- if overlay_label != blank %} aria-label="{{ overlay_label | escape }}"{%- endif -%}>
+      {{ banner_media }}
+      {%- if overlay_label != blank -%}
+        <span class="image-banner__overlay"><span class="ghost-btn image-banner__overlay-btn">{{ overlay_label | escape }}</span></span>
+      {%- endif -%}
+    </a>
+    {%- if overlay_label != blank -%}
+      <div class="image-banner__mobile-cta reveal"><a href="{{ banner_link }}" class="ghost-btn">{{ overlay_label | escape }}</a></div>
+    {%- endif -%}
+  {%- else -%}
+    <div class="image-banner__media reveal">{{ banner_media }}</div>
+  {%- endif -%}
 
   {%- if section.blocks.size > 0 -%}
     <div class="image-banner__blocks">
@@ -38,6 +57,32 @@
 .image-banner__media:hover img { transform: scale(1.025); }
 .image-banner__placeholder { width: 100%; height: 58vh; background: var(--ink-faint-20); }
 
+/* Clickable banner with hover overlay CTA (El Renacer purchase gateway) */
+.image-banner__media--link {
+  position: relative; display: block; color: var(--paper); isolation: isolate;
+}
+.image-banner__media--link::after {
+  content: ""; position: absolute; inset: 0;
+  background: rgba(15, 26, 46, 0.44);
+  opacity: 0; z-index: 2;
+  transition: opacity 520ms var(--ease);
+}
+.image-banner__media--link:hover::after { opacity: 1; }
+.image-banner__overlay {
+  position: absolute; inset: 0; z-index: 3;
+  display: grid; place-items: center;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 520ms var(--ease), transform 520ms var(--ease);
+  pointer-events: none;
+}
+.image-banner__media--link:hover .image-banner__overlay { opacity: 1; transform: translateY(0); }
+.image-banner__overlay-btn {
+  border-color: var(--paper); color: var(--paper);
+  background: rgba(15, 26, 46, 0.12); backdrop-filter: blur(6px);
+}
+.image-banner__overlay-btn:hover { background: var(--paper); color: var(--ink); }
+.image-banner__mobile-cta { display: none; text-align: center; margin-top: 32px; }
+
 .image-banner__blocks {
   width: var(--content); margin: 34px auto 0;
   display: flex; flex-direction: column; gap: 24px; align-items: center;
@@ -45,6 +90,13 @@
 
 @media (max-width: 680px) {
   .image-banner__media img { height: 48vh; }
+  .image-banner__overlay { display: none; }
+  .image-banner__mobile-cta { display: block; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-banner__media--link::after,
+  .image-banner__overlay { transition: none; }
 }
 {% endstylesheet %}
 
@@ -62,6 +114,8 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Mesas de luz" },
     { "type": "richtext", "id": "description", "label": "Description" },
     { "type": "image_picker", "id": "image", "label": "Banner image" },
+    { "type": "url", "id": "link", "label": "Banner link (makes the whole banner clickable)", "info": "When set, the banner becomes a link with a hover overlay CTA and a mobile CTA below." },
+    { "type": "text", "id": "overlay_label", "label": "Overlay / mobile CTA label", "default": "Ver colección completa", "info": "Shown on hover (desktop) and as a button below the banner (mobile). Requires Banner link." },
     {
       "type": "range",
       "id": "spacing_bottom",

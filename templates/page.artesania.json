@@ -1,0 +1,148 @@
+{
+  "sections": {
+    "artesania": {
+      "type": "artesania",
+      "settings": {
+        "hero_eyebrow": "Artesanía · La Cartuja de Sevilla · Desde 1841",
+        "hero_title_1": "Hecho a mano,",
+        "hero_title_2": "en España.",
+        "hero_body": "<p>Cada pieza atraviesa una cadena de manos, fuego y criterio. Dieciocho etapas, tres cocciones y un sello: el pulso histórico de una casa sevillana, llevado a la mesa contemporánea.</p>",
+
+        "intro_eyebrow": "El proceso refleja nuestra misión",
+        "intro_heading": "<p>Desde 1841, cada pieza de La Cartuja nace de una secuencia precisa de manos, fuego, esmalte y memoria.</p>",
+        "intro_body": "<p>Una loza fina no se entiende solo por su forma. Se entiende por el tiempo que contiene: el molde, el sello, la cocción, la clasificación y el gesto final.</p>",
+        "intro_video_eyebrow": "El gesto, filmado",
+        "intro_video_heading": "Descubre nuestro proceso artesanal",
+
+        "proceso_close_eyebrow": "La pieza terminada",
+        "proceso_close_heading": "<p>La Cartuja de Sevilla, <em>desde 1841.</em></p>",
+
+        "calidad_heading_1": "Dieciocho etapas.",
+        "calidad_heading_2": "Hasta ocho miradas.",
+        "calidad_body": "<p>El proceso de producción de cada pieza resume <strong>dieciocho etapas</strong>, de las cuales hasta ocho son clasificaciones. Sólo la loza que supera cada control —en bizcocho y en acabado— llega a ver la luz y entra en su mesa.</p>",
+        "badge1_title": "Máxima calidad",
+        "badge1_text": "Hasta ocho clasificaciones descartan toda pieza que no alcance el criterio de la casa.",
+        "badge2_title": "Pago seguro",
+        "badge2_text": "Transacciones cifradas y protegidas en cada paso de tu compra.",
+        "badge3_title": "Fabricación artesanal",
+        "badge3_text": "Moldeado, sellado, decoración y vidriado con intervención humana en las fases decisivas.",
+        "badge4_title": "Portes gratis",
+        "badge4_text": "Envío sin coste en pedidos superiores a 150&nbsp;€ para España (península).",
+
+        "cols_eyebrow": "Un mismo oficio · cuatro relatos",
+        "cols_heading": "Las colecciones.",
+
+        "news_eyebrow": "Recibir nuestra carta",
+        "news_heading": "<p>Una <em>carta</em> cada estación.</p>",
+        "news_body": "<p>Cuatro envíos al año. Ediciones, talleres y conversaciones desde Sevilla.</p>"
+      },
+      "blocks": {
+        "phase-1": {
+          "type": "phase",
+          "settings": {
+            "number": "01",
+            "title": "La <em>materia</em>",
+            "label": "Barbotina",
+            "description": "Todo empieza en barro líquido: cuarzo, caolín, feldespato, sílice, arcilla y arena. La fórmula magistral de la casa, depurada hasta quedar sin aire."
+          }
+        },
+        "phase-2": {
+          "type": "phase",
+          "settings": {
+            "number": "02",
+            "title": "Moldear",
+            "label": "La forma",
+            "description": "Las piezas planas se prensan; las huecas se cuelan en moldes de escayola. La silueta nace antes que el decorado y decide cómo se vivirá la mesa."
+          }
+        },
+        "phase-3": {
+          "type": "phase",
+          "settings": {
+            "number": "03",
+            "title": "El <em>bizcocho</em>",
+            "label": "Primera cocción · 1.150°C",
+            "description": "Tras secar y repasar en crudo, dieciséis horas de horno la transforman en bizcocho: blanca, dura, porosa. Ya es loza, lista para recibir su identidad."
+          }
+        },
+        "phase-4": {
+          "type": "phase",
+          "settings": {
+            "number": "04",
+            "title": "Sellar",
+            "label": "El sello, a mano",
+            "description": "Una primera clasificación decide qué piezas continúan. Las elegidas reciben el sello de La Cartuja por serigrafía artesanal, una a una."
+          }
+        },
+        "phase-5": {
+          "type": "phase",
+          "settings": {
+            "number": "05",
+            "title": "Decorar",
+            "label": "Calcomanía · 800°C",
+            "description": "La decoradora transfiere el dibujo a mano sobre el bizcocho. Una segunda cocción a 800°C fija el color: así nace <em>Aurora 202 Rosa</em>."
+          }
+        },
+        "phase-6": {
+          "type": "phase",
+          "settings": {
+            "number": "06",
+            "title": "El <em>vidriado</em>",
+            "label": "Vidriado · 1.050°C",
+            "description": "Bañada en barniz pieza a pieza, una tercera cocción convierte ese polvo en cristal. Brillo, transparencia y un color protegido para siempre."
+          }
+        },
+        "col-1": {
+          "type": "collection",
+          "settings": {
+            "name": "Aurora",
+            "tag": "Capítulo 01",
+            "demo_image": "collection-aurora.webp",
+            "link": ""
+          }
+        },
+        "col-2": {
+          "type": "collection",
+          "settings": {
+            "name": "Ochavada",
+            "tag": "Capítulo 02",
+            "demo_image": "ochavada_canasto_floral.jpg",
+            "link": ""
+          }
+        },
+        "col-3": {
+          "type": "collection",
+          "settings": {
+            "name": "Gifts & Decor",
+            "tag": "Capítulo 03",
+            "demo_image": "collection-bellavista.webp",
+            "link": ""
+          }
+        },
+        "col-4": {
+          "type": "collection",
+          "settings": {
+            "name": "Emblemas",
+            "tag": "Selección",
+            "demo_image": "collection-peces.webp",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "phase-1",
+        "phase-2",
+        "phase-3",
+        "phase-4",
+        "phase-5",
+        "phase-6",
+        "col-1",
+        "col-2",
+        "col-3",
+        "col-4"
+      ]
+    }
+  },
+  "order": [
+    "artesania"
+  ]
+}

@@ -71,7 +71,8 @@
     },
     "newsletter": {
       "heading": "Subscribe to our letter",
-      "placeholder": "Your email address",
+      "placeholder": "your email address",
+      "email_label": "Your email address",
       "submit": "Subscribe",
       "success": "Thanks for subscribing",
       "error": "Something went wrong. Please try again."
@@ -99,6 +100,38 @@
     "header": {
       "menu": "Menu",
       "search": "Search"
+    },
+    "collection": {
+      "home": "Home",
+      "nav_label": "Collections navigation",
+      "toggle": "Open {{ name }}",
+      "view_toggle": "Change view",
+      "view_grid": "Grid view",
+      "view_list": "List view",
+      "sort": "Sort",
+      "sort_new": "Newest",
+      "sort_high": "Price - high to low",
+      "sort_low": "Price - low to high",
+      "load_more": "Load more",
+      "badge_new": "New",
+      "favorite": "Add to favourites",
+      "prev_long": "Previous",
+      "next_long": "Next"
+    },
+    "product": {
+      "gallery": "Product gallery",
+      "prev": "Previous image",
+      "next": "Next image",
+      "close": "Close gallery",
+      "thumbs": "Product thumbnails"
+    },
+    "tables": {
+      "filters": "Table filters",
+      "hotspot": "View piece"
+    },
+    "heritage": {
+      "timeline": "Historical timeline",
+      "scroll": "Scroll to explore"
     }
   }
 }

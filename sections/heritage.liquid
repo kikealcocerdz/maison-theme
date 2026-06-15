@@ -1,0 +1,651 @@
+{%- comment -%}
+  Heritage 1841 — long-form scroll narrative (faithful port of the LIVE mockup's
+  heritage.css / heritage.js, jun 2026 redesign). The page is now organised as 9
+  *milestones* (territorio → renacer) grouped into tonal blocks, each with a
+  bespoke editorial composition (.comp-*) and click-driven photo carousels, plus
+  an image lightbox. Milestone data lives in a JS array (brand-historical content,
+  rarely edited).
+
+  Theme-integration adaptations vs the raw mockup:
+   - Everything scoped under `.heritage-page`; the per-milestone colour wash sets
+     --bg/--fg/--ghost on the container, NOT documentElement, so it can't leak.
+   - The mockup's own header / mega-menu / footer markup + CSS + JS are dropped —
+     the theme header-group / footer-group provide those. The mockup's nav-tone
+     scroll logic (navTone) is therefore removed.
+   - Image paths resolved through the __HERITAGE_ASSETS map (asset_url) below;
+     the live `assets/heritage-2026/opt-*.webp` names map onto shipped theme
+     assets via resolve().
+   - Reduced-motion static fallback (.is-static) + divide-by-zero guards retained.
+{%- endcomment -%}
+{%- liquid
+  assign hero_img = section.settings.hero_image
+  assign hero_demo = section.settings.hero_demo_image | default: 'history-sunset.png'
+  assign finale_img = section.settings.finale_image
+  assign finale_demo = section.settings.finale_demo_image | default: 'collection-aurora.webp'
+  assign asset_files = 'history-dawn.png,history-sunset.png,craft.webp,collection-aurora.webp,gifts_decor_arch.png,gifts-decor-vertical.png,mesa_aurora_editorial.jpg,mesa_bodegon_el_renacer.webp,negro_vistas_bandeja.png,negro_vistas_bandeja_photo.jpg,negro_vistas_plato.png,aurora_202_plato.png,aurora_202_sopera.png,aurora_202_cafetera.png,bellavista_plato.png,bellavista_sopera.png,bellavista_fuente.png,heritage-dossier_p03.webp,heritage-dossier_p05.webp,heritage-dossier_p06.webp,heritage-dossier_p07.webp,heritage-dossier_p08.webp,heritage-dossier_p09.webp,heritage-dossier_p10.webp,heritage-dossier_p11.webp,heritage-dossier_p12.webp,heritage-dossier_p13.webp,heritage-dossier_p14.webp,heritage-dossier_p15.webp,heritage-dossier_p21.webp,heritage-dossier_p22.webp,heritage-dossier_p23.webp,heritage-dossier_p24.webp,heritage-dossier_p25.webp' | split: ','
+  comment
+    The 50 real heritage-2026 photos now ship as `heritage2026-opt-<NAME>.webp`. The
+    JS milestone data builds logical paths `assets/heritage-2026/opt-<NAME>.webp`, so
+    resolve() looks them up by basename `opt-<NAME>.webp`. We emit asset_url entries
+    keyed by that basename below.
+  endcomment
+  assign opt_names = 'h01-territorio-a,h01-territorio-b,h02-origen-a,h02-origen-b,h02-origen-c,h02-origen-car1,h02-origen-car2,h02-origen-car3,h03-oficio-a,h03-oficio-c,h03-oficio-car1,h03-oficio-car2,h03-oficio-d,h04-prestigio-a,h04-prestigio-arte1,h04-prestigio-arte2,h04-prestigio-b,h04-prestigio-sello1,h04-prestigio-sello2,h04-prestigio-sello3,h04-prestigio-sello4,h04-prestigio-sello5,h05-archivo-1,h05-archivo-2,h05-archivo-3,h05-archivo-4,h05-archivo-5,h05-archivo-6,h05-archivo-7,h05-archivo-8,h06-tecnica-a,h06-tecnica-car1,h06-tecnica-car2,h06-tecnica-car3,h06-tecnica-car4,h06-tecnica-car5,h06-tecnica-car6,h07-patrimonio-a,h07-patrimonio-car1,h07-patrimonio-car2,h07-patrimonio-wide,h08-nueva-a,h08-nueva-carA1,h08-nueva-carA2,h08-nueva-carA3,h08-nueva-carB1,h08-nueva-carB2,h08-nueva-carB3,h08-nueva-carC1,h08-nueva-carC2' | split: ','
+-%}
+
+<div class="heritage-page" data-section-id="{{ section.id }}">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress"><span class="heritage-progress-bar"></span></div>
+
+  <aside class="heritage-timeline" aria-label="{{ 'sections.heritage.timeline' | t }}">
+    <div class="timeline-line"></div>
+    <nav class="heritage-timeline-links"></nav>
+  </aside>
+
+  <section class="hero-history" data-heritage-hero>
+    {%- if hero_img != blank -%}
+      {% render 'image-responsive', image: hero_img, alt: section.settings.hero_eyebrow, sizes: '100vw', loading: 'eager', fetchpriority: 'high' %}
+    {%- else -%}
+      <img src="{{ hero_demo | asset_url }}" alt="{{ section.settings.hero_eyebrow | escape }}" width="1600" height="1000" fetchpriority="high" decoding="async">
+    {%- endif -%}
+    <div class="hero-vignette"></div>
+    <div class="hero-copy">
+      <div>
+        {%- if section.settings.hero_eyebrow != blank -%}<p class="eyebrow">{{ section.settings.hero_eyebrow | escape }}</p>{%- endif -%}
+        <h1>{{ section.settings.hero_title | escape }}{% if section.settings.hero_title_2 != blank %}<br>{{ section.settings.hero_title_2 | escape }}{% endif %}</h1>
+        {%- if section.settings.hero_intro != blank -%}<p>{{ section.settings.hero_intro }}</p>{%- endif -%}
+      </div>
+    </div>
+    <div class="scroll-hint"><span>{{ 'sections.heritage.scroll' | t }}</span><i class="scroll-mark" aria-hidden="true"></i></div>
+  </section>
+
+  <div class="heritage-timeline-start"></div>
+
+  <section class="closing heritage-finale" data-heritage-finale>
+    <div class="finale-bg">
+      {%- if finale_img != blank -%}
+        {% render 'image-responsive', image: finale_img, alt: section.settings.finale_heading, sizes: '100vw' %}
+      {%- else -%}
+        <img src="{{ finale_demo | asset_url }}" alt="{{ section.settings.finale_heading | escape }}" width="1600" height="1000" loading="lazy" decoding="async">
+      {%- endif -%}
+    </div>
+    <div class="finale-panel">
+      {%- if section.settings.finale_eyebrow != blank -%}<p class="eyebrow">{{ section.settings.finale_eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.finale_heading != blank -%}<h2>{{ section.settings.finale_heading | escape }}</h2>{%- endif -%}
+      {%- if section.settings.finale_body != blank -%}<p>{{ section.settings.finale_body }}</p>{%- endif -%}
+      <div class="finale-actions">
+        {%- if section.settings.cta1_label != blank -%}<a class="cta" href="{{ section.settings.cta1_link | default: '#' }}">{{ section.settings.cta1_label | escape }}</a>{%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}<a class="cta ghost" href="{{ section.settings.cta2_link | default: '#' }}">{{ section.settings.cta2_label | escape }}</a>{%- endif -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  window.__HERITAGE_ASSETS = {
+    {%- for f in asset_files -%}"{{ f }}":"{{ f | asset_url }}",{%- endfor -%}
+    {%- for n in opt_names -%}"opt-{{ n }}.webp":"{{ 'heritage2026-opt-' | append: n | append: '.webp' | asset_url }}"{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}
+  };
+</script>
+
+{% stylesheet %}
+.heritage-page {
+  --paper: #FFFFFF; --paper-warm: #F7F4EE; --navy: #0F1A2E;
+  --ease: cubic-bezier(.19, 1, .22, 1);
+  background: rgb(var(--bg, 247, 244, 238)); color: rgb(var(--fg, 15, 26, 46));
+  transition: background-color .22s linear, color .22s linear; isolation: auto;
+}
+.heritage-page .eyebrow { font-family: var(--sans); font-size: 11px; letter-spacing: .28em; text-transform: uppercase; font-weight: 400; }
+.heritage-page .cta { display: inline-flex; align-items: center; gap: .75rem; font-family: var(--sans); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; padding-bottom: 7px; position: relative; }
+.heritage-page .cta::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: .5px; background: currentColor; transform: scaleX(.25); transform-origin: left; transition: transform 520ms var(--ease); }
+.heritage-page .cta:hover::after { transform: scaleX(1); }
+
+.heritage-page .grain { position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: .035; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E"); }
+.heritage-page .progress { position: fixed; left: 0; top: 0; right: 0; height: 2px; z-index: 80; color: rgb(var(--fg, 15, 26, 46)); background: rgba(15, 26, 46, .10); }
+.heritage-page .progress span { display: block; height: 100%; width: 0; background: currentColor; }
+
+.heritage-page .heritage-timeline { position: fixed; left: 28px; top: 120px; bottom: 38px; z-index: 65; color: #fff; mix-blend-mode: difference; }
+.heritage-page .timeline-line { position: absolute; left: -11px; top: 0; bottom: 0; width: 1px; background: currentColor; opacity: .24; }
+.heritage-page .heritage-timeline nav { display: grid; gap: 13px; }
+.heritage-page .tl { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; display: grid; gap: 2px; opacity: .42; transition: opacity 300ms var(--ease), transform 300ms var(--ease); }
+.heritage-page .tl small { font-size: 9px; letter-spacing: .04em; text-transform: none; opacity: .72; font-family: var(--serif); }
+.heritage-page .tl.active { opacity: 1; transform: translateX(4px); }
+
+.heritage-page .hero-history { position: relative; height: 100vh; min-height: 720px; overflow: hidden; background: #07111f; color: #fff; }
+.heritage-page .hero-history img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(.95) saturate(.88) brightness(.56); transform: scale(1.04); animation: heroDrift 18s var(--ease) infinite alternate; }
+.heritage-page .hero-vignette { position: absolute; inset: 0; background: radial-gradient(circle at 52% 42%, rgba(6, 16, 29, .12), rgba(6, 16, 29, .72) 66%, rgba(6, 16, 29, .94)); }
+.heritage-page .hero-copy { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 0 8vw; }
+.heritage-page .hero-copy h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(74px, 11vw, 174px); line-height: .84; letter-spacing: -.045em; margin: 18px 0 28px; }
+.heritage-page .hero-copy p:not(.eyebrow) { max-width: 760px; margin: 0 auto; color: rgba(255, 255, 255, .78); font-size: 14px; line-height: 1.8; letter-spacing: .04em; }
+.heritage-page .scroll-hint { position: absolute; left: 50%; bottom: 38px; transform: translateX(-50%); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: rgba(255, 255, 255, .76); display: grid; justify-items: center; gap: 16px; }
+.heritage-page .scroll-mark { width: 22px; height: 38px; border: 1px solid currentColor; border-radius: 16px; position: relative; opacity: .86; }
+.heritage-page .scroll-mark::before { content: ""; position: absolute; left: 50%; top: 8px; width: 3px; height: 3px; border-radius: 50%; background: currentColor; transform: translateX(-50%); animation: heritageWheel 1.6s ease-in-out infinite; }
+@keyframes heroDrift { to { transform: scale(1.10) translate3d(-1.2%, 1%, 0); } }
+@keyframes heritageWheel { 0% { opacity: 0; transform: translate(-50%, 0); } 35% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, 14px); } }
+
+.heritage-page .heritage-timeline-start { position: relative; z-index: 2; background: transparent; }
+
+/* Ghost title — final resolved state (v37/v38/v40) */
+.heritage-page .global-ghost-title { display: block; position: fixed; z-index: 1; top: 50vh; left: 50%; width: 80vw; max-width: 80vw; height: 62vh; min-height: 62vh; transform: translate3d(-50%, -50%, 0); pointer-events: none; overflow: visible; font-family: var(--serif); font-weight: 500; text-align: center; text-transform: uppercase; color: rgb(var(--ghost, 15, 26, 46)); }
+.heritage-page .global-ghost-title > div { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; white-space: pre-line; text-wrap: balance; font-size: clamp(56px, 8vw, 148px); line-height: .83; letter-spacing: -.05em; opacity: 0; will-change: opacity, transform; transition: opacity 760ms cubic-bezier(.22, .61, .36, 1), color .22s linear; }
+
+/* Milestone scaffolding (v40 + v41 reading rhythm) */
+.heritage-page .era { height: 420vh; position: relative; z-index: 2; overflow: visible; background: transparent; color: rgb(var(--fg)); }
+.heritage-page .era.era-long { height: 580vh; }
+.heritage-page .era-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; isolation: auto; background: transparent; }
+.heritage-page .era-year { position: absolute; z-index: 12; top: 50vh; left: 50%; font-family: var(--serif); line-height: .78; color: rgb(var(--fg)); opacity: 0; pointer-events: none; will-change: transform, opacity, filter; font-size: clamp(46px, 6.6vw, 102px); letter-spacing: -.03em; white-space: nowrap; }
+.heritage-page #era-territorio .era-year { font-size: clamp(46px, 6.6vw, 102px); letter-spacing: -.03em; }
+.heritage-page .visual-block { position: absolute; z-index: 30; left: 50%; top: 50vh; opacity: 0; will-change: transform, opacity, filter; isolation: auto; width: min(1320px, 89vw); }
+.heritage-page .era-meta { margin: 0 0 28px; display: grid; grid-template-columns: minmax(160px, .44fr) 1fr; gap: 24px; align-items: end; position: relative; z-index: 24; opacity: var(--meta-o, 0); transform: translateY(var(--meta-y, 40px)); transition: filter .2s linear; }
+.heritage-page .era-meta > div { color: #111C2F; }
+.heritage-page .era-meta .kicker,
+.heritage-page .era-meta > div > p:not(.kicker) { color: #111C2F; opacity: 1; font-size: clamp(12px, 1vw, 15px); line-height: 1.35; letter-spacing: .18em; font-weight: 400; }
+.heritage-page.heritage-dark .era-meta > div,
+.heritage-page.heritage-dark .era-meta .kicker,
+.heritage-page.heritage-dark .era-meta > div > p:not(.kicker) { color: #fff; }
+.heritage-page .era-meta h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 3.8vw, 58px); line-height: .92; letter-spacing: -.035em; margin: 0; color: rgb(var(--fg)); max-width: 760px; }
+.heritage-page .media { width: 100%; opacity: 1; position: relative; z-index: 24; will-change: transform, opacity; }
+.heritage-page .frame, .heritage-page .card, .heritage-page .mag-card, .heritage-page .carousel, .heritage-page .artifact-copy, .heritage-page .slide { position: relative; z-index: 24; background: transparent; overflow: hidden; box-shadow: 0 24px 80px rgba(0, 0, 0, .10); transition: transform 700ms var(--ease), box-shadow 700ms var(--ease), filter 700ms var(--ease); will-change: transform, opacity, filter; }
+.heritage-page .frame:hover, .heritage-page .card:hover, .heritage-page .mag-card:hover { transform: translateY(-8px); box-shadow: 0 42px 110px rgba(0, 0, 0, .18); }
+.heritage-page .frame img, .heritage-page .card img, .heritage-page .slide img, .heritage-page .mag-card img { position: relative; z-index: 2; width: 100%; height: 100%; object-fit: cover; filter: saturate(.9) contrast(.98); transition: transform 1200ms var(--ease); }
+.heritage-page .frame:hover img, .heritage-page .card:hover img, .heritage-page .mag-card:hover img { transform: scale(1.045); }
+.heritage-page .media .frame:nth-child(odd) { transform-origin: 50% 60%; }
+.heritage-page .media .frame:nth-child(even) { transform-origin: 50% 40%; }
+.heritage-page .caption-row { display: none; }
+.heritage-page .era-copy { max-width: 820px; margin: 26px auto 0; font-size: clamp(15px, 1.05vw, 17px); line-height: 1.66; letter-spacing: .01em; text-align: center; opacity: var(--copy-o, 0); transform: translateY(var(--copy-y, 40px)); color: rgba(var(--fg), .84); position: relative; z-index: 24; transition: filter .2s linear; }
+.heritage-page .era-copy p { margin: 0; }
+.heritage-page .era-copy p + p { margin-top: 13px; }
+
+/* ===== v42 — Composiciones editoriales por hito + carrusel con clic ===== */
+.heritage-page .comp { width: 100%; }
+.heritage-page .comp.comp-territorio, .heritage-page .comp.comp-origen, .heritage-page .comp.comp-oficio, .heritage-page .comp.comp-prestigio,
+.heritage-page .comp.comp-archivo, .heritage-page .comp.comp-tecnica, .heritage-page .comp.comp-patrimonio, .heritage-page .comp.comp-nueva, .heritage-page .comp.comp-renacer { display: grid; }
+.heritage-page .comp > .frame { min-width: 0; min-height: 0; }
+
+/* Carrusel con clic */
+.heritage-page .carousel-unit { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+.heritage-page .comp .cframe.carousel { height: auto; flex: 1 1 auto; min-height: 0; position: relative; overflow: hidden; }
+.heritage-page .cframe .ctrack { position: absolute; inset: 0; }
+.heritage-page .cslide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity .6s var(--ease); }
+.heritage-page .cslide.active { opacity: 1; }
+.heritage-page .cslide img { width: 100%; height: 100%; object-fit: cover; }
+.heritage-page .comp .cframe[data-fit="contain"] { background: transparent; }
+.heritage-page .comp .cframe[data-fit="contain"] .cslide img { object-fit: contain; padding: 0; }
+.heritage-page .carousel-bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 11px; flex: 0 0 auto; }
+.heritage-page .ccount { display: inline-flex; align-items: baseline; gap: 5px; font-size: 10.5px; letter-spacing: .2em; opacity: .72; font-variant-numeric: tabular-nums; }
+.heritage-page .ccount b { font-weight: 500; }
+.heritage-page .ccount i { font-style: normal; opacity: .45; }
+.heritage-page .carrows { display: flex; gap: 7px; }
+.heritage-page .cbtn { width: 42px; height: 30px; border: .5px solid rgba(var(--fg), .42); display: flex; align-items: center; justify-content: center; font-size: 16px; line-height: 1; color: rgb(var(--fg)); transition: background .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease); }
+.heritage-page .cbtn:hover { background: rgb(var(--fg)); color: rgb(var(--bg)); border-color: rgb(var(--fg)); }
+
+.heritage-page .visual-block .frame img, .heritage-page .visual-block .cslide img { cursor: zoom-in; }
+
+/* Texto descriptivo (comp-note) — v42 base + v44 centred resolved state */
+.heritage-page .comp-note:not(.ar-note) { display: block; margin: clamp(34px, 4.2vh, 56px) auto 0; max-width: 880px; text-align: center; }
+.heritage-page .comp-note:not(.ar-note) .note-cap { margin: 0 auto 14px; font-family: var(--sans); font-size: clamp(10.5px, .82vw, 12px); line-height: 1.45; letter-spacing: .22em; text-transform: uppercase; font-weight: 400; color: rgba(var(--fg), .74); max-width: 72ch; text-align: center; }
+.heritage-page .comp-note:not(.ar-note) p:not(.note-cap) { max-width: 760px; margin-left: auto; margin-right: auto; text-align: center; font-size: clamp(12.5px, .9vw, 14.5px); line-height: 1.72; letter-spacing: .004em; color: rgba(var(--fg), .82); text-wrap: pretty; }
+.heritage-page .comp-note:not(.ar-note) .cn-2 { margin-top: 10px; font-size: clamp(12px, .84vw, 13.5px); line-height: 1.68; color: rgba(var(--fg), .6); }
+/* Archivo ornamental: lectura lateral/editorial */
+.heritage-page .ar-note { align-self: center; text-align: left; display: grid; grid-template-columns: 1fr; gap: 6px; }
+.heritage-page .ar-note .note-cap { margin: 0 0 18px; font-family: var(--sans); font-size: 11px; line-height: 1.45; letter-spacing: .22em; text-transform: uppercase; font-weight: 400; color: rgba(var(--fg), .64); text-align: left; }
+.heritage-page .ar-note p { margin: 0; font-size: clamp(12.5px, .9vw, 14.5px); line-height: 1.72; color: rgba(var(--fg), .82); text-align: left; max-width: 48ch; }
+.heritage-page .ar-note .cn-2 { font-size: clamp(12px, .84vw, 13.5px); color: rgba(var(--fg), .6); }
+
+/* 01 · Territorio */
+.heritage-page .comp-territorio { grid-template-columns: 1.5fr 1fr; grid-template-rows: 42vh auto; gap: 22px 36px; align-items: stretch; }
+.heritage-page .t-a { grid-column: 1; grid-row: 1; }
+.heritage-page .t-b { grid-column: 2; grid-row: 1; }
+.heritage-page .t-note { grid-column: 1/3; grid-row: 2; }
+
+/* 02 · Origen */
+.heritage-page .comp-origen { grid-template-columns: .9fr 1.1fr .82fr; grid-template-rows: 44vh auto; gap: 20px 28px; align-items: stretch; }
+.heritage-page .o-a { grid-column: 1; grid-row: 1; }
+.heritage-page .o-c { grid-column: 2; grid-row: 1; }
+.heritage-page .o-car { grid-column: 3; grid-row: 1; }
+.heritage-page .o-note { grid-column: 1/4; grid-row: 2; }
+
+/* 03 · Oficio */
+.heritage-page .comp-oficio { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 18vh 30vh auto; gap: 18px 22px; align-items: stretch; }
+.heritage-page .of-a { grid-column: 1/4; grid-row: 1; }
+.heritage-page .of-c { grid-column: 1; grid-row: 2; }
+.heritage-page .of-d { grid-column: 2; grid-row: 2; }
+.heritage-page .of-car { grid-column: 3; grid-row: 2; }
+.heritage-page .of-note { grid-column: 1/4; grid-row: 3; }
+
+/* 04 · Prestigio (oscuro) */
+.heritage-page .comp-prestigio { grid-template-columns: .8fr 1.15fr .85fr; grid-template-rows: 22vh 22vh auto; gap: 20px 28px; align-items: stretch; }
+.heritage-page .pr-b { grid-column: 1; grid-row: 1/3; }
+.heritage-page .pr-a { grid-column: 2; grid-row: 1; }
+.heritage-page .pr-arte { grid-column: 2; grid-row: 2; }
+.heritage-page .pr-sello { grid-column: 3; grid-row: 1/3; }
+.heritage-page .pr-note { grid-column: 1/4; grid-row: 3; }
+
+/* 05 · Archivo ornamental (oscuro) — carrusel protagonista */
+.heritage-page .comp-archivo { grid-template-columns: .8fr 1.2fr; grid-template-rows: 56vh; gap: 46px; align-items: center; }
+.heritage-page .ar-note { grid-column: 1; }
+.heritage-page .ar-car { grid-column: 2; align-self: stretch; }
+
+/* 06 · Técnica y mano */
+.heritage-page .comp-tecnica { grid-template-columns: 1.3fr .9fr; grid-template-rows: 42vh auto; gap: 22px 32px; align-items: stretch; }
+.heritage-page .te-a { grid-column: 1; grid-row: 1; }
+.heritage-page .te-car { grid-column: 2; grid-row: 1; }
+.heritage-page .te-note { grid-column: 1/3; grid-row: 2; }
+
+/* 07 · Patrimonio (v44 — secuencial, descubierto con scroll) */
+.heritage-page #era-patrimonio .visual-block { width: min(1180px, 84vw); top: 50vh; }
+.heritage-page #era-patrimonio .era-meta { margin-bottom: clamp(42px, 5vh, 66px); }
+.heritage-page .comp-patrimonio { grid-template-columns: 1.1fr .95fr; grid-template-rows: 44vh 23vh auto; gap: 26px 34px; align-items: stretch; }
+.heritage-page .pa-a { grid-column: 1; grid-row: 1; }
+.heritage-page .pa-car { grid-column: 2; grid-row: 1; }
+.heritage-page .pa-wide { grid-column: 1/3; grid-row: 2; min-height: 23vh; }
+.heritage-page .pa-wide img { object-fit: cover; }
+.heritage-page .pa-note { grid-column: 1/3; grid-row: 3; }
+
+/* 08 · Nueva etapa (oscuro) — tres carruseles */
+.heritage-page .comp-nueva { grid-template-columns: 1fr 1fr .82fr; grid-template-rows: 27vh 23vh auto; gap: 18px 22px; align-items: stretch; }
+.heritage-page .nu-a { grid-column: 1; grid-row: 1; }
+.heritage-page .nu-carA { grid-column: 2; grid-row: 1; }
+.heritage-page .nu-carB { grid-column: 3; grid-row: 1/3; }
+.heritage-page .nu-carC { grid-column: 1/3; grid-row: 2; }
+.heritage-page .nu-note { grid-column: 1/4; grid-row: 3; }
+
+/* 09 · El Renacer */
+.heritage-page .comp-renacer { grid-template-columns: 1.3fr .72fr .72fr; grid-template-rows: 42vh auto; gap: 20px 24px; align-items: stretch; }
+.heritage-page .re-a { grid-column: 1; grid-row: 1; }
+.heritage-page .re-b { grid-column: 2; grid-row: 1; }
+.heritage-page .re-c { grid-column: 3; grid-row: 1; }
+.heritage-page .re-note { grid-column: 1/4; grid-row: 2; }
+
+/* Finale */
+.heritage-page .closing.heritage-finale { position: relative; min-height: 100vh; background: #07111f; color: #fff; display: grid; place-items: center; overflow: hidden; z-index: 2; }
+.heritage-page .finale-bg { position: absolute; inset: 0; }
+.heritage-page .finale-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.42) saturate(.86); transform: scale(1.04); animation: heroDrift 16s var(--ease) infinite alternate; }
+.heritage-page .heritage-finale::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 38% 46%, rgba(7, 17, 31, .20), rgba(7, 17, 31, .76) 60%, rgba(7, 17, 31, .95)); }
+.heritage-page .finale-panel { position: relative; z-index: 2; width: min(980px, 74vw); padding: 8vh 0; text-align: left; }
+.heritage-page .finale-panel h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(58px, 7vw, 118px); line-height: .88; letter-spacing: -.05em; margin: 18px 0 28px; }
+.heritage-page .finale-panel p:not(.eyebrow) { max-width: 720px; font-size: 18px; line-height: 1.72; color: rgba(255, 255, 255, .78); font-weight: 300; }
+.heritage-page .finale-actions { display: flex; gap: 34px; margin-top: 40px; }
+.heritage-page .finale-actions .ghost { opacity: .78; }
+
+/* Image lightbox (v43) — kept full-viewport (theme header sits below z-index 3000) */
+.heritage-page .image-lightbox { position: fixed; inset: 0; z-index: 3000; display: flex; align-items: center; justify-content: center; padding: clamp(24px, 4vw, 64px); background: rgba(7, 12, 20, .92); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 260ms var(--ease), visibility 0s linear 260ms; }
+.heritage-page .image-lightbox.open { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity 260ms var(--ease), visibility 0s linear 0s; }
+.heritage-page .image-lightbox img { max-width: 96vw; max-height: 92vh; width: auto; height: auto; object-fit: contain; box-shadow: 0 28px 110px rgba(0, 0, 0, .42); cursor: default; }
+.heritage-page .lb-close { position: absolute; top: 22px; left: 22px; z-index: 1; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #fff; border: 1px solid rgba(255, 255, 255, .42); border-radius: 50%; font-size: 28px; line-height: 1; background: rgba(255, 255, 255, .06); transition: background 240ms var(--ease), color 240ms var(--ease), border-color 240ms var(--ease); }
+.heritage-page .lb-close:hover { background: #fff; color: #0f1a2e; border-color: #fff; }
+.heritage-page.lightbox-open { overflow: hidden; }
+
+@media (max-width: 980px) {
+  .heritage-page .heritage-timeline { display: none; }
+  .heritage-page .heritage-timeline .tl small { display: none; }
+  .heritage-page .hero-history { min-height: 640px; }
+  .heritage-page .global-ghost-title { display: none; }
+  .heritage-page .era { height: auto; min-height: 150vh; }
+  .heritage-page .era.era-long { height: auto; min-height: 190vh; }
+  .heritage-page .era-stage { position: relative; height: auto; padding: 120px 0; }
+  .heritage-page .era-year, .heritage-page .visual-block { position: relative; transform: none; left: auto; top: auto; opacity: 1; }
+  .heritage-page .era .visual-block { width: 88vw; }
+  .heritage-page .era-meta { grid-template-columns: 1fr; margin-bottom: 20px; }
+  .heritage-page .era-meta > div { text-align: left; }
+  .heritage-page .era-meta .kicker, .heritage-page .era-meta > div > p:not(.kicker) { font-size: 12px; }
+  .heritage-page .comp { display: flex; flex-direction: column; gap: 16px; }
+  .heritage-page .comp > * { grid-column: auto; grid-row: auto; width: 100%; }
+  .heritage-page .comp .frame { height: auto; aspect-ratio: 4/3; }
+  .heritage-page .comp .frame img { height: 100%; }
+  .heritage-page .comp .o-a, .heritage-page .comp .of-c, .heritage-page .comp .pr-b, .heritage-page .comp .re-c { aspect-ratio: 3/4; }
+  .heritage-page .comp .of-a { aspect-ratio: 5/2; }
+  .heritage-page .comp .pa-a { aspect-ratio: 1/1; }
+  .heritage-page .carousel-unit .cframe { height: auto; flex: none; aspect-ratio: 4/3; }
+  .heritage-page .ar-car .cframe { height: auto; aspect-ratio: 1/1; }
+  .heritage-page .o-car .cframe, .heritage-page .of-car .cframe, .heritage-page .pr-arte .cframe, .heritage-page .pr-sello .cframe, .heritage-page .pa-car .cframe { aspect-ratio: 1/1; }
+  .heritage-page .nu-carB .cframe { aspect-ratio: 3/4; }
+  .heritage-page .comp-patrimonio { display: flex; flex-direction: column; }
+  .heritage-page #era-patrimonio .visual-block { top: auto; width: 88vw; }
+  .heritage-page #era-patrimonio .era-meta { margin-bottom: 28px; }
+  .heritage-page .pa-wide { aspect-ratio: 16/6; min-height: auto; }
+  .heritage-page .comp-note:not(.ar-note) { margin: 28px auto 0; max-width: none; }
+  .heritage-page .comp-note:not(.ar-note) .note-cap { font-size: 10.5px; letter-spacing: .18em; margin-bottom: 12px; }
+  .heritage-page .comp-note p { font-size: 14.5px; max-width: none; }
+  .heritage-page .finale-panel { width: 84vw; }
+  .heritage-page .finale-actions { display: grid; gap: 20px; }
+  .heritage-page .image-lightbox { padding: 18px; }
+  .heritage-page .lb-close { top: 14px; left: 14px; width: 40px; height: 40px; }
+}
+
+/* Reduced-motion / no-anim static fallback: flatten eras so content is readable. */
+.heritage-page.is-static .era, .heritage-page.is-static .era.era-long { height: auto; }
+.heritage-page.is-static .era-stage { position: relative; height: auto; padding: 12vh 0; }
+.heritage-page.is-static .era-year { position: relative; top: auto; left: auto; opacity: .12 !important; transform: none !important; text-align: center; display: block; margin: 0 auto 24px; }
+.heritage-page.is-static .visual-block { position: relative; left: auto; top: auto; transform: none !important; opacity: 1 !important; margin: 0 auto; }
+.heritage-page.is-static .era-meta, .heritage-page.is-static .era-copy { opacity: 1 !important; transform: none !important; filter: none !important; }
+.heritage-page.is-static .global-ghost-title { display: none; }
+.heritage-page.is-static .frame, .heritage-page.is-static .card, .heritage-page.is-static .mag-card, .heritage-page.is-static .media { opacity: 1 !important; transform: none !important; filter: none !important; }
+.heritage-page.is-static .hero-history img, .heritage-page.is-static .finale-bg img { animation: none; }
+{% endstylesheet %}
+
+{% javascript %}
+(function () {
+  function boot(container) {
+    if (!container || container.dataset.init) return;
+    container.dataset.init = '1';
+
+    var assets = window.__HERITAGE_ASSETS || {};
+    /* Live mockup builds paths via H='assets/heritage-2026/'; A=n=>H+'opt-'+n+'.webp'.
+       The 50 real opt-*.webp photos now ship as heritage2026-opt-*.webp and are
+       emitted into __HERITAGE_ASSETS keyed by their opt-*.webp basename (see Liquid
+       above), so resolve() finds them directly. Only the Renacer composition still
+       maps onto existing catalog assets. */
+    var MAP = {
+      'mesa_bodegon_lujo_el_renacer.png': 'mesa_bodegon_el_renacer.webp',
+      'collection-aurora.webp': 'collection-aurora.webp',
+      'gifts-decor-vertical.png': 'gifts-decor-vertical.png'
+    };
+    function resolve(u) {
+      if (!u) return u;
+      var base = u.split('/').pop();
+      var target = MAP[base] || base;
+      return assets[target] || u;
+    }
+
+    var H = 'assets/heritage-2026/';
+    var A = function (n) { return H + 'opt-' + n + '.webp'; };
+
+    var milestones = [
+      {id:'territorio', group:0, label:'Territorio', year:'S. XII  -  1398', title:'TIERRA\nY SILENCIO', kicker:'Antes de la fábrica', heading:'Un lugar unido al barro antes de llamarse La Cartuja', text:'El relato comienza antes de la marca. El entorno de Sevilla y el Guadalquivir ya estaban vinculados a una tradición alfarera antigua; después, el Monasterio de Santa María de las Cuevas fijó en el paisaje una memoria de silencio, arquitectura y trabajo paciente.', more:'La futura fábrica no nació en un lugar neutro. Heredó un territorio con arcilla, oficio y una arquitectura capaz de convertir el tiempo en identidad.', cap:'Territorio, monasterio y tradición alfarera', layout:'territorio',
+        a:A('h01-territorio-a'), b:A('h01-territorio-b')},
+
+      {id:'origen', group:0, label:'Origen', year:'1822  -  1841', title:'ORIGEN\nSEVILLANO', kicker:'Carlos Pickman', heading:'La técnica inglesa encuentra una casa en Sevilla', text:'Carlos Pickman llega a Sevilla desde el ámbito comercial británico y convierte el antiguo recinto cartujo en una fábrica de loza fina. En 1841 nace La Cartuja de Sevilla con una ambición clara: producir piezas capaces de competir con las grandes casas inglesas.', more:'En el origen conviven técnica, comercio, ciudad y monasterio: una mezcla irrepetible que explica por qué La Cartuja no fue solo una fábrica, sino una casa con carácter propio.', cap:'Fundación, monasterio y técnica inglesa', layout:'origen',
+        a:A('h02-origen-a'), c:A('h02-origen-c'), b:A('h02-origen-b'),
+        car:[A('h02-origen-car1'),A('h02-origen-car2'),A('h02-origen-car3')]},
+
+      {id:'oficio', group:0, label:'Oficio', year:'1844  -  1852', title:'OFICIO\nY FUEGO', kicker:'Primeros catálogos', heading:'Hornos, maestros y una producción que toma escala', text:'Las primeras tarifas y repertorios consolidan el estilo de la casa. La fábrica crece con operarios especializados, hornos, almacenes y piezas destinadas tanto al uso doméstico como a fondas, paradores y mercados de exportación.', more:'En estos años aparecen algunos de los grandes signos de la casa: formas reconocibles, decorados duraderos y piezas singulares como la cabeza frenológica.', cap:'Producción, hornos y piezas tempranas', layout:'oficio',
+        a:A('h03-oficio-a'), c:A('h03-oficio-c'), d:A('h03-oficio-d'),
+        car:[A('h03-oficio-car1'),A('h03-oficio-car2')]},
+
+      {id:'prestigio', group:1, label:'Prestigio', year:'1862  -  1873', title:'SELLO\nREAL', kicker:'Reconocimiento', heading:'La loza sevillana entra en el mapa internacional', text:'La Cartuja recibe visitas institucionales y reconocimientos en exposiciones. En 1871 se convierte en proveedora oficial de la Casa Real y, en 1873, Carlos Pickman recibe el título de Marqués.', more:'La casa deja de ser únicamente una promesa industrial y se convierte en símbolo de prestigio: Sevilla, Europa y la mesa institucional empiezan a compartir un mismo lenguaje de calidad.', cap:'Exposiciones, Casa Real y legitimidad', layout:'prestigio',
+        a:A('h04-prestigio-a'), b:A('h04-prestigio-b'),
+        car:[A('h04-prestigio-arte1'),A('h04-prestigio-arte2')],
+        car2:[A('h04-prestigio-sello1'),A('h04-prestigio-sello2'),A('h04-prestigio-sello3'),A('h04-prestigio-sello4'),A('h04-prestigio-sello5')]},
+
+      {id:'archivo', group:1, label:'Archivo ornamental', year:'1880  -  1907', title:'ARCHIVO\nORNAMENTAL', kicker:'Decorados y catálogo', heading:'El ornamento se convierte en memoria', text:'El repertorio visual de La Cartuja se amplía: escenas, grecas, flores, paisajes, objetos decorativos, piezas de tocador, botes, floreros y cerámica artística. La marca empieza a construir un archivo visual que trasciende generaciones.', more:'Cada plancha, cada sello y cada motivo decorativo funciona como una forma de memoria impresa sobre la mesa.', cap:'Catálogo, decorado y cerámica artística', layout:'archivo',
+        car:[A('h05-archivo-1'),A('h05-archivo-2'),A('h05-archivo-3'),A('h05-archivo-4'),A('h05-archivo-5'),A('h05-archivo-6'),A('h05-archivo-7'),A('h05-archivo-8')]},
+
+      {id:'tecnica', group:2, label:'Técnica y mano', year:'1910  -  1952', title:'TÉCNICA\nY MANO', kicker:'Proceso artesanal', heading:'La modernización convive con el gesto manual', text:'La casa incorpora hitos técnicos y mantiene una cadena de producción donde la mano sigue decidiendo. Moldeado, cocción, sellado, decoración, esmaltado y clasificación componen un proceso largo, preciso y exigente.', more:'La técnica no sustituye al oficio: lo sostiene. La pieza atraviesa temperatura, criterio y revisión antes de llegar a la mesa.', cap:'Proceso, cocción y clasificación', layout:'tecnica',
+        a:A('h06-tecnica-a'),
+        car:[A('h06-tecnica-car1'),A('h06-tecnica-car2'),A('h06-tecnica-car3'),A('h06-tecnica-car4'),A('h06-tecnica-car5'),A('h06-tecnica-car6')]},
+
+      {id:'patrimonio', group:2, label:'Patrimonio', year:'1964  -  1998', title:'PATRIMONIO\nPROTEGIDO', kicker:'Museo y BIC', heading:'La fábrica empieza a leerse como patrimonio', text:'El conjunto de La Cartuja de Santa María de las Cuevas es declarado Conjunto Monumental Histórico Artístico en 1964. Décadas después, la Colección Histórica del Museo Pickman es declarada Bien de Interés Cultural.', more:'La Cartuja deja de ser solo una marca industrial: su archivo, sus planchas, sus piezas y su memoria pasan a formar parte de un legado protegido.', cap:'Monasterio, museo y reconocimiento patrimonial', layout:'patrimonio',
+        a:A('h07-patrimonio-a'), b:A('h07-patrimonio-wide'),
+        car:[A('h07-patrimonio-car1'),A('h07-patrimonio-car2')]},
+
+      {id:'nueva-etapa', group:3, label:'Nueva etapa', year:'2003  -  2016', title:'CATALOGAR\nLA MEMORIA', kicker:'Archivo vivo', heading:'Describir, conservar y volver a mirar', text:'La catalogación de piezas, la conservación de fondos y la relectura del archivo permiten mirar La Cartuja desde una nueva perspectiva. La historia ya no es un peso, sino una herramienta para construir futuro.', more:'En 2016 se abre una etapa que busca recuperar el espíritu vanguardista de la casa desde su esencia: artesanía, marca España, diseño e innovación.', cap:'Artesanía, colaboraciones y nuevas mesas', layout:'nueva',
+        a:A('h08-nueva-a'),
+        car:[A('h08-nueva-carA1'),A('h08-nueva-carA2'),A('h08-nueva-carA3')],
+        car2:[A('h08-nueva-carB1'),A('h08-nueva-carB2'),A('h08-nueva-carB3')],
+        car3:[A('h08-nueva-carC1'),A('h08-nueva-carC2')]},
+
+      {id:'renacer', group:4, label:'El Renacer', year:'2026', title:'EL\nRENACER', kicker:'Presente', heading:'Una casa histórica vuelve a ocupar su lugar', text:'El Renacer propone volver a mirar La Cartuja desde el presente: formas históricas, decorados icónicos y objetos de conversación reinterpretados para la vida contemporánea.', more:'La nueva etapa no parte de cero. Parte de un archivo, una ciudad, una colección histórica reconocida y una manera de entender la mesa como memoria viva.', cap:'Presente, colección y futuro', layout:'renacer',
+        a:'assets/mesa_bodegon_lujo_el_renacer.png', b:'assets/collection-aurora.webp', c:'assets/gifts-decor-vertical.png'}
+    ];
+
+    var eras = milestones;
+    var main = container.querySelector('.heritage-timeline-start');
+    var timeline = container.querySelector('.heritage-timeline-links');
+    var root = container;
+    var light = { bg: [247, 244, 238], fg: [15, 26, 46], ghost: [15, 26, 46] };
+    var dark = { bg: [15, 26, 46], fg: [244, 241, 234], ghost: [244, 241, 234] };
+    var clamp = function (n, a, b) { a = (a === undefined ? 0 : a); b = (b === undefined ? 1 : b); return Math.max(a, Math.min(b, n)); };
+    var lerp = function (a, b, t) { return a + (b - a) * t; };
+    var ease = function (t) { return 1 - Math.pow(1 - clamp(t), 3); };
+    var mixArr = function (a, b, t) { return a.map(function (v, i) { return Math.round(lerp(v, b[i], t)); }); };
+    var rgb = function (a) { return a.join(','); };
+    function toneForEra(i) { return Math.floor(((eras[i] && eras[i].group) || 0) % 2) === 1 ? dark : light; }
+
+    function im(src, alt) { return '<img src="' + resolve(src) + '" alt="' + (alt || 'La Cartuja de Sevilla') + '" loading="lazy">'; }
+    function f(src, cls) { return '<div class="frame ' + (cls || '') + '">' + im(src) + '</div>'; }
+    function car(paths, cls, fit) {
+      var slides = paths.map(function (p, i) { return '<figure class="cslide' + (i === 0 ? ' active' : '') + '">' + im(p) + '</figure>'; }).join('');
+      var total = String(paths.length).length < 2 ? '0' + paths.length : String(paths.length);
+      return '<div class="carousel-unit ' + (cls || '') + '">' +
+        '<div class="frame cframe carousel" data-fit="' + (fit || 'cover') + '"><div class="ctrack">' + slides + '</div></div>' +
+        '<div class="carousel-bar">' +
+        '<span class="ccount"><b>01</b><i>/</i>' + total + '</span>' +
+        '<div class="carrows">' +
+        '<button type="button" class="cbtn cprev" aria-label="Foto anterior">‹</button>' +
+        '<button type="button" class="cbtn cnext" aria-label="Foto siguiente">›</button>' +
+        '</div></div></div>';
+    }
+    function note(e, cls) { return '<div class="comp-note ' + (cls || '') + '"><p class="note-cap">' + e.cap + '</p><p>' + e.text + '</p><p class="cn-2">' + e.more + '</p></div>'; }
+
+    function mediaHtml(e) {
+      switch (e.layout) {
+        case 'territorio':
+          return '<div class="media comp comp-territorio">' + f(e.a, 't-a') + f(e.b, 't-b') + note(e, 't-note') + '</div>';
+        case 'origen':
+          return '<div class="media comp comp-origen">' + f(e.a, 'o-a') + f(e.c, 'o-c') + car(e.car, 'o-car', 'contain') + note(e, 'o-note') + '</div>';
+        case 'oficio':
+          return '<div class="media comp comp-oficio">' + f(e.a, 'of-a') + f(e.c, 'of-c') + f(e.d, 'of-d') + car(e.car, 'of-car', 'contain') + note(e, 'of-note') + '</div>';
+        case 'prestigio':
+          return '<div class="media comp comp-prestigio">' + f(e.b, 'pr-b') + f(e.a, 'pr-a') + car(e.car, 'pr-arte', 'contain') + car(e.car2, 'pr-sello', 'contain') + note(e, 'pr-note') + '</div>';
+        case 'archivo':
+          return '<div class="media comp comp-archivo">' + note(e, 'ar-note') + car(e.car, 'ar-car', 'contain') + '</div>';
+        case 'tecnica':
+          return '<div class="media comp comp-tecnica">' + f(e.a, 'te-a') + car(e.car, 'te-car', 'contain') + note(e, 'te-note') + '</div>';
+        case 'patrimonio':
+          return '<div class="media comp comp-patrimonio">' + f(e.a, 'pa-a') + car(e.car, 'pa-car', 'contain') + f(e.b, 'pa-wide') + note(e, 'pa-note') + '</div>';
+        case 'nueva':
+          return '<div class="media comp comp-nueva">' + f(e.a, 'nu-a') + car(e.car, 'nu-carA', 'cover') + car(e.car3, 'nu-carC', 'cover') + car(e.car2, 'nu-carB', 'cover') + note(e, 'nu-note') + '</div>';
+        case 'renacer':
+          return '<div class="media comp comp-renacer">' + f(e.a, 're-a') + f(e.b, 're-b') + f(e.c, 're-c') + note(e, 're-note') + '</div>';
+        default:
+          return '<div class="media single"><div class="frame">' + im(e.a) + '</div></div>';
+      }
+    }
+
+    var important = { 'origen': 1, 'oficio': 1, 'prestigio': 1, 'archivo': 1, 'nueva-etapa': 1 };
+    eras.forEach(function (e, i) {
+      var sec = document.createElement('section');
+      sec.className = 'era ' + (important[e.id] ? 'era-long' : '');
+      sec.id = 'era-' + e.id;
+      sec.dataset.index = i;
+      sec.setAttribute('data-screen-label', e.label);
+      sec.innerHTML = '<div class="era-stage"><div class="era-year">' + e.year + '</div><div class="visual-block visual-' + e.layout + '" data-layout="' + e.layout + '"><div class="era-meta"><div><p class="kicker">' + e.kicker + '</p><p>' + e.year + '</p></div><h2>' + e.heading + '</h2></div>' + mediaHtml(e) + '</div></div>';
+      main.appendChild(sec);
+      timeline.insertAdjacentHTML('beforeend', '<a class="tl" href="#era-' + e.id + '"><span>' + e.label + '</span><small>' + e.year + '</small></a>');
+    });
+
+    /* Carrusel con clic: contador + flechas debajo */
+    container.querySelectorAll('.carousel-unit').forEach(function (unit) {
+      var slides = [].slice.call(unit.querySelectorAll('.cslide'));
+      if (slides.length <= 1) { var bar = unit.querySelector('.carousel-bar'); if (bar) bar.style.visibility = 'hidden'; return; }
+      var counter = unit.querySelector('.ccount b');
+      var idx = 0;
+      var show = function (i) { idx = (i + slides.length) % slides.length; slides.forEach(function (s, k) { s.classList.toggle('active', k === idx); }); counter.textContent = String(idx + 1).length < 2 ? '0' + (idx + 1) : String(idx + 1); };
+      unit.querySelector('.cprev').addEventListener('click', function (ev) { ev.preventDefault(); ev.stopPropagation(); show(idx - 1); });
+      unit.querySelector('.cnext').addEventListener('click', function (ev) { ev.preventDefault(); ev.stopPropagation(); show(idx + 1); });
+    });
+
+    /* Lightbox: clic en imagen para abrir, clic fuera / X / Esc para cerrar */
+    var imageLightbox = document.createElement('div');
+    imageLightbox.className = 'image-lightbox';
+    imageLightbox.setAttribute('aria-hidden', 'true');
+    imageLightbox.innerHTML = '<button class="lb-close" type="button" aria-label="Cerrar imagen">×</button><img alt="La Cartuja de Sevilla">';
+    container.appendChild(imageLightbox);
+    var lbImg = imageLightbox.querySelector('img');
+    function openLightbox(src, alt) {
+      if (!src) return;
+      lbImg.src = src; lbImg.alt = alt || 'La Cartuja de Sevilla';
+      imageLightbox.classList.add('open'); imageLightbox.setAttribute('aria-hidden', 'false');
+      container.classList.add('lightbox-open');
+    }
+    function closeLightbox() {
+      imageLightbox.classList.remove('open'); imageLightbox.setAttribute('aria-hidden', 'true');
+      container.classList.remove('lightbox-open');
+      setTimeout(function () { if (!imageLightbox.classList.contains('open')) lbImg.removeAttribute('src'); }, 260);
+    }
+    container.addEventListener('click', function (ev) {
+      var arrow = ev.target.closest && ev.target.closest('.cbtn,a,button');
+      if (arrow) return;
+      var img = ev.target.closest && ev.target.closest('.visual-block .frame img, .visual-block .cslide img');
+      if (!img) return;
+      ev.preventDefault();
+      openLightbox(img.currentSrc || img.src, img.alt);
+    });
+    imageLightbox.addEventListener('click', function (ev) { if (ev.target === imageLightbox || ev.target.classList.contains('lb-close')) closeLightbox(); });
+    document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && imageLightbox.classList.contains('open')) closeLightbox(); });
+
+    var ghost = document.createElement('div');
+    ghost.className = 'global-ghost-title';
+    ghost.setAttribute('aria-hidden', 'true');
+    ghost.innerHTML = '<div></div><div></div>';
+    container.appendChild(ghost);
+    var ghostA = ghost.children[0], ghostB = ghost.children[1];
+
+    var sections = [].slice.call(container.querySelectorAll('.era'));
+    var tlLinks = [].slice.call(container.querySelectorAll('.tl'));
+
+    /* Reduced motion: render flat + skip the scroll animation entirely. */
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      container.classList.add('is-static');
+      return;
+    }
+
+    function setTheme(activeIndex, fade, presence) {
+      fade = fade || 0; presence = (presence === undefined ? 1 : presence);
+      var current = toneForEra(activeIndex), next = toneForEra(Math.min(activeIndex + 1, eras.length - 1));
+      var t = ease(fade);
+      root.style.setProperty('--bg', rgb(mixArr(current.bg, next.bg, t)));
+      root.style.setProperty('--fg', rgb(mixArr(current.fg, next.fg, t)));
+      root.style.setProperty('--ghost', rgb(mixArr(current.ghost, next.ghost, t)));
+      var tone = (t > 0.5 ? next : current);
+      var maxOpacity = tone === dark ? .15 : .12;
+      ghostA.textContent = (eras[activeIndex] && eras[activeIndex].title) || '';
+      ghostB.textContent = (eras[Math.min(activeIndex + 1, eras.length - 1)] && eras[Math.min(activeIndex + 1, eras.length - 1)].title) || '';
+      ghostA.style.opacity = (presence * maxOpacity * (1 - t)).toFixed(3);
+      ghostB.style.opacity = (presence * maxOpacity * t).toFixed(3);
+      root.classList.toggle('heritage-dark', tone === dark);
+    }
+
+    function phaseStyles(sec, p) {
+      var year = sec.querySelector('.era-year'), visual = sec.querySelector('.visual-block'),
+          meta = sec.querySelector('.era-meta'), media = sec.querySelector('.media'), copy = sec.querySelector('.era-copy');
+      if (year) {
+        var yIn = ease(clamp((p - 0.02) / 0.12));
+        var yGo = ease(clamp((p - 0.26) / 0.18));
+        var yEnd = ease(clamp((p - 0.82) / 0.18));
+        var yoff = lerp(72, 0, yIn) - yGo * 300;
+        year.style.opacity = (yIn * (1 - yGo) * (1 - yEnd)).toFixed(3);
+        year.style.transform = 'translate3d(-50%,-50%,0) translateY(' + yoff.toFixed(1) + 'px)';
+        year.style.filter = 'blur(' + lerp(10, 0, yIn).toFixed(2) + 'px)';
+      }
+      var cAppear = ease(clamp((p - 0.30) / 0.16));
+      var cLeave = ease(clamp((p - 0.84) / 0.16));
+      var vis = cAppear * (1 - cLeave);
+      var off;
+      if (p < 0.46) off = lerp(200, 0, ease(clamp((p - 0.30) / 0.16)));
+      else if (p < 0.84) off = lerp(0, -40, (p - 0.46) / 0.38);
+      else off = lerp(-40, -440, ease((p - 0.84) / 0.16));
+      if (visual) {
+        visual.style.opacity = vis.toFixed(3);
+        if (sec.id === 'era-patrimonio') {
+          var patAppear = ease(clamp((p - 0.26) / 0.14));
+          var patScroll = ease(clamp((p - 0.50) / 0.28));
+          var patLeave = ease(clamp((p - 0.86) / 0.14));
+          var revealShift = Math.min(innerHeight * 0.66, 680);
+          var patY = lerp(52, -40, patAppear) - revealShift * patScroll - patLeave * 360;
+          visual.style.transform = 'translate3d(-50%,0,0) translateY(' + patY.toFixed(1) + 'px)';
+          visual.style.filter = 'blur(' + lerp(6, 0, patAppear).toFixed(2) + 'px)';
+        } else {
+          visual.style.transform = 'translate3d(-50%,-50%,0) translateY(' + off.toFixed(1) + 'px)';
+          visual.style.filter = 'blur(' + lerp(6, 0, cAppear).toFixed(2) + 'px)';
+        }
+      }
+      var visOut = 1 - cLeave;
+      var m = ease(clamp((p - 0.34) / 0.12)) * visOut;
+      if (meta) { meta.style.setProperty('--meta-o', m.toFixed(3)); meta.style.setProperty('--meta-y', lerp(38, 0, m).toFixed(1) + 'px'); }
+      var c = ease(clamp((p - 0.38) / 0.14)) * visOut;
+      if (copy) { copy.style.setProperty('--copy-o', c.toFixed(3)); copy.style.setProperty('--copy-y', lerp(34, 0, c).toFixed(1) + 'px'); }
+      if (media) { var scale = lerp(.994, 1, ease(clamp((p - 0.30) / 0.28))); media.style.transform = 'scale(' + scale.toFixed(4) + ')'; }
+      [].slice.call(sec.querySelectorAll('.frame,.mag-card,.card')).forEach(function (fr, i) {
+        var d = ease(clamp((p - (.32 + i * .015)) / .15));
+        fr.style.transform = 'translate3d(0,' + lerp(28, 0, d).toFixed(1) + 'px,0)';
+      });
+    }
+
+    function state() {
+      var active = 0, vh = innerHeight;
+      sections.forEach(function (s, i) { if (s.getBoundingClientRect().top <= vh * .44) active = i; });
+      var sec = sections[active];
+      var r = sec.getBoundingClientRect();
+      var p = clamp((-r.top) / Math.max(1, r.height - vh));
+      var next = sections[active + 1];
+      var fade = 0;
+      if (next) { var nr = next.getBoundingClientRect(); fade = clamp((vh * .86 - nr.top) / (vh * .36)); }
+      return { active: active, p: p, fade: fade, timelineIndex: fade > .55 ? Math.min(active + 1, sections.length - 1) : active };
+    }
+    function ghostPresence() {
+      var vh = innerHeight;
+      var start = main;
+      var finale = container.querySelector('.heritage-finale');
+      var startTop = start ? start.getBoundingClientRect().top : 0;
+      var finaleTop = finale ? finale.getBoundingClientRect().top : Infinity;
+      var fadeIn = ease(clamp((vh * .72 - startTop) / (vh * .38)));
+      var fadeOut = 1 - ease(clamp((vh * 1.02 - finaleTop) / (vh * .45)));
+      return clamp(fadeIn * fadeOut);
+    }
+
+    var progressBar = container.querySelector('.heritage-progress-bar');
+    function update() {
+      var max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+      if (progressBar) progressBar.style.width = (scrollY / max) * 100 + '%';
+      sections.forEach(function (s) {
+        var r = s.getBoundingClientRect();
+        phaseStyles(s, clamp((-r.top) / Math.max(1, r.height - innerHeight)));
+      });
+      var st = state();
+      setTheme(st.active, st.fade, ghostPresence());
+      tlLinks.forEach(function (a, i) { a.classList.toggle('active', i === st.timelineIndex); });
+    }
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+    requestAnimationFrame(update);
+
+    addEventListener('keydown', function (e) {
+      if (['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft'].indexOf(e.key) === -1) return;
+      if (['INPUT', 'TEXTAREA'].indexOf(e.target.tagName || '') !== -1) return;
+      var active = tlLinks.findIndex(function (a) { return a.classList.contains('active'); });
+      var n = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? active + 1 : active - 1;
+      if (tlLinks[n]) { e.preventDefault(); tlLinks[n].click(); }
+    });
+  }
+
+  document.querySelectorAll('.heritage-page').forEach(boot);
+  document.addEventListener('shopify:section:load', function (e) { e.target.querySelectorAll('.heritage-page').forEach(boot); });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Heritage 1841",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "La Cartuja de Sevilla · 1841" },
+    { "type": "text", "id": "hero_title", "label": "Title line 1", "default": "Heritage" },
+    { "type": "text", "id": "hero_title_2", "label": "Title line 2", "default": "1841" },
+    { "type": "richtext", "id": "hero_intro", "label": "Intro" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "hero_demo_image", "label": "Hero demo image (asset filename)" },
+    { "type": "header", "content": "Finale (El Renacer)" },
+    { "type": "text", "id": "finale_eyebrow", "label": "Eyebrow", "default": "El Renacer" },
+    { "type": "text", "id": "finale_heading", "label": "Heading", "default": "Una casa histórica vuelve a ocupar su lugar." },
+    { "type": "richtext", "id": "finale_body", "label": "Body" },
+    { "type": "text", "id": "cta1_label", "label": "CTA 1 label", "default": "Descubrir colecciones" },
+    { "type": "url", "id": "cta1_link", "label": "CTA 1 link" },
+    { "type": "text", "id": "cta2_label", "label": "CTA 2 label", "default": "Ver nuestras mesas" },
+    { "type": "url", "id": "cta2_link", "label": "CTA 2 link" },
+    { "type": "image_picker", "id": "finale_image", "label": "Finale image" },
+    { "type": "text", "id": "finale_demo_image", "label": "Finale demo image (asset filename)" }
+  ],
+  "presets": [{ "name": "Heritage 1841" }]
+}
+{% endschema %}

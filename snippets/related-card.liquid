@@ -1,0 +1,32 @@
+{%- comment -%}
+  Related-products card (PDP "Completa la mesa" / "Te puede interesar").
+  Matches the live design DOM exactly (cartuja.gropius.link):
+    .product-info > div > h3 + p, then .price LAST (no .product-cover overlay,
+    h3 is a plain inline link that inherits its styles so layout is unchanged).
+  Distinct from snippets/collection-card.liquid (PLP grid), whose DOM differs.
+
+  Accepts (all optional; caller passes either a `product` or demo values):
+    card_url, title, price, meta, img1, img2, img_w, img_h, badge,
+    data_price, data_new
+{%- endcomment -%}
+{%- liquid
+  assign c_url = card_url | default: product.url | default: '#'
+  assign c_title = title | default: product.title
+  assign c_w = img_w | default: 1000
+  assign c_h = img_h | default: 1250
+-%}
+<article class="product reveal" data-price="{{ data_price | default: 0 }}" data-new="{{ data_new | default: 0 }}">
+  <div class="product-media">
+    {%- if badge -%}<span class="badge">{{ 'sections.collection.badge_new' | t }}</span>{%- endif -%}
+    <button class="fav" type="button" aria-label="{{ 'sections.collection.favorite' | t }}">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.1c0 5.2-8.8 10.3-8.8 10.3S3.2 13.3 3.2 8.1A4.5 4.5 0 0 1 12 6.6a4.5 4.5 0 0 1 8.8 1.5Z"/></svg>
+    </button>
+    {%- if img1 != blank -%}
+      <img class="main" src="{{ img1 }}" alt="{{ c_title | escape }}" width="{{ c_w }}" height="{{ c_h }}" loading="lazy" decoding="async">
+    {%- endif -%}
+    {%- if img2 != blank -%}
+      <img class="hover" src="{{ img2 }}" alt="{{ c_title | escape }}" width="{{ c_w }}" height="{{ c_h }}" loading="lazy" decoding="async">
+    {%- endif -%}
+  </div>
+  <div class="product-info"><div><h3><a href="{{ c_url }}">{{ c_title | escape }}</a></h3>{%- if meta != blank -%}<p>{{ meta | escape }}</p>{%- endif -%}</div>{%- if price != blank -%}<span class="price">{{ price }}</span>{%- endif -%}</div>
+</article>

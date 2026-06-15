@@ -1,0 +1,192 @@
+{%- comment -%}
+  Nuestras mesas — editorial page: hero + text filter bar + alternating table
+  scenes (full-bleed photo with pulsing hotspots + a featured product panel).
+  Filters toggle scenes by their `type_slug`. Scenes are `scene` blocks.
+{%- endcomment -%}
+{%- liquid
+  assign all_label = section.settings.filter_all_label | default: 'Todas'
+  assign filter_rows = section.settings.filters | newline_to_br | split: '<br />'
+-%}
+<main class="tables-page" data-section-id="{{ section.id }}">
+  <section class="tables-hero">
+    <div>
+      {%- if section.settings.kicker != blank -%}<p class="collection-kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h1>{{ section.settings.heading | escape }}</h1>{%- endif -%}
+    </div>
+    {%- if section.settings.intro != blank -%}<p>{{ section.settings.intro }}</p>{%- endif -%}
+  </section>
+
+  {%- if filter_rows.size > 0 -%}
+    <section class="table-filters table-filters--text" aria-label="{{ 'sections.tables.filters' | t }}">
+      <button class="table-filter active" type="button" data-table-filter="all"><span>{{ all_label | escape }}</span></button>
+      {%- for row in filter_rows -%}
+        {%- assign parts = row | split: '|' -%}
+        {%- if parts[0] != blank -%}
+          <button class="table-filter" type="button" data-table-filter="{{ parts[1] | default: parts[0] | strip | handleize }}"><span>{{ parts[0] | strip | escape }}</span></button>
+        {%- endif -%}
+      {%- endfor -%}
+    </section>
+  {%- endif -%}
+
+  <section class="table-scenes-list">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'scene' -%}
+        {%- liquid
+          assign hotspot_rows = block.settings.hotspots | newline_to_br | split: '<br />'
+        -%}
+        <article class="table-scene-block{% if block.settings.reverse %} reverse{% endif %}" data-table-type="{{ block.settings.type_slug | default: 'all' | strip | handleize }}" {{ block.shopify_attributes }}>
+          <div class="table-scene-photo">
+            {%- if block.settings.photo != blank -%}
+              {% render 'image-responsive', image: block.settings.photo, alt: block.settings.product_title, sizes: '(max-width: 1000px) 100vw, 55vw' %}
+            {%- else -%}
+              <img src="{{ block.settings.demo_photo | default: 'scene-table.webp' | asset_url }}" alt="{{ block.settings.product_title | escape }}" width="1200" height="900" loading="lazy" decoding="async">
+            {%- endif -%}
+            {%- for row in hotspot_rows -%}
+              {%- assign xy = row | split: '|' -%}
+              {%- if xy[0] != blank -%}
+                <button class="scene-hotspot{% if forloop.first %} active{% endif %}" type="button" aria-label="{{ 'sections.tables.hotspot' | t }}" style="left:{{ xy[0] | strip }}%;top:{{ xy[1] | default: '50' | strip }}%"></button>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          <aside class="table-scene-product">
+            <button class="table-prod-arrow prev" type="button" aria-hidden="true" tabindex="-1">‹</button>
+            {%- if block.settings.product_link != blank -%}<a class="table-product-link" href="{{ block.settings.product_link }}">{%- endif -%}
+              {%- if block.settings.product_image != blank -%}
+                {% render 'image-responsive', image: block.settings.product_image, alt: block.settings.product_title, sizes: '(max-width: 1000px) 80vw, 30vw' %}
+              {%- else -%}
+                <img src="{{ block.settings.demo_product_image | default: 'aurora-plate.png' | asset_url }}" alt="{{ block.settings.product_title | escape }}" width="900" height="900" loading="lazy" decoding="async">
+              {%- endif -%}
+            {%- if block.settings.product_link != blank -%}</a>{%- endif -%}
+            {%- if block.settings.product_meta != blank -%}<p>{{ block.settings.product_meta | escape }}</p>{%- endif -%}
+            {%- if block.settings.product_title != blank -%}
+              <h2>{%- if block.settings.product_link != blank -%}<a href="{{ block.settings.product_link }}">{{ block.settings.product_title | escape }}</a>{%- else -%}{{ block.settings.product_title | escape }}{%- endif -%}</h2>
+            {%- endif -%}
+            {%- if block.settings.product_price != blank -%}<span>{{ block.settings.product_price | escape }}</span>{%- endif -%}
+            <div class="table-scene-actions"><button class="ghost-btn" type="button">Añadir al carrito</button></div>
+            <button class="table-prod-arrow next" type="button" aria-hidden="true" tabindex="-1">›</button>
+          </aside>
+        </article>
+      {%- endif -%}
+    {%- endfor -%}
+  </section>
+</main>
+
+{% stylesheet %}
+.tables-page { padding-top: calc(var(--header-h) + 74px); background: var(--paper); color: var(--ink); }
+.tables-page .tables-hero { width: var(--content); margin: 0 auto 66px; display: grid; grid-template-columns: 1fr .82fr; gap: min(8vw, 120px); align-items: start; }
+.tables-page .collection-kicker { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin: 0 0 18px; }
+.tables-page .tables-hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(44px, 5vw, 76px); line-height: .98; margin: 0; color: var(--ink); letter-spacing: -.01em; }
+.tables-page .tables-hero > p { font-size: 14px; line-height: 1.9; color: var(--muted); margin: 34px 0 0; text-align: right; }
+
+.tables-page .table-filters { width: var(--content); margin: 0 auto 86px; display: flex; align-items: center; justify-content: center; gap: clamp(26px, 5vw, 78px); border-top: .5px solid var(--rule); border-bottom: .5px solid var(--rule); padding: 28px 0 30px; }
+.tables-page .table-filter { position: relative; background: transparent; color: var(--muted); text-align: center; padding: 0 0 9px; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; transition: color 260ms var(--ease); }
+.tables-page .table-filter span { position: relative; display: block; font-family: var(--sans); font-size: 10px; letter-spacing: .22em; }
+.tables-page .table-filter::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 0; height: 1px; background: var(--ink); transform: translateX(-50%); transition: width 360ms var(--ease-long), opacity 260ms var(--ease); opacity: 0; }
+.tables-page .table-filter:hover, .tables-page .table-filter.active { color: var(--ink); }
+.tables-page .table-filter.active::after { width: 100%; opacity: 1; }
+.tables-page .table-filter:hover::after { width: 100%; opacity: .42; }
+
+.tables-page .table-scenes-list { width: var(--content); margin: 0 auto 140px; display: grid; gap: 96px; }
+.tables-page .table-scene-block { display: grid; grid-template-columns: 1.1fr .9fr; gap: min(5vw, 76px); align-items: stretch; }
+.tables-page .table-scene-block.reverse .table-scene-photo { order: 2; }
+.tables-page .table-scene-block.reverse .table-scene-product { order: 1; }
+.tables-page .table-scene-block.is-hidden { display: none; }
+.tables-page .table-scene-photo { height: 640px; background: var(--ink-faint-20); position: relative; overflow: hidden; }
+.tables-page .table-scene-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1000ms var(--ease-long); }
+.tables-page .table-scene-photo:hover img { transform: scale(1.025); }
+.tables-page .table-scene-product { position: relative; border-top: .5px solid var(--rule); border-bottom: .5px solid var(--rule); min-height: 640px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 84px; }
+.tables-page .table-scene-product img { height: min(42vh, 360px); width: 100%; object-fit: contain; margin-bottom: 32px; }
+.tables-page .table-scene-product p { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.tables-page .table-scene-product h2 { font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.1; margin: 0 0 10px; color: var(--ink); }
+.tables-page .table-scene-product span { font-size: 13px; color: var(--ink); }
+.tables-page .table-scene-actions { display: grid; gap: 10px; width: min(100%, 300px); margin: 24px auto 0; }
+.tables-page .table-scene-actions .ghost-btn { height: 42px; font-size: 10px; letter-spacing: .18em; width: 100%; padding: 0 18px; }
+.tables-page .table-product-link { display: block; color: inherit; text-decoration: none; }
+.tables-page .table-product-link img { cursor: pointer; }
+.tables-page .table-prod-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--serif); font-size: 34px; line-height: 1; color: var(--ink); opacity: .75; }
+.tables-page .table-prod-arrow.prev { left: 24px; }
+.tables-page .table-prod-arrow.next { right: 24px; }
+.tables-page .scene-hotspot { position: absolute; width: 18px; height: 18px; border: .5px solid var(--ink); background: var(--paper); border-radius: 999px; box-shadow: 0 0 0 9px rgba(255, 255, 255, .48); animation: tableHotspotPulse 2600ms infinite; }
+.tables-page .scene-hotspot.active { background: var(--ink); }
+@keyframes tableHotspotPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, .5); }
+  70% { box-shadow: 0 0 0 14px rgba(255, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+@media (max-width: 1000px) {
+  .tables-page .tables-hero { grid-template-columns: 1fr; }
+  .tables-page .tables-hero > p { text-align: left; margin-top: 0; }
+  .tables-page .table-filters { flex-wrap: wrap; row-gap: 18px; }
+  .tables-page .table-scene-block, .tables-page .table-scene-block.reverse { grid-template-columns: 1fr; }
+  .tables-page .table-scene-block.reverse .table-scene-photo, .tables-page .table-scene-block.reverse .table-scene-product { order: initial; }
+  .tables-page .table-scene-photo, .tables-page .table-scene-product { min-height: auto; height: 520px; }
+}
+@media (max-width: 620px) {
+  .tables-page .table-filters { justify-content: flex-start; gap: 20px; overflow-x: auto; padding: 22px 0 24px; }
+  .tables-page .table-filter { flex: 0 0 auto; }
+  .tables-page .table-scene-photo, .tables-page .table-scene-product { height: 420px; }
+  .tables-page .table-scene-product { padding: 42px 54px; }
+  .tables-page .table-scene-product img { height: 260px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tables-page .scene-hotspot { animation: none; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+(function () {
+  function init(root) {
+    if (!root || root.dataset.init) return;
+    root.dataset.init = '1';
+    var filters = [].slice.call(root.querySelectorAll('[data-table-filter]'));
+    var blocks = [].slice.call(root.querySelectorAll('[data-table-type]'));
+    if (!filters.length || !blocks.length) return;
+    filters.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var type = btn.dataset.tableFilter;
+        filters.forEach(function (b) { b.classList.toggle('active', b === btn); });
+        blocks.forEach(function (block) { block.classList.toggle('is-hidden', type !== 'all' && block.dataset.tableType !== type); });
+      });
+    });
+  }
+  document.querySelectorAll('.tables-page').forEach(init);
+  document.addEventListener('shopify:section:load', function (e) { e.target.querySelectorAll('.tables-page').forEach(init); });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Our tables",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Editorial · Nuestras mesas" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Mesas que cuentan una historia." },
+    { "type": "richtext", "id": "intro", "label": "Intro copy" },
+    { "type": "header", "content": "Filters" },
+    { "type": "text", "id": "filter_all_label", "label": "\"All\" label", "default": "Todas" },
+    { "type": "textarea", "id": "filters", "label": "Filters (one per line: Label|slug)", "info": "slug must match a scene's Type slug.", "default": "Aurora|aurora\n202 Rosa|rosa\nNegro Vistas|negro" }
+  ],
+  "blocks": [
+    {
+      "type": "scene",
+      "name": "Table scene",
+      "settings": [
+        { "type": "checkbox", "id": "reverse", "label": "Reverse layout (product on left)", "default": false },
+        { "type": "text", "id": "type_slug", "label": "Type slug (matches a filter)", "default": "aurora" },
+        { "type": "header", "content": "Scene photo" },
+        { "type": "image_picker", "id": "photo", "label": "Photo" },
+        { "type": "text", "id": "demo_photo", "label": "Demo photo (asset filename)" },
+        { "type": "textarea", "id": "hotspots", "label": "Hotspots (one per line: left%|top%)", "default": "34|45\n58|52\n73|37" },
+        { "type": "header", "content": "Featured product" },
+        { "type": "image_picker", "id": "product_image", "label": "Product image" },
+        { "type": "text", "id": "demo_product_image", "label": "Demo product image (asset filename)" },
+        { "type": "text", "id": "product_meta", "label": "Meta line" },
+        { "type": "text", "id": "product_title", "label": "Product title" },
+        { "type": "text", "id": "product_price", "label": "Price (e.g. 92 €)" },
+        { "type": "url", "id": "product_link", "label": "Product link" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Our tables" }]
+}
+{% endschema %}

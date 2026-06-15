@@ -141,3 +141,32 @@ button {
     transform: none;
   }
 }
+
+/* ---- Product card (shared: collection grid + PDP related grids) ----
+   Markup: snippets/collection-card.liquid. The hover image carousel is
+   progressively enhanced in assets/theme.js (img.main/.hover → .media-slide). */
+.product { position: relative; }
+.product-media { position: relative; background: var(--ink-faint-20); aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.product-cover { position: absolute; inset: 0; z-index: 1; }
+.product-media img.main { width: 78%; height: 78%; object-fit: contain; position: relative; z-index: 0; }
+.product-media img.hover { display: none; }
+.product-media .media-slide { position: absolute; inset: 11%; width: 78%; height: 78%; object-fit: contain; opacity: 0; transform: translateX(100%); transition: transform 520ms var(--ease-long), opacity 360ms var(--ease); will-change: transform, opacity; pointer-events: none; z-index: 1; }
+.product-media .media-slide.is-active { opacity: 1; transform: translateX(0); z-index: 2; }
+.product-media .media-slide.is-prev { opacity: 0; transform: translateX(-100%); }
+.badge { position: absolute; top: 12px; left: 12px; background: var(--paper); padding: 6px 10px; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); z-index: 3; }
+.fav { position: absolute; right: 12px; top: 10px; z-index: 3; width: 26px; height: 26px; display: grid; place-items: center; color: var(--ink); opacity: 0.65; }
+.fav svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 1; fill: none; }
+.fav.active svg { fill: currentColor; }
+.media-side-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 28px; height: 28px; border-radius: 999px; background: rgba(255, 255, 255, 0.82); display: grid; place-items: center; font-size: 15px; color: var(--ink); opacity: 0; transition: opacity 260ms var(--ease), background 260ms var(--ease); }
+.media-side-arrow:hover { background: var(--paper); }
+.media-side-arrow.prev { left: 12px; }
+.media-side-arrow.next { right: 12px; }
+.product-media:hover .media-side-arrow { opacity: 1; }
+.media-nav { position: absolute; left: 0; right: 0; bottom: 10px; z-index: 5; display: flex; justify-content: center; gap: 6px; opacity: 0; transform: translateY(4px); transition: opacity 260ms var(--ease), transform 260ms var(--ease); }
+.product-media:hover .media-nav { opacity: 1; transform: translateY(0); }
+.media-line { width: 24px; height: 1px; background: rgba(15, 26, 46, 0.24); transition: background 200ms var(--ease); }
+.media-line.active { background: var(--ink); }
+.product-info { display: grid; grid-template-columns: 1fr auto; gap: 4px 18px; margin-top: 14px; font-size: 12px; }
+.product-info h3 { font-family: var(--sans); font-weight: 300; font-size: 12px; line-height: 1.35; margin: 0; color: var(--ink); }
+.product-info p { margin: 0; color: var(--muted); font-size: 10px; letter-spacing: 0.06em; }
+.price { font-size: 12px; color: var(--ink); text-align: right; white-space: nowrap; }

@@ -1,20 +1,58 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
-      "type": "product",
-      "settings": {}
+      "type": "product-detail",
+      "settings": {
+        "demo_kicker": "El Renacer · Aurora Collection",
+        "demo_title": "Plato llano 202 Rosa",
+        "demo_short": "Una pieza emblema del imaginario Cartuja: escenas ornamentales en rosa sobre loza fina, pensada para devolver memoria y presencia a la mesa contemporánea.",
+        "demo_price": "92 €",
+        "demo_images": "aurora-plate.png,bellavista-plate.png,bone-white.png"
+      },
+      "blocks": {
+        "a1": { "type": "accordion", "settings": { "label": "Dimensiones", "content": "<p>Ø 28 cm · Alto 2,8 cm. Medidas provisionales editables en Shopify según ficha final.</p>" } },
+        "a2": { "type": "accordion", "settings": { "label": "Detalles", "content": "<p>Loza fina esmaltada. Decorado histórico 202 Rosa. Acabado brillante. Pieza del universo Aurora, una de las formas nacidas con La Cartuja en 1841.</p>" } },
+        "a3": { "type": "accordion", "settings": { "label": "Cuidados", "content": "<p>Lavar preferiblemente a mano o en programa delicado. Evitar cambios bruscos de temperatura, golpes térmicos y productos abrasivos.</p>" } },
+        "a4": { "type": "accordion", "settings": { "label": "Envío y devoluciones", "content": "<p>Envío protegido para piezas cerámicas. Cambios y devoluciones sujetos a disponibilidad y condiciones de venta de la tienda final.</p>" } }
+      },
+      "block_order": ["a1", "a2", "a3", "a4"]
+    },
+    "story": {
+      "type": "product-story",
+      "settings": {
+        "eyebrow": "Bien de Interés Cultural desde 1998",
+        "heading": "No compras una pieza. Entras en una historia.",
+        "body": "<p>Desde Sevilla, la loza fina de La Cartuja conserva el pulso de los oficios lentos: moldes, esmaltes, memoria gráfica y una manera de entender la mesa como ritual. El Renacer devuelve ese legado a la vida contemporánea.</p>",
+        "cta_label": "Nuestra historia",
+        "cta_link": "/",
+        "ornament": "1841",
+        "demo_image": "scene-table.webp"
+      }
+    },
+    "related_set": {
+      "type": "product-related",
+      "settings": { "heading": "Completa la mesa", "product_limit": 5 },
+      "blocks": {
+        "r1": { "type": "product", "settings": { "demo_title": "Plato llano 202 Rosa", "demo_price": "92 €", "demo_meta": "Aurora · 202 Rosa", "demo_image": "aurora-plate.png", "demo_image_2": "bellavista-plate.png", "badge": true, "data_price": 92, "data_new": 1, "data_type": "platos" } },
+        "r2": { "type": "product", "settings": { "demo_title": "Cafetera 202 Rosa", "demo_price": "164 €", "demo_meta": "Aurora · 202 Rosa", "demo_image": "taza-eden.png", "demo_image_2": "bol-peces.png", "badge": true, "data_price": 164, "data_new": 1, "data_type": "jarras" } },
+        "r3": { "type": "product", "settings": { "demo_title": "Sopera 202 Rosa", "demo_price": "245 €", "demo_meta": "Aurora · 202 Rosa", "demo_image": "set-peces.png", "demo_image_2": "fuente-peces.png", "badge": true, "data_price": 245, "data_new": 1, "data_type": "soperas" } },
+        "r4": { "type": "product", "settings": { "demo_title": "Bol 202 Rosa", "demo_price": "58 €", "demo_meta": "Aurora · 202 Rosa", "demo_image": "bol-peces.png", "demo_image_2": "taza-eden.png", "badge": true, "data_price": 58, "data_new": 1, "data_type": "bowls" } },
+        "r5": { "type": "product", "settings": { "demo_title": "Fuente oval 202 Rosa", "demo_price": "128 €", "demo_meta": "Aurora · 202 Rosa", "demo_image": "fuente-peces.png", "demo_image_2": "set-peces.png", "badge": true, "data_price": 128, "data_new": 1, "data_type": "fuentes" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "r5"]
+    },
+    "related_cross": {
+      "type": "product-related",
+      "settings": { "heading": "Te puede interesar", "product_limit": 5 },
+      "blocks": {
+        "c1": { "type": "product", "settings": { "demo_title": "Plato llano Bellavista", "demo_price": "89 €", "demo_meta": "Aurora · Bellavista", "demo_image": "bellavista-plate.png", "demo_image_2": "bone-white.png", "badge": true, "data_price": 89, "data_new": 1, "data_type": "platos" } },
+        "c2": { "type": "product", "settings": { "demo_title": "Bandeja Negro Vistas", "demo_price": "155 €", "demo_meta": "Ochavada · Negro Vistas", "demo_image": "bone-white.png", "demo_image_2": "aurora-plate.png", "badge": true, "data_price": 155, "data_new": 1, "data_type": "bandejas" } },
+        "c3": { "type": "product", "settings": { "demo_title": "Plato Aurora Blanca", "demo_price": "78 €", "demo_meta": "Aurora Blanca", "demo_image": "aurora-plate.png", "demo_image_2": "bellavista-plate.png", "badge": true, "data_price": 78, "data_new": 1, "data_type": "platos" } },
+        "c4": { "type": "product", "settings": { "demo_title": "Fuente Ceilán", "demo_price": "118 €", "demo_meta": "Aurora · Ceilán", "demo_image": "fuente-peces.png", "demo_image_2": "set-peces.png", "badge": true, "data_price": 118, "data_new": 1, "data_type": "fuentes" } },
+        "c5": { "type": "product", "settings": { "demo_title": "Champanera Negro Vistas", "demo_price": "320 €", "demo_meta": "Gifts & Decor", "demo_image": "set-peces.png", "demo_image_2": "fuente-peces.png", "badge": true, "data_price": 320, "data_new": 1, "data_type": "objetos" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5"]
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main", "story", "related_set", "related_cross"]
 }

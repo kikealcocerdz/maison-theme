@@ -1,0 +1,71 @@
+{%- comment -%}
+  Sidebar accordion nav for collection pages.
+  Driven by a linklist (section.settings.sidebar_menu). Each top-level link is a
+  chapter; its child links are subcollections / product types. Falls back to a
+  hardcoded demo tree (mirrors the mockup) when no menu is set — used before the
+  catalog + navigation are built in the dev store.
+
+  The active chapter is auto-opened: a section opens when the current collection
+  matches the parent link or one of its children (linklist `current` flag).
+{%- endcomment -%}
+
+{%- liquid
+  assign menu = linklists[section.settings.sidebar_menu]
+-%}
+
+<aside class="sidebar">
+  <nav class="side-accordion" aria-label="{{ 'sections.collection.nav_label' | t }}">
+    {%- if menu != blank and menu.links.size > 0 -%}
+      {%- for parent in menu.links -%}
+        {%- liquid
+          assign is_open = false
+          if parent.current or parent.child_active
+            assign is_open = true
+          endif
+        -%}
+        <div class="side-section{% if is_open %} is-open{% endif %}">
+          <div class="side-section-head">
+            <a class="side-main-link{% if parent.current %} active{% endif %}" href="{{ parent.url }}">{{ parent.title | escape }}</a>
+            {%- if parent.links.size > 0 -%}
+              <button class="side-toggle" type="button" aria-expanded="{{ is_open }}" aria-label="{{ 'sections.collection.toggle' | t: name: parent.title }}"></button>
+            {%- endif -%}
+          </div>
+          {%- if parent.links.size > 0 -%}
+            <div class="side-panel"><div>
+              {%- for child in parent.links -%}
+                <a class="{% if child.current %}active{% endif %}" href="{{ child.url }}">{{ child.title | escape }}</a>
+              {%- endfor -%}
+            </div></div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      {%- comment -%} Demo fallback tree (no real navigation yet). {%- endcomment -%}
+      <div class="side-section is-open">
+        <div class="side-section-head"><a class="side-main-link active" href="#">Aurora</a><button class="side-toggle" type="button" aria-expanded="true" aria-label="Aurora"></button></div>
+        <div class="side-panel"><div>
+          <a href="#">Aurora Blanca</a><a href="#">202 Rosa</a><a href="#">Bellavista</a><a href="#">Ceilán</a><a href="#">Flor de Lis Azul</a><a href="#">Flor de Lis Rosa</a><a href="#">Viejo Molino</a><a href="#">Oaxaca x G. y Daniela</a>
+        </div></div>
+      </div>
+      <div class="side-section">
+        <div class="side-section-head"><a class="side-main-link" href="#">Ochavada</a><button class="side-toggle" type="button" aria-expanded="false" aria-label="Ochavada"></button></div>
+        <div class="side-panel"><div>
+          <a href="#">Ochavada Blanca</a><a href="#">Negro Vistas</a><a href="#">Negro Vistas by ASH Blue</a><a href="#">Negro Vistas by ASH Yellow</a>
+        </div></div>
+      </div>
+      <div class="side-section">
+        <div class="side-section-head"><a class="side-main-link" href="#">Gifts &amp; Decor</a><button class="side-toggle" type="button" aria-expanded="false" aria-label="Gifts & Decor"></button></div>
+        <div class="side-panel"><div><a href="#">Piezas decorativas</a></div></div>
+      </div>
+      <div class="side-section">
+        <div class="side-section-head"><a class="side-main-link" href="#">Emblemas</a></div>
+      </div>
+      <div class="side-section">
+        <div class="side-section-head"><a class="side-main-link" href="#">Tipo de producto</a><button class="side-toggle" type="button" aria-expanded="false" aria-label="Tipo de producto"></button></div>
+        <div class="side-panel"><div>
+          <a href="#">Platos</a><a href="#">Fuentes</a><a href="#">Bowls</a><a href="#">Jarras y teteras</a><a href="#">Soperas</a><a href="#">Bandejas</a><a href="#">Objetos decorativos</a><a href="#">Tazas y café</a>
+        </div></div>
+      </div>
+    {%- endif -%}
+  </nav>
+</aside>

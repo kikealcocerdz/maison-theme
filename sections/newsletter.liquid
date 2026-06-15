@@ -11,7 +11,7 @@
       <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
     {%- endif -%}
     {%- if section.settings.heading != blank -%}
-      <h2>{{ section.settings.heading }}</h2>
+      <h2>{{ section.settings.heading | remove: '<p>' | remove: '</p>' }}</h2>
     {%- endif -%}
     {%- if section.settings.description != blank -%}
       <p>{{ section.settings.description }}</p>
@@ -19,9 +19,9 @@
 
     {%- form 'customer', class: 'newsletter__form' -%}
       <input type="hidden" name="contact[tags]" value="newsletter">
-      <input type="email" name="contact[email]" placeholder="{{ 'general.newsletter.placeholder' | t }}" aria-label="{{ 'general.newsletter.placeholder' | t }}" required>
+      <input type="email" name="contact[email]" placeholder="{{ 'general.newsletter.placeholder' | t }}" aria-label="{{ 'general.newsletter.email_label' | t }}" required>
       <button type="submit">
-        {{ 'general.newsletter.submit' | t }} <span aria-hidden="true">→</span>
+        {{ 'general.newsletter.submit' | t }}
       </button>
 
       {%- if form.posted_successfully? -%}

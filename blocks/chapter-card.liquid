@@ -22,7 +22,7 @@
     <p class="block-chapter-card__paragraph">{{ block.settings.paragraph }}</p>
   {%- endif -%}
   {%- if block.settings.link != blank and block.settings.link_label != blank -%}
-    <span class="cta block-chapter-card__cta">{{ block.settings.link_label | escape }} <span aria-hidden="true">→</span></span>
+    <span class="cta block-chapter-card__cta">{{ block.settings.link_label | escape }}</span>
   {%- endif -%}
 
   {%- if block.settings.link != blank -%}</a>{%- endif -%}

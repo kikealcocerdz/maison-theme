@@ -1,0 +1,142 @@
+{%- comment -%}
+  Collections landing — a full-height horizontal strip: editorial copy followed by
+  large chapter cards, advanced with the bottom prev/next arrows. Chapter cards come
+  from `chapter` blocks (image + kicker + title + link), with asset fallbacks.
+  Intended for templates/list-collections.json (the /collections route).
+{%- endcomment -%}
+<div class="collections-landing" data-section-id="{{ section.id }}">
+  <section class="collections-stage collections-stage-v26">
+    <div class="collections-strip" data-collections-strip>
+      <div class="collections-copy reveal">
+        {%- if section.settings.breadcrumb != blank -%}
+          <div class="breadcrumbs"><a href="{{ routes.root_url }}">{{ 'sections.collection.home' | t }}</a> / {{ section.settings.breadcrumb | escape }}</div>
+        {%- endif -%}
+        {%- if section.settings.kicker != blank -%}<p class="collection-kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
+        {%- if section.settings.heading != blank -%}<h1>{{ section.settings.heading | remove: '<p>' | remove: '</p>' }}</h1>{%- endif -%}
+        {%- if section.settings.intro != blank -%}<p>{{ section.settings.intro }}</p>{%- endif -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'chapter' -%}
+          <a class="landing-card" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>
+            <div class="image-frame">
+              {%- if block.settings.image != blank -%}
+                {% render 'image-responsive', image: block.settings.image, alt: block.settings.title, sizes: '(max-width: 1000px) 56vw, 22vw' %}
+              {%- else -%}
+                <img src="{{ block.settings.demo_image | default: 'collection-aurora.webp' | asset_url }}" alt="{{ block.settings.title | escape }}" width="900" height="1100" loading="lazy" decoding="async">
+              {%- endif -%}
+            </div>
+            {%- if block.settings.kicker != blank -%}<span>{{ block.settings.kicker | escape }}</span>{%- endif -%}
+            {%- if block.settings.title != blank -%}<h2>{{ block.settings.title | escape }}</h2>{%- endif -%}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="collections-arrows-v26">
+      <button type="button" class="landing-prev" aria-label="{{ 'sections.product.prev' | t }}">{{ 'sections.collection.prev_long' | t }}</button>
+      <button type="button" class="landing-next" aria-label="{{ 'sections.product.next' | t }}">{{ 'sections.collection.next_long' | t }}</button>
+    </div>
+  </section>
+</div>
+
+{% stylesheet %}
+.collections-landing { padding-top: var(--header-h); min-height: 100vh; max-height: 100vh; overflow: hidden; }
+.collections-landing .collections-stage { width: 100%; height: calc(100vh - var(--header-h)); margin: 0; padding: 0; position: relative; overflow: hidden; display: block; }
+.collections-landing .collections-strip { height: calc(100vh - var(--header-h)); width: max-content; display: flex; align-items: flex-start; gap: 34px; padding: 16px 5vw 112px; transition: transform 720ms var(--ease-long); will-change: transform; }
+
+.collections-landing .collections-copy { flex: 0 0 clamp(280px, 24vw, 350px); min-width: clamp(280px, 24vw, 350px); max-width: clamp(280px, 24vw, 350px); align-self: flex-start; margin-top: clamp(92px, 16vh, 150px); margin-right: clamp(28px, 4vw, 70px); }
+.collections-landing .breadcrumbs { font-size: 10px; color: var(--muted); letter-spacing: .08em; margin-bottom: 22px; }
+.collections-landing .breadcrumbs a:hover { color: var(--ink); }
+.collections-landing .collection-kicker { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin: 0 0 18px; }
+.collections-landing .collections-copy h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(32px, 3.35vw, 50px); line-height: 1.02; margin: 0 0 22px; letter-spacing: -.01em; color: var(--ink); }
+.collections-landing .collections-copy h1 em { font-style: italic; }
+.collections-landing .collections-copy p:not(.collection-kicker) { max-width: 310px; font-size: 12px; line-height: 1.72; color: var(--muted); }
+
+.collections-landing .landing-card { flex: 0 0 clamp(260px, 22vw, 360px); width: clamp(260px, 22vw, 360px); min-width: 260px; overflow: visible; display: block; }
+.collections-landing .landing-card .image-frame { height: calc(100vh - var(--header-h) - 176px); max-height: 690px; min-height: 420px; overflow: hidden; background: var(--ink-faint-20); }
+.collections-landing .landing-card .image-frame img { width: 100%; height: 100%; object-fit: cover; transition: transform 760ms var(--ease-long), filter 760ms var(--ease-long); }
+.collections-landing .landing-card:hover .image-frame img { transform: scale(1.065); filter: saturate(1.04); }
+.collections-landing .landing-card span { display: block; margin-top: 17px; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.collections-landing .landing-card h2 { font-family: var(--serif); font-weight: 400; font-size: 31px; margin: 5px 0 0; font-variant: small-caps; }
+
+.collections-landing .collections-arrows-v26 { position: absolute; left: 5vw; right: 5vw; bottom: 24px; height: 38px; display: flex; justify-content: center; align-items: center; gap: 44px; z-index: 8; pointer-events: none; }
+.collections-landing .collections-arrows-v26 button { pointer-events: auto; position: relative; width: 138px; height: 34px; border: 0; font-size: 0; color: var(--ink); transition: width 260ms var(--ease), color 260ms var(--ease); }
+.collections-landing .collections-arrows-v26 button::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: .5px; background: currentColor; transform: translateY(-50%); }
+.collections-landing .collections-arrows-v26 button::after { position: absolute; top: 50%; transform: translateY(-55%); font-size: 26px; line-height: 1; background: var(--paper); color: currentColor; }
+.collections-landing .collections-arrows-v26 .landing-prev::after { content: "←"; left: 0; padding-right: 14px; }
+.collections-landing .collections-arrows-v26 .landing-next::after { content: "→"; right: 0; padding-left: 14px; }
+.collections-landing .collections-arrows-v26 button:not(:disabled):hover { width: 158px; }
+.collections-landing .collections-arrows-v26 button:disabled { color: var(--ink-faint, #A8AEBA); cursor: default; pointer-events: none; }
+
+@media (max-height: 760px) and (min-width: 1001px) {
+  .collections-landing .collections-strip { padding-top: 12px; padding-bottom: 92px; }
+  .collections-landing .collections-copy { margin-top: 10vh; }
+  .collections-landing .landing-card .image-frame { height: calc(100vh - var(--header-h) - 146px); min-height: 350px; }
+  .collections-landing .collections-arrows-v26 { bottom: 16px; }
+}
+@media (max-width: 1000px) {
+  .collections-landing { max-height: none; overflow: visible; }
+  .collections-landing .collections-stage { height: auto; max-height: none; overflow: visible; }
+  .collections-landing .collections-strip { height: auto; max-height: none; width: 100%; overflow-x: auto; padding: 32px 16px 110px; gap: 20px; transform: none !important; }
+  .collections-landing .collections-copy { margin: 0 22px 0 0; align-self: flex-start; }
+  .collections-landing .collections-copy h1 { font-size: 36px; }
+  .collections-landing .landing-card { flex-basis: 250px; width: 250px; min-width: 250px; }
+  .collections-landing .landing-card .image-frame { height: 56vh; min-height: 360px; }
+  .collections-landing .collections-arrows-v26 { display: none; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+(function () {
+  function init(root) {
+    if (!root || root.dataset.init) return;
+    root.dataset.init = '1';
+    var strip = root.querySelector('[data-collections-strip]');
+    var prev = root.querySelector('.landing-prev');
+    var next = root.querySelector('.landing-next');
+    if (!strip || !prev || !next) return;
+    var x = 0;
+    var max = function () { return Math.max(0, strip.scrollWidth - window.innerWidth + window.innerWidth * 0.05); };
+    var cardStep = function () { var c = strip.querySelector('.landing-card'); return c ? c.getBoundingClientRect().width + 34 : 360; };
+    var update = function () {
+      x = Math.max(0, Math.min(x, max()));
+      strip.style.transform = 'translate3d(' + (-x) + 'px,0,0)';
+      prev.disabled = x <= 2;
+      next.disabled = x >= max() - 2;
+    };
+    prev.addEventListener('click', function () { x -= cardStep(); update(); });
+    next.addEventListener('click', function () { x += cardStep(); update(); });
+    window.addEventListener('resize', update);
+    update();
+  }
+  document.querySelectorAll('.collections-landing').forEach(init);
+  document.addEventListener('shopify:section:load', function (e) { e.target.querySelectorAll('.collections-landing').forEach(init); });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Collections landing",
+  "settings": [
+    { "type": "text", "id": "breadcrumb", "label": "Breadcrumb label", "default": "Colecciones" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "El Renacer" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Las colecciones de La Cartuja</p>" },
+    { "type": "richtext", "id": "intro", "label": "Intro copy" }
+  ],
+  "blocks": [
+    {
+      "type": "chapter",
+      "name": "Chapter card",
+      "settings": [
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "text", "id": "kicker", "label": "Kicker (e.g. Capítulo 01)" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "demo_image", "label": "Demo image (asset filename)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Collections landing" }]
+}
+{% endschema %}

@@ -1,0 +1,146 @@
+<section class="heritage-stamp-section reveal" aria-labelledby="heritage-title-{{ section.id }}" data-section-id="{{ section.id }}">
+  {%- liquid
+    assign stamps = ''
+    if section.settings.stamp_one != blank
+      assign stamps = stamps | append: 'stamp-one|' | append: section.settings.stamp_one | append: '||'
+    endif
+    if section.settings.stamp_two != blank
+      assign stamps = stamps | append: 'stamp-two|' | append: section.settings.stamp_two | append: '||'
+    endif
+    if section.settings.stamp_three != blank
+      assign stamps = stamps | append: 'stamp-three|' | append: section.settings.stamp_three | append: '||'
+    endif
+    if section.settings.stamp_four != blank
+      assign stamps = stamps | append: 'stamp-four|' | append: section.settings.stamp_four | append: '||'
+    endif
+  -%}
+  {%- if stamps != blank -%}
+    {%- assign stamp_list = stamps | split: '||' -%}
+    {%- for entry in stamp_list -%}
+      {%- assign parts = entry | split: '|' -%}
+      {%- assign pos_class = parts[0] -%}
+      {%- assign stamp_img = parts[1] -%}
+      <img class="heritage-stamp {{ pos_class }}" src="{{ stamp_img | image_url: width: 380 }}" alt="" width="{{ stamp_img.width }}" height="{{ stamp_img.height }}" loading="lazy" decoding="async">
+    {%- endfor -%}
+  {%- endif -%}
+
+  <div class="heritage-content">
+    {%- if section.settings.bg_number != blank -%}
+      <div class="stamp-bg-number" aria-hidden="true">{{ section.settings.bg_number | escape }}</div>
+    {%- endif -%}
+    {%- if section.settings.kicker != blank -%}
+      <p class="heritage-kicker">{{ section.settings.kicker | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 id="heritage-title-{{ section.id }}" class="heritage-main-text">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    <div class="heritage-divider" aria-hidden="true"></div>
+  </div>
+</section>
+
+{% stylesheet %}
+.heritage-stamp-section {
+  position: relative; overflow: hidden; min-height: 60vh;
+  margin: 0 auto clamp(24px, 3vh, 36px);
+  padding: clamp(42px, 5vw, 68px) 24px;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; isolation: isolate; background: #EEEFF1;
+}
+.heritage-stamp-section::after {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(15, 26, 46, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 26, 46, 0.012) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.26), transparent 68%);
+  z-index: 0; pointer-events: none;
+}
+.heritage-content {
+  position: relative; z-index: 5;
+  width: min(1040px, 100%); margin: 0 auto; text-align: center;
+}
+.stamp-bg-number {
+  position: absolute; z-index: -1; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--serif); font-size: clamp(120px, 19vw, 300px);
+  font-weight: 400; line-height: 0.75; letter-spacing: -0.085em;
+  color: rgba(15, 26, 46, 0.05);
+  pointer-events: none; white-space: nowrap; user-select: none;
+}
+.heritage-kicker {
+  margin: 0 0 clamp(18px, 2vw, 26px);
+  font-size: 10px; line-height: 1.4; letter-spacing: 0.34em;
+  text-transform: uppercase; color: rgba(15, 26, 46, 0.50); font-weight: 400;
+}
+.heritage-main-text, .heritage-main-text p {
+  margin: 0 auto; max-width: 75%;
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(26px, 2.75vw, 44px); line-height: 1.05;
+  letter-spacing: -0.03em; color: var(--ink);
+}
+.heritage-main-text { max-width: none; }
+.heritage-main-text em { font-style: italic; color: #172832; }
+.heritage-divider {
+  position: relative; width: 110px; height: 0.5px;
+  margin: clamp(28px, 3.4vw, 42px) auto 0;
+  background: linear-gradient(90deg, transparent, rgba(15, 26, 46, 0.54), transparent);
+}
+.heritage-divider::before, .heritage-divider::after {
+  content: ""; position: absolute; top: 50%;
+  width: 4px; height: 4px; border-radius: 999px;
+  background: rgba(15, 26, 46, 0.24); transform: translateY(-50%);
+}
+.heritage-divider::before { left: -12px; }
+.heritage-divider::after { right: -12px; }
+.heritage-stamp {
+  position: absolute; z-index: 3;
+  width: clamp(82px, 9vw, 165px); opacity: 0.15;
+  filter: sepia(0.18) saturate(0.7) contrast(0.96);
+  mix-blend-mode: multiply; pointer-events: none;
+  transform-origin: center; user-select: none;
+  height: auto;
+  animation: stampFloat 9s ease-in-out infinite;
+}
+.stamp-one { top: 12%; left: 13%; transform: rotate(-15deg); animation-delay: 0s; }
+.stamp-two { top: 13%; right: 12%; width: clamp(96px, 10.5vw, 190px); transform: rotate(12deg); animation-delay: -2s; }
+.stamp-three { bottom: 10%; left: 16%; width: clamp(88px, 9.4vw, 170px); transform: rotate(8deg); animation-delay: -4s; }
+.stamp-four { right: 17%; bottom: 10%; width: clamp(86px, 9.2vw, 165px); transform: rotate(-9deg); opacity: 0.13; animation-delay: -6s; }
+@keyframes stampFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -9px; }
+}
+@media (hover: hover) {
+  .heritage-stamp-section:hover .heritage-stamp { opacity: 0.21; }
+}
+@media (max-width: 900px) {
+  .heritage-stamp-section { min-height: 60vh; margin: 0 auto 24px; padding: 56px 20px; }
+  .heritage-kicker { font-size: 9px; letter-spacing: 0.22em; }
+  .heritage-main-text p { max-width: 88%; font-size: clamp(25px, 7vw, 38px); line-height: 1.07; }
+  .stamp-bg-number { font-size: clamp(112px, 36vw, 210px); }
+  .heritage-stamp { opacity: 0.10; }
+  .stamp-one { top: 8%; left: -28px; }
+  .stamp-two { top: 12%; right: -38px; }
+  .stamp-three { bottom: 7%; left: -20px; }
+  .stamp-four { right: -24px; bottom: 10%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .heritage-stamp { animation: none; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Heritage stamp",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Bien de Interés Cultural desde 1998" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Una herencia que <em>trasciende</em> generaciones.<br>Una forma de vivir la mesa que <em>evoluciona</em> con el tiempo.</p>" },
+    { "type": "text", "id": "bg_number", "label": "Background number", "default": "1841" },
+    { "type": "header", "content": "Decorative stamps (optional)" },
+    { "type": "image_picker", "id": "stamp_one", "label": "Stamp 1 (top-left)" },
+    { "type": "image_picker", "id": "stamp_two", "label": "Stamp 2 (top-right)" },
+    { "type": "image_picker", "id": "stamp_three", "label": "Stamp 3 (bottom-left)" },
+    { "type": "image_picker", "id": "stamp_four", "label": "Stamp 4 (bottom-right)" }
+  ],
+  "presets": [{ "name": "Heritage stamp" }]
+}
+{% endschema %}

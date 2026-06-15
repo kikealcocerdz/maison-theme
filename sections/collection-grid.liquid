@@ -1,0 +1,340 @@
+{%- comment -%}
+  Collection grid — the storefront PLP. One flexible section that renders any
+  collection (chapter / subcollection / product-type) plus the curated "Emblemas"
+  page. Layout: left sidebar nav accordion + intro + toolbar (grid/list view,
+  client-side sort) + product grid with a mid-grid editorial insert + load more.
+
+  Real path: renders collection.products (paginated). Demo path (pre-catalog):
+  renders `product` blocks with demo images/titles/prices (CLAUDE.md §7).
+{%- endcomment -%}
+
+{%- liquid
+  assign has_products = false
+  if collection.products.size > 0
+    assign has_products = true
+  endif
+  assign editorial_after = section.settings.editorial_after | default: 6
+  assign per_page = section.settings.products_per_page | default: 24
+  assign initial_count = section.settings.demo_initial_count | default: 12
+
+  assign intro_kicker = collection.metafields.custom.chapter | metafield_text
+  if intro_kicker == blank
+    assign intro_kicker = section.settings.kicker
+  endif
+  assign intro_title = section.settings.title | default: collection.title
+  assign intro_copy = section.settings.intro_copy
+  if intro_copy == blank and collection.description != blank
+    assign intro_copy = collection.description
+  endif
+-%}
+
+<div class="collection-grid collection-page" data-section-id="{{ section.id }}">
+  <section class="shop-layout">
+    {% render 'collection-nav' %}
+
+    <div class="shop-main">
+      <section class="collection-intro">
+        <div>
+          <div class="breadcrumbs">
+            <a href="{{ routes.root_url }}">{{ 'sections.collection.home' | t }}</a> /
+            <a href="{{ routes.collections_url }}">{{ 'collections.title' | t }}</a>
+            {%- if intro_title != blank %} / {{ intro_title | escape }}{% endif -%}
+          </div>
+          {%- if intro_kicker != blank -%}<div class="collection-kicker">{{ intro_kicker | escape }}</div>{%- endif -%}
+          {%- if intro_title != blank -%}<h1>{{ intro_title | escape }}</h1>{%- endif -%}
+        </div>
+        {%- if intro_copy != blank -%}<p>{{ intro_copy }}</p>{%- endif -%}
+      </section>
+
+      <div class="toolbar">
+        <div class="view-toggle" aria-label="{{ 'sections.collection.view_toggle' | t }}">
+          <button class="view-btn active" type="button" data-view="grid" aria-label="{{ 'sections.collection.view_grid' | t }}"><span class="view-icon grid"><i></i><i></i><i></i></span></button>
+          <button class="view-btn" type="button" data-view="list" aria-label="{{ 'sections.collection.view_list' | t }}"><span class="view-icon list"><i></i><i></i><i></i></span></button>
+        </div>
+        <div class="sort-wrap">
+          <button class="sort-btn" type="button">{{ 'sections.collection.sort' | t }} <span aria-hidden="true">⌄</span></button>
+          <div class="sort-menu">
+            <button type="button" data-sort="new">{{ 'sections.collection.sort_new' | t }}</button>
+            <button type="button" data-sort="high">{{ 'sections.collection.sort_high' | t }}</button>
+            <button type="button" data-sort="low">{{ 'sections.collection.sort_low' | t }}</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="products" id="productGrid">
+        {%- if has_products -%}
+          {%- paginate collection.products by per_page -%}
+            {%- for product in collection.products -%}
+              {%- liquid
+                assign p_img1 = product.featured_image | image_url: width: 720
+                assign p_img2 = product.images[1] | image_url: width: 720
+                assign p_w = product.featured_image.width | default: 1000
+                assign p_h = product.featured_image.height | default: 1250
+                assign p_price = product.price | money
+                assign p_new = 0
+                if product.tags contains 'novedad' or product.tags contains 'new'
+                  assign p_new = 1
+                endif
+              -%}
+              {% render 'collection-card',
+                card_url: product.url, title: product.title,
+                price: p_price, meta: product.type,
+                img1: p_img1, img2: p_img2, img_w: p_w, img_h: p_h,
+                badge: p_new, data_price: product.price, data_new: p_new, data_type: product.type %}
+              {%- if forloop.index == editorial_after -%}{% render 'collection-editorial-insert', section: section %}{%- endif -%}
+            {%- endfor -%}
+
+            {%- if paginate.next -%}
+              <div class="load-more"><a class="ghost-btn" href="{{ paginate.next.url }}" rel="next">{{ 'sections.collection.load_more' | t }}&nbsp;→</a></div>
+            {%- endif -%}
+          {%- endpaginate -%}
+        {%- else -%}
+          {%- assign has_extra = false -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'product' -%}
+              {%- liquid
+                assign d_img1 = block.settings.demo_image | asset_url
+                assign d_img2 = ''
+                if block.settings.demo_image_2 != blank
+                  assign d_img2 = block.settings.demo_image_2 | asset_url
+                endif
+                assign is_extra = false
+                if forloop.index > initial_count
+                  assign is_extra = true
+                  assign has_extra = true
+                endif
+              -%}
+              {% render 'collection-card',
+                card_url: block.settings.link, title: block.settings.demo_title,
+                price: block.settings.demo_price, meta: block.settings.demo_meta,
+                img1: d_img1, img2: d_img2, badge: block.settings.badge,
+                data_price: block.settings.data_price, data_new: block.settings.data_new,
+                data_type: block.settings.data_type, extra: is_extra %}
+              {%- if forloop.index == editorial_after -%}{% render 'collection-editorial-insert', section: section %}{%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if has_extra -%}
+            <div class="load-more"><button class="ghost-btn" type="button" id="loadMore">{{ 'sections.collection.load_more' | t }}&nbsp;→</button></div>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% stylesheet %}
+.collection-page { padding-top: calc(var(--header-h) + 56px); }
+.collection-page .breadcrumbs { font-size: 10px; color: var(--muted); letter-spacing: .08em; margin-bottom: 28px; }
+.collection-page .breadcrumbs a:hover { color: var(--ink); }
+
+.collection-page .shop-layout {
+  width: var(--content); margin: 0 auto;
+  display: grid; grid-template-columns: minmax(190px, 230px) minmax(0, 1fr);
+  gap: min(4vw, 64px); align-items: start;
+}
+.collection-page .shop-main { min-width: 0; }
+
+.collection-page .collection-intro {
+  width: 100%; margin: 0 0 46px;
+  display: grid; grid-template-columns: minmax(260px, 1fr) minmax(320px, .78fr);
+  gap: min(6vw, 90px); align-items: end;
+}
+.collection-page .collection-intro h1 {
+  font-family: var(--serif); font-weight: 400; font-size: clamp(48px, 4.8vw, 84px);
+  line-height: .95; margin: 0; color: var(--ink); font-variant: small-caps; letter-spacing: .02em;
+}
+.collection-page .collection-intro > p {
+  justify-self: end; text-align: right; color: var(--muted); max-width: 540px;
+  margin: 0 0 4px auto; font-size: 14px; line-height: 1.8;
+}
+.collection-page .collection-kicker {
+  font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px;
+}
+
+/* Sidebar accordion */
+.collection-page .sidebar { margin-top: 205px; position: sticky; top: calc(var(--header-h) + 22px); }
+.collection-page .side-accordion { display: grid; border-top: .5px solid var(--rule); }
+.collection-page .side-section { border-bottom: .5px solid var(--rule); }
+.collection-page .side-section-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 42px; }
+.collection-page .side-main-link { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); opacity: .86; }
+.collection-page .side-main-link.active { color: var(--ink); opacity: 1; }
+.collection-page .side-toggle { position: relative; width: 28px; height: 28px; flex: 0 0 28px; color: var(--ink); opacity: .74; }
+.collection-page .side-toggle::before, .collection-page .side-toggle::after {
+  content: ""; position: absolute; left: 8px; right: 8px; top: 50%; height: .5px; background: currentColor;
+  transition: transform 240ms var(--ease), opacity 240ms var(--ease);
+}
+.collection-page .side-toggle::after { transform: rotate(90deg); }
+.collection-page .side-section.is-open .side-toggle::after { transform: rotate(0deg); opacity: 0; }
+.collection-page .side-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 360ms var(--ease), padding 360ms var(--ease); padding: 0; }
+.collection-page .side-panel > div { overflow: hidden; }
+.collection-page .side-section.is-open .side-panel { grid-template-rows: 1fr; padding: 0 0 16px; }
+.collection-page .side-panel a { display: block; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 6px 0; opacity: .82; }
+.collection-page .side-panel a.active, .collection-page .side-panel a:hover { color: var(--ink); opacity: 1; }
+
+/* Toolbar */
+.collection-page .toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 42px; }
+.collection-page .view-toggle { display: flex; gap: 10px; align-items: center; }
+.collection-page .view-btn { width: 24px; height: 24px; display: grid; place-items: center; color: var(--muted); }
+.collection-page .view-btn.active { color: var(--ink); }
+.collection-page .view-icon.grid { width: 17px; height: 13px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.collection-page .view-icon.grid i, .collection-page .view-icon.list i { display: block; background: currentColor; height: 100%; }
+.collection-page .view-icon.list { width: 18px; display: grid; gap: 3px; }
+.collection-page .view-icon.list i { height: 1px; }
+.collection-page .sort-wrap { position: relative; }
+.collection-page .sort-btn { height: 40px; border: .5px solid var(--rule); padding: 0 16px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; min-width: 124px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.collection-page .sort-menu { position: absolute; right: 0; top: calc(100% + 6px); width: 205px; background: var(--paper); border: .5px solid var(--rule); box-shadow: 0 18px 50px rgba(15, 26, 46, .08); padding: 12px 0; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 240ms var(--ease); z-index: 10; }
+.collection-page .sort-wrap.open .sort-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.collection-page .sort-menu button { display: block; width: 100%; text-align: left; padding: 12px 18px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
+.collection-page .sort-menu button:hover { background: var(--ink-faint-20); }
+
+/* Product grid (base card styles are shared in assets/critical.css) */
+.collection-page .products { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 52px 22px; transition: opacity 220ms var(--ease); }
+.collection-page .products.is-list { grid-template-columns: 1fr; gap: 28px; }
+
+/* List view */
+.collection-page .products.is-list .product { display: grid; grid-template-columns: 120px 1fr auto; align-items: center; gap: 28px; }
+.collection-page .products.is-list .product-media { width: 120px; aspect-ratio: 1; }
+.collection-page .products.is-list .product-info { display: contents; }
+.collection-page .products.is-list .price { text-align: left; }
+.collection-page .products.is-list .media-side-arrow, .collection-page .products.is-list .media-nav { display: none; }
+
+/* Editorial insert */
+.collection-page .editorial-insert { grid-column: 1 / -1; margin: 66px 0 34px; display: block; }
+.collection-page .editorial-insert img { width: 100%; height: min(46vw, 640px); object-fit: cover; background: var(--ink-faint-20); }
+.collection-page .editorial-insert p { font-family: var(--sans); font-size: 12px; line-height: 1.7; letter-spacing: .02em; color: var(--muted); max-width: 560px; margin: 16px 0 0; }
+
+.collection-page .load-more { display: flex; justify-content: center; margin: 70px 0 126px; grid-column: 1 / -1; }
+.collection-page .load-more .ghost-btn { min-width: 220px; }
+.collection-page .extra-product.is-hidden { display: none !important; }
+
+@media (max-width: 1180px) {
+  .collection-page .collection-intro { grid-template-columns: 1fr; gap: 20px; }
+  .collection-page .collection-intro > p { justify-self: start; text-align: left; margin: 0; }
+  .collection-page .products { grid-template-columns: repeat(2, 1fr); gap: 42px 16px; }
+}
+@media (max-width: 1000px) {
+  .collection-page .shop-layout { grid-template-columns: 1fr; }
+  .collection-page .sidebar { margin-top: 0; position: relative; top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .collection-page .side-panel { grid-template-rows: 1fr; }
+}
+@media (max-width: 620px) {
+  .collection-page .sidebar { grid-template-columns: 1fr; }
+  .collection-page .products { grid-template-columns: repeat(2, 1fr); gap: 30px 10px; }
+  .collection-page .product-info { grid-template-columns: 1fr; }
+  .collection-page .price { text-align: left; }
+  .collection-page .collection-intro h1 { font-size: 42px; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+(function () {
+  function init(root) {
+    if (!root || root.dataset.init) return;
+    root.dataset.init = '1';
+
+    // Sidebar accordion
+    root.querySelectorAll('.side-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        var s = btn.closest('.side-section');
+        if (s) { var open = s.classList.toggle('is-open'); btn.setAttribute('aria-expanded', open); }
+      });
+    });
+
+    // (Product-media hover carousel is handled globally in assets/theme.js.)
+
+    var grid = root.querySelector('#productGrid');
+
+    // View toggle
+    root.querySelectorAll('.view-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        root.querySelectorAll('.view-btn').forEach(function (x) { x.classList.remove('active'); });
+        b.classList.add('active');
+        if (grid) grid.classList.toggle('is-list', b.dataset.view === 'list');
+      });
+    });
+
+    // Favourite toggle (visual only)
+    root.querySelectorAll('.fav').forEach(function (b) {
+      b.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); b.classList.toggle('active'); });
+    });
+
+    // Sort
+    var sw = root.querySelector('.sort-wrap');
+    if (sw) {
+      var sb = sw.querySelector('.sort-btn');
+      if (sb) sb.addEventListener('click', function () { sw.classList.toggle('open'); });
+      sw.querySelectorAll('.sort-menu button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          if (!grid) return;
+          var items = [].slice.call(grid.querySelectorAll('.product'));
+          var mode = b.dataset.sort;
+          items.sort(function (a, c) {
+            return mode === 'new' ? (+c.dataset.new - +a.dataset.new)
+              : mode === 'high' ? (+c.dataset.price - +a.dataset.price)
+              : mode === 'low' ? (+a.dataset.price - +c.dataset.price) : 0;
+          });
+          var editorial = grid.querySelector('.editorial-insert');
+          items.forEach(function (item, i) {
+            if (editorial && i === 6) grid.insertBefore(editorial, item);
+            grid.appendChild(item);
+          });
+          sw.classList.remove('open');
+        });
+      });
+    }
+
+    // Load more (demo reveal)
+    var lm = root.querySelector('#loadMore');
+    if (lm) lm.addEventListener('click', function () {
+      root.querySelectorAll('.extra-product.is-hidden').forEach(function (el) { el.classList.remove('is-hidden'); el.classList.add('is-visible'); });
+      lm.style.display = 'none';
+    });
+  }
+
+  document.querySelectorAll('.collection-grid').forEach(init);
+  document.addEventListener('shopify:section:load', function (e) {
+    e.target.querySelectorAll('.collection-grid').forEach(init);
+  });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Collection grid",
+  "settings": [
+    { "type": "link_list", "id": "sidebar_menu", "label": "Sidebar navigation menu", "info": "Nested menu (chapters → subcollections). Falls back to a demo tree when empty." },
+    { "type": "text", "id": "kicker", "label": "Kicker", "info": "Small label above the title, e.g. 'Capítulo 01'. Overridden by the collection metafield custom.chapter." },
+    { "type": "text", "id": "title", "label": "Title override", "info": "Falls back to the collection title." },
+    { "type": "richtext", "id": "intro_copy", "label": "Intro copy", "info": "Falls back to the collection description." },
+    { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 12, "max": 48, "step": 6, "default": 24 },
+    { "type": "header", "content": "Editorial insert (mid-grid)" },
+    { "type": "range", "id": "editorial_after", "label": "Insert after card #", "min": 3, "max": 12, "step": 1, "default": 6 },
+    { "type": "image_picker", "id": "editorial_image", "label": "Editorial image" },
+    { "type": "text", "id": "editorial_demo_image", "label": "Editorial demo image (asset filename)", "info": "Used when no editorial image is selected, e.g. collection-aurora.webp" },
+    { "type": "richtext", "id": "editorial_text", "label": "Editorial caption" },
+    { "type": "header", "content": "Demo (when the collection has no products yet)" },
+    { "type": "range", "id": "demo_initial_count", "label": "Demo cards shown before 'Load more'", "min": 3, "max": 24, "step": 1, "default": 12 }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Demo product",
+      "settings": [
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "text", "id": "demo_title", "label": "Title" },
+        { "type": "text", "id": "demo_price", "label": "Price (e.g. 68 €)" },
+        { "type": "text", "id": "demo_meta", "label": "Meta line (e.g. subcollection)" },
+        { "type": "text", "id": "demo_image", "label": "Image (asset filename)" },
+        { "type": "text", "id": "demo_image_2", "label": "Hover image (asset filename)" },
+        { "type": "checkbox", "id": "badge", "label": "Show 'Novedad' badge", "default": false },
+        { "type": "header", "content": "Sort / filter data" },
+        { "type": "number", "id": "data_price", "label": "Sort price (number)" },
+        { "type": "number", "id": "data_new", "label": "Is new (1/0)" },
+        { "type": "text", "id": "data_type", "label": "Product type slug" }
+      ]
+    }
+  ]
+}
+{% endschema %}

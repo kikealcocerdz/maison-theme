@@ -1,0 +1,43 @@
+{%- comment -%}
+  Renders one product card for the collection grid.
+
+  Accepts (all optional — caller passes either a `product` or demo values):
+    product   — Shopify product object (real path)
+    card_url  — link target (defaults to product.url or '#')
+    title     — product title
+    price     — preformatted price string (e.g. "68 €")
+    meta      — small meta line under the title (e.g. subcollection name)
+    img1, img2 — image URLs (main + hover); for real products use featured_image + images[1]
+    img_w, img_h — intrinsic dimensions for the <img> (Theme Check requires width+height)
+    badge     — truthy to show the "Novedad" badge
+    data_price, data_new, data_type — dataset values used by client-side sort/filter
+    extra     — truthy to hide the card behind "Cargar más"
+{%- endcomment -%}
+
+{%- liquid
+  assign c_url = card_url | default: product.url | default: '#'
+  assign c_title = title | default: product.title
+  assign c_w = img_w | default: 1000
+  assign c_h = img_h | default: 1250
+-%}
+<article class="product reveal{% if extra %} extra-product is-hidden{% endif %}"
+  data-type="{{ data_type | default: '' }}" data-price="{{ data_price | default: 0 }}" data-new="{{ data_new | default: 0 }}">
+  <div class="product-media">
+    <a class="product-cover" href="{{ c_url }}" aria-label="{{ c_title | escape }}"></a>
+    {%- if badge -%}<span class="badge">{{ 'sections.collection.badge_new' | t }}</span>{%- endif -%}
+    <button class="fav" type="button" aria-label="{{ 'sections.collection.favorite' | t }}">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.1c0 5.2-8.8 10.3-8.8 10.3S3.2 13.3 3.2 8.1A4.5 4.5 0 0 1 12 6.6a4.5 4.5 0 0 1 8.8 1.5Z"/></svg>
+    </button>
+    {%- if img1 != blank -%}
+      <img class="main" src="{{ img1 }}" alt="{{ c_title | escape }}" width="{{ c_w }}" height="{{ c_h }}" loading="lazy" decoding="async">
+    {%- endif -%}
+    {%- if img2 != blank -%}
+      <img class="hover" src="{{ img2 }}" alt="{{ c_title | escape }}" width="{{ c_w }}" height="{{ c_h }}" loading="lazy" decoding="async">
+    {%- endif -%}
+  </div>
+  <div class="product-info">
+    <h3><a href="{{ c_url }}">{{ c_title | escape }}</a></h3>
+    {%- if price != blank -%}<span class="price">{{ price }}</span>{%- endif -%}
+    {%- if meta != blank -%}<p>{{ meta | escape }}</p>{%- endif -%}
+  </div>
+</article>

@@ -19,7 +19,7 @@
       {%- else -%}
         {%- comment -%} Demo nav (shown until a navigation menu is selected). {%- endcomment -%}
         <a href="{{ routes.collections_url }}">Colecciones</a>
-        <a href="/pages/mesas">Nuestras mesas</a>
+        <a href="/pages/nuestras-mesas">Nuestras mesas</a>
       {%- endif -%}
     </div>
 
@@ -38,8 +38,8 @@
           <a href="{{ link.url }}">{{ link.title }}</a>
         {%- endfor -%}
       {%- else -%}
-        <a href="/pages/historia">Nuestra historia</a>
-        <a href="{{ routes.collections_url }}">Emblemas</a>
+        <a href="/pages/artesania">Artesanía</a>
+        <a href="/pages/heritage">Heritage 1841</a>
       {%- endif -%}
       <a href="{{ routes.search_url }}" aria-label="{{ 'general.search.label' | t }}">{{ 'general.search.label' | t }}</a>
       <a href="{{ routes.cart_url }}" class="header-cart" aria-label="{{ 'general.cart.label' | t }}">

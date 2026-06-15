@@ -1,20 +1,33 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
-      "type": "collection",
-      "settings": {}
+      "type": "collection-grid",
+      "settings": {
+        "kicker": "Capítulo 01",
+        "products_per_page": 24,
+        "editorial_after": 6,
+        "editorial_demo_image": "collection-aurora.webp",
+        "editorial_text": "<p>Una colección luminosa para construir mesas donde conviven memoria, color y oficio sevillano.</p>",
+        "demo_initial_count": 12
+      },
+      "blocks": {
+        "b1": { "type": "product", "settings": { "demo_title": "Plato llano 28 cm Aurora Blanca", "demo_price": "68 €", "demo_meta": "Aurora Blanca", "demo_image": "aurora-plate.png", "demo_image_2": "bellavista-plate.png", "badge": true, "data_price": 68, "data_new": 1, "data_type": "platos" } },
+        "b2": { "type": "product", "settings": { "demo_title": "Sopera Aurora Blanca", "demo_price": "272 €", "demo_meta": "Aurora Blanca", "demo_image": "set-peces.png", "demo_image_2": "fuente-peces.png", "badge": false, "data_price": 272, "data_new": 0, "data_type": "soperas" } },
+        "b3": { "type": "product", "settings": { "demo_title": "Plato de postre Aurora Blanca", "demo_price": "92 €", "demo_meta": "Aurora Blanca", "demo_image": "bellavista-plate.png", "demo_image_2": "bone-white.png", "badge": false, "data_price": 92, "data_new": 0, "data_type": "platos" } },
+        "b4": { "type": "product", "settings": { "demo_title": "Bajoplato Aurora Blanca", "demo_price": "104 €", "demo_meta": "Aurora Blanca", "demo_image": "bone-white.png", "demo_image_2": "aurora-plate.png", "badge": false, "data_price": 104, "data_new": 0, "data_type": "platos" } },
+        "b5": { "type": "product", "settings": { "demo_title": "Taza consomé Aurora Blanca", "demo_price": "106 €", "demo_meta": "Aurora Blanca", "demo_image": "taza-eden.png", "demo_image_2": "bol-peces.png", "badge": true, "data_price": 106, "data_new": 1, "data_type": "tazas" } },
+        "b6": { "type": "product", "settings": { "demo_title": "Plato pan Aurora Blanca", "demo_price": "128 €", "demo_meta": "Aurora Blanca", "demo_image": "bol-peces.png", "demo_image_2": "set-peces.png", "badge": false, "data_price": 128, "data_new": 0, "data_type": "platos" } },
+        "b7": { "type": "product", "settings": { "demo_title": "Plato llano 28 cm 202 Rosa", "demo_price": "68 €", "demo_meta": "202 Rosa", "demo_image": "aurora-plate.png", "demo_image_2": "taza-eden.png", "badge": true, "data_price": 68, "data_new": 1, "data_type": "platos" } },
+        "b8": { "type": "product", "settings": { "demo_title": "Sopera 202 Rosa", "demo_price": "272 €", "demo_meta": "202 Rosa", "demo_image": "set-peces.png", "demo_image_2": "bone-white.png", "badge": false, "data_price": 272, "data_new": 0, "data_type": "soperas" } },
+        "b9": { "type": "product", "settings": { "demo_title": "Plato de postre 202 Rosa", "demo_price": "92 €", "demo_meta": "202 Rosa", "demo_image": "bellavista-plate.png", "demo_image_2": "fuente-peces.png", "badge": false, "data_price": 92, "data_new": 0, "data_type": "platos" } },
+        "b10": { "type": "product", "settings": { "demo_title": "Bajoplato 202 Rosa", "demo_price": "104 €", "demo_meta": "202 Rosa", "demo_image": "bone-white.png", "demo_image_2": "bol-peces.png", "badge": false, "data_price": 104, "data_new": 0, "data_type": "platos" } },
+        "b11": { "type": "product", "settings": { "demo_title": "Taza consomé 202 Rosa", "demo_price": "106 €", "demo_meta": "202 Rosa", "demo_image": "taza-eden.png", "demo_image_2": "aurora-plate.png", "badge": true, "data_price": 106, "data_new": 1, "data_type": "tazas" } },
+        "b12": { "type": "product", "settings": { "demo_title": "Plato pan 202 Rosa", "demo_price": "128 €", "demo_meta": "202 Rosa", "demo_image": "fuente-peces.png", "demo_image_2": "set-peces.png", "badge": false, "data_price": 128, "data_new": 0, "data_type": "platos" } },
+        "b13": { "type": "product", "settings": { "demo_title": "Plato llano 28 cm Bellavista", "demo_price": "68 €", "demo_meta": "Bellavista", "demo_image": "bellavista-plate.png", "demo_image_2": "bone-white.png", "badge": true, "data_price": 68, "data_new": 1, "data_type": "platos" } },
+        "b14": { "type": "product", "settings": { "demo_title": "Sopera Bellavista", "demo_price": "272 €", "demo_meta": "Bellavista", "demo_image": "set-peces.png", "demo_image_2": "fuente-peces.png", "badge": false, "data_price": 272, "data_new": 0, "data_type": "soperas" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8", "b9", "b10", "b11", "b12", "b13", "b14"]
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main"]
 }

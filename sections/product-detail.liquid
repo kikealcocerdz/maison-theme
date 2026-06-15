@@ -1,0 +1,328 @@
+{%- comment -%}
+  Product detail (PDP) — 3-column layout: title/breadcrumbs (left, sticky) ·
+  gallery with arrows + progress lines + fullscreen lightbox (centre) · accordions
+  + price + add-to-cart (right, sticky). Real `product` object with demo fallback
+  (CLAUDE.md §7) so it renders before catalog migration.
+{%- endcomment -%}
+
+{%- liquid
+  assign has_product = false
+  if product != blank and product.id
+    assign has_product = true
+  endif
+
+  assign kicker = product.metafields.custom.kicker | metafield_text | default: section.settings.demo_kicker
+  assign title = product.title | default: section.settings.demo_title
+  assign short = product.metafields.custom.short_description | metafield_text
+  if short == blank
+    assign short = product.excerpt | default: section.settings.demo_short
+  endif
+
+  if has_product
+    assign price = product.price | money
+  else
+    assign price = section.settings.demo_price
+  endif
+
+  comment
+    Build the gallery image list: real product images, else up to 3 demo assets.
+  endcomment
+  assign demo_imgs = section.settings.demo_images | default: 'aurora-plate.png,bellavista-plate.png,bone-white.png' | split: ','
+-%}
+
+<div class="product-page" data-section-id="{{ section.id }}">
+  <section class="product-detail" data-product-gallery>
+
+    <aside class="product-title-panel">
+      <div class="product-title-sticky">
+        <div class="product-breadcrumbs">
+          <a href="{{ routes.root_url }}">{{ 'sections.collection.home' | t }}</a> /
+          <a href="{{ routes.collections_url }}">{{ 'collections.title' | t }}</a>
+          {%- if has_product and product.collections.first -%}
+            / <a href="{{ product.collections.first.url }}">{{ product.collections.first.title | escape }}</a>
+          {%- endif -%}
+          {%- if title != blank %} / {{ title | escape }}{% endif -%}
+        </div>
+        {%- if kicker != blank -%}<p class="product-kicker">{{ kicker | escape }}</p>{%- endif -%}
+        {%- if title != blank -%}<h1>{{ title | escape }}</h1>{%- endif -%}
+        {%- if short != blank -%}<p class="product-short">{{ short }}</p>{%- endif -%}
+      </div>
+    </aside>
+
+    <section class="product-gallery-panel" aria-label="{{ 'sections.product.gallery' | t }}">
+      <div class="product-main-media">
+        <button class="fav product-fav" type="button" aria-label="{{ 'sections.collection.favorite' | t }}">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.1c0 5.2-8.8 10.3-8.8 10.3S3.2 13.3 3.2 8.1A4.5 4.5 0 0 1 12 6.6a4.5 4.5 0 0 1 8.8 1.5Z"/></svg>
+        </button>
+        <button class="product-gallery-arrow prev" type="button" aria-label="{{ 'sections.product.prev' | t }}">‹</button>
+        {%- if has_product -%}
+          {%- for image in product.images limit: 6 -%}
+            <img class="product-gallery-slide{% if forloop.first %} is-active{% endif %}" src="{{ image | image_url: width: 1200 }}" alt="{{ image.alt | default: product.title | escape }}" width="{{ image.width }}" height="{{ image.height }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async">
+          {%- endfor -%}
+        {%- else -%}
+          {%- for img in demo_imgs -%}
+            <img class="product-gallery-slide{% if forloop.first %} is-active{% endif %}" src="{{ img | strip | asset_url }}" alt="{{ title | escape }}" width="1200" height="1200" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async">
+          {%- endfor -%}
+        {%- endif -%}
+        <button class="product-gallery-arrow next" type="button" aria-label="{{ 'sections.product.next' | t }}">›</button>
+        <div class="product-gallery-lines" aria-hidden="true">
+          {%- if has_product -%}
+            {%- for image in product.images limit: 6 -%}<span{% if forloop.first %} class="active"{% endif %}></span>{%- endfor -%}
+          {%- else -%}
+            {%- for img in demo_imgs -%}<span{% if forloop.first %} class="active"{% endif %}></span>{%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </section>
+
+    <aside class="product-info-panel">
+      <div class="product-info-sticky">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'accordion' -%}
+            <div class="product-accordion" {{ block.shopify_attributes }}>
+              <button type="button">{{ block.settings.label | escape }} <span aria-hidden="true"></span></button>
+              <div><p>{{ block.settings.content }}</p></div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if has_product -%}
+          {%- form 'product', product, class: 'product-buy-block' -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <span class="product-price-large">{{ price }}</span>
+            <button class="add-to-bag" type="submit" name="add"{% unless product.available %} disabled{% endunless %}>
+              {%- if product.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+            </button>
+          {%- endform -%}
+        {%- else -%}
+          <div class="product-buy-block">
+            <span class="product-price-large">{{ price }}</span>
+            <button class="add-to-bag" type="button">{{ 'products.product.add_to_cart' | t }}</button>
+          </div>
+        {%- endif -%}
+      </div>
+    </aside>
+  </section>
+</div>
+
+{%- comment -%} Fullscreen gallery lightbox {%- endcomment -%}
+<div class="product-lightbox" id="productLightbox" aria-hidden="true">
+  <button class="lightbox-close" type="button" aria-label="{{ 'sections.product.close' | t }}">×</button>
+  <aside class="lightbox-thumbs" aria-label="{{ 'sections.product.thumbs' | t }}">
+    {%- if has_product -%}
+      {%- for image in product.images limit: 6 -%}
+        <button type="button" data-target="{{ forloop.index0 }}"{% if forloop.first %} class="active"{% endif %}><img src="{{ image | image_url: width: 160 }}" alt="" width="74" height="92" loading="lazy"></button>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for img in demo_imgs -%}
+        <button type="button" data-target="{{ forloop.index0 }}"{% if forloop.first %} class="active"{% endif %}><img src="{{ img | strip | asset_url }}" alt="" width="74" height="92" loading="lazy"></button>
+      {%- endfor -%}
+    {%- endif -%}
+  </aside>
+  <div class="lightbox-scroll">
+    {%- if has_product -%}
+      {%- for image in product.images limit: 6 -%}
+        <figure data-index="{{ forloop.index0 }}"><img src="{{ image | image_url: width: 1600 }}" alt="{{ image.alt | default: product.title | escape }}" width="{{ image.width }}" height="{{ image.height }}" loading="lazy"></figure>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for img in demo_imgs -%}
+        <figure data-index="{{ forloop.index0 }}"><img src="{{ img | strip | asset_url }}" alt="{{ title | escape }}" width="1600" height="1600" loading="lazy"></figure>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+.product-page { padding-top: var(--header-h); background: var(--paper); color: var(--ink); }
+.product-detail { width: var(--content); margin: 0 auto; display: grid; grid-template-columns: minmax(220px, 25%) minmax(420px, 44%) minmax(280px, 31%); gap: min(4vw, 70px); align-items: start; padding-bottom: 6vh; }
+
+.product-title-panel, .product-info-panel { position: relative; min-height: auto; }
+.product-title-sticky { position: relative; top: auto; padding-top: 24vh; }
+.product-detail.info-expanded .product-title-sticky { padding-top: 18vh; }
+.product-breadcrumbs { position: absolute; top: 18px; left: 0; font-size: 10px; letter-spacing: .08em; color: var(--muted); white-space: nowrap; }
+.product-breadcrumbs a { text-decoration: underline; text-underline-offset: 3px; }
+.product-kicker { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin: 0 0 18px; }
+.product-title-panel h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(46px, 4.7vw, 82px); line-height: .92; margin: 0; color: var(--ink); font-variant: small-caps; letter-spacing: .01em; }
+.product-short { font-size: 12px; line-height: 1.75; color: var(--muted); max-width: 320px; margin: 22px 0 0; }
+
+.product-gallery-panel { display: flex; align-items: center; justify-content: center; padding: 28px 0 38px; }
+.product-main-media { position: relative; width: 100%; height: min(76vh, 780px); background: var(--ink-faint-20); display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: zoom-in; }
+.product-main-media .product-gallery-slide { position: absolute; inset: 8%; width: 84%; height: 84%; object-fit: contain; opacity: 0; transform: translateX(100%); transition: transform 620ms var(--ease-long), opacity 380ms var(--ease); will-change: transform, opacity; }
+.product-main-media .product-gallery-slide.is-active { opacity: 1; transform: translateX(0); z-index: 1; }
+.product-main-media .product-gallery-slide.is-prev { opacity: 0; transform: translateX(-100%); }
+.product-fav { position: absolute; right: 18px; top: 16px; width: 32px; height: 32px; display: grid; place-items: center; color: var(--ink); opacity: .7; z-index: 5; }
+.product-fav svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 1; fill: none; }
+.product-fav.active svg { fill: currentColor; }
+.product-gallery-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 34px; height: 34px; border-radius: 999px; background: rgba(255, 255, 255, .84); font-size: 18px; line-height: 1; display: grid; place-items: center; color: var(--ink); transition: background 260ms var(--ease); }
+.product-gallery-arrow:hover { background: var(--paper); }
+.product-gallery-arrow.prev { left: 18px; } .product-gallery-arrow.next { right: 18px; }
+.product-gallery-lines { position: absolute; left: 0; right: 0; bottom: 18px; display: flex; justify-content: center; gap: 8px; z-index: 5; }
+.product-gallery-lines span { width: 26px; height: 1px; background: rgba(15, 26, 46, .22); transition: background 220ms var(--ease), width 220ms var(--ease); }
+.product-gallery-lines span.active { background: var(--ink); width: 34px; }
+
+.product-info-sticky { position: relative; top: auto; padding-top: 18vh; display: flex; flex-direction: column; justify-content: flex-start; min-height: min(740px, calc(100vh - var(--header-h) - 18px)); transition: padding-top 360ms var(--ease-long); }
+.product-detail.info-expanded .product-info-sticky { padding-top: 5vh; }
+.product-accordion { border-bottom: .5px solid var(--rule); }
+.product-accordion:first-of-type { border-top: .5px solid var(--rule); }
+.product-accordion button { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 17px 0; font-size: 12px; color: var(--ink); }
+.product-accordion button span { font-size: 0; width: 16px; height: 16px; display: grid; place-items: center; }
+.product-accordion button span::before { content: "+"; font-size: 16px; line-height: 1; }
+.product-accordion.is-open button span::before { content: "−"; font-size: 18px; }
+.product-accordion > div { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 320ms var(--ease), padding 320ms var(--ease); overflow: hidden; }
+.product-accordion.is-open > div { grid-template-rows: 1fr; padding: 0 0 14px; }
+.product-accordion > div > p { overflow: hidden; margin: 0; font-size: 11px; line-height: 1.58; color: var(--muted); padding-right: 4px; }
+.product-buy-block { margin-top: 22px; display: grid; gap: 18px; background: var(--paper); }
+.product-price-large { font-family: var(--serif); font-size: 30px; line-height: 1; text-align: right; color: var(--ink); }
+.add-to-bag { height: 54px; background: var(--ink); color: #fff; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; width: 100%; transition: background 260ms var(--ease); }
+.add-to-bag:hover { background: #24314a; }
+.add-to-bag[disabled] { opacity: .5; cursor: default; }
+
+/* Fullscreen lightbox */
+.product-lightbox { position: fixed; inset: 0; background: var(--paper); z-index: 300; display: grid; grid-template-columns: 128px minmax(0, 1fr); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 320ms var(--ease), visibility 0s linear 320ms; }
+.product-lightbox.is-open { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity 320ms var(--ease), visibility 0s linear 0s; }
+.lightbox-close { position: fixed; top: 24px; right: 34px; z-index: 310; font-family: var(--serif); font-size: 40px; line-height: 1; color: var(--ink); }
+.lightbox-thumbs { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center; border-right: .5px solid var(--rule); background: var(--paper); z-index: 305; }
+.lightbox-thumbs button { width: 74px; height: 92px; border: .5px solid transparent; background: var(--ink-faint-20); padding: 5px; opacity: .55; transition: opacity 220ms var(--ease), border-color 220ms var(--ease), transform 220ms var(--ease); }
+.lightbox-thumbs button.active { opacity: 1; border-color: var(--ink); transform: translateX(5px); }
+.lightbox-thumbs img { width: 100%; height: 100%; object-fit: contain; }
+.lightbox-scroll { height: 100vh; overflow-y: auto; scroll-snap-type: y proximity; background: var(--paper); }
+.lightbox-scroll figure { height: 100vh; margin: 0; display: grid; place-items: center; scroll-snap-align: start; background: #f6f7f8; }
+.lightbox-scroll figure img { width: min(76vw, 1120px); height: 86vh; object-fit: contain; }
+
+@media (max-width: 1180px) {
+  .product-detail { grid-template-columns: 1fr; max-width: 900px; gap: 0; }
+  .product-title-panel, .product-info-panel, .product-gallery-panel { min-height: auto; }
+  .product-title-sticky, .product-info-sticky { position: relative; top: auto; padding-top: 0; min-height: auto; }
+  .product-title-panel { padding-top: 72px; }
+  .product-breadcrumbs { position: relative; top: auto; margin-bottom: 42px; white-space: normal; }
+  .product-gallery-panel { padding: 42px 0; }
+  .product-main-media { height: min(74vh, 720px); }
+  .product-short { max-width: 560px; }
+  .product-buy-block { margin-top: 34px; }
+  .product-price-large { text-align: left; }
+}
+@media (max-width: 720px) {
+  .product-detail { width: calc(100vw - 24px); }
+  .product-title-panel h1 { font-size: 42px; }
+  .product-main-media { height: 64vh; }
+  .product-main-media .product-gallery-slide { inset: 6%; width: 88%; height: 88%; }
+  .product-gallery-arrow { width: 30px; height: 30px; }
+  .product-lightbox { grid-template-columns: 72px 1fr; }
+  .lightbox-thumbs button { width: 46px; height: 62px; }
+  .lightbox-close { top: 14px; right: 18px; }
+  .lightbox-scroll figure img { width: 82vw; height: 80vh; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+(function () {
+  function init(root) {
+    if (!root || root.dataset.init) return;
+    root.dataset.init = '1';
+
+    // Gallery carousel
+    var gallery = root.querySelector('[data-product-gallery] .product-main-media');
+    if (gallery) {
+      var slides = [].slice.call(gallery.querySelectorAll('.product-gallery-slide'));
+      var lines = [].slice.call(gallery.querySelectorAll('.product-gallery-lines span'));
+      var index = 0;
+      var show = function (n) {
+        var old = index;
+        index = (n + slides.length) % slides.length;
+        slides.forEach(function (s, i) { s.classList.remove('is-active', 'is-prev'); if (i === index) s.classList.add('is-active'); else if (i === old) s.classList.add('is-prev'); });
+        lines.forEach(function (l, i) { l.classList.toggle('active', i === index); });
+      };
+      var gp = gallery.querySelector('.product-gallery-arrow.prev');
+      var gn = gallery.querySelector('.product-gallery-arrow.next');
+      if (gp) gp.addEventListener('click', function (e) { e.stopPropagation(); show(index - 1); });
+      if (gn) gn.addEventListener('click', function (e) { e.stopPropagation(); show(index + 1); });
+      lines.forEach(function (line, i) { line.addEventListener('click', function () { show(i); }); });
+    }
+
+    // Favourite (visual)
+    root.querySelectorAll('.product-fav').forEach(function (b) {
+      b.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); b.classList.toggle('active'); });
+    });
+
+    // Accordions + info-expanded state (keeps the buy block visible)
+    var detail = root.querySelector('.product-detail');
+    var refresh = function () { if (detail) detail.classList.toggle('info-expanded', !!detail.querySelector('.product-accordion.is-open')); };
+    root.querySelectorAll('.product-accordion button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var acc = btn.closest('.product-accordion');
+        if (acc) acc.classList.toggle('is-open');
+        setTimeout(refresh, 0);
+      });
+    });
+    refresh();
+  }
+
+  function initLightbox() {
+    var lightbox = document.getElementById('productLightbox');
+    var mainMedia = document.querySelector('.product-main-media');
+    if (!lightbox || !mainMedia || lightbox.dataset.init) return;
+    lightbox.dataset.init = '1';
+    var scroller = lightbox.querySelector('.lightbox-scroll');
+    var figures = [].slice.call(lightbox.querySelectorAll('figure'));
+    var thumbs = [].slice.call(lightbox.querySelectorAll('.lightbox-thumbs button'));
+    var openAt = function (i) {
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.documentElement.style.overflow = 'hidden';
+      requestAnimationFrame(function () { if (figures[i]) figures[i].scrollIntoView({ block: 'start' }); });
+    };
+    var close = function () {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.documentElement.style.overflow = '';
+    };
+    mainMedia.addEventListener('click', function (e) {
+      if (e.target.closest('button')) return;
+      var actives = [].slice.call(mainMedia.querySelectorAll('.product-gallery-slide'));
+      var active = actives.findIndex(function (x) { return x.classList.contains('is-active'); });
+      openAt(Math.max(active, 0));
+    });
+    var cl = lightbox.querySelector('.lightbox-close');
+    if (cl) cl.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lightbox.classList.contains('is-open')) close(); });
+    thumbs.forEach(function (btn) { btn.addEventListener('click', function () { var idx = Number(btn.dataset.target || 0); if (figures[idx]) figures[idx].scrollIntoView({ behavior: 'smooth', block: 'start' }); }); });
+    if (scroller) {
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) { if (entry.isIntersecting) { var idx = Number(entry.target.dataset.index || 0); thumbs.forEach(function (t, i) { t.classList.toggle('active', i === idx); }); } });
+      }, { root: scroller, threshold: .6 });
+      figures.forEach(function (f) { obs.observe(f); });
+    }
+  }
+
+  document.querySelectorAll('.product-page').forEach(init);
+  initLightbox();
+  document.addEventListener('shopify:section:load', function (e) {
+    e.target.querySelectorAll('.product-page').forEach(init);
+    initLightbox();
+  });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Product detail",
+  "settings": [
+    { "type": "text", "id": "demo_kicker", "label": "Kicker", "info": "Falls back to product metafield custom.kicker." },
+    { "type": "header", "content": "Demo (when no product / before catalog migration)" },
+    { "type": "text", "id": "demo_title", "label": "Demo title" },
+    { "type": "textarea", "id": "demo_short", "label": "Demo short description" },
+    { "type": "text", "id": "demo_price", "label": "Demo price (e.g. 92 €)" },
+    { "type": "text", "id": "demo_images", "label": "Demo gallery images (comma-separated asset filenames)", "info": "e.g. aurora-plate.png,bellavista-plate.png,bone-white.png" }
+  ],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordion row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Detalles" },
+        { "type": "richtext", "id": "content", "label": "Content" }
+      ]
+    }
+  ]
+}
+{% endschema %}

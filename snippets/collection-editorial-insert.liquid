@@ -1,0 +1,18 @@
+{%- comment -%}
+  Full-width editorial card injected mid-grid on the collection page.
+  Reads from the calling section: editorial_image (image_picker) with an asset
+  fallback (editorial_demo_image), plus editorial_text caption.
+{%- endcomment -%}
+{%- liquid
+  assign ed_image = section.settings.editorial_image
+  assign ed_demo = section.settings.editorial_demo_image | default: 'collection-aurora.webp'
+  assign ed_text = section.settings.editorial_text
+-%}
+<div class="editorial-insert reveal">
+  {%- if ed_image != blank -%}
+    {% render 'image-responsive', image: ed_image, alt: ed_text | default: '' | strip_html | escape, sizes: '100vw' %}
+  {%- else -%}
+    <img src="{{ ed_demo | asset_url }}" alt="{{ ed_text | default: '' | strip_html | escape }}" width="1760" height="640" loading="lazy" decoding="async">
+  {%- endif -%}
+  {%- if ed_text != blank -%}<p>{{ ed_text }}</p>{%- endif -%}
+</div>

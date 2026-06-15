@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "main": {
+      "type": "our-tables",
+      "settings": {
+        "kicker": "Editorial · Nuestras mesas",
+        "heading": "Mesas que cuentan una historia.",
+        "intro": "<p>Escenas editoriales donde las piezas de El Renacer se combinan por color, forma y memoria. Una guía visual para imaginar la mesa contemporánea desde el blanco sereno de Aurora, el gesto ornamental de 202 Rosa y el contraste de Negro Vistas.</p>",
+        "filter_all_label": "Todas",
+        "filters": "Aurora|aurora\n202 Rosa|rosa\nNegro Vistas|negro"
+      },
+      "blocks": {
+        "s1": { "type": "scene", "settings": { "type_slug": "aurora", "demo_photo": "scene-table.webp", "hotspots": "34|45\n58|52\n73|37", "demo_product_image": "aurora-plate.png", "product_meta": "Aurora · 202 Rosa", "product_title": "Plato llano 202 Rosa", "product_price": "92 €", "product_link": "/products/plato-llano-202-rosa" } },
+        "s2": { "type": "scene", "settings": { "reverse": true, "type_slug": "rosa", "demo_photo": "summer-banner.webp", "hotspots": "41|55\n64|38\n76|62", "demo_product_image": "set-peces.png", "product_meta": "Aurora · 202 Rosa", "product_title": "Sopera 202 Rosa", "product_price": "245 €", "product_link": "/products/plato-llano-202-rosa" } },
+        "s3": { "type": "scene", "settings": { "type_slug": "negro", "demo_photo": "craft.webp", "hotspots": "38|48\n55|34\n70|60", "demo_product_image": "bone-white.png", "product_meta": "Ochavada · Negro Vistas", "product_title": "Plato Negro Vistas", "product_price": "96 €", "product_link": "/products/plato-llano-202-rosa" } }
+      },
+      "block_order": ["s1", "s2", "s3"]
+    }
+  },
+  "order": ["main"]
+}

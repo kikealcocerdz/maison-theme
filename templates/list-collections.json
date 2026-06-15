@@ -1,20 +1,21 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
-      "type": "collections",
-      "settings": {}
+      "type": "collections-landing",
+      "settings": {
+        "breadcrumb": "Colecciones",
+        "kicker": "El Renacer",
+        "heading": "<p>Las colecciones<br><em>de La Cartuja</em></p>",
+        "intro": "<p>Una primera edición para volver a mirar La Cartuja desde el presente: formas históricas, decorados icónicos y objetos de conversación reinterpretados para la vida contemporánea.</p>"
+      },
+      "blocks": {
+        "ch1": { "type": "chapter", "settings": { "kicker": "Capítulo 01", "title": "Aurora", "demo_image": "collection-aurora.webp", "link": "/collections/aurora" } },
+        "ch2": { "type": "chapter", "settings": { "kicker": "Capítulo 02", "title": "Ochavada", "demo_image": "collection-peces.webp", "link": "/collections/ochavada" } },
+        "ch3": { "type": "chapter", "settings": { "kicker": "Capítulo 03", "title": "Gifts & Decor", "demo_image": "collection-bellavista.webp", "link": "/collections/gifts-decor" } },
+        "ch4": { "type": "chapter", "settings": { "kicker": "Selección", "title": "Emblemas", "demo_image": "eden-banner.png", "link": "/collections/emblemas" } }
+      },
+      "block_order": ["ch1", "ch2", "ch3", "ch4"]
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main"]
 }

@@ -26,7 +26,7 @@
         <span class="eyebrow story-scroll__eyebrow">{{ section.settings.eyebrow | escape }}</span>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
-        <h2>{{ section.settings.heading }}</h2>
+        <h2>{{ section.settings.heading | remove: '<p>' | remove: '</p>' }}</h2>
       {%- endif -%}
       {%- if section.settings.paragraph != blank -%}
         <p>{{ section.settings.paragraph }}</p>

@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "main": {
+      "type": "heritage",
+      "settings": {
+        "hero_eyebrow": "La Cartuja de Sevilla · 1841",
+        "hero_title": "Heritage",
+        "hero_title_2": "1841",
+        "hero_intro": "<p>Desde el Monasterio de Santa María de las Cuevas hasta El Renacer: una cronología editorial de oficio, archivo, mesa y memoria sevillana.</p>",
+        "hero_demo_image": "history-sunset.png",
+        "finale_eyebrow": "El Renacer",
+        "finale_heading": "Una casa histórica vuelve a ocupar su lugar.",
+        "finale_body": "<p>La nueva etapa de La Cartuja no parte de cero. Parte de un archivo, de una ciudad, de una colección histórica reconocida y de una manera de entender la mesa como memoria viva.</p>",
+        "cta1_label": "Descubrir colecciones",
+        "cta1_link": "/collections",
+        "cta2_label": "Ver nuestras mesas",
+        "cta2_link": "/pages/nuestras-mesas",
+        "finale_demo_image": "collection-aurora.webp"
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -71,7 +71,8 @@
     },
     "newsletter": {
       "heading": "Recibir nuestra carta",
-      "placeholder": "Su correo electrónico",
+      "placeholder": "su correo electrónico",
+      "email_label": "Su correo electrónico",
       "submit": "Suscribir",
       "success": "Gracias por suscribirse",
       "error": "Algo salió mal. Inténtalo de nuevo."
@@ -88,7 +89,7 @@
   },
   "products": {
     "product": {
-      "add_to_cart": "Añadir a la cesta",
+      "add_to_cart": "Añadir a cesta",
       "sold_out": "Agotado",
       "unavailable": "No disponible",
       "price_from": "Desde {{ price }}",
@@ -99,6 +100,38 @@
     "header": {
       "menu": "Menú",
       "search": "Buscar"
+    },
+    "collection": {
+      "home": "Inicio",
+      "nav_label": "Navegación de colecciones",
+      "toggle": "Abrir {{ name }}",
+      "view_toggle": "Cambiar vista",
+      "view_grid": "Vista cuadrícula",
+      "view_list": "Vista lista",
+      "sort": "Ordenar",
+      "sort_new": "Novedad",
+      "sort_high": "Precio - alto a bajo",
+      "sort_low": "Precio - bajo a alto",
+      "load_more": "Cargar más",
+      "badge_new": "Novedad",
+      "favorite": "Añadir a favoritos",
+      "prev_long": "Anterior",
+      "next_long": "Siguiente"
+    },
+    "product": {
+      "gallery": "Galería de producto",
+      "prev": "Imagen anterior",
+      "next": "Imagen siguiente",
+      "close": "Cerrar galería",
+      "thumbs": "Miniaturas de producto"
+    },
+    "tables": {
+      "filters": "Filtros de mesas",
+      "hotspot": "Ver pieza"
+    },
+    "heritage": {
+      "timeline": "Cronología histórica",
+      "scroll": "Desplazarse para explorar"
     }
   }
 }
