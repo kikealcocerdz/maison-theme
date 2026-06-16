@@ -57,7 +57,8 @@
       "scroll_down": "Desplazar hacia abajo",
       "previous": "Anterior",
       "next": "Siguiente",
-      "loading": "Cargando"
+      "loading": "Cargando",
+      "close": "Cerrar"
     },
     "search": {
       "placeholder": "Buscar productos",
@@ -132,6 +133,13 @@
     "heritage": {
       "timeline": "Cronología histórica",
       "scroll": "Desplazarse para explorar"
+    },
+    "cart": {
+      "empty": "Tu cesta está vacía.",
+      "subtotal": "Subtotal",
+      "checkout": "Finalizar compra",
+      "view": "Ver cesta",
+      "taxes_note": "Gastos de envío e impuestos calculados en el checkout."
     }
   }
 }

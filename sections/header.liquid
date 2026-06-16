@@ -42,8 +42,8 @@
         <a href="/pages/heritage">Heritage 1841</a>
       {%- endif -%}
       <a href="{{ routes.search_url }}" aria-label="{{ 'general.search.label' | t }}">{{ 'general.search.label' | t }}</a>
-      <a href="{{ routes.cart_url }}" class="header-cart" aria-label="{{ 'general.cart.label' | t }}">
-        {{ 'general.cart.count' | t: count: cart.item_count }}
+      <a href="{{ routes.cart_url }}" class="header-cart" data-cart-toggle aria-label="{{ 'general.cart.label' | t }}">
+        {{ 'general.cart.label' | t | default: 'Cesta' }} (<span data-cart-count-badge>{{ cart.item_count }}</span>)
       </a>
     </div>
   </nav>

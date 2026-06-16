@@ -1,9 +1,17 @@
 <section class="editorial-hero" id="editorialHero-{{ section.id }}" data-section-id="{{ section.id }}" data-header-variant="light" aria-label="{{ section.settings.heading | strip_html | escape | default: 'Hero' }}">
+  {%- liquid
+    assign hero_video_src = ''
+    if section.settings.video != blank
+      assign hero_video_src = section.settings.video
+    elsif section.settings.demo_video != blank
+      assign hero_video_src = section.settings.demo_video | asset_url
+    endif
+  -%}
   <div class="editorial-hero__sticky">
     <div class="editorial-hero__frame">
-      {%- if section.settings.video != blank -%}
-        <video class="editorial-hero__media" autoplay muted loop playsinline poster="{%- if section.settings.image != blank -%}{{ section.settings.image | image_url: width: 1920 }}{%- endif -%}">
-          <source src="{{ section.settings.video }}" type="video/mp4">
+      {%- if hero_video_src != blank -%}
+        <video class="editorial-hero__media" autoplay muted loop playsinline preload="auto" poster="{%- if section.settings.image != blank -%}{{ section.settings.image | image_url: width: 1920 }}{%- else -%}{{ 'hero.webp' | asset_url }}{%- endif -%}" aria-label="{{ section.settings.heading | strip_html | escape }}">
+          <source src="{{ hero_video_src }}" type="video/mp4">
         </video>
       {%- elsif section.settings.image != blank -%}
         <img class="editorial-hero__media" src="{{ section.settings.image | image_url: width: 1920 }}"
@@ -230,6 +238,7 @@
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Hero image (fallback for video, also LCP)" },
     { "type": "url", "id": "video", "label": "Hero video URL (MP4, optional)" },
+    { "type": "text", "id": "demo_video", "label": "Demo video asset (filename in /assets)", "info": "Used when no Hero video URL is set. Default ships the editorial loop.", "default": "hero-living-heritage-loop.mp4" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "La Cartuja de Sevilla · 1841" },
     { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>El nuevo latir de una casa histórica.</p>" },
     { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>La Cartuja de Sevilla presenta El Renacer: una colección que reúne memoria, oficio y mesa contemporánea desde 1841.</p>" }

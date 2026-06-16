@@ -57,7 +57,8 @@
       "scroll_down": "Scroll down",
       "previous": "Previous",
       "next": "Next",
-      "loading": "Loading"
+      "loading": "Loading",
+      "close": "Close"
     },
     "search": {
       "placeholder": "Search products",
@@ -132,6 +133,13 @@
     "heritage": {
       "timeline": "Historical timeline",
       "scroll": "Scroll to explore"
+    },
+    "cart": {
+      "empty": "Your cart is empty.",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout",
+      "view": "View cart",
+      "taxes_note": "Shipping and taxes calculated at checkout."
     }
   }
 }

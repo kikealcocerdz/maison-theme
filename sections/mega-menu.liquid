@@ -13,7 +13,7 @@
                 <li><a href="{{ link.url }}"><span>{{ link.title }}</span></a></li>
               {%- endfor -%}
             {%- elsif block.settings.items != blank -%}
-              {%- comment -%} Demo items: one per line, "Label | meta" (meta optional). {%- endcomment -%}
+              {%- comment -%} Demo items: one per line, "Label | meta | url" (meta + url optional). {%- endcomment -%}
               {%- assign lines = block.settings.items | strip | newline_to_br | split: '<br />' -%}
               {%- for line in lines -%}
                 {%- assign row = line | strip -%}
@@ -21,8 +21,14 @@
                 {%- assign parts = row | split: '|' -%}
                 {%- assign label = parts[0] | strip -%}
                 {%- assign meta = '' -%}
+                {%- assign url = '' -%}
                 {%- if parts.size > 1 -%}{%- assign meta = parts[1] | strip -%}{%- endif -%}
-                <li><span>{{ label | escape }}</span>{%- if meta != blank -%}<span aria-hidden="true">{{ meta | escape }}</span>{%- endif -%}</li>
+                {%- if parts.size > 2 -%}{%- assign url = parts[2] | strip -%}{%- endif -%}
+                {%- if url != blank -%}
+                  <li><a href="{{ url }}"><span>{{ label | escape }}</span>{%- if meta != blank -%}<span aria-hidden="true">{{ meta | escape }}</span>{%- endif -%}</a></li>
+                {%- else -%}
+                  <li><span>{{ label | escape }}</span>{%- if meta != blank -%}<span aria-hidden="true">{{ meta | escape }}</span>{%- endif -%}</li>
+                {%- endif -%}
               {%- endfor -%}
             {%- endif -%}
           </ul>

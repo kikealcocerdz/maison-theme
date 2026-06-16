@@ -4,8 +4,9 @@
       "type": "editorial-hero",
       "settings": {
         "eyebrow": "La Cartuja de Sevilla · 1841",
-        "heading": "<p>El nuevo latir de una casa histórica.</p>",
-        "subheading": "<p>La Cartuja de Sevilla presenta El Renacer: una colección que reúne memoria, oficio y mesa contemporánea desde 1841.</p>"
+        "heading": "<p>Heritage for modern living.</p>",
+        "subheading": "<p>La Cartuja de Sevilla presenta El Renacer: una colección que reúne memoria, oficio y mesa contemporánea desde 1841.</p>",
+        "demo_video": "hero-living-heritage-loop.mp4"
       }
     },
     "bestsellers": {
@@ -19,14 +20,75 @@
         "soft_bg": true
       },
       "blocks": {
-        "p1": { "type": "product-card", "settings": { "show_price": true, "meta_line_override": "Aurora", "demo_image": "aurora_202_plato.png", "demo_title": "Plato 202 Rosa", "demo_price": "92 €" } },
-        "p2": { "type": "product-card", "settings": { "show_price": true, "meta_line_override": "Aurora", "demo_image": "aurora_202_sopera.png", "demo_title": "Sopera 202 Rosa", "demo_price": "245 €" } },
-        "p3": { "type": "product-card", "settings": { "show_price": true, "meta_line_override": "Bellavista", "demo_image": "bellavista_sopera.png", "demo_title": "Sopera Bellavista", "demo_price": "230 €" } },
-        "p4": { "type": "product-card", "settings": { "show_price": true, "meta_line_override": "Bellavista", "demo_image": "bellavista_fuente.png", "demo_title": "Fuente Bellavista", "demo_price": "128 €" } },
-        "p5": { "type": "product-card", "settings": { "show_price": true, "meta_line_override": "Bellavista", "demo_image": "bellavista_plato.png", "demo_title": "Plato Bellavista", "demo_price": "89 €" } },
-        "p6": { "type": "product-card", "settings": { "show_price": true, "meta_line_override": "Ochavada", "demo_image": "negro_vistas_plato.png", "demo_title": "Plato Negro Vistas", "demo_price": "96 €" } }
+        "p1": {
+          "type": "product-card",
+          "settings": {
+            "show_price": true,
+            "meta_line_override": "Aurora",
+            "demo_image": "aurora_202_plato.png",
+            "demo_title": "Plato 202 Rosa",
+            "demo_price": "92 €"
+          }
+        },
+        "p2": {
+          "type": "product-card",
+          "settings": {
+            "show_price": true,
+            "meta_line_override": "Aurora",
+            "demo_image": "aurora_202_sopera.png",
+            "demo_title": "Sopera 202 Rosa",
+            "demo_price": "245 €"
+          }
+        },
+        "p3": {
+          "type": "product-card",
+          "settings": {
+            "show_price": true,
+            "meta_line_override": "Bellavista",
+            "demo_image": "bellavista_sopera.png",
+            "demo_title": "Sopera Bellavista",
+            "demo_price": "230 €"
+          }
+        },
+        "p4": {
+          "type": "product-card",
+          "settings": {
+            "show_price": true,
+            "meta_line_override": "Bellavista",
+            "demo_image": "bellavista_fuente.png",
+            "demo_title": "Fuente Bellavista",
+            "demo_price": "128 €"
+          }
+        },
+        "p5": {
+          "type": "product-card",
+          "settings": {
+            "show_price": true,
+            "meta_line_override": "Bellavista",
+            "demo_image": "bellavista_plato.png",
+            "demo_title": "Plato Bellavista",
+            "demo_price": "89 €"
+          }
+        },
+        "p6": {
+          "type": "product-card",
+          "settings": {
+            "show_price": true,
+            "meta_line_override": "Ochavada",
+            "demo_image": "negro_vistas_plato.png",
+            "demo_title": "Plato Negro Vistas",
+            "demo_price": "96 €"
+          }
+        }
       },
-      "block_order": ["p1", "p2", "p3", "p4", "p5", "p6"]
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "p6"
+      ]
     },
     "heritage_stamp": {
       "type": "heritage-stamp",
@@ -46,11 +108,45 @@
         "cta_link": "/collections"
       },
       "blocks": {
-        "c1": { "type": "chapter-card", "settings": { "demo_image": "collection-aurora.webp", "chapter": "Capítulo 01", "title": "Aurora", "paragraph": "<p>La forma nacida con La Cartuja en 1841. Un repertorio de clásicos vivos: 202 Rosa, Bellavista, Ceilán, Flor de Lis, Viejo Molino y Oaxaca.</p>", "link": "/collections/aurora", "link_label": "Descubrir Aurora" } },
-        "c2": { "type": "chapter-card", "settings": { "demo_image": "negro_vistas_bandeja.png", "chapter": "Capítulo 02", "title": "Ochavada", "paragraph": "<p>La modernidad que nació en 1841. Líneas geométricas, silueta octogonal y decorados de fuerte presencia para mesas con carácter.</p>", "link": "/collections/ochavada", "link_label": "Descubrir Ochavada" } },
-        "c3": { "type": "chapter-card", "settings": { "demo_image": "gifts-decor-vertical.png", "chapter": "Capítulo 03", "title": "Gifts & Decor", "paragraph": "<p>Objetos con memoria: piezas decorativas, bandejas, champaneras, mugs y emblemas que llevan la historia de La Cartuja más allá de la mesa.</p>", "link": "/collections/gifts-decor", "link_label": "Descubrir Gifts & Decor" } }
+        "c1": {
+          "type": "chapter-card",
+          "settings": {
+            "demo_image": "collection-aurora.webp",
+            "chapter": "Capítulo 01",
+            "title": "Aurora",
+            "paragraph": "<p>La forma nacida con La Cartuja en 1841. Un repertorio de clásicos vivos: 202 Rosa, Bellavista, Ceilán, Flor de Lis, Viejo Molino y Oaxaca.</p>",
+            "link": "/collections/aurora",
+            "link_label": "Descubrir Aurora"
+          }
+        },
+        "c2": {
+          "type": "chapter-card",
+          "settings": {
+            "demo_image": "negro_vistas_bandeja.png",
+            "chapter": "Capítulo 02",
+            "title": "Ochavada",
+            "paragraph": "<p>La modernidad que nació en 1841. Líneas geométricas, silueta octogonal y decorados de fuerte presencia para mesas con carácter.</p>",
+            "link": "/collections/ochavada",
+            "link_label": "Descubrir Ochavada"
+          }
+        },
+        "c3": {
+          "type": "chapter-card",
+          "settings": {
+            "demo_image": "gifts-decor-vertical.png",
+            "chapter": "Capítulo 03",
+            "title": "Gifts & Decor",
+            "paragraph": "<p>Objetos con memoria: piezas decorativas, bandejas, champaneras, mugs y emblemas que llevan la historia de La Cartuja más allá de la mesa.</p>",
+            "link": "/collections/gifts-decor",
+            "link_label": "Descubrir Gifts & Decor"
+          }
+        }
       },
-      "block_order": ["c1", "c2", "c3"]
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ]
     },
     "season_banner": {
       "type": "image-banner",
@@ -73,13 +169,69 @@
         "cta_link": "/pages/mesas"
       },
       "blocks": {
-        "i1": { "type": "product", "settings": { "meta_line": "Aurora Collection", "demo_image": "aurora_202_plato.png", "demo_title": "Plato 202 Rosa", "demo_price": "92 €", "hotspot_x": 32, "hotspot_y": 42 } },
-        "i2": { "type": "product", "settings": { "meta_line": "Aurora Collection", "demo_image": "aurora_202_sopera.png", "demo_title": "Sopera 202 Rosa", "demo_price": "185 €", "hotspot_x": 57, "hotspot_y": 51 } },
-        "i3": { "type": "product", "settings": { "meta_line": "Aurora Collection", "demo_image": "aurora_202_cafetera.png", "demo_title": "Cafetera 202 Rosa", "demo_price": "128 €", "hotspot_x": 71, "hotspot_y": 34 } },
-        "i4": { "type": "product", "settings": { "meta_line": "Bellavista", "demo_image": "bellavista_fuente.png", "demo_title": "Fuente Bellavista", "demo_price": "96 €", "hotspot_x": 43, "hotspot_y": 67 } },
-        "i5": { "type": "product", "settings": { "meta_line": "Ochavada Collection", "demo_image": "negro_vistas_plato.png", "demo_title": "Plato Negro Vistas", "demo_price": "98 €", "hotspot_x": 79, "hotspot_y": 61 } }
+        "i1": {
+          "type": "product",
+          "settings": {
+            "meta_line": "Aurora Collection",
+            "demo_image": "aurora_202_plato.png",
+            "demo_title": "Plato 202 Rosa",
+            "demo_price": "92 €",
+            "hotspot_x": 32,
+            "hotspot_y": 42
+          }
+        },
+        "i2": {
+          "type": "product",
+          "settings": {
+            "meta_line": "Aurora Collection",
+            "demo_image": "aurora_202_sopera.png",
+            "demo_title": "Sopera 202 Rosa",
+            "demo_price": "185 €",
+            "hotspot_x": 57,
+            "hotspot_y": 51
+          }
+        },
+        "i3": {
+          "type": "product",
+          "settings": {
+            "meta_line": "Aurora Collection",
+            "demo_image": "aurora_202_cafetera.png",
+            "demo_title": "Cafetera 202 Rosa",
+            "demo_price": "128 €",
+            "hotspot_x": 71,
+            "hotspot_y": 34
+          }
+        },
+        "i4": {
+          "type": "product",
+          "settings": {
+            "meta_line": "Bellavista",
+            "demo_image": "bellavista_fuente.png",
+            "demo_title": "Fuente Bellavista",
+            "demo_price": "96 €",
+            "hotspot_x": 43,
+            "hotspot_y": 67
+          }
+        },
+        "i5": {
+          "type": "product",
+          "settings": {
+            "meta_line": "Ochavada Collection",
+            "demo_image": "negro_vistas_plato.png",
+            "demo_title": "Plato Negro Vistas",
+            "demo_price": "98 €",
+            "hotspot_x": 79,
+            "hotspot_y": 61
+          }
+        }
       },
-      "block_order": ["i1", "i2", "i3", "i4", "i5"]
+      "block_order": [
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5"
+      ]
     },
     "story": {
       "type": "story-scroll",
@@ -100,5 +252,14 @@
       }
     }
   },
-  "order": ["hero", "bestsellers", "heritage_stamp", "triptych", "season_banner", "scene", "story", "newsletter"]
+  "order": [
+    "hero",
+    "bestsellers",
+    "heritage_stamp",
+    "triptych",
+    "season_banner",
+    "scene",
+    "story",
+    "newsletter"
+  ]
 }
