@@ -121,11 +121,67 @@
 .cart-drawer__empty { padding: 60px 28px; text-align: center; display: flex; flex-direction: column; gap: 22px; align-items: center; }
 .cart-drawer__empty p { font-family: var(--serif); font-size: 22px; }
 
-.cart-drawer__foot { padding: 24px 28px 30px; border-top: 0.5px solid var(--rule); }
-.cart-drawer__subtotal { display: flex; justify-content: space-between; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
-.cart-drawer__note { font-size: 11px; color: var(--muted); margin: 10px 0 18px; }
-.cart-drawer__checkout { width: 100%; }
-.cart-drawer__viewcart { display: block; text-align: center; margin-top: 16px; }
+.cart-drawer__foot {
+  padding: 22px 28px calc(26px + env(safe-area-inset-bottom, 0px));
+  border-top: 0.5px solid var(--rule);
+  background: var(--paper);
+}
+.cart-drawer__subtotal {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 0.5px solid var(--rule);
+}
+.cart-drawer__subtotal > span:first-child {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cart-drawer__subtotal [data-cart-subtotal] {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+.cart-drawer__note {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 14px 0 18px;
+}
+
+/* Primary checkout — solid, full-width (overrides the outline .ghost-btn) */
+.cart-drawer__checkout {
+  display: flex;
+  width: 100%;
+  height: 54px;
+  padding: 0;
+  border: 0.5px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  letter-spacing: 0.2em;
+  transition: background 240ms var(--ease), color 240ms var(--ease);
+}
+.cart-drawer__checkout:hover {
+  background: transparent;
+  color: var(--ink);
+}
+
+.cart-drawer__viewcart {
+  display: block;
+  width: max-content;
+  margin: 16px auto 0;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cart-drawer__viewcart:after { background: var(--muted); }
+.cart-drawer__viewcart:hover { color: var(--ink); }
 
 .cart-drawer.is-loading .cart-drawer__panel { cursor: progress; }
 .cart-drawer.is-loading .cart-drawer__body { opacity: 0.55; transition: opacity 160ms var(--ease); }
