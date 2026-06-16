@@ -31,7 +31,7 @@
       </div>
       <p class="cart-drawer__note">{{ 'sections.cart.taxes_note' | t | default: 'Gastos de envío e impuestos calculados en el checkout.' }}</p>
       <a class="ghost-btn cart-drawer__checkout" href="/checkout">{{ 'sections.cart.checkout' | t | default: 'Finalizar compra' }}</a>
-      <a class="cart-drawer__viewcart cta" href="{{ routes.cart_url }}">{{ 'sections.cart.view' | t | default: 'Ver cesta' }}</a>
+      <a class="cart-drawer__viewcart" href="{{ routes.cart_url }}">{{ 'sections.cart.view' | t | default: 'Ver cesta' }}</a>
     </footer>
   </aside>
 </div>
@@ -173,15 +173,20 @@
 
 .cart-drawer__viewcart {
   display: block;
-  width: max-content;
-  margin: 16px auto 0;
+  width: fit-content;
+  margin: 18px auto 0;
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
+  padding-bottom: 3px;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 0.5px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 360ms var(--ease), color 240ms var(--ease);
 }
-.cart-drawer__viewcart:after { background: var(--muted); }
-.cart-drawer__viewcart:hover { color: var(--ink); }
+.cart-drawer__viewcart:hover { color: var(--ink); background-size: 100% 0.5px; }
 
 .cart-drawer.is-loading .cart-drawer__panel { cursor: progress; }
 .cart-drawer.is-loading .cart-drawer__body { opacity: 0.55; transition: opacity 160ms var(--ease); }
