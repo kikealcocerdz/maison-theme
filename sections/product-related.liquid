@@ -19,6 +19,7 @@
         {%- liquid
           assign r_img1 = product.featured_image | image_url: width: 720
           assign r_img2 = product.images[1] | image_url: width: 720
+          assign r_img3 = product.images[2] | image_url: width: 720
           assign r_w = product.featured_image.width | default: 1000
           assign r_h = product.featured_image.height | default: 1250
           assign r_price = product.price | money
@@ -30,7 +31,7 @@
         -%}
         {% render 'related-card',
           card_url: product.url, title: product.title, price: r_price, meta: r_meta,
-          img1: r_img1, img2: r_img2, img_w: r_w, img_h: r_h,
+          img1: r_img1, img2: r_img2, img3: r_img3, img_w: r_w, img_h: r_h,
           badge: r_new, data_price: product.price, data_new: r_new %}
       {%- endfor -%}
     {%- else -%}
@@ -42,11 +43,15 @@
             if block.settings.demo_image_2 != blank
               assign d_img2 = block.settings.demo_image_2 | asset_url
             endif
+            assign d_img3 = ''
+            if block.settings.demo_image_3 != blank
+              assign d_img3 = block.settings.demo_image_3 | asset_url
+            endif
           -%}
           {% render 'related-card',
             card_url: block.settings.link, title: block.settings.demo_title,
             price: block.settings.demo_price, meta: block.settings.demo_meta,
-            img1: d_img1, img2: d_img2, badge: block.settings.badge,
+            img1: d_img1, img2: d_img2, img3: d_img3, badge: block.settings.badge,
             data_price: block.settings.data_price, data_new: block.settings.data_new %}
         {%- endif -%}
       {%- endfor -%}
@@ -63,7 +68,28 @@
 .product-related .related-grid .price { text-align: left; }
 @media (max-width: 1180px) { .product-related .related-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 720px) { .product-related .related-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 12px; } }
+.product-related .product { cursor: pointer; }
 {% endstylesheet %}
+
+{% javascript %}
+(function () {
+  function init(root) {
+    root.querySelectorAll('.product').forEach(function (card) {
+      if (card.dataset.cardLink) return;
+      card.dataset.cardLink = '1';
+      card.addEventListener('click', function (e) {
+        if (e.target.closest('button, .media-nav')) return;
+        var link = card.querySelector('.product-info a');
+        if (link && link.href) window.location.href = link.href;
+      });
+    });
+  }
+  document.querySelectorAll('.product-related').forEach(init);
+  document.addEventListener('shopify:section:load', function (e) {
+    e.target.querySelectorAll('.product-related').forEach(init);
+  });
+})();
+{% endjavascript %}
 
 {% schema %}
 {
@@ -84,6 +110,7 @@
         { "type": "text", "id": "demo_meta", "label": "Meta line" },
         { "type": "text", "id": "demo_image", "label": "Image (asset filename)" },
         { "type": "text", "id": "demo_image_2", "label": "Hover image (asset filename)" },
+        { "type": "text", "id": "demo_image_3", "label": "Third carousel image (asset filename)" },
         { "type": "checkbox", "id": "badge", "label": "Show 'Novedad' badge", "default": false },
         { "type": "number", "id": "data_price", "label": "Sort price (number)" },
         { "type": "number", "id": "data_new", "label": "Is new (1/0)" },

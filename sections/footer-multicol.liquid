@@ -8,7 +8,7 @@
         <img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ settings.logo_alt | default: shop.name | escape }}" width="88" height="auto" loading="lazy">
       {%- endif -%}
       {%- if section.settings.tagline != blank -%}
-        <p>{{ section.settings.tagline }}</p>
+        <p>{{ section.settings.tagline | newline_to_br }}</p>
       {%- endif -%}
     </div>
 
@@ -36,8 +36,8 @@
   </div>
 
   <div class="footer-bottom">
-    <span>{{ 'general.footer.copyright' | t: year: 'now' | date: '%Y', shop_name: shop.name }}</span>
     {%- if section.settings.tagline_bottom != blank -%}<span>{{ section.settings.tagline_bottom }}</span>{%- endif -%}
+    <span>{{ 'general.footer.copyright' | t: year: 'now' | date: '%Y', shop_name: shop.name }}</span>
   </div>
 </footer>
 
@@ -112,7 +112,7 @@
     { "type": "image_picker", "id": "logo", "label": "Footer logo (overrides theme setting)" },
     { "type": "text", "id": "logo_alt", "label": "Logo alt text" },
     { "type": "textarea", "id": "tagline", "label": "Tagline under logo", "default": "La Cartuja\nde Sevilla" },
-    { "type": "text", "id": "tagline_bottom", "label": "Tagline bottom right", "default": "Hecho en España. Editado con calma." }
+    { "type": "text", "id": "tagline_bottom", "label": "Tagline bottom left", "default": "España / Español" }
   ],
   "max_blocks": 6,
   "blocks": [

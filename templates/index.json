@@ -4,7 +4,7 @@
       "type": "editorial-hero",
       "settings": {
         "eyebrow": "La Cartuja de Sevilla · 1841",
-        "heading": "<p>Heritage for modern living.</p>",
+        "heading": "<p>El nuevo latir de una casa histórica.</p>",
         "subheading": "<p>La Cartuja de Sevilla presenta El Renacer: una colección que reúne memoria, oficio y mesa contemporánea desde 1841.</p>",
         "demo_video": "hero-living-heritage-loop.mp4"
       }
@@ -15,6 +15,7 @@
         "eyebrow": "Selección de piezas icónicas",
         "heading": "Emblemas del Renacer",
         "description": "<p>Piezas que condensan casi dos siglos de historia: formas, decorados y objetos llamados a ocupar de nuevo su lugar en la mesa contemporánea.</p>",
+        "collection": "emblemas",
         "cards_per_row": 3,
         "show_arrows": true,
         "soft_bg": true
@@ -38,6 +39,16 @@
             "demo_image": "aurora_202_sopera.png",
             "demo_title": "Sopera 202 Rosa",
             "demo_price": "245 €"
+          }
+        },
+        "p2b": {
+          "type": "product-card",
+          "settings": {
+            "show_price": true,
+            "meta_line_override": "Aurora",
+            "demo_image": "aurora_202_cafetera.png",
+            "demo_title": "Cafetera 202 Rosa",
+            "demo_price": "164 €"
           }
         },
         "p3": {
@@ -84,6 +95,7 @@
       "block_order": [
         "p1",
         "p2",
+        "p2b",
         "p3",
         "p4",
         "p5",
@@ -137,7 +149,7 @@
             "chapter": "Capítulo 03",
             "title": "Gifts & Decor",
             "paragraph": "<p>Objetos con memoria: piezas decorativas, bandejas, champaneras, mugs y emblemas que llevan la historia de La Cartuja más allá de la mesa.</p>",
-            "link": "/collections/gifts-decor",
+            "link": "/collections/decoracion",
             "link_label": "Descubrir Gifts & Decor"
           }
         }
@@ -176,6 +188,7 @@
             "demo_image": "aurora_202_plato.png",
             "demo_title": "Plato 202 Rosa",
             "demo_price": "92 €",
+            "link": "/products/plato-202-rosa",
             "hotspot_x": 32,
             "hotspot_y": 42
           }
@@ -187,6 +200,7 @@
             "demo_image": "aurora_202_sopera.png",
             "demo_title": "Sopera 202 Rosa",
             "demo_price": "185 €",
+            "link": "/products/sopera-202-rosa",
             "hotspot_x": 57,
             "hotspot_y": 51
           }
@@ -198,6 +212,7 @@
             "demo_image": "aurora_202_cafetera.png",
             "demo_title": "Cafetera 202 Rosa",
             "demo_price": "128 €",
+            "link": "/products/cafetera-202-rosa",
             "hotspot_x": 71,
             "hotspot_y": 34
           }
@@ -209,6 +224,7 @@
             "demo_image": "bellavista_fuente.png",
             "demo_title": "Fuente Bellavista",
             "demo_price": "96 €",
+            "link": "/products/fuente-bellavista",
             "hotspot_x": 43,
             "hotspot_y": 67
           }
@@ -220,6 +236,7 @@
             "demo_image": "negro_vistas_plato.png",
             "demo_title": "Plato Negro Vistas",
             "demo_price": "98 €",
+            "link": "/products/plato-negro-vistas",
             "hotspot_x": 79,
             "hotspot_y": 61
           }
@@ -254,8 +271,8 @@
   },
   "order": [
     "hero",
-    "bestsellers",
     "heritage_stamp",
+    "bestsellers",
     "triptych",
     "season_banner",
     "scene",

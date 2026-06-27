@@ -107,6 +107,25 @@
     };
     prev.addEventListener('click', function () { x -= cardStep(); update(); });
     next.addEventListener('click', function () { x += cardStep(); update(); });
+    var stage = root.querySelector('.collections-stage-v26');
+    if (stage) {
+      var inView = function () {
+        var r = stage.getBoundingClientRect();
+        return r.top < window.innerHeight && r.bottom > 0;
+      };
+      stage.addEventListener('wheel', function (e) {
+        if (!inView()) return;
+        var m = max();
+        if (m <= 0) return;
+        var delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+        var nextX = x + delta * 1.15;
+        if ((nextX >= 0 && nextX <= m) || (x > 0 && x < m)) {
+          e.preventDefault();
+          x = nextX;
+          update();
+        }
+      }, { passive: false });
+    }
     window.addEventListener('resize', update);
     update();
   }

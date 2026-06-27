@@ -43,6 +43,10 @@
 .product-story-cta { display: inline-flex; margin-top: 30px; color: #fff; border: .5px solid rgba(255, 255, 255, .72); height: 46px; align-items: center; justify-content: center; padding: 0 28px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; transition: background 260ms var(--ease), color 260ms var(--ease); }
 .product-story-cta:hover { background: #fff; color: var(--ink); }
 .product-story-ornament { position: absolute; right: 7%; bottom: 7%; z-index: 2; font-family: var(--serif); font-size: clamp(86px, 12vw, 180px); line-height: .8; color: rgba(255, 255, 255, .14); font-style: italic; pointer-events: none; }
+@media (max-width: 1180px) {
+  .product-story-card { grid-template-columns: 1fr; min-height: 68vh; }
+  .product-story-copy { margin: 0; padding: 9vh 32px; }
+}
 @media (max-width: 720px) {
   .product-story { padding: 7vh 0; }
   .product-story-card { grid-template-columns: 1fr; min-height: 64vh; }

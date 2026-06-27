@@ -104,10 +104,9 @@
   position: absolute; width: 18px; height: 18px;
   border: 0.5px solid var(--ink); background: var(--paper);
   border-radius: 999px; box-shadow: 0 0 0 9px rgba(255, 255, 255, 0.48);
-  transform: translate(-50%, -50%);
   transition: transform 260ms var(--ease), background 260ms var(--ease), color 260ms var(--ease);
 }
-.scene-hotspot:hover, .scene-hotspot.active { transform: translate(-50%, -50%) scale(1.24); background: var(--ink); color: var(--paper); }
+.scene-hotspot:hover, .scene-hotspot.active { transform: scale(1.24); background: var(--ink); color: var(--paper); }
 .scene-hotspot::after { content: ""; position: absolute; inset: 6px; border-radius: 999px; background: currentColor; }
 .scene-product-view {
   position: relative; min-height: 620px; background: var(--paper);
@@ -205,7 +204,7 @@
     function render() {
       const p = items[current];
       const imgHtml = p.img
-        ? `<a class="scene-image-open" href="${p.url || '#'}" data-scene-open><img src="${p.img}" alt="${p.name || ''}"></a>`
+        ? `<a class="scene-image-open" href="${p.url || '#'}"><img src="${p.img}" alt="${p.name || ''}"></a>`
         : '';
       panel.innerHTML =
         imgHtml +
@@ -230,23 +229,6 @@
       const span = e.target.closest('span');
       if (!span) return;
       set([...dots.children].indexOf(span));
-    });
-
-    // Fullscreen image lightbox
-    panel.addEventListener('click', e => {
-      const open = e.target.closest('[data-scene-open]');
-      if (!open) return;
-      e.preventDefault();
-      const img = open.querySelector('img');
-      if (!img) return;
-      const overlay = document.createElement('div');
-      overlay.className = 'quick-image-lightbox';
-      overlay.innerHTML = `<button type="button" aria-label="Cerrar">×</button><img src="${img.src}" alt="${img.alt}">`;
-      document.body.appendChild(overlay);
-      requestAnimationFrame(() => overlay.classList.add('is-open'));
-      const close = () => { overlay.classList.remove('is-open'); setTimeout(() => overlay.remove(), 240); };
-      overlay.addEventListener('click', ev => { if (ev.target === overlay || ev.target.tagName === 'BUTTON') close(); });
-      document.addEventListener('keydown', function esc(ev) { if (ev.key === 'Escape') { close(); document.removeEventListener('keydown', esc); } });
     });
 
     render();

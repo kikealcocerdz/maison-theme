@@ -1,0 +1,39 @@
+{
+  "sections": {
+    "main": {
+      "type": "collection-grid",
+      "settings": {
+        "kicker": "Selección",
+        "title": "Emblemas",
+        "intro_copy": "<p>Piezas que condensan casi dos siglos de historia: formas, decorados y objetos llamados a ocupar de nuevo su lugar en la mesa contemporánea.</p>",
+        "products_per_page": 24,
+        "editorial_after": 6,
+        "editorial_demo_image": "mesa_bodegon_el_renacer.webp",
+        "editorial_text": "<p>Una selección de iconos reconocibles: objetos que resumen el archivo, la técnica y el nuevo deseo de La Cartuja.</p>",
+        "demo_initial_count": 12
+      },
+      "blocks": {
+        "e1": { "type": "product", "settings": { "demo_title": "Plato llano 28 cm 202 Rosa", "demo_price": "68 €", "demo_meta": "202 Rosa", "demo_image": "aurora_202_plato.png", "demo_image_2": "aurora_202_sopera.png", "badge": true, "data_price": 68, "data_new": 1, "data_type": "platos" } },
+        "e2": { "type": "product", "settings": { "demo_title": "Sopera 202 Rosa", "demo_price": "272 €", "demo_meta": "202 Rosa", "demo_image": "aurora_202_sopera.png", "demo_image_2": "aurora_202_cafetera.png", "badge": false, "data_price": 272, "data_new": 0, "data_type": "soperas" } },
+        "e3": { "type": "product", "settings": { "demo_title": "Plato de postre 202 Rosa", "demo_price": "92 €", "demo_meta": "202 Rosa", "demo_image": "aurora_202_cafetera.png", "demo_image_2": "aurora_202_plato.png", "badge": false, "data_price": 92, "data_new": 0, "data_type": "platos" } },
+        "e4": { "type": "product", "settings": { "demo_title": "Bajoplato 202 Rosa", "demo_price": "104 €", "demo_meta": "202 Rosa", "demo_image": "aurora-plate.png", "demo_image_2": "aurora_202_plato.png", "badge": false, "data_price": 104, "data_new": 0, "data_type": "platos" } },
+        "e5": { "type": "product", "settings": { "demo_title": "Taza consomé 202 Rosa", "demo_price": "106 €", "demo_meta": "202 Rosa", "demo_image": "taza-eden.png", "demo_image_2": "aurora_202_cafetera.png", "badge": true, "data_price": 106, "data_new": 1, "data_type": "tazas" } },
+        "e6": { "type": "product", "settings": { "demo_title": "Plato pan 202 Rosa", "demo_price": "128 €", "demo_meta": "202 Rosa", "demo_image": "aurora_202_plato.png", "demo_image_2": "aurora_202_sopera.png", "badge": false, "data_price": 128, "data_new": 0, "data_type": "platos" } },
+        "e7": { "type": "product", "settings": { "demo_title": "Plato llano 28 cm Bellavista", "demo_price": "68 €", "demo_meta": "Bellavista", "demo_image": "bellavista_plato.png", "demo_image_2": "bellavista_sopera.png", "badge": true, "data_price": 68, "data_new": 1, "data_type": "platos" } },
+        "e8": { "type": "product", "settings": { "demo_title": "Sopera Bellavista", "demo_price": "272 €", "demo_meta": "Bellavista", "demo_image": "bellavista_sopera.png", "demo_image_2": "bellavista_fuente.png", "badge": false, "data_price": 272, "data_new": 0, "data_type": "soperas" } },
+        "e9": { "type": "product", "settings": { "demo_title": "Plato de postre Bellavista", "demo_price": "92 €", "demo_meta": "Bellavista", "demo_image": "bellavista_fuente.png", "demo_image_2": "bellavista_plato.png", "badge": false, "data_price": 92, "data_new": 0, "data_type": "platos" } },
+        "e10": { "type": "product", "settings": { "demo_title": "Bajoplato Bellavista", "demo_price": "104 €", "demo_meta": "Bellavista", "demo_image": "bellavista-plate.png", "demo_image_2": "bellavista_plato.png", "badge": false, "data_price": 104, "data_new": 0, "data_type": "platos" } },
+        "e11": { "type": "product", "settings": { "demo_title": "Taza consomé Bellavista", "demo_price": "106 €", "demo_meta": "Bellavista", "demo_image": "taza-eden.png", "demo_image_2": "bellavista_fuente.png", "badge": true, "data_price": 106, "data_new": 1, "data_type": "tazas" } },
+        "e12": { "type": "product", "settings": { "demo_title": "Plato pan Bellavista", "demo_price": "128 €", "demo_meta": "Bellavista", "demo_image": "bellavista_plato.png", "demo_image_2": "bellavista_sopera.png", "badge": false, "data_price": 128, "data_new": 0, "data_type": "platos" } },
+        "e13": { "type": "product", "settings": { "demo_title": "Plato llano 28 cm Negro Vistas", "demo_price": "68 €", "demo_meta": "Negro Vistas", "demo_image": "negro_vistas_plato.png", "demo_image_2": "negro_vistas_bandeja_photo.jpg", "badge": true, "data_price": 68, "data_new": 1, "data_type": "platos" } },
+        "e14": { "type": "product", "settings": { "demo_title": "Sopera Negro Vistas", "demo_price": "272 €", "demo_meta": "Negro Vistas", "demo_image": "negro_vistas_bandeja_photo.jpg", "demo_image_2": "negro_vistas_plato.png", "badge": false, "data_price": 272, "data_new": 0, "data_type": "soperas" } },
+        "e15": { "type": "product", "settings": { "demo_title": "Plato de postre Negro Vistas", "demo_price": "92 €", "demo_meta": "Negro Vistas", "demo_image": "negro_vistas_plato.png", "demo_image_2": "negro_vistas_bandeja_photo.jpg", "badge": false, "data_price": 92, "data_new": 0, "data_type": "platos" } },
+        "e16": { "type": "product", "settings": { "demo_title": "Bajoplato Negro Vistas", "demo_price": "104 €", "demo_meta": "Negro Vistas", "demo_image": "negro_vistas_bandeja_photo.jpg", "demo_image_2": "negro_vistas_plato.png", "badge": false, "data_price": 104, "data_new": 0, "data_type": "platos" } },
+        "e17": { "type": "product", "settings": { "demo_title": "Taza consomé Negro Vistas", "demo_price": "106 €", "demo_meta": "Negro Vistas", "demo_image": "taza-eden.png", "demo_image_2": "negro_vistas_plato.png", "badge": true, "data_price": 106, "data_new": 1, "data_type": "tazas" } },
+        "e18": { "type": "product", "settings": { "demo_title": "Plato pan Negro Vistas", "demo_price": "128 €", "demo_meta": "Negro Vistas", "demo_image": "negro_vistas_plato.png", "demo_image_2": "negro_vistas_bandeja_photo.jpg", "badge": false, "data_price": 128, "data_new": 0, "data_type": "platos" } }
+      },
+      "block_order": ["e1", "e2", "e3", "e4", "e5", "e6", "e7", "e8", "e9", "e10", "e11", "e12", "e13", "e14", "e15", "e16", "e17", "e18"]
+    }
+  },
+  "order": ["main"]
+}

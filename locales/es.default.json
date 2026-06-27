@@ -79,7 +79,7 @@
       "error": "Algo salió mal. Inténtalo de nuevo."
     },
     "footer": {
-      "copyright": "© {{ year }} {{ shop_name }}. Hecho en España. Editado con calma.",
+      "copyright": "{{ shop_name }} · 1841",
       "language": "Idioma",
       "currency": "Moneda"
     },

@@ -11,7 +11,7 @@
       "blocks": {
         "ch1": { "type": "chapter", "settings": { "kicker": "Capítulo 01", "title": "Aurora", "demo_image": "collection-aurora.webp", "link": "/collections/aurora" } },
         "ch2": { "type": "chapter", "settings": { "kicker": "Capítulo 02", "title": "Ochavada", "demo_image": "collection-peces.webp", "link": "/collections/ochavada" } },
-        "ch3": { "type": "chapter", "settings": { "kicker": "Capítulo 03", "title": "Gifts & Decor", "demo_image": "collection-bellavista.webp", "link": "/collections/gifts-decor" } },
+        "ch3": { "type": "chapter", "settings": { "kicker": "Capítulo 03", "title": "Decoración", "demo_image": "collection-bellavista.webp", "link": "/collections/decoracion" } },
         "ch4": { "type": "chapter", "settings": { "kicker": "Selección", "title": "Emblemas", "demo_image": "eden-banner.png", "link": "/collections/emblemas" } }
       },
       "block_order": ["ch1", "ch2", "ch3", "ch4"]

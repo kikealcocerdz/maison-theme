@@ -41,7 +41,7 @@
         <a href="/pages/artesania">Artesanía</a>
         <a href="/pages/heritage">Heritage 1841</a>
       {%- endif -%}
-      <a href="{{ routes.search_url }}" aria-label="{{ 'general.search.label' | t }}">{{ 'general.search.label' | t }}</a>
+      <a href="{{ routes.search_url }}" class="search-link" aria-label="{{ 'general.search.label' | t }}">{% render 'icon-search' %}</a>
       <a href="{{ routes.cart_url }}" class="header-cart" data-cart-toggle aria-label="{{ 'general.cart.label' | t }}">
         {{ 'general.cart.label' | t | default: 'Cesta' }} (<span data-cart-count-badge>{{ cart.item_count }}</span>)
       </a>
@@ -79,7 +79,7 @@
 
 .nav {
   height: var(--header-h);
-  width: var(--content);
+  width: min(90vw, 1760px);
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -98,6 +98,22 @@
 }
 
 .nav-right { justify-content: flex-end; }
+
+.search-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.search-link svg {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  stroke-width: 1.25;
+  fill: none;
+}
 
 .logo {
   height: 50px;
@@ -162,9 +178,12 @@
 
 .skip-link:focus { left: 16px; top: 16px; }
 
-@media (max-width: 1100px) {
-  .nav-left a,
-  .nav-right a:not(:last-child) { display: none; }
+@media (max-width: 1240px) {
+  .nav-left > a,
+  .nav-right > a:not(.search-link):not(:last-child) { display: none; }
+  .nav { grid-template-columns: 1fr auto 1fr; }
+  .nav-left,
+  .nav-right { gap: 18px; }
 }
 
 @media (max-width: 680px) {

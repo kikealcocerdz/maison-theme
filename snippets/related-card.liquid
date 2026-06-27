@@ -27,6 +27,9 @@
     {%- if img2 != blank -%}
       <img class="hover" src="{{ img2 }}" alt="{{ c_title | escape }}" width="{{ c_w }}" height="{{ c_h }}" loading="lazy" decoding="async">
     {%- endif -%}
+    {%- if img3 != blank -%}
+      <img class="hover" src="{{ img3 }}" alt="{{ c_title | escape }}" width="{{ c_w }}" height="{{ c_h }}" loading="lazy" decoding="async">
+    {%- endif -%}
   </div>
   <div class="product-info"><div><h3><a href="{{ c_url }}">{{ c_title | escape }}</a></h3>{%- if meta != blank -%}<p>{{ meta | escape }}</p>{%- endif -%}</div>{%- if price != blank -%}<span class="price">{{ price }}</span>{%- endif -%}</div>
 </article>

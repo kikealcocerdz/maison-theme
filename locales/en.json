@@ -79,7 +79,7 @@
       "error": "Something went wrong. Please try again."
     },
     "footer": {
-      "copyright": "© {{ year }} {{ shop_name }}. Made in Spain. Crafted slowly.",
+      "copyright": "{{ shop_name }} · 1841",
       "language": "Language",
       "currency": "Currency"
     },

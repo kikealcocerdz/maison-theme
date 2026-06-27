@@ -20,6 +20,9 @@
 {%- liquid
   assign hero_img = section.settings.hero_image
   assign hero_demo = section.settings.hero_demo_image | default: 'history-sunset.png'
+  assign hero_video = section.settings.hero_video
+  assign hero_video_demo = section.settings.hero_video_demo | default: 'heritage-hero-loop.mp4'
+  assign hero_poster = section.settings.hero_video_poster | default: 'heritage-hero-poster.jpg'
   assign finale_img = section.settings.finale_image
   assign finale_demo = section.settings.finale_demo_image | default: 'collection-aurora.webp'
   assign asset_files = 'history-dawn.png,history-sunset.png,craft.webp,collection-aurora.webp,gifts_decor_arch.png,gifts-decor-vertical.png,mesa_aurora_editorial.jpg,mesa_bodegon_el_renacer.webp,negro_vistas_bandeja.png,negro_vistas_bandeja_photo.jpg,negro_vistas_plato.png,aurora_202_plato.png,aurora_202_sopera.png,aurora_202_cafetera.png,bellavista_plato.png,bellavista_sopera.png,bellavista_fuente.png,heritage-dossier_p03.webp,heritage-dossier_p05.webp,heritage-dossier_p06.webp,heritage-dossier_p07.webp,heritage-dossier_p08.webp,heritage-dossier_p09.webp,heritage-dossier_p10.webp,heritage-dossier_p11.webp,heritage-dossier_p12.webp,heritage-dossier_p13.webp,heritage-dossier_p14.webp,heritage-dossier_p15.webp,heritage-dossier_p21.webp,heritage-dossier_p22.webp,heritage-dossier_p23.webp,heritage-dossier_p24.webp,heritage-dossier_p25.webp' | split: ','
@@ -42,7 +45,19 @@
   </aside>
 
   <section class="hero-history" data-heritage-hero>
-    {%- if hero_img != blank -%}
+    {%- if hero_video != blank -%}
+      {%- comment -%} Section-setting video upload (Shopify-hosted sources) {%- endcomment -%}
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata"{% if hero_poster != blank %} poster="{{ hero_poster | asset_url }}"{% endif %} aria-label="{{ section.settings.hero_eyebrow | escape }}">
+        {%- for source in hero_video.sources -%}
+          <source src="{{ source.url }}" type="{{ source.mime_type }}">
+        {%- endfor -%}
+      </video>
+    {%- elsif hero_video_demo != blank -%}
+      {%- comment -%} Looping timelapse loop shipped as a theme asset (live parity) {%- endcomment -%}
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="{{ hero_poster | asset_url }}" aria-label="{{ section.settings.hero_eyebrow | escape }}">
+        <source src="{{ hero_video_demo | asset_url }}" type="video/mp4">
+      </video>
+    {%- elsif hero_img != blank -%}
       {% render 'image-responsive', image: hero_img, alt: section.settings.hero_eyebrow, sizes: '100vw', loading: 'eager', fetchpriority: 'high' %}
     {%- else -%}
       <img src="{{ hero_demo | asset_url }}" alt="{{ section.settings.hero_eyebrow | escape }}" width="1600" height="1000" fetchpriority="high" decoding="async">
@@ -112,6 +127,8 @@
 
 .heritage-page .hero-history { position: relative; height: 100vh; min-height: 720px; overflow: hidden; background: #07111f; color: #fff; }
 .heritage-page .hero-history img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(.95) saturate(.88) brightness(.56); transform: scale(1.04); animation: heroDrift 18s var(--ease) infinite alternate; }
+/* Hero Heritage video — overrides the img drift/brightness filter (live parity) */
+.heritage-page .hero-history .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 .heritage-page .hero-vignette { position: absolute; inset: 0; background: radial-gradient(circle at 52% 42%, rgba(6, 16, 29, .12), rgba(6, 16, 29, .72) 66%, rgba(6, 16, 29, .94)); }
 .heritage-page .hero-copy { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 0 8vw; }
 .heritage-page .hero-copy h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(74px, 11vw, 174px); line-height: .84; letter-spacing: -.045em; margin: 18px 0 28px; }
@@ -633,8 +650,11 @@
     { "type": "text", "id": "hero_title", "label": "Title line 1", "default": "Heritage" },
     { "type": "text", "id": "hero_title_2", "label": "Title line 2", "default": "1841" },
     { "type": "richtext", "id": "hero_intro", "label": "Intro" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "video", "id": "hero_video", "label": "Hero video (looping)" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image (fallback if no video)" },
     { "type": "text", "id": "hero_demo_image", "label": "Hero demo image (asset filename)" },
+    { "type": "text", "id": "hero_video_demo", "label": "Hero demo video (asset filename)", "default": "heritage-hero-loop.mp4" },
+    { "type": "text", "id": "hero_video_poster", "label": "Hero video poster (asset filename)", "default": "heritage-hero-poster.jpg" },
     { "type": "header", "content": "Finale (El Renacer)" },
     { "type": "text", "id": "finale_eyebrow", "label": "Eyebrow", "default": "El Renacer" },
     { "type": "text", "id": "finale_heading", "label": "Heading", "default": "Una casa histórica vuelve a ocupar su lugar." },
