@@ -25,13 +25,17 @@
     </div>
 
     <footer class="cart-drawer__foot" data-cart-foot hidden>
-      <div class="cart-drawer__subtotal">
-        <span>{{ 'sections.cart.subtotal' | t | default: 'Subtotal' }}</span>
-        <span data-cart-subtotal></span>
+      <div class="cart-drawer__totals">
+        <div class="cart-drawer__subtotal">
+          <span>{{ 'sections.cart.subtotal' | t | default: 'Subtotal' }}</span>
+          <span data-cart-subtotal></span>
+        </div>
+        <p class="cart-drawer__note">{{ 'sections.cart.taxes_note' | t | default: 'Gastos de envío e impuestos calculados en el checkout.' }}</p>
       </div>
-      <p class="cart-drawer__note">{{ 'sections.cart.taxes_note' | t | default: 'Gastos de envío e impuestos calculados en el checkout.' }}</p>
-      <a class="ghost-btn cart-drawer__checkout" href="/checkout">{{ 'sections.cart.checkout' | t | default: 'Finalizar compra' }}</a>
-      <a class="cart-drawer__viewcart" href="{{ routes.cart_url }}">{{ 'sections.cart.view' | t | default: 'Ver cesta' }}</a>
+      <div class="cart-drawer__actions">
+        <a class="ghost-btn cart-drawer__checkout" href="/checkout">{{ 'sections.cart.checkout' | t | default: 'Finalizar compra' }}</a>
+        <a class="cart-drawer__viewcart" href="{{ routes.cart_url }}">{{ 'sections.cart.view' | t | default: 'Ver cesta' }}</a>
+      </div>
     </footer>
   </aside>
 </div>
@@ -125,13 +129,17 @@
   padding: 22px 28px calc(26px + env(safe-area-inset-bottom, 0px));
   border-top: 0.5px solid var(--rule);
   background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
+.cart-drawer__totals { display: flex; flex-direction: column; gap: 12px; }
 .cart-drawer__subtotal {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 16px;
-  padding-bottom: 14px;
+  padding-bottom: 12px;
   border-bottom: 0.5px solid var(--rule);
 }
 .cart-drawer__subtotal > span:first-child {
@@ -151,8 +159,10 @@
   font-size: 11px;
   line-height: 1.5;
   color: var(--muted);
-  margin: 14px 0 18px;
+  margin: 0;
 }
+
+.cart-drawer__actions { display: flex; flex-direction: column; align-items: stretch; gap: 14px; }
 
 /* Primary checkout — solid, full-width (overrides the outline .ghost-btn) */
 .cart-drawer__checkout {
@@ -172,9 +182,9 @@
 }
 
 .cart-drawer__viewcart {
-  display: block;
+  align-self: center;
   width: fit-content;
-  margin: 18px auto 0;
+  margin: 0;
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;

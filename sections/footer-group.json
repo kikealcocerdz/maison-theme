@@ -11,17 +11,23 @@
       "blocks": {
         "col-1": {
           "type": "column",
-          "settings": { "heading": "Comprar" }
+          "settings": {
+            "heading": "Comprar",
+            "items": "Colecciones | /collections\nVajillas completas | /collections/vajillas-completas\nPiezas icónicas | /collections/emblemas"
+          }
         },
         "col-2": {
           "type": "column",
-          "settings": { "heading": "La casa" }
+          "settings": {
+            "heading": "La casa",
+            "items": "Nuestra historia | /pages/heritage\nNuestras mesas | /pages/nuestras-mesas\nArtesanía | /pages/artesania"
+          }
         },
         "col-3": {
-          "type": "text_column",
+          "type": "column",
           "settings": {
             "heading": "Contacto",
-            "content": "<p>Atención al cliente<br>Newsletter<br>ES / EN</p>"
+            "items": "Atención al cliente\nNewsletter\nES / EN"
           }
         }
       },

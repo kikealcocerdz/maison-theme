@@ -6,6 +6,9 @@
         <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ section.settings.logo_alt | default: shop.name | escape }}" width="88" height="auto" loading="lazy">
       {%- elsif settings.logo != blank -%}
         <img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ settings.logo_alt | default: shop.name | escape }}" width="88" height="auto" loading="lazy">
+      {%- else -%}
+        {%- comment -%} Demo logo (shown until a logo is uploaded in theme settings). {%- endcomment -%}
+        <img src="{{ 'logo-navy.png' | asset_url }}" alt="{{ shop.name | escape }}" width="119" height="124" loading="lazy">
       {%- endif -%}
       {%- if section.settings.tagline != blank -%}
         <p>{{ section.settings.tagline | newline_to_br }}</p>
@@ -19,9 +22,23 @@
         {%- assign linklist = linklists[block.settings.menu] -%}
         <div {{ block.shopify_attributes }}>
           <h4>{{ block.settings.heading | escape }}</h4>
-          {%- for link in linklist.links -%}
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          {%- endfor -%}
+          {%- if linklist.links.size > 0 -%}
+            {%- for link in linklist.links -%}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- endfor -%}
+          {%- elsif block.settings.items != blank -%}
+            {%- comment -%} Manual items, one per line: "Label | url" (mirrors mega-menu §8). {%- endcomment -%}
+            {%- assign lines = block.settings.items | strip | newline_to_br | split: '<br />' -%}
+            {%- for line in lines -%}
+              {%- assign row = line | strip -%}
+              {%- if row == blank -%}{%- continue -%}{%- endif -%}
+              {%- assign parts = row | split: '|' -%}
+              {%- assign label = parts[0] | strip -%}
+              {%- assign url = '' -%}
+              {%- if parts.size > 1 -%}{%- assign url = parts[1] | strip -%}{%- endif -%}
+              {%- if url != blank -%}<a href="{{ url }}">{{ label | escape }}</a>{%- else -%}<span>{{ label | escape }}</span>{%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
         </div>
 
       {%- when 'text_column' -%}
@@ -37,7 +54,8 @@
 
   <div class="footer-bottom">
     {%- if section.settings.tagline_bottom != blank -%}<span>{{ section.settings.tagline_bottom }}</span>{%- endif -%}
-    <span>{{ 'general.footer.copyright' | t: year: 'now' | date: '%Y', shop_name: shop.name }}</span>
+    {%- assign copyright_year = 'now' | date: '%Y' -%}
+    <span>{{ 'general.footer.copyright' | t: year: copyright_year, shop_name: shop.name }}</span>
   </div>
 </footer>
 
@@ -121,7 +139,8 @@
       "name": "Menu column",
       "settings": [
         { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
-        { "type": "link_list", "id": "menu", "label": "Menu" }
+        { "type": "link_list", "id": "menu", "label": "Menu" },
+        { "type": "textarea", "id": "items", "label": "Items (fallback, one per line: 'Label | url')" }
       ]
     },
     {

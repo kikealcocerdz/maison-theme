@@ -19,88 +19,7 @@
         "cards_per_row": 3,
         "show_arrows": true,
         "soft_bg": true
-      },
-      "blocks": {
-        "p1": {
-          "type": "product-card",
-          "settings": {
-            "show_price": true,
-            "meta_line_override": "Aurora",
-            "demo_image": "aurora_202_plato.png",
-            "demo_title": "Plato 202 Rosa",
-            "demo_price": "92 €"
-          }
-        },
-        "p2": {
-          "type": "product-card",
-          "settings": {
-            "show_price": true,
-            "meta_line_override": "Aurora",
-            "demo_image": "aurora_202_sopera.png",
-            "demo_title": "Sopera 202 Rosa",
-            "demo_price": "245 €"
-          }
-        },
-        "p2b": {
-          "type": "product-card",
-          "settings": {
-            "show_price": true,
-            "meta_line_override": "Aurora",
-            "demo_image": "aurora_202_cafetera.png",
-            "demo_title": "Cafetera 202 Rosa",
-            "demo_price": "164 €"
-          }
-        },
-        "p3": {
-          "type": "product-card",
-          "settings": {
-            "show_price": true,
-            "meta_line_override": "Bellavista",
-            "demo_image": "bellavista_sopera.png",
-            "demo_title": "Sopera Bellavista",
-            "demo_price": "230 €"
-          }
-        },
-        "p4": {
-          "type": "product-card",
-          "settings": {
-            "show_price": true,
-            "meta_line_override": "Bellavista",
-            "demo_image": "bellavista_fuente.png",
-            "demo_title": "Fuente Bellavista",
-            "demo_price": "128 €"
-          }
-        },
-        "p5": {
-          "type": "product-card",
-          "settings": {
-            "show_price": true,
-            "meta_line_override": "Bellavista",
-            "demo_image": "bellavista_plato.png",
-            "demo_title": "Plato Bellavista",
-            "demo_price": "89 €"
-          }
-        },
-        "p6": {
-          "type": "product-card",
-          "settings": {
-            "show_price": true,
-            "meta_line_override": "Ochavada",
-            "demo_image": "negro_vistas_plato.png",
-            "demo_title": "Plato Negro Vistas",
-            "demo_price": "96 €"
-          }
-        }
-      },
-      "block_order": [
-        "p1",
-        "p2",
-        "p2b",
-        "p3",
-        "p4",
-        "p5",
-        "p6"
-      ]
+      }
     },
     "heritage_stamp": {
       "type": "heritage-stamp",
@@ -185,10 +104,7 @@
           "type": "product",
           "settings": {
             "meta_line": "Aurora Collection",
-            "demo_image": "aurora_202_plato.png",
-            "demo_title": "Plato 202 Rosa",
-            "demo_price": "92 €",
-            "link": "/products/plato-202-rosa",
+            "product": "plato-llano-202-rosa",
             "hotspot_x": 32,
             "hotspot_y": 42
           }
@@ -197,10 +113,7 @@
           "type": "product",
           "settings": {
             "meta_line": "Aurora Collection",
-            "demo_image": "aurora_202_sopera.png",
-            "demo_title": "Sopera 202 Rosa",
-            "demo_price": "185 €",
-            "link": "/products/sopera-202-rosa",
+            "product": "sopera-202-rosa",
             "hotspot_x": 57,
             "hotspot_y": 51
           }
@@ -209,10 +122,7 @@
           "type": "product",
           "settings": {
             "meta_line": "Aurora Collection",
-            "demo_image": "aurora_202_cafetera.png",
-            "demo_title": "Cafetera 202 Rosa",
-            "demo_price": "128 €",
-            "link": "/products/cafetera-202-rosa",
+            "product": "cafetera-202-rosa",
             "hotspot_x": 71,
             "hotspot_y": 34
           }
@@ -221,10 +131,7 @@
           "type": "product",
           "settings": {
             "meta_line": "Bellavista",
-            "demo_image": "bellavista_fuente.png",
-            "demo_title": "Fuente Bellavista",
-            "demo_price": "96 €",
-            "link": "/products/fuente-bellavista",
+            "product": "fuente-med-bellavista",
             "hotspot_x": 43,
             "hotspot_y": 67
           }
@@ -233,10 +140,7 @@
           "type": "product",
           "settings": {
             "meta_line": "Ochavada Collection",
-            "demo_image": "negro_vistas_plato.png",
-            "demo_title": "Plato Negro Vistas",
-            "demo_price": "98 €",
-            "link": "/products/plato-negro-vistas",
+            "product": "plato-llano-negro-vistas",
             "hotspot_x": 79,
             "hotspot_y": 61
           }

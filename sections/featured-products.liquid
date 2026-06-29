@@ -70,6 +70,14 @@
 .featured-products__track { display: flex; transition: transform 680ms var(--ease-long); }
 .featured-products__card { flex: 0 0 calc(100% / 3); padding: 0 18px; text-align: center; }
 
+/* Auto-fill cards reuse .block-product-card__* markup but not its block stylesheet,
+   so give them a self-contained, snappy hover lift (fixes jank on fast pass-over). */
+.featured-products__card .block-product-card__media img { transition: transform 380ms var(--ease); will-change: transform; }
+.featured-products__card:hover .block-product-card__media img { transform: translateY(-6px) scale(1.03); }
+@media (prefers-reduced-motion: reduce) {
+  .featured-products__card:hover .block-product-card__media img { transform: none; }
+}
+
 .featured-products[data-cards-per-row="2"] .featured-products__card { flex-basis: 50%; }
 .featured-products[data-cards-per-row="4"] .featured-products__card { flex-basis: 25%; }
 

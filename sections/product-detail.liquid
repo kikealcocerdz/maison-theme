@@ -18,6 +18,8 @@
     assign short = product.excerpt | default: section.settings.demo_short
   endif
 
+  assign description = product.description | default: section.settings.demo_description
+
   if has_product
     assign price = product.price | money
   else
@@ -30,7 +32,7 @@
   assign demo_imgs = section.settings.demo_images | default: 'aurora-plate.png,bellavista-plate.png,bone-white.png' | split: ','
 -%}
 
-<div class="product-page" data-section-id="{{ section.id }}">
+<div class="product-page" data-section-id="{{ section.id }}" style="--pdp-desc-size: {{ section.settings.description_size | default: 15 }}px;">
   <section class="product-detail" data-product-gallery>
 
     <aside class="product-title-panel">
@@ -77,11 +79,14 @@
 
     <aside class="product-info-panel">
       <div class="product-info-sticky">
+        {%- if description != blank -%}
+          <div class="product-description rte">{{ description }}</div>
+        {%- endif -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'accordion' -%}
             <div class="product-accordion" {{ block.shopify_attributes }}>
               <button type="button">{{ block.settings.label | escape }} <span aria-hidden="true"></span></button>
-              <div><p>{{ block.settings.content }}</p></div>
+              <div class="product-accordion__panel"><div class="product-accordion__content">{{ block.settings.content }}</div></div>
             </div>
           {%- endif -%}
         {%- endfor -%}
@@ -103,6 +108,19 @@
       </div>
     </aside>
   </section>
+
+  {%- comment -%} Sticky add-to-cart: shows when the buy block scrolls out of view {%- endcomment -%}
+  <div class="pdp-sticky-bar" aria-hidden="true" data-pdp-sticky>
+    <div class="pdp-sticky-bar__inner">
+      <div class="pdp-sticky-bar__info">
+        {%- if title != blank -%}<span class="pdp-sticky-bar__title">{{ title | escape }}</span>{%- endif -%}
+        <span class="pdp-sticky-bar__price">{{ price }}</span>
+      </div>
+      <button class="add-to-bag pdp-sticky-bar__btn" type="button" data-pdp-sticky-add{% if has_product and product.available == false %} disabled{% endif %}>
+        {%- if has_product and product.available == false -%}{{ 'products.product.sold_out' | t }}{%- else -%}{{ 'products.product.add_to_cart' | t }}{%- endif -%}
+      </button>
+    </div>
+  </div>
 </div>
 
 {%- comment -%} Fullscreen gallery lightbox {%- endcomment -%}
@@ -160,17 +178,32 @@
 .product-gallery-lines span { width: 26px; height: 1px; background: rgba(15, 26, 46, .22); transition: background 220ms var(--ease), width 220ms var(--ease); }
 .product-gallery-lines span.active { background: var(--ink); width: 34px; }
 
-.product-info-sticky { position: relative; top: auto; padding-top: 18vh; display: flex; flex-direction: column; justify-content: flex-start; min-height: min(740px, calc(100vh - var(--header-h) - 18px)); transition: padding-top 360ms var(--ease-long); }
+.product-info-sticky { position: relative; top: auto; padding-top: 11vh; display: flex; flex-direction: column; justify-content: flex-start; min-height: min(740px, calc(100vh - var(--header-h) - 18px)); transition: padding-top 360ms var(--ease-long); }
 .product-detail.info-expanded .product-info-sticky { padding-top: 5vh; }
+.product-description { margin-bottom: 26px; color: var(--ink-soft); font-size: var(--pdp-desc-size, 15px); line-height: 1.7; }
+.product-description > :first-child { margin-top: 0; }
+.product-description > :last-child { margin-bottom: 0; }
+.product-description p { margin: 0 0 12px; }
+.product-description h1, .product-description h2, .product-description h3, .product-description h4 { font-family: var(--serif); font-weight: 400; color: var(--ink); line-height: 1.25; margin: 22px 0 10px; }
+.product-description h2 { font-size: 21px; } .product-description h3 { font-size: 17px; } .product-description h4 { font-size: 14px; }
+.product-description ul, .product-description ol { margin: 0 0 12px; padding-left: 18px; }
+.product-description li { margin-bottom: 5px; }
+.product-description a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.product-description strong { color: var(--ink); }
+.product-description img { max-width: 100%; height: auto; margin: 14px 0; }
+
 .product-accordion { border-bottom: .5px solid var(--rule); }
 .product-accordion:first-of-type { border-top: .5px solid var(--rule); }
 .product-accordion button { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 17px 0; font-size: 12px; color: var(--ink); }
 .product-accordion button span { font-size: 0; width: 16px; height: 16px; display: grid; place-items: center; }
 .product-accordion button span::before { content: "+"; font-size: 16px; line-height: 1; }
 .product-accordion.is-open button span::before { content: "−"; font-size: 18px; }
-.product-accordion > div { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 320ms var(--ease), padding 320ms var(--ease); overflow: hidden; }
-.product-accordion.is-open > div { grid-template-rows: 1fr; padding: 0 0 14px; }
-.product-accordion > div > p { overflow: hidden; margin: 0; font-size: 11px; line-height: 1.58; color: var(--muted); padding-right: 4px; }
+.product-accordion__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 320ms var(--ease); overflow: hidden; }
+.product-accordion.is-open .product-accordion__panel { grid-template-rows: 1fr; }
+.product-accordion__content { overflow: hidden; min-height: 0; padding-bottom: 0; transition: padding-bottom 320ms var(--ease); }
+.product-accordion.is-open .product-accordion__content { padding-bottom: 14px; }
+.product-accordion__content > * { margin: 0; font-size: 11px; line-height: 1.58; color: var(--muted); padding-right: 4px; }
+.product-accordion__content > * + * { margin-top: 8px; }
 .product-buy-block { margin-top: 22px; display: grid; gap: 18px; background: var(--paper); }
 .product-price-large { font-family: var(--serif); font-size: 30px; line-height: 1; text-align: right; color: var(--ink); }
 .add-to-bag { height: 54px; background: var(--ink); color: #fff; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; width: 100%; transition: background 260ms var(--ease); }
@@ -213,6 +246,19 @@
   .lightbox-thumbs button { width: 46px; height: 62px; }
   .lightbox-close { top: 14px; right: 18px; }
   .lightbox-scroll figure img { width: 82vw; height: 80vh; }
+}
+
+.pdp-sticky-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: var(--paper); border-top: .5px solid var(--rule); transform: translateY(100%); transition: transform 320ms var(--ease); pointer-events: none; }
+.pdp-sticky-bar.is-visible { transform: translateY(0); pointer-events: auto; }
+.pdp-sticky-bar__inner { width: var(--content); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 12px 0; }
+.pdp-sticky-bar__info { display: flex; align-items: baseline; gap: 16px; min-width: 0; }
+.pdp-sticky-bar__title { font-family: var(--serif); font-size: 17px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pdp-sticky-bar__price { font-family: var(--serif); font-size: 17px; color: var(--ink); white-space: nowrap; }
+.pdp-sticky-bar__btn { width: auto; min-width: 220px; height: 48px; padding: 0 32px; flex: none; }
+@media (max-width: 620px) {
+  .pdp-sticky-bar__inner { width: calc(100vw - 24px); gap: 12px; }
+  .pdp-sticky-bar__title { display: none; }
+  .pdp-sticky-bar__btn { flex: 1; min-width: 0; padding: 0 16px; }
 }
 {% endstylesheet %}
 
@@ -257,6 +303,20 @@
       });
     });
     refresh();
+
+    // Sticky add-to-cart: visible only while the real buy block is off-screen
+    var buyBlock = root.querySelector('.product-buy-block');
+    var bar = root.querySelector('[data-pdp-sticky]');
+    var realAdd = root.querySelector('.product-buy-block .add-to-bag');
+    var stickyAdd = root.querySelector('[data-pdp-sticky-add]');
+    if (stickyAdd && realAdd) stickyAdd.addEventListener('click', function () { realAdd.click(); });
+    if (buyBlock && bar) {
+      var barObs = new IntersectionObserver(function (entries) {
+        bar.classList.toggle('is-visible', !entries[0].isIntersecting);
+        bar.setAttribute('aria-hidden', entries[0].isIntersecting ? 'true' : 'false');
+      }, { threshold: 0 });
+      barObs.observe(buyBlock);
+    }
   }
 
   function initLightbox() {
@@ -313,6 +373,8 @@
     { "type": "header", "content": "Demo (when no product / before catalog migration)" },
     { "type": "text", "id": "demo_title", "label": "Demo title" },
     { "type": "textarea", "id": "demo_short", "label": "Demo short description" },
+    { "type": "richtext", "id": "demo_description", "label": "Demo description", "info": "Falls back when the product has no description." },
+    { "type": "range", "id": "description_size", "min": 12, "max": 20, "step": 1, "unit": "px", "label": "Description text size", "default": 15 },
     { "type": "text", "id": "demo_price", "label": "Demo price (e.g. 92 €)" },
     { "type": "text", "id": "demo_images", "label": "Demo gallery images (comma-separated asset filenames)", "info": "e.g. aurora-plate.png,bellavista-plate.png,bone-white.png" }
   ],

@@ -4,7 +4,11 @@
   to demo `product` blocks before the catalog migrates (CLAUDE.md §7).
 {%- endcomment -%}
 {%- liquid
+  assign current_id = product.id
   assign source = collections[section.settings.collection]
+  if source == blank
+    assign source = product.collections.first
+  endif
   assign limit = section.settings.product_limit | default: 5
   assign auto = false
   if source != blank and source.products.size > 0
@@ -16,6 +20,7 @@
   <div class="related-grid">
     {%- if auto -%}
       {%- for product in source.products limit: limit -%}
+        {%- if product.id == current_id -%}{%- continue -%}{%- endif -%}
         {%- liquid
           assign r_img1 = product.featured_image | image_url: width: 720
           assign r_img2 = product.images[1] | image_url: width: 720
