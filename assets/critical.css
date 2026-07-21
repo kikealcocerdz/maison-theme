@@ -15,7 +15,6 @@ body {
   color: var(--ink);
   font-family: var(--sans);
   font-weight: 300;
-  font-size: var(--fs-body);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: geometricPrecision;

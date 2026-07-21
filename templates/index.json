@@ -53,7 +53,7 @@
         "c2": {
           "type": "chapter-card",
           "settings": {
-            "demo_image": "negro_vistas_bandeja.png",
+            "demo_image": "negro_vistas_bandeja.webp",
             "chapter": "Capítulo 02",
             "title": "Ochavada",
             "paragraph": "<p>La modernidad que nació en 1841. Líneas geométricas, silueta octogonal y decorados de fuerte presencia para mesas con carácter.</p>",
@@ -64,7 +64,7 @@
         "c3": {
           "type": "chapter-card",
           "settings": {
-            "demo_image": "gifts-decor-vertical.png",
+            "demo_image": "gifts-decor-vertical.webp",
             "chapter": "Capítulo 03",
             "title": "Gifts & Decor",
             "paragraph": "<p>Objetos con memoria: piezas decorativas, bandejas, champaneras, mugs y emblemas que llevan la historia de La Cartuja más allá de la mesa.</p>",
@@ -95,54 +95,61 @@
       "settings": {
         "eyebrow": "Nuestras mesas",
         "heading": "Una escena, cada pieza.",
-        "description": "<p>Mesas editoriales donde las piezas de El Renacer se combinan por color, forma y memoria: del blanco sereno de Aurora al contraste de Negro Vistas.</p>",
+        "description": "<p>Una escena editorial construida alrededor de Negro Vistas: piezas gráficas, contraste profundo y el gesto preciso de vestir la mesa pieza a pieza.</p>",
         "cta_label": "Descubre nuestras mesas",
-        "cta_link": "/pages/mesas"
+        "cta_link": "/pages/mesas",
+        "cta2_label": "Aprende a vestir tu mesa",
+        "cta2_link": "/pages/viste-tu-mesa",
+        "add_label": "Añadir pieza",
+        "set1_product": "vajilla-42-p-negro-vistas",
+        "set1_label": "Añadir vajilla · 42 platos",
+        "set2_product": "vajilla-56-p-negro-vistas",
+        "set2_label": "Añadir vajilla · 56 platos"
       },
       "blocks": {
         "i1": {
           "type": "product",
           "settings": {
-            "meta_line": "Aurora Collection",
-            "product": "plato-llano-202-rosa",
-            "hotspot_x": 32,
-            "hotspot_y": 42
+            "meta_line": "Ochavada · Negro Vistas",
+            "product": "plato-llano-negro-vistas",
+            "hotspot_x": 40,
+            "hotspot_y": 54
           }
         },
         "i2": {
           "type": "product",
           "settings": {
-            "meta_line": "Aurora Collection",
-            "product": "sopera-202-rosa",
-            "hotspot_x": 57,
-            "hotspot_y": 51
+            "meta_line": "Ochavada · Negro Vistas",
+            "product": "fuente-red-negro-vistas",
+            "hotspot_x": 58,
+            "hotspot_y": 60
           }
         },
         "i3": {
           "type": "product",
           "settings": {
-            "meta_line": "Aurora Collection",
-            "product": "cafetera-202-rosa",
-            "hotspot_x": 71,
-            "hotspot_y": 34
+            "meta_line": "Ochavada · Negro Vistas",
+            "product": "sopera-negro-vistas",
+            "hotspot_x": 70,
+            "hotspot_y": 43
           }
         },
         "i4": {
           "type": "product",
           "settings": {
-            "meta_line": "Bellavista",
-            "product": "fuente-med-bellavista",
-            "hotspot_x": 43,
-            "hotspot_y": 67
+            "meta_line": "Ochavada · Negro Vistas",
+            "product": "salsera-negro-vistas",
+            "hotspot_x": 80,
+            "hotspot_y": 62
           }
         },
         "i5": {
           "type": "product",
           "settings": {
-            "meta_line": "Ochavada Collection",
-            "product": "plato-llano-negro-vistas",
-            "hotspot_x": 79,
-            "hotspot_y": 61
+            "meta_line": "Ochavada · Negro Vistas",
+            "product": "bandeja-pastas-negro-vistas",
+            "hotspot_x": 28,
+            "hotspot_y": 68
           }
         }
       },

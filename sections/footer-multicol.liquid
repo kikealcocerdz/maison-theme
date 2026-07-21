@@ -54,8 +54,7 @@
 
   <div class="footer-bottom">
     {%- if section.settings.tagline_bottom != blank -%}<span>{{ section.settings.tagline_bottom }}</span>{%- endif -%}
-    {%- assign copyright_year = 'now' | date: '%Y' -%}
-    <span>{{ 'general.footer.copyright' | t: year: copyright_year, shop_name: shop.name }}</span>
+    {%- if section.settings.tagline_bottom_right != blank -%}<span>{{ section.settings.tagline_bottom_right }}</span>{%- endif -%}
   </div>
 </footer>
 
@@ -64,6 +63,8 @@
   padding: 78px 0 44px;
   border-top: 0.5px solid var(--rule);
   background: var(--paper);
+  display: flex;
+  flex-direction: column;
 }
 
 .footer-grid {
@@ -75,7 +76,6 @@
 }
 
 .footer-logo img {
-  width: 88px;
   margin-bottom: 24px;
 }
 
@@ -130,7 +130,8 @@
     { "type": "image_picker", "id": "logo", "label": "Footer logo (overrides theme setting)" },
     { "type": "text", "id": "logo_alt", "label": "Logo alt text" },
     { "type": "textarea", "id": "tagline", "label": "Tagline under logo", "default": "La Cartuja\nde Sevilla" },
-    { "type": "text", "id": "tagline_bottom", "label": "Tagline bottom left", "default": "España / Español" }
+    { "type": "text", "id": "tagline_bottom", "label": "Tagline bottom left", "default": "La Cartuja de Sevilla · 1841" },
+    { "type": "text", "id": "tagline_bottom_right", "label": "Tagline bottom right", "default": "Hecho en España. Editado con calma." }
   ],
   "max_blocks": 6,
   "blocks": [

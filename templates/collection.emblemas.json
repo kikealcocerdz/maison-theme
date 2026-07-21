@@ -3,13 +3,12 @@
     "main": {
       "type": "collection-grid",
       "settings": {
+        "sidebar_menu": "colecciones-sidebar",
         "kicker": "Selección",
         "title": "Emblemas",
         "intro_copy": "<p>Piezas que condensan casi dos siglos de historia: formas, decorados y objetos llamados a ocupar de nuevo su lugar en la mesa contemporánea.</p>",
         "products_per_page": 24,
-        "editorial_after": 6,
-        "editorial_demo_image": "mesa_bodegon_el_renacer.webp",
-        "editorial_text": "<p>Una selección de iconos reconocibles: objetos que resumen el archivo, la técnica y el nuevo deseo de La Cartuja.</p>"
+        "editorial_after": 6
       }
     }
   },

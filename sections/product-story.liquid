@@ -5,12 +5,13 @@
 {%- liquid
   assign story_image = section.settings.image
   assign demo_image = section.settings.demo_image | default: 'scene-table.webp'
+  assign story_alt = section.settings.heading | default: '' | strip_html | escape
 -%}
 <section class="product-story reveal" data-section-id="{{ section.id }}">
   <div class="product-story-card">
     <div class="product-story-media">
       {%- if story_image != blank -%}
-        {% render 'image-responsive', image: story_image, alt: section.settings.heading | default: '' | strip_html | escape, sizes: '100vw', loading: 'lazy' %}
+        {% render 'image-responsive', image: story_image, alt: story_alt, sizes: '100vw', loading: 'lazy' %}
       {%- else -%}
         <img src="{{ demo_image | asset_url }}" alt="{{ section.settings.heading | default: '' | strip_html | escape }}" width="1600" height="1000" loading="lazy" decoding="async">
       {%- endif -%}

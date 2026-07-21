@@ -63,7 +63,9 @@
     "search": {
       "placeholder": "Buscar productos",
       "label": "Buscar",
-      "submit": "Buscar"
+      "submit": "Buscar",
+      "view_all": "Ver todos los resultados",
+      "no_results": "Sin resultados para “{{ terms }}”"
     },
     "cart": {
       "label": "Cesta",

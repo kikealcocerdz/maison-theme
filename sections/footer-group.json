@@ -6,7 +6,8 @@
       "type": "footer-multicol",
       "settings": {
         "tagline": "La Cartuja\nde Sevilla",
-        "tagline_bottom": "España / Español"
+        "tagline_bottom": "La Cartuja de Sevilla · 1841",
+        "tagline_bottom_right": "Hecho en España. Editado con calma."
       },
       "blocks": {
         "col-1": {
@@ -20,7 +21,7 @@
           "type": "column",
           "settings": {
             "heading": "La casa",
-            "items": "Nuestra historia | /pages/heritage\nNuestras mesas | /pages/nuestras-mesas\nArtesanía | /pages/artesania"
+            "items": "Nuestra historia | /pages/heritage\nNuestras mesas | /pages/nuestras-mesas\nEmblemas | /collections/emblemas"
           }
         },
         "col-3": {

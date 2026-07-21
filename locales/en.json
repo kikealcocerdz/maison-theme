@@ -63,7 +63,9 @@
     "search": {
       "placeholder": "Search products",
       "label": "Search",
-      "submit": "Search"
+      "submit": "Search",
+      "view_all": "View all results",
+      "no_results": "No results for “{{ terms }}”"
     },
     "cart": {
       "label": "Cart",

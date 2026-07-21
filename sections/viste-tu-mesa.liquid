@@ -1,0 +1,1013 @@
+{%- comment -%}
+  Viste tu mesa — editorial landing + interactive table-styling advisor
+  (faithful port of lastmocks/viste-tu-mesa.html + styles/viste-tu-mesa.css
+  + scripts/viste-tu-mesa.js, v53 photographic wizard preview).
+
+  Page = 7 pieces: hero · guía paso a paso (5 static steps, inline SVGs) ·
+  laboratorio de capas (7 layer toggles over a real plate photo) · wizard
+  (6 questions, live photo preview from FORM_IMAGES) · resultado (weighted
+  SCORE matrix × COLLECTIONS catalog → top-3 tabs + product cards) ·
+  comprar por capas (3 tiered buy cards) · toast.
+
+  Theme-integration adaptations vs the raw mockup:
+   - Scoped under `.vt-page`; mockup class names kept. The mockup's own
+     header / mega-menu / footer markup + CSS + JS are dropped — the theme
+     header-group / footer-group provide those. The mockup's reveal-on-scroll
+     JS is dropped too (assets/theme.js already observes `.reveal`).
+   - Image paths resolved through the window.__VT_ASSETS map below (asset_url):
+     `assets/viste-tu-mesa/*` → `vt-<name>.webp` (identical variants deduped:
+     27 logical keys → 10 physical files), `assets/catalog/<col>/<file>` →
+     `vt-cat-<col>-<file>`, root ambients keep their original basenames
+     (ochavada_canasto_floral.jpg / scene-left-tableware.webp already shipped).
+   - COLLECTIONS collectionUrl/featuredUrl: mockup .html pages mapped onto
+     theme routes (/collections/<handle>, PDP demo /products/plato-llano-202-rosa).
+   - `data-add` buy buttons stay visual like the mockup (toast only) — no fake
+     cart writes, real cart badge untouched.
+   - Reduced-motion: keyframe/transition off-switch + instant scrolling.
+{%- endcomment -%}
+{%- liquid
+  assign hero_img = section.settings.hero_image
+  assign hero_demo = section.settings.hero_demo_image | default: 'mesa_bodegon_lujo_el_renacer.webp'
+  assign plate_img = section.settings.lab_plate_image
+  assign plate_demo = section.settings.lab_plate_demo_image | default: 'aurora_202_plato.webp'
+  assign root_assets = 'mesa_bodegon_lujo_el_renacer.webp,aurora_202_plato.webp,mesa_aurora_editorial.webp,mesa_aurora_oaxaca.webp,mesa_ochavada_negro_vistas.webp,gifts_decor_arch.webp,ochavada_canasto_floral.jpg,scene-left-tableware.webp' | split: ','
+  assign jardin_bases = 'woodLight,woodDark,stone,graphite' | split: ','
+  assign jardin_textiles = 'linenWhite,linenBeige,blueSoft,dark' | split: ','
+  assign catalog_keys = 'aurora-blanca/plato-llano.webp,aurora-blanca/fuente-redonda.webp,aurora-blanca/cafetera.webp,202-rosa/plato-llano.webp,202-rosa/sopera.webp,202-rosa/cafetera.webp,bellavista/plato-llano.webp,bellavista/fuente-redonda.webp,bellavista/sopera.webp,ochavada-blanca/plato-llano.webp,ochavada-blanca/fuente-redonda.webp,ochavada-blanca/sopera.webp,negro-vistas/plato-llano.webp,negro-vistas/fuente-redonda.webp,negro-vistas/sopera.webp,oaxaca/prod_p5_0.webp,oaxaca/prod_p5_1.webp,oaxaca/prod_p5_2.webp,gifts-decor/bandeja-vistas-cibeles-azul.webp,gifts-decor/cabeza-frenologica.webp,gifts-decor/florero-alhambra-azul-grande.webp' | split: ','
+-%}
+
+<div class="vt-page" data-section-id="{{ section.id }}">
+  <!-- ===================== 1 · HERO ===================== -->
+  <section aria-label="Viste tu mesa con La Cartuja" class="vt-hero">
+    <div class="vt-hero__media">
+      {%- if hero_img != blank -%}
+        {% render 'image-responsive', image: hero_img, alt: 'Mesa vestida con piezas de La Cartuja de Sevilla', sizes: '100vw', loading: 'eager', fetchpriority: 'high' %}
+      {%- else -%}
+        <img src="{{ hero_demo | asset_url }}" alt="Mesa vestida con piezas de La Cartuja de Sevilla" width="2048" height="1529" fetchpriority="high" decoding="async">
+      {%- endif -%}
+    </div>
+    <div class="vt-hero__inner">
+      <span class="eyebrow">La Cartuja de Sevilla · desde 1841</span>
+      <h1 class="display">Viste tu mesa con <em>La Cartuja</em>.</h1>
+      <p>Del mantel al último detalle: aprende a crear una mesa equilibrada y descubre qué vajillas encajan con tu ocasión, tu espacio y tu forma de recibir.</p>
+      <div class="vt-hero__ctas">
+        <a class="ghost-btn solid" data-scroll-to="#guide" href="#guide">Aprender paso a paso</a>
+        <a class="ghost-btn" data-scroll-to="#wizard" href="#wizard">Encontrar mi vajilla ideal</a>
+      </div>
+    </div>
+    <span class="vt-hero__scroll">Desliza</span>
+  </section>
+
+  <!-- ===================== 2 · GUÍA PASO A PASO ===================== -->
+  <section class="vt-section" id="guide">
+    <div class="section-head reveal">
+      <span class="eyebrow">La mesa, por capas</span>
+      <h2>Cinco gestos para una <em>mesa equilibrada</em></h2>
+      <p>Vestir una mesa no es acumular: es ordenar. Estos cinco pasos componen una mesa serena, hospitalaria y con memoria.</p>
+    </div>
+    <div class="guide-rail reveal">
+      <article class="guide-step">
+        <div class="guide-step__no">01</div>
+        <div class="guide-step__icon"><svg viewbox="0 0 84 84"><path d="M6 58 H78 M14 58 V40 a28 14 0 0 1 56 0 V58"></path><path d="M20 40 H64" opacity=".5"></path></svg></div>
+        <h3>La base</h3>
+        <p>Mantel claro, camino de mesa, individuales o mesa vista. La base marca el tono: el lino aporta calidez; la madera o la piedra, naturalidad.</p>
+        <span class="guide-step__line"></span>
+      </article>
+      <article class="guide-step">
+        <div class="guide-step__no">02</div>
+        <div class="guide-step__icon"><svg viewbox="0 0 84 84"><circle cx="42" cy="42" r="34"></circle><circle cx="42" cy="42" r="24"></circle><circle cx="42" cy="42" r="13"></circle></svg></div>
+        <h3>Las capas</h3>
+        <p>Bajoplato, plato llano, plato de postre y hondo o bol según el menú. Cada pieza se apila con orden, dejando ver un borde de la anterior.</p>
+        <span class="guide-step__line"></span>
+      </article>
+      <article class="guide-step">
+        <div class="guide-step__no">03</div>
+        <div class="guide-step__icon"><svg viewbox="0 0 84 84"><path d="M22 18 H62 V66 H22 Z" opacity=".5"></path><path d="M30 26 H54 M30 36 H54 M30 46 H46"></path></svg></div>
+        <h3>El gesto</h3>
+        <p>Una servilleta sencilla, doblada con limpieza, a un lado o sobre el plato. El detalle que dice que la mesa se ha pensado con calma.</p>
+        <span class="guide-step__line"></span>
+      </article>
+      <article class="guide-step">
+        <div class="guide-step__no">04</div>
+        <div class="guide-step__icon"><svg viewbox="0 0 84 84"><path d="M30 64 H54 M34 64 V48 a8 8 0 0 1 16 0 V64"></path><path d="M42 40 V20 M42 28 q-10 -6 -16 -2 M42 28 q10 -6 16 -2"></path></svg></div>
+        <h3>El centro</h3>
+        <p>Bajo y discreto: velas, ramas, flores o piezas decorativas que no tapen la mirada ni molesten a la conversación.</p>
+        <span class="guide-step__line"></span>
+      </article>
+      <article class="guide-step">
+        <div class="guide-step__no">05</div>
+        <div class="guide-step__icon"><svg viewbox="0 0 84 84"><ellipse cx="42" cy="42" rx="36" ry="16"></ellipse><ellipse cx="42" cy="42" opacity=".5" rx="36" ry="16" transform="rotate(60 42 42)"></ellipse></svg></div>
+        <h3>Compartir</h3>
+        <p>Fuentes, boles, salseras y piezas de servicio. Lo que hace que una mesa funcione de verdad y que recibir sea un placer.</p>
+        <span class="guide-step__line"></span>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== 3 · LABORATORIO DE CAPAS ===================== -->
+  <section aria-label="Laboratorio visual de capas" class="vt-section soft-bg hairline" id="lab">
+    <div class="section-head reveal">
+      <span class="eyebrow">Laboratorio visual</span>
+      <h2>Una mesa se compone <em>capa a capa</em></h2>
+      <p>Activa y desactiva cada elemento para entender cómo se construye una mesa. Empieza por la base y añade solo lo que tu menú necesita.</p>
+    </div>
+    <div class="lab reveal">
+      <div aria-hidden="true" class="lab-stage">
+        <div class="lab-table"></div>
+        <div class="lab-layer lab-textil on"></div>
+        <div class="lab-layer lab-bajoplato on"></div>
+        <div class="lab-layer lab-protagonista on">
+          {%- if plate_img != blank -%}
+            <img src="{{ plate_img | image_url: width: 800 }}" alt="" width="{{ plate_img.width }}" height="{{ plate_img.height }}" loading="lazy" decoding="async">
+          {%- else -%}
+            <img src="{{ plate_demo | asset_url }}" alt="" width="572" height="571" loading="lazy" decoding="async">
+          {%- endif -%}
+        </div>
+        <div class="lab-layer lab-bol"></div>
+        <div class="lab-layer lab-auxiliar"></div>
+        <div class="lab-layer lab-servilleta"></div>
+        <div class="lab-layer lab-centro"></div>
+      </div>
+      <div class="lab-controls">
+        <h3>Construye tu mesa</h3>
+        <p>Cada interruptor añade una capa. No hay reglas rígidas: la mesa ideal es la que se adapta a lo que vas a servir.</p>
+        <button aria-pressed="true" class="lab-toggle" data-layer="textil" type="button"><span class="lab-toggle__label"><b>Base textil</b><small>Mantel, camino o individuales</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="true" class="lab-toggle" data-layer="bajoplato" type="button"><span class="lab-toggle__label"><b>Bajoplato</b><small>Marca el sitio y da profundidad</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="true" class="lab-toggle" data-layer="protagonista" type="button"><span class="lab-toggle__label"><b>Plato protagonista</b><small>El plato llano, centro de la escena</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="false" class="lab-toggle" data-layer="auxiliar" type="button"><span class="lab-toggle__label"><b>Plato auxiliar</b><small>Postre o pan, a un lado</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="false" class="lab-toggle" data-layer="bol" type="button"><span class="lab-toggle__label"><b>Hondo o bol</b><small>Para sopas, cremas o ensaladas</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="false" class="lab-toggle" data-layer="servilleta" type="button"><span class="lab-toggle__label"><b>Servilleta</b><small>El gesto del anfitrión</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="false" class="lab-toggle" data-layer="centro" type="button"><span class="lab-toggle__label"><b>Centro bajo</b><small>Flores, velas o ramas</small></span><span class="lab-switch"></span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 4 · WIZARD + 5 · PREVIEW ===================== -->
+  <section aria-label="Asesor visual de mesa" class="vt-section" id="wizard">
+    <div class="section-head reveal">
+      <span class="eyebrow">Asesor visual</span>
+      <h2>Encuentra tu <em>vajilla ideal</em></h2>
+      <p>Seis preguntas. Mientras respondes, tu mesa toma forma. Al final, tres vajillas de La Cartuja pensadas para ti.</p>
+    </div>
+    <div class="wizard reveal">
+      <div class="wizard-grid">
+        <!-- preview en vivo -->
+        <aside aria-label="Vista previa de tu mesa" class="wz-preview">
+          <div class="wz-stage" id="wzStage">
+            <img alt="Vista previa editorial de la mesa seleccionada" class="wz-photo" id="wzPhoto" loading="lazy" decoding="async" width="1200" height="1489" src="{{ 'vt-desayuno_luminoso.webp' | asset_url }}">
+            <div class="wz-photo-overlay" id="wzPhotoOverlay"></div>
+            <div class="wz-caption" id="wzCaption"><b>Tu mesa</b> · responde para verla tomar forma</div>
+          </div>
+        </aside>
+        <!-- panel de preguntas -->
+        <div>
+          <div aria-hidden="true" class="wz-progress" id="wzProgress"></div>
+          <div class="wz-panel" id="wzPanel"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 6 · RESULTADO ===================== -->
+  <section aria-label="Tus vajillas recomendadas" class="vt-section soft-bg hairline reveal" hidden id="result">
+    <div class="section-head">
+      <span class="eyebrow">Tu resultado</span>
+      <h2>Tres vajillas para <em>tu mesa</em></h2>
+      <p>Seleccionadas según tu ocasión, tu espacio y tu forma de recibir. Pulsa cada una para verla en tu mesa.</p>
+    </div>
+    <div class="result">
+      <div class="result-tabs" id="resultTabs" role="tablist"></div>
+      <div id="resultCards"></div>
+    </div>
+  </section>
+
+  <!-- ===================== 7 · COMPRA POR CAPAS ===================== -->
+  {%- comment -%} Resolve the three layered packs into real multi-item cart payloads + live totals. {%- endcomment -%}
+  {%- capture base_pack -%}{%- render 'viste-pack', items_text: section.settings.pack_base_items -%}{%- endcapture -%}
+  {%- capture full_pack -%}{%- render 'viste-pack', items_text: section.settings.pack_full_items -%}{%- endcapture -%}
+  {%- capture host_pack -%}{%- render 'viste-pack', items_text: section.settings.pack_host_items -%}{%- endcapture -%}
+  {%- assign base_parts = base_pack | split: '~~' -%}
+  {%- assign full_parts = full_pack | split: '~~' -%}
+  {%- assign host_parts = host_pack | split: '~~' -%}
+  {%- assign base_total = base_parts[0] | plus: 0 -%}
+  {%- assign full_total = full_parts[0] | plus: 0 -%}
+  {%- assign host_total = host_parts[0] | plus: 0 -%}
+
+  <section aria-label="Comprar por capas" class="vt-section" id="buy">
+    <div class="section-head reveal">
+      <span class="eyebrow">Comprar por capas</span>
+      <h2>Empieza por la base, <em>crece con calma</em></h2>
+      <p>No hace falta tenerlo todo a la vez. Compón tu mesa en el orden que tenga sentido para tu casa.</p>
+    </div>
+    <div class="layers-buy reveal">
+      <article class="buy-card">
+        <span class="buy-card__tier">Capa 01</span>
+        <h3>Set base</h3>
+        <span class="buy-card__price">{% if base_total > 0 %}{{ base_total | money }}{% else %}desde 148 €{% endif %}</span>
+        <ul>
+          <li>Platos llanos para 4</li>
+          <li>Platos de postre para 4</li>
+          <li>Lo esencial para empezar a recibir</li>
+        </ul>
+        <button class="ghost-btn" data-add="Set base"{% if base_total > 0 %} data-items='{{ base_parts[1] }}'{% endif %} type="button">Añadir el set base</button>
+      </article>
+      <article class="buy-card feature">
+        <span class="buy-card__tier">Capa 02 · la más elegida</span>
+        <h3>Mesa completa</h3>
+        <span class="buy-card__price">{% if full_total > 0 %}{{ full_total | money }}{% else %}desde 296 €{% endif %}</span>
+        <ul>
+          <li>Todo el set base</li>
+          <li>Boles y platos hondos</li>
+          <li>Fuente y salsera para compartir</li>
+        </ul>
+        <button class="ghost-btn" data-add="Mesa completa"{% if full_total > 0 %} data-items='{{ full_parts[1] }}'{% endif %} type="button">Añadir la mesa completa</button>
+      </article>
+      <article class="buy-card">
+        <span class="buy-card__tier">Capa 03</span>
+        <h3>Anfitrión</h3>
+        <span class="buy-card__price">{% if host_total > 0 %}{{ host_total | money }}{% else %}desde 420 €{% endif %}</span>
+        <ul>
+          <li>Todo lo de la mesa completa</li>
+          <li>Sopera y bandejas de servicio</li>
+          <li>Piezas decorativas y de centro</li>
+        </ul>
+        <button class="ghost-btn" data-add="Set anfitrión"{% if host_total > 0 %} data-items='{{ host_parts[1] }}'{% endif %} type="button">Añadir el set anfitrión</button>
+      </article>
+    </div>
+  </section>
+
+  <div aria-live="polite" class="vt-toast" id="vtToast" role="status"></div>
+</div>
+
+<script>
+  window.__VT_ASSETS = {
+    {%- for f in root_assets -%}"{{ f }}":"{{ f | asset_url }}",{%- endfor -%}
+    "viste-tu-mesa/desayuno_luminoso.webp":"{{ 'vt-desayuno_luminoso.webp' | asset_url }}",
+    "viste-tu-mesa/desayuno_contemporaneo.webp":"{{ 'vt-desayuno_luminoso.webp' | asset_url }}",
+    "viste-tu-mesa/desayuno_clasico.webp":"{{ 'vt-desayuno_clasico.webp' | asset_url }}",
+    {%- for b in jardin_bases -%}
+      {%- assign base_asset = 'vt-desayuno_jardin_' | append: b | append: '.webp' -%}
+      "viste-tu-mesa/desayuno_jardin_{{ b }}.webp":"{{ base_asset | asset_url }}",
+      "viste-tu-mesa/desayuno_jardin_{{ b }}_none.webp":"{{ base_asset | asset_url }}",
+      {%- for t in jardin_textiles -%}
+        {%- assign tex_asset = 'vt-desayuno_jardin_' | append: t | append: '.webp' -%}
+        "viste-tu-mesa/desayuno_jardin_{{ b }}_{{ t }}.webp":"{{ tex_asset | asset_url }}",
+      {%- endfor -%}
+    {%- endfor -%}
+    {%- for k in catalog_keys -%}
+      {%- assign cat_asset = 'vt-cat-' | append: k | replace: '/', '-' -%}
+      "catalog/{{ k }}":"{{ cat_asset | asset_url }}"{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  };
+</script>
+
+{% stylesheet %}
+/* Page tokens (mockup :root values the theme doesn't share) */
+.vt-page {
+  --vt-content: min(90vw, 1760px);
+  --vt-ivory: #F6F4EF;
+  --vt-paper-warm: rgba(168, 174, 186, .12);
+  --vt-stone: rgba(168, 174, 186, .20);
+}
+
+/* Shell utilities re-scoped for mockup parity */
+.vt-page .soft-bg { background: var(--vt-ivory); }
+.vt-page .ghost-btn { min-height: 46px; height: auto; border-width: .5px; background: transparent; color: var(--ink); }
+.vt-page .ghost-btn:hover { background: var(--ink); color: #fff; }
+.vt-page .ghost-btn.solid { background: var(--ink); color: #fff; }
+.vt-page .ghost-btn.solid:hover { background: var(--ink-soft); }
+.vt-page .section-head { text-align: center; margin: 0 auto 56px; max-width: 720px; padding: 0 24px; }
+.vt-page .section-head .eyebrow { display: block; margin-bottom: 14px; }
+.vt-page .section-head h2 { font-family: var(--serif); font-size: clamp(28px, 2.8vw, 44px); line-height: 1.1; font-weight: 400; letter-spacing: -.005em; margin: 0 0 16px; color: var(--ink); }
+.vt-page .section-head h2 em { font-style: italic; }
+.vt-page .section-head p { margin: 0 auto; font-weight: 300; font-size: 15px; line-height: 1.7; color: var(--ink-soft); max-width: 580px; }
+
+/* Section scaffolding */
+.vt-page .vt-section { padding: 120px 0; }
+
+/* ===================== 1 · HERO ===================== */
+.vt-page .vt-hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden; background: #0F1A2E; }
+.vt-page .vt-hero__media { position: absolute; inset: 0; z-index: 0; }
+.vt-page .vt-hero__media img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.96); }
+.vt-page .vt-hero__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15, 26, 46, .30) 0%, rgba(15, 26, 46, .10) 38%, rgba(15, 26, 46, .66) 100%); }
+.vt-page .vt-hero__inner { position: relative; z-index: 2; width: var(--vt-content); margin: 0 auto; padding: 0 0 12vh; color: #fff; }
+.vt-page .vt-hero .eyebrow { color: rgba(255, 255, 255, .78); }
+.vt-page .vt-hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(46px, 7vw, 118px); line-height: 1; margin: 18px 0 22px; max-width: 13ch; letter-spacing: -.01em; text-wrap: balance; }
+.vt-page .vt-hero h1 em { font-style: italic; }
+.vt-page .vt-hero p { font-weight: 300; font-size: clamp(14px, 1.1vw, 17px); line-height: 1.75; color: rgba(255, 255, 255, .9); max-width: 560px; margin: 0 0 38px; }
+.vt-page .vt-hero__ctas { display: flex; flex-wrap: wrap; gap: 16px; }
+.vt-page .vt-hero .ghost-btn { border-color: rgba(255, 255, 255, .8); color: #fff; }
+.vt-page .vt-hero .ghost-btn:hover { background: #fff; color: var(--ink); }
+.vt-page .vt-hero .ghost-btn.solid { background: #fff; color: var(--ink); border-color: #fff; }
+.vt-page .vt-hero .ghost-btn.solid:hover { background: rgba(255, 255, 255, .86); }
+.vt-page .vt-hero__scroll { position: absolute; right: 4vw; bottom: 30px; z-index: 3; color: rgba(255, 255, 255, .75); font-size: 9px; letter-spacing: .28em; text-transform: uppercase; writing-mode: vertical-rl; display: flex; align-items: center; gap: 14px; }
+.vt-page .vt-hero__scroll::before { content: ""; width: .5px; height: 46px; background: rgba(255, 255, 255, .6); }
+
+/* ===================== 2 · GUÍA PASO A PASO ===================== */
+.vt-page .guide-rail { width: var(--vt-content); margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border-top: .5px solid var(--rule); }
+.vt-page .guide-step { position: relative; padding: 34px 26px 40px; border-left: .5px solid var(--rule); cursor: pointer; transition: background 420ms var(--ease); }
+.vt-page .guide-step:first-child { border-left: 0; }
+.vt-page .guide-step:hover { background: var(--vt-paper-warm); }
+.vt-page .guide-step__no { font-family: var(--serif); font-size: 14px; color: var(--muted); letter-spacing: .04em; }
+.vt-page .guide-step__icon { margin: 26px 0 24px; height: 84px; display: flex; align-items: flex-end; }
+.vt-page .guide-step__icon svg { width: 84px; height: 84px; stroke: var(--ink); stroke-width: .9; fill: none; overflow: visible; }
+.vt-page .guide-step h3 { font-family: var(--serif); font-weight: 400; font-size: 21px; line-height: 1.15; margin: 0 0 12px; color: var(--ink); }
+.vt-page .guide-step p { font-weight: 300; font-size: 13.5px; line-height: 1.65; color: var(--ink-soft); margin: 0; }
+.vt-page .guide-step__line { position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: var(--ink); transition: width 600ms var(--ease); }
+.vt-page .guide-step:hover .guide-step__line { width: 100%; }
+
+/* ===================== 3 · LABORATORIO DE CAPAS ===================== */
+.vt-page .lab { width: var(--vt-content); margin: 0 auto; display: grid; grid-template-columns: 1.1fr .9fr; gap: min(6vw, 84px); align-items: center; }
+.vt-page .lab-stage { position: relative; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; border-radius: 50%; isolation: isolate; }
+.vt-page .lab-table { position: absolute; inset: 0; border-radius: 50%; background: #EFE9DF; box-shadow: inset 0 0 60px rgba(15, 26, 46, .06); transition: background 500ms var(--ease); }
+.vt-page .lab-layer { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(.6); opacity: 0; transition: opacity 500ms var(--ease), transform 600ms var(--ease-long); pointer-events: none; display: flex; align-items: center; justify-content: center; }
+.vt-page .lab-layer.on { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.vt-page .lab-textil { width: 96%; height: 96%; border-radius: 50%; background: #FBF6F0; box-shadow: 0 18px 50px rgba(15, 26, 46, .10); }
+.vt-page .lab-bajoplato { width: 78%; height: 78%; border-radius: 50%; border: 1px solid rgba(15, 26, 46, .18); background: radial-gradient(circle, #fff 62%, #F1ECE4 100%); box-shadow: 0 10px 26px rgba(15, 26, 46, .08); }
+.vt-page .lab-protagonista { width: 60%; height: 60%; }
+.vt-page .lab-protagonista img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 14px 24px rgba(15, 26, 46, .16)); }
+.vt-page .lab-auxiliar { width: 30%; height: 30%; left: 74%; top: 30%; border-radius: 50%; border: 1px solid rgba(15, 26, 46, .22); background: radial-gradient(circle, #fff 60%, #EFEAE2 100%); box-shadow: 0 8px 18px rgba(15, 26, 46, .10); }
+.vt-page .lab-auxiliar.on { transform: translate(-50%, -50%) scale(1); }
+.vt-page .lab-bol { width: 26%; height: 26%; left: 28%; top: 30%; border-radius: 50%; background: radial-gradient(circle at 50% 38%, #fff 40%, #E7E0D5 100%); border: 1px solid rgba(15, 26, 46, .2); box-shadow: 0 8px 18px rgba(15, 26, 46, .12); }
+.vt-page .lab-bol.on { transform: translate(-50%, -50%) scale(1); }
+.vt-page .lab-servilleta { width: 20%; height: 34%; left: 20%; top: 72%; background: linear-gradient(135deg, #EDE7DC, #F7F2EA); border: 1px solid rgba(15, 26, 46, .1); transform-origin: center; box-shadow: 0 6px 14px rgba(15, 26, 46, .1); }
+.vt-page .lab-servilleta.on { transform: translate(-50%, -50%) rotate(-10deg) scale(1); }
+.vt-page .lab-centro { width: 22%; height: 22%; left: 50%; top: -2%; border-radius: 50%; background: radial-gradient(circle, #9CAE8E, #6E8266); box-shadow: 0 10px 22px rgba(15, 26, 46, .18); }
+.vt-page .lab-centro.on { transform: translate(-50%, -50%) scale(1); }
+.vt-page .lab-controls { display: flex; flex-direction: column; gap: 0; }
+.vt-page .lab-controls h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 2.2vw, 34px); line-height: 1.12; margin: 0 0 8px; }
+.vt-page .lab-controls > p { font-weight: 300; font-size: 14px; line-height: 1.65; color: var(--ink-soft); margin: 0 0 26px; max-width: 42ch; }
+.vt-page .lab-toggle { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 56px; padding: 0 4px; border-top: .5px solid var(--rule); text-align: left; }
+.vt-page .lab-toggle:last-of-type { border-bottom: .5px solid var(--rule); }
+.vt-page .lab-toggle__label { display: flex; flex-direction: column; gap: 3px; }
+.vt-page .lab-toggle__label b { font-weight: 500; font-size: 13px; letter-spacing: .02em; color: var(--ink); }
+.vt-page .lab-toggle__label small { font-weight: 300; font-size: 11.5px; color: var(--muted); }
+.vt-page .lab-switch { flex: 0 0 auto; width: 44px; height: 24px; border-radius: 999px; background: var(--rule); position: relative; transition: background 280ms var(--ease); }
+.vt-page .lab-switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(15, 26, 46, .3); transition: transform 280ms var(--ease); }
+.vt-page .lab-toggle[aria-pressed="true"] .lab-switch { background: var(--ink); }
+.vt-page .lab-toggle[aria-pressed="true"] .lab-switch::after { transform: translateX(20px); }
+
+/* ===================== 4 · WIZARD ===================== */
+.vt-page .wizard { width: var(--vt-content); margin: 0 auto; }
+.vt-page .wizard-grid { display: grid; grid-template-columns: .92fr 1.08fr; gap: min(5vw, 72px); align-items: stretch; }
+.vt-page .wz-preview { position: sticky; top: 120px; align-self: start; border: .5px solid var(--rule); background: #fff; overflow: hidden; }
+.vt-page .wz-stage { position: relative; aspect-ratio: 4/5; overflow: hidden; transition: background 600ms var(--ease); background: var(--vt-paper-warm); }
+.vt-page .wz-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.01); transition: opacity 520ms var(--ease), transform 950ms var(--ease-long), filter 720ms var(--ease); will-change: opacity, transform, filter; }
+.vt-page .wz-photo.is-changing { opacity: .18; transform: scale(1.035); }
+.vt-page .wz-photo-overlay { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(15, 26, 46, .03), rgba(15, 26, 46, .10)); mix-blend-mode: multiply; transition: background 620ms var(--ease), opacity 620ms var(--ease); }
+.vt-page .wz-caption { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 20px 22px; background: linear-gradient(0deg, rgba(255, 255, 255, .94), rgba(255, 255, 255, 0)); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+.vt-page .wz-caption b { font-weight: 500; }
+.vt-page .wz-stage[data-style="clasico"] .wz-photo { filter: saturate(.96) contrast(1.02) brightness(1.02); }
+.vt-page .wz-stage[data-style="contemporaneo"] .wz-photo { filter: saturate(.82) contrast(1.08) brightness(.99); }
+.vt-page .wz-stage[data-style="mediterraneo"] .wz-photo { filter: saturate(1.08) contrast(1.02) brightness(1.03); }
+.vt-page .wz-stage[data-style="sobrio"] .wz-photo { filter: saturate(.72) contrast(1.12) brightness(.96); }
+.vt-page .wz-stage[data-presence="sutil"] .wz-photo { transform: scale(1.005); }
+.vt-page .wz-stage[data-presence="equilibrada"] .wz-photo { transform: scale(1.025); }
+.vt-page .wz-stage[data-presence="protagonista"] .wz-photo { transform: scale(1.065); }
+.vt-page .wz-stage[data-style="clasico"] .wz-photo-overlay { background: linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(145, 101, 78, .13)); }
+.vt-page .wz-stage[data-style="contemporaneo"] .wz-photo-overlay { background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(15, 26, 46, .18)); }
+.vt-page .wz-stage[data-style="mediterraneo"] .wz-photo-overlay { background: linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(200, 170, 120, .16)); }
+.vt-page .wz-stage[data-style="sobrio"] .wz-photo-overlay { background: linear-gradient(180deg, rgba(0, 0, 0, .02), rgba(0, 0, 0, .20)); }
+.vt-page .wz-progress { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
+.vt-page .wz-progress span { flex: 1; height: 2px; background: var(--rule); position: relative; overflow: hidden; }
+.vt-page .wz-progress span.done::after, .vt-page .wz-progress span.active::after { content: ""; position: absolute; inset: 0; background: var(--ink); transform-origin: left; animation: vtWzFill 500ms var(--ease) forwards; }
+@keyframes vtWzFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.vt-page .wz-panel { position: relative; }
+.vt-page .wz-step { display: none; }
+.vt-page .wz-step.active { display: block; animation: vtWzIn 520ms var(--ease-long); }
+@keyframes vtWzIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.vt-page .wz-q-no { font-family: var(--sans); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.vt-page .wz-step h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 2.6vw, 38px); line-height: 1.1; margin: 12px 0 30px; color: var(--ink); }
+.vt-page .wz-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.vt-page .wz-opt { display: flex; align-items: center; gap: 14px; min-height: 64px; padding: 0 22px; border: .5px solid var(--rule); background: #fff; text-align: left; transition: border-color 240ms var(--ease), background 240ms var(--ease), transform 240ms var(--ease); }
+.vt-page .wz-opt:hover { border-color: var(--ink); }
+.vt-page .wz-opt[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: #fff; }
+.vt-page .wz-opt .swatch { flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; border: .5px solid rgba(15, 26, 46, .25); }
+.vt-page .wz-opt[aria-pressed="true"] .swatch { border-color: rgba(255, 255, 255, .5); }
+.vt-page .wz-opt span { font-weight: 400; font-size: 14px; letter-spacing: .01em; }
+.vt-page .wz-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 34px; gap: 16px; }
+.vt-page .wz-back { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.vt-page .wz-back[disabled] { opacity: .3; cursor: not-allowed; }
+.vt-page .wz-hint { font-size: 11px; letter-spacing: .04em; color: var(--muted); }
+
+/* ===================== 5/6 · RESULTADO ===================== */
+.vt-page .result { width: var(--vt-content); margin: 0 auto; }
+.vt-page .result-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 46px; }
+.vt-page .result-tab { min-height: 48px; padding: 0 24px; border: .5px solid var(--rule); background: #fff; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; transition: all 240ms var(--ease); }
+.vt-page .result-tab .rank { font-family: var(--serif); font-size: 14px; }
+.vt-page .result-tab[aria-selected="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.vt-page .result-card { display: none; grid-template-columns: 1fr 1fr; gap: min(5vw, 72px); align-items: center; }
+.vt-page .result-card.active { display: grid; animation: vtWzIn 560ms var(--ease-long); }
+.vt-page .result-ambient { position: relative; aspect-ratio: 4/5; overflow: hidden; background: var(--vt-stone); }
+.vt-page .result-ambient img { width: 100%; height: 100%; object-fit: cover; transition: transform 1000ms var(--ease-long); }
+.vt-page .result-card:hover .result-ambient img { transform: scale(1.04); }
+.vt-page .result-ambient__tag { position: absolute; left: 22px; top: 22px; z-index: 2; background: rgba(255, 255, 255, .92); padding: 8px 14px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); }
+.vt-page .result-body .eyebrow { display: block; margin-bottom: 12px; }
+.vt-page .result-body h3 { font-family: var(--serif); font-weight: 400; font-style: italic; font-size: clamp(30px, 3vw, 46px); line-height: 1.05; margin: 0 0 18px; color: var(--ink); }
+.vt-page .result-reason { font-weight: 300; font-size: 15px; line-height: 1.7; color: var(--ink-soft); margin: 0 0 30px; max-width: 46ch; }
+.vt-page .result-products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 32px; }
+.vt-page .result-product { text-align: center; }
+.vt-page .result-product__img { aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; background: var(--vt-paper-warm); padding: 14px; margin-bottom: 12px; }
+.vt-page .result-product__img img { max-height: 100%; max-width: 100%; object-fit: contain; transition: transform 600ms var(--ease); }
+.vt-page .result-product:hover .result-product__img img { transform: translateY(-5px) scale(1.04); }
+.vt-page .result-product b { display: block; font-family: var(--serif); font-weight: 400; font-size: 14px; line-height: 1.2; color: var(--ink); margin-bottom: 3px; }
+.vt-page .result-product small { font-size: 11px; letter-spacing: .06em; color: var(--ink-soft); }
+.vt-page .result-ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+
+/* ===================== 7 · COMPRA POR CAPAS ===================== */
+.vt-page .layers-buy { width: var(--vt-content); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.vt-page .buy-card { border: .5px solid var(--rule); padding: 40px 34px 36px; display: flex; flex-direction: column; background: #fff; transition: border-color 280ms var(--ease), transform 280ms var(--ease), box-shadow 280ms var(--ease); }
+.vt-page .buy-card:hover { border-color: var(--ink); transform: translateY(-4px); box-shadow: 0 24px 50px rgba(15, 26, 46, .07); }
+.vt-page .buy-card.feature { background: var(--ink); color: #fff; border-color: var(--ink); }
+.vt-page .buy-card__tier { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
+.vt-page .buy-card.feature .buy-card__tier { color: rgba(255, 255, 255, .7); }
+.vt-page .buy-card h3 { font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.1; margin: 14px 0 6px; }
+.vt-page .buy-card__price { font-family: var(--serif); font-size: 20px; color: var(--ink); margin-bottom: 22px; }
+.vt-page .buy-card.feature .buy-card__price { color: #fff; }
+.vt-page .buy-card ul { list-style: none; margin: 0 0 30px; padding: 0; display: grid; gap: 13px; flex: 1; }
+.vt-page .buy-card li { position: relative; padding-left: 24px; font-weight: 300; font-size: 13.5px; line-height: 1.5; color: var(--ink-soft); }
+.vt-page .buy-card.feature li { color: rgba(255, 255, 255, .86); }
+.vt-page .buy-card li::before { content: ""; position: absolute; left: 0; top: 8px; width: 11px; height: .5px; background: currentColor; opacity: .6; }
+.vt-page .buy-card .ghost-btn { width: 100%; }
+.vt-page .buy-card.feature .ghost-btn { border-color: rgba(255, 255, 255, .8); color: #fff; }
+.vt-page .buy-card.feature .ghost-btn:hover { background: #fff; color: var(--ink); }
+
+/* ===================== Cart toast ===================== */
+.vt-page .vt-toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 30px); z-index: 120; background: var(--ink); color: #fff; padding: 16px 26px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: 0; pointer-events: none; transition: opacity 300ms var(--ease), transform 300ms var(--ease); }
+.vt-page .vt-toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 1024px) {
+  .vt-page { --vt-content: min(92vw, 1760px); }
+  .vt-page .lab, .vt-page .wizard-grid, .vt-page .result-card { grid-template-columns: 1fr; }
+  .vt-page .lab { gap: 48px; }
+  .vt-page .wz-preview { position: relative; top: 0; order: -1; margin-bottom: 8px; }
+  .vt-page .wz-stage { aspect-ratio: 16/10; }
+  .vt-page .guide-rail { grid-template-columns: 1fr 1fr; }
+  .vt-page .guide-step { border-left: 0; border-top: .5px solid var(--rule); }
+  .vt-page .layers-buy { grid-template-columns: 1fr; }
+}
+@media (max-width: 680px) {
+  .vt-page { --vt-content: calc(100vw - 32px); }
+  .vt-page .vt-section { padding: 78px 0; }
+  .vt-page .vt-hero__inner { padding-bottom: 14vh; }
+  .vt-page .vt-hero h1 { font-size: 42px; }
+  .vt-page .vt-hero__ctas { flex-direction: column; align-items: stretch; }
+  .vt-page .vt-hero__ctas .ghost-btn { width: 100%; }
+  .vt-page .vt-hero__scroll { display: none; }
+  .vt-page .guide-rail { grid-template-columns: 1fr; }
+  .vt-page .wz-options { grid-template-columns: 1fr; }
+  .vt-page .result-tabs { flex-direction: column; }
+  .vt-page .result-tab { width: 100%; justify-content: center; }
+  .vt-page .result-products { gap: 10px; }
+  .vt-page .wz-preview { margin-left: -16px; margin-right: -16px; border-left: 0; border-right: 0; }
+}
+
+/* Reduced motion: kill decorative animation/transitions, keep function */
+@media (prefers-reduced-motion: reduce) {
+  .vt-page .wz-step.active, .vt-page .result-card.active,
+  .vt-page .wz-progress span.done::after, .vt-page .wz-progress span.active::after { animation: none; }
+  .vt-page .wz-progress span.done::after, .vt-page .wz-progress span.active::after { transform: none; }
+  .vt-page .lab-layer, .vt-page .wz-photo, .vt-page .wz-photo-overlay,
+  .vt-page .result-ambient img, .vt-page .result-product__img img,
+  .vt-page .guide-step, .vt-page .guide-step__line, .vt-page .buy-card { transition: none; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+(function () {
+  'use strict';
+
+  function boot(container) {
+    if (!container || container.dataset.init) return;
+    container.dataset.init = '1';
+
+    var $ = function (s, c) { return (c || container).querySelector(s); };
+    var $$ = function (s, c) { return Array.prototype.slice.call((c || container).querySelectorAll(s)); };
+    var clamp = function (n, a, b) { return Math.max(a, Math.min(b, n)); };
+    var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var scrollBehavior = reducedMotion ? 'auto' : 'smooth';
+
+    /* Asset map: mockup logical paths (assets/…) → theme asset_url */
+    var ASSETS = window.__VT_ASSETS || {};
+    function resolve(u) {
+      if (!u) return u;
+      return ASSETS[u.replace(/^assets\//, '')] || u;
+    }
+
+    /* ---------- Laboratorio de capas ---------- */
+    $$('.lab-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var on = btn.getAttribute('aria-pressed') === 'true';
+        btn.setAttribute('aria-pressed', on ? 'false' : 'true');
+        var layer = $('.lab-' + btn.dataset.layer);
+        if (layer) layer.classList.toggle('on', !on);
+      });
+    });
+
+    /* ============================================================
+       WIZARD + PREVIEW (data ported verbatim from the mockup)
+       ============================================================ */
+    var COLORS = {
+      woodLight: '#D8C3A2', woodDark: '#6E513A', stone: '#E7E3DB', graphite: '#2A2E36',
+      none: 'transparent', linenWhite: '#F7F3EC', linenBeige: '#E7DCC8', blueSoft: '#C9D6E2', dark: '#242321'
+    };
+
+    var QUESTIONS = [
+      {
+        key: 'occasion', q: '¿Para qué ocasión quieres vestir la mesa?',
+        options: [
+          { id: 'desayuno', label: 'Desayuno lento' },
+          { id: 'aperitivo', label: 'Aperitivo en casa' },
+          { id: 'comidaFormal', label: 'Comida formal' },
+          { id: 'cenaEspecial', label: 'Cena especial' }
+        ]
+      },
+      {
+        key: 'space', q: '¿Dónde va a estar esa mesa?',
+        options: [
+          { id: 'luminoso', label: 'Interior luminoso' },
+          { id: 'clasico', label: 'Casa clásica' },
+          { id: 'contemporaneo', label: 'Interior contemporáneo' },
+          { id: 'jardin', label: 'Jardín o terraza' }
+        ]
+      },
+      {
+        key: 'base', q: '¿Cómo es la base de tu mesa?',
+        options: [
+          { id: 'woodLight', label: 'Madera clara', swatch: COLORS.woodLight },
+          { id: 'woodDark', label: 'Madera oscura', swatch: COLORS.woodDark },
+          { id: 'stone', label: 'Blanca o piedra', swatch: COLORS.stone },
+          { id: 'graphite', label: 'Negra / grafito', swatch: COLORS.graphite }
+        ]
+      },
+      {
+        key: 'textil', q: '¿Qué textil imaginas?',
+        options: [
+          { id: 'none', label: 'Sin mantel', swatch: '#EDEAE4' },
+          { id: 'linenWhite', label: 'Lino blanco', swatch: COLORS.linenWhite },
+          { id: 'linenBeige', label: 'Lino beige', swatch: COLORS.linenBeige },
+          { id: 'blueSoft', label: 'Azul suave', swatch: COLORS.blueSoft },
+          { id: 'dark', label: 'Oscuro', swatch: COLORS.dark }
+        ]
+      },
+      {
+        key: 'style', q: '¿Qué estilo quieres transmitir?',
+        options: [
+          { id: 'clasico', label: 'Clásico' },
+          { id: 'contemporaneo', label: 'Contemporáneo' },
+          { id: 'mediterraneo', label: 'Mediterráneo' },
+          { id: 'sobrio', label: 'Sobrio y elegante' }
+        ]
+      },
+      {
+        key: 'presence', q: '¿Cuánta presencia debe tener la vajilla?',
+        options: [
+          { id: 'sutil', label: 'Sutil' },
+          { id: 'equilibrada', label: 'Equilibrada' },
+          { id: 'protagonista', label: 'Muy protagonista' }
+        ]
+      }
+    ];
+
+    var FORM_IMAGES = {
+      desayuno: {
+        luminoso: 'assets/viste-tu-mesa/desayuno_luminoso.webp',
+        clasico: 'assets/viste-tu-mesa/desayuno_clasico.webp',
+        contemporaneo: 'assets/viste-tu-mesa/desayuno_contemporaneo.webp',
+        jardin: {
+          woodLight: {
+            none: 'assets/viste-tu-mesa/desayuno_jardin_woodLight_none.webp',
+            linenWhite: 'assets/viste-tu-mesa/desayuno_jardin_woodLight_linenWhite.webp',
+            linenBeige: 'assets/viste-tu-mesa/desayuno_jardin_woodLight_linenBeige.webp',
+            blueSoft: 'assets/viste-tu-mesa/desayuno_jardin_woodLight_blueSoft.webp',
+            dark: 'assets/viste-tu-mesa/desayuno_jardin_woodLight_dark.webp',
+            default: 'assets/viste-tu-mesa/desayuno_jardin_woodLight.webp'
+          },
+          woodDark: {
+            none: 'assets/viste-tu-mesa/desayuno_jardin_woodDark_none.webp',
+            linenWhite: 'assets/viste-tu-mesa/desayuno_jardin_woodDark_linenWhite.webp',
+            linenBeige: 'assets/viste-tu-mesa/desayuno_jardin_woodDark_linenBeige.webp',
+            blueSoft: 'assets/viste-tu-mesa/desayuno_jardin_woodDark_blueSoft.webp',
+            dark: 'assets/viste-tu-mesa/desayuno_jardin_woodDark_dark.webp',
+            default: 'assets/viste-tu-mesa/desayuno_jardin_woodDark.webp'
+          },
+          stone: {
+            none: 'assets/viste-tu-mesa/desayuno_jardin_stone_none.webp',
+            linenWhite: 'assets/viste-tu-mesa/desayuno_jardin_stone_linenWhite.webp',
+            linenBeige: 'assets/viste-tu-mesa/desayuno_jardin_stone_linenBeige.webp',
+            blueSoft: 'assets/viste-tu-mesa/desayuno_jardin_stone_blueSoft.webp',
+            dark: 'assets/viste-tu-mesa/desayuno_jardin_stone_dark.webp',
+            default: 'assets/viste-tu-mesa/desayuno_jardin_stone.webp'
+          },
+          graphite: {
+            none: 'assets/viste-tu-mesa/desayuno_jardin_graphite_none.webp',
+            linenWhite: 'assets/viste-tu-mesa/desayuno_jardin_graphite_linenWhite.webp',
+            linenBeige: 'assets/viste-tu-mesa/desayuno_jardin_graphite_linenBeige.webp',
+            blueSoft: 'assets/viste-tu-mesa/desayuno_jardin_graphite_blueSoft.webp',
+            dark: 'assets/viste-tu-mesa/desayuno_jardin_graphite_dark.webp',
+            default: 'assets/viste-tu-mesa/desayuno_jardin_graphite.webp'
+          },
+          default: 'assets/viste-tu-mesa/desayuno_jardin_woodLight.webp'
+        },
+        default: 'assets/viste-tu-mesa/desayuno_luminoso.webp'
+      },
+      default: 'assets/viste-tu-mesa/desayuno_luminoso.webp'
+    };
+
+    /* collectionUrl / featuredUrl mapped from mockup .html pages onto theme routes */
+    var COLLECTIONS = {
+      'aurora-blanca': {
+        name: 'Aurora Blanca', tag: 'Serena · Luminosa', eyebrow: 'Colección icónica', ambient: 'assets/mesa_aurora_editorial.webp', plate: 'assets/catalog/aurora-blanca/plato-llano.webp',
+        reason: 'La forma esencial de La Cartuja, en su versión más pura. Perfecta para desayunos lentos y mesas serenas donde la vajilla acompaña sin alzar la voz.',
+        products: [
+          { n: 'Plato llano Aurora', p: '38 €', img: 'assets/catalog/aurora-blanca/plato-llano.webp' },
+          { n: 'Fuente Aurora', p: '96 €', img: 'assets/catalog/aurora-blanca/fuente-redonda.webp' },
+          { n: 'Cafetera Aurora', p: '128 €', img: 'assets/catalog/aurora-blanca/cafetera.webp' }
+        ], collectionUrl: '/collections/aurora-blanca', featuredUrl: '/collections/aurora-blanca'
+      },
+      'rosa-202': {
+        name: '202 Rosa', tag: 'Clásica · Memoria', eyebrow: 'Emblema de la casa', ambient: 'assets/mesa_bodegon_lujo_el_renacer.webp', plate: 'assets/catalog/202-rosa/plato-llano.webp',
+        reason: 'El decorado floral más querido de La Cartuja, ligado a la memoria de tantas mesas. Convierte cualquier celebración en un recuerdo que permanece.',
+        products: [
+          { n: 'Plato llano 202 Rosa', p: '42 €', img: 'assets/catalog/202-rosa/plato-llano.webp' },
+          { n: 'Sopera 202 Rosa', p: '185 €', img: 'assets/catalog/202-rosa/sopera.webp' },
+          { n: 'Cafetera 202 Rosa', p: '128 €', img: 'assets/catalog/202-rosa/cafetera.webp' }
+        ], collectionUrl: '/collections/202-rosa', featuredUrl: '/products/plato-llano-202-rosa'
+      },
+      'bellavista': {
+        name: 'Bellavista', tag: 'Botánica · Equilibrada', eyebrow: 'Naturaleza dibujada', ambient: 'assets/ochavada_canasto_floral.jpg', plate: 'assets/catalog/bellavista/plato-llano.webp',
+        reason: 'Un jardín botánico llevado a la loza. Pide aire, luz natural y mesas largas; equilibra presencia y serenidad.',
+        products: [
+          { n: 'Plato Bellavista', p: '40 €', img: 'assets/catalog/bellavista/plato-llano.webp' },
+          { n: 'Fuente Bellavista', p: '96 €', img: 'assets/catalog/bellavista/fuente-redonda.webp' },
+          { n: 'Sopera Bellavista', p: '175 €', img: 'assets/catalog/bellavista/sopera.webp' }
+        ], collectionUrl: '/collections/bellavista', featuredUrl: '/collections/bellavista'
+      },
+      'ochavada-blanca': {
+        name: 'Ochavada Blanca', tag: 'Geométrica · Sobria', eyebrow: 'Modernidad de 1841', ambient: 'assets/scene-left-tableware.webp', plate: 'assets/catalog/ochavada-blanca/plato-llano.webp',
+        reason: 'La silueta octogonal que nació moderna. Líneas limpias para mesas contemporáneas y bases despejadas.',
+        products: [
+          { n: 'Plato Ochavada', p: '44 €', img: 'assets/catalog/ochavada-blanca/plato-llano.webp' },
+          { n: 'Fuente Ochavada', p: '110 €', img: 'assets/catalog/ochavada-blanca/fuente-redonda.webp' },
+          { n: 'Sopera Ochavada', p: '178 €', img: 'assets/catalog/ochavada-blanca/sopera.webp' }
+        ], collectionUrl: '/collections/ochavada-blanca', featuredUrl: '/collections/ochavada'
+      },
+      'negro-vistas': {
+        name: 'Negro Vistas', tag: 'Contraste · Carácter', eyebrow: 'Drama gráfico', ambient: 'assets/mesa_ochavada_negro_vistas.webp', plate: 'assets/catalog/negro-vistas/plato-llano.webp',
+        reason: 'Contraste llevado al extremo: dibujo en negro sobre fondo claro, con un punto teatral. Brilla en cenas especiales y mesas oscuras.',
+        products: [
+          { n: 'Plato Negro Vistas', p: '46 €', img: 'assets/catalog/negro-vistas/plato-llano.webp' },
+          { n: 'Fuente Negro Vistas', p: '120 €', img: 'assets/catalog/negro-vistas/fuente-redonda.webp' },
+          { n: 'Sopera Negro Vistas', p: '190 €', img: 'assets/catalog/negro-vistas/sopera.webp' }
+        ], collectionUrl: '/collections/negro-vistas', featuredUrl: '/collections/negro-vistas'
+      },
+      'oaxaca': {
+        name: 'Oaxaca x Gastón y Daniela', tag: 'Colorista · Mediterránea', eyebrow: 'Edición de autor', ambient: 'assets/mesa_aurora_oaxaca.webp', plate: 'assets/catalog/oaxaca/prod_p5_0.webp',
+        reason: 'Color y luz mediterránea en una colaboración de autor. Pensada para mesas exteriores donde la vajilla es la fiesta.',
+        products: [
+          { n: 'Plato Oaxaca', p: '48 €', img: 'assets/catalog/oaxaca/prod_p5_0.webp' },
+          { n: 'Plato Oaxaca azul', p: '48 €', img: 'assets/catalog/oaxaca/prod_p5_1.webp' },
+          { n: 'Plato Oaxaca amarillo', p: '48 €', img: 'assets/catalog/oaxaca/prod_p5_2.webp' }
+        ], collectionUrl: '/collections/oaxaca', featuredUrl: '/collections/oaxaca'
+      },
+      'gifts-decor': {
+        name: 'Gifts & Decor', tag: 'Objeto · Anfitrión', eyebrow: 'Completar la mesa', ambient: 'assets/gifts_decor_arch.webp', plate: 'assets/catalog/gifts-decor/bandeja-vistas-cibeles-azul.webp',
+        reason: 'Las piezas que hacen que una mesa funcione de verdad: bandejas, objetos de servicio y detalles decorativos.',
+        products: [
+          { n: 'Bandeja decorativa', p: '110 €', img: 'assets/catalog/gifts-decor/bandeja-vistas-cibeles-azul.webp' },
+          { n: 'Cabeza frenológica', p: '220 €', img: 'assets/catalog/gifts-decor/cabeza-frenologica.webp' },
+          { n: 'Florero Alhambra', p: '160 €', img: 'assets/catalog/gifts-decor/florero-alhambra-azul-grande.webp' }
+        ], collectionUrl: '/collections/gifts-decor', featuredUrl: '/collections/gifts-decor'
+      }
+    };
+
+    var SCORE = {
+      occasion: {
+        desayuno:      { 'aurora-blanca': 4, 'rosa-202': 2, 'bellavista': 1 },
+        aperitivo:     { 'gifts-decor': 4, 'ochavada-blanca': 2, 'oaxaca': 1 },
+        comidaFormal:  { 'rosa-202': 3, 'bellavista': 3, 'aurora-blanca': 2 },
+        cenaEspecial:  { 'negro-vistas': 4, 'ochavada-blanca': 2, 'rosa-202': 2 }
+      },
+      space: {
+        luminoso:      { 'aurora-blanca': 3, 'rosa-202': 3, 'bellavista': 1 },
+        clasico:       { 'rosa-202': 4, 'bellavista': 2, 'gifts-decor': 1 },
+        contemporaneo: { 'ochavada-blanca': 4, 'negro-vistas': 3, 'aurora-blanca': 1 },
+        jardin:        { 'oaxaca': 4, 'bellavista': 4, 'aurora-blanca': 1 }
+      },
+      base: {
+        woodLight: { 'aurora-blanca': 2, 'bellavista': 2, 'rosa-202': 1 },
+        woodDark:  { 'negro-vistas': 3, 'ochavada-blanca': 1, 'oaxaca': 1 },
+        stone:     { 'ochavada-blanca': 3, 'aurora-blanca': 3 },
+        graphite:  { 'negro-vistas': 4, 'ochavada-blanca': 2 }
+      },
+      textil: {
+        none:       { 'ochavada-blanca': 3, 'negro-vistas': 2, 'aurora-blanca': 1 },
+        linenWhite: { 'aurora-blanca': 3, 'ochavada-blanca': 2, 'rosa-202': 1 },
+        linenBeige: { 'bellavista': 3, 'oaxaca': 2, 'aurora-blanca': 1 },
+        blueSoft:   { 'bellavista': 3, 'aurora-blanca': 2 },
+        dark:       { 'negro-vistas': 3, 'ochavada-blanca': 2 }
+      },
+      style: {
+        clasico:       { 'rosa-202': 4, 'bellavista': 2 },
+        contemporaneo: { 'ochavada-blanca': 4, 'negro-vistas': 3 },
+        mediterraneo:  { 'oaxaca': 4, 'bellavista': 3 },
+        sobrio:        { 'ochavada-blanca': 3, 'aurora-blanca': 3, 'negro-vistas': 1 }
+      },
+      presence: {
+        sutil:        { 'aurora-blanca': 3, 'ochavada-blanca': 2 },
+        equilibrada:  { 'bellavista': 2, 'rosa-202': 2, 'aurora-blanca': 1 },
+        protagonista: { 'negro-vistas': 3, 'oaxaca': 3, 'rosa-202': 2 }
+      }
+    };
+
+    var answers = {};
+    var stepIndex = 0;
+    var totalSteps = QUESTIONS.length;
+    var panel = $('#wzPanel');
+    var progress = $('#wzProgress');
+    if (panel && progress) {
+      QUESTIONS.forEach(function (Q, i) {
+        var step = document.createElement('div');
+        step.className = 'wz-step' + (i === 0 ? ' active' : '');
+        step.dataset.step = i;
+        var opts = Q.options.map(function (o) {
+          var sw = o.swatch ? '<span class="swatch" style="background:' + o.swatch + '"></span>' : '';
+          return '<button class="wz-opt" type="button" role="radio" aria-checked="false" aria-pressed="false" data-key="' + Q.key + '" data-id="' + o.id + '">' + sw + '<span>' + o.label + '</span></button>';
+        }).join('');
+        step.innerHTML = '<span class="wz-q-no">Paso ' + (i + 1) + ' de ' + totalSteps + '</span><h3>' + Q.q + '</h3><div class="wz-options" role="radiogroup" aria-label="' + Q.q + '">' + opts + '</div><div class="wz-actions"><button class="wz-back" type="button" data-back ' + (i === 0 ? 'disabled' : '') + '>← Atrás</button><span class="wz-hint">Elige una opción para continuar</span></div>';
+        panel.appendChild(step);
+        var bar = document.createElement('span');
+        if (i === 0) bar.className = 'active';
+        progress.appendChild(bar);
+      });
+    }
+
+    var steps = $$('.wz-step');
+    var bars = $$('#wzProgress span');
+    function showStep(i) {
+      stepIndex = clamp(i, 0, totalSteps - 1);
+      steps.forEach(function (s, idx) { s.classList.toggle('active', idx === stepIndex); });
+      bars.forEach(function (b, idx) { b.className = idx < stepIndex ? 'done' : (idx === stepIndex ? 'active' : ''); });
+      if (stepIndex > 0 && window.innerWidth <= 1024) {
+        var top = $('#wizard').getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({ top: top, behavior: scrollBehavior });
+      }
+    }
+
+    var stage = $('#wzStage');
+    var elPhoto = $('#wzPhoto');
+    var elCaption = $('#wzCaption');
+    var currentPhoto = elPhoto ? elPhoto.getAttribute('src') : '';
+
+    function labelFor(key, id) {
+      var Q = QUESTIONS.filter(function (q) { return q.key === key; })[0];
+      var o = Q && Q.options.filter(function (x) { return x.id === id; })[0];
+      return o ? o.label : id;
+    }
+
+    function getPhoto() {
+      var occasion = answers.occasion || 'desayuno';
+      var space = answers.space || 'luminoso';
+      var root = FORM_IMAGES[occasion] || FORM_IMAGES.desayuno;
+
+      // Línea completamente desarrollada: Desayuno lento + Jardín/terraza + base + textil.
+      if (occasion === 'desayuno' && space === 'jardin') {
+        var base = answers.base || 'woodLight';
+        var textil = answers.textil || 'default';
+        var branch = root.jardin[base] || root.jardin.woodLight;
+        return branch[textil] || branch.default || root.jardin.default || root.default;
+      }
+
+      // Resto de espacios de Desayuno: imagen editorial ya preparada.
+      if (occasion === 'desayuno' && typeof root[space] === 'string') return root[space];
+
+      // Resto de ocasiones: vista orientativa, manteniendo la transición y los efectos finales.
+      if (typeof FORM_IMAGES.desayuno[space] === 'string') return FORM_IMAGES.desayuno[space];
+      return FORM_IMAGES.default;
+    }
+
+    function setPhoto(src) {
+      src = resolve(src);
+      if (!elPhoto || !src || src === currentPhoto) return;
+      currentPhoto = src;
+      elPhoto.classList.add('is-changing');
+      var next = new Image();
+      next.onload = function () {
+        elPhoto.src = src;
+        requestAnimationFrame(function () { elPhoto.classList.remove('is-changing'); });
+      };
+      next.onerror = function () { elPhoto.classList.remove('is-changing'); };
+      next.src = src;
+    }
+
+    function updatePreview() {
+      if (!stage) return;
+      stage.dataset.style = answers.style || '';
+      stage.dataset.presence = answers.presence || '';
+      setPhoto(getPhoto());
+
+      var labels = [];
+      ['occasion', 'space', 'base', 'textil', 'style', 'presence'].forEach(function (key) {
+        if (answers[key]) labels.push(labelFor(key, answers[key]));
+      });
+      if (elCaption) {
+        elCaption.innerHTML = labels.length ? '<b>Tu mesa</b> · ' + labels.join(' · ') : '<b>Tu mesa</b> · responde para verla tomar forma';
+      }
+    }
+
+    if (panel) {
+      panel.addEventListener('click', function (e) {
+        var opt = e.target.closest('.wz-opt');
+        var back = e.target.closest('[data-back]');
+        if (back) { showStep(stepIndex - 1); return; }
+        if (!opt) return;
+        var key = opt.dataset.key, id = opt.dataset.id;
+        answers[key] = id;
+        $$('.wz-opt', opt.parentElement).forEach(function (b) {
+          var sel = b === opt;
+          b.setAttribute('aria-pressed', sel ? 'true' : 'false');
+          b.setAttribute('aria-checked', sel ? 'true' : 'false');
+        });
+        updatePreview();
+        if (stepIndex < totalSteps - 1) setTimeout(function () { showStep(stepIndex + 1); }, 260);
+        else setTimeout(buildResult, 320);
+      });
+    }
+
+    function recommend() {
+      var totals = {};
+      Object.keys(COLLECTIONS).forEach(function (k) { totals[k] = 0; });
+      Object.keys(answers).forEach(function (key) {
+        var map = SCORE[key] && SCORE[key][answers[key]];
+        if (!map) return;
+        Object.keys(map).forEach(function (col) { totals[col] += map[col]; });
+      });
+      var order = Object.keys(COLLECTIONS);
+      return order.slice().sort(function (a, b) {
+        if (totals[b] !== totals[a]) return totals[b] - totals[a];
+        return order.indexOf(a) - order.indexOf(b);
+      }).slice(0, 3);
+    }
+
+    var resultSection = $('#result');
+    var tabsWrap = $('#resultTabs');
+    var cardsWrap = $('#resultCards');
+    function buildResult() {
+      if (!resultSection || !tabsWrap || !cardsWrap) return;
+      var top3 = recommend();
+      tabsWrap.innerHTML = top3.map(function (id, i) {
+        var c = COLLECTIONS[id];
+        return '<button class="result-tab" role="tab" data-target="' + id + '" aria-selected="' + (i === 0) + '"><span class="rank">0' + (i + 1) + '</span>' + c.name + '</button>';
+      }).join('');
+      cardsWrap.innerHTML = top3.map(function (id, i) {
+        var c = COLLECTIONS[id];
+        var prods = c.products.map(function (p) {
+          return '<div class="result-product"><div class="result-product__img"><img src="' + resolve(p.img) + '" alt="' + p.n + '" loading="lazy"></div><b>' + p.n + '</b><small>' + p.p + '</small></div>';
+        }).join('');
+        return '<article class="result-card' + (i === 0 ? ' active' : '') + '" data-card="' + id + '"><div class="result-ambient"><span class="result-ambient__tag">' + c.tag + '</span><img src="' + resolve(c.ambient) + '" alt="Mesa vestida con ' + c.name + '" loading="lazy"></div><div class="result-body"><span class="eyebrow">' + c.eyebrow + '</span><h3>' + c.name + '</h3><p class="result-reason">' + c.reason + '</p><div class="result-products">' + prods + '</div><div class="result-ctas"><a class="ghost-btn solid" href="' + c.collectionUrl + '">Ver colección</a><a class="ghost-btn" href="' + c.featuredUrl + '">Ver pieza destacada</a><button class="ghost-btn" type="button" data-add="' + c.name + '">Añadir a la cesta</button></div></div></article>';
+      }).join('');
+      resultSection.hidden = false;
+      resultSection.classList.add('is-visible');
+      resultSection.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+    }
+
+    if (resultSection) {
+      resultSection.addEventListener('click', function (e) {
+        var tab = e.target.closest('.result-tab');
+        if (!tab) return;
+        var id = tab.dataset.target;
+        $$('.result-tab', tabsWrap).forEach(function (t) { t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+        $$('.result-card', cardsWrap).forEach(function (card) { card.classList.toggle('active', card.dataset.card === id); });
+      });
+    }
+
+    /* ---------- Add to cart ---------- */
+    var toast = $('#vtToast');
+    function showToast(name, msg) {
+      if (!toast) return;
+      toast.textContent = name + (msg || ' · añadido a la cesta');
+      toast.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(function () { toast.classList.remove('show'); }, 2200);
+    }
+    function openCartDrawer() {
+      var toggle = document.querySelector('[data-cart-toggle]');
+      if (toggle) { toggle.click(); }              // reuses cart-drawer open+refresh
+    }
+    container.addEventListener('click', function (e) {
+      var add = e.target.closest('[data-add]');
+      if (!add) return;
+      e.preventDefault();
+      // Build the /cart/add.js body: a multi-item pack (data-items) or a single variant.
+      var body = null;
+      var itemsAttr = add.getAttribute('data-items');
+      if (itemsAttr) {
+        try {
+          var items = JSON.parse(itemsAttr);
+          if (items && items.length) { body = { items: items }; }
+        } catch (err) { body = null; }
+      }
+      if (!body) {
+        var vid = add.getAttribute('data-variant-id');
+        if (vid) { body = { id: vid, quantity: 1 }; }
+      }
+      if (!body) { showToast(add.dataset.add); return; }   // demo card w/o real product → toast only
+      if (add.dataset.busy) return;
+      add.dataset.busy = '1';
+      add.setAttribute('disabled', 'disabled');
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(body)
+      }).then(function (r) {
+        if (!r.ok) { throw new Error('add failed'); }
+        return r.json();
+      }).then(function () {
+        showToast(add.dataset.add);
+        openCartDrawer();
+      }).catch(function () {
+        showToast(add.dataset.add, ' · no se pudo añadir');
+      }).then(function () {
+        delete add.dataset.busy;
+        add.removeAttribute('disabled');
+      });
+    });
+
+    /* ---------- Smooth-scroll CTAs ---------- */
+    $$('[data-scroll-to]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var target = $(a.dataset.scrollTo);
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: scrollBehavior, block: 'start' }); }
+      });
+    });
+
+    updatePreview();
+  }
+
+  function initAll() {
+    document.querySelectorAll('.vt-page').forEach(boot);
+  }
+  initAll();
+  document.addEventListener('shopify:section:load', initAll);
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Viste tu mesa",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Imagen del hero"
+    },
+    {
+      "type": "image_picker",
+      "id": "lab_plate_image",
+      "label": "Plato protagonista del laboratorio"
+    },
+    {
+      "type": "header",
+      "content": "Demo (cuando no hay imagen seleccionada)"
+    },
+    {
+      "type": "text",
+      "id": "hero_demo_image",
+      "label": "Asset demo del hero",
+      "default": "mesa_bodegon_lujo_el_renacer.webp"
+    },
+    {
+      "type": "text",
+      "id": "lab_plate_demo_image",
+      "label": "Asset demo del plato",
+      "default": "aurora_202_plato.webp"
+    },
+    {
+      "type": "header",
+      "content": "Packs · Comprar por capas"
+    },
+    {
+      "type": "paragraph",
+      "content": "Una línea por pieza: handle-del-producto | cantidad. El precio de la tarjeta se calcula solo. Total de handles únicos entre los 3 packs < 20."
+    },
+    {
+      "type": "textarea",
+      "id": "pack_base_items",
+      "label": "Capa 01 · Set base"
+    },
+    {
+      "type": "textarea",
+      "id": "pack_full_items",
+      "label": "Capa 02 · Mesa completa"
+    },
+    {
+      "type": "textarea",
+      "id": "pack_host_items",
+      "label": "Capa 03 · Anfitrión"
+    }
+  ],
+  "presets": [{ "name": "Viste tu mesa" }],
+  "enabled_on": { "templates": ["page", "index"] }
+}
+{% endschema %}

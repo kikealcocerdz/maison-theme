@@ -17,7 +17,7 @@
           {% render 'image-responsive', image: section.settings.image, alt: section.settings.image.alt, sizes: '(max-width: 1000px) 100vw, 55vw' %}
         {%- else -%}
           {%- comment -%} Demo fallback (shipped in /assets) until a scene image is set. {%- endcomment -%}
-          <img src="{{ 'scene-left-tableware.webp' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="2400" height="1792" loading="lazy" decoding="async">
+          <img src="{{ 'mesa_ochavada_negro_vistas.webp' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1800" height="1343" loading="lazy" decoding="async">
         {%- endif -%}
         {%- for block in products -%}
           {%- liquid
@@ -40,12 +40,32 @@
     </div>
 
     {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
-      <div class="center reveal"><a href="{{ section.settings.cta_link }}" class="ghost-btn">{{ section.settings.cta_label | escape }}</a></div>
+      <div class="center reveal scene-cta-row">
+        <a href="{{ section.settings.cta_link }}" class="ghost-btn">{{ section.settings.cta_label | escape }}</a>
+        {%- if section.settings.cta2_label != blank and section.settings.cta2_link != blank -%}
+          <a href="{{ section.settings.cta2_link }}" class="ghost-btn">{{ section.settings.cta2_label | escape }}</a>
+        {%- endif -%}
+      </div>
     {%- endif -%}
 
     {%- comment -%} Product data consumed by JS to render the right-side panel. {%- endcomment -%}
+    {%- liquid
+      assign set1 = all_products[section.settings.set1_product]
+      assign set2 = all_products[section.settings.set2_product]
+    -%}
     <script type="application/json" data-scene-data>
-      [
+      {
+        "cartUrl": {{ routes.cart_add_url | json }},
+        "addLabel": {{ section.settings.add_label | default: '' | json }},
+        "sets": [
+          {%- if section.settings.set1_label != blank -%}
+            { "label": {{ section.settings.set1_label | json }}, "variant": {{ set1.selected_or_first_available_variant.id | json }} }{%- if section.settings.set2_label != blank -%},{%- endif -%}
+          {%- endif -%}
+          {%- if section.settings.set2_label != blank -%}
+            { "label": {{ section.settings.set2_label | json }}, "variant": {{ set2.selected_or_first_available_variant.id | json }} }
+          {%- endif -%}
+        ],
+        "items": [
         {%- for block in products -%}
           {%- liquid
             assign p = all_products[block.settings.product]
@@ -54,6 +74,7 @@
             assign p_price = block.settings.demo_price
             assign p_url = block.settings.link
             assign p_img = ''
+            assign p_variant = nil
             if block.settings.demo_image != blank
               assign p_img = block.settings.demo_image | asset_url
             endif
@@ -61,6 +82,7 @@
               assign p_name = p.title
               assign p_url = p.url
               assign p_price = p.price | money
+              assign p_variant = p.selected_or_first_available_variant.id
               if p.featured_image != blank
                 assign p_img = p.featured_image | image_url: width: 840
               endif
@@ -71,10 +93,12 @@
             "meta": {{ p_meta | default: '' | json }},
             "price": {{ p_price | default: '' | json }},
             "img": {{ p_img | default: '' | json }},
-            "url": {{ p_url | default: '#' | json }}
+            "url": {{ p_url | default: '#' | json }},
+            "variant": {{ p_variant | json }}
           }{%- unless forloop.last -%},{%- endunless -%}
         {%- endfor -%}
-      ]
+        ]
+      }
     </script>
   </div>
 </section>
@@ -84,7 +108,7 @@
 .scene-redesign .scene-layout { width: var(--content); margin: 0 auto; display: block; }
 .scene-redesign .scene-copy { text-align: center; margin: 0 auto 46px; max-width: 740px; }
 .scene-redesign .scene-copy h2 {
-  font-family: var(--serif); font-size: clamp(28px, 2.6vw, 40px); line-height: 1.12;
+  font-family: var(--serif); font-size: var(--fs-h2); line-height: 1.12;
   font-weight: 400; margin: 0 0 16px;
 }
 .scene-redesign .scene-copy p {
@@ -145,10 +169,13 @@
 .scene-dots span.active { background: var(--ink); width: 36px; }
 
 .scene-redesign .center { text-align: center; margin-top: 72px; }
+.scene-cta-row { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; }
+.scene-cta-row .ghost-btn { min-width: 220px; }
 
 .scene-image-open { display: block; width: 100%; background: transparent; border: 0; padding: 0; margin: 0 auto 34px; cursor: zoom-in; }
 .scene-image-open img { height: min(48vh, 420px) !important; margin: 0 auto !important; }
-.scene-actions { display: grid; gap: 10px; margin: 26px auto 0; width: min(100%, 300px); }
+.scene-actions { display: grid; gap: 10px; margin: 26px auto 0; width: min(100%, 360px); }
+.scene-actions form { display: contents; }
 .ghost-btn.small-cart { height: 42px; padding: 0 18px; font-size: 10px; letter-spacing: 0.18em; width: 100%; }
 .ghost-btn.small-cart.alt { background: transparent; color: var(--ink); }
 
@@ -166,14 +193,14 @@
   .scene-product-inner img { height: 320px; }
 }
 @media (max-width: 680px) {
-  .table-scene.scene-redesign { padding: 74px 0 130px; }
   .scene-left-image, .scene-product-view { min-height: 420px; }
   .scene-product-inner { padding: 38px 48px; }
   .scene-product-inner img { height: 260px; }
   .scene-nav.prev { left: 6px; }
   .scene-nav.next { right: 6px; }
-  .scene-redesign .center { margin-top: 58px; }
   .scene-actions { width: 100%; }
+  .scene-cta-row { display: grid; gap: 12px; }
+  .scene-cta-row .ghost-btn { min-width: 0; width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   .scene-left-image img, .scene-hotspot, .scene-product-inner img { transition: none; }
@@ -182,9 +209,6 @@
 
 {% javascript %}
 (function () {
-  const ADD = 'Añadir al carrito';
-  const BUY_TABLE = 'Comprar mesa completa';
-
   document.querySelectorAll('.scene-redesign:not([data-init])').forEach(initScene);
 
   function initScene(root) {
@@ -195,11 +219,24 @@
     const hotspots = [...root.querySelectorAll('[data-scene-hotspot]')];
     if (!dataEl || !panel || !dots) return;
 
-    let items = [];
-    try { items = JSON.parse(dataEl.textContent.trim()); } catch (e) { items = []; }
+    let data = {};
+    try { data = JSON.parse(dataEl.textContent.trim()); } catch (e) { data = {}; }
+    const items = data.items || [];
+    const sets = data.sets || [];
+    const cartUrl = data.cartUrl || '/cart/add';
     if (!items.length) return;
 
     let current = 0;
+
+    // Real variant -> /cart/add form (intercepted globally by the cart drawer); demo -> inert button.
+    function actionBtn(label, variant, alt) {
+      if (!label) return '';
+      const cls = 'ghost-btn small-cart' + (alt ? ' alt' : '');
+      if (variant) {
+        return `<form method="post" action="${cartUrl}"><input type="hidden" name="id" value="${variant}"><button class="${cls}" type="submit">${label}</button></form>`;
+      }
+      return `<button class="${cls}" type="button">${label}</button>`;
+    }
 
     function render() {
       const p = items[current];
@@ -211,10 +248,10 @@
         (p.meta ? `<p>${p.meta}</p>` : '') +
         `<h3>${p.name || ''}</h3>` +
         (p.price ? `<span class="scene-price">${p.price}</span>` : '') +
-        `<div class="scene-actions">
-           <button class="ghost-btn small-cart" type="button">${ADD}</button>
-           <button class="ghost-btn small-cart alt" type="button">${BUY_TABLE}</button>
-         </div>`;
+        `<div class="scene-actions">` +
+        actionBtn(data.addLabel, p.variant, false) +
+        sets.map(s => actionBtn(s.label, s.variant, true)).join('') +
+        `</div>`;
       dots.innerHTML = items.map((_, i) => `<span class="${i === current ? 'active' : ''}"></span>`).join('');
       hotspots.forEach((h, i) => h.classList.toggle('active', i === current));
     }
@@ -230,6 +267,29 @@
       if (!span) return;
       set([...dots.children].indexOf(span));
     });
+
+    // Swipe on the product panel: drag left = next, right = prev.
+    let sx = 0, sdragging = false, smoved = false;
+    panel.addEventListener('pointerdown', e => {
+      if (e.button != null && e.button !== 0) return;
+      sdragging = true; smoved = false; sx = e.clientX;
+      panel.setPointerCapture?.(e.pointerId);
+    });
+    panel.addEventListener('pointermove', e => {
+      if (sdragging && Math.abs(e.clientX - sx) > 5) smoved = true;
+    });
+    function swipeEnd(e) {
+      if (!sdragging) return;
+      sdragging = false;
+      panel.releasePointerCapture?.(e.pointerId);
+      const dx = e.clientX - sx;
+      if (Math.abs(dx) > 40) set(current + (dx < 0 ? 1 : -1));
+    }
+    panel.addEventListener('pointerup', swipeEnd);
+    panel.addEventListener('pointercancel', swipeEnd);
+    panel.addEventListener('click', e => {
+      if (smoved) { e.preventDefault(); e.stopPropagation(); smoved = false; }
+    }, true);
 
     render();
   }
@@ -267,7 +327,15 @@
     { "type": "richtext", "id": "description", "label": "Description" },
     { "type": "image_picker", "id": "image", "label": "Scene image (left side)" },
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Descubre nuestras mesas" },
-    { "type": "url", "id": "cta_link", "label": "CTA link" }
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "text", "id": "cta2_label", "label": "Second CTA label", "default": "Aprende a vestir tu mesa" },
+    { "type": "url", "id": "cta2_link", "label": "Second CTA link" },
+    { "type": "header", "content": "Product panel actions" },
+    { "type": "text", "id": "add_label", "label": "Add-to-cart label (shown piece)", "default": "Añadir pieza" },
+    { "type": "product", "id": "set1_product", "label": "Set 1 product (e.g. full vajilla)" },
+    { "type": "text", "id": "set1_label", "label": "Set 1 button label", "default": "Añadir vajilla · 42 platos" },
+    { "type": "product", "id": "set2_product", "label": "Set 2 product" },
+    { "type": "text", "id": "set2_label", "label": "Set 2 button label", "default": "Añadir vajilla · 56 platos" }
   ],
   "presets": [
     {

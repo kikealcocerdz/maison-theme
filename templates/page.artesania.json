@@ -105,7 +105,7 @@
           "settings": {
             "name": "Ochavada",
             "tag": "Capítulo 02",
-            "demo_image": "ochavada_canasto_floral.jpg",
+            "demo_image": "negro_vistas_bandeja.webp",
             "link": ""
           }
         },
@@ -114,7 +114,7 @@
           "settings": {
             "name": "Gifts & Decor",
             "tag": "Capítulo 03",
-            "demo_image": "collection-bellavista.webp",
+            "demo_image": "gifts_decor_arch.webp",
             "link": ""
           }
         },
@@ -123,7 +123,7 @@
           "settings": {
             "name": "Emblemas",
             "tag": "Selección",
-            "demo_image": "collection-peces.webp",
+            "demo_image": "emblemas-cover.webp",
             "link": ""
           }
         }

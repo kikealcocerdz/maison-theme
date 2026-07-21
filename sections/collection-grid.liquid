@@ -17,6 +17,23 @@
   assign per_page = section.settings.products_per_page | default: 24
   assign initial_count = section.settings.demo_initial_count | default: 12
 
+  # Editorial insert: per-collection via metafields, falling back to section settings.
+  # Chapter collections carry custom.editorial_image / custom.editorial_text; sub-collection
+  # and product-type pages have neither, so the mid-grid insert is suppressed for them.
+  assign ed_asset = collection.metafields.custom.editorial_image.value
+  if ed_asset == blank
+    assign ed_asset = section.settings.editorial_demo_image
+  endif
+  assign ed_text = collection.metafields.custom.editorial_text.value
+  if ed_text == blank
+    assign ed_text = section.settings.editorial_text
+  endif
+  assign ed_picker = section.settings.editorial_image
+  assign has_editorial = false
+  if ed_picker != blank or ed_asset != blank or ed_text != blank
+    assign has_editorial = true
+  endif
+
   assign intro_kicker = collection.metafields.custom.chapter | metafield_text
   if intro_kicker == blank
     assign intro_kicker = section.settings.kicker
@@ -81,7 +98,7 @@
                 price: p_price, meta: product.type,
                 img1: p_img1, img2: p_img2, img_w: p_w, img_h: p_h,
                 badge: p_new, data_price: product.price, data_new: p_new, data_type: product.type %}
-              {%- if forloop.index == editorial_after -%}{% render 'collection-editorial-insert', section: section %}{%- endif -%}
+              {%- if forloop.index == editorial_after and has_editorial -%}{% render 'collection-editorial-insert', ed_picker: ed_picker, ed_asset: ed_asset, ed_text: ed_text %}{%- endif -%}
             {%- endfor -%}
 
             {%- if paginate.next -%}
@@ -110,7 +127,7 @@
                 img1: d_img1, img2: d_img2, badge: block.settings.badge,
                 data_price: block.settings.data_price, data_new: block.settings.data_new,
                 data_type: block.settings.data_type, extra: is_extra %}
-              {%- if forloop.index == editorial_after -%}{% render 'collection-editorial-insert', section: section %}{%- endif -%}
+              {%- if forloop.index == editorial_after and has_editorial -%}{% render 'collection-editorial-insert', ed_picker: ed_picker, ed_asset: ed_asset, ed_text: ed_text %}{%- endif -%}
             {%- endif -%}
           {%- endfor -%}
 
@@ -130,8 +147,8 @@
 
 .collection-page .shop-layout {
   width: var(--content); margin: 0 auto;
-  display: grid; grid-template-columns: minmax(190px, 230px) minmax(0, 1fr);
-  gap: min(4vw, 64px); align-items: start;
+  display: grid; grid-template-columns: 230px minmax(0, 1fr);
+  gap: min(4.5vw, 72px); align-items: start;
 }
 .collection-page .shop-main { min-width: 0; }
 
@@ -141,7 +158,7 @@
   gap: min(6vw, 90px); align-items: end;
 }
 .collection-page .collection-intro h1 {
-  font-family: var(--serif); font-weight: 400; font-size: clamp(48px, 4.8vw, 84px);
+  font-family: var(--serif); font-weight: 400; font-size: clamp(44px, 5vw, 78px);
   line-height: .95; margin: 0; color: var(--ink); font-variant: small-caps; letter-spacing: .02em;
 }
 .collection-page .collection-intro > p {
@@ -153,7 +170,7 @@
 }
 
 /* Sidebar accordion */
-.collection-page .sidebar { margin-top: 205px; position: sticky; top: calc(var(--header-h) + 22px); }
+.collection-page .sidebar { margin-top: 6px; position: sticky; top: calc(var(--header-h) + 24px); }
 .collection-page .side-accordion { display: grid; border-top: .5px solid var(--rule); }
 .collection-page .side-section { border-bottom: .5px solid var(--rule); }
 .collection-page .side-section-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 42px; }
@@ -173,7 +190,7 @@
 .collection-page .side-panel a.active, .collection-page .side-panel a:hover { color: var(--ink); opacity: 1; }
 
 /* Toolbar */
-.collection-page .toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 42px; }
+.collection-page .toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 34px; }
 .collection-page .view-toggle { display: flex; gap: 10px; align-items: center; }
 .collection-page .view-btn { width: 24px; height: 24px; display: grid; place-items: center; color: var(--muted); }
 .collection-page .view-btn.active { color: var(--ink); }
@@ -189,7 +206,7 @@
 .collection-page .sort-menu button:hover { background: var(--ink-faint-20); }
 
 /* Product grid (base card styles are shared in assets/critical.css) */
-.collection-page .products { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 52px 22px; transition: opacity 220ms var(--ease); }
+.collection-page .products { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px 18px; transition: opacity 220ms var(--ease); }
 .collection-page .products.is-list { grid-template-columns: 1fr; gap: 28px; }
 
 /* List view */
@@ -203,7 +220,7 @@
 .collection-page .products.is-list .media-side-arrow, .collection-page .products.is-list .media-nav { display: none; }
 
 /* Editorial insert */
-.collection-page .editorial-insert { grid-column: 1 / -1; margin: 66px 0 34px; display: block; }
+.collection-page .editorial-insert { grid-column: 1 / -1; margin: 48px 0 26px; display: block; }
 .collection-page .editorial-insert img { width: 100%; height: min(46vw, 640px); object-fit: cover; background: var(--ink-faint-20); }
 .collection-page .editorial-insert p { font-family: var(--sans); font-size: 12px; line-height: 1.7; letter-spacing: .02em; color: #747b88; max-width: 560px; margin: 16px 0 0; }
 

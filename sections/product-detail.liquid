@@ -37,13 +37,21 @@
 
     <aside class="product-title-panel">
       <div class="product-title-sticky">
+        {%- liquid
+          assign crumb_collection = product.collections.first
+          assign chapter = crumb_collection.metafields.custom.chapter
+        -%}
         <div class="product-breadcrumbs">
           <a href="{{ routes.root_url }}">{{ 'sections.collection.home' | t }}</a> /
           <a href="{{ routes.collections_url }}">{{ 'collections.title' | t }}</a>
-          {%- if has_product and product.collections.first -%}
-            / <a href="{{ product.collections.first.url }}">{{ product.collections.first.title | escape }}</a>
+          {%- if chapter.value.title != blank -%}
+            / <a href="{{ chapter.value.url }}">{{ chapter.value.title | escape }}</a>
+          {%- elsif chapter != blank -%}
+            / <span>{{ chapter | metafield_text | escape }}</span>
           {%- endif -%}
-          {%- if title != blank %} / {{ title | escape }}{% endif -%}
+          {%- if crumb_collection != blank -%}
+            / <a href="{{ crumb_collection.url }}">{{ crumb_collection.title | escape }}</a>
+          {%- endif -%}
         </div>
         {%- if kicker != blank -%}<p class="product-kicker">{{ kicker | escape }}</p>{%- endif -%}
         {%- if title != blank -%}<h1>{{ title | escape }}</h1>{%- endif -%}
@@ -79,14 +87,16 @@
 
     <aside class="product-info-panel">
       <div class="product-info-sticky">
-        {%- if description != blank -%}
-          <div class="product-description rte">{{ description }}</div>
-        {%- endif -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'accordion' -%}
             <div class="product-accordion" {{ block.shopify_attributes }}>
               <button type="button">{{ block.settings.label | escape }} <span aria-hidden="true"></span></button>
-              <div class="product-accordion__panel"><div class="product-accordion__content">{{ block.settings.content }}</div></div>
+              <div class="product-accordion__panel"><div class="product-accordion__content">
+                {{ block.settings.content }}
+                {%- if block.settings.show_description and description != blank -%}
+                  <div class="product-description rte">{{ description }}</div>
+                {%- endif -%}
+              </div></div>
             </div>
           {%- endif -%}
         {%- endfor -%}
@@ -178,9 +188,9 @@
 .product-gallery-lines span { width: 26px; height: 1px; background: rgba(15, 26, 46, .22); transition: background 220ms var(--ease), width 220ms var(--ease); }
 .product-gallery-lines span.active { background: var(--ink); width: 34px; }
 
-.product-info-sticky { position: relative; top: auto; padding-top: 11vh; display: flex; flex-direction: column; justify-content: flex-start; min-height: min(740px, calc(100vh - var(--header-h) - 18px)); transition: padding-top 360ms var(--ease-long); }
+.product-info-sticky { position: relative; top: auto; padding-top: 18vh; display: flex; flex-direction: column; justify-content: flex-start; min-height: min(740px, calc(100vh - var(--header-h) - 18px)); transition: padding-top 360ms var(--ease-long); }
 .product-detail.info-expanded .product-info-sticky { padding-top: 5vh; }
-.product-description { margin-bottom: 26px; color: var(--ink-soft); font-size: var(--pdp-desc-size, 15px); line-height: 1.7; }
+.product-description { margin: 0; color: var(--ink-soft); font-size: var(--pdp-desc-size, 15px); line-height: 1.7; }
 .product-description > :first-child { margin-top: 0; }
 .product-description > :last-child { margin-bottom: 0; }
 .product-description p { margin: 0 0 12px; }
@@ -384,7 +394,8 @@
       "name": "Accordion row",
       "settings": [
         { "type": "text", "id": "label", "label": "Label", "default": "Detalles" },
-        { "type": "richtext", "id": "content", "label": "Content" }
+        { "type": "richtext", "id": "content", "label": "Content" },
+        { "type": "checkbox", "id": "show_description", "label": "Append product description", "default": false, "info": "Adds the product's description (when non-empty) below this accordion's content." }
       ]
     }
   ]

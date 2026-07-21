@@ -5,7 +5,7 @@
       "settings": {},
       "blocks": {
         "a1": { "type": "accordion", "settings": { "label": "Dimensiones", "content": "<p>Ø 28 cm · Alto 2,8 cm. Medidas provisionales editables en Shopify según ficha final.</p>" } },
-        "a2": { "type": "accordion", "settings": { "label": "Detalles", "content": "<p>Loza fina esmaltada. Decorado histórico 202 Rosa. Acabado brillante. Pieza del universo Aurora, una de las formas nacidas con La Cartuja en 1841.</p>" } },
+        "a2": { "type": "accordion", "settings": { "label": "Detalles", "content": "<p>Loza fina esmaltada. Decorado histórico 202 Rosa. Acabado brillante. Pieza del universo Aurora, una de las formas nacidas con La Cartuja en 1841.</p>", "show_description": true } },
         "a3": { "type": "accordion", "settings": { "label": "Cuidados", "content": "<p>Lavar preferiblemente a mano o en programa delicado. Evitar cambios bruscos de temperatura, golpes térmicos y productos abrasivos.</p>" } },
         "a4": { "type": "accordion", "settings": { "label": "Envío y devoluciones", "content": "<p>Envío protegido para piezas cerámicas. Cambios y devoluciones sujetos a disponibilidad y condiciones de venta de la tienda final.</p>" } }
       },
@@ -20,7 +20,7 @@
         "cta_label": "Nuestra historia",
         "cta_link": "/",
         "ornament": "1841",
-        "demo_image": "scene-table.webp"
+        "demo_image": "mesa_aurora_editorial.webp"
       }
     },
     "related_set": {

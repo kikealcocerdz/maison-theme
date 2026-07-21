@@ -20,6 +20,7 @@
         {%- comment -%} Demo nav (shown until a navigation menu is selected). {%- endcomment -%}
         <a href="{{ routes.collections_url }}">Colecciones</a>
         <a href="/pages/nuestras-mesas">Nuestras mesas</a>
+        <a href="/pages/viste-tu-mesa">Viste tu mesa</a>
       {%- endif -%}
     </div>
 
@@ -41,12 +42,22 @@
         <a href="/pages/artesania">Artesanía</a>
         <a href="/pages/heritage">Heritage 1841</a>
       {%- endif -%}
-      <a href="{{ routes.search_url }}" class="search-link" aria-label="{{ 'general.search.label' | t }}">{% render 'icon-search' %}</a>
+      <button type="button" class="search-link" id="searchToggle" aria-label="{{ 'general.search.label' | t }}" aria-expanded="false" aria-controls="searchPanel">{% render 'icon-search' %}</button>
       <a href="{{ routes.cart_url }}" class="header-cart" data-cart-toggle aria-label="{{ 'general.cart.label' | t }}">
         {{ 'general.cart.label' | t | default: 'Cesta' }} (<span data-cart-count-badge>{{ cart.item_count }}</span>)
       </a>
     </div>
   </nav>
+
+  <div class="search-panel" id="searchPanel" data-predictive-url="{{ routes.predictive_search_url }}">
+    <div class="search-panel__inner">
+      <form class="search-panel__form" action="{{ routes.search_url }}" method="get" role="search">
+        <input class="search-panel__input" type="search" name="q" placeholder="{{ 'general.search.label' | t }}…" autocomplete="off" aria-label="{{ 'general.search.label' | t }}">
+        <button class="search-panel__submit" type="submit" aria-label="{{ 'general.search.label' | t }}">{% render 'icon-search' %}</button>
+      </form>
+      <div class="search-panel__results" id="searchResults" aria-live="polite"></div>
+    </div>
+  </div>
 </header>
 
 {% stylesheet %}
@@ -105,6 +116,87 @@
   justify-content: center;
   width: 24px;
   height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.search-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  border-bottom: 0.5px solid rgba(15, 26, 46, 0.08);
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 320ms var(--ease), transform 320ms var(--ease);
+}
+
+.search-open .search-panel {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.search-panel__inner {
+  width: min(90vw, 1760px);
+  margin: 0 auto;
+  padding: 22px 0;
+}
+
+.search-panel__form {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.search-panel__results:not(:empty) {
+  margin-top: 18px;
+  max-height: min(60vh, 520px);
+  overflow-y: auto;
+}
+
+.search-panel__input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  border-bottom: 0.5px solid var(--rule);
+  background: transparent;
+  font-family: var(--serif);
+  font-size: var(--fs-h3);
+  font-weight: 400;
+  padding: 8px 0;
+  color: var(--ink);
+}
+
+.search-panel__input::placeholder { color: var(--muted); }
+.search-panel__input:focus { outline: none; border-color: var(--ink); }
+
+.search-panel__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.search-panel__submit svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 1.25;
+  fill: none;
 }
 
 .search-link svg {
@@ -124,14 +216,16 @@
 
 .site-header.light .logo { filter: brightness(0) invert(1); }
 
-.menu-open .site-header {
+.menu-open .site-header,
+.search-open .site-header {
   background: var(--paper);
   color: var(--ink);
   border-color: rgba(15, 26, 46, 0.08);
   backdrop-filter: blur(16px);
 }
 
-.menu-open .site-header .logo { filter: none; }
+.menu-open .site-header .logo,
+.search-open .site-header .logo { filter: none; }
 
 .menu-trigger {
   display: flex;
@@ -206,11 +300,69 @@
     });
   }
 
+  const searchToggle = document.getElementById('searchToggle');
+  const searchPanel = document.getElementById('searchPanel');
+  const closeSearch = () => {
+    body.classList.remove('search-open');
+    if (searchToggle) searchToggle.setAttribute('aria-expanded', 'false');
+  };
+  if (searchToggle && searchPanel) {
+    const input = searchPanel.querySelector('input');
+    const results = searchPanel.querySelector('#searchResults');
+    const predictiveUrl = searchPanel.dataset.predictiveUrl || '/search/suggest';
+    let timer;
+    let lastTerm = '';
+
+    const renderResults = (html) => {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const section = doc.querySelector('.shopify-section') || doc.body;
+      results.innerHTML = section ? section.innerHTML : '';
+    };
+
+    const fetchResults = (term) => {
+      const url = predictiveUrl
+        + '?q=' + encodeURIComponent(term)
+        + '&section_id=predictive-search'
+        + '&resources[type]=product&resources[limit]=6';
+      fetch(url)
+        .then((r) => (r.ok ? r.text() : ''))
+        .then(renderResults)
+        .catch(() => { results.innerHTML = ''; });
+    };
+
+    input.addEventListener('input', () => {
+      const term = input.value.trim();
+      if (term === lastTerm) return;
+      lastTerm = term;
+      clearTimeout(timer);
+      if (term.length < 2) { results.innerHTML = ''; return; }
+      timer = setTimeout(() => fetchResults(term), 220);
+    });
+
+    searchToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = body.classList.toggle('search-open');
+      searchToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) {
+        body.classList.remove('menu-open');
+        if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+        setTimeout(() => input && input.focus(), 60);
+      }
+    });
+    document.addEventListener('click', (e) => {
+      if (body.classList.contains('search-open') && !searchPanel.contains(e.target) && !searchToggle.contains(e.target)) {
+        closeSearch();
+      }
+    });
+  }
+
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && body.classList.contains('menu-open')) {
+    if (e.key !== 'Escape') return;
+    if (body.classList.contains('menu-open')) {
       body.classList.remove('menu-open');
       if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
     }
+    if (body.classList.contains('search-open')) closeSearch();
   });
 
   function updateHeaderState() {

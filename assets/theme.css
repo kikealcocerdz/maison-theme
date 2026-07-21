@@ -43,4 +43,11 @@ main {
 
 .soft-bg { background: var(--ink-faint-20); }
 
+@media (max-width: 680px) {
+  .section {
+    padding-top: 74px;
+    padding-bottom: 82px;
+  }
+}
+
 /* Per-section CSS gets appended below in subsequent tasks. */

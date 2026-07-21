@@ -13,7 +13,7 @@
       "blocks": {
         "col-1": { "type": "column", "settings": { "heading": "Producto", "items": "Platos | | /collections/platos\nBoles y cuencos | | /collections/bowls\nJarras y teteras | | /collections/jarras-teteras\nFuentes y bandejas | | /collections/fuentes\nTazas | | /collections/tazas\nVajillas completas | | /collections/vajillas-completas\nDecoración | | /collections/decoracion" } },
         "col-2": { "type": "column", "settings": { "heading": "Colecciones", "items": "Aurora | Icono | /collections/aurora\nOchavada | Geometría | /collections/ochavada\nViejo Molino | Archivo | /collections/viejo-molino\nNegro Vistas | Contraste | /collections/negro-vistas\nVistas A. Stewart | Vistas | /collections/vistas-stewart\nFlor Lis | Color | /collections/flor-lis\n202 Rosa | Emblema | /collections/202-rosa\nEmblemas | Selección | /collections/emblemas" } },
-        "col-3": { "type": "column", "settings": { "heading": "Editorial", "items": "Emblemas | | /collections/emblemas\nNuestras mesas | | /pages/nuestras-mesas\nArtesanía | | /pages/artesania\nHeritage 1841 | | /pages/heritage" } },
+        "col-3": { "type": "column", "settings": { "heading": "Editorial", "items": "Emblemas | | /collections/emblemas\nViste tu mesa | | /pages/viste-tu-mesa\nNuestras mesas | | /pages/nuestras-mesas\nArtesanía | | /pages/artesania\nHeritage 1841 | | /pages/heritage" } },
         "card-1": { "type": "feature_card", "settings": { "text": "Una casa histórica vuelve a latir.", "link": "/pages/heritage", "link_label": "Descubrir historia" } }
       },
       "block_order": ["col-1", "col-2", "col-3", "card-1"]

@@ -3,11 +3,9 @@
     "main": {
       "type": "collection-grid",
       "settings": {
-        "kicker": "Capítulo 01",
+        "sidebar_menu": "colecciones-sidebar",
         "products_per_page": 24,
-        "editorial_after": 6,
-        "editorial_demo_image": "collection-aurora.webp",
-        "editorial_text": "<p>Una colección luminosa para construir mesas donde conviven memoria, color y oficio sevillano.</p>"
+        "editorial_after": 6
       }
     }
   },

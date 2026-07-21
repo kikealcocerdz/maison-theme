@@ -46,7 +46,7 @@
 .editorial-hero {
   height: 245vh;
   position: relative;
-  background: var(--paper);
+  background: #EEEFF1;
 }
 .editorial-hero__sticky {
   position: sticky; top: 0; height: 100vh;
@@ -59,10 +59,10 @@
   background: #dbe1e8;
   isolation: isolate;
   clip-path: polygon(
-    var(--hero-clip-left, 15%) var(--hero-clip-top, 12%),
-    var(--hero-clip-right, 85%) var(--hero-clip-top, 12%),
-    var(--hero-clip-right, 85%) var(--hero-clip-bottom, 92%),
-    var(--hero-clip-left, 15%) var(--hero-clip-bottom, 92%)
+    var(--hero-clip-left, 0%) var(--hero-clip-top, 0%),
+    var(--hero-clip-right, 100%) var(--hero-clip-top, 0%),
+    var(--hero-clip-right, 100%) var(--hero-clip-bottom, 100%),
+    var(--hero-clip-left, 0%) var(--hero-clip-bottom, 100%)
   );
   will-change: clip-path;
   transform: translateZ(0);
@@ -118,7 +118,8 @@
   text-wrap: balance;
   letter-spacing: -0.005em;
 }
-.editorial-hero__title p {
+.editorial-hero__title h1 p { margin: 0; font-size: inherit; line-height: inherit; }
+.editorial-hero__title > p {
   font-size: clamp(10px, 0.85vw, 13px);
   line-height: 1.8; letter-spacing: 0.04em;
   margin: 0 auto; max-width: 560px;
