@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "legal-doc",
+      "settings": {
+        "doc": "cookies",
+        "kicker": "Información legal · La Cartuja de Sevilla",
+        "title": "Política de cookies",
+        "intro": "<p>Información sobre las tecnologías de almacenamiento utilizadas, su finalidad y las opciones disponibles para gestionarlas.</p>",
+        "source_note": "<p>Contenido maquetado a partir de la información legal publicada por La Cartuja de Sevilla.<br><br>Consulta de referencia: julio de 2026.</p>",
+        "next_label": "Términos y condiciones",
+        "next_url": "/pages/terminos-condiciones"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

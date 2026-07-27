@@ -1,0 +1,245 @@
+{%- comment -%}
+  Documento legal (aviso legal / privacidad / cookies / términos) — port 1:1 del
+  mockup `cartuja.gropius.link/*.html` + `styles/legal.css` + `scripts/legal.js`.
+
+  Adaptaciones vs el mockup (mismas que en heritage.liquid):
+   - El header/footer propios del mockup (.legal-header/.legal-footer) se descartan:
+     los aporta header-group / footer-group. El header del theme es `position:fixed`,
+     así que el hero suma var(--header-h) al padding y las tabs pegan ahí.
+   - CSS scopeado bajo `.legal-page`; los tokens del mockup se mapean a los del theme
+     (--accent → --accent-1). `--content`/`--text` se redefinen en el contenedor
+     porque el legal usa una caja más ancha (78vw/1420) que el global (70vw/1600).
+   - El IntersectionObserver de `.reveal` ya vive en assets/theme.js → aquí sólo queda
+     la barra de progreso y el link activo del índice.
+
+  El texto de cada documento vive en snippets/legal-<doc>.liquid (part: index|body).
+{%- endcomment -%}
+{%- liquid
+  assign doc = section.settings.doc
+  assign tabs = 'aviso-legal|Aviso legal,politica-privacidad|Privacidad,politica-de-cookies|Cookies,terminos-condiciones|Términos y condiciones' | split: ','
+-%}
+
+<div class="legal-page" data-section-id="{{ section.id }}">
+  <div class="legal-progress" aria-hidden="true"></div>
+
+  <nav class="legal-tabs-wrap" aria-label="{{ 'sections.legal.tabs_label' | t }}">
+    <div class="legal-tabs">
+      {%- for tab in tabs -%}
+        {%- assign parts = tab | split: '|' -%}
+        {%- assign handle = parts[0] -%}
+        <a
+          href="{{ routes.root_url }}pages/{{ handle }}"
+          class="{% if page.handle == handle %}is-current{% endif %}"
+          {% if page.handle == handle %}aria-current="page"{% endif %}
+        >{{ parts[1] }}</a>
+      {%- endfor -%}
+    </div>
+  </nav>
+
+  <section class="legal-hero">
+    <div class="legal-hero-inner">
+      <div>
+        {%- if section.settings.kicker != blank -%}
+          <span class="legal-kicker">{{ section.settings.kicker }}</span>
+        {%- endif -%}
+        <h1>{{ section.settings.title | default: page.title }}</h1>
+      </div>
+      <p>{{ section.settings.intro | strip_html }}</p>
+    </div>
+  </section>
+
+  <div class="legal-layout">
+    <aside class="legal-aside">
+      <div class="label">{{ 'sections.legal.index_label' | t }}</div>
+      {%- case doc -%}
+        {%- when 'aviso' -%}{% render 'legal-aviso', part: 'index' %}
+        {%- when 'privacidad' -%}{% render 'legal-privacidad', part: 'index' %}
+        {%- when 'cookies' -%}{% render 'legal-cookies', part: 'index' %}
+        {%- when 'terminos' -%}{% render 'legal-terminos', part: 'index' %}
+      {%- endcase -%}
+      {%- if section.settings.source_note != blank -%}
+        <div class="legal-source">{{ section.settings.source_note }}</div>
+      {%- endif -%}
+    </aside>
+
+    <article class="legal-content">
+      {%- if section.settings.intro != blank -%}
+        <p class="legal-intro reveal">{{ section.settings.intro | strip_html }}</p>
+      {%- endif -%}
+      {%- case doc -%}
+        {%- when 'aviso' -%}{% render 'legal-aviso', part: 'body' %}
+        {%- when 'privacidad' -%}{% render 'legal-privacidad', part: 'body' %}
+        {%- when 'cookies' -%}{% render 'legal-cookies', part: 'body' %}
+        {%- when 'terminos' -%}{% render 'legal-terminos', part: 'body' %}
+      {%- endcase -%}
+    </article>
+  </div>
+
+  {%- if section.settings.next_label != blank -%}
+    <section class="legal-next">
+      <div class="legal-next-inner">
+        <span>{{ 'sections.legal.next_doc' | t }}</span>
+        <a href="{{ section.settings.next_url }}">{{ section.settings.next_label }}<i aria-hidden="true">→</i></a>
+      </div>
+    </section>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+.legal-page {
+  --content: min(78vw, 1420px);
+  --text: min(760px, 100%);
+  --paper-soft: #f3f4f6;
+  /* El header del theme es fixed (fuera de flujo); en el mockup era sticky y ocupaba
+     sitio, así que la página empieza justo debajo. */
+  padding-top: var(--header-h);
+}
+
+.legal-page .legal-progress { position: fixed; z-index: 120; top: 0; left: 0; height: 2px; width: 0; background: var(--accent-1); transition: width .08s linear; }
+
+.legal-page .legal-hero { position: relative; min-height: 480px; padding: 112px 0 84px; display: flex; align-items: flex-end; background: linear-gradient(135deg, #f5f6f8 0%, #e9ecf1 100%); overflow: hidden; }
+.legal-page .legal-hero::before { content: "1841"; position: absolute; right: -.03em; bottom: -.26em; font-family: var(--serif); font-size: min(31vw, 470px); line-height: 1; color: rgba(15, 26, 46, .035); pointer-events: none; }
+.legal-page .legal-hero-inner { position: relative; width: var(--content); margin: auto; display: grid; grid-template-columns: 1.3fr .7fr; gap: 8vw; align-items: end; }
+.legal-page .legal-kicker { display: block; margin-bottom: 22px; font-size: 10px; font-weight: 500; letter-spacing: .23em; text-transform: uppercase; color: var(--muted); }
+.legal-page .legal-hero h1 { font-family: var(--serif); font-size: clamp(54px, 7vw, 112px); font-weight: 400; line-height: .92; letter-spacing: -.025em; margin: 0; }
+.legal-page .legal-hero p { max-width: 410px; margin: 0; font-size: 13px; line-height: 1.9; color: var(--ink-soft); }
+
+.legal-page .legal-tabs-wrap { position: sticky; top: var(--header-h); z-index: 80; background: rgba(255, 255, 255, .94); backdrop-filter: blur(16px); border-bottom: .5px solid var(--rule); }
+.legal-page .legal-tabs { width: var(--content); margin: auto; display: flex; align-items: center; overflow: auto; scrollbar-width: none; }
+.legal-page .legal-tabs::-webkit-scrollbar { display: none; }
+.legal-page .legal-tabs a { position: relative; flex: 0 0 auto; padding: 22px 28px 21px 0; margin-right: 34px; font-size: 9px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.legal-page .legal-tabs a::after { content: ""; position: absolute; left: 0; right: 28px; bottom: -1px; height: 1px; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
+.legal-page .legal-tabs a:hover,
+.legal-page .legal-tabs a.is-current { color: var(--ink); }
+.legal-page .legal-tabs a.is-current::after { transform: scaleX(1); }
+
+.legal-page .legal-layout { width: var(--content); margin: 0 auto; padding: 104px 0 130px; display: grid; grid-template-columns: minmax(190px, 260px) minmax(0, 1fr); gap: clamp(64px, 8vw, 150px); align-items: start; }
+.legal-page .legal-aside { position: sticky; top: calc(var(--header-h) + 86px); }
+.legal-page .legal-aside .label { font-size: 9px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 25px; }
+.legal-page .legal-index { display: grid; gap: 14px; }
+.legal-page .legal-index a { font-family: var(--serif); font-size: 18px; line-height: 1.2; color: var(--muted); transition: color .25s ease, transform .25s ease; }
+.legal-page .legal-index a:hover,
+.legal-page .legal-index a.is-active { color: var(--ink); transform: translateX(5px); }
+.legal-page .legal-source { margin-top: 46px; padding-top: 22px; border-top: .5px solid var(--rule); font-size: 10px; line-height: 1.75; color: var(--muted); }
+
+.legal-page .legal-content { max-width: var(--text); }
+.legal-page .legal-intro { font-family: var(--serif); font-size: clamp(24px, 2.4vw, 34px); line-height: 1.35; color: var(--ink); margin: 0 0 78px; }
+.legal-page .legal-section { scroll-margin-top: calc(var(--header-h) + 86px); padding: 0 0 72px; margin: 0 0 72px; border-bottom: .5px solid var(--rule); }
+.legal-page .legal-section:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+.legal-page .legal-number { font-size: 9px; font-weight: 500; letter-spacing: .22em; color: var(--muted); margin-bottom: 15px; }
+.legal-page .legal-section h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(31px, 3vw, 47px); line-height: 1.08; letter-spacing: -.01em; margin: 0 0 30px; }
+.legal-page .legal-section h3 { font-family: var(--serif); font-weight: 500; font-size: 23px; line-height: 1.2; margin: 42px 0 16px; }
+.legal-page .legal-section h4 { font-size: 10px; letter-spacing: .17em; text-transform: uppercase; margin: 35px 0 15px; }
+.legal-page .legal-section p,
+.legal-page .legal-section li { font-size: 14px; line-height: 1.92; color: var(--ink-soft); }
+.legal-page .legal-section p { margin: 0 0 19px; }
+.legal-page .legal-section ul { list-style: none; margin: 20px 0 28px; padding: 0; }
+.legal-page .legal-section li { position: relative; padding-left: 25px; margin: 9px 0; }
+.legal-page .legal-section li::before { content: ""; position: absolute; left: 2px; top: .83em; width: 6px; height: .5px; background: var(--ink); }
+.legal-page .legal-data { margin: 27px 0 36px; border-top: .5px solid var(--rule); }
+.legal-page .legal-data-row { display: grid; grid-template-columns: 190px 1fr; gap: 24px; padding: 15px 0; border-bottom: .5px solid var(--rule); font-size: 13px; line-height: 1.65; }
+.legal-page .legal-data-row strong { font-weight: 500; }
+.legal-page .legal-callout { margin: 36px 0; padding: 26px 30px; background: var(--paper-soft); border-left: 2px solid var(--ink); font-family: var(--serif); font-size: 20px; line-height: 1.5; }
+.legal-page .legal-content a { text-decoration: underline; text-decoration-thickness: .5px; text-underline-offset: 3px; }
+
+.legal-page .cookie-table { width: 100%; border-collapse: collapse; margin: 30px 0 45px; font-size: 12px; line-height: 1.6; }
+.legal-page .cookie-table th { text-align: left; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; font-weight: 500; color: var(--muted); padding: 12px; border-bottom: 1px solid var(--ink); }
+.legal-page .cookie-table td { vertical-align: top; padding: 14px 12px; border-bottom: .5px solid var(--rule); color: var(--ink-soft); }
+.legal-page .browser-links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 25px; }
+.legal-page .browser-links a { padding: 14px 16px; border: .5px solid var(--rule); text-decoration: none; font-size: 11px; transition: background .25s ease, border-color .25s ease, color .25s ease; }
+.legal-page .browser-links a:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+.legal-page .legal-next { background: var(--ink); color: var(--paper); padding: 82px 0; }
+.legal-page .legal-next-inner { width: var(--content); margin: auto; display: flex; align-items: end; justify-content: space-between; gap: 40px; }
+.legal-page .legal-next span { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255, 255, 255, .62); }
+.legal-page .legal-next a { font-family: var(--serif); font-size: clamp(38px, 5vw, 72px); line-height: 1; display: flex; align-items: center; gap: 25px; }
+.legal-page .legal-next a i { font-family: var(--sans); font-size: 30px; font-style: normal; transition: transform .3s ease; }
+.legal-page .legal-next a:hover i { transform: translateX(10px); }
+
+@media (max-width: 1000px) {
+  .legal-page { --content: min(88vw, 1420px); }
+  .legal-page .legal-hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .legal-page .legal-layout { grid-template-columns: 1fr; }
+  .legal-page .legal-aside { position: relative; top: auto; }
+  .legal-page .legal-index { grid-template-columns: repeat(2, 1fr); }
+  .legal-page .legal-source { max-width: 500px; }
+}
+
+@media (max-width: 680px) {
+  .legal-page { --content: calc(100vw - 32px); }
+  .legal-page .legal-tabs a { padding-top: 18px; padding-bottom: 17px; margin-right: 22px; }
+  .legal-page .legal-hero { min-height: 405px; padding: 92px 0 58px; }
+  .legal-page .legal-hero h1 { font-size: 54px; }
+  .legal-page .legal-hero p { font-size: 12px; }
+  .legal-page .legal-layout { padding: 72px 0 92px; gap: 60px; }
+  .legal-page .legal-index { grid-template-columns: 1fr 1fr; gap: 12px 18px; }
+  .legal-page .legal-index a { font-size: 16px; }
+  .legal-page .legal-intro { font-size: 25px; margin-bottom: 56px; }
+  .legal-page .legal-section { padding-bottom: 54px; margin-bottom: 55px; }
+  .legal-page .legal-section h2 { font-size: 33px; }
+  .legal-page .legal-section p,
+  .legal-page .legal-section li { font-size: 13px; line-height: 1.85; }
+  .legal-page .legal-data-row { grid-template-columns: 1fr; gap: 4px; }
+  .legal-page .cookie-table { display: block; overflow-x: auto; }
+  .legal-page .browser-links { grid-template-columns: 1fr; }
+  .legal-page .legal-next { padding: 60px 0; }
+  .legal-page .legal-next-inner { align-items: flex-start; flex-direction: column; }
+  .legal-page .legal-next a { font-size: 43px; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+(() => {
+  const init = (root) => {
+    if (!root) return;
+    const progress = root.querySelector('.legal-progress');
+    const sections = [...root.querySelectorAll('.legal-section[id]')];
+    const links = [...root.querySelectorAll('.legal-index a')];
+    if (!progress && !sections.length) return;
+
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (progress) progress.style.width = `${max > 0 ? (window.scrollY / max) * 100 : 0}%`;
+      let active = sections.length ? sections[0].id : null;
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= 230) active = section.id;
+      }
+      links.forEach((link) => link.classList.toggle('is-active', link.getAttribute('href') === `#${active}`));
+    };
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  };
+
+  document.querySelectorAll('.legal-page').forEach(init);
+  document.addEventListener('shopify:section:load', (e) => init(e.target.querySelector('.legal-page')));
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Documento legal",
+  "settings": [
+    {
+      "type": "select",
+      "id": "doc",
+      "label": "Documento",
+      "options": [
+        { "value": "aviso", "label": "Aviso legal" },
+        { "value": "privacidad", "label": "Política de privacidad" },
+        { "value": "cookies", "label": "Política de cookies" },
+        { "value": "terminos", "label": "Términos y condiciones" }
+      ],
+      "default": "privacidad"
+    },
+    { "type": "text", "id": "kicker", "label": "Antetítulo", "default": "Información legal · La Cartuja de Sevilla" },
+    { "type": "text", "id": "title", "label": "Título" },
+    { "type": "richtext", "id": "intro", "label": "Entradilla" },
+    { "type": "richtext", "id": "source_note", "label": "Nota de origen (columna lateral)" },
+    { "type": "header", "content": "Siguiente documento" },
+    { "type": "text", "id": "next_label", "label": "Etiqueta" },
+    { "type": "url", "id": "next_url", "label": "Enlace" }
+  ]
+}
+{% endschema %}

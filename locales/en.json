@@ -142,6 +142,11 @@
       "checkout": "Checkout",
       "view": "View cart",
       "taxes_note": "Shipping and taxes calculated at checkout."
+    },
+    "legal": {
+      "tabs_label": "Legal documents",
+      "index_label": "Table of contents",
+      "next_doc": "Next document"
     }
   }
 }

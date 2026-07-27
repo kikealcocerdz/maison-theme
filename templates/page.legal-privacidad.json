@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "legal-doc",
+      "settings": {
+        "doc": "privacidad",
+        "kicker": "Información legal · La Cartuja de Sevilla",
+        "title": "Política de privacidad",
+        "intro": "<p>Cómo se recogen, utilizan, conservan y protegen los datos personales de las personas usuarias de La Cartuja de Sevilla.</p>",
+        "source_note": "<p>Contenido maquetado a partir de la información legal publicada por La Cartuja de Sevilla.<br><br>Consulta de referencia: julio de 2026.</p>",
+        "next_label": "Política de cookies",
+        "next_url": "/pages/politica-de-cookies"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

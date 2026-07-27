@@ -142,6 +142,11 @@
       "checkout": "Finalizar compra",
       "view": "Ver cesta",
       "taxes_note": "Gastos de envío e impuestos calculados en el checkout."
+    },
+    "legal": {
+      "tabs_label": "Documentos legales",
+      "index_label": "Índice del documento",
+      "next_doc": "Siguiente documento"
     }
   }
 }

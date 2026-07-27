@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "legal-doc",
+      "settings": {
+        "doc": "aviso",
+        "kicker": "Información legal · La Cartuja de Sevilla",
+        "title": "Aviso legal",
+        "intro": "<p>Información sobre la titularidad del sitio, sus condiciones de uso, la propiedad intelectual y el marco de responsabilidad aplicable.</p>",
+        "source_note": "<p>Contenido maquetado a partir de la información legal publicada por La Cartuja de Sevilla.<br><br>Consulta de referencia: julio de 2026.</p>",
+        "next_label": "Política de privacidad",
+        "next_url": "/pages/politica-privacidad"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
