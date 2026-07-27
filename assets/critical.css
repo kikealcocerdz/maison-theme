@@ -169,3 +169,28 @@ button {
 .product-info h3 { font-family: var(--sans); font-weight: 300; font-size: 12px; line-height: 1.35; margin: 0; color: var(--ink); }
 .product-info p { margin: 0; color: var(--muted); font-size: 10px; letter-spacing: 0.06em; }
 .price { font-size: 12px; color: var(--ink); text-align: right; white-space: nowrap; }
+
+/* Stock scaffolds (page/cart/search/404/blog/article): clear the fixed header.
+   Real designs replace these. */
+.shell-pad { width: min(760px, 90vw); margin: 0 auto; padding: calc(var(--header-h) + 56px) 0 80px; }
+.shell-pad h1 { font-family: var(--serif); font-weight: 400; }
+
+/* Páginas /policies/* de Shopify (envíos, devoluciones, privacidad de checkout…).
+   Shopify genera el markup y no admite plantilla de theme, así que sólo se puede
+   estilar: se le da la misma tipografía que a los documentos legales
+   (sections/legal-doc.liquid). */
+.shopify-policy__container { width: min(760px, 90vw); max-width: none; margin: 0 auto; padding: calc(var(--header-h) + 96px) 0 120px; }
+.shopify-policy__title { margin-bottom: 46px; }
+.shopify-policy__title h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(38px, 5vw, 64px); line-height: 1.04; letter-spacing: -0.02em; margin: 0; }
+.shopify-policy__body .rte { font-size: 14px; line-height: 1.92; color: var(--ink-soft); }
+.shopify-policy__body .rte p { margin: 0 0 19px; }
+.shopify-policy__body .rte h2,
+.shopify-policy__body .rte h3,
+.shopify-policy__body .rte h4 { font-family: var(--serif); font-weight: 500; font-size: 23px; line-height: 1.2; margin: 42px 0 16px; color: var(--ink); }
+.shopify-policy__body .rte ul,
+.shopify-policy__body .rte ol { margin: 20px 0 28px; padding-left: 22px; }
+.shopify-policy__body .rte li { margin: 9px 0; }
+.shopify-policy__body .rte a { color: inherit; text-decoration: underline; text-decoration-thickness: 0.5px; text-underline-offset: 3px; }
+.shopify-policy__body .rte table { width: 100%; border-collapse: collapse; margin: 30px 0; font-size: 12px; }
+.shopify-policy__body .rte td,
+.shopify-policy__body .rte th { text-align: left; padding: 14px 12px; border-bottom: 0.5px solid var(--rule); }
