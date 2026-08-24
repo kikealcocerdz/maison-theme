@@ -251,7 +251,7 @@
           {%- if color_idx < 0 or v.options[color_idx] == current_color -%}
             {%- assign items = v.metafields.custom.pack.value -%}
             {%- if items != blank -%}
-              {%- assign cols = items.size | at_most: 8 -%}
+              {%- assign cols = items.size -%}{%- if cols > 8 -%}{%- assign cols = cols | plus: 1 | divided_by: 2 -%}{%- endif -%}
               <div class="product-set-includes-list{% if v.id == current_variant.id %} is-visible{% endif %}" data-pack-for="{{ v.id }}" style="--pack-cols: {{ cols }}">
                 {%- for item in items -%}
                   {%- assign ip = item.producto.value -%}
@@ -275,7 +275,7 @@
         {%- for row in demo_bundles -%}
           {%- assign parts = row | split: '|' -%}
           {%- assign raw_items = parts[2] | default: '' | split: ',' -%}
-          {%- assign cols = raw_items.size | at_most: 8 -%}
+          {%- assign cols = raw_items.size -%}{%- if cols > 8 -%}{%- assign cols = cols | plus: 1 | divided_by: 2 -%}{%- endif -%}
           <div class="product-set-includes-list{% if forloop.first %} is-visible{% endif %}" data-pack-for="{{ parts[0] | strip | escape }}" style="--pack-cols: {{ cols }}">
             {%- for raw in raw_items -%}
               {%- assign bits = raw | strip | split: ':' -%}
