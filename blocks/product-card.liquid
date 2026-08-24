@@ -24,6 +24,7 @@
       <span class="block-product-card__price">{{ product.price | money }}</span>
     {%- endif -%}
   </a>
+  {% render 'quick-add', product: product %}
 </article>
 {%- elsif block.settings.demo_image != blank -%}
   {%- comment -%} Demo card — used when no product is selected (e.g. before catalog migration). {%- endcomment -%}
@@ -52,7 +53,7 @@
 {%- endif -%}
 
 {% stylesheet %}
-.block-product-card { text-align: center; }
+.block-product-card { position: relative; text-align: center; }
 .block-product-card__link { display: block; }
 .block-product-card__media {
   position: relative; overflow: hidden; background: transparent;

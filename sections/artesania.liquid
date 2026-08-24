@@ -1,14 +1,17 @@
 {%- comment -%}
   Artesanía — La Cartuja de Sevilla. Editorial craft page.
   Six sections: hero video / intro sticky-grow video / process 3D plate (scroll
-  driven via self-hosted model-viewer) / quality + badges / collections grid /
+  driven via a self-hosted Three.js plate) / quality + badges / collections grid /
   newsletter. Everything scoped under `.artesania-page`.
 
   Follows §9 scroll-driven pattern (self-contained rAF IIFE writing CSS custom
   props, Math.max guards, reduced-motion + mobile static fallbacks, re-init on
   shopify:section:load) and the global `.reveal` → `.is-visible` IntersectionObserver
-  in assets/theme.js. model-viewer + its script are self-hosted assets; if the
-  web component is unsupported a static <img> fallback is shown.
+  in assets/theme.js. The 3D plate ships as three injected assets (three.min.js +
+  artesania-textures.js then artesania-plate.js — `window.LCPlate.setProgress(0..1)`
+  drives material-morph + decal-swap + fall-with-spin) loaded on IntersectionObserver
+  approach to dodge AssetSizeJavaScript; if WebGL/Three is unavailable, or under
+  reduced-motion, a static <img.plate-fallback> is shown instead.
 
   Title + meta description come from the Shopify Page object — create a Page with
   handle "artesania" + template "artesania".
@@ -17,14 +20,13 @@
 {%- liquid
   assign poster = 'artesania-proceso-poster.jpg'
   assign video  = 'artesania-proceso.mp4'
-  assign plate_fallback = 'artesania-plato-llano.jpg'
-  assign plate_glb = 'artesania-plate.glb'
+  assign plate_fallback = 'artesania-inline-optimized.webp'
 -%}
 
-<main class="artesania-page" data-section-id="{{ section.id }}" data-model-viewer-src="{{ 'model-viewer.min.js' | asset_url }}">
+<main class="artesania-page" data-section-id="{{ section.id }}" data-three-src="{{ 'three.min.js' | asset_url }}" data-textures-src="{{ 'artesania-textures.js' | asset_url }}" data-plate-src="{{ 'artesania-plate.js' | asset_url }}">
 
   {%- comment -%} ============ 1 · HERO ============ {%- endcomment -%}
-  <section class="ap-hero" data-ap-hero>
+  <section class="ap-hero" data-ap-hero data-header-variant="light">
     <img class="ap-hero__poster" src="{{ poster | asset_url }}" alt="" width="1920" height="1080" fetchpriority="high" decoding="async">
     <video class="ap-hero__video" muted loop playsinline preload="metadata" poster="{{ poster | asset_url }}" data-start="3">
       <source src="{{ video | asset_url }}" type="video/mp4">
@@ -86,29 +88,14 @@
   </section>
 
   {%- comment -%} ============ 3 · PROCESO oscuro · plato 3D ============ {%- endcomment -%}
-  <section class="ap-proceso" id="proceso" data-ap-proceso>
-    <div class="ap-proceso__track" data-ap-proceso-track>
+  <section class="ap-proceso" id="proceso" data-ap-proceso data-header-variant="light">
+    <div class="ap-proceso__track process-track" data-ap-proceso-track>
       <div class="ap-proceso__pin">
-        <div class="ap-plate-wrap">
-          <model-viewer
-            id="ap-plate-canvas"
-            class="ap-plate"
-            src="{{ plate_glb | asset_url }}"
-            alt="Plato Aurora 202 Rosa de La Cartuja de Sevilla"
-            camera-controls
-            disable-zoom
-            interaction-prompt="none"
-            auto-rotate
-            auto-rotate-delay="0"
-            rotation-per-second="14deg"
-            shadow-intensity="0.9"
-            exposure="1.05"
-            environment-image="neutral"
-            data-ap-model>
-            <img class="ap-plate__fallback show" slot="poster" src="{{ plate_fallback | asset_url }}" alt="Plato Aurora 202 Rosa" width="800" height="800" loading="lazy" decoding="async">
-          </model-viewer>
+        <div class="ap-plate-wrap plate-wrap">
+          <canvas id="plate-canvas" class="ap-plate"></canvas>
+          <img class="ap-plate__fallback plate-fallback" src="{{ plate_fallback | asset_url }}" alt="Plato Aurora 202 Rosa" width="800" height="800" loading="lazy" decoding="async">
           <noscript>
-            <img class="ap-plate__fallback ap-plate__fallback--static show" src="{{ plate_fallback | asset_url }}" alt="Plato Aurora 202 Rosa" width="800" height="800">
+            <img class="ap-plate__fallback ap-plate__fallback--static" src="{{ plate_fallback | asset_url }}" alt="Plato Aurora 202 Rosa" width="800" height="800">
           </noscript>
         </div>
 
@@ -293,7 +280,10 @@
   color: var(--ap-ink);
   font-family: var(--sans);
   font-weight: 300;
-  overflow-x: hidden;
+  /* clip (not hidden): hidden forces overflow-y:auto → scroll-container →
+     breaks the sticky pins of intro/proceso. clip keeps the horizontal
+     safety-clip without creating a scroll container, so sticky works. */
+  overflow-x: clip;
 }
 .artesania-page img,
 .artesania-page video { display: block; max-width: 100%; }
@@ -482,17 +472,19 @@
   position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none;
 }
 .artesania-page .ap-plate,
-.artesania-page #ap-plate-canvas {
-  width: min(78vmin, 720px); height: min(78vmin, 720px); aspect-ratio: 1/1; object-fit: contain;
-  background: transparent; --poster-color: transparent;
+.artesania-page #plate-canvas {
+  width: min(78vmin, 720px); height: min(78vmin, 720px); aspect-ratio: 1/1;
+  background: transparent;
 }
 .artesania-page .ap-plate__fallback {
-  width: 100%; height: 100%; object-fit: contain;
+  width: min(48vmin, 440px); height: auto; object-fit: contain;
   filter: drop-shadow(0 30px 50px rgba(0,0,0,.5));
 }
-.artesania-page .ap-plate__fallback--static {
-  position: absolute; width: min(48vmin, 440px); height: auto;
+.artesania-page .plate-fallback {
+  position: absolute; opacity: 0; pointer-events: none; transition: opacity .5s ease;
 }
+.artesania-page .plate-fallback.show { opacity: 1; }
+.artesania-page .ap-plate__fallback--static { position: absolute; }
 
 .artesania-page .ap-proceso__copy {
   position: relative; z-index: 3; width: var(--ap-content); height: 100%; margin: 0 auto;
@@ -689,7 +681,7 @@
   .artesania-page .ap-calidad__grid { grid-template-columns: 1fr; gap: 36px; }
   .artesania-page .ap-intro__statement { width: 62%; }
   .artesania-page .ap-plate,
-  .artesania-page #ap-plate-canvas { width: 84vmin; height: 84vmin; }
+  .artesania-page #plate-canvas { width: 84vmin; height: 84vmin; }
 }
 @media (max-width: 780px) {
   /* proceso en móvil: pin más corto, copys apilados, sin recortes */
@@ -704,7 +696,7 @@
   .artesania-page .ap-proc-side--l { display: none; }
   .artesania-page .ap-proc-title { font-size: clamp(34px, 9vw, 52px); }
   .artesania-page .ap-plate,
-  .artesania-page #ap-plate-canvas { width: 92vmin; height: 92vmin; }
+  .artesania-page #plate-canvas { width: 92vmin; height: 92vmin; }
   .artesania-page .ap-proceso__final { bottom: 7vh; }
 
   /* sección 2 en móvil: sin pin, apilado, vídeo estático */
@@ -767,23 +759,35 @@
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var mobile = function () { return window.matchMedia('(max-width: 780px)').matches; };
 
-    /* ---- lazy-load self-hosted model-viewer when proceso nears viewport ---- */
-    var mvSrc = root.dataset.modelViewerSrc;
+    /* ---- lazy-load the Three.js plate when proceso nears viewport ----
+       Ships as injected assets (three + textures then plate) to dodge
+       theme-check AssetSizeJavaScript / ParserBlockingJavaScript. Under
+       reduced-motion we skip the ~899KB entirely and show the static plate. */
     var procesoEl = root.querySelector('[data-ap-proceso]');
-    if (mvSrc && procesoEl && !window.customElements.get('model-viewer')) {
-      var loaded = false;
-      var loadMV = function () {
-        if (loaded) return; loaded = true;
+    var plateFb = root.querySelector('.plate-fallback');
+    var booted = false;
+    function loadScript(src) {
+      return new Promise(function (res, rej) {
         var s = document.createElement('script');
-        s.type = 'module'; s.src = mvSrc;
+        s.src = src; s.onload = res; s.onerror = rej;
         document.head.appendChild(s);
-      };
+      });
+    }
+    function bootPlate() {
+      if (booted) return; booted = true;
+      Promise.all([loadScript(root.dataset.threeSrc), loadScript(root.dataset.texturesSrc)])
+        .then(function () { return loadScript(root.dataset.plateSrc); })
+        .catch(function () { if (plateFb) plateFb.classList.add('show'); });
+    }
+    if (reduce) {
+      if (plateFb) plateFb.classList.add('show');
+    } else if (procesoEl) {
       if ('IntersectionObserver' in window) {
-        var mvObs = new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) { if (en.isIntersecting) { loadMV(); mvObs.disconnect(); } });
+        var plObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { if (en.isIntersecting) { bootPlate(); plObs.disconnect(); } });
         }, { rootMargin: '600px 0px' });
-        mvObs.observe(procesoEl);
-      } else { loadMV(); }
+        plObs.observe(procesoEl);
+      } else { bootPlate(); }
     }
 
     /* ---- HERO video: seek to ~3s, autoplay muted, fade in ---- */
@@ -835,7 +839,6 @@
     var details = [].slice.call(root.querySelectorAll('[data-ap-phase-detail]'));
     var ticks = [].slice.call(root.querySelectorAll('[data-ap-tick]'));
     var closing = root.querySelector('[data-ap-closing]');
-    var model = root.querySelector('[data-ap-model]');
     var N = Math.max(titles.length, details.length) || 6;
     var curPhase = -1;
 
@@ -887,9 +890,7 @@
         var raw = clamp01(-pr.top / ptotal);
         setPhase(Math.min(N - 1, Math.floor(raw * N * 0.999)));
         if (closing) closing.classList.toggle('is-visible', raw > 0.9);
-        if (model && 'cameraOrbit' in model) {
-          try { model.cameraOrbit = (raw * 360).toFixed(1) + 'deg 78deg auto'; } catch (e2) {}
-        }
+        if (window.LCPlate) { window.LCPlate.setProgress(raw); }
       }
     }
 
@@ -914,8 +915,6 @@
       showStatic();
       update(); setInterval(update, 140);
     }, 480);
-
-    if (model) { model.addEventListener('load', function () { update(); }); }
   }
 
   document.querySelectorAll('.artesania-page').forEach(init);

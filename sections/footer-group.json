@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "Footer",
@@ -14,26 +23,32 @@
           "type": "column",
           "settings": {
             "heading": "Comprar",
-            "items": "Colecciones | /collections\nVajillas completas | /collections/vajillas-completas\nPiezas icónicas | /collections/emblemas"
+            "items": "Colecciones | /collections\nVajillas | /collections/vajillas\nPiezas icónicas | /collections/emblemas"
           }
         },
         "col-2": {
           "type": "column",
           "settings": {
             "heading": "La casa",
-            "items": "Nuestra historia | /pages/heritage\nNuestras mesas | /pages/nuestras-mesas\nEmblemas | /collections/emblemas"
+            "items": "Nuestra historia | /pages/heritage-1841\nNuestras mesas | /pages/nuestras-mesas\nEmblemas | /collections/emblemas"
           }
         },
         "col-3": {
           "type": "column",
           "settings": {
-            "heading": "Contacto",
-            "items": "Atención al cliente\nNewsletter\nES / EN"
+            "heading": "Ayuda y legal",
+            "menu": "footer"
           }
         }
       },
-      "block_order": ["col-1", "col-2", "col-3"]
+      "block_order": [
+        "col-1",
+        "col-2",
+        "col-3"
+      ]
     }
   },
-  "order": ["footer-multicol"]
+  "order": [
+    "footer-multicol"
+  ]
 }

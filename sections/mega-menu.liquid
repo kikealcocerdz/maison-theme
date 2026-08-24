@@ -84,13 +84,13 @@
   margin: 0 auto;
   padding: 58px 0 68px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr) 1.25fr;
-  gap: 48px;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) 1.2fr;
+  gap: min(3vw, 40px);
 }
 
 .mega h3 {
   font-family: var(--serif);
-  font-size: 30px;
+  font-size: clamp(22px, 1.7vw, 30px);
   font-weight: 400;
   margin: 0 0 24px;
 }
@@ -119,10 +119,14 @@
 .mega li a {
   display: flex;
   justify-content: space-between;
-  gap: 18px;
+  gap: 12px;
   width: 100%;
   color: inherit;
 }
+
+/* Rótulos largos ("Negro Vistas by ASH Yellow") mandan sobre la meta. */
+.mega li > span:first-child, .mega li a > span:first-child { min-width: 0; }
+.mega li a > span:last-child:not(:first-child) { flex: 0 0 auto; color: var(--muted); }
 
 .mega-card {
   background: var(--ink-faint-20);
@@ -161,7 +165,7 @@
     {
       "type": "column",
       "name": "Column",
-      "limit": 4,
+      "limit": 5,
       "settings": [
         { "type": "text", "id": "heading", "label": "Column heading", "default": "Producto" },
         { "type": "link_list", "id": "menu", "label": "Menu" },

@@ -5,6 +5,7 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/search
 {% endcomment %}
 
+<div class="shell-pad">
 <h1>{{ 'search.title' | t }}</h1>
 
 <form action="{{ routes.search_url }}" method="get" role="search">
@@ -41,6 +42,7 @@
                 {% endif %}
               </p>
             </div>
+            {% render 'quick-add', product: result %}
           </div>
         {% endfor %}
 
@@ -55,12 +57,17 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
+  .search-result {
+    position: relative;
+  }
   .search-results .prev,
   .search-results .page,
   .search-results .next {
     grid-column: 1 / -1;
   }
 {% endstylesheet %}
+
+</div>
 
 {% schema %}
 {

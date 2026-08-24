@@ -6,7 +6,7 @@
   Distinct from snippets/collection-card.liquid (PLP grid), whose DOM differs.
 
   Accepts (all optional; caller passes either a `product` or demo values):
-    card_url, title, price, meta, img1, img2, img_w, img_h, badge,
+    card_url, title, price, meta, img1, img_w, img_h, badge,
     data_price, data_new
 {%- endcomment -%}
 {%- liquid
@@ -24,12 +24,7 @@
     {%- if img1 != blank -%}
       <img class="main" src="{{ img1 }}" alt="{{ c_title | escape }}" width="{{ c_w }}" height="{{ c_h }}" loading="lazy" decoding="async">
     {%- endif -%}
-    {%- if img2 != blank -%}
-      <img class="hover" src="{{ img2 }}" alt="{{ c_title | escape }}" width="{{ c_w }}" height="{{ c_h }}" loading="lazy" decoding="async">
-    {%- endif -%}
-    {%- if img3 != blank -%}
-      <img class="hover" src="{{ img3 }}" alt="{{ c_title | escape }}" width="{{ c_w }}" height="{{ c_h }}" loading="lazy" decoding="async">
-    {%- endif -%}
+    {% render 'quick-add', product: product %}
   </div>
   <div class="product-info"><div><h3><a href="{{ c_url }}">{{ c_title | escape }}</a></h3>{%- if meta != blank -%}<p>{{ meta | escape }}</p>{%- endif -%}</div>{%- if price != blank -%}<span class="price">{{ price }}</span>{%- endif -%}</div>
 </article>

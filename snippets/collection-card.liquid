@@ -7,7 +7,7 @@
     title     — product title
     price     — preformatted price string (e.g. "68 €")
     meta      — small meta line under the title (e.g. subcollection name)
-    img1, img2 — image URLs (main + hover); for real products use featured_image + images[1]
+    img1      — image URL; for real products use featured_image
     img_w, img_h — intrinsic dimensions for the <img> (Theme Check requires width+height)
     badge     — truthy to show the "Novedad" badge
     data_price, data_new, data_type — dataset values used by client-side sort/filter
@@ -31,9 +31,7 @@
     {%- if img1 != blank -%}
       <img class="main" src="{{ img1 }}" alt="{{ c_title | escape }}" width="{{ c_w }}" height="{{ c_h }}" loading="lazy" decoding="async">
     {%- endif -%}
-    {%- if img2 != blank -%}
-      <img class="hover" src="{{ img2 }}" alt="{{ c_title | escape }}" width="{{ c_w }}" height="{{ c_h }}" loading="lazy" decoding="async">
-    {%- endif -%}
+    {% render 'quick-add', product: product %}
   </div>
   <div class="product-info">
     <h3><a href="{{ c_url }}">{{ c_title | escape }}</a></h3>

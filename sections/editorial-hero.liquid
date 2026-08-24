@@ -10,7 +10,7 @@
   <div class="editorial-hero__sticky">
     <div class="editorial-hero__frame">
       {%- if hero_video_src != blank -%}
-        <video class="editorial-hero__media" autoplay muted loop playsinline preload="auto" poster="{%- if section.settings.image != blank -%}{{ section.settings.image | image_url: width: 1920 }}{%- else -%}{{ 'hero.webp' | asset_url }}{%- endif -%}" aria-label="{{ section.settings.heading | strip_html | escape }}">
+        <video class="editorial-hero__media" autoplay muted loop playsinline preload="auto" poster="{%- if section.settings.image != blank -%}{{ section.settings.image | image_url: width: 1920 }}{%- else -%}{{ 'hero-poster.webp' | asset_url }}{%- endif -%}" aria-label="{{ section.settings.heading | strip_html | escape }}">
           <source src="{{ hero_video_src }}" type="video/mp4">
         </video>
       {%- elsif section.settings.image != blank -%}

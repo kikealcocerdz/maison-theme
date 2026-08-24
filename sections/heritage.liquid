@@ -25,7 +25,7 @@
   assign hero_poster = section.settings.hero_video_poster | default: 'heritage-hero-poster.jpg'
   assign finale_img = section.settings.finale_image
   assign finale_demo = section.settings.finale_demo_image | default: 'collection-aurora.webp'
-  assign asset_files = 'history-dawn.png,history-sunset.png,craft.webp,collection-aurora.webp,gifts_decor_arch.png,gifts-decor-vertical.png,mesa_aurora_editorial.jpg,mesa_bodegon_el_renacer.webp,negro_vistas_bandeja.png,negro_vistas_bandeja_photo.jpg,negro_vistas_plato.png,aurora_202_plato.png,aurora_202_sopera.png,aurora_202_cafetera.png,bellavista_plato.png,bellavista_sopera.png,bellavista_fuente.png,heritage-dossier_p03.webp,heritage-dossier_p05.webp,heritage-dossier_p06.webp,heritage-dossier_p07.webp,heritage-dossier_p08.webp,heritage-dossier_p09.webp,heritage-dossier_p10.webp,heritage-dossier_p11.webp,heritage-dossier_p12.webp,heritage-dossier_p13.webp,heritage-dossier_p14.webp,heritage-dossier_p15.webp,heritage-dossier_p21.webp,heritage-dossier_p22.webp,heritage-dossier_p23.webp,heritage-dossier_p24.webp,heritage-dossier_p25.webp' | split: ','
+  assign asset_files = 'history-dawn.png,history-sunset.png,craft.webp,collection-aurora.webp,mesa_bodegon_lujo_el_renacer.webp,gifts-decor-vertical.webp,gifts_decor_arch.png,gifts-decor-vertical.png,mesa_aurora_editorial.jpg,mesa_bodegon_el_renacer.webp,negro_vistas_bandeja.png,negro_vistas_bandeja_photo.jpg,negro_vistas_plato.png,aurora_202_plato.png,aurora_202_sopera.png,aurora_202_cafetera.png,bellavista_plato.png,bellavista_sopera.png,bellavista_fuente.png,heritage-dossier_p03.webp,heritage-dossier_p05.webp,heritage-dossier_p06.webp,heritage-dossier_p07.webp,heritage-dossier_p08.webp,heritage-dossier_p09.webp,heritage-dossier_p10.webp,heritage-dossier_p11.webp,heritage-dossier_p12.webp,heritage-dossier_p13.webp,heritage-dossier_p14.webp,heritage-dossier_p15.webp,heritage-dossier_p21.webp,heritage-dossier_p22.webp,heritage-dossier_p23.webp,heritage-dossier_p24.webp,heritage-dossier_p25.webp' | split: ','
   comment
     The 50 real heritage-2026 photos now ship as `heritage2026-opt-<NAME>.webp`. The
     JS milestone data builds logical paths `assets/heritage-2026/opt-<NAME>.webp`, so
@@ -44,7 +44,7 @@
     <nav class="heritage-timeline-links"></nav>
   </aside>
 
-  <section class="hero-history" data-heritage-hero>
+  <section class="hero-history" data-heritage-hero data-header-variant="light">
     {%- if hero_video != blank -%}
       {%- comment -%} Section-setting video upload (Shopify-hosted sources) {%- endcomment -%}
       <video class="hero-video" autoplay muted loop playsinline preload="metadata"{% if hero_poster != blank %} poster="{{ hero_poster | asset_url }}"{% endif %} aria-label="{{ section.settings.hero_eyebrow | escape }}">
@@ -128,7 +128,7 @@
 .heritage-page .hero-history { position: relative; height: 100vh; min-height: 720px; overflow: hidden; background: #07111f; color: #fff; }
 .heritage-page .hero-history img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(.95) saturate(.88) brightness(.56); transform: scale(1.04); animation: heroDrift 18s var(--ease) infinite alternate; }
 /* Hero Heritage video — overrides the img drift/brightness filter (live parity) */
-.heritage-page .hero-history .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.heritage-page .hero-history .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; filter: contrast(.95) saturate(.88) brightness(.56); transform: scale(1.04); animation: heroDrift 18s var(--ease) infinite alternate; }
 .heritage-page .hero-vignette { position: absolute; inset: 0; background: radial-gradient(circle at 52% 42%, rgba(6, 16, 29, .12), rgba(6, 16, 29, .72) 66%, rgba(6, 16, 29, .94)); }
 .heritage-page .hero-copy { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 0 8vw; }
 .heritage-page .hero-copy h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(74px, 11vw, 174px); line-height: .84; letter-spacing: -.045em; margin: 18px 0 28px; }
@@ -337,7 +337,7 @@
 .heritage-page.is-static .era-meta, .heritage-page.is-static .era-copy { opacity: 1 !important; transform: none !important; filter: none !important; }
 .heritage-page.is-static .global-ghost-title { display: none; }
 .heritage-page.is-static .frame, .heritage-page.is-static .card, .heritage-page.is-static .mag-card, .heritage-page.is-static .media { opacity: 1 !important; transform: none !important; filter: none !important; }
-.heritage-page.is-static .hero-history img, .heritage-page.is-static .finale-bg img { animation: none; }
+.heritage-page.is-static .hero-history img, .heritage-page.is-static .hero-history .hero-video, .heritage-page.is-static .finale-bg img { animation: none; }
 {% endstylesheet %}
 
 {% javascript %}
@@ -352,16 +352,10 @@
        emitted into __HERITAGE_ASSETS keyed by their opt-*.webp basename (see Liquid
        above), so resolve() finds them directly. Only the Renacer composition still
        maps onto existing catalog assets. */
-    var MAP = {
-      'mesa_bodegon_lujo_el_renacer.png': 'mesa_bodegon_el_renacer.webp',
-      'collection-aurora.webp': 'collection-aurora.webp',
-      'gifts-decor-vertical.png': 'gifts-decor-vertical.png'
-    };
     function resolve(u) {
       if (!u) return u;
       var base = u.split('/').pop();
-      var target = MAP[base] || base;
-      return assets[target] || u;
+      return assets[base] || u;
     }
 
     var H = 'assets/heritage-2026/';
@@ -402,7 +396,7 @@
         car3:[A('h08-nueva-carC1'),A('h08-nueva-carC2')]},
 
       {id:'renacer', group:4, label:'El Renacer', year:'2026', title:'EL\nRENACER', kicker:'Presente', heading:'Una casa histórica vuelve a ocupar su lugar', text:'El Renacer propone volver a mirar La Cartuja desde el presente: formas históricas, decorados icónicos y objetos de conversación reinterpretados para la vida contemporánea.', more:'La nueva etapa no parte de cero. Parte de un archivo, una ciudad, una colección histórica reconocida y una manera de entender la mesa como memoria viva.', cap:'Presente, colección y futuro', layout:'renacer',
-        a:'assets/mesa_bodegon_lujo_el_renacer.png', b:'assets/collection-aurora.webp', c:'assets/gifts-decor-vertical.png'}
+        a:'assets/mesa_bodegon_lujo_el_renacer.webp', b:'assets/collection-aurora.webp', c:'assets/gifts-decor-vertical.webp'}
     ];
 
     var eras = milestones;
@@ -541,6 +535,7 @@
       ghostA.style.opacity = (presence * maxOpacity * (1 - t)).toFixed(3);
       ghostB.style.opacity = (presence * maxOpacity * t).toFixed(3);
       root.classList.toggle('heritage-dark', tone === dark);
+      root.setAttribute('data-header-variant', tone === dark ? 'light' : 'dark');
     }
 
     function phaseStyles(sec, p) {

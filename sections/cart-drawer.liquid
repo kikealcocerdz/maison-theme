@@ -198,6 +198,9 @@
 }
 .cart-drawer__viewcart:hover { color: var(--ink); background-size: 100% 0.5px; }
 
+/* Author display:flex overrides the UA's [hidden] rule — re-assert it. */
+.cart-drawer [hidden] { display: none !important; }
+
 .cart-drawer.is-loading .cart-drawer__panel { cursor: progress; }
 .cart-drawer.is-loading .cart-drawer__body { opacity: 0.55; transition: opacity 160ms var(--ease); }
 
@@ -207,12 +210,19 @@
 {% endstylesheet %}
 
 {% javascript %}
-(function () {
+(function init() {
   if (window.__cartDrawerInit) return;
-  window.__cartDrawerInit = true;
 
+  // Only claim the init flag once the drawer is actually in the DOM. If this
+  // script runs before it, retry on DOMContentLoaded — burning the flag on a
+  // null lookup left every add-to-cart form falling back to a native POST,
+  // i.e. a full page load to /cart instead of opening the drawer.
   var drawer = document.getElementById('cartDrawer');
-  if (!drawer) return;
+  if (!drawer) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+    return;
+  }
+  window.__cartDrawerInit = true;
 
   var body = document.body;
   var bodyEl = drawer.querySelector('[data-cart-body]');

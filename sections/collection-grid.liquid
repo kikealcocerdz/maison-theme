@@ -84,7 +84,6 @@
             {%- for product in collection.products -%}
               {%- liquid
                 assign p_img1 = product.featured_image | image_url: width: 720
-                assign p_img2 = product.images[1] | image_url: width: 720
                 assign p_w = product.featured_image.width | default: 1000
                 assign p_h = product.featured_image.height | default: 1250
                 assign p_price = product.price | money
@@ -93,16 +92,22 @@
                   assign p_new = 1
                 endif
               -%}
-              {% render 'collection-card',
+              {% render 'collection-card', product: product,
                 card_url: product.url, title: product.title,
                 price: p_price, meta: product.type,
-                img1: p_img1, img2: p_img2, img_w: p_w, img_h: p_h,
+                img1: p_img1, img_w: p_w, img_h: p_h,
                 badge: p_new, data_price: product.price, data_new: p_new, data_type: product.type %}
               {%- if forloop.index == editorial_after and has_editorial -%}{% render 'collection-editorial-insert', ed_picker: ed_picker, ed_asset: ed_asset, ed_text: ed_text %}{%- endif -%}
             {%- endfor -%}
 
-            {%- if paginate.next -%}
-              <div class="load-more"><a class="ghost-btn" href="{{ paginate.next.url }}" rel="next">{{ 'sections.collection.load_more' | t }}&nbsp;→</a></div>
+            {%- if paginate.pages > 1 -%}
+              {%- assign shown = paginate.current_offset | plus: collection.products.size -%}
+              <div class="load-more" data-total="{{ collection.products_count }}">
+                <p class="load-count">{{ 'sections.collection.showing' | t: shown: shown, total: collection.products_count }}</p>
+                {%- if paginate.next -%}
+                  <a class="ghost-btn" href="{{ paginate.next.url }}" rel="next">{{ 'sections.collection.load_more' | t }}&nbsp;→</a>
+                {%- endif -%}
+              </div>
             {%- endif -%}
           {%- endpaginate -%}
         {%- else -%}
@@ -111,10 +116,6 @@
             {%- if block.type == 'product' -%}
               {%- liquid
                 assign d_img1 = block.settings.demo_image | asset_url
-                assign d_img2 = ''
-                if block.settings.demo_image_2 != blank
-                  assign d_img2 = block.settings.demo_image_2 | asset_url
-                endif
                 assign is_extra = false
                 if forloop.index > initial_count
                   assign is_extra = true
@@ -124,7 +125,7 @@
               {% render 'collection-card',
                 card_url: block.settings.link, title: block.settings.demo_title,
                 price: block.settings.demo_price, meta: block.settings.demo_meta,
-                img1: d_img1, img2: d_img2, badge: block.settings.badge,
+                img1: d_img1, badge: block.settings.badge,
                 data_price: block.settings.data_price, data_new: block.settings.data_new,
                 data_type: block.settings.data_type, extra: is_extra %}
               {%- if forloop.index == editorial_after and has_editorial -%}{% render 'collection-editorial-insert', ed_picker: ed_picker, ed_asset: ed_asset, ed_text: ed_text %}{%- endif -%}
@@ -152,17 +153,21 @@
 }
 .collection-page .shop-main { min-width: 0; }
 
+/* The description column is the narrow one: the sidebar already eats 230px, so
+   a .78fr share behind a 90px gap left it ~275px (≈36 chars) on a 1440 screen.
+   Rebalanced toward the copy; the 0 floor lets it shrink instead of overflowing
+   just above the 1180px breakpoint, where the old 260+320 floors didn't fit. */
 .collection-page .collection-intro {
   width: 100%; margin: 0 0 46px;
-  display: grid; grid-template-columns: minmax(260px, 1fr) minmax(320px, .78fr);
-  gap: min(6vw, 90px); align-items: end;
+  display: grid; grid-template-columns: minmax(240px, 1fr) minmax(0, 1.05fr);
+  gap: min(3.5vw, 56px); align-items: end;
 }
 .collection-page .collection-intro h1 {
   font-family: var(--serif); font-weight: 400; font-size: clamp(44px, 5vw, 78px);
   line-height: .95; margin: 0; color: var(--ink); font-variant: small-caps; letter-spacing: .02em;
 }
 .collection-page .collection-intro > p {
-  justify-self: end; text-align: right; color: #777f8d; max-width: 540px;
+  justify-self: end; text-align: right; color: #777f8d; max-width: 600px;
   margin: 0 0 4px auto; font-size: 14px; line-height: 1.8;
 }
 .collection-page .collection-kicker {
@@ -217,15 +222,16 @@
 .collection-page .products.is-list .product-info p { font-size: 11px; }
 .collection-page .products.is-list .price { min-width: 80px; text-align: left; }
 .collection-page .products.is-list .fav { right: auto; left: 88px; top: 8px; }
-.collection-page .products.is-list .media-side-arrow, .collection-page .products.is-list .media-nav { display: none; }
 
 /* Editorial insert */
 .collection-page .editorial-insert { grid-column: 1 / -1; margin: 48px 0 26px; display: block; }
 .collection-page .editorial-insert img { width: 100%; height: min(46vw, 640px); object-fit: cover; background: var(--ink-faint-20); }
 .collection-page .editorial-insert p { font-family: var(--sans); font-size: 12px; line-height: 1.7; letter-spacing: .02em; color: #747b88; max-width: 560px; margin: 16px 0 0; }
 
-.collection-page .load-more { display: flex; justify-content: center; margin: 70px 0 126px; grid-column: 1 / -1; }
+.collection-page .load-more { display: flex; flex-direction: column; align-items: center; gap: 18px; margin: 70px 0 126px; grid-column: 1 / -1; }
 .collection-page .load-more .ghost-btn { min-width: 220px; }
+.collection-page .load-count { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.collection-page .load-more.is-loading .ghost-btn { opacity: .45; pointer-events: none; }
 .collection-page .extra-product.is-hidden { display: none !important; }
 
 @media (max-width: 1180px) {
@@ -275,9 +281,12 @@
       });
     });
 
-    // Favourite toggle (visual only)
-    root.querySelectorAll('.fav').forEach(function (b) {
-      b.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); b.classList.toggle('active'); });
+    // Favourite toggle (visual only) — delegated so cards appended by "load more" work too
+    root.addEventListener('click', function (e) {
+      var f = e.target.closest('.fav');
+      if (!f) return;
+      e.preventDefault(); e.stopPropagation();
+      f.classList.toggle('active');
     });
 
     // Sort
@@ -300,6 +309,8 @@
             if (editorial && i === 6) grid.insertBefore(editorial, item);
             grid.appendChild(item);
           });
+          var lmEl = grid.querySelector('.load-more');
+          if (lmEl) grid.appendChild(lmEl); // keep the load-more block last after re-ordering
           sw.classList.remove('open');
         });
       });
@@ -311,6 +322,64 @@
       root.querySelectorAll('.extra-product.is-hidden').forEach(function (el) { el.classList.remove('is-hidden'); el.classList.add('is-visible'); });
       lm.style.display = 'none';
     });
+
+    // Load more (real path) — append the next paginated page instead of navigating to it,
+    // and auto-fire when the block scrolls into view. The <a href> stays a real link, so
+    // no-JS and crawlers keep the normal ?page=N flow.
+    var more = root.querySelector('.load-more[data-total]');
+    var link = more && more.querySelector('a[rel="next"]');
+    if (grid && link) {
+      var count = more.querySelector('.load-count');
+      var observer = null;
+      var loading = false;
+
+      function done() {
+        if (observer) { observer.disconnect(); observer = null; }
+        link.remove();
+        link = null;
+      }
+
+      function loadNext() {
+        if (loading || !link) return;
+        loading = true;
+        more.classList.add('is-loading');
+        // Section Rendering API: returns just this section, not the whole document.
+        var sid = root.dataset.sectionId;
+        fetch(link.href + (sid ? '&section_id=' + encodeURIComponent(sid) : ''))
+          .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
+          .then(function (html) {
+            var next = new DOMParser().parseFromString(html, 'text/html').querySelector('#productGrid');
+            if (!next) return done();
+            // Only .product nodes: the next page renders its own .editorial-insert, which
+            // must not be duplicated mid-grid.
+            next.querySelectorAll('.product').forEach(function (el) { grid.insertBefore(el, more); });
+            var nextCount = next.querySelector('.load-count');
+            if (count && nextCount) count.textContent = nextCount.textContent;
+            var nextLink = next.querySelector('.load-more a[rel="next"]');
+            if (nextLink) link.href = nextLink.href; else done();
+            // ponytail: let theme.js's shopify:section:load handler pick up the new cards
+            // (reveal observer) instead of re-implementing it here. init() is guarded by
+            // root.dataset.init, so the section's own listener re-entry is a no-op.
+            root.dispatchEvent(new CustomEvent('shopify:section:load', { bubbles: true }));
+          })
+          .catch(function () { if (link) link.removeAttribute('data-ajax'); }) // fall back to plain navigation
+          .then(function () { loading = false; more.classList.remove('is-loading'); });
+      }
+
+      link.dataset.ajax = '1';
+      link.addEventListener('click', function (e) {
+        if (!link.dataset.ajax) return; // a failed fetch reverts to normal navigation
+        e.preventDefault();
+        loadNext();
+      });
+
+      if ('IntersectionObserver' in window) {
+        observer = new IntersectionObserver(function (entries) {
+          if (entries.some(function (en) { return en.isIntersecting; })) loadNext();
+        }, { rootMargin: '600px' });
+        observer.observe(more);
+      }
+    }
   }
 
   document.querySelectorAll('.collection-grid').forEach(init);
@@ -347,7 +416,6 @@
         { "type": "text", "id": "demo_price", "label": "Price (e.g. 68 €)" },
         { "type": "text", "id": "demo_meta", "label": "Meta line (e.g. subcollection)" },
         { "type": "text", "id": "demo_image", "label": "Image (asset filename)" },
-        { "type": "text", "id": "demo_image_2", "label": "Hover image (asset filename)" },
         { "type": "checkbox", "id": "badge", "label": "Show 'Novedad' badge", "default": false },
         { "type": "header", "content": "Sort / filter data" },
         { "type": "number", "id": "data_price", "label": "Sort price (number)" },

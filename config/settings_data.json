@@ -1,7 +1,14 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
-    "logo": null,
-    "logo_light": null,
     "logo_width": 88,
     "logo_alt": "La Cartuja de Sevilla",
     "color_paper": "#FFFFFF",
@@ -22,8 +29,7 @@
     "social_instagram": "",
     "social_facebook": "",
     "social_pinterest": "",
-    "social_youtube": "",
-    "favicon": null
+    "social_youtube": ""
   },
   "presets": {
     "Default": {

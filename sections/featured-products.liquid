@@ -38,6 +38,7 @@
                 <h3 class="block-product-card__title">{{ product.title | escape }}</h3>
                 <span class="block-product-card__price">{{ product.price | money }}</span>
               </a>
+              {% render 'quick-add', product: product %}
             </article>
           {%- endfor -%}
         {%- else -%}
@@ -76,7 +77,7 @@
 .featured-products__track { display: flex; cursor: grab; -webkit-user-select: none; user-select: none; }
 .featured-products__track.is-dragging { cursor: grabbing; }
 .featured-products__track.is-dragging a { pointer-events: none; }
-.featured-products__card { flex: 0 0 calc(100% / 3); padding: 0 18px; text-align: center; }
+.featured-products__card { position: relative; flex: 0 0 calc(100% / 3); padding: 0 18px; text-align: center; }
 
 /* Auto-fill cards reuse .block-product-card__* markup but not its block stylesheet,
    so give them a self-contained hover lift (matches mockup .best-card img). */

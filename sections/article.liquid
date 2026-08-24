@@ -6,6 +6,7 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/article
 {% endcomment %}
 
+<div class="shell-pad">
 {% if article.image %}
   {{ article.image | image_url: width: 1000 | image_tag }}
 {% endif %}
@@ -59,6 +60,8 @@
     <input type="submit" value="{{ 'blog.comment_form_submit' | t }}">
   {% endform %}
 {% endif %}
+
+</div>
 
 {% schema %}
 {
