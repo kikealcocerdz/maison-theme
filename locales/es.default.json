@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "404": {
     "title": "404",
@@ -116,6 +125,7 @@
       "sort_high": "Precio - alto a bajo",
       "sort_low": "Precio - bajo a alto",
       "load_more": "Cargar más",
+      "showing": "Mostrando {{ shown }} de {{ total }}",
       "badge_new": "Novedad",
       "favorite": "Añadir a favoritos",
       "prev_long": "Anterior",
@@ -126,7 +136,11 @@
       "prev": "Imagen anterior",
       "next": "Imagen siguiente",
       "close": "Cerrar galería",
-      "thumbs": "Miniaturas de producto"
+      "thumbs": "Miniaturas de producto",
+      "color": "Color",
+      "service": "Servicio",
+      "pieces_selector": "Selecciona el número de piezas",
+      "pack_intro": "Tu pack contiene:"
     },
     "tables": {
       "filters": "Filtros de mesas",

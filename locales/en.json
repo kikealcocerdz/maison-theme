@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "404": {
     "title": "404",
@@ -116,6 +125,7 @@
       "sort_high": "Price - high to low",
       "sort_low": "Price - low to high",
       "load_more": "Load more",
+      "showing": "Showing {{ shown }} of {{ total }}",
       "badge_new": "New",
       "favorite": "Add to favourites",
       "prev_long": "Previous",
@@ -126,7 +136,11 @@
       "prev": "Previous image",
       "next": "Next image",
       "close": "Close gallery",
-      "thumbs": "Product thumbnails"
+      "thumbs": "Product thumbnails",
+      "color": "Colour",
+      "service": "Service",
+      "pieces_selector": "Select the number of pieces",
+      "pack_intro": "Your set includes:"
     },
     "tables": {
       "filters": "Table filters",
