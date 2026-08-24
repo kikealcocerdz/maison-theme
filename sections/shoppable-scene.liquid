@@ -17,7 +17,7 @@
           {% render 'image-responsive', image: section.settings.image, alt: section.settings.image.alt, sizes: '(max-width: 1000px) 100vw, 55vw' %}
         {%- else -%}
           {%- comment -%} Demo fallback (shipped in /assets) until a scene image is set. {%- endcomment -%}
-          <img src="{{ 'mesa_ochavada_negro_vistas.webp' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1800" height="1343" loading="lazy" decoding="async">
+          <img src="{{ 'mesa_aurora_oaxaca.webp' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1800" height="1343" loading="lazy" decoding="async">
         {%- endif -%}
         {%- for block in products -%}
           {%- liquid
@@ -58,10 +58,20 @@
         "cartUrl": {{ routes.cart_add_url | json }},
         "addLabel": {{ section.settings.add_label | default: '' | json }},
         "sets": [
-          {%- if section.settings.set1_label != blank -%}
-            { "label": {{ section.settings.set1_label | json }}, "variant": {{ set1.selected_or_first_available_variant.id | json }} }{%- if section.settings.set2_label != blank -%},{%- endif -%}
+          {%- liquid
+            assign show_set1 = false
+            assign show_set2 = false
+            if set1 != blank and section.settings.set1_label != blank
+              assign show_set1 = true
+            endif
+            if set2 != blank and section.settings.set2_label != blank
+              assign show_set2 = true
+            endif
+          -%}
+          {%- if show_set1 -%}
+            { "label": {{ section.settings.set1_label | json }}, "variant": {{ set1.selected_or_first_available_variant.id | json }} }{%- if show_set2 -%},{%- endif -%}
           {%- endif -%}
-          {%- if section.settings.set2_label != blank -%}
+          {%- if show_set2 -%}
             { "label": {{ section.settings.set2_label | json }}, "variant": {{ set2.selected_or_first_available_variant.id | json }} }
           {%- endif -%}
         ],
@@ -195,10 +205,16 @@
 
 .scene-image-open { display: block; width: 100%; background: transparent; border: 0; padding: 0; margin: 0 auto 34px; cursor: zoom-in; }
 .scene-image-open img { height: min(48vh, 420px) !important; margin: 0 auto !important; }
-.scene-actions { display: grid; gap: 10px; margin: 26px auto 0; width: min(100%, 360px); }
+.scene-actions { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin: 26px auto 0; width: min(100%, 360px); }
 .scene-actions form { display: contents; }
+.scene-actions > .ghost-btn.small-cart:first-child { grid-column: 1 / -1; }
 .ghost-btn.small-cart { height: 42px; padding: 0 18px; font-size: 10px; letter-spacing: 0.18em; width: 100%; }
-.ghost-btn.small-cart.alt { background: transparent; color: var(--ink); }
+.ghost-btn.small-cart.alt { background: transparent; color: var(--ink); padding: 0 10px; font-size: 9px; letter-spacing: 0.12em; white-space: nowrap; }
+.ghost-btn.small-cart:hover { background: var(--brand); border-color: var(--brand); color: var(--paper); }
+
+@media (max-width: 680px) {
+  .ghost-btn.small-cart.alt { font-size: 8px; letter-spacing: 0.08em; padding: 0 7px; }
+}
 
 .quick-image-lightbox {
   position: fixed; inset: 0; z-index: 9999; background: rgba(15, 26, 46, 0.82);

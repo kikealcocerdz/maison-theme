@@ -13,7 +13,7 @@
       "type": "editorial-hero",
       "settings": {
         "eyebrow": "La Cartuja de Sevilla · 1841",
-        "heading": "<p>El nuevo latir de una casa histórica.</p>",
+        "heading": "<p>Heritage crafted for modern living.</p>",
         "subheading": "<p>La Cartuja de Sevilla presenta El Renacer: una colección que reúne memoria, oficio y mesa contemporánea desde 1841.</p>",
         "demo_video": "hero-living-heritage-loop.mp4"
       }
@@ -104,61 +104,70 @@
       "settings": {
         "eyebrow": "Nuestras mesas",
         "heading": "Una escena, cada pieza.",
-        "description": "<p>Una escena editorial construida alrededor de Negro Vistas: piezas gráficas, contraste profundo y el gesto preciso de vestir la mesa pieza a pieza.</p>",
+        "description": "<p>Una escena editorial construida alrededor de Oaxaca: color, naturaleza y piezas con carácter para vestir la mesa de una forma más libre y expresiva.</p>",
         "cta_label": "Descubre nuestras mesas",
-        "cta_link": "/pages/mesas",
+        "cta_link": "/pages/nuestras-mesas",
         "cta2_label": "Aprende a vestir tu mesa",
         "cta2_link": "/pages/viste-tu-mesa",
         "add_label": "Añadir pieza",
-        "set1_product": "vajilla-42-p-negro-vistas",
-        "set1_label": "Añadir vajilla · 42 platos",
-        "set2_product": "vajilla-56-p-negro-vistas",
-        "set2_label": "Añadir vajilla · 56 platos"
+        "set1_product": "",
+        "set1_label": "",
+        "set2_product": "",
+        "set2_label": ""
       },
       "blocks": {
         "i1": {
           "type": "product",
           "settings": {
-            "meta_line": "Ochavada · Negro Vistas",
-            "product": "plato-llano-negro-vistas",
-            "hotspot_x": 40,
-            "hotspot_y": 54
+            "meta_line": "Aurora · Oaxaca",
+            "product": "plato-postre-oaxaca-verde-by-gaston-y-daniela",
+            "hotspot_x": 50,
+            "hotspot_y": 23
           }
         },
         "i2": {
           "type": "product",
           "settings": {
-            "meta_line": "Ochavada · Negro Vistas",
-            "product": "fuente-red-negro-vistas",
-            "hotspot_x": 58,
-            "hotspot_y": 60
+            "meta_line": "Aurora · Oaxaca",
+            "product": "plato-llano-oaxaca-azul-by-gaston-y-daniela",
+            "hotspot_x": 38,
+            "hotspot_y": 49
           }
         },
         "i3": {
           "type": "product",
           "settings": {
-            "meta_line": "Ochavada · Negro Vistas",
-            "product": "sopera-negro-vistas",
-            "hotspot_x": 70,
-            "hotspot_y": 43
+            "meta_line": "Aurora · Oaxaca",
+            "product": "plato-llano-oaxaca-amarillo-by-gaston-y-daniela",
+            "hotspot_x": 62,
+            "hotspot_y": 49
           }
         },
         "i4": {
           "type": "product",
           "settings": {
-            "meta_line": "Ochavada · Negro Vistas",
-            "product": "salsera-negro-vistas",
-            "hotspot_x": 80,
-            "hotspot_y": 62
+            "meta_line": "Aurora · Oaxaca",
+            "product": "plato-hondo-oaxaca-rosa-by-gaston-y-daniela-rosa",
+            "hotspot_x": 32,
+            "hotspot_y": 72
           }
         },
         "i5": {
           "type": "product",
           "settings": {
-            "meta_line": "Ochavada · Negro Vistas",
-            "product": "bandeja-pastas-negro-vistas",
-            "hotspot_x": 28,
-            "hotspot_y": 68
+            "meta_line": "Aurora · Oaxaca",
+            "product": "plato-postre-oaxaca-celeste-by-gaston-y-daniela",
+            "hotspot_x": 50,
+            "hotspot_y": 74
+          }
+        },
+        "i6": {
+          "type": "product",
+          "settings": {
+            "meta_line": "Aurora · Oaxaca",
+            "product": "plato-postre-oaxaca-negro-by-gaston-y-daniela",
+            "hotspot_x": 68,
+            "hotspot_y": 72
           }
         }
       },
@@ -167,14 +176,15 @@
         "i2",
         "i3",
         "i4",
-        "i5"
+        "i5",
+        "i6"
       ]
     },
     "story": {
       "type": "story-scroll",
       "settings": {
         "eyebrow": "185 años de historia",
-        "heading": "<p>El nuevo latir de una casa histórica.</p>",
+        "heading": "<p>Heritage crafted for modern living</p>",
         "paragraph": "<p>Fundada en Sevilla en 1841, La Cartuja se proyecta hoy como una lovemark: una historia de oficio, memoria y amor por una marca que vuelve a ocupar su lugar en la mesa contemporánea.</p>",
         "cta_label": "Descubre nuestra historia",
         "cta_link": "/pages/historia"

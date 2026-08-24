@@ -205,6 +205,7 @@
   {%- assign full_total = full_parts[0] | plus: 0 -%}
   {%- assign host_total = host_parts[0] | plus: 0 -%}
 
+  {%- if section.settings.show_buy_layers -%}
   <section aria-label="Comprar por capas" class="vt-section" id="buy">
     <div class="section-head reveal">
       <span class="eyebrow">Comprar por capas</span>
@@ -247,6 +248,7 @@
       </article>
     </div>
   </section>
+  {%- endif -%}
 
   <div aria-live="polite" class="vt-toast" id="vtToast" role="status"></div>
 </div>
@@ -1524,6 +1526,13 @@
     {
       "type": "header",
       "content": "Packs · Comprar por capas"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_buy_layers",
+      "label": "Mostrar «Comprar por capas»",
+      "info": "El diseño de agosto de 2026 retiró esta sección de la página. La lógica de carrito sigue aquí por si se recupera.",
+      "default": false
     },
     {
       "type": "paragraph",
