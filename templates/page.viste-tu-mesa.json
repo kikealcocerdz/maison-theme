@@ -1,9 +1,18 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "viste-tu-mesa",
       "settings": {
-        "hero_demo_image": "mesa_bodegon_lujo_el_renacer.webp",
+        "hero_demo_image": "hero-viste-tu-mesa.webp",
         "lab_plate_demo_image": "aurora_202_plato.webp",
         "pack_base_items": "plato-llano-bellavista | 4\nplato-postre-bellavista | 4",
         "pack_full_items": "plato-llano-bellavista | 4\nplato-postre-bellavista | 4\nplato-hondo-bellavista | 4\nbol-grande-bellavista | 4\nfuente-red-bellavista | 1\nsalsera-bellavista | 1",

@@ -1,13 +1,17 @@
 {%- comment -%}
   Viste tu mesa — editorial landing + interactive table-styling advisor
-  (faithful port of lastmocks/viste-tu-mesa.html + styles/viste-tu-mesa.css
-  + scripts/viste-tu-mesa.js, v53 photographic wizard preview).
+  (faithful port of https://cartuja.gropius.link/viste-tu-mesa.html +
+  styles/viste-tu-mesa.css + scripts/viste-tu-mesa.js, v69/v70: tubelight
+  guide, real-image layers lab, progressive-unlock wizard, editorial results).
 
-  Page = 7 pieces: hero · guía paso a paso (5 static steps, inline SVGs) ·
-  laboratorio de capas (7 layer toggles over a real plate photo) · wizard
-  (6 questions, live photo preview from FORM_IMAGES) · resultado (weighted
-  SCORE matrix × COLLECTIONS catalog → top-3 tabs + product cards) ·
-  comprar por capas (3 tiered buy cards) · toast.
+  Page = 7 pieces: hero (microparallax) · guía por pasos (tube-nav tabs +
+  photo panels) · laboratorio de capas (real webp layers over a wood table,
+  individual/mantel as a mutually-exclusive `data-exclusive="textil"` pair,
+  one `cuberteria` toggle driving both tenedor + cuchillo, plato+bajoplato
+  stack merge, quick presets) · asesor visual (6 progressive steps, photo
+  cascade preview from the formulario tree) · resultado (SCORE matrix ×
+  COLLECTIONS → top-3 editorial cards + match count-up) · comprar por capas
+  (3 tiered buy cards) · toast.
 
   Theme-integration adaptations vs the raw mockup:
    - Scoped under `.vt-page`; mockup class names kept. The mockup's own
@@ -15,30 +19,41 @@
      header-group / footer-group provide those. The mockup's reveal-on-scroll
      JS is dropped too (assets/theme.js already observes `.reveal`).
    - Image paths resolved through the window.__VT_ASSETS map below (asset_url):
-     `assets/viste-tu-mesa/*` → `vt-<name>.webp` (identical variants deduped:
-     27 logical keys → 10 physical files), `assets/catalog/<col>/<file>` →
-     `vt-cat-<col>-<file>`, root ambients keep their original basenames
-     (ochavada_canasto_floral.jpg / scene-left-tableware.webp already shipped).
+     `assets/viste-tu-mesa/lab|guide|formulario/*` → flattened `vt-lab-*` /
+     `vt-guide-*` / `vt-form-*` files. Only the shipped formulario subset
+     (01-espacio ×4, 02-ocasion 4×4, 03-base jardín ×16, 04-textil jardín ×16)
+     is mapped; resolve() returns null for unshipped candidates (05-estilo /
+     06-presencia and non-jardín 03/04) so the live onerror cascade skips
+     straight to the closest shipped photo. Root ambients keep their original
+     basenames y solo actúan de respaldo si la colección no tiene imagen.
    - COLLECTIONS collectionUrl/featuredUrl: mockup .html pages mapped onto
      theme routes (/collections/<handle>, PDP demo /products/plato-llano-202-rosa).
-   - `data-add` buy buttons stay visual like the mockup (toast only) — no fake
-     cart writes, real cart badge untouched.
-   - Reduced-motion: keyframe/transition off-switch + instant scrolling.
+   - Real cart: `[data-add]` buttons with `data-items` POST /cart/add.js and
+     open the theme cart drawer. The mockup's fake `Cesta (n)` counter is NOT
+     reintroduced.
+   - Resultado sobre catálogo real: COLLECTIONS solo guarda copy editorial;
+     nombre/url/precios/fotos/variantes se inyectan desde window.__VT_COLLECTIONS
+     (Liquid, lista `vt_recs`). El «Ajuste visual» sale de la puntuación, no es
+     un número fijo por posición.
+   - Reduced-motion: keyframe/transition off-switch, instant scrolling,
+     no microparallax, match numbers set without count-up.
 {%- endcomment -%}
 {%- liquid
   assign hero_img = section.settings.hero_image
-  assign hero_demo = section.settings.hero_demo_image | default: 'mesa_bodegon_lujo_el_renacer.webp'
-  assign plate_img = section.settings.lab_plate_image
-  assign plate_demo = section.settings.lab_plate_demo_image | default: 'aurora_202_plato.webp'
-  assign root_assets = 'mesa_bodegon_lujo_el_renacer.webp,aurora_202_plato.webp,mesa_aurora_editorial.webp,mesa_aurora_oaxaca.webp,mesa_ochavada_negro_vistas.webp,gifts_decor_arch.webp,ochavada_canasto_floral.jpg,scene-left-tableware.webp' | split: ','
-  assign jardin_bases = 'woodLight,woodDark,stone,graphite' | split: ','
-  assign jardin_textiles = 'linenWhite,linenBeige,blueSoft,dark' | split: ','
-  assign catalog_keys = 'aurora-blanca/plato-llano.webp,aurora-blanca/fuente-redonda.webp,aurora-blanca/cafetera.webp,202-rosa/plato-llano.webp,202-rosa/sopera.webp,202-rosa/cafetera.webp,bellavista/plato-llano.webp,bellavista/fuente-redonda.webp,bellavista/sopera.webp,ochavada-blanca/plato-llano.webp,ochavada-blanca/fuente-redonda.webp,ochavada-blanca/sopera.webp,negro-vistas/plato-llano.webp,negro-vistas/fuente-redonda.webp,negro-vistas/sopera.webp,oaxaca/prod_p5_0.webp,oaxaca/prod_p5_1.webp,oaxaca/prod_p5_2.webp,gifts-decor/bandeja-vistas-cibeles-azul.webp,gifts-decor/cabeza-frenologica.webp,gifts-decor/florero-alhambra-azul-grande.webp' | split: ','
+  assign hero_demo = section.settings.hero_demo_image | default: 'hero-viste-tu-mesa.webp'
+  assign root_assets = 'mesa_bodegon_lujo_el_renacer.webp,mesa_aurora_editorial.webp,mesa_aurora_oaxaca.webp,mesa_ochavada_negro_vistas.webp,gifts_decor_arch.webp,ochavada_canasto_floral.jpg,scene-left-tableware.webp' | split: ','
+  assign lab_names = 'bajoplato,base-textil,centro-bajo,cuberteria-plata,cuchillo-plata,hondo-bol,mantel-bordado,mesa-madera,plato-auxiliar,plato-bajoplato,plato-protagonista,servilleta-bordada,tenedor-plata' | split: ','
+  assign guide_names = 'base,capas,centro,compartir,gesto' | split: ','
+  assign form_spaces = 'luminoso,clasico,contemporaneo,jardin' | split: ','
+  assign form_occasions = 'desayuno,aperitivo,comidaFormal,cenaEspecial' | split: ','
+  assign form_bases = 'woodLight,woodDark,stone,graphite' | split: ','
+  assign form_textiles = 'linenWhite,linenBeige,pattern,dark' | split: ','
+  assign vt_recs = 'aurora-blanca,ochavada-blanca,bellavista,202-rosa,ceilan,viejo-molino,oaxaca,negro-vistas,negro-vistas-ash-blue,negro-vistas-ash-yellow,flor-de-lis-azul,flor-de-lis-rosa' | split: ','
 -%}
 
 <div class="vt-page" data-section-id="{{ section.id }}">
   <!-- ===================== 1 · HERO ===================== -->
-  <section aria-label="Viste tu mesa con La Cartuja" class="vt-hero">
+  <section aria-label="Viste tu mesa con La Cartuja" class="vt-hero" id="heroVTM">
     <div class="vt-hero__media">
       {%- if hero_img != blank -%}
         {% render 'image-responsive', image: hero_img, alt: 'Mesa vestida con piezas de La Cartuja de Sevilla', sizes: '100vw', loading: 'eager', fetchpriority: 'high' %}
@@ -59,48 +74,37 @@
   </section>
 
   <!-- ===================== 2 · GUÍA PASO A PASO ===================== -->
-  <section class="vt-section" id="guide">
+  <section class="vt-section vt-steps-section" id="guide">
     <div class="section-head reveal">
       <span class="eyebrow">La mesa, por capas</span>
       <h2>Cinco gestos para una <em>mesa equilibrada</em></h2>
-      <p>Vestir una mesa no es acumular: es ordenar. Estos cinco pasos componen una mesa serena, hospitalaria y con memoria.</p>
+      <p>Una guía más visual para entender la composición antes de elegir. Cada paso marca una decisión concreta: base, capas, gesto, centro y piezas para compartir.</p>
     </div>
-    <div class="guide-rail reveal">
-      <article class="guide-step">
-        <div class="guide-step__no">01</div>
-        <div class="guide-step__icon"><svg viewbox="0 0 84 84"><path d="M6 58 H78 M14 58 V40 a28 14 0 0 1 56 0 V58"></path><path d="M20 40 H64" opacity=".5"></path></svg></div>
-        <h3>La base</h3>
-        <p>Mantel claro, camino de mesa, individuales o mesa vista. La base marca el tono: el lino aporta calidez; la madera o la piedra, naturalidad.</p>
-        <span class="guide-step__line"></span>
-      </article>
-      <article class="guide-step">
-        <div class="guide-step__no">02</div>
-        <div class="guide-step__icon"><svg viewbox="0 0 84 84"><circle cx="42" cy="42" r="34"></circle><circle cx="42" cy="42" r="24"></circle><circle cx="42" cy="42" r="13"></circle></svg></div>
-        <h3>Las capas</h3>
-        <p>Bajoplato, plato llano, plato de postre y hondo o bol según el menú. Cada pieza se apila con orden, dejando ver un borde de la anterior.</p>
-        <span class="guide-step__line"></span>
-      </article>
-      <article class="guide-step">
-        <div class="guide-step__no">03</div>
-        <div class="guide-step__icon"><svg viewbox="0 0 84 84"><path d="M22 18 H62 V66 H22 Z" opacity=".5"></path><path d="M30 26 H54 M30 36 H54 M30 46 H46"></path></svg></div>
-        <h3>El gesto</h3>
-        <p>Una servilleta sencilla, doblada con limpieza, a un lado o sobre el plato. El detalle que dice que la mesa se ha pensado con calma.</p>
-        <span class="guide-step__line"></span>
-      </article>
-      <article class="guide-step">
-        <div class="guide-step__no">04</div>
-        <div class="guide-step__icon"><svg viewbox="0 0 84 84"><path d="M30 64 H54 M34 64 V48 a8 8 0 0 1 16 0 V64"></path><path d="M42 40 V20 M42 28 q-10 -6 -16 -2 M42 28 q10 -6 16 -2"></path></svg></div>
-        <h3>El centro</h3>
-        <p>Bajo y discreto: velas, ramas, flores o piezas decorativas que no tapen la mirada ni molesten a la conversación.</p>
-        <span class="guide-step__line"></span>
-      </article>
-      <article class="guide-step">
-        <div class="guide-step__no">05</div>
-        <div class="guide-step__icon"><svg viewbox="0 0 84 84"><ellipse cx="42" cy="42" rx="36" ry="16"></ellipse><ellipse cx="42" cy="42" opacity=".5" rx="36" ry="16" transform="rotate(60 42 42)"></ellipse></svg></div>
-        <h3>Compartir</h3>
-        <p>Fuentes, boles, salseras y piezas de servicio. Lo que hace que una mesa funcione de verdad y que recibir sea un placer.</p>
-        <span class="guide-step__line"></span>
-      </article>
+    <div class="guide-experience reveal" data-guide-experience>
+      <div class="tube-nav" role="tablist" aria-label="Pasos para vestir la mesa">
+        <button class="tube-item is-active" type="button" role="tab" aria-selected="true" data-guide="base"><span>01</span><b>La base</b></button>
+        <button class="tube-item" type="button" role="tab" aria-selected="false" data-guide="capas"><span>02</span><b>Las capas</b></button>
+        <button class="tube-item" type="button" role="tab" aria-selected="false" data-guide="gesto"><span>03</span><b>El gesto</b></button>
+        <button class="tube-item" type="button" role="tab" aria-selected="false" data-guide="centro"><span>04</span><b>El centro</b></button>
+        <button class="tube-item" type="button" role="tab" aria-selected="false" data-guide="compartir"><span>05</span><b>Compartir</b></button>
+      </div>
+      <div class="guide-showcase">
+        <div class="guide-visual" aria-hidden="true">
+          <div class="guide-image-panel is-active" data-guide-image="base"><img src="{{ 'vt-guide-base.webp' | asset_url }}" alt="" width="1500" height="996" loading="lazy" decoding="async"></div>
+          <div class="guide-image-panel" data-guide-image="capas"><img src="{{ 'vt-guide-capas.webp' | asset_url }}" alt="" width="1800" height="1343" loading="lazy" decoding="async"></div>
+          <div class="guide-image-panel" data-guide-image="gesto"><img src="{{ 'vt-guide-gesto.webp' | asset_url }}" alt="" width="450" height="450" loading="lazy" decoding="async"></div>
+          <div class="guide-image-panel" data-guide-image="centro"><img src="{{ 'vt-guide-centro.webp' | asset_url }}" alt="" width="1800" height="1343" loading="lazy" decoding="async"></div>
+          <div class="guide-image-panel" data-guide-image="compartir"><img src="{{ 'vt-guide-compartir.webp' | asset_url }}" alt="" width="1800" height="1343" loading="lazy" decoding="async"></div>
+          <div class="guide-media-label"><span>01</span><b>La base</b></div>
+        </div>
+        <div class="guide-copy-wrap">
+          <article class="guide-panel is-active" data-guide-panel="base"><span>01</span><h3>La base</h3><p>Mantel claro, camino de mesa, individuales o mesa vista. La base decide la temperatura visual: lino para suavizar, madera para naturalidad, piedra para luz y grafito para carácter.</p></article>
+          <article class="guide-panel" data-guide-panel="capas"><span>02</span><h3>Las capas</h3><p>Bajoplato, plato llano, plato de postre y hondo o bol según el menú. La clave es dejar respirar cada borde y no tapar completamente la pieza anterior.</p></article>
+          <article class="guide-panel" data-guide-panel="gesto"><span>03</span><h3>El gesto</h3><p>La servilleta ordena la escena. Puede ir lateral, sobre el plato o ligeramente bajo una pieza: discreta, limpia y con intención.</p></article>
+          <article class="guide-panel" data-guide-panel="centro"><span>04</span><h3>El centro</h3><p>Flores bajas, velas o piezas decorativas. Debe aportar atmósfera sin romper la conversación ni competir con la vajilla.</p></article>
+          <article class="guide-panel" data-guide-panel="compartir"><span>05</span><h3>Compartir</h3><p>Fuentes, boles, salseras y piezas de servicio completan la mesa. Son las piezas que convierten una composición bonita en una mesa útil.</p></article>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -113,31 +117,36 @@
     </div>
     <div class="lab reveal">
       <div aria-hidden="true" class="lab-stage">
-        <div class="lab-table"></div>
-        <div class="lab-layer lab-textil on"></div>
-        <div class="lab-layer lab-bajoplato on"></div>
-        <div class="lab-layer lab-protagonista on">
-          {%- if plate_img != blank -%}
-            <img src="{{ plate_img | image_url: width: 800 }}" alt="" width="{{ plate_img.width }}" height="{{ plate_img.height }}" loading="lazy" decoding="async">
-          {%- else -%}
-            <img src="{{ plate_demo | asset_url }}" alt="" width="572" height="571" loading="lazy" decoding="async">
-          {%- endif -%}
-        </div>
-        <div class="lab-layer lab-bol"></div>
-        <div class="lab-layer lab-auxiliar"></div>
-        <div class="lab-layer lab-servilleta"></div>
-        <div class="lab-layer lab-centro"></div>
+        <div class="lab-table"><img src="{{ 'vt-lab-mesa-madera.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
+        <div class="lab-layer lab-individual on"><img src="{{ 'vt-lab-base-textil.webp' | asset_url }}" alt="" width="1600" height="1593" decoding="async"></div>
+        <div class="lab-layer lab-mantel"><img src="{{ 'vt-lab-mantel-bordado.webp' | asset_url }}" alt="" width="1594" height="1600" decoding="async"></div>
+        <div class="lab-layer lab-tenedor on"><img src="{{ 'vt-lab-tenedor-plata.webp' | asset_url }}" alt="" width="231" height="1100" decoding="async"></div>
+        <div class="lab-layer lab-cuchillo on"><img src="{{ 'vt-lab-cuchillo-plata.webp' | asset_url }}" alt="" width="226" height="1100" decoding="async"></div>
+        <div class="lab-layer lab-bajoplato on"><img src="{{ 'vt-lab-bajoplato.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
+        <div class="lab-layer lab-stack"><img src="{{ 'vt-lab-plato-bajoplato.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
+        <div class="lab-layer lab-protagonista on"><img src="{{ 'vt-lab-plato-protagonista.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
+        <div class="lab-layer lab-bol"><img src="{{ 'vt-lab-hondo-bol.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
+        <div class="lab-layer lab-auxiliar"><img src="{{ 'vt-lab-plato-auxiliar.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
+        <div class="lab-layer lab-servilleta"><img src="{{ 'vt-lab-servilleta-bordada.webp' | asset_url }}" alt="" width="581" height="1200" decoding="async"></div>
+        <div class="lab-layer lab-centro"><img src="{{ 'vt-lab-centro-bajo.webp' | asset_url }}" alt="" width="300" height="300" decoding="async"></div>
+        <div class="lab-status"><span id="labCount">4 capas activas</span></div>
       </div>
       <div class="lab-controls">
         <h3>Construye tu mesa</h3>
-        <p>Cada interruptor añade una capa. No hay reglas rígidas: la mesa ideal es la que se adapta a lo que vas a servir.</p>
-        <button aria-pressed="true" class="lab-toggle" data-layer="textil" type="button"><span class="lab-toggle__label"><b>Base textil</b><small>Mantel, camino o individuales</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="true" class="lab-toggle" data-layer="bajoplato" type="button"><span class="lab-toggle__label"><b>Bajoplato</b><small>Marca el sitio y da profundidad</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="true" class="lab-toggle" data-layer="protagonista" type="button"><span class="lab-toggle__label"><b>Plato protagonista</b><small>El plato llano, centro de la escena</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="false" class="lab-toggle" data-layer="auxiliar" type="button"><span class="lab-toggle__label"><b>Plato auxiliar</b><small>Postre o pan, a un lado</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="false" class="lab-toggle" data-layer="bol" type="button"><span class="lab-toggle__label"><b>Hondo o bol</b><small>Para sopas, cremas o ensaladas</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="false" class="lab-toggle" data-layer="servilleta" type="button"><span class="lab-toggle__label"><b>Servilleta</b><small>El gesto del anfitrión</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="false" class="lab-toggle" data-layer="centro" type="button"><span class="lab-toggle__label"><b>Centro bajo</b><small>Flores, velas o ramas</small></span><span class="lab-switch"></span></button>
+        <p>Activa o retira cada pieza libremente. La madera queda siempre debajo y la composición se actualiza con una transición suave.</p>
+        <div class="lab-quick-actions" aria-label="Acciones rápidas del laboratorio">
+          <button type="button" data-lab-preset="clean">Mesa limpia</button>
+          <button type="button" data-lab-preset="full">Mesa completa</button>
+        </div>
+        <button aria-pressed="true" class="lab-toggle" data-exclusive="textil" data-layer="individual" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-base-textil.webp' | asset_url }}" alt="" width="1600" height="1593" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Individual redondo</b><small>Textura ligera bajo el servicio</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="false" class="lab-toggle" data-exclusive="textil" data-layer="mantel" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-mantel-bordado.webp' | asset_url }}" alt="" width="1594" height="1600" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Mantel bordado</b><small>Cubre la madera con lino y cenefa</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="true" class="lab-toggle" data-layer="cuberteria" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-cuberteria-plata.webp' | asset_url }}" alt="" width="900" height="900" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Cubertería de plata</b><small>Tenedor a la izquierda y cuchillo a la derecha</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="true" class="lab-toggle" data-layer="bajoplato" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-bajoplato.webp' | asset_url }}" alt="" width="1500" height="1500" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Bajo plato</b><small>Marca el sitio y da profundidad</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="true" class="lab-toggle" data-layer="protagonista" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-plato-protagonista.webp' | asset_url }}" alt="" width="1500" height="1500" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Plato protagonista</b><small>La pieza central de la composición</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="false" class="lab-toggle" data-layer="bol" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-hondo-bol.webp' | asset_url }}" alt="" width="1500" height="1500" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Hondo o bol</b><small>Para sopas, cremas o ensaladas</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="false" class="lab-toggle" data-layer="auxiliar" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-plato-auxiliar.webp' | asset_url }}" alt="" width="1500" height="1500" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Plato auxiliar</b><small>Postre, pan o apoyo lateral</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="false" class="lab-toggle" data-layer="servilleta" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-servilleta-bordada.webp' | asset_url }}" alt="" width="581" height="1200" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Servilleta bordada</b><small>A la derecha de la cubertería</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="false" class="lab-toggle" data-layer="centro" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-centro-bajo.webp' | asset_url }}" alt="" width="300" height="300" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Centro bajo</b><small>Flores bajas o pieza decorativa</small></span><span class="lab-switch"></span></button>
       </div>
     </div>
   </section>
@@ -147,20 +156,23 @@
     <div class="section-head reveal">
       <span class="eyebrow">Asesor visual</span>
       <h2>Encuentra tu <em>vajilla ideal</em></h2>
-      <p>Seis preguntas. Mientras respondes, tu mesa toma forma. Al final, tres vajillas de La Cartuja pensadas para ti.</p>
+      <p>Primero elige el espacio, después la ocasión, la mesa y el textil. Mientras respondes, la escena toma forma hasta llegar a tres vajillas pensadas para ti.</p>
     </div>
     <div class="wizard reveal">
-      <div class="wizard-grid">
+      <div class="wizard-grid wizard-grid--redesign">
         <!-- preview en vivo -->
-        <aside aria-label="Vista previa de tu mesa" class="wz-preview">
+        <aside aria-label="Vista previa de tu mesa" class="wz-preview wz-preview--redesign">
+          <div class="wz-preview__top"><span class="eyebrow">Vista en directo</span><small id="wzMiniStatus" aria-live="polite">Sin respuestas todavía</small></div>
           <div class="wz-stage" id="wzStage">
-            <img alt="Vista previa editorial de la mesa seleccionada" class="wz-photo" id="wzPhoto" loading="lazy" decoding="async" width="1200" height="1489" src="{{ 'vt-desayuno_luminoso.webp' | asset_url }}">
+            <img alt="Vista previa editorial de la mesa seleccionada" class="wz-photo" id="wzPhoto" loading="lazy" decoding="async" width="1328" height="1760" src="{{ 'vt-form-01-espacio-luminoso.webp' | asset_url }}">
             <div class="wz-photo-overlay" id="wzPhotoOverlay"></div>
             <div class="wz-caption" id="wzCaption"><b>Tu mesa</b> · responde para verla tomar forma</div>
           </div>
+          <div class="wz-live-summary" id="wzLiveSummary" aria-live="polite"><span>Selecciona el espacio para empezar</span></div>
         </aside>
         <!-- panel de preguntas -->
-        <div>
+        <div class="wz-builder">
+          <div class="wz-builder__head"><span>Asesor visual</span><b id="wzStepStatus" aria-live="polite">Paso 1 de 6</b></div>
           <div aria-hidden="true" class="wz-progress" id="wzProgress"></div>
           <div class="wz-panel" id="wzPanel"></div>
         </div>
@@ -173,7 +185,7 @@
     <div class="section-head">
       <span class="eyebrow">Tu resultado</span>
       <h2>Tres vajillas para <em>tu mesa</em></h2>
-      <p>Seleccionadas según tu ocasión, tu espacio y tu forma de recibir. Pulsa cada una para verla en tu mesa.</p>
+      <p>Seleccionadas según tu espacio, tu ocasión y tu forma de recibir. Pulsa cada una para verla en tu mesa.</p>
     </div>
     <div class="result">
       <div class="result-tabs" id="resultTabs" role="tablist"></div>
@@ -242,36 +254,74 @@
 <script>
   window.__VT_ASSETS = {
     {%- for f in root_assets -%}"{{ f }}":"{{ f | asset_url }}",{%- endfor -%}
-    "viste-tu-mesa/desayuno_luminoso.webp":"{{ 'vt-desayuno_luminoso.webp' | asset_url }}",
-    "viste-tu-mesa/desayuno_contemporaneo.webp":"{{ 'vt-desayuno_luminoso.webp' | asset_url }}",
-    "viste-tu-mesa/desayuno_clasico.webp":"{{ 'vt-desayuno_clasico.webp' | asset_url }}",
-    {%- for b in jardin_bases -%}
-      {%- assign base_asset = 'vt-desayuno_jardin_' | append: b | append: '.webp' -%}
-      "viste-tu-mesa/desayuno_jardin_{{ b }}.webp":"{{ base_asset | asset_url }}",
-      "viste-tu-mesa/desayuno_jardin_{{ b }}_none.webp":"{{ base_asset | asset_url }}",
-      {%- for t in jardin_textiles -%}
-        {%- assign tex_asset = 'vt-desayuno_jardin_' | append: t | append: '.webp' -%}
-        "viste-tu-mesa/desayuno_jardin_{{ b }}_{{ t }}.webp":"{{ tex_asset | asset_url }}",
+    {%- for n in lab_names -%}
+      {%- assign lab_asset = 'vt-lab-' | append: n | append: '.webp' -%}
+      "viste-tu-mesa/lab/{{ n }}.webp":"{{ lab_asset | asset_url }}",
+    {%- endfor -%}
+    {%- for n in guide_names -%}
+      {%- assign guide_asset = 'vt-guide-' | append: n | append: '.webp' -%}
+      "viste-tu-mesa/guide/guide-{{ n }}.webp":"{{ guide_asset | asset_url }}",
+    {%- endfor -%}
+    {%- for s in form_spaces -%}
+      {%- assign space_asset = 'vt-form-01-espacio-' | append: s | append: '.webp' -%}
+      "viste-tu-mesa/formulario/01-espacio/{{ s }}.webp":"{{ space_asset | asset_url }}",
+      {%- for o in form_occasions -%}
+        {%- assign occ_asset = 'vt-form-02-ocasion-' | append: s | append: '-' | append: o | append: '.webp' -%}
+        "viste-tu-mesa/formulario/02-ocasion/{{ s }}/{{ o }}.webp":"{{ occ_asset | asset_url }}",
       {%- endfor -%}
     {%- endfor -%}
-    {%- for k in catalog_keys -%}
-      {%- assign cat_asset = 'vt-cat-' | append: k | replace: '/', '-' -%}
-      "catalog/{{ k }}":"{{ cat_asset | asset_url }}"{%- unless forloop.last -%},{%- endunless -%}
+    {%- for o in form_occasions -%}
+      {%- for b in form_bases -%}
+        {%- assign jbase_asset = 'vt-form-03-base-jardin-' | append: o | append: '-' | append: b | append: '.webp' -%}
+        "viste-tu-mesa/formulario/03-base/jardin/{{ o }}/{{ b }}.webp":"{{ jbase_asset | asset_url }}",
+      {%- endfor -%}
+      {%- for t in form_textiles -%}
+        {%- assign jtex_asset = 'vt-form-04-textil-jardin-' | append: o | append: '-' | append: t | append: '.webp' -%}
+        "viste-tu-mesa/formulario/04-textil/jardin/{{ o }}/{{ t }}.webp":"{{ jtex_asset | asset_url }}",
+      {%- endfor -%}
+    {%- endfor -%}
+  };
+  {%- comment -%}
+    Catálogo real para el asesor: título, url, imagen y 3 piezas por colección.
+    Una colección despublicada o vacía no se emite → el JS la saca del pool de
+    candidatos, así ninguna tarjeta de resultado puede enlazar a un 404.
+    `collections[handle].products` no consume el cupo de all_products (<20) que
+    usan los packs de «Comprar por capas».
+  {%- endcomment -%}
+  window.__VT_COLLECTIONS = {
+    {%- for h in vt_recs -%}
+      {%- assign col = collections[h] -%}
+      {%- if col.products.size > 0 -%}
+        {%- comment -%} col.featured_image = imagen de colección, o la del primer producto. {%- endcomment -%}
+        {%- assign cover = col.featured_image -%}
+        {{ h | json }}: {
+          "name": {{ col.title | json }},
+          "url": {{ col.url | json }},
+          "image": {{ cover | image_url: width: 1400 | json }},
+          "products": [
+            {%- for p in col.products limit: 3 -%}
+              {
+                "n": {{ p.title | json }},
+                "p": {{ p.price | money | json }},
+                "img": {{ p.featured_image | image_url: width: 640 | json }},
+                "url": {{ p.url | json }},
+                "vid": {{ p.selected_or_first_available_variant.id | json }}
+              },
+            {%- endfor -%}
+          ]
+        },
+      {%- endif -%}
     {%- endfor -%}
   };
 </script>
 
 {% stylesheet %}
-/* Page tokens (mockup :root values the theme doesn't share) */
-.vt-page {
-  --vt-content: min(90vw, 1760px);
-  --vt-ivory: #F6F4EF;
-  --vt-paper-warm: rgba(168, 174, 186, .12);
-  --vt-stone: rgba(168, 174, 186, .20);
-}
+/* Page tokens (mockup :root values the theme doesn't share; --content
+   re-declared because this page uses a wider shell than the theme). */
+.vt-page { --content: min(90vw, 1760px); --ivory: #F6F4EF; --paper-warm: rgba(168, 174, 186, .12); --stone: rgba(168, 174, 186, .20); }
 
 /* Shell utilities re-scoped for mockup parity */
-.vt-page .soft-bg { background: var(--vt-ivory); }
+.vt-page .soft-bg { background: var(--ivory); }
 .vt-page .ghost-btn { min-height: 46px; height: auto; border-width: .5px; background: transparent; color: var(--ink); }
 .vt-page .ghost-btn:hover { background: var(--ink); color: #fff; }
 .vt-page .ghost-btn.solid { background: var(--ink); color: #fff; }
@@ -281,16 +331,18 @@
 .vt-page .section-head h2 { font-family: var(--serif); font-size: clamp(28px, 2.8vw, 44px); line-height: 1.1; font-weight: 400; letter-spacing: -.005em; margin: 0 0 16px; color: var(--ink); }
 .vt-page .section-head h2 em { font-style: italic; }
 .vt-page .section-head p { margin: 0 auto; font-weight: 300; font-size: 15px; line-height: 1.7; color: var(--ink-soft); max-width: 580px; }
+.vt-page .hairline { border-top: .5px solid var(--rule); }
 
 /* Section scaffolding */
 .vt-page .vt-section { padding: 120px 0; }
+.vt-page .vt-section.compact { padding: 84px 0; }
 
 /* ===================== 1 · HERO ===================== */
 .vt-page .vt-hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden; background: #0F1A2E; }
 .vt-page .vt-hero__media { position: absolute; inset: 0; z-index: 0; }
 .vt-page .vt-hero__media img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.96); }
-.vt-page .vt-hero__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15, 26, 46, .30) 0%, rgba(15, 26, 46, .10) 38%, rgba(15, 26, 46, .66) 100%); }
-.vt-page .vt-hero__inner { position: relative; z-index: 2; width: var(--vt-content); margin: 0 auto; padding: 0 0 12vh; color: #fff; }
+.vt-page .vt-hero__media:after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15, 26, 46, .30) 0%, rgba(15, 26, 46, .10) 38%, rgba(15, 26, 46, .66) 100%); }
+.vt-page .vt-hero__inner { position: relative; z-index: 2; width: var(--content); margin: 0 auto; padding: 0 0 12vh; color: #fff; }
 .vt-page .vt-hero .eyebrow { color: rgba(255, 255, 255, .78); }
 .vt-page .vt-hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(46px, 7vw, 118px); line-height: 1; margin: 18px 0 22px; max-width: 13ch; letter-spacing: -.01em; text-wrap: balance; }
 .vt-page .vt-hero h1 em { font-style: italic; }
@@ -301,81 +353,90 @@
 .vt-page .vt-hero .ghost-btn.solid { background: #fff; color: var(--ink); border-color: #fff; }
 .vt-page .vt-hero .ghost-btn.solid:hover { background: rgba(255, 255, 255, .86); }
 .vt-page .vt-hero__scroll { position: absolute; right: 4vw; bottom: 30px; z-index: 3; color: rgba(255, 255, 255, .75); font-size: 9px; letter-spacing: .28em; text-transform: uppercase; writing-mode: vertical-rl; display: flex; align-items: center; gap: 14px; }
-.vt-page .vt-hero__scroll::before { content: ""; width: .5px; height: 46px; background: rgba(255, 255, 255, .6); }
-
-/* ===================== 2 · GUÍA PASO A PASO ===================== */
-.vt-page .guide-rail { width: var(--vt-content); margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border-top: .5px solid var(--rule); }
-.vt-page .guide-step { position: relative; padding: 34px 26px 40px; border-left: .5px solid var(--rule); cursor: pointer; transition: background 420ms var(--ease); }
-.vt-page .guide-step:first-child { border-left: 0; }
-.vt-page .guide-step:hover { background: var(--vt-paper-warm); }
-.vt-page .guide-step__no { font-family: var(--serif); font-size: 14px; color: var(--muted); letter-spacing: .04em; }
-.vt-page .guide-step__icon { margin: 26px 0 24px; height: 84px; display: flex; align-items: flex-end; }
-.vt-page .guide-step__icon svg { width: 84px; height: 84px; stroke: var(--ink); stroke-width: .9; fill: none; overflow: visible; }
-.vt-page .guide-step h3 { font-family: var(--serif); font-weight: 400; font-size: 21px; line-height: 1.15; margin: 0 0 12px; color: var(--ink); }
-.vt-page .guide-step p { font-weight: 300; font-size: 13.5px; line-height: 1.65; color: var(--ink-soft); margin: 0; }
-.vt-page .guide-step__line { position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: var(--ink); transition: width 600ms var(--ease); }
-.vt-page .guide-step:hover .guide-step__line { width: 100%; }
+.vt-page .vt-hero__scroll:before { content: ""; width: .5px; height: 46px; background: rgba(255, 255, 255, .6); }
+.vt-page .vt-hero:not(.vt-hero--atelier) .vt-hero__inner { display: block; max-width: none; }
 
 /* ===================== 3 · LABORATORIO DE CAPAS ===================== */
-.vt-page .lab { width: var(--vt-content); margin: 0 auto; display: grid; grid-template-columns: 1.1fr .9fr; gap: min(6vw, 84px); align-items: center; }
-.vt-page .lab-stage { position: relative; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; border-radius: 50%; isolation: isolate; }
-.vt-page .lab-table { position: absolute; inset: 0; border-radius: 50%; background: #EFE9DF; box-shadow: inset 0 0 60px rgba(15, 26, 46, .06); transition: background 500ms var(--ease); }
-.vt-page .lab-layer { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(.6); opacity: 0; transition: opacity 500ms var(--ease), transform 600ms var(--ease-long); pointer-events: none; display: flex; align-items: center; justify-content: center; }
+.vt-page .lab { width: var(--content); margin: 0 auto; display: grid; grid-template-columns: 1.05fr .95fr; gap: min(6vw, 84px); align-items: center; }
+.vt-page .lab-stage { position: relative; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; border-radius: 50%; isolation: isolate; background: radial-gradient(circle at 50% 44%, rgba(255, 255, 255, .76), rgba(246, 244, 239, .56) 62%, rgba(15, 26, 46, .045) 100%); box-shadow: 0 30px 100px rgba(15, 26, 46, .10); overflow: visible; transition: transform 460ms var(--ease), box-shadow 460ms var(--ease); }
+.vt-page .lab-stage:before { content: ""; position: absolute; inset: 1.4%; border: .5px solid rgba(15, 26, 46, .12); border-radius: 50%; z-index: 0; pointer-events: none; transition: inset 520ms var(--ease), border-color 520ms var(--ease); }
+.vt-page .lab-stage:after { content: ""; position: absolute; inset: -4%; border-radius: 50%; border: 1px solid rgba(15, 26, 46, .055); border-top-color: rgba(15, 26, 46, .18); z-index: 0; pointer-events: none; opacity: .72; animation: lab-orbit 18s linear infinite; }
+.vt-page .lab-stage.is-updating { transform: scale(1.006); box-shadow: 0 36px 112px rgba(15, 26, 46, .13); }
+.vt-page .lab-stage.is-updating:before { inset: .6%; border-color: rgba(15, 26, 46, .20); }
+.vt-page .lab-table { position: absolute; inset: -6%; border-radius: 50%; overflow: hidden; z-index: 1; filter: drop-shadow(0 22px 45px rgba(15, 26, 46, .14)); transition: opacity 520ms var(--ease), transform 700ms var(--ease-long); }
+.vt-page .lab-table img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); }
+.vt-page .lab-layer { position: absolute; left: 50%; top: 50%; z-index: 3; transform: translate(-50%, -50%) scale(.82); opacity: 0; transition: opacity 520ms var(--ease), transform 720ms var(--ease-long), filter 520ms var(--ease); pointer-events: none; display: flex; align-items: center; justify-content: center; will-change: transform, opacity; }
 .vt-page .lab-layer.on { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-.vt-page .lab-textil { width: 96%; height: 96%; border-radius: 50%; background: #FBF6F0; box-shadow: 0 18px 50px rgba(15, 26, 46, .10); }
-.vt-page .lab-bajoplato { width: 78%; height: 78%; border-radius: 50%; border: 1px solid rgba(15, 26, 46, .18); background: radial-gradient(circle, #fff 62%, #F1ECE4 100%); box-shadow: 0 10px 26px rgba(15, 26, 46, .08); }
-.vt-page .lab-protagonista { width: 60%; height: 60%; }
-.vt-page .lab-protagonista img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 14px 24px rgba(15, 26, 46, .16)); }
-.vt-page .lab-auxiliar { width: 30%; height: 30%; left: 74%; top: 30%; border-radius: 50%; border: 1px solid rgba(15, 26, 46, .22); background: radial-gradient(circle, #fff 60%, #EFEAE2 100%); box-shadow: 0 8px 18px rgba(15, 26, 46, .10); }
-.vt-page .lab-auxiliar.on { transform: translate(-50%, -50%) scale(1); }
-.vt-page .lab-bol { width: 26%; height: 26%; left: 28%; top: 30%; border-radius: 50%; background: radial-gradient(circle at 50% 38%, #fff 40%, #E7E0D5 100%); border: 1px solid rgba(15, 26, 46, .2); box-shadow: 0 8px 18px rgba(15, 26, 46, .12); }
+.vt-page .lab-layer img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 14px 24px rgba(15, 26, 46, .16)); transform-origin: center; }
+.vt-page .lab-layer.just-toggled.on img { animation: lab-pop 620ms var(--ease-long); }
+.vt-page .lab-individual { width: 91%; height: 91%; z-index: 2; }
+.vt-page .lab-individual img { filter: drop-shadow(0 18px 34px rgba(15, 26, 46, .14)); }
+.vt-page .lab-mantel { width: 112%; height: 112%; z-index: 2; }
+.vt-page .lab-mantel img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 14px 28px rgba(15, 26, 46, .11)); }
+.vt-page .lab-stage.has-mantel .lab-table { opacity: 0; transform: scale(.985); }
+.vt-page .lab-tenedor { width: 10%; height: 57%; left: 20%; top: 55%; z-index: 4; }
+.vt-page .lab-cuchillo { width: 10%; height: 58%; left: 79%; top: 55%; z-index: 4; }
+.vt-page .lab-tenedor img, .vt-page .lab-cuchillo img { filter: drop-shadow(0 10px 15px rgba(15, 26, 46, .20)); }
+.vt-page .lab-bajoplato { width: 78%; height: 78%; z-index: 4; }
+.vt-page .lab-protagonista { width: 60%; height: 60%; z-index: 5; }
+.vt-page .lab-stack { width: 78%; height: 78%; z-index: 5; }
+.vt-page .lab-stack img { filter: drop-shadow(0 20px 34px rgba(15, 26, 46, .20)); }
+.vt-page .lab-stage.has-stack .lab-bajoplato.on, .vt-page .lab-stage.has-stack .lab-protagonista.on { opacity: 0; transform: translate(-50%, -50%) scale(.96); }
+.vt-page .lab-stage.has-stack .lab-stack { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.vt-page .lab-bol { width: 48%; height: 48%; left: 50%; top: 50%; z-index: 6; }
 .vt-page .lab-bol.on { transform: translate(-50%, -50%) scale(1); }
-.vt-page .lab-servilleta { width: 20%; height: 34%; left: 20%; top: 72%; background: linear-gradient(135deg, #EDE7DC, #F7F2EA); border: 1px solid rgba(15, 26, 46, .1); transform-origin: center; box-shadow: 0 6px 14px rgba(15, 26, 46, .1); }
-.vt-page .lab-servilleta.on { transform: translate(-50%, -50%) rotate(-10deg) scale(1); }
-.vt-page .lab-centro { width: 22%; height: 22%; left: 50%; top: -2%; border-radius: 50%; background: radial-gradient(circle, #9CAE8E, #6E8266); box-shadow: 0 10px 22px rgba(15, 26, 46, .18); }
+.vt-page .lab-auxiliar { width: 44%; height: 44%; left: 76%; top: 17%; z-index: 7; }
+.vt-page .lab-auxiliar.on { transform: translate(-50%, -50%) rotate(8deg) scale(1); }
+.vt-page .lab-servilleta { width: 18%; height: 47%; left: 93%; top: 56%; z-index: 4; transform-origin: center; }
+.vt-page .lab-servilleta.on { transform: translate(-50%, -50%) rotate(2deg) scale(1); }
+.vt-page .lab-servilleta img { filter: drop-shadow(0 14px 20px rgba(15, 26, 46, .18)); transform: scale(1.08); }
+.vt-page .lab-centro { width: 35%; height: 35%; left: 50%; top: 8%; z-index: 8; }
 .vt-page .lab-centro.on { transform: translate(-50%, -50%) scale(1); }
-.vt-page .lab-controls { display: flex; flex-direction: column; gap: 0; }
+.vt-page .lab-centro img { filter: drop-shadow(0 16px 30px rgba(15, 26, 46, .18)); }
+.vt-page .lab-status { position: absolute; left: 50%; bottom: -22px; transform: translateX(-50%); z-index: 12; display: inline-flex; align-items: center; justify-content: center; min-width: 150px; height: 38px; padding: 0 18px; border-radius: 999px; background: rgba(255, 255, 255, .88); border: .5px solid rgba(15, 26, 46, .12); box-shadow: 0 16px 38px rgba(15, 26, 46, .09); backdrop-filter: blur(12px); font-size: 10px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+.vt-page .lab-controls { display: flex; flex-direction: column; gap: 10px; }
 .vt-page .lab-controls h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 2.2vw, 34px); line-height: 1.12; margin: 0 0 8px; }
-.vt-page .lab-controls > p { font-weight: 300; font-size: 14px; line-height: 1.65; color: var(--ink-soft); margin: 0 0 26px; max-width: 42ch; }
-.vt-page .lab-toggle { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 56px; padding: 0 4px; border-top: .5px solid var(--rule); text-align: left; }
-.vt-page .lab-toggle:last-of-type { border-bottom: .5px solid var(--rule); }
-.vt-page .lab-toggle__label { display: flex; flex-direction: column; gap: 3px; }
+.vt-page .lab-controls > p { font-weight: 300; font-size: 14px; line-height: 1.65; color: var(--ink-soft); margin: 0 0 12px; max-width: 48ch; }
+.vt-page .lab-quick-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 2px 0 4px; }
+.vt-page .lab-quick-actions button { min-height: 42px; border: .5px solid rgba(15, 26, 46, .14); border-radius: 999px; background: rgba(255, 255, 255, .58); font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--ink); transition: background 280ms var(--ease), border-color 280ms var(--ease), transform 280ms var(--ease), box-shadow 280ms var(--ease); }
+.vt-page .lab-quick-actions button:hover { transform: translateY(-1px); background: #fff; border-color: rgba(15, 26, 46, .25); box-shadow: 0 12px 28px rgba(15, 26, 46, .06); }
+.vt-page .lab-toggle { position: relative; display: grid; grid-template-columns: 58px 1fr auto; align-items: center; gap: 14px; width: 100%; min-height: 74px; padding: 10px 14px 10px 10px; border: .5px solid rgba(15, 26, 46, .12); border-radius: 999px; text-align: left; background: rgba(255, 255, 255, .62); box-shadow: 0 12px 38px rgba(15, 26, 46, .035); overflow: hidden; transition: transform 280ms var(--ease), background 280ms var(--ease), border-color 280ms var(--ease), box-shadow 280ms var(--ease); }
+.vt-page .lab-toggle:hover { transform: translateX(4px); background: #fff; border-color: rgba(15, 26, 46, .22); box-shadow: 0 16px 42px rgba(15, 26, 46, .065); }
+.vt-page .lab-toggle[aria-pressed="true"] { background: #fff; border-color: rgba(15, 26, 46, .28); box-shadow: 0 16px 44px rgba(15, 26, 46, .08); }
+.vt-page .lab-thumb { width: 54px; height: 54px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--ivory); border: .5px solid rgba(15, 26, 46, .10); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .65); position: relative; z-index: 1; }
+.vt-page .lab-thumb img { width: 100%; height: 100%; object-fit: contain; transform: scale(1.18); }
+.vt-page .lab-toggle[data-layer="servilleta"] .lab-thumb img { transform: scale(1.16); }
+.vt-page .lab-toggle[data-layer="centro"] .lab-thumb img { transform: scale(1.25); }
+.vt-page .lab-toggle[data-layer="individual"] .lab-thumb img { transform: scale(1.34); }
+.vt-page .lab-toggle[data-layer="mantel"] .lab-thumb img { transform: scale(1.10); }
+.vt-page .lab-toggle[data-layer="cuberteria"] .lab-thumb img { transform: scale(1.08); }
+.vt-page .lab-toggle[data-layer="auxiliar"] .lab-thumb img { transform: scale(1.32) rotate(8deg); }
+.vt-page .lab-toggle__label { display: flex; flex-direction: column; gap: 4px; min-width: 0; position: relative; z-index: 1; }
 .vt-page .lab-toggle__label b { font-weight: 500; font-size: 13px; letter-spacing: .02em; color: var(--ink); }
-.vt-page .lab-toggle__label small { font-weight: 300; font-size: 11.5px; color: var(--muted); }
-.vt-page .lab-switch { flex: 0 0 auto; width: 44px; height: 24px; border-radius: 999px; background: var(--rule); position: relative; transition: background 280ms var(--ease); }
-.vt-page .lab-switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(15, 26, 46, .3); transition: transform 280ms var(--ease); }
-.vt-page .lab-toggle[aria-pressed="true"] .lab-switch { background: var(--ink); }
-.vt-page .lab-toggle[aria-pressed="true"] .lab-switch::after { transform: translateX(20px); }
+.vt-page .lab-toggle__label small { font-weight: 300; font-size: 11.5px; line-height: 1.35; color: var(--muted); }
+.vt-page .lab-switch { flex: 0 0 auto; width: 54px; height: 28px; border-radius: 999px; background: #ECE8E0; position: relative; transition: background 280ms var(--ease), border-color 280ms var(--ease); border: .5px solid rgba(15, 26, 46, .12); z-index: 1; }
+.vt-page .lab-switch:after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 2px 8px rgba(15, 26, 46, .22); transition: transform 280ms var(--ease); }
+/* v70 · navy literal del mockup; no existe token para este azul en css-variables. */
+.vt-page .lab-toggle[aria-pressed="true"] .lab-switch { background: #012169; border-color: #012169; }
+.vt-page .lab-toggle[aria-pressed="true"] .lab-switch:after { transform: translateX(26px); }
+@keyframes lab-pop { 0% { transform: scale(.95); } 55% { transform: scale(1.035); } 100% { transform: scale(1); } }
+@keyframes lab-orbit { to { transform: rotate(360deg); } }
 
 /* ===================== 4 · WIZARD ===================== */
-.vt-page .wizard { width: var(--vt-content); margin: 0 auto; }
+.vt-page .wizard { width: var(--content); margin: 0 auto; }
 .vt-page .wizard-grid { display: grid; grid-template-columns: .92fr 1.08fr; gap: min(5vw, 72px); align-items: stretch; }
 .vt-page .wz-preview { position: sticky; top: 120px; align-self: start; border: .5px solid var(--rule); background: #fff; overflow: hidden; }
-.vt-page .wz-stage { position: relative; aspect-ratio: 4/5; overflow: hidden; transition: background 600ms var(--ease); background: var(--vt-paper-warm); }
-.vt-page .wz-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.01); transition: opacity 520ms var(--ease), transform 950ms var(--ease-long), filter 720ms var(--ease); will-change: opacity, transform, filter; }
-.vt-page .wz-photo.is-changing { opacity: .18; transform: scale(1.035); }
-.vt-page .wz-photo-overlay { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(15, 26, 46, .03), rgba(15, 26, 46, .10)); mix-blend-mode: multiply; transition: background 620ms var(--ease), opacity 620ms var(--ease); }
-.vt-page .wz-caption { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 20px 22px; background: linear-gradient(0deg, rgba(255, 255, 255, .94), rgba(255, 255, 255, 0)); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+.vt-page .wz-stage { position: relative; aspect-ratio: 4/5; overflow: hidden; transition: background 600ms var(--ease); }
+.vt-page .wz-caption { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 20px 22px; background: linear-gradient(0deg, rgba(255, 255, 255, .94), rgba(255, 255, 255, 0)); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
 .vt-page .wz-caption b { font-weight: 500; }
-.vt-page .wz-stage[data-style="clasico"] .wz-photo { filter: saturate(.96) contrast(1.02) brightness(1.02); }
-.vt-page .wz-stage[data-style="contemporaneo"] .wz-photo { filter: saturate(.82) contrast(1.08) brightness(.99); }
-.vt-page .wz-stage[data-style="mediterraneo"] .wz-photo { filter: saturate(1.08) contrast(1.02) brightness(1.03); }
-.vt-page .wz-stage[data-style="sobrio"] .wz-photo { filter: saturate(.72) contrast(1.12) brightness(.96); }
-.vt-page .wz-stage[data-presence="sutil"] .wz-photo { transform: scale(1.005); }
-.vt-page .wz-stage[data-presence="equilibrada"] .wz-photo { transform: scale(1.025); }
-.vt-page .wz-stage[data-presence="protagonista"] .wz-photo { transform: scale(1.065); }
-.vt-page .wz-stage[data-style="clasico"] .wz-photo-overlay { background: linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(145, 101, 78, .13)); }
-.vt-page .wz-stage[data-style="contemporaneo"] .wz-photo-overlay { background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(15, 26, 46, .18)); }
-.vt-page .wz-stage[data-style="mediterraneo"] .wz-photo-overlay { background: linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(200, 170, 120, .16)); }
-.vt-page .wz-stage[data-style="sobrio"] .wz-photo-overlay { background: linear-gradient(180deg, rgba(0, 0, 0, .02), rgba(0, 0, 0, .20)); }
 .vt-page .wz-progress { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
 .vt-page .wz-progress span { flex: 1; height: 2px; background: var(--rule); position: relative; overflow: hidden; }
-.vt-page .wz-progress span.done::after, .vt-page .wz-progress span.active::after { content: ""; position: absolute; inset: 0; background: var(--ink); transform-origin: left; animation: vtWzFill 500ms var(--ease) forwards; }
-@keyframes vtWzFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.vt-page .wz-progress span.done:after, .vt-page .wz-progress span.active:after { content: ""; position: absolute; inset: 0; background: var(--ink); transform-origin: left; animation: wzFill 500ms var(--ease) forwards; }
+@keyframes wzFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .vt-page .wz-panel { position: relative; }
 .vt-page .wz-step { display: none; }
-.vt-page .wz-step.active { display: block; animation: vtWzIn 520ms var(--ease-long); }
-@keyframes vtWzIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.vt-page .wz-step.active { display: block; animation: wzIn 520ms var(--ease-long); }
+@keyframes wzIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 .vt-page .wz-q-no { font-family: var(--sans); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
 .vt-page .wz-step h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 2.6vw, 38px); line-height: 1.1; margin: 12px 0 30px; color: var(--ink); }
 .vt-page .wz-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
@@ -385,20 +446,16 @@
 .vt-page .wz-opt .swatch { flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; border: .5px solid rgba(15, 26, 46, .25); }
 .vt-page .wz-opt[aria-pressed="true"] .swatch { border-color: rgba(255, 255, 255, .5); }
 .vt-page .wz-opt span { font-weight: 400; font-size: 14px; letter-spacing: .01em; }
-.vt-page .wz-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 34px; gap: 16px; }
-.vt-page .wz-back { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
-.vt-page .wz-back[disabled] { opacity: .3; cursor: not-allowed; }
-.vt-page .wz-hint { font-size: 11px; letter-spacing: .04em; color: var(--muted); }
 
 /* ===================== 5/6 · RESULTADO ===================== */
-.vt-page .result { width: var(--vt-content); margin: 0 auto; }
+.vt-page .result { width: var(--content); margin: 0 auto; }
 .vt-page .result-tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 46px; }
 .vt-page .result-tab { min-height: 48px; padding: 0 24px; border: .5px solid var(--rule); background: #fff; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; transition: all 240ms var(--ease); }
 .vt-page .result-tab .rank { font-family: var(--serif); font-size: 14px; }
 .vt-page .result-tab[aria-selected="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
 .vt-page .result-card { display: none; grid-template-columns: 1fr 1fr; gap: min(5vw, 72px); align-items: center; }
-.vt-page .result-card.active { display: grid; animation: vtWzIn 560ms var(--ease-long); }
-.vt-page .result-ambient { position: relative; aspect-ratio: 4/5; overflow: hidden; background: var(--vt-stone); }
+.vt-page .result-card.active { display: grid; animation: wzIn 560ms var(--ease-long); }
+.vt-page .result-ambient { position: relative; aspect-ratio: 4/5; overflow: hidden; background: var(--stone); }
 .vt-page .result-ambient img { width: 100%; height: 100%; object-fit: cover; transition: transform 1000ms var(--ease-long); }
 .vt-page .result-card:hover .result-ambient img { transform: scale(1.04); }
 .vt-page .result-ambient__tag { position: absolute; left: 22px; top: 22px; z-index: 2; background: rgba(255, 255, 255, .92); padding: 8px 14px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); }
@@ -407,7 +464,7 @@
 .vt-page .result-reason { font-weight: 300; font-size: 15px; line-height: 1.7; color: var(--ink-soft); margin: 0 0 30px; max-width: 46ch; }
 .vt-page .result-products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 32px; }
 .vt-page .result-product { text-align: center; }
-.vt-page .result-product__img { aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; background: var(--vt-paper-warm); padding: 14px; margin-bottom: 12px; }
+.vt-page .result-product__img { aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; background: var(--paper-warm); padding: 14px; margin-bottom: 12px; }
 .vt-page .result-product__img img { max-height: 100%; max-width: 100%; object-fit: contain; transition: transform 600ms var(--ease); }
 .vt-page .result-product:hover .result-product__img img { transform: translateY(-5px) scale(1.04); }
 .vt-page .result-product b { display: block; font-family: var(--serif); font-weight: 400; font-size: 14px; line-height: 1.2; color: var(--ink); margin-bottom: 3px; }
@@ -415,7 +472,7 @@
 .vt-page .result-ctas { display: flex; flex-wrap: wrap; gap: 14px; }
 
 /* ===================== 7 · COMPRA POR CAPAS ===================== */
-.vt-page .layers-buy { width: var(--vt-content); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.vt-page .layers-buy { width: var(--content); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .vt-page .buy-card { border: .5px solid var(--rule); padding: 40px 34px 36px; display: flex; flex-direction: column; background: #fff; transition: border-color 280ms var(--ease), transform 280ms var(--ease), box-shadow 280ms var(--ease); }
 .vt-page .buy-card:hover { border-color: var(--ink); transform: translateY(-4px); box-shadow: 0 24px 50px rgba(15, 26, 46, .07); }
 .vt-page .buy-card.feature { background: var(--ink); color: #fff; border-color: var(--ink); }
@@ -427,7 +484,7 @@
 .vt-page .buy-card ul { list-style: none; margin: 0 0 30px; padding: 0; display: grid; gap: 13px; flex: 1; }
 .vt-page .buy-card li { position: relative; padding-left: 24px; font-weight: 300; font-size: 13.5px; line-height: 1.5; color: var(--ink-soft); }
 .vt-page .buy-card.feature li { color: rgba(255, 255, 255, .86); }
-.vt-page .buy-card li::before { content: ""; position: absolute; left: 0; top: 8px; width: 11px; height: .5px; background: currentColor; opacity: .6; }
+.vt-page .buy-card li:before { content: ""; position: absolute; left: 0; top: 8px; width: 11px; height: .5px; background: currentColor; opacity: .6; }
 .vt-page .buy-card .ghost-btn { width: 100%; }
 .vt-page .buy-card.feature .ghost-btn { border-color: rgba(255, 255, 255, .8); color: #fff; }
 .vt-page .buy-card.feature .ghost-btn:hover { background: #fff; color: var(--ink); }
@@ -438,39 +495,240 @@
 
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 1024px) {
-  .vt-page { --vt-content: min(92vw, 1760px); }
+  .vt-page { --content: min(92vw, 1760px); }
   .vt-page .lab, .vt-page .wizard-grid, .vt-page .result-card { grid-template-columns: 1fr; }
   .vt-page .lab { gap: 48px; }
   .vt-page .wz-preview { position: relative; top: 0; order: -1; margin-bottom: 8px; }
   .vt-page .wz-stage { aspect-ratio: 16/10; }
-  .vt-page .guide-rail { grid-template-columns: 1fr 1fr; }
-  .vt-page .guide-step { border-left: 0; border-top: .5px solid var(--rule); }
   .vt-page .layers-buy { grid-template-columns: 1fr; }
 }
 @media (max-width: 680px) {
-  .vt-page { --vt-content: calc(100vw - 32px); }
+  .vt-page { --content: calc(100vw - 32px); }
   .vt-page .vt-section { padding: 78px 0; }
   .vt-page .vt-hero__inner { padding-bottom: 14vh; }
   .vt-page .vt-hero h1 { font-size: 42px; }
   .vt-page .vt-hero__ctas { flex-direction: column; align-items: stretch; }
   .vt-page .vt-hero__ctas .ghost-btn { width: 100%; }
   .vt-page .vt-hero__scroll { display: none; }
-  .vt-page .guide-rail { grid-template-columns: 1fr; }
   .vt-page .wz-options { grid-template-columns: 1fr; }
   .vt-page .result-tabs { flex-direction: column; }
   .vt-page .result-tab { width: 100%; justify-content: center; }
   .vt-page .result-products { gap: 10px; }
   .vt-page .wz-preview { margin-left: -16px; margin-right: -16px; border-left: 0; border-right: 0; }
+  .vt-page .lab-tenedor { left: 19%; width: 9%; height: 55%; }
+  .vt-page .lab-cuchillo { left: 79%; width: 9%; height: 56%; }
+  .vt-page .lab-servilleta { left: 92%; width: 18%; height: 46%; top: 56%; }
+  .vt-page .lab-auxiliar { left: 75%; top: 17%; width: 43%; height: 43%; }
+  .vt-page .lab-centro { top: 7%; }
+}
+
+/* ===== v53 · Preview fotográfico ===== */
+.vt-page .wz-stage { background: var(--paper-warm); }
+.vt-page .wz-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.01); transition: opacity 520ms var(--ease), transform 950ms var(--ease-long), filter 720ms var(--ease); will-change: opacity, transform, filter; }
+.vt-page .wz-photo.is-changing { opacity: .18; transform: scale(1.035); }
+.vt-page .wz-photo-overlay { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(15, 26, 46, .03), rgba(15, 26, 46, .10)); mix-blend-mode: multiply; transition: background 620ms var(--ease), opacity 620ms var(--ease); }
+.vt-page .wz-caption { z-index: 2; }
+.vt-page .wz-stage[data-style="clasico"] .wz-photo { filter: saturate(.96) contrast(1.02) brightness(1.02); }
+.vt-page .wz-stage[data-style="contemporaneo"] .wz-photo { filter: saturate(.82) contrast(1.08) brightness(.99); }
+.vt-page .wz-stage[data-style="mediterraneo"] .wz-photo { filter: saturate(1.08) contrast(1.02) brightness(1.03); }
+.vt-page .wz-stage[data-style="sobrio"] .wz-photo { filter: saturate(.72) contrast(1.12) brightness(.96); }
+.vt-page .wz-stage[data-presence="sutil"] .wz-photo { transform: scale(1.005); }
+.vt-page .wz-stage[data-presence="equilibrada"] .wz-photo { transform: scale(1.025); }
+.vt-page .wz-stage[data-presence="protagonista"] .wz-photo { transform: scale(1.065); }
+.vt-page .wz-stage[data-style="clasico"] .wz-photo-overlay { background: linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(145, 101, 78, .13)); }
+.vt-page .wz-stage[data-style="contemporaneo"] .wz-photo-overlay { background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(15, 26, 46, .18)); }
+.vt-page .wz-stage[data-style="mediterraneo"] .wz-photo-overlay { background: linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(200, 170, 120, .16)); }
+.vt-page .wz-stage[data-style="sobrio"] .wz-photo-overlay { background: linear-gradient(180deg, rgba(0, 0, 0, .02), rgba(0, 0, 0, .20)); }
+
+/* ===== v56 · Asesor visual rediseñado ===== */
+.vt-page .wizard-grid--redesign { grid-template-columns: minmax(380px, .9fr) minmax(540px, 1.1fr); align-items: start; }
+.vt-page .wz-preview--redesign { border: 0; background: transparent; overflow: visible; }
+.vt-page .wz-preview__top { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 0 0 14px; }
+.vt-page .wz-preview__top small { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.vt-page .wz-preview--redesign .wz-stage { border-radius: 34px; border: .5px solid rgba(15, 26, 46, .12); box-shadow: 0 30px 90px rgba(15, 26, 46, .12); background: #fff; overflow: hidden; isolation: isolate; aspect-ratio: 4/5; }
+.vt-page .wz-preview--redesign .wz-stage:before { content: ""; position: absolute; z-index: 2; inset: 16px; border: .5px solid rgba(255, 255, 255, .32); border-radius: 26px; pointer-events: none; mix-blend-mode: screen; }
+.vt-page .wz-preview--redesign .wz-stage:after { content: ""; position: absolute; z-index: 2; right: 18px; top: 18px; width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, .72), rgba(255, 255, 255, .05)); opacity: .72; pointer-events: none; transition: transform 700ms var(--ease); }
+.vt-page .wz-preview--redesign .wz-stage.is-loading:after { transform: scale(1.28); opacity: .55; }
+.vt-page .wz-caption { z-index: 4; border-radius: 0 0 34px 34px; padding: 44px 24px 24px; background: linear-gradient(0deg, rgba(255, 255, 255, .96), rgba(255, 255, 255, .72) 42%, rgba(255, 255, 255, 0)); letter-spacing: .1em; }
+.vt-page .wz-live-summary { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.vt-page .wz-live-summary span { display: inline-flex; min-height: 34px; align-items: center; padding: 0 13px; border: .5px solid rgba(15, 26, 46, .12); border-radius: 999px; background: #fff; box-shadow: 0 10px 28px rgba(15, 26, 46, .04); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.vt-page .wz-builder { position: relative; padding: 30px; border: .5px solid rgba(15, 26, 46, .10); background: linear-gradient(180deg, rgba(255, 255, 255, .94), rgba(246, 244, 239, .58)); box-shadow: 0 30px 90px rgba(15, 26, 46, .07); border-radius: 34px; }
+.vt-page .wz-builder__head { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 0 0 20px; }
+.vt-page .wz-builder__head span { font-family: var(--serif); font-size: 24px; color: var(--ink); }
+.vt-page .wz-builder__head b { font-weight: 500; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.vt-page .wz-builder .wz-progress { position: sticky; top: 104px; z-index: 4; margin: 0 0 26px; padding: 0; background: rgba(250, 249, 246, .86); backdrop-filter: blur(10px); }
+.vt-page .wz-panel { display: grid; gap: 14px; }
+.vt-page .wz-panel .wz-step { display: block; }
+.vt-page .wz-step-card { position: relative; padding: 24px 24px 26px; border: .5px solid rgba(15, 26, 46, .10); background: rgba(255, 255, 255, .70); border-radius: 28px; box-shadow: 0 16px 44px rgba(15, 26, 46, .035); transition: opacity 320ms var(--ease), transform 320ms var(--ease), border-color 320ms var(--ease), box-shadow 320ms var(--ease), background 320ms var(--ease); overflow: hidden; }
+.vt-page .wz-step-card:before { content: ""; position: absolute; left: 0; top: 24px; width: 3px; height: 0; background: var(--ink); border-radius: 999px; transition: height 360ms var(--ease); }
+.vt-page .wz-step-card.is-active, .vt-page .wz-step-card.is-complete { background: #fff; border-color: rgba(15, 26, 46, .18); box-shadow: 0 22px 60px rgba(15, 26, 46, .075); }
+.vt-page .wz-step-card.is-active:before, .vt-page .wz-step-card.is-complete:before { height: 48px; }
+.vt-page .wz-step-card.is-locked { opacity: .48; filter: saturate(.55); box-shadow: none; background: rgba(255, 255, 255, .42); }
+.vt-page .wz-step-card.is-locked .wz-options { pointer-events: none; }
+.vt-page .wz-step__head { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 8px; }
+.vt-page .wz-step__chosen { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.vt-page .wz-step-card h3 { font-family: var(--serif); font-size: clamp(25px, 2vw, 34px); line-height: 1.08; font-weight: 400; margin: 8px 0 8px; color: var(--ink); }
+.vt-page .wz-step-card > p { margin: 0 0 20px; max-width: 58ch; font-size: 13px; line-height: 1.55; color: var(--ink-soft); }
+.vt-page .wz-step-card .wz-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.vt-page .wz-opt--visual { position: relative; display: grid; grid-template-columns: 72px 1fr 22px; align-items: center; gap: 14px; min-height: 92px; padding: 10px 14px 10px 10px; border: .5px solid rgba(15, 26, 46, .12); border-radius: 22px; background: #fff; text-align: left; box-shadow: 0 12px 34px rgba(15, 26, 46, .035); overflow: hidden; transition: transform 260ms var(--ease), border-color 260ms var(--ease), box-shadow 260ms var(--ease), background 260ms var(--ease); }
+.vt-page .wz-opt--visual:before { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(15, 26, 46, .06), transparent 42%); opacity: 0; transition: opacity 300ms var(--ease); }
+.vt-page .wz-opt--visual:hover { transform: translateY(-3px); border-color: rgba(15, 26, 46, .30); box-shadow: 0 18px 42px rgba(15, 26, 46, .075); }
+.vt-page .wz-opt--visual:hover:before { opacity: 1; }
+.vt-page .wz-opt--visual[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); box-shadow: 0 24px 54px rgba(15, 26, 46, .18); }
+.vt-page .wz-opt-media { position: relative; z-index: 1; width: 72px; height: 72px; border-radius: 18px; display: flex; align-items: center; justify-content: center; background: var(--ivory); overflow: hidden; border: .5px solid rgba(15, 26, 46, .08); }
+.vt-page .wz-opt-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 520ms var(--ease); }
+.vt-page .wz-opt--visual:hover .wz-opt-media img { transform: scale(1.08); }
+.vt-page .wz-opt-swatch { box-shadow: inset 0 0 0 8px rgba(255, 255, 255, .55); }
+.vt-page .wz-opt-icon { font-family: var(--serif); font-size: 28px; color: var(--ink); background: radial-gradient(circle, rgba(15, 26, 46, .08), rgba(15, 26, 46, .02)); }
+.vt-page .wz-opt--visual[aria-pressed="true"] .wz-opt-icon { color: #fff; background: rgba(255, 255, 255, .12); }
+.vt-page .wz-opt-copy { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.vt-page .wz-opt-copy b { font-weight: 500; font-size: 13.5px; letter-spacing: .01em; color: inherit; }
+.vt-page .wz-opt-copy small { font-weight: 300; font-size: 11.4px; line-height: 1.38; color: var(--muted); }
+.vt-page .wz-opt--visual[aria-pressed="true"] .wz-opt-copy small { color: rgba(255, 255, 255, .72); }
+.vt-page .wz-check { position: relative; z-index: 1; width: 20px; height: 20px; border-radius: 50%; border: .5px solid rgba(15, 26, 46, .20); display: inline-flex; align-items: center; justify-content: center; background: #fff; }
+.vt-page .wz-check:after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ink); transform: scale(0); transition: transform 240ms var(--ease); }
+.vt-page .wz-opt--visual[aria-pressed="true"] .wz-check { border-color: rgba(255, 255, 255, .60); background: rgba(255, 255, 255, .12); }
+.vt-page .wz-opt--visual[aria-pressed="true"] .wz-check:after { transform: scale(1); background: #fff; }
+
+/* v56 · Resultados más editoriales */
+.vt-page .result-summary { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: -18px 0 34px; }
+.vt-page .result-summary span { display: inline-flex; min-height: 34px; align-items: center; padding: 0 13px; border: .5px solid rgba(15, 26, 46, .12); border-radius: 999px; background: #fff; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.vt-page .result-tabs { margin-bottom: 34px; }
+.vt-page .result-tab { border-radius: 999px; background: rgba(255, 255, 255, .74); box-shadow: 0 10px 26px rgba(15, 26, 46, .04); }
+.vt-page .result-card--editorial { grid-template-columns: minmax(420px, .95fr) minmax(520px, 1.05fr); gap: min(5vw, 78px); padding: 28px; border: .5px solid rgba(15, 26, 46, .10); border-radius: 36px; background: #fff; box-shadow: 0 30px 90px rgba(15, 26, 46, .08); }
+.vt-page .result-card--editorial .result-ambient { border-radius: 28px; overflow: hidden; box-shadow: 0 18px 54px rgba(15, 26, 46, .10); }
+.vt-page .result-floating-plate { position: absolute; right: 26px; bottom: 24px; width: 34%; aspect-ratio: 1/1; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, .84); backdrop-filter: blur(14px); box-shadow: 0 24px 60px rgba(15, 26, 46, .18); padding: 8%; transition: transform 700ms var(--ease-long); }
+.vt-page .result-floating-plate img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 14px 24px rgba(15, 26, 46, .16)); }
+.vt-page .result-card--editorial:hover .result-floating-plate { transform: translateY(-8px) rotate(5deg); }
+.vt-page .result-match { display: inline-flex; align-items: center; gap: 14px; min-height: 42px; padding: 0 16px; border-radius: 999px; background: var(--ivory); margin: 0 0 22px; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+.vt-page .result-match b { font-weight: 500; }
+.vt-page .result-match span { font-family: var(--serif); font-size: 21px; letter-spacing: 0; color: var(--ink); }
+.vt-page .result-card--editorial .result-products { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.vt-page .result-card--editorial .result-product__img { border-radius: 20px; background: linear-gradient(180deg, var(--ivory), #fff); border: .5px solid rgba(15, 26, 46, .08); }
+
+@media (max-width: 1180px) {
+  .vt-page .wizard-grid--redesign { grid-template-columns: 1fr; }
+  .vt-page .wz-preview--redesign { position: relative; top: 0; }
+  .vt-page .wz-builder .wz-progress { position: relative; top: 0; }
+  .vt-page .result-card--editorial { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .vt-page .wz-builder { padding: 18px; border-radius: 24px; }
+  .vt-page .wz-preview--redesign .wz-stage { border-radius: 24px; aspect-ratio: 4/5; }
+  .vt-page .wz-caption { border-radius: 0 0 24px 24px; }
+  .vt-page .wz-step-card { padding: 20px 16px; border-radius: 22px; }
+  .vt-page .wz-step-card .wz-options { grid-template-columns: 1fr; }
+  .vt-page .wz-opt--visual { grid-template-columns: 64px 1fr 20px; min-height: 82px; border-radius: 18px; }
+  .vt-page .wz-opt-media { width: 64px; height: 64px; border-radius: 14px; }
+  .vt-page .result-card--editorial { padding: 16px; border-radius: 24px; }
+  .vt-page .result-card--editorial .result-ambient { border-radius: 20px; }
+  .vt-page .result-floating-plate { width: 40%; }
+  .vt-page .result-card--editorial .result-products { grid-template-columns: 1fr 1fr; }
+  .vt-page .result-ctas .ghost-btn { width: 100%; }
+}
+
+/* ===== v57 · Guía tipo tubelight ===== */
+.vt-page .vt-steps-section { background: linear-gradient(180deg, #fff 0%, #fff 56%, var(--ivory) 100%); }
+.vt-page .guide-experience { width: var(--content); margin: 0 auto; display: grid; gap: 34px; justify-items: center; }
+.vt-page .tube-nav { position: relative; display: flex; align-items: center; justify-content: center; gap: 8px; max-width: 980px; width: 100%; padding: 8px; border: .5px solid rgba(15, 26, 46, .12); border-radius: 999px; background: rgba(255, 255, 255, .72); backdrop-filter: blur(18px); box-shadow: 0 18px 70px rgba(15, 26, 46, .08); }
+.vt-page .tube-item { position: relative; min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 22px; border-radius: 999px; color: rgba(15, 26, 46, .66); transition: color 260ms var(--ease), background 260ms var(--ease), transform 260ms var(--ease); white-space: nowrap; isolation: isolate; }
+.vt-page .tube-item span { font-family: var(--serif); font-size: 16px; line-height: 1; color: currentColor; opacity: .72; }
+.vt-page .tube-item b { font-weight: 500; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: currentColor; }
+.vt-page .tube-item:hover { color: var(--ink); transform: translateY(-1px); }
+.vt-page .tube-item.is-active { color: var(--ink); background: rgba(15, 26, 46, .055); }
+.vt-page .tube-item.is-active:before { content: ""; position: absolute; left: 50%; top: -8px; transform: translateX(-50%); width: 34px; height: 4px; background: var(--ink); border-radius: 999px 999px 0 0; box-shadow: 0 0 22px rgba(15, 26, 46, .42), 0 0 40px rgba(15, 26, 46, .20); }
+.vt-page .tube-item.is-active:after { content: ""; position: absolute; left: 50%; top: -15px; transform: translateX(-50%); width: 64px; height: 34px; border-radius: 50%; background: rgba(15, 26, 46, .12); filter: blur(14px); z-index: -1; animation: tubeGlow 2.6s ease-in-out infinite alternate; }
+@keyframes tubeGlow { from { opacity: .55; transform: translateX(-50%) scale(.92); } to { opacity: 1; transform: translateX(-50%) scale(1.05); } }
+.vt-page .guide-showcase { width: 100%; display: grid; grid-template-columns: minmax(300px, .85fr) minmax(420px, 1fr); align-items: center; gap: min(6vw, 88px); padding: 42px; border: .5px solid rgba(15, 26, 46, .10); border-radius: 42px; background: rgba(255, 255, 255, .80); box-shadow: 0 30px 100px rgba(15, 26, 46, .07); overflow: hidden; }
+.vt-page .guide-visual { position: relative; min-height: 430px; border-radius: 36px; background: radial-gradient(circle at 50% 42%, #fff 0%, #F7F4ED 44%, rgba(15, 26, 46, .06) 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.vt-page .guide-visual:before { content: ""; position: absolute; inset: 24px; border: .5px solid rgba(15, 26, 46, .09); border-radius: 50%; }
+.vt-page .guide-visual:after { content: ""; position: absolute; width: 74%; aspect-ratio: 1/1; border-radius: 50%; background: linear-gradient(135deg, rgba(255, 255, 255, .70), rgba(255, 255, 255, .22)); box-shadow: inset 0 0 0 1px rgba(15, 26, 46, .06), 0 24px 70px rgba(15, 26, 46, .08); }
+.vt-page .guide-copy-wrap { position: relative; min-height: 330px; display: grid; align-items: center; }
+.vt-page .guide-panel { grid-area: 1/1; opacity: 0; transform: translateY(20px); pointer-events: none; transition: opacity 360ms var(--ease), transform 480ms var(--ease-long); }
+.vt-page .guide-panel.is-active { opacity: 1; transform: none; pointer-events: auto; }
+.vt-page .guide-panel span { display: inline-flex; align-items: center; justify-content: center; width: 58px; height: 58px; border-radius: 50%; border: .5px solid rgba(15, 26, 46, .15); font-family: var(--serif); font-size: 22px; color: var(--ink); margin-bottom: 22px; background: #fff; box-shadow: 0 16px 36px rgba(15, 26, 46, .05); }
+.vt-page .guide-panel h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 4.2vw, 68px); line-height: .95; margin: 0 0 20px; color: var(--ink); letter-spacing: -.015em; }
+.vt-page .guide-panel p { max-width: 56ch; font-size: 16px; line-height: 1.75; color: var(--ink-soft); margin: 0; font-weight: 300; }
+
+/* v57 · Wizard: iconos minimalistas */
+.vt-page .wz-opt--visual { grid-template-columns: 58px 1fr 22px; min-height: 82px; padding: 12px 16px 12px 12px; border-radius: 24px; background: rgba(255, 255, 255, .86); }
+.vt-page .wz-opt-media { width: 58px; height: 58px; border-radius: 50%; background: linear-gradient(180deg, #fff, var(--ivory)); box-shadow: inset 0 0 0 1px rgba(15, 26, 46, .08), 0 10px 24px rgba(15, 26, 46, .04); overflow: visible; }
+.vt-page .wz-opt-lineicon svg { width: 31px; height: 31px; stroke: var(--ink); stroke-width: 1.15; fill: none; overflow: visible; transition: stroke 240ms var(--ease), transform 300ms var(--ease); }
+.vt-page .wz-opt--visual:hover .wz-opt-lineicon svg { transform: translateY(-2px); }
+.vt-page .wz-opt--visual[aria-pressed="true"] .wz-opt-lineicon { background: rgba(255, 255, 255, .12); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .20); }
+.vt-page .wz-opt--visual[aria-pressed="true"] .wz-opt-lineicon svg { stroke: #fff; }
+.vt-page .wz-opt-swatch { box-shadow: inset 0 0 0 1px rgba(15, 26, 46, .08), inset 0 0 0 11px rgba(255, 255, 255, .60); }
+.vt-page .wz-opt--visual[aria-pressed="true"] .wz-opt-swatch { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .18), inset 0 0 0 11px rgba(255, 255, 255, .10); }
+.vt-page .wz-step-card:not(.is-locked) .wz-options { animation: optionsRise 420ms var(--ease-long); }
+@keyframes optionsRise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.vt-page .wz-step-card.is-locked { opacity: .42; transform: scale(.992); }
+.vt-page .wz-step-card.is-locked h3:after { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--muted); margin-left: 10px; vertical-align: middle; opacity: .35; }
+
+/* v57 · Resultado: tarjetas más visuales */
+.vt-page .result-card--editorial { background: linear-gradient(135deg, #fff 0%, #fff 48%, rgba(246, 244, 239, .78) 100%); border-radius: 42px; align-items: stretch; }
+.vt-page .result-card--editorial .result-body { align-self: center; padding: 10px 14px; }
+.vt-page .result-card--editorial .result-products { margin-top: 4px; }
+.vt-page .result-card--editorial .result-product { padding: 12px; border: .5px solid rgba(15, 26, 46, .08); border-radius: 24px; background: rgba(255, 255, 255, .78); transition: transform 260ms var(--ease), box-shadow 260ms var(--ease), border-color 260ms var(--ease); }
+.vt-page .result-card--editorial .result-product:hover { transform: translateY(-4px); box-shadow: 0 18px 38px rgba(15, 26, 46, .08); border-color: rgba(15, 26, 46, .18); }
+.vt-page .result-card--editorial .result-product__img { margin-bottom: 10px; }
+.vt-page .result-tabs { position: relative; }
+.vt-page .result-tab[aria-selected="true"] { box-shadow: 0 18px 40px rgba(15, 26, 46, .16); }
+
+@media (max-width: 1180px) {
+  .vt-page .guide-showcase { grid-template-columns: 1fr; padding: 28px; }
+  .vt-page .guide-visual { min-height: 340px; }
+  .vt-page .tube-nav { overflow: auto; justify-content: flex-start; padding: 8px; }
+  .vt-page .tube-item { flex: 0 0 auto; }
+}
+@media (max-width: 760px) {
+  .vt-page .tube-nav { border-radius: 28px; }
+  .vt-page .tube-item { min-height: 46px; padding: 0 16px; }
+  .vt-page .tube-item b { font-size: 10px; }
+  .vt-page .guide-showcase { border-radius: 28px; padding: 18px; }
+  .vt-page .guide-visual { min-height: 280px; border-radius: 22px; }
+  .vt-page .guide-panel h3 { font-size: 42px; }
+  .vt-page .guide-panel p { font-size: 14px; }
+  .vt-page .wz-opt--visual { grid-template-columns: 52px 1fr 20px; }
+  .vt-page .wz-opt-media { width: 52px; height: 52px; }
+  .vt-page .wz-opt-lineicon svg { width: 28px; height: 28px; }
+}
+
+/* ===== v58 · Guía por imágenes + ajustes de resultado ===== */
+.vt-page .guide-visual { background: #EDE8DE; box-shadow: inset 0 0 0 1px rgba(15, 26, 46, .08), 0 24px 80px rgba(15, 26, 46, .08); }
+.vt-page .guide-visual:before { inset: 0; border: 0; border-radius: 36px; background: linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(15, 26, 46, .10)); z-index: 3; pointer-events: none; }
+.vt-page .guide-visual:after { content: ""; position: absolute; inset: 0; width: auto; aspect-ratio: auto; border-radius: 36px; background: radial-gradient(circle at 50% 38%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 46%, rgba(15, 26, 46, .22) 100%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16); z-index: 4; pointer-events: none; }
+.vt-page .guide-image-panel { position: absolute; inset: 0; opacity: 0; transform: scale(1.035); transition: opacity 560ms var(--ease), transform 1050ms var(--ease-long), filter 650ms var(--ease); z-index: 1; filter: saturate(.92) contrast(.98); }
+.vt-page .guide-image-panel.is-active { opacity: 1; transform: scale(1); filter: saturate(1) contrast(1); }
+.vt-page .guide-image-panel img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.vt-page .guide-image-panel[data-guide-image="base"] img { object-position: center center; }
+.vt-page .guide-image-panel[data-guide-image="capas"] img { object-position: center center; }
+.vt-page .guide-image-panel[data-guide-image="gesto"] img { object-position: center center; }
+.vt-page .guide-image-panel[data-guide-image="centro"] img { object-position: center center; }
+.vt-page .guide-image-panel[data-guide-image="compartir"] img { object-position: center center; }
+.vt-page .guide-media-label { position: absolute; left: 22px; bottom: 22px; z-index: 5; display: inline-flex; align-items: center; gap: 12px; padding: 10px 15px 10px 10px; border-radius: 999px; background: rgba(255, 255, 255, .78); border: .5px solid rgba(255, 255, 255, .58); backdrop-filter: blur(14px); color: var(--ink); box-shadow: 0 18px 44px rgba(15, 26, 46, .16); }
+.vt-page .guide-media-label span { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: var(--ink); color: #fff; font-family: var(--serif); font-size: 15px; }
+.vt-page .guide-media-label b { font-weight: 500; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
+.vt-page .result-match .match-number { min-width: 72px; text-align: right; font-variant-numeric: tabular-nums; letter-spacing: .01em; }
+@media (max-width: 760px) {
+  .vt-page .guide-visual:before, .vt-page .guide-visual:after { border-radius: 22px; }
+  .vt-page .guide-media-label { left: 14px; bottom: 14px; padding: 8px 12px 8px 8px; }
+  .vt-page .guide-media-label span { width: 30px; height: 30px; font-size: 13px; }
+  .vt-page .guide-media-label b { font-size: 10px; }
 }
 
 /* Reduced motion: kill decorative animation/transitions, keep function */
 @media (prefers-reduced-motion: reduce) {
+  .vt-page .lab-stage:after, .vt-page .tube-item.is-active:after,
+  .vt-page .lab-layer.just-toggled.on img,
   .vt-page .wz-step.active, .vt-page .result-card.active,
-  .vt-page .wz-progress span.done::after, .vt-page .wz-progress span.active::after { animation: none; }
-  .vt-page .wz-progress span.done::after, .vt-page .wz-progress span.active::after { transform: none; }
-  .vt-page .lab-layer, .vt-page .wz-photo, .vt-page .wz-photo-overlay,
-  .vt-page .result-ambient img, .vt-page .result-product__img img,
-  .vt-page .guide-step, .vt-page .guide-step__line, .vt-page .buy-card { transition: none; }
+  .vt-page .wz-step-card:not(.is-locked) .wz-options,
+  .vt-page .wz-progress span.done:after, .vt-page .wz-progress span.active:after { animation: none; }
+  .vt-page .wz-progress span.done:after, .vt-page .wz-progress span.active:after { transform: none; }
+  .vt-page .lab-stage, .vt-page .lab-table, .vt-page .lab-layer, .vt-page .lab-toggle,
+  .vt-page .guide-image-panel, .vt-page .guide-panel, .vt-page .tube-item,
+  .vt-page .wz-photo, .vt-page .wz-photo-overlay, .vt-page .wz-step-card, .vt-page .wz-opt--visual,
+  .vt-page .result-ambient img, .vt-page .result-product__img img, .vt-page .result-floating-plate,
+  .vt-page .buy-card { transition: none; }
 }
 {% endstylesheet %}
 
@@ -488,276 +746,345 @@
     var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var scrollBehavior = reducedMotion ? 'auto' : 'smooth';
 
-    /* Asset map: mockup logical paths (assets/…) → theme asset_url */
+    /* Asset map: mockup logical paths (assets/…) → theme asset_url.
+       Returns null when the logical file was not shipped, so the photo
+       cascade can skip it (mirrors the mockup's onerror fall-through). */
     var ASSETS = window.__VT_ASSETS || {};
     function resolve(u) {
-      if (!u) return u;
-      return ASSETS[u.replace(/^assets\//, '')] || u;
+      if (!u) return null;
+      return ASSETS[u.replace(/^assets\//, '')] || null;
+    }
+
+    /* ---------- Hero microparallax ---------- */
+    var hero = $('#heroVTM');
+    if (hero && !reducedMotion) {
+      hero.addEventListener('pointermove', function (e) {
+        var r = hero.getBoundingClientRect();
+        var mx = ((e.clientX - r.left) / r.width - 0.5).toFixed(3);
+        var my = ((e.clientY - r.top) / r.height - 0.5).toFixed(3);
+        hero.style.setProperty('--mx', mx);
+        hero.style.setProperty('--my', my);
+      }, { passive: true });
+    }
+
+    /* ---------- Guía por pasos tipo tubelight ---------- */
+    var guideExp = $('[data-guide-experience]');
+    if (guideExp) {
+      guideExp.dataset.active = 'base';
+      $$('.tube-item', guideExp).forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var id = btn.dataset.guide;
+          guideExp.dataset.active = id;
+          $$('.tube-item', guideExp).forEach(function (b) {
+            var active = b === btn;
+            b.classList.toggle('is-active', active);
+            b.setAttribute('aria-selected', active ? 'true' : 'false');
+          });
+          $$('.guide-panel', guideExp).forEach(function (panel) {
+            panel.classList.toggle('is-active', panel.dataset.guidePanel === id);
+          });
+          $$('.guide-image-panel', guideExp).forEach(function (panel) {
+            panel.classList.toggle('is-active', panel.dataset.guideImage === id);
+          });
+          var label = $('.guide-media-label', guideExp);
+          if (label) {
+            var no = btn.querySelector('span') ? btn.querySelector('span').textContent : '';
+            var title = btn.querySelector('b') ? btn.querySelector('b').textContent : '';
+            label.innerHTML = '<span>' + no + '</span><b>' + title + '</b>';
+          }
+        });
+      });
     }
 
     /* ---------- Laboratorio de capas ---------- */
+    function pulseLab(layer) {
+      var labStage = $('.lab-stage');
+      if (labStage) {
+        labStage.classList.add('is-updating');
+        window.setTimeout(function () { labStage.classList.remove('is-updating'); }, 520);
+      }
+      if (layer && layer.classList.contains('on')) {
+        layer.classList.remove('just-toggled');
+        void layer.offsetWidth;
+        layer.classList.add('just-toggled');
+        window.setTimeout(function () { layer.classList.remove('just-toggled'); }, 720);
+      }
+    }
+
+    function updateLabStack() {
+      var labStage = $('.lab-stage');
+      var protagonista = $('.lab-protagonista');
+      var bajoplato = $('.lab-bajoplato');
+      var hasStack = !!(protagonista && bajoplato && protagonista.classList.contains('on') && bajoplato.classList.contains('on'));
+      if (labStage) {
+        labStage.classList.toggle('has-stack', hasStack);
+        var mantel = $('.lab-mantel');
+        labStage.classList.toggle('has-mantel', !!(mantel && mantel.classList.contains('on')));
+      }
+      var active = $$('.lab-toggle').filter(function (btn) { return btn.getAttribute('aria-pressed') === 'true'; }).length;
+      var counter = $('#labCount');
+      if (counter) counter.textContent = active === 1 ? '1 capa activa' : active + ' capas activas';
+    }
+
+    /* Un toggle puede gobernar más de una capa (cubertería = tenedor + cuchillo). */
+    function labLayersFor(toggle) {
+      if (toggle.dataset.layer === 'cuberteria') {
+        return [$('.lab-tenedor'), $('.lab-cuchillo')].filter(Boolean);
+      }
+      var layer = $('.lab-' + toggle.dataset.layer);
+      return layer ? [layer] : [];
+    }
+
+    function setLabToggle(toggle, next) {
+      toggle.setAttribute('aria-pressed', next ? 'true' : 'false');
+      labLayersFor(toggle).forEach(function (layer) {
+        layer.classList.toggle('on', next);
+      });
+    }
+
     $$('.lab-toggle').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var on = btn.getAttribute('aria-pressed') === 'true';
-        btn.setAttribute('aria-pressed', on ? 'false' : 'true');
-        var layer = $('.lab-' + btn.dataset.layer);
-        if (layer) layer.classList.toggle('on', !on);
+        var next = !on;
+
+        // data-exclusive="textil": individual y mantel se excluyen entre sí.
+        if (next && btn.dataset.exclusive) {
+          $$('.lab-toggle[data-exclusive="' + btn.dataset.exclusive + '"]').forEach(function (other) {
+            if (other !== btn) setLabToggle(other, false);
+          });
+        }
+
+        setLabToggle(btn, next);
+        updateLabStack();
+        var layers = labLayersFor(btn);
+        pulseLab(layers[0] || $('.lab-stage'));
       });
     });
 
+    $$('.lab-quick-actions [data-lab-preset]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var full = btn.dataset.labPreset === 'full';
+        $$('.lab-toggle').forEach(function (toggle) {
+          var next = full;
+          if (full && toggle.dataset.layer === 'individual') next = false;
+          if (full && toggle.dataset.layer === 'mantel') next = true;
+          setLabToggle(toggle, next);
+        });
+        updateLabStack();
+        pulseLab($('.lab-stage'));
+      });
+    });
+    updateLabStack();
+
     /* ============================================================
-       WIZARD + PREVIEW (data ported verbatim from the mockup)
+       WIZARD + PREVIEW (data ported verbatim from the mockup v59)
        ============================================================ */
     var COLORS = {
       woodLight: '#D8C3A2', woodDark: '#6E513A', stone: '#E7E3DB', graphite: '#2A2E36',
-      none: 'transparent', linenWhite: '#F7F3EC', linenBeige: '#E7DCC8', blueSoft: '#C9D6E2', dark: '#242321'
+      none: 'transparent', linenWhite: '#F7F3EC', linenBeige: '#E7DCC8', pattern: '#D8D0C0', dark: '#242321'
     };
 
     var QUESTIONS = [
       {
-        key: 'occasion', q: '¿Para qué ocasión quieres vestir la mesa?',
+        key: 'space', q: '¿Dónde va a estar esa mesa?', lead: 'El espacio cambia la luz y el tono visual.',
         options: [
-          { id: 'desayuno', label: 'Desayuno lento' },
-          { id: 'aperitivo', label: 'Aperitivo en casa' },
-          { id: 'comidaFormal', label: 'Comida formal' },
-          { id: 'cenaEspecial', label: 'Cena especial' }
+          { id: 'luminoso', label: 'Interior luminoso', desc: 'Blancos, reflejos y equilibrio.' },
+          { id: 'clasico', label: 'Casa clásica', desc: 'Molduras, memoria y gesto tradicional.' },
+          { id: 'contemporaneo', label: 'Interior contemporáneo', desc: 'Líneas limpias y composición más depurada.' },
+          { id: 'jardin', label: 'Jardín o terraza', desc: 'Exterior, aire y materia natural.' }
         ]
       },
       {
-        key: 'space', q: '¿Dónde va a estar esa mesa?',
+        key: 'occasion', q: '¿Para qué ocasión quieres vestir la mesa?', lead: 'Define el ritmo de la composición.',
         options: [
-          { id: 'luminoso', label: 'Interior luminoso' },
-          { id: 'clasico', label: 'Casa clásica' },
-          { id: 'contemporaneo', label: 'Interior contemporáneo' },
-          { id: 'jardin', label: 'Jardín o terraza' }
+          { id: 'desayuno', label: 'Desayuno lento', desc: 'Luz suave, piezas serenas y una escena de mañana.' },
+          { id: 'aperitivo', label: 'Aperitivo en casa', desc: 'Piezas de apoyo, fuentes y objetos para compartir.' },
+          { id: 'comidaFormal', label: 'Comida formal', desc: 'Más estructura, capas completas y presencia clásica.' },
+          { id: 'cenaEspecial', label: 'Cena especial', desc: 'Contraste, profundidad y vajilla con carácter.' }
         ]
       },
       {
-        key: 'base', q: '¿Cómo es la base de tu mesa?',
+        key: 'base', q: '¿Cómo es la base de tu mesa?', lead: 'La superficie condiciona la presencia de la vajilla.',
         options: [
-          { id: 'woodLight', label: 'Madera clara', swatch: COLORS.woodLight },
-          { id: 'woodDark', label: 'Madera oscura', swatch: COLORS.woodDark },
-          { id: 'stone', label: 'Blanca o piedra', swatch: COLORS.stone },
-          { id: 'graphite', label: 'Negra / grafito', swatch: COLORS.graphite }
+          { id: 'woodLight', label: 'Madera clara', desc: 'Natural, cálida y ligera.', swatch: COLORS.woodLight },
+          { id: 'woodDark', label: 'Madera oscura', desc: 'Más contraste y profundidad.', swatch: COLORS.woodDark },
+          { id: 'stone', label: 'Blanca o piedra', desc: 'Limpia, mineral y luminosa.', swatch: COLORS.stone },
+          { id: 'graphite', label: 'Negra / grafito', desc: 'Sofisticada y teatral.', swatch: COLORS.graphite }
         ]
       },
       {
-        key: 'textil', q: '¿Qué textil imaginas?',
+        key: 'textil', q: '¿Qué textil imaginas?', lead: 'El textil suaviza la escena y añade temperatura.',
         options: [
-          { id: 'none', label: 'Sin mantel', swatch: '#EDEAE4' },
-          { id: 'linenWhite', label: 'Lino blanco', swatch: COLORS.linenWhite },
-          { id: 'linenBeige', label: 'Lino beige', swatch: COLORS.linenBeige },
-          { id: 'blueSoft', label: 'Azul suave', swatch: COLORS.blueSoft },
-          { id: 'dark', label: 'Oscuro', swatch: COLORS.dark }
+          { id: 'none', label: 'Sin mantel', desc: 'Mantiene visible la mesa que acabas de elegir.', swatch: '#EDEAE4' },
+          { id: 'linenWhite', label: 'Lino blanco', desc: 'Clásico, limpio y luminoso.', swatch: COLORS.linenWhite },
+          { id: 'linenBeige', label: 'Lino beige', desc: 'Cálido y muy natural.', swatch: COLORS.linenBeige },
+          { id: 'pattern', label: 'Patrón', desc: 'Un motivo textil que añade ritmo y personalidad.', swatch: COLORS.pattern },
+          { id: 'dark', label: 'Oscuro', desc: 'Más contraste y presencia.', swatch: COLORS.dark }
         ]
       },
       {
-        key: 'style', q: '¿Qué estilo quieres transmitir?',
+        key: 'style', q: '¿Qué estilo quieres transmitir?', lead: 'La misma vajilla cambia según la intención.',
         options: [
-          { id: 'clasico', label: 'Clásico' },
-          { id: 'contemporaneo', label: 'Contemporáneo' },
-          { id: 'mediterraneo', label: 'Mediterráneo' },
-          { id: 'sobrio', label: 'Sobrio y elegante' }
+          { id: 'clasico', label: 'Clásico', desc: 'Herencia, calma y simetría.', icon: 'I' },
+          { id: 'contemporaneo', label: 'Contemporáneo', desc: 'Más aire y menos ornamento.', icon: 'II' },
+          { id: 'mediterraneo', label: 'Mediterráneo', desc: 'Luz, color y naturalidad.', icon: 'III' },
+          { id: 'sobrio', label: 'Sobrio y elegante', desc: 'Pocas piezas, mucho carácter.', icon: 'IV' }
         ]
       },
       {
-        key: 'presence', q: '¿Cuánta presencia debe tener la vajilla?',
+        key: 'presence', q: '¿Cuánta presencia debe tener la vajilla?', lead: 'Ajusta si quieres que acompañe o que lidere la mesa.',
         options: [
-          { id: 'sutil', label: 'Sutil' },
-          { id: 'equilibrada', label: 'Equilibrada' },
-          { id: 'protagonista', label: 'Muy protagonista' }
+          { id: 'sutil', label: 'Sutil', desc: 'La vajilla acompaña sin imponerse.', icon: '·' },
+          { id: 'equilibrada', label: 'Equilibrada', desc: 'Presencia media, fácil de recibir.', icon: '○' },
+          { id: 'protagonista', label: 'Muy protagonista', desc: 'El decorado marca la escena.', icon: '●' }
         ]
       }
     ];
 
-    var FORM_IMAGES = {
-      desayuno: {
-        luminoso: 'assets/viste-tu-mesa/desayuno_luminoso.webp',
-        clasico: 'assets/viste-tu-mesa/desayuno_clasico.webp',
-        contemporaneo: 'assets/viste-tu-mesa/desayuno_contemporaneo.webp',
-        jardin: {
-          woodLight: {
-            none: 'assets/viste-tu-mesa/desayuno_jardin_woodLight_none.webp',
-            linenWhite: 'assets/viste-tu-mesa/desayuno_jardin_woodLight_linenWhite.webp',
-            linenBeige: 'assets/viste-tu-mesa/desayuno_jardin_woodLight_linenBeige.webp',
-            blueSoft: 'assets/viste-tu-mesa/desayuno_jardin_woodLight_blueSoft.webp',
-            dark: 'assets/viste-tu-mesa/desayuno_jardin_woodLight_dark.webp',
-            default: 'assets/viste-tu-mesa/desayuno_jardin_woodLight.webp'
-          },
-          woodDark: {
-            none: 'assets/viste-tu-mesa/desayuno_jardin_woodDark_none.webp',
-            linenWhite: 'assets/viste-tu-mesa/desayuno_jardin_woodDark_linenWhite.webp',
-            linenBeige: 'assets/viste-tu-mesa/desayuno_jardin_woodDark_linenBeige.webp',
-            blueSoft: 'assets/viste-tu-mesa/desayuno_jardin_woodDark_blueSoft.webp',
-            dark: 'assets/viste-tu-mesa/desayuno_jardin_woodDark_dark.webp',
-            default: 'assets/viste-tu-mesa/desayuno_jardin_woodDark.webp'
-          },
-          stone: {
-            none: 'assets/viste-tu-mesa/desayuno_jardin_stone_none.webp',
-            linenWhite: 'assets/viste-tu-mesa/desayuno_jardin_stone_linenWhite.webp',
-            linenBeige: 'assets/viste-tu-mesa/desayuno_jardin_stone_linenBeige.webp',
-            blueSoft: 'assets/viste-tu-mesa/desayuno_jardin_stone_blueSoft.webp',
-            dark: 'assets/viste-tu-mesa/desayuno_jardin_stone_dark.webp',
-            default: 'assets/viste-tu-mesa/desayuno_jardin_stone.webp'
-          },
-          graphite: {
-            none: 'assets/viste-tu-mesa/desayuno_jardin_graphite_none.webp',
-            linenWhite: 'assets/viste-tu-mesa/desayuno_jardin_graphite_linenWhite.webp',
-            linenBeige: 'assets/viste-tu-mesa/desayuno_jardin_graphite_linenBeige.webp',
-            blueSoft: 'assets/viste-tu-mesa/desayuno_jardin_graphite_blueSoft.webp',
-            dark: 'assets/viste-tu-mesa/desayuno_jardin_graphite_dark.webp',
-            default: 'assets/viste-tu-mesa/desayuno_jardin_graphite.webp'
-          },
-          default: 'assets/viste-tu-mesa/desayuno_jardin_woodLight.webp'
-        },
-        default: 'assets/viste-tu-mesa/desayuno_luminoso.webp'
-      },
-      default: 'assets/viste-tu-mesa/desayuno_luminoso.webp'
-    };
+    var FORM_ROOT = 'assets/viste-tu-mesa/formulario';
+    var DEFAULT_FORM_PHOTO = FORM_ROOT + '/01-espacio/luminoso.webp';
 
-    /* collectionUrl / featuredUrl mapped from mockup .html pages onto theme routes */
+    /* Copy editorial de cada colección candidata (curación hardcodeada, decisión
+       del cliente). Nombre, url, precios, fotos y variantes NO viven aquí: se
+       inyectan desde window.__VT_COLLECTIONS con el catálogo real. `ambient` es
+       solo el respaldo si la colección no tiene imagen en el admin. */
     var COLLECTIONS = {
       'aurora-blanca': {
-        name: 'Aurora Blanca', tag: 'Serena · Luminosa', eyebrow: 'Colección icónica', ambient: 'assets/mesa_aurora_editorial.webp', plate: 'assets/catalog/aurora-blanca/plato-llano.webp',
-        reason: 'La forma esencial de La Cartuja, en su versión más pura. Perfecta para desayunos lentos y mesas serenas donde la vajilla acompaña sin alzar la voz.',
-        products: [
-          { n: 'Plato llano Aurora', p: '38 €', img: 'assets/catalog/aurora-blanca/plato-llano.webp' },
-          { n: 'Fuente Aurora', p: '96 €', img: 'assets/catalog/aurora-blanca/fuente-redonda.webp' },
-          { n: 'Cafetera Aurora', p: '128 €', img: 'assets/catalog/aurora-blanca/cafetera.webp' }
-        ], collectionUrl: '/collections/aurora-blanca', featuredUrl: '/collections/aurora-blanca'
-      },
-      'rosa-202': {
-        name: '202 Rosa', tag: 'Clásica · Memoria', eyebrow: 'Emblema de la casa', ambient: 'assets/mesa_bodegon_lujo_el_renacer.webp', plate: 'assets/catalog/202-rosa/plato-llano.webp',
-        reason: 'El decorado floral más querido de La Cartuja, ligado a la memoria de tantas mesas. Convierte cualquier celebración en un recuerdo que permanece.',
-        products: [
-          { n: 'Plato llano 202 Rosa', p: '42 €', img: 'assets/catalog/202-rosa/plato-llano.webp' },
-          { n: 'Sopera 202 Rosa', p: '185 €', img: 'assets/catalog/202-rosa/sopera.webp' },
-          { n: 'Cafetera 202 Rosa', p: '128 €', img: 'assets/catalog/202-rosa/cafetera.webp' }
-        ], collectionUrl: '/collections/202-rosa', featuredUrl: '/products/plato-llano-202-rosa'
-      },
-      'bellavista': {
-        name: 'Bellavista', tag: 'Botánica · Equilibrada', eyebrow: 'Naturaleza dibujada', ambient: 'assets/ochavada_canasto_floral.jpg', plate: 'assets/catalog/bellavista/plato-llano.webp',
-        reason: 'Un jardín botánico llevado a la loza. Pide aire, luz natural y mesas largas; equilibra presencia y serenidad.',
-        products: [
-          { n: 'Plato Bellavista', p: '40 €', img: 'assets/catalog/bellavista/plato-llano.webp' },
-          { n: 'Fuente Bellavista', p: '96 €', img: 'assets/catalog/bellavista/fuente-redonda.webp' },
-          { n: 'Sopera Bellavista', p: '175 €', img: 'assets/catalog/bellavista/sopera.webp' }
-        ], collectionUrl: '/collections/bellavista', featuredUrl: '/collections/bellavista'
+        tag: 'Serena · Luminosa', eyebrow: 'La base atemporal', ambient: 'assets/mesa_aurora_editorial.webp',
+        reason: 'Esmalte blanco roto y líneas suaves: la base atemporal sobre la que se dibuja todo lo demás. Perfecta para desayunos lentos y mesas serenas donde la vajilla acompaña sin alzar la voz.'
       },
       'ochavada-blanca': {
-        name: 'Ochavada Blanca', tag: 'Geométrica · Sobria', eyebrow: 'Modernidad de 1841', ambient: 'assets/scene-left-tableware.webp', plate: 'assets/catalog/ochavada-blanca/plato-llano.webp',
-        reason: 'La silueta octogonal que nació moderna. Líneas limpias para mesas contemporáneas y bases despejadas.',
-        products: [
-          { n: 'Plato Ochavada', p: '44 €', img: 'assets/catalog/ochavada-blanca/plato-llano.webp' },
-          { n: 'Fuente Ochavada', p: '110 €', img: 'assets/catalog/ochavada-blanca/fuente-redonda.webp' },
-          { n: 'Sopera Ochavada', p: '178 €', img: 'assets/catalog/ochavada-blanca/sopera.webp' }
-        ], collectionUrl: '/collections/ochavada-blanca', featuredUrl: '/collections/ochavada'
+        tag: 'Geométrica · Sobria', eyebrow: 'Modernidad de 1841', ambient: 'assets/scene-left-tableware.webp',
+        reason: 'La silueta octogonal que nació moderna. Líneas limpias para mesas contemporáneas y bases despejadas, sin ornamento que sobre.'
+      },
+      'bellavista': {
+        tag: 'Luminosa · Equilibrada', eyebrow: 'Decorado sobre Aurora', ambient: 'assets/scene-left-tableware.webp',
+        reason: 'Luminosa y equilibrada, donde la tradición y la contemporaneidad se encuentran. La vajilla que funciona igual de bien en una mesa de diario que en una puesta con intención.'
+      },
+      '202-rosa': {
+        tag: 'Clásica · Memoria', eyebrow: 'Emblema de la casa', ambient: 'assets/mesa_bodegon_lujo_el_renacer.webp',
+        reason: 'Paisajes suaves, motivos florales y grecas exquisitas en el rosa eterno de La Cartuja. Convierte cualquier celebración en un recuerdo que permanece.'
       },
       'negro-vistas': {
-        name: 'Negro Vistas', tag: 'Contraste · Carácter', eyebrow: 'Drama gráfico', ambient: 'assets/mesa_ochavada_negro_vistas.webp', plate: 'assets/catalog/negro-vistas/plato-llano.webp',
-        reason: 'Contraste llevado al extremo: dibujo en negro sobre fondo claro, con un punto teatral. Brilla en cenas especiales y mesas oscuras.',
-        products: [
-          { n: 'Plato Negro Vistas', p: '46 €', img: 'assets/catalog/negro-vistas/plato-llano.webp' },
-          { n: 'Fuente Negro Vistas', p: '120 €', img: 'assets/catalog/negro-vistas/fuente-redonda.webp' },
-          { n: 'Sopera Negro Vistas', p: '190 €', img: 'assets/catalog/negro-vistas/sopera.webp' }
-        ], collectionUrl: '/collections/negro-vistas', featuredUrl: '/collections/negro-vistas'
+        tag: 'Contraste · Carácter', eyebrow: 'Drama gráfico', ambient: 'assets/mesa_ochavada_negro_vistas.webp',
+        reason: 'Fondo negro profundo y vistas paisajísticas en blanco puro: clásico y moderno a la vez. Brilla en cenas especiales y sobre mesas oscuras.'
+      },
+      'ceilan': {
+        tag: 'Oriental · Andaluza', eyebrow: 'Grecas y palmeras', ambient: 'assets/ochavada_canasto_floral.jpg',
+        reason: 'Motivos florales, palmeras y grecas orientales reinterpretadas con luz andaluza. Pide exterior, sobremesa larga y ganas de mirar el plato.'
       },
       'oaxaca': {
-        name: 'Oaxaca x Gastón y Daniela', tag: 'Colorista · Mediterránea', eyebrow: 'Edición de autor', ambient: 'assets/mesa_aurora_oaxaca.webp', plate: 'assets/catalog/oaxaca/prod_p5_0.webp',
-        reason: 'Color y luz mediterránea en una colaboración de autor. Pensada para mesas exteriores donde la vajilla es la fiesta.',
-        products: [
-          { n: 'Plato Oaxaca', p: '48 €', img: 'assets/catalog/oaxaca/prod_p5_0.webp' },
-          { n: 'Plato Oaxaca azul', p: '48 €', img: 'assets/catalog/oaxaca/prod_p5_1.webp' },
-          { n: 'Plato Oaxaca amarillo', p: '48 €', img: 'assets/catalog/oaxaca/prod_p5_2.webp' }
-        ], collectionUrl: '/collections/oaxaca', featuredUrl: '/collections/oaxaca'
+        tag: 'Colorista · Tropical', eyebrow: 'Edición de autor', ambient: 'assets/mesa_aurora_oaxaca.webp',
+        reason: 'Aves exóticas, vegetación tropical y color contemporáneo sobre tradición cerámica. Para mesas de exterior donde la vajilla es la fiesta.'
       },
-      'gifts-decor': {
-        name: 'Gifts & Decor', tag: 'Objeto · Anfitrión', eyebrow: 'Completar la mesa', ambient: 'assets/gifts_decor_arch.webp', plate: 'assets/catalog/gifts-decor/bandeja-vistas-cibeles-azul.webp',
-        reason: 'Las piezas que hacen que una mesa funcione de verdad: bandejas, objetos de servicio y detalles decorativos.',
-        products: [
-          { n: 'Bandeja decorativa', p: '110 €', img: 'assets/catalog/gifts-decor/bandeja-vistas-cibeles-azul.webp' },
-          { n: 'Cabeza frenológica', p: '220 €', img: 'assets/catalog/gifts-decor/cabeza-frenologica.webp' },
-          { n: 'Florero Alhambra', p: '160 €', img: 'assets/catalog/gifts-decor/florero-alhambra-azul-grande.webp' }
-        ], collectionUrl: '/collections/gifts-decor', featuredUrl: '/collections/gifts-decor'
+      'negro-vistas-ash-blue': {
+        tag: 'De autor · Azul', eyebrow: 'Aaron Stewart Home', ambient: 'assets/mesa_ochavada_negro_vistas.webp',
+        reason: 'La mirada de Aaron Stewart Home sobre uno de los decorados más sofisticados de la casa. Azul profundo para mesas que buscan conversación.'
+      },
+      'negro-vistas-ash-yellow': {
+        tag: 'De autor · Amarillo', eyebrow: 'Aaron Stewart Home', ambient: 'assets/mesa_aurora_oaxaca.webp',
+        reason: 'La fuerza de Negro Vistas reinterpretada desde una sensibilidad decorativa contemporánea. Amarillo cálido que pide madera oscura debajo.'
+      },
+      'flor-de-lis-azul': {
+        tag: 'Francesa · Intensa', eyebrow: 'Flor de Lis', ambient: 'assets/ochavada_canasto_floral.jpg',
+        reason: 'Un decorado de inspiración francesa con azul intenso sobre loza fina sevillana. Estructura y presencia para una comida con mantel.'
+      },
+      'flor-de-lis-rosa': {
+        tag: 'Cálida · Delicada', eyebrow: 'Flor de Lis', ambient: 'assets/ochavada_canasto_floral.jpg',
+        reason: 'La flor de lis en un tono rosado, luminoso y delicado, lleno de calidez. Pide luz de mañana y mesas sin prisa.'
+      },
+      'viejo-molino': {
+        tag: 'Rural · Cálida', eyebrow: 'Archivo de la casa', ambient: 'assets/mesa_bodegon_lujo_el_renacer.webp',
+        reason: 'Una escena rural evocadora en tonos tierra, ocres y azules suaves. La mesa de campo bien puesta: natural, cálida y sin esfuerzo.'
       }
     };
 
+    /* Merge del catálogo real. Una colección sin datos vivos (despublicada,
+       vacía o con el handle renombrado) se cae del pool de candidatos. */
+    var LIVE = window.__VT_COLLECTIONS || {};
+    Object.keys(COLLECTIONS).forEach(function (h) {
+      var live = LIVE[h];
+      if (!live) { delete COLLECTIONS[h]; return; }
+      var c = COLLECTIONS[h];
+      c.name = live.name;
+      c.collectionUrl = live.url;
+      c.products = live.products || [];
+      c.featuredUrl = c.products[0] ? c.products[0].url : live.url;
+      c.plate = c.products[0] ? c.products[0].img : c.ambient;
+      if (live.image) c.ambient = live.image;
+    });
+
+    /* Matriz de afinidad: respuesta → peso por colección. Curación editorial,
+       hardcodeada a propósito. Invariante: toda opción de QUESTIONS aparece
+       aquí, si no esa pregunta deja de mover el resultado. Los pesos de
+       flor-lis, vistas-stewart y viejo-molino son nuevos (no existían en el
+       mockup) y salen de la descripción real de cada colección. */
+    /* Matriz de afinidad: respuesta → peso por colección. Curación editorial,
+       hardcodeada a propósito. Invariante: toda opción de QUESTIONS aparece
+       aquí, si no esa pregunta deja de mover el resultado. Los pesos salen de
+       la descripción real de cada colección en el admin; los de Bellavista,
+       Ceilán, Flor Lis, Vistas A. Stewart y Viejo Molino no existían en el
+       mockup y están pendientes de validar por la casa. */
+    /* Matriz de afinidad: respuesta → peso por colección. Curación editorial,
+       hardcodeada a propósito. Trabaja a nivel HOJA: los padres Flor Lis y
+       Vistas A. Stewart no entran, porque competirían contra sus propias
+       versiones de color. Dos invariantes que verifica el check:
+       toda opción de QUESTIONS reparte puntos, y toda colección llega a 4 en
+       alguna respuesta (sin eso nunca batiría a quien sí lo tiene).
+       Pesos derivados de la descripción real de cada colección: pendientes de
+       validar por la casa. */
     var SCORE = {
       occasion: {
-        desayuno:      { 'aurora-blanca': 4, 'rosa-202': 2, 'bellavista': 1 },
-        aperitivo:     { 'gifts-decor': 4, 'ochavada-blanca': 2, 'oaxaca': 1 },
-        comidaFormal:  { 'rosa-202': 3, 'bellavista': 3, 'aurora-blanca': 2 },
-        cenaEspecial:  { 'negro-vistas': 4, 'ochavada-blanca': 2, 'rosa-202': 2 }
+        desayuno:      { 'aurora-blanca': 4, 'flor-de-lis-rosa': 3, 'bellavista': 3, 'viejo-molino': 2 },
+        aperitivo:     { 'oaxaca': 4, 'negro-vistas-ash-yellow': 3, 'ceilan': 3, 'ochavada-blanca': 2, 'negro-vistas-ash-blue': 2 },
+        comidaFormal:  { 'flor-de-lis-azul': 4, '202-rosa': 3, 'bellavista': 2, 'aurora-blanca': 2 },
+        cenaEspecial:  { 'negro-vistas': 4, 'negro-vistas-ash-blue': 3, 'ochavada-blanca': 2, 'flor-de-lis-azul': 1 }
       },
       space: {
-        luminoso:      { 'aurora-blanca': 3, 'rosa-202': 3, 'bellavista': 1 },
-        clasico:       { 'rosa-202': 4, 'bellavista': 2, 'gifts-decor': 1 },
-        contemporaneo: { 'ochavada-blanca': 4, 'negro-vistas': 3, 'aurora-blanca': 1 },
-        jardin:        { 'oaxaca': 4, 'bellavista': 4, 'aurora-blanca': 1 }
+        luminoso:      { 'flor-de-lis-rosa': 4, 'aurora-blanca': 3, 'bellavista': 3, 'ceilan': 1, 'negro-vistas-ash-blue': 1 },
+        clasico:       { '202-rosa': 4, 'flor-de-lis-azul': 3, 'viejo-molino': 3, 'ceilan': 2 },
+        contemporaneo: { 'ochavada-blanca': 4, 'negro-vistas': 3, 'negro-vistas-ash-yellow': 3, 'bellavista': 2 },
+        jardin:        { 'ceilan': 4, 'oaxaca': 3, 'viejo-molino': 3, 'flor-de-lis-rosa': 1 }
       },
       base: {
-        woodLight: { 'aurora-blanca': 2, 'bellavista': 2, 'rosa-202': 1 },
-        woodDark:  { 'negro-vistas': 3, 'ochavada-blanca': 1, 'oaxaca': 1 },
-        stone:     { 'ochavada-blanca': 3, 'aurora-blanca': 3 },
-        graphite:  { 'negro-vistas': 4, 'ochavada-blanca': 2 }
+        woodLight: { 'aurora-blanca': 2, 'ceilan': 2, 'viejo-molino': 2, 'oaxaca': 2, 'flor-de-lis-rosa': 2, 'bellavista': 1 },
+        woodDark:  { 'negro-vistas-ash-yellow': 4, 'negro-vistas': 3, 'viejo-molino': 2, 'ochavada-blanca': 1 },
+        stone:     { 'aurora-blanca': 3, 'ochavada-blanca': 3, 'flor-de-lis-azul': 3, 'bellavista': 2, 'negro-vistas-ash-blue': 2 },
+        graphite:  { 'negro-vistas': 4, 'negro-vistas-ash-blue': 3, 'ochavada-blanca': 2, 'oaxaca': 1 }
       },
       textil: {
-        none:       { 'ochavada-blanca': 3, 'negro-vistas': 2, 'aurora-blanca': 1 },
-        linenWhite: { 'aurora-blanca': 3, 'ochavada-blanca': 2, 'rosa-202': 1 },
-        linenBeige: { 'bellavista': 3, 'oaxaca': 2, 'aurora-blanca': 1 },
-        blueSoft:   { 'bellavista': 3, 'aurora-blanca': 2 },
-        dark:       { 'negro-vistas': 3, 'ochavada-blanca': 2 }
+        none:       { 'ochavada-blanca': 3, 'bellavista': 2, 'negro-vistas': 2, 'aurora-blanca': 1 },
+        linenWhite: { 'aurora-blanca': 3, 'bellavista': 3, 'flor-de-lis-rosa': 3, 'ochavada-blanca': 2, 'negro-vistas-ash-blue': 1 },
+        linenBeige: { 'viejo-molino': 4, 'ceilan': 2, 'negro-vistas-ash-yellow': 2, 'aurora-blanca': 1, 'oaxaca': 1 },
+        pattern:    { 'flor-de-lis-rosa': 4, 'flor-de-lis-azul': 4, 'ceilan': 3, 'oaxaca': 2, '202-rosa': 1 },
+        dark:       { 'negro-vistas': 3, 'negro-vistas-ash-blue': 3, 'flor-de-lis-azul': 1, 'ochavada-blanca': 1 }
       },
       style: {
-        clasico:       { 'rosa-202': 4, 'bellavista': 2 },
-        contemporaneo: { 'ochavada-blanca': 4, 'negro-vistas': 3 },
-        mediterraneo:  { 'oaxaca': 4, 'bellavista': 3 },
-        sobrio:        { 'ochavada-blanca': 3, 'aurora-blanca': 3, 'negro-vistas': 1 }
+        clasico:       { '202-rosa': 4, 'flor-de-lis-azul': 3, 'viejo-molino': 2, 'ceilan': 1 },
+        contemporaneo: { 'ochavada-blanca': 4, 'negro-vistas': 3, 'bellavista': 3, 'negro-vistas-ash-blue': 3, 'negro-vistas-ash-yellow': 2 },
+        mediterraneo:  { 'ceilan': 4, 'oaxaca': 4, 'negro-vistas-ash-yellow': 3, 'flor-de-lis-rosa': 3, 'viejo-molino': 1 },
+        sobrio:        { 'aurora-blanca': 3, 'ochavada-blanca': 3, 'bellavista': 3, 'negro-vistas': 1 }
       },
       presence: {
-        sutil:        { 'aurora-blanca': 3, 'ochavada-blanca': 2 },
-        equilibrada:  { 'bellavista': 2, 'rosa-202': 2, 'aurora-blanca': 1 },
-        protagonista: { 'negro-vistas': 3, 'oaxaca': 3, 'rosa-202': 2 }
+        sutil:        { 'aurora-blanca': 3, 'bellavista': 3, 'ochavada-blanca': 2, 'viejo-molino': 1 },
+        equilibrada:  { 'bellavista': 4, 'flor-de-lis-rosa': 3, '202-rosa': 2, 'viejo-molino': 2, 'ceilan': 1, 'aurora-blanca': 1 },
+        protagonista: { 'negro-vistas-ash-blue': 4, 'oaxaca': 3, 'negro-vistas': 3, 'negro-vistas-ash-yellow': 3, '202-rosa': 2 }
       }
     };
 
     var answers = {};
-    var stepIndex = 0;
     var totalSteps = QUESTIONS.length;
     var panel = $('#wzPanel');
     var progress = $('#wzProgress');
-    if (panel && progress) {
-      QUESTIONS.forEach(function (Q, i) {
-        var step = document.createElement('div');
-        step.className = 'wz-step' + (i === 0 ? ' active' : '');
-        step.dataset.step = i;
-        var opts = Q.options.map(function (o) {
-          var sw = o.swatch ? '<span class="swatch" style="background:' + o.swatch + '"></span>' : '';
-          return '<button class="wz-opt" type="button" role="radio" aria-checked="false" aria-pressed="false" data-key="' + Q.key + '" data-id="' + o.id + '">' + sw + '<span>' + o.label + '</span></button>';
-        }).join('');
-        step.innerHTML = '<span class="wz-q-no">Paso ' + (i + 1) + ' de ' + totalSteps + '</span><h3>' + Q.q + '</h3><div class="wz-options" role="radiogroup" aria-label="' + Q.q + '">' + opts + '</div><div class="wz-actions"><button class="wz-back" type="button" data-back ' + (i === 0 ? 'disabled' : '') + '>← Atrás</button><span class="wz-hint">Elige una opción para continuar</span></div>';
-        panel.appendChild(step);
-        var bar = document.createElement('span');
-        if (i === 0) bar.className = 'active';
-        progress.appendChild(bar);
-      });
-    }
-
-    var steps = $$('.wz-step');
-    var bars = $$('#wzProgress span');
-    function showStep(i) {
-      stepIndex = clamp(i, 0, totalSteps - 1);
-      steps.forEach(function (s, idx) { s.classList.toggle('active', idx === stepIndex); });
-      bars.forEach(function (b, idx) { b.className = idx < stepIndex ? 'done' : (idx === stepIndex ? 'active' : ''); });
-      if (stepIndex > 0 && window.innerWidth <= 1024) {
-        var top = $('#wizard').getBoundingClientRect().top + window.scrollY - 90;
-        window.scrollTo({ top: top, behavior: scrollBehavior });
-      }
-    }
-
     var stage = $('#wzStage');
     var elPhoto = $('#wzPhoto');
     var elCaption = $('#wzCaption');
+    var liveSummary = $('#wzLiveSummary');
+    var miniStatus = $('#wzMiniStatus');
+    var stepStatus = $('#wzStepStatus');
+    var resultSection = $('#result');
+    var tabsWrap = $('#resultTabs');
+    var cardsWrap = $('#resultCards');
     var currentPhoto = elPhoto ? elPhoto.getAttribute('src') : '';
 
     function labelFor(key, id) {
@@ -766,109 +1093,320 @@
       return o ? o.label : id;
     }
 
-    function getPhoto() {
-      var occasion = answers.occasion || 'desayuno';
-      var space = answers.space || 'luminoso';
-      var root = FORM_IMAGES[occasion] || FORM_IMAGES.desayuno;
-
-      // Línea completamente desarrollada: Desayuno lento + Jardín/terraza + base + textil.
-      if (occasion === 'desayuno' && space === 'jardin') {
-        var base = answers.base || 'woodLight';
-        var textil = answers.textil || 'default';
-        var branch = root.jardin[base] || root.jardin.woodLight;
-        return branch[textil] || branch.default || root.jardin.default || root.default;
-      }
-
-      // Resto de espacios de Desayuno: imagen editorial ya preparada.
-      if (occasion === 'desayuno' && typeof root[space] === 'string') return root[space];
-
-      // Resto de ocasiones: vista orientativa, manteniendo la transición y los efectos finales.
-      if (typeof FORM_IMAGES.desayuno[space] === 'string') return FORM_IMAGES.desayuno[space];
-      return FORM_IMAGES.default;
+    function iconSvg(key, id) {
+      var icons = {
+        occasion: {
+          desayuno: '<path d="M20 50h44"/><path d="M28 50c0-10 7-18 14-18s14 8 14 18"/><path d="M31 27c5-5 17-5 22 0"/>',
+          aperitivo: '<circle cx="31" cy="42" r="9"/><circle cx="53" cy="42" r="9"/><path d="M31 51v13M53 51v13M25 64h12M47 64h12"/>',
+          comidaFormal: '<circle cx="42" cy="42" r="24"/><circle cx="42" cy="42" r="14"/><path d="M14 24v36M70 24v36"/>',
+          cenaEspecial: '<path d="M22 62h40"/><path d="M34 62V36a8 8 0 0 1 16 0v26"/><path d="M42 21v9"/><path d="M34 22c6-5 10-5 16 0"/>'
+        },
+        space: {
+          luminoso: '<circle cx="42" cy="42" r="12"/><path d="M42 12v10M42 62v10M12 42h10M62 42h10M21 21l7 7M56 56l7 7M63 21l-7 7M28 56l-7 7"/>',
+          clasico: '<path d="M18 64h48M24 64V28h36v36"/><path d="M30 34h24M30 45h24"/><path d="M18 28h48"/>',
+          contemporaneo: '<path d="M20 58h44V26H20z"/><path d="M28 34h28M28 44h18"/>',
+          jardin: '<path d="M42 66V34"/><path d="M42 45c-12 0-18-8-18-18 12 0 18 8 18 18z"/><path d="M42 41c12 0 18-8 18-18-12 0-18 8-18 18z"/>'
+        },
+        base: {
+          woodLight: '<path d="M18 30h48M18 42h48M18 54h48"/><path d="M28 24c8 8 8 36 0 44M50 20c-7 10-7 38 2 46"/>',
+          woodDark: '<path d="M18 30h48M18 42h48M18 54h48"/><path d="M24 24c12 10 9 30 0 42M58 22c-10 12-9 31 0 43"/>',
+          stone: '<path d="M18 28h48v30H18z"/><path d="M26 35h14M46 35h12M30 47h24"/>',
+          graphite: '<rect x="20" y="24" width="44" height="36" rx="2"/><path d="M28 32h28M28 44h22"/>'
+        },
+        textil: {
+          none: '<path d="M20 42h44"/><path d="M24 50h36"/>',
+          linenWhite: '<path d="M24 20h36v44H24z"/><path d="M32 20v44M52 20v44"/>',
+          linenBeige: '<path d="M22 24h40v36H22z"/><path d="M30 24c8 8 8 28 0 36M54 24c-8 8-8 28 0 36"/>',
+          pattern: '<path d="M22 26h40v32H22z"/><path d="M22 34h40M22 50h40M30 26v32M46 26v32M62 26v32"/>',
+          dark: '<path d="M24 22h36v40H24z"/><path d="M32 30h20M32 42h20M32 54h20"/>'
+        },
+        style: {
+          clasico: '<path d="M42 18l6 14 15 2-11 10 3 15-13-8-13 8 3-15-11-10 15-2z"/>',
+          contemporaneo: '<path d="M22 24h40v12H22zM22 48h40v12H22z"/>',
+          mediterraneo: '<circle cx="42" cy="42" r="22"/><path d="M20 42c11-8 33 8 44 0"/>',
+          sobrio: '<path d="M24 24h36v36H24z"/><path d="M32 32h20v20H32z"/>'
+        },
+        presence: {
+          sutil: '<circle cx="42" cy="42" r="6"/><circle cx="42" cy="42" r="24" opacity=".35"/>',
+          equilibrada: '<circle cx="42" cy="42" r="14"/><circle cx="42" cy="42" r="26"/>',
+          protagonista: '<circle cx="42" cy="42" r="8"/><circle cx="42" cy="42" r="18"/><circle cx="42" cy="42" r="30"/>'
+        }
+      };
+      var path = icons[key] && icons[key][id] ? icons[key][id] : '<circle cx="42" cy="42" r="20"/>';
+      return '<svg viewBox="0 0 84 84" aria-hidden="true">' + path + '</svg>';
     }
 
-    function setPhoto(src) {
-      src = resolve(src);
-      if (!elPhoto || !src || src === currentPhoto) return;
-      currentPhoto = src;
+    function optionMarkup(Q, o) {
+      var media = '<span class="wz-opt-media wz-opt-lineicon">' + iconSvg(Q.key, o.id) + '</span>';
+      return '<button class="wz-opt wz-opt--visual" type="button" role="radio" aria-checked="false" aria-pressed="false" data-key="' + Q.key + '" data-id="' + o.id + '">' +
+        media +
+        '<span class="wz-opt-copy"><b>' + o.label + '</b><small>' + (o.desc || '') + '</small></span>' +
+        '<span class="wz-check" aria-hidden="true"></span>' +
+        '</button>';
+    }
+
+    function buildWizard() {
+      if (!panel || !progress) return;
+      panel.innerHTML = '';
+      progress.innerHTML = '';
+      QUESTIONS.forEach(function (Q, i) {
+        var step = document.createElement('section');
+        step.className = 'wz-step wz-step-card';
+        step.dataset.step = i;
+        step.dataset.key = Q.key;
+        var opts = Q.options.map(function (o) { return optionMarkup(Q, o); }).join('');
+        step.innerHTML = '<div class="wz-step__head"><span class="wz-q-no">Paso ' + (i + 1) + ' de ' + totalSteps + '</span><span class="wz-step__chosen" data-chosen>Sin seleccionar</span></div>' +
+          '<h3>' + Q.q + '</h3><p>' + Q.lead + '</p>' +
+          '<div class="wz-options" role="radiogroup" aria-label="' + Q.q + '">' + opts + '</div>';
+        panel.appendChild(step);
+        var bar = document.createElement('span');
+        progress.appendChild(bar);
+      });
+      renderWizard();
+    }
+
+    function firstUnansweredIndex() {
+      for (var i = 0; i < QUESTIONS.length; i++) {
+        if (!answers[QUESTIONS[i].key]) return i;
+      }
+      return totalSteps;
+    }
+
+    function isUnlocked(i) {
+      if (i === 0) return true;
+      return !!answers[QUESTIONS[i - 1].key];
+    }
+
+    function renderWizard() {
+      var firstOpen = firstUnansweredIndex();
+      var steps = $$('.wz-step', panel);
+      steps.forEach(function (s, idx) {
+        var Q = QUESTIONS[idx];
+        var unlocked = isUnlocked(idx);
+        var complete = !!answers[Q.key];
+        s.classList.toggle('is-locked', !unlocked);
+        s.classList.toggle('is-complete', complete);
+        s.classList.toggle('is-active', unlocked && idx === firstOpen);
+        $$('button', s).forEach(function (btn) { btn.disabled = !unlocked; });
+        $$('.wz-opt', s).forEach(function (btn) {
+          var sel = answers[Q.key] === btn.dataset.id;
+          btn.setAttribute('aria-pressed', sel ? 'true' : 'false');
+          btn.setAttribute('aria-checked', sel ? 'true' : 'false');
+        });
+        var chosen = $('[data-chosen]', s);
+        if (chosen) chosen.textContent = complete ? labelFor(Q.key, answers[Q.key]) : (unlocked ? 'Elige una opción' : 'Pendiente');
+      });
+      var bars = $$('#wzProgress span');
+      bars.forEach(function (b, idx) {
+        b.className = idx < firstOpen ? 'done' : (idx === firstOpen ? 'active' : '');
+      });
+      if (stepStatus) stepStatus.textContent = firstOpen >= totalSteps ? 'Propuesta lista' : 'Paso ' + (firstOpen + 1) + ' de ' + totalSteps;
+      if (miniStatus) {
+        var count = Object.keys(answers).length;
+        miniStatus.textContent = count ? count + ' de ' + totalSteps + ' respuestas' : 'Sin respuestas todavía';
+      }
+    }
+
+    function getPhotoCandidates() {
+      var space = answers.space || '';
+      var occasion = answers.occasion || '';
+      var base = answers.base || '';
+      var textil = answers.textil || '';
+      var style = answers.style || '';
+      var presence = answers.presence || '';
+      var candidates = [];
+
+      // Future images: resolve() skips them until they ship in the asset map.
+      if (space && occasion && base && textil && style && presence) {
+        candidates.push(FORM_ROOT + '/06-presencia/' + space + '/' + occasion + '/' + base + '/' + textil + '/' + style + '/' + presence + '.webp');
+      }
+      if (space && occasion && base && textil && style) {
+        candidates.push(FORM_ROOT + '/05-estilo/' + space + '/' + occasion + '/' + base + '/' + textil + '/' + style + '.webp');
+      }
+      // Textiles are common to all table bases. «Sin mantel» deliberately keeps step 3.
+      if (space && occasion && textil && textil !== 'none') {
+        candidates.push(FORM_ROOT + '/04-textil/' + space + '/' + occasion + '/' + textil + '.webp');
+      }
+      if (space && occasion && base) {
+        candidates.push(FORM_ROOT + '/03-base/' + space + '/' + occasion + '/' + base + '.webp');
+      }
+      if (space && occasion) {
+        candidates.push(FORM_ROOT + '/02-ocasion/' + space + '/' + occasion + '.webp');
+      }
+      if (space) candidates.push(FORM_ROOT + '/01-espacio/' + space + '.webp');
+      candidates.push(DEFAULT_FORM_PHOTO);
+      return candidates.filter(function (src, index, all) { return all.indexOf(src) === index; });
+    }
+
+    var photoRequestId = 0;
+    function setPhotoCandidates(candidates) {
+      if (!elPhoto || !candidates || !candidates.length) return;
+      // Map logical paths through the asset bridge; unmapped (unshipped)
+      // candidates are skipped so the cascade lands on the closest shipped
+      // photo. The Image onload/onerror below stays as a second safety net.
+      var resolved = [];
+      candidates.forEach(function (u) {
+        var url = resolve(u);
+        if (url && resolved.indexOf(url) === -1) resolved.push(url);
+      });
+      if (!resolved.length) return;
+      var requestId = ++photoRequestId;
+      if (stage) stage.classList.add('is-loading');
       elPhoto.classList.add('is-changing');
-      var next = new Image();
-      next.onload = function () {
-        elPhoto.src = src;
-        requestAnimationFrame(function () { elPhoto.classList.remove('is-changing'); });
-      };
-      next.onerror = function () { elPhoto.classList.remove('is-changing'); };
-      next.src = src;
+
+      function tryCandidate(index) {
+        if (requestId !== photoRequestId) return;
+        if (index >= resolved.length) {
+          elPhoto.classList.remove('is-changing');
+          if (stage) stage.classList.remove('is-loading');
+          return;
+        }
+        var src = resolved[index];
+        if (src === currentPhoto) {
+          elPhoto.classList.remove('is-changing');
+          if (stage) stage.classList.remove('is-loading');
+          return;
+        }
+        var next = new Image();
+        next.onload = function () {
+          if (requestId !== photoRequestId) return;
+          currentPhoto = src;
+          elPhoto.src = src;
+          requestAnimationFrame(function () {
+            elPhoto.classList.remove('is-changing');
+            if (stage) stage.classList.remove('is-loading');
+          });
+        };
+        next.onerror = function () { tryCandidate(index + 1); };
+        next.src = src;
+      }
+      tryCandidate(0);
     }
 
     function updatePreview() {
       if (!stage) return;
       stage.dataset.style = answers.style || '';
       stage.dataset.presence = answers.presence || '';
-      setPhoto(getPhoto());
+      stage.dataset.base = answers.base || '';
+      stage.dataset.textil = answers.textil || '';
+      setPhotoCandidates(getPhotoCandidates());
 
       var labels = [];
-      ['occasion', 'space', 'base', 'textil', 'style', 'presence'].forEach(function (key) {
+      ['space', 'occasion', 'base', 'textil', 'style', 'presence'].forEach(function (key) {
         if (answers[key]) labels.push(labelFor(key, answers[key]));
       });
       if (elCaption) {
         elCaption.innerHTML = labels.length ? '<b>Tu mesa</b> · ' + labels.join(' · ') : '<b>Tu mesa</b> · responde para verla tomar forma';
       }
+      if (liveSummary) {
+        liveSummary.innerHTML = labels.length ? labels.map(function (t) { return '<span>' + t + '</span>'; }).join('') : '<span>Selecciona el espacio para empezar</span>';
+      }
     }
 
     if (panel) {
+      buildWizard();
       panel.addEventListener('click', function (e) {
         var opt = e.target.closest('.wz-opt');
-        var back = e.target.closest('[data-back]');
-        if (back) { showStep(stepIndex - 1); return; }
-        if (!opt) return;
-        var key = opt.dataset.key, id = opt.dataset.id;
-        answers[key] = id;
-        $$('.wz-opt', opt.parentElement).forEach(function (b) {
-          var sel = b === opt;
-          b.setAttribute('aria-pressed', sel ? 'true' : 'false');
-          b.setAttribute('aria-checked', sel ? 'true' : 'false');
-        });
+        if (!opt || opt.disabled) return;
+        var idx = QUESTIONS.findIndex(function (q) { return q.key === opt.dataset.key; });
+        var changed = answers[opt.dataset.key] !== opt.dataset.id;
+        if (changed && idx > -1) {
+          for (var i = idx + 1; i < QUESTIONS.length; i++) delete answers[QUESTIONS[i].key];
+        }
+        answers[opt.dataset.key] = opt.dataset.id;
+        if (resultSection) resultSection.hidden = true;
         updatePreview();
-        if (stepIndex < totalSteps - 1) setTimeout(function () { showStep(stepIndex + 1); }, 260);
-        else setTimeout(buildResult, 320);
+        renderWizard();
+        var nextIdx = firstUnansweredIndex();
+        var nextStep = nextIdx < totalSteps ? $('.wz-step[data-step="' + nextIdx + '"]', panel) : null;
+        if (nextStep) {
+          window.setTimeout(function () { nextStep.scrollIntoView({ behavior: scrollBehavior, block: window.innerWidth <= 1180 ? 'center' : 'nearest' }); }, 160);
+        }
+        if (nextIdx >= totalSteps) window.setTimeout(buildResult, 320);
       });
     }
 
     function recommend() {
+      var pool = Object.keys(COLLECTIONS);
       var totals = {};
-      Object.keys(COLLECTIONS).forEach(function (k) { totals[k] = 0; });
+      var max = 0;
+      pool.forEach(function (k) { totals[k] = 0; });
       Object.keys(answers).forEach(function (key) {
         var map = SCORE[key] && SCORE[key][answers[key]];
         if (!map) return;
-        Object.keys(map).forEach(function (col) { totals[col] += map[col]; });
+        var best = 0;
+        Object.keys(map).forEach(function (col) {
+          if (totals[col] === undefined) return;   // colección fuera del pool
+          totals[col] += map[col];
+          if (map[col] > best) best = map[col];
+        });
+        max += best;                               // techo alcanzable con ESTAS respuestas
       });
-      var order = Object.keys(COLLECTIONS);
-      return order.slice().sort(function (a, b) {
+      return pool.slice().sort(function (a, b) {
         if (totals[b] !== totals[a]) return totals[b] - totals[a];
-        return order.indexOf(a) - order.indexOf(b);
-      }).slice(0, 3);
+        return pool.indexOf(a) - pool.indexOf(b);  // desempate estable
+      }).slice(0, 3).map(function (id) {
+        var score = totals[id] || 0;
+        // Reescalado afín a la banda 55-99: monótono con la puntuación y sin
+        // recortes (un suelo duro hacía que dos scores distintos mostrasen el
+        // mismo %). ponytail: cambiar por Math.round(score / max * 100) si el
+        // cliente prefiere el porcentaje crudo sobre el máximo alcanzable.
+        var pct = max ? Math.round(55 + 44 * score / max) : 0;
+        return { id: id, score: score, pct: pct };
+      });
     }
 
-    var resultSection = $('#result');
-    var tabsWrap = $('#resultTabs');
-    var cardsWrap = $('#resultCards');
+    function animateMatchNumbers() {
+      $$('.match-number', cardsWrap).forEach(function (el) {
+        var target = parseInt(el.getAttribute('data-match') || '0', 10);
+        if (reducedMotion) { el.textContent = target + '%'; return; }
+        var start = null;
+        var duration = 1150;
+        function tick(ts) {
+          if (!start) start = ts;
+          var p = clamp((ts - start) / duration, 0, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(target * eased) + '%';
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }
+
+    /* Los títulos y precios vienen del catálogo del comercio: escapar antes de
+       meterlos en atributos y en el HTML que se inyecta. */
+    function esc(t) {
+      return String(t == null ? '' : t).replace(/[&<>"]/g, function (m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m];
+      });
+    }
+
     function buildResult() {
       if (!resultSection || !tabsWrap || !cardsWrap) return;
       var top3 = recommend();
-      tabsWrap.innerHTML = top3.map(function (id, i) {
-        var c = COLLECTIONS[id];
-        return '<button class="result-tab" role="tab" data-target="' + id + '" aria-selected="' + (i === 0) + '"><span class="rank">0' + (i + 1) + '</span>' + c.name + '</button>';
+      var answerSummary = ['space', 'occasion', 'base', 'textil', 'style', 'presence'].map(function (key) {
+        return answers[key] ? '<span>' + labelFor(key, answers[key]) + '</span>' : '';
       }).join('');
-      cardsWrap.innerHTML = top3.map(function (id, i) {
-        var c = COLLECTIONS[id];
+      tabsWrap.innerHTML = top3.map(function (item, i) {
+        var c = COLLECTIONS[item.id];
+        return '<button class="result-tab" role="tab" data-target="' + item.id + '" aria-selected="' + (i === 0) + '"><span class="rank">0' + (i + 1) + '</span><span>' + esc(c.name) + '</span></button>';
+      }).join('');
+      cardsWrap.innerHTML = '<div class="result-summary">' + answerSummary + '</div>' + top3.map(function (item, i) {
+        var c = COLLECTIONS[item.id];
         var prods = c.products.map(function (p) {
-          return '<div class="result-product"><div class="result-product__img"><img src="' + resolve(p.img) + '" alt="' + p.n + '" loading="lazy"></div><b>' + p.n + '</b><small>' + p.p + '</small></div>';
+          return '<div class="result-product"><div class="result-product__img"><img src="' + (resolve(p.img) || p.img) + '" alt="' + esc(p.n) + '" loading="lazy"></div><b>' + esc(p.n) + '</b><small>' + esc(p.p) + '</small></div>';
         }).join('');
-        return '<article class="result-card' + (i === 0 ? ' active' : '') + '" data-card="' + id + '"><div class="result-ambient"><span class="result-ambient__tag">' + c.tag + '</span><img src="' + resolve(c.ambient) + '" alt="Mesa vestida con ' + c.name + '" loading="lazy"></div><div class="result-body"><span class="eyebrow">' + c.eyebrow + '</span><h3>' + c.name + '</h3><p class="result-reason">' + c.reason + '</p><div class="result-products">' + prods + '</div><div class="result-ctas"><a class="ghost-btn solid" href="' + c.collectionUrl + '">Ver colección</a><a class="ghost-btn" href="' + c.featuredUrl + '">Ver pieza destacada</a><button class="ghost-btn" type="button" data-add="' + c.name + '">Añadir a la cesta</button></div></div></article>';
+        var cartItems = c.products.filter(function (p) { return p.vid; }).map(function (p) { return { id: p.vid, quantity: 1 }; });
+        var addLabel = cartItems.length > 1 ? 'Añadir las ' + cartItems.length + ' piezas' : 'Añadir a la cesta';
+        var addAttrs = cartItems.length ? " data-items='" + JSON.stringify(cartItems) + "'" : '';
+        return '<article class="result-card result-card--editorial' + (i === 0 ? ' active' : '') + '" data-card="' + item.id + '">' +
+          '<div class="result-ambient"><span class="result-ambient__tag">Recomendación 0' + (i + 1) + '</span><img src="' + (resolve(c.ambient) || c.ambient) + '" alt="Mesa vestida con ' + esc(c.name) + '" loading="lazy"></div>' +
+          '<div class="result-body"><span class="eyebrow">' + c.eyebrow + '</span><h3>' + esc(c.name) + '</h3><div class="result-match"><b>Ajuste visual</b><span class="match-number" data-match="' + item.pct + '">0%</span></div><p class="result-reason">' + c.reason + '</p><div class="result-products">' + prods + '</div><div class="result-ctas"><a class="ghost-btn solid" href="' + c.collectionUrl + '">Ver colección</a><a class="ghost-btn" href="' + c.featuredUrl + '">Ver pieza destacada</a><button class="ghost-btn" type="button" data-add="' + esc(c.name) + '"' + addAttrs + '>' + addLabel + '</button></div></div>' +
+          '</article>';
       }).join('');
       resultSection.hidden = false;
       resultSection.classList.add('is-visible');
+      animateMatchNumbers();
       resultSection.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
     }
 
@@ -882,7 +1420,7 @@
       });
     }
 
-    /* ---------- Add to cart ---------- */
+    /* ---------- Add to cart (real /cart/add.js, no fake counter) ---------- */
     var toast = $('#vtToast');
     function showToast(name, msg) {
       if (!toast) return;
@@ -975,7 +1513,7 @@
       "type": "text",
       "id": "hero_demo_image",
       "label": "Asset demo del hero",
-      "default": "mesa_bodegon_lujo_el_renacer.webp"
+      "default": "hero-viste-tu-mesa.webp"
     },
     {
       "type": "text",
