@@ -12,6 +12,7 @@
     "logo_width": 88,
     "logo_alt": "La Cartuja de Sevilla",
     "color_paper": "#FFFFFF",
+    "color_brand": "#012169",
     "color_ink": "#0F1A2E",
     "color_ink_soft": "#1F2A40",
     "color_muted": "#6B7280",
@@ -34,6 +35,7 @@
   "presets": {
     "Default": {
       "color_paper": "#FFFFFF",
+      "color_brand": "#012169",
       "color_ink": "#0F1A2E",
       "color_ink_soft": "#1F2A40",
       "color_muted": "#6B7280",

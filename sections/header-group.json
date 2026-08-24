@@ -14,7 +14,7 @@
     "header": {
       "type": "header",
       "settings": {
-        "nav_left_limit": 2
+        "nav_left_limit": 3
       }
     },
     "mega-menu": {
@@ -23,42 +23,28 @@
         "col-1": {
           "type": "column",
           "settings": {
-            "heading": "Aurora",
-            "items": "Aurora Blanca | Base | /collections/aurora-blanca\n202 Rosa | Emblema | /collections/202-rosa\nBellavista | Equilibrio | /collections/bellavista\nCeilán | Oriental | /collections/ceilan\nFlor de Lis Azul | Azul | /collections/flor-de-lis-azul\nFlor de Lis Rosa | Rosa | /collections/flor-de-lis-rosa\nViejo Molino | Archivo | /collections/viejo-molino\nOaxaca x G. y Daniela | Autor | /collections/oaxaca\nVer la forma completa | → | /collections/aurora"
+            "heading": "Producto",
+            "items": "Vajillas | | /collections/vajillas\nJuegos de café | | /collections/juegos-cafe\nJuegos de té | | /collections/juegos-te\nJuegos de boles | | /collections/juegos-boles\nFuentes | | /collections/fuentes\nJarras y teteras | | /collections/jarras-teteras\nBandejas | | /collections/bandejas\nObjetos decorativos | | /collections/decoracion"
           }
         },
         "col-2": {
           "type": "column",
           "settings": {
-            "heading": "Ochavada",
-            "items": "Ochavada Blanca | Base | /collections/ochavada-blanca\nNegro Vistas | Contraste | /collections/negro-vistas\nNegro Vistas by ASH Blue | | /collections/negro-vistas-ash-blue\nNegro Vistas by ASH Yellow | | /collections/negro-vistas-ash-yellow\nVer la forma completa | → | /collections/ochavada"
+            "heading": "Colecciones",
+            "items": "Aurora | Cap. 01 | /collections/aurora\nOchavada | Cap. 02 | /collections/ochavada\nGifts & Decor | Cap. 03 | /collections/decoracion\nEmblemas | Selección | /collections/emblemas"
           }
         },
         "col-3": {
           "type": "column",
           "settings": {
-            "heading": "Gifts & Decor",
-            "items": "Piezas decorativas | Objeto | /collections/decoracion\nEmblemas | Selección | /collections/emblemas"
-          }
-        },
-        "col-4": {
-          "type": "column",
-          "settings": {
-            "heading": "Tipo de producto",
-            "items": "Vajillas | | /collections/vajillas\nJuegos de café | | /collections/juegos-cafe\nJuegos de té | | /collections/juegos-te\nJuegos de boles | | /collections/juegos-boles\nFuentes | | /collections/fuentes\nJarras y teteras | | /collections/jarras-teteras\nBandejas | | /collections/bandejas\nObjetos decorativos | | /collections/decoracion"
-          }
-        },
-        "col-5": {
-          "type": "column",
-          "settings": {
             "heading": "Editorial",
-            "items": "Viste tu mesa | | /pages/viste-tu-mesa\nNuestras mesas | | /pages/nuestras-mesas\nArtesanía | | /pages/artesania\nHeritage 1841 | | /pages/heritage-1841"
+            "items": "Nuestras mesas | | /pages/nuestras-mesas\nViste tu mesa | | /pages/viste-tu-mesa\nArtesanía | | /pages/artesania\nIdentifica tu sello | | /pages/identifica-tu-sello"
           }
         },
         "card-1": {
           "type": "feature_card",
           "settings": {
-            "text": "Una casa histórica vuelve a latir.",
+            "text": "Heritage crafted for modern living",
             "link": "/pages/heritage-1841",
             "link_label": "Descubrir historia"
           }
@@ -68,8 +54,6 @@
         "col-1",
         "col-2",
         "col-3",
-        "col-4",
-        "col-5",
         "card-1"
       ],
       "settings": {}

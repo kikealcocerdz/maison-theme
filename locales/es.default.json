@@ -161,6 +161,9 @@
       "tabs_label": "Documentos legales",
       "index_label": "Índice del documento",
       "next_doc": "Siguiente documento"
+    },
+    "footer": {
+      "legal_label": "Enlaces legales"
     }
   }
 }

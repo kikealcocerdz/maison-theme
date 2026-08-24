@@ -14,30 +14,30 @@
     "footer-multicol": {
       "type": "footer-multicol",
       "settings": {
-        "tagline": "La Cartuja\nde Sevilla",
-        "tagline_bottom": "La Cartuja de Sevilla · 1841",
-        "tagline_bottom_right": "Hecho en España. Editado con calma."
+        "tagline": "Heritage crafted for modern living",
+        "tagline_bottom": "© La Cartuja de Sevilla",
+        "legal_items": "Aviso legal | /pages/aviso-legal\nPolítica de privacidad | /pages/politica-privacidad\nPolítica de cookies | /pages/politica-cookies\nTérminos y condiciones | /pages/terminos-condiciones"
       },
       "blocks": {
         "col-1": {
           "type": "column",
           "settings": {
-            "heading": "Comprar",
-            "items": "Colecciones | /collections\nVajillas | /collections/vajillas\nPiezas icónicas | /collections/emblemas"
+            "heading": "Colecciones",
+            "items": "Aurora | /collections/aurora\nOchavada | /collections/ochavada\nGifts & Decor | /collections/decoracion\nEmblemas | /collections/emblemas"
           }
         },
         "col-2": {
           "type": "column",
           "settings": {
-            "heading": "La casa",
-            "items": "Nuestra historia | /pages/heritage-1841\nNuestras mesas | /pages/nuestras-mesas\nEmblemas | /collections/emblemas"
+            "heading": "Editorial",
+            "items": "Artesanía | /pages/artesania\nCalidad | /pages/artesania#calidad\nHeritage 1841 | /pages/heritage-1841"
           }
         },
         "col-3": {
           "type": "column",
           "settings": {
-            "heading": "Ayuda y legal",
-            "menu": "footer"
+            "heading": "Atención",
+            "items": "Contacto | /pages/contacto\nEnvíos y devoluciones | /pages/terminos-condiciones\nPrivacidad | /pages/politica-privacidad\nCondiciones | /pages/terminos-condiciones"
           }
         }
       },

@@ -14,13 +14,13 @@
       </button>
       {%- if menu.links.size > 0 -%}
         {%- for link in menu.links limit: section.settings.nav_left_limit -%}
-          <a href="{{ link.url }}">{{ link.title }}</a>
+          <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
         {%- endfor -%}
       {%- else -%}
         {%- comment -%} Demo nav (shown until a navigation menu is selected). {%- endcomment -%}
         <a href="{{ routes.collections_url }}">Colecciones</a>
         <a href="/pages/nuestras-mesas">Nuestras mesas</a>
-        <a href="/pages/viste-tu-mesa">Viste tu mesa</a>
+        <a href="/pages/artesania">Artesanía</a>
       {%- endif -%}
     </div>
 
@@ -36,10 +36,11 @@
     <div class="nav-right">
       {%- if menu.links.size > 0 -%}
         {%- for link in menu.links offset: section.settings.nav_left_limit -%}
-          <a href="{{ link.url }}">{{ link.title }}</a>
+          <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
         {%- endfor -%}
       {%- else -%}
-        <a href="/pages/artesania">Artesanía</a>
+        <a href="/pages/viste-tu-mesa">Viste tu mesa</a>
+        <a href="/pages/identifica-tu-sello">Sellos</a>
         <a href="/pages/heritage-1841">Heritage 1841</a>
       {%- endif -%}
       <button type="button" class="search-link" id="searchToggle" aria-label="{{ 'general.search.label' | t }}" aria-expanded="false" aria-controls="searchPanel">{% render 'icon-search' %}</button>
@@ -90,7 +91,7 @@
 
 .nav {
   height: var(--header-h);
-  width: min(90vw, 1760px);
+  width: var(--content-wide);
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -109,6 +110,37 @@
 }
 
 .nav-right { justify-content: flex-end; }
+
+/* Subrayado contenido: crece por la izquierda, se retira por la derecha. */
+.nav-left > a,
+.nav-right > a:not(.search-link) { position: relative; padding-bottom: 4px; }
+
+.nav-left > a::after,
+.nav-right > a:not(.search-link)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 420ms var(--ease);
+}
+
+.nav-left > a:hover::after,
+.nav-left > a[aria-current="page"]::after,
+.nav-right > a:not(.search-link):hover::after,
+.nav-right > a[aria-current="page"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-left > a::after,
+  .nav-right > a:not(.search-link)::after { transition: none; }
+}
 
 .search-link {
   display: inline-flex;
@@ -144,7 +176,7 @@
 }
 
 .search-panel__inner {
-  width: min(90vw, 1760px);
+  width: var(--content-wide);
   margin: 0 auto;
   padding: 22px 0;
 }
@@ -404,7 +436,7 @@
       "min": 0,
       "max": 6,
       "step": 1,
-      "default": 2
+      "default": 3
     },
     {
       "type": "header",

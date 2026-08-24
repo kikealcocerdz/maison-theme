@@ -5,6 +5,7 @@
 <style>
   :root {
     --paper: {{ settings.color_paper }};
+    --brand: {{ settings.color_brand }};
     --ink: {{ settings.color_ink }};
     --ink-soft: {{ settings.color_ink_soft }};
     --muted: {{ settings.color_muted }};
@@ -33,6 +34,8 @@
     --fs-h3: clamp(1.375rem, 1.8vw, 1.75rem);     /* 22–28px  */
 
     --content: min({{ settings.content_viewport_width }}vw, {{ settings.content_max_width }}px);
+    {%- comment -%} El shell (header, mega, footer) corre más ancho que el contenido editorial. {%- endcomment -%}
+    --content-wide: min(90vw, 1760px);
     --header-h: {{ settings.header_height_desktop }}px;
 
     --rule-width: {{ settings.button_border_width }}px;

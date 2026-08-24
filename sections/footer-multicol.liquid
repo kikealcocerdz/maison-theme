@@ -53,9 +53,50 @@
   </div>
 
   <div class="footer-bottom">
+    <span class="footer-locale">
+      {{ localization.country.name }}
+      {%- if localization.available_languages.size > 1 -%}
+        {%- comment -%} Conmutador real de idioma: funciona sin JS. {%- endcomment -%}
+        <span aria-hidden="true"> / </span>
+        {%- form 'localization', class: 'footer-language-form' -%}
+          <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+          {%- for lang in localization.available_languages -%}
+            <button
+              class="footer-language-option{% if lang.iso_code == localization.language.iso_code %} is-active{% endif %}"
+              type="submit"
+              name="locale_code"
+              value="{{ lang.iso_code }}"
+              lang="{{ lang.iso_code }}"
+              {% if lang.iso_code == localization.language.iso_code %}aria-current="true"{% endif %}
+            >{{ lang.endonym_name | capitalize }}</button>
+            {%- unless forloop.last -%}<span class="footer-language-sep" aria-hidden="true">·</span>{%- endunless -%}
+          {%- endfor -%}
+        {%- endform -%}
+      {%- endif -%}
+    </span>
     {%- if section.settings.tagline_bottom != blank -%}<span>{{ section.settings.tagline_bottom }}</span>{%- endif -%}
-    {%- if section.settings.tagline_bottom_right != blank -%}<span>{{ section.settings.tagline_bottom_right }}</span>{%- endif -%}
   </div>
+
+  {%- assign legal_menu = linklists[section.settings.legal_menu] -%}
+  {%- if legal_menu.links.size > 0 -%}
+    <nav class="footer-legal-links" aria-label="{{ 'sections.footer.legal_label' | t }}">
+      {%- for link in legal_menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+  {%- elsif section.settings.legal_items != blank -%}
+    {%- comment -%} Fallback: una línea por enlace, "Label | url" (mismo formato que las columnas). {%- endcomment -%}
+    <nav class="footer-legal-links" aria-label="{{ 'sections.footer.legal_label' | t }}">
+      {%- assign legal_lines = section.settings.legal_items | strip | newline_to_br | split: '<br />' -%}
+      {%- for line in legal_lines -%}
+        {%- assign row = line | strip -%}
+        {%- if row == blank -%}{%- continue -%}{%- endif -%}
+        {%- assign parts = row | split: '|' -%}
+        {%- assign label = parts[0] | strip -%}
+        {%- if parts.size > 1 -%}<a href="{{ parts[1] | strip }}">{{ label | escape }}</a>{%- endif -%}
+      {%- endfor -%}
+    </nav>
+  {%- endif -%}
 </footer>
 
 {% stylesheet %}
@@ -68,10 +109,10 @@
 }
 
 .footer-grid {
-  width: var(--content);
+  width: var(--content-wide);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.2fr repeat(3, 1fr);
+  grid-template-columns: 1.3fr repeat(3, 1fr);
   gap: 48px;
 }
 
@@ -103,7 +144,7 @@
 }
 
 .footer-bottom {
-  width: var(--content);
+  width: var(--content-wide);
   margin: 60px auto 0;
   display: flex;
   justify-content: space-between;
@@ -113,6 +154,68 @@
   color: var(--muted);
 }
 
+.footer-grid a:hover { color: var(--brand); }
+
+.footer-locale {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.footer-language-form { display: inline; }
+
+.footer-language-option {
+  position: relative;
+  padding: 0 0 3px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.footer-language-option::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 420ms var(--ease);
+}
+
+.footer-language-option:hover,
+.footer-language-option.is-active { color: var(--ink); }
+
+.footer-language-option:hover::after,
+.footer-language-option.is-active::after { transform: scaleX(1); transform-origin: left; }
+
+.footer-language-sep { margin: 0 6px; }
+
+.footer-legal-links {
+  width: var(--content-wide);
+  margin: 22px auto 0;
+  padding-top: 18px;
+  border-top: 0.5px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.footer-legal-links a { color: inherit; }
+.footer-legal-links a:hover { color: var(--brand); }
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-language-option::after { transition: none; }
+}
+
 @media (max-width: 1100px) {
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -120,6 +223,7 @@
 @media (max-width: 680px) {
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { display: grid; gap: 12px; }
+  .footer-legal-links { gap: 14px 22px; }
 }
 {% endstylesheet %}
 
@@ -129,9 +233,11 @@
   "settings": [
     { "type": "image_picker", "id": "logo", "label": "Footer logo (overrides theme setting)" },
     { "type": "text", "id": "logo_alt", "label": "Logo alt text" },
-    { "type": "textarea", "id": "tagline", "label": "Tagline under logo", "default": "La Cartuja\nde Sevilla" },
-    { "type": "text", "id": "tagline_bottom", "label": "Tagline bottom left", "default": "La Cartuja de Sevilla · 1841" },
-    { "type": "text", "id": "tagline_bottom_right", "label": "Tagline bottom right", "default": "Hecho en España. Editado con calma." }
+    { "type": "textarea", "id": "tagline", "label": "Tagline under logo", "default": "Heritage crafted for modern living" },
+    { "type": "text", "id": "tagline_bottom", "label": "Copyright (bottom right)", "default": "© La Cartuja de Sevilla" },
+    { "type": "header", "content": "Legal links row" },
+    { "type": "link_list", "id": "legal_menu", "label": "Legal menu" },
+    { "type": "textarea", "id": "legal_items", "label": "Legal links (fallback, one per line: 'Label | url')" }
   ],
   "max_blocks": 6,
   "blocks": [

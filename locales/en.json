@@ -161,6 +161,9 @@
       "tabs_label": "Legal documents",
       "index_label": "Table of contents",
       "next_doc": "Next document"
+    },
+    "footer": {
+      "legal_label": "Legal links"
     }
   }
 }

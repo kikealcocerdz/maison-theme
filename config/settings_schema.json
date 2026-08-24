@@ -42,6 +42,7 @@
     "name": "Colors",
     "settings": [
       { "type": "color", "id": "color_paper", "label": "Paper (page background)", "default": "#FFFFFF" },
+      { "type": "color", "id": "color_brand", "label": "Brand", "default": "#012169", "info": "Cartuja: azul de marca. Puntos del mega-menú, badge de sets, hover del footer." },
       { "type": "color", "id": "color_ink", "label": "Ink (primary text)", "default": "#0F1A2E" },
       { "type": "color", "id": "color_ink_soft", "label": "Ink soft (secondary text)", "default": "#1F2A40" },
       { "type": "color", "id": "color_muted", "label": "Muted (captions, eyebrows)", "default": "#6B7280" },

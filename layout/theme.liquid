@@ -3,11 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="{{ settings.color_paper }}">
+  <meta name="theme-color" content="{{ settings.color_brand }}">
   <link rel="canonical" href="{{ canonical_url }}">
 
+  {%- comment -%}
+    Iconos de marca. Si el comerciante sube un favicon en los ajustes manda ése;
+    si no, el juego que viaja en /assets (SVG + PNG cubren todo navegador actual).
+  {%- endcomment -%}
   {%- if settings.favicon != blank -%}
     <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
+  {%- else -%}
+    <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon-32x32.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="48x48" href="{{ 'favicon-48x48.png' | asset_url }}">
+    <link rel="apple-touch-icon" href="{{ 'apple-touch-icon.png' | asset_url }}">
   {%- endif -%}
 
   <title>
