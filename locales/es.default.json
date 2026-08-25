@@ -164,6 +164,20 @@
     },
     "footer": {
       "legal_label": "Enlaces legales"
+    },
+    "stamps": {
+      "seal": "Sello",
+      "go_to_decade": "Ir a la década de",
+      "zoom_in": "Ampliar",
+      "zoom_out": "Reducir",
+      "archive_label": "Archivo histórico cronológico de sellos de La Cartuja de Sevilla",
+      "jump_decade": "Saltar a una década",
+      "viewport_hint": "Recorre los sellos con la rueda del ratón",
+      "timeline_label": "Línea temporal interactiva",
+      "timeline_seek": "Moverse por la línea temporal",
+      "scroll": "Scroll",
+      "scroll_hint": "recorre el archivo",
+      "modal_kicker": "Archivo de marcas"
     }
   }
 }

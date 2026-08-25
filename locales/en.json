@@ -164,6 +164,20 @@
     },
     "footer": {
       "legal_label": "Legal links"
+    },
+    "stamps": {
+      "seal": "Stamp",
+      "go_to_decade": "Go to the",
+      "zoom_in": "Zoom in",
+      "zoom_out": "Zoom out",
+      "archive_label": "Chronological archive of La Cartuja de Sevilla maker's marks",
+      "jump_decade": "Jump to a decade",
+      "viewport_hint": "Scroll through the stamps with the mouse wheel",
+      "timeline_label": "Interactive timeline",
+      "timeline_seek": "Move along the timeline",
+      "scroll": "Scroll",
+      "scroll_hint": "to browse the archive",
+      "modal_kicker": "Marks archive"
     }
   }
 }
