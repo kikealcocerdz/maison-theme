@@ -24,7 +24,7 @@
           "type": "column",
           "settings": {
             "heading": "Producto",
-            "items": "Vajillas | | /collections/vajillas\nJuegos de café | | /collections/juegos-cafe\nJuegos de té | | /collections/juegos-te\nJuegos de boles | | /collections/juegos-boles\nFuentes | | /collections/fuentes\nJarras y teteras | | /collections/jarras-teteras\nBandejas | | /collections/bandejas\nObjetos decorativos | | /collections/decoracion"
+            "items": "Vajillas | | /collections/vajillas\nJuegos de café | | /collections/juegos-cafe\nJuegos de té | | /collections/juegos-te\nJuegos de boles | | /collections/juegos-boles\nPlatos | | /collections/platos\nBoles y cuencos | | /collections/bowls\nFuentes | | /collections/fuentes\nJarras y teteras | | /collections/jarras-teteras\nTazas | | /collections/tazas\nBandejas | | /collections/bandejas\nObjetos decorativos | | /collections/decoracion"
           }
         },
         "col-2": {
