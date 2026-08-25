@@ -494,6 +494,27 @@
 }
 @media(max-width:700px){.stamp-hero-premium .stamp-hero-copy{width:calc(100vw - 36px)!important;}.stamp-hero-premium .stamp-hero-copy h1{width:94%!important;max-width:560px!important;}.stamp-hero-premium .stamp-hero-copy .stamp-intro{max-width:92%!important;}
 }
+
+/* El track se ancla al 29% y el pie al 64% del visor, pero la tarjeta medía en
+   px: por debajo de ~1065px de alto de ventana el sello invadía el texto. Se
+   acota la tarjeta a la banda libre entre ambos anclajes. Los restos (189px,
+   195px, 140px) son el top+bottom del visor en cada breakpoint. */
+.stamp-horizontal-story {
+  --seal-card-w: max(120px, min(clamp(188px, 17.5vw, 270px), calc((100svh - var(--header-h) - 189px) * 0.33)));
+}
+
+@media (max-width: 980px) {
+  .stamp-horizontal-story {
+    --seal-card-w: max(120px, min(clamp(180px, 28vw, 235px), calc((100svh - var(--header-h) - 195px) * 0.33)));
+  }
+}
+
+@media (max-width: 700px) {
+  .stamp-horizontal-story {
+    --seal-card-w: max(130px, min(58vw, 235px, calc((100svh - var(--header-h) - 140px) * 0.35)));
+  }
+}
+
 {% endstylesheet %}
 
 {% javascript %}
