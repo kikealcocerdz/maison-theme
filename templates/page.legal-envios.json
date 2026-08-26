@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main": {
+      "type": "legal-doc",
+      "settings": {
+        "doc": "envios",
+        "kicker": "Información legal · La Cartuja de Sevilla",
+        "title": "Envíos y devoluciones",
+        "intro": "Información sobre la entrega y la devolución de tus pedidos.",
+        "next_label": "Términos y condiciones",
+        "next_url": "/pages/terminos-condiciones"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -56,6 +56,7 @@
         {%- when 'privacidad' -%}{% render 'legal-privacidad', part: 'index' %}
         {%- when 'cookies' -%}{% render 'legal-cookies', part: 'index' %}
         {%- when 'terminos' -%}{% render 'legal-terminos', part: 'index' %}
+        {%- when 'envios' -%}{% render 'legal-envios', part: 'index' %}
       {%- endcase -%}
       {%- if section.settings.source_note != blank -%}
         <div class="legal-source">{{ section.settings.source_note }}</div>
@@ -71,6 +72,7 @@
         {%- when 'privacidad' -%}{% render 'legal-privacidad', part: 'body' %}
         {%- when 'cookies' -%}{% render 'legal-cookies', part: 'body' %}
         {%- when 'terminos' -%}{% render 'legal-terminos', part: 'body' %}
+        {%- when 'envios' -%}{% render 'legal-envios', part: 'body' %}
       {%- endcase -%}
     </article>
   </div>
@@ -229,7 +231,8 @@
         { "value": "aviso", "label": "Aviso legal" },
         { "value": "privacidad", "label": "Política de privacidad" },
         { "value": "cookies", "label": "Política de cookies" },
-        { "value": "terminos", "label": "Términos y condiciones" }
+        { "value": "terminos", "label": "Términos y condiciones" },
+        { "value": "envios", "label": "Envíos y devoluciones" }
       ],
       "default": "privacidad"
     },

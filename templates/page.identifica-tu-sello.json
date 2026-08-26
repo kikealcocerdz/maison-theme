@@ -3,7 +3,7 @@
     "main": {
       "type": "stamp-archive",
       "settings": {
-        "heading": "Conoce la historia detrás del sello de tu vajilla.",
+        "heading": "Conoce la historia detrás del sello de tu vajilla",
         "intro": "Encuentra la marca que aparece bajo tu pieza y descubre cuándo se utilizó y qué nos cuenta sobre su origen.",
         "year_from": "1841",
         "year_to": "HOY",

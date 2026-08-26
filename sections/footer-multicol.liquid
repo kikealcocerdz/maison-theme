@@ -13,6 +13,16 @@
       {%- if section.settings.tagline != blank -%}
         <p>{{ section.settings.tagline | newline_to_br }}</p>
       {%- endif -%}
+
+      {%- comment -%} Redes sociales: solo se pintan las que tienen URL. {%- endcomment -%}
+      {%- if section.settings.social_instagram != blank or section.settings.social_facebook != blank or section.settings.social_tiktok != blank or section.settings.social_linkedin != blank -%}
+        <nav class="footer-social" aria-label="{{ 'sections.footer.social_label' | t }}">
+          {%- if section.settings.social_instagram != blank -%}<a href="{{ section.settings.social_instagram }}" aria-label="Instagram" rel="noopener" target="_blank">{%- render 'icon-instagram' -%}</a>{%- endif -%}
+          {%- if section.settings.social_facebook != blank -%}<a href="{{ section.settings.social_facebook }}" aria-label="Facebook" rel="noopener" target="_blank">{%- render 'icon-facebook' -%}</a>{%- endif -%}
+          {%- if section.settings.social_tiktok != blank -%}<a href="{{ section.settings.social_tiktok }}" aria-label="TikTok" rel="noopener" target="_blank">{%- render 'icon-tiktok' -%}</a>{%- endif -%}
+          {%- if section.settings.social_linkedin != blank -%}<a href="{{ section.settings.social_linkedin }}" aria-label="LinkedIn" rel="noopener" target="_blank">{%- render 'icon-linkedin' -%}</a>{%- endif -%}
+        </nav>
+      {%- endif -%}
     </div>
 
     {%- for block in section.blocks -%}
@@ -128,6 +138,28 @@
   color: var(--ink);
 }
 
+.footer-social {
+  display: flex;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.footer-social a {
+  display: block;
+  width: 22px;
+  height: 22px;
+  color: var(--ink-soft);
+  transition: color 0.3s var(--ease);
+}
+
+.footer-social a:hover { color: var(--ink); }
+
+.footer-social svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .footer-grid h4 {
   font-size: 10px;
   letter-spacing: 0.18em;
@@ -235,6 +267,11 @@
     { "type": "text", "id": "logo_alt", "label": "Logo alt text" },
     { "type": "textarea", "id": "tagline", "label": "Tagline under logo", "default": "Heritage crafted for modern living" },
     { "type": "text", "id": "tagline_bottom", "label": "Copyright (bottom right)", "default": "© La Cartuja de Sevilla" },
+    { "type": "header", "content": "Redes sociales" },
+    { "type": "url", "id": "social_instagram", "label": "Instagram" },
+    { "type": "url", "id": "social_facebook", "label": "Facebook" },
+    { "type": "url", "id": "social_tiktok", "label": "TikTok" },
+    { "type": "url", "id": "social_linkedin", "label": "LinkedIn" },
     { "type": "header", "content": "Legal links row" },
     { "type": "link_list", "id": "legal_menu", "label": "Legal menu" },
     { "type": "textarea", "id": "legal_items", "label": "Legal links (fallback, one per line: 'Label | url')" }

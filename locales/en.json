@@ -163,7 +163,8 @@
       "next_doc": "Next document"
     },
     "footer": {
-      "legal_label": "Legal links"
+      "legal_label": "Legal links",
+      "social_label": "Social media"
     },
     "stamps": {
       "seal": "Stamp",

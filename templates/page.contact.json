@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "contact-form",
+      "settings": {
+        "eyebrow": "Estamos aquí para ayudarte",
+        "title": "Contacto",
+        "intro": "Cuéntanos cómo podemos ayudarte y te responderemos lo antes posible."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

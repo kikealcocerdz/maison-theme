@@ -37,7 +37,7 @@
           "type": "column",
           "settings": {
             "heading": "Atención",
-            "items": "Contacto | /pages/contact\nEnvíos y devoluciones | /pages/terminos-condiciones\nPrivacidad | /pages/politica-privacidad\nCondiciones | /pages/terminos-condiciones"
+            "items": "Contacto | /pages/contacto\nEnvíos y devoluciones | /pages/envios-devoluciones"
           }
         }
       },

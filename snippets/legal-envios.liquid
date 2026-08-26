@@ -1,0 +1,25 @@
+{%- if part == 'index' -%}
+  <div class="legal-index">
+    <a href="#envios">Envíos</a>
+    <a href="#devoluciones">Devoluciones</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+{%- else -%}
+  <section class="legal-section reveal" id="envios">
+    <div class="legal-number">01</div>
+    <h2>Envíos</h2>
+    <p>Preparamos cada pedido en nuestras instalaciones y lo enviamos a la dirección indicada durante el proceso de compra.</p>
+    <p>Los plazos y costes de entrega disponibles se muestran antes de confirmar el pedido y pueden variar según el destino, el peso y el volumen del envío.</p>
+  </section>
+  <section class="legal-section reveal" id="devoluciones">
+    <div class="legal-number">02</div>
+    <h2>Devoluciones</h2>
+    <p>Si deseas devolver un pedido, contacta con nosotros dentro del plazo legal aplicable indicando el número de pedido y los productos que deseas devolver.</p>
+    <p>Los artículos deben conservarse en perfecto estado y, siempre que sea posible, en su embalaje original. Te indicaremos los pasos y la dirección de devolución.</p>
+  </section>
+  <section class="legal-section reveal" id="contacto">
+    <div class="legal-number">03</div>
+    <h2>¿Necesitas ayuda?</h2>
+    <p>Para consultas sobre entregas, incidencias o devoluciones, escríbenos desde nuestra <a href="{{ routes.root_url }}pages/contacto">página de contacto</a>.</p>
+  </section>
+{%- endif -%}

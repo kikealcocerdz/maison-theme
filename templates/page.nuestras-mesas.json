@@ -13,7 +13,7 @@
       "type": "our-tables",
       "settings": {
         "kicker": "Editorial · Nuestras mesas",
-        "heading": "Mesas que cuentan una historia.",
+        "heading": "Mesas que cuentan una historia",
         "intro": "<p>Cinco escenas editoriales para descubrir cómo viven las colecciones de La Cartuja sobre una mesa contemporánea. Cada mesa se explora por piezas, con acceso directo a la colección correspondiente.</p>",
         "filter_all_label": "Todas",
         "filters": "Aurora Oaxaca|oaxaca\nFlor de Lis Azul|flor\nAurora Ceilán|ceilan\nBellavista|bellavista\nNegro Vistas|negro"

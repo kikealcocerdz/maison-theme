@@ -13,7 +13,7 @@
       "type": "editorial-hero",
       "settings": {
         "eyebrow": "La Cartuja de Sevilla · 1841",
-        "heading": "<p>Heritage crafted for modern living.</p>",
+        "heading": "<p>Heritage crafted for modern living</p>",
         "subheading": "<p>La Cartuja de Sevilla presenta El Renacer: una colección que reúne memoria, oficio y mesa contemporánea desde 1841.</p>",
         "demo_video": "hero-living-heritage-loop.mp4"
       }
@@ -103,7 +103,7 @@
       "type": "shoppable-scene",
       "settings": {
         "eyebrow": "Nuestras mesas",
-        "heading": "Una escena, cada pieza.",
+        "heading": "Una escena, cada pieza",
         "description": "<p>Una escena editorial construida alrededor de Oaxaca: color, naturaleza y piezas con carácter para vestir la mesa de una forma más libre y expresiva.</p>",
         "cta_label": "Descubre nuestras mesas",
         "cta_link": "/pages/nuestras-mesas",
@@ -185,7 +185,7 @@
       "settings": {
         "eyebrow": "185 años de historia",
         "heading": "<p>Heritage crafted for modern living</p>",
-        "paragraph": "<p>Fundada en Sevilla en 1841, La Cartuja se proyecta hoy como una lovemark: una historia de oficio, memoria y amor por una marca que vuelve a ocupar su lugar en la mesa contemporánea.</p>",
+        "paragraph": "<p>Fundada en Sevilla en 1841, La Cartuja se proyecta hoy como una marca con alma: una historia de oficio, memoria y afecto que vuelve a ocupar su lugar en la mesa contemporánea.</p>",
         "cta_label": "Descubre nuestra historia",
         "cta_link": "/pages/historia"
       }
@@ -194,7 +194,7 @@
       "type": "newsletter",
       "settings": {
         "eyebrow": "Recibir nuestra carta",
-        "heading": "<p>Una <em>carta</em> cada estación.</p>",
+        "heading": "<p>Una <em>carta</em> cada estación</p>",
         "description": "<p>Cuatro envíos al año. Ediciones, talleres y conversaciones desde Sevilla.</p>"
       }
     }

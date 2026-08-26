@@ -1,0 +1,51 @@
+<section class="contact-page" data-section-id="{{ section.id }}">
+  <div class="contact-page__intro">
+    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
+    <h1>{{ section.settings.title | default: page.title | escape }}</h1>
+    {%- if section.settings.intro != blank -%}<p>{{ section.settings.intro | escape }}</p>{%- endif -%}
+  </div>
+
+  {%- form 'contact', class: 'contact-form' -%}
+    {%- if form.posted_successfully? -%}
+      <p class="contact-form__message contact-form__message--success">Gracias por escribirnos. Te responderemos lo antes posible.</p>
+    {%- elsif form.errors -%}
+      <div class="contact-form__message contact-form__message--error">{{ form.errors | default_errors }}</div>
+    {%- endif -%}
+    <label for="ContactFormName">Nombre</label>
+    <input id="ContactFormName" type="text" name="contact[name]" autocomplete="name" value="{{ form.name | escape }}" required>
+    <label for="ContactFormEmail">Email</label>
+    <input id="ContactFormEmail" type="email" name="contact[email]" autocomplete="email" value="{{ form.email | escape }}" required>
+    <label for="ContactFormMessage">Mensaje</label>
+    <textarea id="ContactFormMessage" name="contact[body]" rows="7" required>{{ form.body | escape }}</textarea>
+    <button type="submit">Enviar mensaje <span aria-hidden="true">→</span></button>
+  {%- endform -%}
+</section>
+
+{% stylesheet %}
+.contact-page { width: min(760px, var(--content)); margin: 0 auto; padding: calc(var(--header-h) + 120px) 0 140px; }
+.contact-page__intro { margin-bottom: 72px; }
+.contact-page h1 { font-family: var(--serif); font-size: clamp(58px, 8vw, 112px); font-weight: 400; line-height: .95; margin: 20px 0 24px; }
+.contact-page__intro p { max-width: 460px; color: var(--ink-soft); font-size: 15px; line-height: 1.8; }
+.contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 28px; }
+.contact-form label { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.contact-form input, .contact-form textarea { grid-column: 1 / -1; width: 100%; border: 0; border-bottom: .5px solid var(--rule); border-radius: 0; background: transparent; padding: 12px 0 14px; color: var(--ink); font: inherit; resize: vertical; }
+.contact-form textarea { margin-top: 18px; }
+.contact-form button { grid-column: 1 / -1; justify-self: start; margin-top: 28px; border: 0; background: transparent; color: var(--ink); font: 500 11px var(--sans); letter-spacing: .16em; text-transform: uppercase; cursor: pointer; }
+.contact-form button span { display: inline-block; margin-left: 14px; font-size: 18px; transition: transform .25s ease; }
+.contact-form button:hover span { transform: translateX(6px); }
+.contact-form__message { grid-column: 1 / -1; margin-bottom: 24px; font-size: 13px; line-height: 1.6; }
+.contact-form__message--success { color: var(--ink); }
+.contact-form__message--error { color: var(--accent-1); }
+@media (max-width: 680px) { .contact-page { width: calc(100vw - 32px); padding-top: calc(var(--header-h) + 84px); } .contact-page__intro { margin-bottom: 56px; } .contact-form { grid-template-columns: 1fr; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Formulario de contacto",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Estamos aquí para ayudarte" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Contacto" },
+    { "type": "textarea", "id": "intro", "label": "Entradilla", "default": "Cuéntanos cómo podemos ayudarte y te responderemos lo antes posible." }
+  ]
+}
+{% endschema %}
