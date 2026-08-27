@@ -1,25 +1,62 @@
 {%- if part == 'index' -%}
   <div class="legal-index">
     <a href="#envios">Envíos</a>
+    <a href="#plazos">Plazos de entrega</a>
     <a href="#devoluciones">Devoluciones</a>
+    <a href="#exclusiones">Exclusiones</a>
     <a href="#contacto">Contacto</a>
   </div>
 {%- else -%}
   <section class="legal-section reveal" id="envios">
     <div class="legal-number">01</div>
     <h2>Envíos</h2>
-    <p>Preparamos cada pedido en nuestras instalaciones y lo enviamos a la dirección indicada durante el proceso de compra.</p>
-    <p>Los plazos y costes de entrega disponibles se muestran antes de confirmar el pedido y pueden variar según el destino, el peso y el volumen del envío.</p>
+    <h3>Envíos nacionales</h3>
+    <p>En la Península, el envío es gratuito en pedidos superiores a 150 €.</p>
+    <p>En la Península, el envío estándar tiene un coste de 6,99 €. Para Baleares, Canarias, Ceuta y Melilla, los gastos de envío se calculan automáticamente en el carrito según el destino.</p>
+    <p>Los envíos a Canarias, Ceuta y Melilla no incluyen IVA. En estos destinos pueden aplicarse además gastos de aduanas, DUA de importación, IGIC (Canarias) o IPSI (Ceuta y Melilla), que correrán a cargo del cliente.</p>
+    <h3>Envíos internacionales</h3>
+    <p>Los gastos de transporte se calculan automáticamente en el carrito según el peso, el volumen y el destino del pedido.</p>
+    <p>Para destinos fuera de la Unión Europea, los precios se muestran sin IVA. Además del coste de transporte, el cliente deberá asumir los aranceles, tasas e impuestos de importación que exija el país de destino.</p>
+    <p>Si necesitas una fecha de entrega concreta, escríbenos y haremos todo lo posible por adaptarnos.</p>
+  </section>
+  <section class="legal-section reveal" id="plazos">
+    <div class="legal-number">02</div>
+    <h2>Plazos de entrega</h2>
+    <p>Si la pieza está en stock, el plazo es de <strong>7 días hábiles</strong>.</p>
+    <p>Si la pieza está en producción, el plazo es de <strong>entre 15 y 21 días hábiles</strong>.</p>
+    <p>Los plazos empiezan a contar desde la confirmación del pedido y no incluyen posibles retrasos ajenos a nosotros en aduanas o en la empresa de transporte.</p>
   </section>
   <section class="legal-section reveal" id="devoluciones">
-    <div class="legal-number">02</div>
+    <div class="legal-number">03</div>
     <h2>Devoluciones</h2>
-    <p>Si deseas devolver un pedido, contacta con nosotros dentro del plazo legal aplicable indicando el número de pedido y los productos que deseas devolver.</p>
-    <p>Los artículos deben conservarse en perfecto estado y, siempre que sea posible, en su embalaje original. Te indicaremos los pasos y la dirección de devolución.</p>
+    <p>Dispones de <strong>14 días naturales</strong> desde la fecha de recepción del pedido para solicitar la devolución del importe o realizar un cambio por otros artículos.</p>
+    <p>Para iniciar una devolución, escríbenos indicando el número de pedido y las piezas que deseas devolver. Te confirmaremos los pasos a seguir.</p>
+    <h3>Condiciones generales</h3>
+    <ul>
+      <li>Los gastos de envío de la devolución correrán a cargo del cliente.</li>
+      <li>Las piezas deben devolverse en perfecto estado, en su embalaje original y sin signos de uso.</li>
+      <li>Una vez recibidas y revisadas las piezas, si cumplen con las condiciones, procederemos a la devolución del importe o al cambio solicitado en el menor plazo posible.</li>
+    </ul>
+    <h3>Dirección de devolución</h3>
+    <p>La Cartuja de Sevilla<br>Carretera Nacional 630, Km 805 — Centro Comarcal Norte<br>41909 Salteras (Sevilla), España</p>
+    <h3>Pedidos internacionales</h3>
+    <p>Todos los pedidos internacionales tienen carácter de venta final una vez despachados. No se aceptan devoluciones ni reembolsos por cambio de opinión o por error en el pedido realizado por el cliente.</p>
+  </section>
+  <section class="legal-section reveal" id="exclusiones">
+    <div class="legal-number">04</div>
+    <h2>Exclusiones de garantía y devoluciones</h2>
+    <p>Quedan fuera de nuestra política de devoluciones y garantía las siguientes situaciones:</p>
+    <ul>
+      <li>Piezas que hayan sido usadas, lavadas o retiradas de su embalaje original.</li>
+      <li>Daños causados por choque térmico, uso inadecuado en hornos o microondas, o impactos durante el uso doméstico.</li>
+      <li>Variaciones naturales en el tono del esmalte, la textura o los motivos pintados a mano, ya que forman parte inherente de la producción artesanal y no se consideran defectos.</li>
+      <li>Pedidos personalizados, con monogramas o fabricados a medida.</li>
+      <li>Daños durante el transporte notificados más de 48 horas después de la entrega confirmada.</li>
+    </ul>
   </section>
   <section class="legal-section reveal" id="contacto">
-    <div class="legal-number">03</div>
+    <div class="legal-number">05</div>
     <h2>¿Necesitas ayuda?</h2>
-    <p>Para consultas sobre entregas, incidencias o devoluciones, escríbenos desde nuestra <a href="{{ routes.root_url }}pages/contacto">página de contacto</a>.</p>
+    <p>Para consultas sobre entregas, incidencias o devoluciones, escríbenos desde nuestra <a href="{{ routes.root_url }}pages/contacto">página de contacto</a> o a <a href="mailto:pedidos@lacartujadesevilla.com">pedidos@lacartujadesevilla.com</a>.</p>
   </section>
 {%- endif -%}

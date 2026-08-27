@@ -16,7 +16,7 @@
         "a1": { "type": "accordion", "settings": { "label": "Dimensiones", "content": "<p>Ø 28 cm · Alto 2,8 cm. Medidas provisionales editables en Shopify según ficha final.</p>" } },
         "a2": { "type": "accordion", "settings": { "label": "Detalles", "content": "<p>Loza fina esmaltada. Decorado histórico 202 Rosa. Acabado brillante. Pieza del universo Aurora, una de las formas nacidas con La Cartuja en 1841.</p>", "show_description": true } },
         "a3": { "type": "accordion", "settings": { "label": "Cuidados", "content": "<p>Lavar preferiblemente a mano o en programa delicado. Evitar cambios bruscos de temperatura, golpes térmicos y productos abrasivos.</p>" } },
-        "a4": { "type": "accordion", "settings": { "label": "Envío y devoluciones", "content": "<p>Envío protegido para piezas cerámicas. Cambios y devoluciones sujetos a disponibilidad y condiciones de venta de la tienda final.</p>" } }
+        "a4": { "type": "accordion", "settings": { "label": "Envío y devoluciones", "content": "<p>Envío protegido para piezas cerámicas. Envío gratuito en pedidos superiores a 150 € en la Península.</p><p>Plazo de entrega: 7 días hábiles si la pieza está en stock; entre 15 y 21 días hábiles si está en producción.</p><p>Dispones de 14 días naturales desde la recepción para solicitar la devolución o un cambio. Consulta la <a href=\"/pages/envios-devoluciones\">política de envíos y devoluciones</a>.</p>" } }
       },
       "block_order": ["a1", "a2", "a3", "a4"]
     },
