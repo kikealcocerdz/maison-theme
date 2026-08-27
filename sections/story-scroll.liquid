@@ -162,6 +162,34 @@
   .story-scroll__content { opacity: 1; transform: translate3d(-50%, -50%, 0); }
   .story-scroll__scroll-cue span { animation: none; }
 }
+
+/* ==========================================================================
+   v99 — Story de la home en móvil: el crossfade se acorta y el texto se centra.
+   ========================================================================== */
+@media (max-width: 760px) {
+  .story-scroll {
+    height: 190dvh !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    overflow: clip !important;
+  }
+
+  .story-scroll__sticky { height: 100dvh !important; min-height: 0 !important; }
+  .story-scroll__image { object-position: center center !important; }
+
+  .story-scroll__content {
+    width: calc(100% - 36px) !important;
+    max-width: 430px !important;
+    top: 50% !important;
+    text-align: center !important;
+  }
+
+  .story-scroll__content h2 { font-size: clamp(32px, 9vw, 42px) !important; line-height: 1.02 !important; margin-bottom: 18px !important; }
+  .story-scroll__content p { font-size: 12px !important; line-height: 1.62 !important; margin-bottom: 24px !important; }
+
+  .story-scroll__scroll-cue { display: none !important; }
+  .story-scroll__progress { bottom: 20px !important; width: min(180px, 48vw) !important; }
+}
 {% endstylesheet %}
 
 {% javascript %}

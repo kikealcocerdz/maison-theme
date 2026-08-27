@@ -184,6 +184,40 @@
   .editorial-hero__frame { clip-path: none !important; }
   .editorial-hero__title { opacity: 1 !important; transform: translate3d(-50%, 0, 0) !important; }
 }
+
+/* ==========================================================================
+   v96 — Hero de la home en móvil: sin scroll-clip. La sección ocupa un
+   viewport, el recorte se desactiva y el titular se muestra ya revelado, sin
+   obligar a hacer scroll para leerlo. Sustituye al JS de v96, que hacía lo
+   mismo escribiendo las variables a mano.
+   ========================================================================== */
+@media (max-width: 780px) {
+  .editorial-hero {
+    height: 100dvh !important;
+    min-height: 560px !important;
+    --hero-title-opacity: 1 !important;
+    --hero-progress: 1 !important;
+    --hero-dim: 0.08 !important;
+    --hero-media-scale: 1.025 !important;
+  }
+
+  .editorial-hero__sticky { position: relative !important; top: auto !important; height: 100dvh !important; }
+  .editorial-hero__frame { height: 100dvh !important; clip-path: none !important; }
+
+  .editorial-hero__title {
+    opacity: 1 !important;
+    transform: translate3d(-50%, 0, 0) !important;
+    width: calc(100vw - 42px) !important;
+    bottom: calc(42px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .editorial-hero__title h1 { font-size: clamp(42px, 12.4vw, 64px) !important; line-height: 0.98 !important; }
+  .editorial-hero__title p { font-size: 11px !important; line-height: 1.62 !important; max-width: 340px !important; }
+
+  .editorial-hero__progress,
+  .editorial-hero__scroll-cue { display: none !important; }
+  .editorial-hero__media { object-position: center center !important; }
+}
 {% endstylesheet %}
 
 {% javascript %}

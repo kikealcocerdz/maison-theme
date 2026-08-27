@@ -474,6 +474,66 @@
   .heritage-page-body .heritage-finale { padding:64px 16px!important;min-height:70dvh!important }
   .heritage-page-body .finale-panel { text-align:center!important;margin:0 auto!important }
 }
+
+/* ==========================================================================
+   v98 — Heritage en móvil: cada bloque visual se despega de su posición
+   absoluta y se apila a ancho completo.
+   ========================================================================== */
+@media (max-width: 760px) {
+  .heritage-page-body { overflow-x: hidden !important; }
+
+  .heritage-page .hero-history { height: 88dvh !important; min-height: 620px !important; }
+  .heritage-page .heritage-timeline-start { display: block !important; }
+
+  .heritage-page .visual-block {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+  }
+
+  .heritage-page .media {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    transform: none !important;
+  }
+
+  .heritage-page .media .frame,
+  .heritage-page .media .card,
+  .heritage-page .media .mag-card,
+  .heritage-page .cslide {
+    position: relative !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    opacity: 1 !important;
+  }
+
+  .heritage-page .media img,
+  .heritage-page .frame img,
+  .heritage-page .cslide img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 62dvh !important;
+    object-fit: contain !important;
+    filter: none !important;
+  }
+
+  .heritage-page .carousel-unit { width: 100% !important; }
+  .heritage-page .carousel-bar { margin-top: 8px !important; }
+  .heritage-page .global-ghost-title { display: none !important; }
+  .heritage-page .finale-panel { width: 100% !important; max-width: 100% !important; padding: 24px !important; }
+}
 {% endstylesheet %}
 
 {% javascript %}

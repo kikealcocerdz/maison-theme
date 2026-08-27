@@ -36,6 +36,43 @@
 @media (max-width: 680px) {
   .editorial-collections__grid { gap: 46px; }
 }
+
+/* ==========================================================================
+   v98 — El tríptico pasa a carrusel con snap en móvil en vez de apilarse.
+   ========================================================================== */
+@media (max-width: 760px) {
+  .editorial-collections { padding-left: 14px !important; padding-right: 14px !important; }
+
+  .editorial-collections__grid {
+    display: flex !important;
+    gap: 10px !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    scrollbar-width: none !important;
+    padding-bottom: 8px !important;
+  }
+
+  .editorial-collections__grid::-webkit-scrollbar { display: none !important; }
+
+  .editorial-collections__item {
+    flex: 0 0 78vw !important;
+    max-width: 330px !important;
+    scroll-snap-align: center !important;
+    margin: 0 !important;
+  }
+
+  .editorial-collections__item .block-chapter-card__media { height: 42dvh !important; max-height: 380px !important; }
+  .editorial-collections__item .block-chapter-card__title { font-size: 29px !important; margin: 10px 0 5px !important; }
+
+  .editorial-collections__item .block-chapter-card__paragraph {
+    font-size: 10px !important;
+    line-height: 1.5 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+}
 {% endstylesheet %}
 
 {% schema %}

@@ -887,6 +887,19 @@
   .viste-page .wz-step-card h3 { margin-top:6px!important;margin-bottom:7px!important }
   .viste-page .wz-mobile-nav { margin-top:15px!important;padding-top:13px!important }
 }
+
+/* v98 — Guía, lab y wizard: contenedores a una columna en móvil. */
+@media (max-width: 760px) {
+  .vt-page .tube-nav { width: 100% !important; margin-bottom: 12px !important; gap: 5px !important; padding: 5px !important; border-radius: 999px !important; }
+  .vt-page .tube-item { min-height: 40px !important; padding: 0 12px !important; border-radius: 999px !important; }
+  .vt-page .tube-item span { display: none !important; }
+  .vt-page .tube-item b { font-size: 8px !important; letter-spacing: 0.08em !important; }
+  .vt-page #lab { padding-top: 46px !important; padding-bottom: 46px !important; }
+  .vt-page #lab > .section-head { margin-bottom: 20px !important; }
+  .vt-page .lab { display: grid !important; grid-template-columns: 1fr !important; gap: 12px !important; height: auto !important; }
+  .vt-page #wizard { padding-top: 48px !important; }
+  .vt-page .wizard-grid--redesign { display: grid !important; grid-template-columns: 1fr !important; gap: 10px !important; }
+}
 {% endstylesheet %}
 
 {% javascript %}
