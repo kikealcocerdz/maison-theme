@@ -34,7 +34,7 @@
       "type": "heritage-stamp",
       "settings": {
         "kicker": "Bien de Interés Cultural desde 1998",
-        "heading": "<p>Una herencia que <em>trasciende</em> generaciones.<br>Una forma de vivir la mesa que <em>evoluciona</em> con el tiempo.</p>",
+        "heading": "<p>Una herencia que <em>trasciende</em> generaciones.<br>Una forma de vivir la mesa que <em>evoluciona</em> con el tiempo</p>",
         "bg_number": "1841"
       }
     },
@@ -54,7 +54,7 @@
             "demo_image": "collection-aurora.webp",
             "chapter": "Capítulo 01",
             "title": "Aurora",
-            "paragraph": "<p>La forma nacida con La Cartuja en 1841. Un repertorio de clásicos vivos: 202 Rosa, Bellavista, Ceilán, Flor de Lis, Viejo Molino y Oaxaca.</p>",
+            "paragraph": "<p>La forma nacida con La Cartuja en 1841. Un repertorio de clásicos vivos: Aurora Blanca, 202 Rosa, Bellavista, Ceilán, Flor de Lis Azul, Flor de Lis Rosa, Viejo Molino.</p>",
             "link": "/collections/aurora",
             "link_label": "Descubrir Aurora"
           }
@@ -65,7 +65,7 @@
             "demo_image": "negro_vistas_bandeja.webp",
             "chapter": "Capítulo 02",
             "title": "Ochavada",
-            "paragraph": "<p>La modernidad que nació en 1841. Líneas geométricas, silueta octogonal y decorados de fuerte presencia para mesas con carácter.</p>",
+            "paragraph": "<p>La modernidad que nació en 1841: Ochavada blanca, Canasto Floral, Negro Vistas, Yedra, Laberinto. Líneas geométricas, silueta octogonal y decorados para mesas con carácter.</p>",
             "link": "/collections/ochavada",
             "link_label": "Descubrir Ochavada"
           }
@@ -185,7 +185,7 @@
       "settings": {
         "eyebrow": "185 años de historia",
         "heading": "<p>Heritage crafted for modern living</p>",
-        "paragraph": "<p>Fundada en Sevilla en 1841, La Cartuja se proyecta hoy como una marca con alma: una historia de oficio, memoria y afecto que vuelve a ocupar su lugar en la mesa contemporánea.</p>",
+        "paragraph": "<p>Fundada en Sevilla en 1841, La Cartuja se proyecta hoy como una marca con alma: una historia de oficio, memoria y afecto que vuelve a ocupar su lugar en la mesa contemporánea</p>",
         "cta_label": "Descubre nuestra historia",
         "cta_link": "/pages/historia"
       }

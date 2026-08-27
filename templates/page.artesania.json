@@ -14,20 +14,20 @@
       "settings": {
         "hero_eyebrow": "Artesanía · La Cartuja de Sevilla · Desde 1841",
         "hero_title_1": "Hecho a mano,",
-        "hero_title_2": "en España.",
-        "hero_body": "<p>Cada pieza atraviesa una cadena de manos, fuego y criterio. Dieciocho etapas, tres cocciones y un sello: el pulso histórico de una casa sevillana, llevado a la mesa contemporánea.</p>",
+        "hero_title_2": "en España",
+        "hero_body": "<p>Cada pieza nace del diálogo entre oficio, tiempo y fuego. A lo largo de dieciocho etapas y tres cocciones, distintas manos especializadas modelan, decoran y esmaltan la loza antes de recibir el sello que certifica su origen en La Cartuja de Sevilla.</p>",
 
         "intro_eyebrow": "El proceso refleja nuestra misión",
-        "intro_heading": "<p>Desde 1841, cada pieza de La Cartuja nace de una secuencia precisa de manos, fuego, esmalte y memoria.</p>",
+        "intro_heading": "<p>Desde 1841, cada pieza de La Cartuja nace de una secuencia precisa de manos, fuego, esmalte y memoria</p>",
         "intro_body": "<p>Una loza fina no se entiende solo por su forma. Se entiende por el tiempo que contiene: el molde, el sello, la cocción, la clasificación y el gesto final.</p>",
         "intro_video_eyebrow": "El gesto, filmado",
         "intro_video_heading": "Descubre nuestro proceso artesanal",
 
         "proceso_close_eyebrow": "La pieza terminada",
-        "proceso_close_heading": "<p>La Cartuja de Sevilla, <em>desde 1841.</em></p>",
+        "proceso_close_heading": "<p>La Cartuja de Sevilla, <em>desde 1841</em></p>",
 
         "calidad_heading_1": "Dieciocho etapas.",
-        "calidad_heading_2": "Hasta ocho miradas.",
+        "calidad_heading_2": "Hasta ocho miradas",
         "calidad_body": "<p>El proceso de producción de cada pieza resume <strong>dieciocho etapas</strong>, de las cuales hasta ocho son clasificaciones. Sólo la loza que supera cada control —en bizcocho y en acabado— llega a ver la luz y entra en su mesa.</p>",
         "badge1_title": "Máxima calidad",
         "badge1_text": "Hasta ocho clasificaciones descartan toda pieza que no alcance el criterio de la casa.",
@@ -39,10 +39,10 @@
         "badge4_text": "Envío sin coste en pedidos superiores a 150&nbsp;€ para España (península).",
 
         "cols_eyebrow": "Un mismo oficio · cuatro relatos",
-        "cols_heading": "Las colecciones.",
+        "cols_heading": "Las colecciones",
 
         "news_eyebrow": "Recibir nuestra carta",
-        "news_heading": "<p>Una <em>carta</em> cada estación.</p>",
+        "news_heading": "<p>Una <em>carta</em> cada estación</p>",
         "news_body": "<p>Cuatro envíos al año. Ediciones, talleres y conversaciones desde Sevilla.</p>"
       },
       "blocks": {
