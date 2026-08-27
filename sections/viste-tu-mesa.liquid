@@ -42,8 +42,10 @@
   assign hero_img = section.settings.hero_image
   assign hero_demo = section.settings.hero_demo_image | default: 'hero-viste-tu-mesa.webp'
   assign root_assets = 'mesa_bodegon_lujo_el_renacer.webp,mesa_aurora_editorial.webp,mesa_aurora_oaxaca.webp,mesa_ochavada_negro_vistas.webp,gifts_decor_arch.webp,ochavada_canasto_floral.jpg,scene-left-tableware.webp' | split: ','
-  assign lab_names = 'bajoplato,base-textil,centro-bajo,cuberteria-plata,cuchillo-plata,hondo-bol,mantel-bordado,mesa-madera,plato-auxiliar,plato-bajoplato,plato-protagonista,servilleta-bordada,tenedor-plata' | split: ','
+  assign lab_names = 'bajoplato,base-textil,centro-bajo-florero,cuberteria-plata,cuchillo-plata,hondo-bol,mantel-bordado,mesa-madera,platillo-pan,plato-bajoplato,plato-protagonista,servilleta-bordada,tenedor-plata' | split: ','
   assign guide_names = 'base,capas,centro,compartir,gesto' | split: ','
+  # v99: la tarjeta de recomendación usa la portada real de cada vajilla.
+  assign set_handles ='202-rosa,aurora-blanca,bellavista,ceilan,flor-de-lis-azul,flor-de-lis-rosa,negro-vistas,negro-vistas-ash-blue,negro-vistas-ash-yellow,ochavada-blanca,viejo-molino' | split: ','
   assign form_spaces = 'luminoso,clasico,contemporaneo,jardin' | split: ','
   assign form_occasions = 'desayuno,aperitivo,comidaFormal,cenaEspecial' | split: ','
   assign form_bases = 'woodLight,woodDark,stone,graphite' | split: ','
@@ -126,9 +128,9 @@
         <div class="lab-layer lab-stack"><img src="{{ 'vt-lab-plato-bajoplato.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
         <div class="lab-layer lab-protagonista on"><img src="{{ 'vt-lab-plato-protagonista.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
         <div class="lab-layer lab-bol"><img src="{{ 'vt-lab-hondo-bol.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
-        <div class="lab-layer lab-auxiliar"><img src="{{ 'vt-lab-plato-auxiliar.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
+        <div class="lab-layer lab-auxiliar"><img src="{{ 'vt-lab-platillo-pan.webp' | asset_url }}" alt="" width="1200" height="1203" decoding="async"></div>
         <div class="lab-layer lab-servilleta"><img src="{{ 'vt-lab-servilleta-bordada.webp' | asset_url }}" alt="" width="581" height="1200" decoding="async"></div>
-        <div class="lab-layer lab-centro"><img src="{{ 'vt-lab-centro-bajo.webp' | asset_url }}" alt="" width="300" height="300" decoding="async"></div>
+        <div class="lab-layer lab-centro"><img src="{{ 'vt-lab-centro-bajo-florero.webp' | asset_url }}" alt="" width="1200" height="1200" decoding="async"></div>
         <div class="lab-status"><span id="labCount">4 capas activas</span></div>
       </div>
       <div class="lab-controls">
@@ -144,9 +146,9 @@
         <button aria-pressed="true" class="lab-toggle" data-layer="bajoplato" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-bajoplato.webp' | asset_url }}" alt="" width="1500" height="1500" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Bajo plato</b><small>Marca el sitio y da profundidad</small></span><span class="lab-switch"></span></button>
         <button aria-pressed="true" class="lab-toggle" data-layer="protagonista" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-plato-protagonista.webp' | asset_url }}" alt="" width="1500" height="1500" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Plato protagonista</b><small>La pieza central de la composición</small></span><span class="lab-switch"></span></button>
         <button aria-pressed="false" class="lab-toggle" data-layer="bol" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-hondo-bol.webp' | asset_url }}" alt="" width="1500" height="1500" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Hondo o bol</b><small>Para sopas, cremas o ensaladas</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="false" class="lab-toggle" data-layer="auxiliar" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-plato-auxiliar.webp' | asset_url }}" alt="" width="1500" height="1500" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Plato auxiliar</b><small>Postre, pan o apoyo lateral</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="false" class="lab-toggle" data-layer="auxiliar" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-platillo-pan.webp' | asset_url }}" alt="" width="1200" height="1203" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Platillo de pan</b><small>Pequeño plato de apoyo a la izquierda del servicio</small></span><span class="lab-switch"></span></button>
         <button aria-pressed="false" class="lab-toggle" data-layer="servilleta" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-servilleta-bordada.webp' | asset_url }}" alt="" width="581" height="1200" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Servilleta bordada</b><small>A la derecha de la cubertería</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="false" class="lab-toggle" data-layer="centro" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-centro-bajo.webp' | asset_url }}" alt="" width="300" height="300" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Centro bajo</b><small>Flores bajas o pieza decorativa</small></span><span class="lab-switch"></span></button>
+        <button aria-pressed="false" class="lab-toggle" data-layer="centro" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-centro-bajo-florero.webp' | asset_url }}" alt="" width="1200" height="1200" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Centro bajo</b><small>Florero bajo o pieza decorativa que no interrumpe la conversación</small></span><span class="lab-switch"></span></button>
       </div>
     </div>
   </section>
@@ -263,6 +265,10 @@
     {%- for n in guide_names -%}
       {%- assign guide_asset = 'vt-guide-' | append: n | append: '.webp' -%}
       "viste-tu-mesa/guide/guide-{{ n }}.webp":"{{ guide_asset | asset_url }}",
+    {%- endfor -%}
+    {%- for h in set_handles -%}
+      {%- assign set_asset = 'set-' | append: h | append: '-vajilla.webp' -%}
+      "sets/{{ h }}/vajilla.webp":"{{ set_asset | asset_url }}",
     {%- endfor -%}
     {%- for s in form_spaces -%}
       {%- assign space_asset = 'vt-form-01-espacio-' | append: s | append: '.webp' -%}
@@ -732,6 +738,155 @@
   .vt-page .result-ambient img, .vt-page .result-product__img img, .vt-page .result-floating-plate,
   .vt-page .buy-card { transition: none; }
 }
+
+/* ==========================================================================
+   v98 / v99 — Viste tu mesa en móvil.
+   Guía: el texto pasa a ir sobre la foto. Lab: escenario sticky y controles en
+   dos columnas sin miniaturas. Wizard: una pregunta por pantalla con su propia
+   navegación (.wz-mobile-nav, inyectada por el JS de la sección).
+   ========================================================================== */
+
+/* ===== v98-mobile-ux ===== */
+.result-floating-plate { display:none!important }
+.result-ambient { position:relative;overflow:hidden }
+.result-ambient>img { width:100%;height:100%;object-fit:cover!important;object-position:center!important;display:block }
+@media(max-width:760px) {
+  .vt-section { padding-left:14px!important;padding-right:14px!important }
+  .vt-section .section-head { width:100%!important;max-width:100%!important }
+  .guide-showcase { padding:0!important;border-radius:24px!important;display:block!important;position:relative!important }
+  .guide-visual { min-height:68dvh!important;max-height:620px!important;border-radius:24px!important }
+  .guide-copy-wrap { position:absolute!important;left:0!important;right:0!important;bottom:0!important;min-height:0!important;z-index:8!important;padding:80px 20px 22px!important;background:linear-gradient(180deg,transparent,rgba(7,18,36,.82))!important;color:#fff!important;pointer-events:none!important }
+  .guide-panel { display:none!important;position:relative!important;opacity:1!important;transform:none!important;color:#fff!important }
+  .guide-panel.is-active { display:block!important }
+  .guide-panel>span { display:none!important }
+  .guide-panel h3 { font-size:34px!important;color:#fff!important;margin:0 0 8px!important }
+  .guide-panel p { font-size:12px!important;line-height:1.55!important;color:rgba(255,255,255,.88)!important;max-width:44ch!important }
+  .guide-media-label { display:none!important }
+  .lab-stage { position:sticky!important;top:calc(var(--header-h,64px) + 8px)!important;z-index:12!important;width:100%!important;height:42dvh!important;min-height:310px!important;max-height:390px!important;border-radius:24px!important;box-shadow:0 18px 44px rgba(15,26,46,.10)!important }
+  .lab-controls { display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;padding:0!important }
+  .lab-controls h3,.lab-controls>p { grid-column:1/-1!important;margin:0!important }
+  .lab-controls h3 { font-size:27px!important;margin-top:4px!important }
+  .lab-controls>p { display:none!important }
+  .lab-quick-actions { grid-column:1/-1!important;margin:2px 0 3px!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important }
+  .lab-toggle { min-height:48px!important;padding:7px 10px!important;border:1px solid rgba(15,26,46,.10)!important;border-radius:12px!important;grid-template-columns:1fr 22px!important;gap:8px!important }
+  .lab-thumb { display:none!important }
+  .lab-toggle__label small { display:none!important }
+  .lab-toggle__label b { font-size:9px!important;line-height:1.2!important }
+  .lab-switch { width:21px!important;height:12px!important }
+  .lab-switch:after { width:8px!important;height:8px!important;top:1px!important;left:1px!important }
+  .lab-toggle[aria-pressed="true"] .lab-switch:after { transform:translateX(9px)!important }
+  .wz-preview--redesign { position:sticky!important;top:calc(var(--header-h,64px) + 7px)!important;z-index:14!important;background:#fff!important;border-radius:22px!important;box-shadow:0 16px 44px rgba(15,26,46,.12)!important;padding:7px!important }
+  .wz-preview__top { padding:3px 5px 7px!important }
+  .wz-preview--redesign .wz-stage { aspect-ratio:16/8.6!important;min-height:0!important;max-height:34dvh!important;border-radius:17px!important }
+  .wz-caption { padding:8px 10px!important;font-size:8px!important;border-radius:0 0 17px 17px!important }
+  .wz-live-summary { display:none!important }
+  .wz-builder { padding:14px!important;border-radius:22px!important;box-shadow:none!important }
+  .wz-builder__head { margin-bottom:9px!important }
+  .wz-builder__head span { font-size:18px!important }
+  .wz-builder .wz-progress { position:relative!important;top:auto!important;margin-bottom:10px!important }
+  .wz-panel .wz-step-card { display:none!important }
+  .wz-panel .wz-step-card.is-mobile-current { display:block!important;min-height:0!important;padding:15px!important;border-radius:18px!important }
+  .wz-step-card:before { display:none!important }
+  .wz-step-card h3 { font-size:26px!important;margin:3px 0 4px!important }
+  .wz-step-card>p { font-size:10.5px!important;margin:0 0 10px!important }
+  .wz-step-card .wz-options { grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important }
+  .wz-opt--visual { grid-template-columns:1fr!important;min-height:62px!important;padding:10px!important;border-radius:14px!important;text-align:center!important;place-items:center!important }
+  .wz-opt-media,.wz-check { display:none!important }
+  .wz-opt-copy { gap:2px!important;align-items:center!important }
+  .wz-opt-copy b { font-size:10.5px!important }
+  .wz-opt-copy small { font-size:8.8px!important;line-height:1.25!important }
+  .wz-step__head { margin-bottom:3px!important }
+  .wz-step__chosen { font-size:7px!important }
+  .wz-mobile-nav { display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;margin-top:10px!important;padding-top:10px!important;border-top:1px solid rgba(15,26,46,.10)!important }
+  .wz-mobile-prev { border:0!important;background:transparent!important;color:var(--ink,#0f1a2e)!important;font-size:8.5px!important;letter-spacing:.08em!important;text-transform:uppercase!important;padding:8px 0!important }
+  .wz-mobile-prev:disabled { opacity:.25!important }
+  .wz-mobile-step { font-size:8px!important;letter-spacing:.12em!important;text-transform:uppercase!important;color:var(--muted,#7a8190)!important }
+  .result-card--editorial { grid-template-columns:1fr!important;padding:12px!important;border-radius:22px!important }
+  .result-card--editorial .result-ambient { aspect-ratio:4/5!important;border-radius:17px!important }
+  .result-card--editorial .result-ambient>img { object-fit:cover!important }
+  .result-card--editorial .result-body { padding:16px 6px 6px!important }
+  .result-card--editorial .result-products { grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important }
+  .result-card--editorial .result-product { padding:6px!important;border-radius:12px!important }
+  .result-card--editorial .result-product b { font-size:8px!important }
+  .result-card--editorial .result-product small { font-size:7.5px!important }
+}
+@media(min-width:761px) {
+  .wz-mobile-nav { display:none!important }
+}
+.wz-opt--visual { grid-template-columns:1fr!important }
+.wz-opt-media,.wz-check { display:none!important }
+.wz-opt-copy { min-width:0!important }
+
+/* ===== v99-refinements ===== */
+@media (min-width:761px) {
+  .viste-page .wz-opt--visual { grid-template-columns:58px minmax(0,1fr) 22px!important;
+    text-align:left!important;
+    place-items:initial!important; }
+  .viste-page .wz-opt-media { display:flex!important;
+    width:58px!important;
+    height:58px!important; }
+  .viste-page .wz-check { display:inline-flex!important; }
+}
+.viste-page .lab-auxiliar { width:25%!important;
+  height:25%!important;
+  left:28%!important;
+  top:20%!important;
+  z-index:7!important; }
+.viste-page .lab-auxiliar.on { transform:translate(-50%,-50%) rotate(-5deg) scale(1)!important; }
+.viste-page .lab-auxiliar img { object-fit:contain!important;
+  filter:drop-shadow(0 12px 19px rgba(15,26,46,.15))!important; }
+.viste-page .lab-toggle[data-layer="auxiliar"] .lab-thumb img { transform:scale(1.08)!important }
+.viste-page .lab-centro { width:40%!important;
+  height:40%!important;
+  top:7%!important; }
+.viste-page .lab-centro img { object-fit:contain!important }
+@media(max-width:760px) {
+  .viste-page .vt-hero { height:62dvh!important;
+    min-height:430px!important;
+    max-height:610px!important;
+    align-items:flex-end!important; }
+  .viste-page .vt-hero__media:after { background:linear-gradient(180deg,rgba(7,18,36,.38) 0%,rgba(7,18,36,.35) 36%,rgba(7,18,36,.82) 100%)!important; }
+  .viste-page .vt-hero__media img { filter:saturate(.9) brightness(.78)!important }
+  .viste-page .vt-hero__inner { width:calc(100% - 32px)!important;
+    padding:0 0 4.2dvh!important;
+    margin:0 auto!important; }
+  .viste-page .vt-hero .eyebrow { font-size:7.5px!important;margin-bottom:8px!important }
+  .viste-page .vt-hero h1 { font-size:clamp(31px,8.7vw,40px)!important;
+    line-height:.98!important;
+    max-width:10.5ch!important;
+    margin:8px 0 11px!important; }
+  .viste-page .vt-hero p { font-size:10.5px!important;
+    line-height:1.5!important;
+    max-width:39ch!important;
+    margin:0 0 14px!important; }
+  .viste-page .vt-hero__ctas { display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:7px!important; }
+  .viste-page .vt-hero__ctas .ghost-btn { min-height:36px!important;
+    padding:0 8px!important;
+    font-size:6.8px!important;
+    letter-spacing:.08em!important; }
+  .viste-page .vt-section { padding-top:58px!important;padding-bottom:58px!important }
+  .viste-page .section-head { margin-bottom:26px!important }
+  .viste-page .section-head h2 { margin-bottom:14px!important }
+  .viste-page .guide-showcase { margin-top:16px!important }
+  .viste-page .lab-auxiliar { width:24%!important;height:24%!important;left:27%!important;top:19%!important; }
+  .viste-page .lab-centro { width:38%!important;height:38%!important;top:7%!important }
+  .viste-page .wizard-grid--redesign { gap:16px!important }
+  .viste-page .wz-builder { margin-top:2px!important }
+  .viste-page .wz-step-card.is-mobile-current.is-complete .wz-options { display:none!important }
+  .viste-page .wz-step-card.is-mobile-current.is-complete>p { margin-bottom:4px!important }
+  .viste-page .wz-panel .wz-step-card.is-mobile-current { padding:17px 15px 18px!important }
+  .viste-page .wz-preview--redesign { margin-bottom:4px!important }
+  .viste-page .wz-preview--redesign .wz-stage { max-height:30dvh!important }
+  .viste-page .result-card--editorial { margin-bottom:18px!important }
+  .viste-page .wizard-grid--redesign { gap:22px!important }
+  .viste-page .wz-preview--redesign { margin-bottom:0!important }
+  .viste-page .wz-builder { margin-top:0!important;padding:16px!important }
+  .viste-page .wz-panel .wz-step-card.is-mobile-current { padding:19px 16px 20px!important }
+  .viste-page .wz-step-card h3 { margin-top:6px!important;margin-bottom:7px!important }
+  .viste-page .wz-mobile-nav { margin-top:15px!important;padding-top:13px!important }
+}
 {% endstylesheet %}
 
 {% javascript %}
@@ -952,27 +1107,27 @@
        solo el respaldo si la colección no tiene imagen en el admin. */
     var COLLECTIONS = {
       'aurora-blanca': {
-        tag: 'Serena · Luminosa', eyebrow: 'La base atemporal', ambient: 'assets/mesa_aurora_editorial.webp',
+        tag: 'Serena · Luminosa', eyebrow: 'La base atemporal', ambient: 'assets/sets/aurora-blanca/vajilla.webp',
         reason: 'Esmalte blanco roto y líneas suaves: la base atemporal sobre la que se dibuja todo lo demás. Perfecta para desayunos lentos y mesas serenas donde la vajilla acompaña sin alzar la voz.'
       },
       'ochavada-blanca': {
-        tag: 'Geométrica · Sobria', eyebrow: 'Modernidad de 1841', ambient: 'assets/scene-left-tableware.webp',
+        tag: 'Geométrica · Sobria', eyebrow: 'Modernidad de 1841', ambient: 'assets/sets/ochavada-blanca/vajilla.webp',
         reason: 'La silueta octogonal que nació moderna. Líneas limpias para mesas contemporáneas y bases despejadas, sin ornamento que sobre.'
       },
       'bellavista': {
-        tag: 'Luminosa · Equilibrada', eyebrow: 'Decorado sobre Aurora', ambient: 'assets/scene-left-tableware.webp',
+        tag: 'Luminosa · Equilibrada', eyebrow: 'Decorado sobre Aurora', ambient: 'assets/sets/bellavista/vajilla.webp',
         reason: 'Luminosa y equilibrada, donde la tradición y la contemporaneidad se encuentran. La vajilla que funciona igual de bien en una mesa de diario que en una puesta con intención.'
       },
       '202-rosa': {
-        tag: 'Clásica · Memoria', eyebrow: 'Emblema de la casa', ambient: 'assets/mesa_bodegon_lujo_el_renacer.webp',
+        tag: 'Clásica · Memoria', eyebrow: 'Emblema de la casa', ambient: 'assets/sets/202-rosa/vajilla.webp',
         reason: 'Paisajes suaves, motivos florales y grecas exquisitas en el rosa eterno de La Cartuja. Convierte cualquier celebración en un recuerdo que permanece.'
       },
       'negro-vistas': {
-        tag: 'Contraste · Carácter', eyebrow: 'Drama gráfico', ambient: 'assets/mesa_ochavada_negro_vistas.webp',
+        tag: 'Contraste · Carácter', eyebrow: 'Drama gráfico', ambient: 'assets/sets/negro-vistas/vajilla.webp',
         reason: 'Fondo negro profundo y vistas paisajísticas en blanco puro: clásico y moderno a la vez. Brilla en cenas especiales y sobre mesas oscuras.'
       },
       'ceilan': {
-        tag: 'Oriental · Andaluza', eyebrow: 'Grecas y palmeras', ambient: 'assets/ochavada_canasto_floral.jpg',
+        tag: 'Oriental · Andaluza', eyebrow: 'Grecas y palmeras', ambient: 'assets/sets/ceilan/vajilla.webp',
         reason: 'Motivos florales, palmeras y grecas orientales reinterpretadas con luz andaluza. Pide exterior, sobremesa larga y ganas de mirar el plato.'
       },
       'oaxaca': {
@@ -980,23 +1135,23 @@
         reason: 'Aves exóticas, vegetación tropical y color contemporáneo sobre tradición cerámica. Para mesas de exterior donde la vajilla es la fiesta.'
       },
       'negro-vistas-ash-blue': {
-        tag: 'De autor · Azul', eyebrow: 'Aaron Stewart Home', ambient: 'assets/mesa_ochavada_negro_vistas.webp',
+        tag: 'De autor · Azul', eyebrow: 'Aaron Stewart Home', ambient: 'assets/sets/negro-vistas-ash-blue/vajilla.webp',
         reason: 'La mirada de Aaron Stewart Home sobre uno de los decorados más sofisticados de la casa. Azul profundo para mesas que buscan conversación.'
       },
       'negro-vistas-ash-yellow': {
-        tag: 'De autor · Amarillo', eyebrow: 'Aaron Stewart Home', ambient: 'assets/mesa_aurora_oaxaca.webp',
+        tag: 'De autor · Amarillo', eyebrow: 'Aaron Stewart Home', ambient: 'assets/sets/negro-vistas-ash-yellow/vajilla.webp',
         reason: 'La fuerza de Negro Vistas reinterpretada desde una sensibilidad decorativa contemporánea. Amarillo cálido que pide madera oscura debajo.'
       },
       'flor-de-lis-azul': {
-        tag: 'Francesa · Intensa', eyebrow: 'Flor de Lis', ambient: 'assets/ochavada_canasto_floral.jpg',
+        tag: 'Francesa · Intensa', eyebrow: 'Flor de Lis', ambient: 'assets/sets/flor-de-lis-azul/vajilla.webp',
         reason: 'Un decorado de inspiración francesa con azul intenso sobre loza fina sevillana. Estructura y presencia para una comida con mantel.'
       },
       'flor-de-lis-rosa': {
-        tag: 'Cálida · Delicada', eyebrow: 'Flor de Lis', ambient: 'assets/ochavada_canasto_floral.jpg',
+        tag: 'Cálida · Delicada', eyebrow: 'Flor de Lis', ambient: 'assets/sets/flor-de-lis-rosa/vajilla.webp',
         reason: 'La flor de lis en un tono rosado, luminoso y delicado, lleno de calidez. Pide luz de mañana y mesas sin prisa.'
       },
       'viejo-molino': {
-        tag: 'Rural · Cálida', eyebrow: 'Archivo de la casa', ambient: 'assets/mesa_bodegon_lujo_el_renacer.webp',
+        tag: 'Rural · Cálida', eyebrow: 'Archivo de la casa', ambient: 'assets/sets/viejo-molino/vajilla.webp',
         reason: 'Una escena rural evocadora en tonos tierra, ocres y azules suaves. La mesa de campo bien puesta: natural, cálida y sin esfuerzo.'
       }
     };
@@ -1088,6 +1243,9 @@
     var tabsWrap = $('#resultTabs');
     var cardsWrap = $('#resultCards');
     var currentPhoto = elPhoto ? elPhoto.getAttribute('src') : '';
+    /* v98: en móvil el wizard muestra una pregunta por pantalla en vez del acordeón. */
+    var mobileWizardIndex = 0;
+    var isMobileWizard = function () { return window.matchMedia && window.matchMedia('(max-width: 760px)').matches; };
 
     function labelFor(key, id) {
       var Q = QUESTIONS.filter(function (q) { return q.key === key; })[0];
@@ -1164,6 +1322,19 @@
         var bar = document.createElement('span');
         progress.appendChild(bar);
       });
+      var builder = panel.closest('.wz-builder');
+      if (builder && !builder.querySelector('.wz-mobile-nav')) {
+        var nav = document.createElement('div');
+        nav.className = 'wz-mobile-nav';
+        nav.innerHTML = '<button type="button" class="wz-mobile-prev" aria-label="Pregunta anterior">← Pregunta anterior</button><span class="wz-mobile-step"></span>';
+        builder.appendChild(nav);
+        nav.querySelector('.wz-mobile-prev').addEventListener('click', function () {
+          mobileWizardIndex = Math.max(0, mobileWizardIndex - 1);
+          renderWizard();
+          var wizard = document.getElementById('wizard');
+          if (wizard) wizard.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+        });
+      }
       renderWizard();
     }
 
@@ -1188,7 +1359,10 @@
         var complete = !!answers[Q.key];
         s.classList.toggle('is-locked', !unlocked);
         s.classList.toggle('is-complete', complete);
-        s.classList.toggle('is-active', unlocked && idx === firstOpen);
+        var desktopActive = unlocked && idx === firstOpen;
+        var mobileActive = isMobileWizard() && idx === mobileWizardIndex;
+        s.classList.toggle('is-active', isMobileWizard() ? mobileActive : desktopActive);
+        s.classList.toggle('is-mobile-current', mobileActive);
         $$('button', s).forEach(function (btn) { btn.disabled = !unlocked; });
         $$('.wz-opt', s).forEach(function (btn) {
           var sel = answers[Q.key] === btn.dataset.id;
@@ -1206,6 +1380,13 @@
       if (miniStatus) {
         var count = Object.keys(answers).length;
         miniStatus.textContent = count ? count + ' de ' + totalSteps + ' respuestas' : 'Sin respuestas todavía';
+      }
+      var mnav = container.querySelector('.wz-mobile-nav');
+      if (mnav) {
+        var prevBtn = mnav.querySelector('.wz-mobile-prev');
+        var stepLabel = mnav.querySelector('.wz-mobile-step');
+        if (prevBtn) prevBtn.disabled = mobileWizardIndex <= 0;
+        if (stepLabel) stepLabel.textContent = 'Pregunta ' + (mobileWizardIndex + 1) + ' de ' + totalSteps;
       }
     }
 
@@ -1317,12 +1498,17 @@
         }
         answers[opt.dataset.key] = opt.dataset.id;
         if (resultSection) resultSection.hidden = true;
+        if (isMobileWizard()) mobileWizardIndex = Math.min(totalSteps - 1, idx + 1);
         updatePreview();
         renderWizard();
         var nextIdx = firstUnansweredIndex();
         var nextStep = nextIdx < totalSteps ? $('.wz-step[data-step="' + nextIdx + '"]', panel) : null;
-        if (nextStep) {
+        if (nextStep && !isMobileWizard()) {
           window.setTimeout(function () { nextStep.scrollIntoView({ behavior: scrollBehavior, block: window.innerWidth <= 1180 ? 'center' : 'nearest' }); }, 160);
+        }
+        if (isMobileWizard()) {
+          var wizardSection = document.getElementById('wizard');
+          if (wizardSection) window.setTimeout(function () { wizardSection.scrollIntoView({ behavior: scrollBehavior, block: 'start' }); }, 100);
         }
         if (nextIdx >= totalSteps) window.setTimeout(buildResult, 320);
       });
@@ -1402,7 +1588,7 @@
         var addLabel = cartItems.length > 1 ? 'Añadir las ' + cartItems.length + ' piezas' : 'Añadir a la cesta';
         var addAttrs = cartItems.length ? " data-items='" + JSON.stringify(cartItems) + "'" : '';
         return '<article class="result-card result-card--editorial' + (i === 0 ? ' active' : '') + '" data-card="' + item.id + '">' +
-          '<div class="result-ambient"><span class="result-ambient__tag">Recomendación 0' + (i + 1) + '</span><img src="' + (resolve(c.ambient) || c.ambient) + '" alt="Mesa vestida con ' + esc(c.name) + '" loading="lazy"></div>' +
+          '<div class="result-ambient"><span class="result-ambient__tag">Recomendación 0' + (i + 1) + '</span><img src="' + (resolve(c.ambient) || c.ambient) + '" alt="Carátula de la vajilla ' + esc(c.name) + '" loading="lazy"></div>' +
           '<div class="result-body"><span class="eyebrow">' + c.eyebrow + '</span><h3>' + esc(c.name) + '</h3><div class="result-match"><b>Ajuste visual</b><span class="match-number" data-match="' + item.pct + '">0%</span></div><p class="result-reason">' + c.reason + '</p><div class="result-products">' + prods + '</div><div class="result-ctas"><a class="ghost-btn solid" href="' + c.collectionUrl + '">Ver colección</a><a class="ghost-btn" href="' + c.featuredUrl + '">Ver pieza destacada</a><button class="ghost-btn" type="button" data-add="' + esc(c.name) + '"' + addAttrs + '>' + addLabel + '</button></div></div>' +
           '</article>';
       }).join('');

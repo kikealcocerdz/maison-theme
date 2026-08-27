@@ -162,7 +162,9 @@
 .tables-page .table-scene-block { display: grid; grid-template-columns: 1.1fr .9fr; gap: min(5vw, 76px); align-items: center; scroll-margin-top: 120px; }
 .tables-page .table-scene-block.reverse .table-scene-photo { order: 2; }
 .tables-page .table-scene-block.reverse .table-scene-product { order: 1; }
-.tables-page .table-scene-block.is-hidden { display: none; }
+/* !important a propósito: el bloque de v98 fija `display:grid!important` en móvil
+   y sin esto el filtro dejaría de ocultar escenas por debajo de 760px. */
+.tables-page .table-scene-block.is-hidden { display: none !important; }
 .tables-page .table-scene-photo { height: 640px; min-height: 640px; background: var(--ink-faint-20); position: relative; overflow: hidden; }
 .tables-page .table-scene-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 1000ms var(--ease-long); }
 .tables-page .table-scene-photo:hover img { transform: scale(1.025); }
@@ -223,6 +225,46 @@
   .tables-page .scene-hotspot { animation: none; }
   .tables-page .table-product-slot, .tables-page .table-scene-photo img { transition: none; }
 }
+
+/* ==========================================================================
+   v98 / v99 — Nuestras mesas en móvil.
+   Los filtros pasan a una píldora scrollable con snap y cada escena a un
+   módulo de 90dvh: foto arriba, producto debajo.
+   ========================================================================== */
+@media(max-width:760px) {
+  .tables-page { overflow-x:hidden!important;padding-top:calc(var(--header-h,64px) + 28px)!important }
+  .tables-hero { width:calc(100% - 28px)!important;margin:0 auto 28px!important;gap:14px!important }
+  .tables-hero h1 { font-size:clamp(38px,11vw,52px)!important }
+  .tables-hero>p { font-size:11.5px!important;line-height:1.65!important;margin:0!important }
+  .table-filters { width:calc(100% - 28px)!important;margin:0 auto 28px!important;padding:8px!important;border:1px solid rgba(15,26,46,.10)!important;border-radius:999px!important;background:#f7f7f5!important;display:flex!important;flex-wrap:nowrap!important;justify-content:flex-start!important;gap:7px!important;overflow-x:auto!important;scrollbar-width:none!important;scroll-snap-type:x proximity!important }
+  .table-filters::-webkit-scrollbar { display:none }
+  .table-filter { flex:0 0 auto!important;min-height:38px!important;padding:0 15px!important;border-radius:999px!important;background:#fff!important;border:1px solid rgba(15,26,46,.10)!important;scroll-snap-align:start!important;color:var(--ink-soft,#445066)!important }
+  .table-filter:after { display:none!important }
+  .table-filter.active { background:var(--ink,#0f1a2e)!important;color:#fff!important;border-color:var(--ink,#0f1a2e)!important }
+  .table-filter span { font-size:8.5px!important;letter-spacing:.12em!important }
+  .table-scenes-list { width:calc(100% - 28px)!important;margin:0 auto 70px!important;gap:28px!important }
+  .table-scene-block,.table-scene-block.reverse { height:90dvh!important;min-height:620px!important;max-height:820px!important;display:grid!important;grid-template-columns:1fr!important;grid-template-rows:minmax(0,1.08fr) minmax(0,.92fr)!important;gap:0!important;border:1px solid rgba(15,26,46,.10)!important;background:#fff!important;overflow:hidden!important }
+  .table-scene-block.reverse .table-scene-photo,.table-scene-block.reverse .table-scene-product { order:initial!important }
+  .table-scene-photo { width:100%!important;height:100%!important;min-height:0!important }
+  .table-scene-product { width:100%!important;height:100%!important;min-height:0!important;padding:16px 38px 18px!important;border-top:1px solid rgba(15,26,46,.10)!important;border-bottom:0!important;justify-content:center!important }
+  .table-shop-scene .table-product-link img { height:min(20dvh,150px)!important;margin:0 auto 8px!important }
+  .table-scene-product h2 { font-size:22px!important;margin:0 0 4px!important }
+  .table-product-note { display:none!important }
+  .table-product-lines { margin:9px 0 5px!important }
+  .table-shop-scene .table-scene-actions { display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important;margin-top:6px!important }
+  .table-shop-scene .table-scene-actions .ghost-btn:first-child { grid-column:1/-1!important }
+  .table-shop-scene .table-scene-actions .ghost-btn { width:100%!important;min-width:0!important;min-height:35px!important;padding:0 7px!important;font-size:7.5px!important;letter-spacing:.08em!important }
+    margin-left:auto!important;
+    margin-right:auto!important; }
+  .tables-page-body .table-filters { position:relative!important;
+    z-index:4!important;
+    scroll-behavior:smooth!important;
+    scroll-snap-type:x proximity!important;
+    -webkit-overflow-scrolling:touch!important; }
+  .tables-page-body .table-filter { cursor:pointer!important;
+    touch-action:manipulation!important; }
+  .tables-page-body .table-filter.active { box-shadow:0 8px 20px rgba(15,26,46,.12)!important; }
+}
 {% endstylesheet %}
 
 {% javascript %}
@@ -268,11 +310,24 @@
     var filters = [].slice.call(root.querySelectorAll('[data-table-filter]'));
     var blocks = [].slice.call(root.querySelectorAll('[data-table-type]'));
     filters.forEach(function (btn) {
+      btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
       btn.addEventListener('click', function () {
-        var type = btn.dataset.tableFilter;
-        filters.forEach(function (b) { b.classList.toggle('active', b === btn); });
-        blocks.forEach(function (block) { block.classList.toggle('is-hidden', type !== 'all' && block.dataset.tableType !== type); });
-      });
+        var type = btn.dataset.tableFilter || 'all';
+        filters.forEach(function (b) {
+          var active = b === btn;
+          b.classList.toggle('active', active);
+          b.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        blocks.forEach(function (block) {
+          var show = type === 'all' || block.dataset.tableType === type;
+          block.classList.toggle('is-hidden', !show);
+          block.setAttribute('aria-hidden', show ? 'false' : 'true');
+        });
+        /* v99: en móvil los filtros van en una tira scrollable — centra el pulsado. */
+        if (window.innerWidth <= 760) {
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }, { passive: true });
     });
 
     root.querySelectorAll('.table-shop-scene').forEach(initScene);

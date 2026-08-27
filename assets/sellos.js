@@ -29,6 +29,9 @@
 
 
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
+/* v99: por debajo de 700px el archivo deja de ser un scroll-theatre vertical y
+   pasa a un carrusel horizontal nativo con centrado por scroll. */
+const mobileArchive=()=>window.matchMedia('(max-width:700px)').matches;
 const story=document.getElementById('archivo');
 const viewport=document.getElementById('stampViewport');
 const track=document.getElementById('stampTrack');
@@ -87,7 +90,16 @@ function measure(){
   const first=track.children[0];
   const cardW=first.getBoundingClientRect().width||230;
   const pitch=cardW*1.05;
-  const perSeal=window.innerWidth<=700?185:245;
+  if(mobileArchive()){
+    const maxScroll=Math.max(1,viewport.scrollWidth-viewport.clientWidth);
+    metrics={storyTop:story.offsetTop,scrollDistance:maxScroll,cardW,pitch};
+    story.style.height='auto';
+    targetPos=localProgress()*Math.max(0,SEALS.length-1);
+    renderPos=targetPos;
+    placeTimelineTicks(); requestUpdate();
+    return;
+  }
+  const perSeal=245;
   const scrollDistance=Math.max(window.innerHeight,(SEALS.length-1)*perSeal);
   metrics={storyTop:story.offsetTop,scrollDistance,cardW,pitch};
   story.style.height=`${window.innerHeight+scrollDistance}px`;
@@ -95,9 +107,25 @@ function measure(){
   if(!Number.isFinite(renderPos))renderPos=targetPos;
   placeTimelineTicks(); requestUpdate();
 }
-function localProgress(){return clamp((window.scrollY-metrics.storyTop)/metrics.scrollDistance,0,1)}
+function localProgress(){
+  if(mobileArchive()){
+    const max=Math.max(1,viewport.scrollWidth-viewport.clientWidth);
+    return clamp(viewport.scrollLeft/max,0,1);
+  }
+  return clamp((window.scrollY-metrics.storyTop)/metrics.scrollDistance,0,1)
+}
 function scrollYForIndex(index){const denom=Math.max(1,SEALS.length-1);return metrics.storyTop+(clamp(index,0,SEALS.length-1)/denom)*metrics.scrollDistance}
 function scrollToIndex(index,behavior='smooth'){
+  index=clamp(index,0,SEALS.length-1);
+  if(mobileArchive()){
+    const item=track.children[index];
+    if(!item)return;
+    const left=item.offsetLeft-(viewport.clientWidth-item.offsetWidth)/2;
+    viewport.scrollTo({left,behavior:behavior==='instant'?'auto':'smooth'});
+    activeIndex=index;
+    setActive(index,index/Math.max(1,SEALS.length-1));
+    return;
+  }
   const y=scrollYForIndex(index);
   if(behavior==='instant'){cancelSnapAnimation();window.scrollTo(0,y);return;}
   animateScrollTo(y,560);
@@ -124,6 +152,7 @@ function animateScrollTo(y,duration=540){
 }
 function scheduleSnap(){
   clearTimeout(snapTimer);
+  if(mobileArchive())return;
   if(REDUCED)return;
   if(dragging||isAutoSnapping||drawer?.classList.contains('open'))return;
   const y=window.scrollY;
@@ -139,6 +168,22 @@ function scheduleSnap(){
 function paint(now=performance.now()){
   raf=0;if(!track)return;
   const progress=localProgress();
+  if(mobileArchive()){
+    const viewportCenter=viewport.scrollLeft+viewport.clientWidth/2;
+    let nearest=0,nearestDist=Infinity;
+    [...track.children].forEach((item,index)=>{
+      item.style.transform='';item.style.opacity='1';item.style.zIndex='1';
+      const center=item.offsetLeft+item.offsetWidth/2;
+      const distance=Math.abs(center-viewportCenter);
+      if(distance<nearestDist){nearestDist=distance;nearest=index;}
+    });
+    [...track.children].forEach((item,index)=>{
+      item.classList.toggle('is-active',index===nearest);
+      item.setAttribute('aria-current',index===nearest?'true':'false');
+    });
+    setActive(nearest,nearest/Math.max(1,SEALS.length-1));
+    return;
+  }
   targetPos=progress*Math.max(0,SEALS.length-1);
   const dt=Math.min(34,Math.max(8,now-lastPaint));lastPaint=now;
   const follow=REDUCED?1:1-Math.pow(.86,dt/16.67);
@@ -176,13 +221,15 @@ function requestUpdate(){if(!raf)raf=requestAnimationFrame(paint)}
 window.addEventListener('scroll',()=>{requestUpdate();scheduleSnap();},{passive:true,signal});
 window.addEventListener('wheel',()=>{clearTimeout(snapTimer);if(isAutoSnapping)cancelSnapAnimation();},{passive:true,signal});
 window.addEventListener('touchstart',()=>{clearTimeout(snapTimer);if(isAutoSnapping)cancelSnapAnimation();},{passive:true,signal});
+viewport?.addEventListener('scroll',()=>{if(mobileArchive())requestUpdate();},{passive:true});
 viewport?.addEventListener('pointermove',e=>{
+  if(mobileArchive())return;
   const r=viewport.getBoundingClientRect();pointer.x=clamp(((e.clientX-r.left)/r.width-.5)*2,-1,1);pointer.y=clamp(((e.clientY-r.top)/r.height-.5)*2,-1,1);pointer.active=true;if(!dragging)requestUpdate();
 });
 viewport?.addEventListener('pointerleave',()=>{pointer.active=false;requestUpdate();});
-viewport?.addEventListener('pointerdown',e=>{if(e.pointerType==='touch')return;cancelSnapAnimation();clearTimeout(snapTimer);dragging=true;dragMoved=false;dragStartX=e.clientX;dragStoryY=window.scrollY;viewport.classList.add('is-dragging');viewport.setPointerCapture(e.pointerId);});
-viewport?.addEventListener('pointermove',e=>{if(!dragging)return;const dx=e.clientX-dragStartX;if(Math.abs(dx)>5)dragMoved=true;const indexDelta=dx/metrics.pitch;const yPerIndex=metrics.scrollDistance/Math.max(1,SEALS.length-1);window.scrollTo(0,clamp(dragStoryY-indexDelta*yPerIndex,metrics.storyTop,metrics.storyTop+metrics.scrollDistance));});
-function endDrag(){if(!dragging)return;dragging=false;viewport?.classList.remove('is-dragging');const nearest=Math.round(localProgress()*Math.max(0,SEALS.length-1));animateScrollTo(scrollYForIndex(nearest),460);setTimeout(()=>dragMoved=false,0)}
+viewport?.addEventListener('pointerdown',e=>{if(mobileArchive()||e.pointerType==='touch')return;cancelSnapAnimation();clearTimeout(snapTimer);dragging=true;dragMoved=false;dragStartX=e.clientX;dragStoryY=window.scrollY;viewport.classList.add('is-dragging');viewport.setPointerCapture(e.pointerId);});
+viewport?.addEventListener('pointermove',e=>{if(mobileArchive()||!dragging)return;const dx=e.clientX-dragStartX;if(Math.abs(dx)>5)dragMoved=true;const indexDelta=dx/metrics.pitch;const yPerIndex=metrics.scrollDistance/Math.max(1,SEALS.length-1);window.scrollTo(0,clamp(dragStoryY-indexDelta*yPerIndex,metrics.storyTop,metrics.storyTop+metrics.scrollDistance));});
+function endDrag(){if(mobileArchive()||!dragging)return;dragging=false;viewport?.classList.remove('is-dragging');const nearest=Math.round(localProgress()*Math.max(0,SEALS.length-1));animateScrollTo(scrollYForIndex(nearest),460);setTimeout(()=>dragMoved=false,0)}
 viewport?.addEventListener('pointerup',endDrag);viewport?.addEventListener('pointercancel',endDrag);
 viewport?.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();scrollToIndex(activeIndex-1)}if(e.key==='ArrowRight'){e.preventDefault();scrollToIndex(activeIndex+1)}});
 progressTrack?.addEventListener('click',e=>{const r=progressTrack.getBoundingClientRect();const ratio=clamp((e.clientX-r.left)/r.width,0,1);const idx=Math.round(ratio*Math.max(0,SEALS.length-1));scrollToIndex(idx)});

@@ -338,6 +338,142 @@
 .heritage-page.is-static .global-ghost-title { display: none; }
 .heritage-page.is-static .frame, .heritage-page.is-static .card, .heritage-page.is-static .mag-card, .heritage-page.is-static .media { opacity: 1 !important; transform: none !important; filter: none !important; }
 .heritage-page.is-static .hero-history img, .heritage-page.is-static .hero-history .hero-video, .heritage-page.is-static .finale-bg img { animation: none; }
+
+/* ==========================================================================
+   v98 / v99 — Heritage en móvil.
+   El scroll-theatre por eras se apaga y cada hito se lee como un bloque
+   apilado: carrusel con todas sus imágenes (.mobile-era-*) y la nota debajo.
+   ========================================================================== */
+
+/* ===== v98-mobile-ux ===== */
+@media(max-width:760px) {
+  .heritage-timeline { display:none!important }
+  .era,.era-long { height:auto!important;min-height:0!important;padding:56px 16px!important;overflow:visible!important }
+  .era-stage { height:auto!important;min-height:0!important;position:relative!important;display:block!important }
+  .era-year { position:relative!important;left:auto!important;top:auto!important;transform:none!important;opacity:.14!important;filter:none!important;font-size:clamp(74px,22vw,120px)!important;line-height:.8!important;text-align:center!important;margin:0 0 24px!important }
+  .era-meta { position:relative!important;opacity:1!important;transform:none!important;width:100%!important;margin-bottom:18px!important }
+  .era-meta h2 { font-size:clamp(34px,10vw,48px)!important;line-height:1!important;max-width:100%!important }
+  .era-copy { position:relative!important;opacity:1!important;transform:none!important;width:100%!important;max-width:100%!important;margin-top:18px!important }
+  .heritage-finale { min-height:76dvh!important;height:auto!important;padding:52px 16px!important }
+}
+
+/* ===== v99-refinements ===== */
+@media(max-width:760px) {
+  .heritage-page-body .hero-history { height:78dvh!important;
+    min-height:560px!important; }
+  .heritage-page-body .hero-copy { inset:auto 16px 8dvh 16px!important;
+    width:auto!important;
+    padding:0!important;
+    text-align:center!important;
+    display:block!important; }
+  .heritage-page-body .hero-copy>div { width:100%!important }
+  .heritage-page-body .hero-copy .eyebrow { text-align:center!important }
+  .heritage-page-body .hero-copy h1 { font-size:clamp(50px,15vw,66px)!important;
+    line-height:.88!important;
+    text-align:center!important;
+    margin:14px auto 18px!important; }
+  .heritage-page-body .hero-copy p:not(.eyebrow) { max-width:34ch!important;
+    margin:0 auto!important;
+    font-size:12px!important;
+    line-height:1.6!important;
+    text-align:center!important; }
+  .heritage-page-body .scroll-hint { display:none!important }
+  .heritage-page-body .era,
+  .heritage-page-body .era.era-long { height:auto!important;
+    min-height:0!important;
+    padding:64px 16px 72px!important;
+    overflow:hidden!important; }
+  .heritage-page-body .era-stage { position:relative!important;
+    top:auto!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+    display:block!important; }
+  .heritage-page-body .era-year { position:relative!important;
+    left:auto!important;top:auto!important;
+    width:100%!important;
+    transform:none!important;
+    opacity:.11!important;
+    filter:none!important;
+    font-size:clamp(54px,16vw,82px)!important;
+    line-height:.9!important;
+    letter-spacing:-.035em!important;
+    text-align:center!important;
+    white-space:normal!important;
+    overflow-wrap:anywhere!important;
+    margin:0 auto 26px!important; }
+  .heritage-page-body .visual-block { position:relative!important;
+    left:auto!important;top:auto!important;
+    transform:none!important;
+    opacity:1!important;
+    filter:none!important;
+    width:100%!important;
+    max-width:520px!important;
+    margin:0 auto!important; }
+  .heritage-page-body .era-meta { display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    gap:16px!important;
+    margin:0 auto 26px!important;
+    text-align:center!important; }
+  .heritage-page-body .era-meta>div { display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    gap:10px!important; }
+  .heritage-page-body .era-meta .kicker { font-size:8px!important;text-align:center!important }
+  .heritage-page-body .era-meta>div>p:last-child { font-size:9px!important;
+    line-height:1.35!important;
+    letter-spacing:.08em!important;
+    text-align:center!important;
+    max-width:28ch!important; }
+  .heritage-page-body .era-meta h2 { width:100%!important;
+    max-width:14ch!important;
+    margin:0 auto!important;
+    font-size:clamp(31px,9.4vw,43px)!important;
+    line-height:1.02!important;
+    text-align:center!important; }
+  .heritage-page-body .mobile-era-media { width:100%!important;
+    display:block!important;
+    transform:none!important; }
+  .heritage-page-body .mobile-era-carousel { width:100%!important;margin:0 auto!important }
+  .heritage-page-body .mobile-era-carousel .cframe { width:100%!important;
+    height:min(62dvh,490px)!important;
+    min-height:320px!important;
+    background:transparent!important; }
+  .heritage-page-body .mobile-era-carousel .cslide { position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    opacity:0!important;
+    pointer-events:none!important; }
+  .heritage-page-body .mobile-era-carousel .cslide.active { opacity:1!important;pointer-events:auto!important }
+  .heritage-page-body .mobile-era-carousel .cslide img { width:100%!important;
+    height:100%!important;
+    max-height:none!important;
+    object-fit:contain!important;
+    object-position:center!important; }
+  .heritage-page-body .mobile-era-carousel .carousel-bar { margin:10px auto 0!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:22px!important; }
+  .heritage-page-body .mobile-era-carousel .ccount { font-size:8px!important }
+  .heritage-page-body .mobile-era-carousel .carrows { display:flex!important;gap:8px!important }
+  .heritage-page-body .mobile-era-carousel .cbtn { width:40px!important;height:40px!important;border:1px solid currentColor!important;border-radius:999px!important; }
+  .heritage-page-body .mobile-era-note { margin:26px auto 0!important;
+    max-width:40ch!important;
+    text-align:center!important;
+    font-size:12px!important;
+    line-height:1.65!important; }
+  .heritage-page-body .mobile-era-note .note-cap { margin-bottom:11px!important;
+    font-size:8px!important;
+    letter-spacing:.16em!important;
+    text-transform:uppercase!important;
+    opacity:.65!important; }
+  .heritage-page-body .mobile-era-note p { margin:0 0 10px!important }
+  .heritage-page-body .heritage-finale { padding:64px 16px!important;min-height:70dvh!important }
+  .heritage-page-body .finale-panel { text-align:center!important;margin:0 auto!important }
+}
 {% endstylesheet %}
 
 {% javascript %}
@@ -411,6 +547,8 @@
     var mixArr = function (a, b, t) { return a.map(function (v, i) { return Math.round(lerp(v, b[i], t)); }); };
     var rgb = function (a) { return a.join(','); };
     function toneForEra(i) { return Math.floor(((eras[i] && eras[i].group) || 0) % 2) === 1 ? dark : light; }
+    /* v98/v99: en móvil el teatro de scroll se apaga y cada era se lee apilada. */
+    var mobileHeritage = window.matchMedia('(max-width: 760px)').matches;
 
     function im(src, alt) { return '<img src="' + resolve(src) + '" alt="' + (alt || 'La Cartuja de Sevilla') + '" loading="lazy">'; }
     function f(src, cls) { return '<div class="frame ' + (cls || '') + '">' + im(src) + '</div>'; }
@@ -428,7 +566,20 @@
     }
     function note(e, cls) { return '<div class="comp-note ' + (cls || '') + '"><p class="note-cap">' + e.cap + '</p><p>' + e.text + '</p><p class="cn-2">' + e.more + '</p></div>'; }
 
+    function allEraImages(e) {
+      var sources = [];
+      ['a', 'b', 'c', 'd'].forEach(function (k) { if (e[k]) sources.push(e[k]); });
+      ['car', 'car2', 'car3'].forEach(function (k) { if (Array.isArray(e[k])) sources.push.apply(sources, e[k]); });
+      return sources.filter(function (v, i) { return v && sources.indexOf(v) === i; });
+    }
+
+    function mobileMediaHtml(e) {
+      return '<div class="media mobile-era-media">' + car(allEraImages(e), 'mobile-era-carousel', 'contain') +
+        '<div class="mobile-era-note"><p class="note-cap">' + e.cap + '</p><p>' + e.text + '</p><p>' + e.more + '</p></div></div>';
+    }
+
     function mediaHtml(e) {
+      if (mobileHeritage) return mobileMediaHtml(e);
       switch (e.layout) {
         case 'territorio':
           return '<div class="media comp comp-territorio">' + f(e.a, 't-a') + f(e.b, 't-b') + note(e, 't-note') + '</div>';
@@ -460,6 +611,13 @@
       sec.id = 'era-' + e.id;
       sec.dataset.index = i;
       sec.setAttribute('data-screen-label', e.label);
+      if (mobileHeritage) {
+        var t = toneForEra(i);
+        sec.style.setProperty('--bg', rgb(t.bg));
+        sec.style.setProperty('--fg', rgb(t.fg));
+        sec.style.backgroundColor = 'rgb(' + rgb(t.bg) + ')';
+        sec.style.color = 'rgb(' + rgb(t.fg) + ')';
+      }
       sec.innerHTML = '<div class="era-stage"><div class="era-year">' + e.year + '</div><div class="visual-block visual-' + e.layout + '" data-layout="' + e.layout + '"><div class="era-meta"><div><p class="kicker">' + e.kicker + '</p><p>' + e.year + '</p></div><h2>' + e.heading + '</h2></div>' + mediaHtml(e) + '</div></div>';
       main.appendChild(sec);
       timeline.insertAdjacentHTML('beforeend', '<a class="tl" href="#era-' + e.id + '"><span>' + e.label + '</span><small>' + e.year + '</small></a>');
@@ -610,6 +768,12 @@
     function update() {
       var max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
       if (progressBar) progressBar.style.width = (scrollY / max) * 100 + '%';
+      if (mobileHeritage) {
+        var mst = state();
+        setTheme(mst.active, 0, 0);
+        tlLinks.forEach(function (a, i) { a.classList.toggle('active', i === mst.timelineIndex); });
+        return;
+      }
       sections.forEach(function (s) {
         var r = s.getBoundingClientRect();
         phaseStyles(s, clamp((-r.top) / Math.max(1, r.height - innerHeight)));

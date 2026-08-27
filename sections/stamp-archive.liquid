@@ -515,6 +515,186 @@
   }
 }
 
+
+/* ==========================================================================
+   v96 / v98 / v99 — Archivo de sellos.
+   En ventanas de poca altura el sello activo deja de invadir el pie de texto;
+   en móvil (<=700px) el coverflow pasa a scroll horizontal nativo con snap y
+   el archivo cabe en un solo viewport.
+   ========================================================================== */
+
+/* ===== v96-experience ===== */
+@media (min-width:701px) and (max-height:840px) {
+  .stamp-archive-head { z-index:280!important;
+    top:calc(var(--header-h) + 8px)!important;
+    padding-bottom:9px!important; }
+  .stamp-archive-title { position:relative;z-index:2;padding:6px 20px 8px 0;
+    background:linear-gradient(90deg,#071b48 0%,#071b48 78%,rgba(7,27,72,0) 100%) }
+  .stamp-coverflow-viewport { top:calc(var(--header-h) + 142px)!important;
+    bottom:74px!important; }
+  .stamp-coverflow-track { top:8%!important }
+  .stamp-horizontal-story { --seal-card-w:clamp(150px,25vh,198px)!important }
+  .stamp-active-caption { top:55%!important }
+  .stamp-caption-period { font-size:clamp(23px,1.9vw,32px)!important }
+  .stamp-caption-desc { font-size:10px!important;line-height:1.5!important;-webkit-line-clamp:3!important }
+  .stamp-era-menu button { height:31px!important;min-width:56px!important;font-size:8px!important }
+  .stamp-timeline-wrap { bottom:10px!important }
+}
+@media (min-width:701px) and (max-height:680px) {
+  .stamp-coverflow-viewport { top:calc(var(--header-h) + 130px)!important;bottom:60px!important }
+  .stamp-horizontal-story { --seal-card-w:clamp(138px,23vh,170px)!important }
+  .stamp-coverflow-track { top:4%!important }
+  .stamp-active-caption { top:53%!important }
+  .stamp-caption-desc { -webkit-line-clamp:2!important }
+  .stamp-timeline-wrap { bottom:6px!important }
+}
+@media (min-width:701px) and (max-height:820px) {
+  .stamp-horizontal-story { --seal-card-w:clamp(145px,23vh,188px)!important }
+  .stamp-archive-head { top:calc(var(--header-h) + 4px)!important }
+  .stamp-archive-title h2 { font-size:clamp(24px,2.1vw,34px)!important;line-height:.95!important }
+  .stamp-era-menu button { height:29px!important;min-width:52px!important;padding:0 10px!important;font-size:8px!important }
+  .stamp-coverflow-viewport { top:calc(var(--header-h) + 105px)!important;bottom:60px!important }
+  .stamp-coverflow-track { top:9%!important }
+  .stamp-active-caption { top:calc(9% + var(--seal-card-w) + 16px)!important }
+  .stamp-caption-period { font-size:clamp(21px,1.8vw,30px)!important;line-height:1!important }
+  .stamp-caption-desc { margin-top:10px!important;font-size:9.5px!important;line-height:1.45!important;-webkit-line-clamp:2!important;max-width:620px!important }
+  .stamp-timeline-wrap { bottom:6px!important }
+  .stamp-scroll-cue { display:none!important }
+}
+@media (min-width:701px) and (max-height:620px) {
+  .stamp-horizontal-story { --seal-card-w:clamp(118px,21vh,145px)!important }
+  .stamp-coverflow-viewport { top:calc(var(--header-h) + 92px)!important;bottom:52px!important }
+  .stamp-coverflow-track { top:6%!important }
+  .stamp-active-caption { top:calc(6% + var(--seal-card-w) + 10px)!important }
+  .stamp-caption-period { font-size:20px!important }
+  .stamp-caption-desc { display:none!important }
+  .stamp-era-menu button { height:26px!important;min-width:48px!important;font-size:7px!important }
+}
+
+/* ===== v98-mobile-ux ===== */
+@media(max-width:760px) {
+  .stamp-hero { min-height:calc(100dvh - var(--header-h,64px))!important;height:auto!important;padding:0 18px!important;display:flex!important;align-items:flex-start!important }
+  .stamp-hero-copy { position:relative!important;left:auto!important;right:auto!important;top:auto!important;transform:none!important;width:100%!important;max-width:100%!important;padding-top:clamp(74px,12dvh,110px)!important;margin:0!important;text-align:left!important }
+  .stamp-hero-copy h1 { font-size:clamp(38px,11vw,54px)!important;line-height:.98!important;max-width:10.5ch!important;margin:0 0 16px!important }
+  .stamp-hero-copy p { font-size:11.5px!important;line-height:1.62!important;max-width:35ch!important;margin:0!important }
+  .stamp-hero-premium { min-height:calc(100dvh - var(--header-h,64px))!important;height:auto!important;padding:0!important;display:block!important;background-position:64% center!important;overflow:hidden!important }
+  .stamp-hero-premium .stamp-hero-copy { position:relative!important;left:auto!important;right:auto!important;top:auto!important;transform:none!important;width:calc(100% - 36px)!important;max-width:none!important;min-height:0!important;padding:clamp(76px,12dvh,112px) 0 42px!important;margin:0 auto!important;text-align:left!important;display:block!important }
+  .stamp-hero-premium .stamp-hero-copy h1 { width:100%!important;max-width:10.8ch!important;font-size:clamp(38px,11vw,52px)!important;line-height:.98!important;letter-spacing:-.025em!important;margin:0 0 16px!important }
+  .stamp-hero-premium .stamp-hero-copy .stamp-intro { width:100%!important;max-width:35ch!important;font-size:11.5px!important;line-height:1.62!important;margin:0!important }
+  .stamp-hero-stage { display:none!important }
+}
+
+/* ===== v99-refinements ===== */
+@media(max-width:760px) {
+  .stamps-page-body .stamp-hero-premium { height:60dvh!important;
+    min-height:440px!important;
+    max-height:560px!important;
+    display:flex!important;
+    align-items:center!important; }
+  .stamps-page-body .stamp-hero-premium .stamp-hero-copy { width:calc(100% - 36px)!important;
+    max-width:420px!important;
+    margin:0 auto!important;
+    padding:var(--header-h,64px) 0 0!important;
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:center!important;
+    min-height:100%!important; }
+  .stamps-page-body .stamp-hero-premium .stamp-hero-copy h1 { width:100%!important;
+    max-width:10.5ch!important;
+    font-size:clamp(34px,9.8vw,44px)!important;
+    line-height:1!important;
+    margin:0 0 15px!important; }
+  .stamps-page-body .stamp-hero-premium .stamp-hero-copy .stamp-intro { width:100%!important;
+    max-width:32ch!important;
+    font-size:12px!important;
+    line-height:1.58!important; }
+  .stamps-page-body .stamp-horizontal-story { height:auto!important;
+    min-height:0!important;
+    --seal-card-w:min(68vw,250px)!important; }
+  .stamps-page-body .stamp-scroll-pin { position:relative!important;
+    top:auto!important;
+    height:auto!important;
+    min-height:82dvh!important;
+    overflow:hidden!important;
+    padding:28px 0 24px!important; }
+  .stamps-page-body .stamp-scroll-pin:before { inset:0!important }
+  .stamps-page-body .stamp-scroll-pin:after { inset:0!important }
+  .stamps-page-body .stamp-archive-head { position:relative!important;
+    left:auto!important;right:auto!important;top:auto!important;
+    transform:none!important;
+    width:calc(100% - 32px)!important;
+    margin:0 auto 8px!important; }
+  .stamps-page-body .stamp-era-menu { display:flex!important;
+    width:100%!important;
+    overflow-x:auto!important;
+    gap:7px!important;
+    padding:2px 0 8px!important;
+    scroll-snap-type:x proximity!important; }
+  .stamps-page-body .stamp-era-menu button { scroll-snap-align:start!important }
+  .stamps-page-body .stamp-coverflow-viewport { position:relative!important;
+    left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+    width:100%!important;
+    height:42dvh!important;
+    min-height:330px!important;
+    max-height:420px!important;
+    margin:6px 0 0!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    perspective:none!important;
+    cursor:grab!important;
+    touch-action:pan-x!important;
+    scroll-snap-type:x mandatory!important;
+    scroll-behavior:smooth!important;
+    -webkit-overflow-scrolling:touch!important;
+    scrollbar-width:none!important; }
+  .stamps-page-body .stamp-coverflow-viewport::-webkit-scrollbar { display:none!important }
+  .stamps-page-body .stamp-coverflow-track { position:relative!important;
+    left:auto!important;right:auto!important;top:auto!important;
+    width:max-content!important;
+    height:100%!important;
+    display:flex!important;
+    align-items:center!important;
+    gap:16px!important;
+    padding:0 calc(50vw - (var(--seal-card-w) / 2))!important;
+    transform:none!important;
+    transform-style:flat!important; }
+  .stamps-page-body .stamp-item { position:relative!important;
+    left:auto!important;top:auto!important;
+    flex:0 0 var(--seal-card-w)!important;
+    width:var(--seal-card-w)!important;
+    height:var(--seal-card-w)!important;
+    transform:none!important;
+    opacity:1!important;
+    scroll-snap-align:center!important; }
+  .stamps-page-body .stamp-item.is-active { transform:scale(1.02)!important }
+  .stamps-page-body .stamp-active-caption { position:relative!important;
+    left:auto!important;right:auto!important;top:auto!important;
+    transform:none!important;
+    width:calc(100% - 36px)!important;
+    min-height:122px!important;
+    margin:5px auto 52px!important;
+    padding:0!important; }
+  .stamps-page-body .stamp-caption-period { font-size:28px!important;text-align:center!important }
+  .stamps-page-body .stamp-caption-desc { max-width:38ch!important;
+    margin:12px auto 0!important;
+    font-size:11.5px!important;
+    line-height:1.55!important;
+    text-align:center!important;
+    -webkit-line-clamp:4!important; }
+  .stamps-page-body .stamp-timeline-wrap { position:absolute!important;
+    left:16px!important;right:16px!important;bottom:14px!important;
+    transform:none!important;
+    width:auto!important; }
+  .stamps-page-body .stamp-scroll-cue { display:none!important }
+}
+@media(max-width:420px) {
+  .stamps-page-body .stamp-hero-premium { height:58dvh!important;min-height:420px!important }
+  .stamps-page-body .stamp-hero-premium .stamp-hero-copy h1 { font-size:clamp(32px,9.5vw,39px)!important }
+}
+@media(max-width:760px) {
+  .stamps-page-body .stamp-scroll-pin { min-height:0!important;height:auto!important }
+  .stamps-page-body .stamp-active-caption { margin-bottom:56px!important }
+}
 {% endstylesheet %}
 
 {% javascript %}
