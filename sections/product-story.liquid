@@ -59,6 +59,21 @@
   .product-story-card::before { animation: none; }
   .product-story-media { transition: none; }
 }
+
+/* v96 / v98 — la tarjeta editorial deja de ser un bloque de altura fija en móvil:
+   la foto ocupa media pantalla y el texto va debajo. */
+@media (max-width: 780px) {
+  .product-story { width: calc(100vw - 28px) !important; }
+  .product-story-card { grid-template-columns: 1fr !important; }
+  .product-story-media { min-height: 320px !important; }
+}
+
+@media (max-width: 760px) {
+  .product-story-card { display: grid !important; min-height: 0 !important; }
+  .product-story-media { height: 48dvh !important; min-height: 300px !important; }
+  .product-story-copy { padding: 28px 20px 34px !important; }
+  .product-story-copy h2 { font-size: 34px !important; line-height: 1 !important; }
+}
 {% endstylesheet %}
 
 {% schema %}

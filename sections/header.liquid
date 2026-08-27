@@ -312,10 +312,51 @@
   .nav-right { gap: 18px; }
 }
 
-@media (max-width: 680px) {
-  .nav { height: var(--header-h); padding-top: 6px; }
-  .logo { height: 34px; }
-  .nav-right a { display: none; }
+/* v96: barra móvil con safe-area y objetivos táctiles de 44px. Buscar y cesta
+   siguen visibles (antes se ocultaba todo .nav-right en móvil). */
+@media (max-width: 780px) {
+  .nav {
+    width: calc(100vw - 28px);
+    height: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+    padding-top: env(safe-area-inset-top, 0px);
+    align-items: center;
+  }
+
+  .nav-left,
+  .nav-right {
+    gap: 12px;
+    transform: translateY(-2px);
+  }
+
+  .menu-trigger {
+    gap: 7px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
+
+  .hamb { transform: scale(0.86); }
+
+  .logo,
+  .logo img {
+    height: 42px;
+    max-height: 42px;
+  }
+
+  .nav-right > a:last-child {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .menu-trigger,
+  .search-link,
+  .nav-right > a:last-child {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .search-link { width: 40px; height: 40px; }
 }
 {% endstylesheet %}
 

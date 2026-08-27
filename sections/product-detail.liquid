@@ -529,6 +529,128 @@
   .product-set-pack-intro { margin-bottom: 20px; }
   .product-set-include-card { flex-basis: 148px; }
 }
+
+/* ==========================================================================
+   v96 / v98 — PDP en móvil: la columna sticky de tres paneles se convierte en
+   una sola columna. En 761–780px la foto va primero (v96); a partir de 760px
+   manda v98 y el orden pasa a título → foto → compra.
+   Las clases del mock `ceilan-*` son aquí `product-set-*`.
+   ========================================================================== */
+@media (max-width: 780px) {
+  .product-page { width: 100% !important; max-width: 100% !important; overflow-x: clip !important; }
+  .product-breadcrumbs,
+  .product-set-breadcrumb-bar { padding-top: 12px !important; }
+
+  .product-page .product-detail {
+    width: calc(100% - 28px) !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    padding-top: 14px !important;
+  }
+
+  .product-page .product-gallery-panel,
+  .product-page .product-title-panel,
+  .product-page .product-info-panel { width: 100% !important; min-width: 0 !important; max-width: 100% !important; }
+  .product-page .product-gallery-panel { order: 1 !important; }
+  .product-page .product-title-panel { order: 2 !important; }
+  .product-page .product-info-panel { order: 3 !important; }
+
+  .product-page .product-title-sticky { padding: 26px 2px 20px !important; text-align: left !important; }
+  .product-page .product-title-sticky h1 { font-size: clamp(34px, 10vw, 48px) !important; line-height: 0.96 !important; }
+  .product-page .product-short { font-size: 12px !important; line-height: 1.68 !important; max-width: 95% !important; }
+  .product-page .product-info-sticky { padding: 0 !important; min-height: 0 !important; }
+
+  .product-page .product-main-media {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: min(62dvh, 510px) !important;
+    min-height: 360px !important;
+    background: #eeeff1 !important;
+    margin: 0 !important;
+  }
+
+  .product-page .product-main-media .product-gallery-slide { object-fit: contain !important; object-position: center !important; background: #eeeff1 !important; }
+
+  .product-page .product-buy-block {
+    position: sticky !important;
+    bottom: 0 !important;
+    z-index: 45 !important;
+    background: rgba(255, 255, 255, 0.97) !important;
+    padding: 12px 0 calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+    margin-top: 8px !important;
+    border-top: 1px solid rgba(15, 26, 46, 0.10) !important;
+    box-shadow: 0 -10px 30px rgba(15, 26, 46, 0.05) !important;
+  }
+
+  .product-page .piece-color-row,
+  .product-page .piece-dimension-row { min-height: 48px !important; padding: 13px 0 !important; }
+  .product-page .product-accordion button { min-height: 50px !important; padding: 14px 0 !important; }
+  .product-page .product-accordion > div > p { font-size: 11.5px !important; line-height: 1.65 !important; }
+  .product-page .product-price-large { font-size: 25px !important; }
+  .product-page .add-to-bag { height: 50px !important; }
+  .product-page .bundle-options { gap: 6px !important; }
+  .product-page .bundle-option { min-height: 40px !important; padding: 0 12px !important; font-size: 9px !important; }
+
+  .product-page .product-set-price-row { gap: 10px !important; align-items: center !important; }
+  .product-page .product-set-pack {
+    width: calc(100% - 28px) !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 46px 0 !important;
+  }
+  .product-page .product-set-includes-list {
+    grid-auto-columns: min(72vw, 270px) !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overscroll-behavior-inline: contain !important;
+  }
+
+  .product-lightbox { grid-template-columns: 1fr !important; }
+  .product-lightbox .lightbox-thumbs { display: none !important; }
+  .product-lightbox .lightbox-scroll figure img { width: 94vw !important; height: 88dvh !important; object-fit: contain !important; }
+}
+
+@media (max-width: 760px) {
+  .product-page { overflow-x: hidden !important; }
+
+  .product-page .product-detail {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding-top: 18px !important;
+  }
+
+  .product-page .product-title-panel,
+  .product-page .product-gallery-panel,
+  .product-page .product-info-panel { height: auto !important; max-height: none !important; min-height: 0 !important; position: relative !important; }
+  .product-page .product-title-sticky,
+  .product-page .product-info-sticky { position: relative !important; top: auto !important; transform: none !important; height: auto !important; min-height: 0 !important; }
+
+  .product-page .product-title-panel { order: 1 !important; }
+  .product-page .product-gallery-panel { order: 2 !important; }
+  .product-page .product-info-panel { order: 3 !important; }
+
+  .product-page .product-title-panel h1 { font-size: clamp(36px, 11vw, 50px) !important; line-height: 0.96 !important; margin-bottom: 12px !important; }
+  .product-page .product-short { font-size: 11.5px !important; line-height: 1.65 !important; max-width: 46ch !important; }
+
+  .product-page .product-main-media { height: auto !important; aspect-ratio: 4 / 5 !important; min-height: 0 !important; max-height: none !important; overflow: hidden !important; }
+  .product-page .product-gallery-slide { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center !important; }
+
+  .product-page .product-buy-block { position: relative !important; bottom: auto !important; margin-top: 14px !important; }
+  .product-page .piece-color-row,
+  .product-page .piece-dimension-row { padding: 13px 0 !important; }
+  .product-page .product-accordion button { padding: 13px 0 !important; }
+  .product-page .product-set-pack { overflow: hidden !important; }
+}
 {% endstylesheet %}
 
 {% javascript %}

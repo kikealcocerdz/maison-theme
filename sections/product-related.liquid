@@ -64,6 +64,29 @@
 @media (max-width: 1180px) { .product-related .related-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 720px) { .product-related .related-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 12px; } }
 .product-related .product { cursor: pointer; }
+
+/* v96 / v98 — mismas proporciones de tarjeta que el listado en móvil. */
+@media (max-width: 780px) {
+  .product-related { width: calc(100vw - 28px) !important; }
+  .product-related .related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 28px 10px !important; }
+  .product-related .product-media { aspect-ratio: 4 / 5 !important; }
+  .product-related .product-info { margin-top: 9px !important; gap: 4px 8px !important; font-size: 10px !important; }
+  .product-related .product-info h3 { font-size: 10px !important; line-height: 1.32 !important; }
+  .product-related .product-info p { font-size: 8px !important; line-height: 1.35 !important; }
+  .product-related .price { font-size: 10px !important; }
+  .product-related .fav { width: 32px !important; height: 32px !important; right: 6px !important; top: 5px !important; }
+}
+
+@media (max-width: 760px) {
+  .product-related .related-grid { gap: 24px 10px !important; }
+  .product-related .related-grid .product-media { overflow: hidden !important; }
+  .product-related .related-grid .product-media img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
+}
+
+@media (max-width: 420px) {
+  .product-related .related-grid { gap: 24px 8px !important; }
+  .product-related .product-info h3 { font-size: 9.5px !important; }
+}
 {% endstylesheet %}
 
 {% javascript %}

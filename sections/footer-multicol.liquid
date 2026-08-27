@@ -64,10 +64,8 @@
 
   <div class="footer-bottom">
     <span class="footer-locale">
-      {{ localization.country.name }}
       {%- if localization.available_languages.size > 1 -%}
         {%- comment -%} Conmutador real de idioma: funciona sin JS. {%- endcomment -%}
-        <span aria-hidden="true"> / </span>
         {%- form 'localization', class: 'footer-language-form' -%}
           <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
           {%- for lang in localization.available_languages -%}
@@ -138,26 +136,49 @@
   color: var(--ink);
 }
 
+/* Redes: pastilla circular con filete, sin cambio de color al hover (v96 lo introdujo
+   y v98 lo revirtió — aquí va ya el estado final). Instagram es de trazo; el resto,
+   de relleno. Se seleccionan por aria-label porque los iconos son condicionales. */
 .footer-social {
   display: flex;
-  gap: 14px;
+  align-items: center;
+  gap: 9px;
   margin-top: 22px;
 }
 
 .footer-social a {
-  display: block;
-  width: 22px;
-  height: 22px;
-  color: var(--ink-soft);
-  transition: color 0.3s var(--ease);
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
 }
 
-.footer-social a:hover { color: var(--ink); }
-
 .footer-social svg {
-  width: 100%;
-  height: 100%;
   display: block;
+  width: 15px;
+  height: 15px;
+  margin: auto;
+  overflow: visible;
+}
+
+.footer-social a[aria-label="Instagram"] svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.55;
+}
+
+.footer-social a:not([aria-label="Instagram"]) svg {
+  fill: currentColor;
+  stroke: none;
 }
 
 .footer-grid h4 {
@@ -190,8 +211,8 @@
 
 .footer-locale {
   display: inline-flex;
-  align-items: baseline;
-  gap: 2px;
+  align-items: center;
+  gap: 7px;
 }
 
 .footer-language-form { display: inline; }
@@ -252,10 +273,52 @@
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
+/* v96: en móvil el logo ocupa el ancho y las 3 columnas de nav se compactan. */
+@media (max-width: 780px) {
+  .site-footer { overflow-x: hidden; }
+
+  .footer-grid {
+    width: calc(100% - 28px);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px 14px;
+    align-items: start;
+  }
+
+  .footer-logo { grid-column: 1 / -1; }
+
+  .footer-grid h4 {
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+
+  .footer-grid > div:not(.footer-logo) a {
+    font-size: 9.5px;
+    line-height: 1.35;
+    margin-bottom: 9px;
+    word-break: normal;
+  }
+}
+
+@media (max-width: 760px) {
+  .footer-social {
+    width: max-content;
+    max-width: 100%;
+    gap: 7px;
+  }
+
+  .footer-social a { width: 28px; height: 28px; }
+  .footer-social svg { width: 12.5px; height: 12.5px; }
+}
+
 @media (max-width: 680px) {
-  .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { display: grid; gap: 12px; }
   .footer-legal-links { gap: 14px 22px; }
+}
+
+@media (max-width: 420px) {
+  .footer-grid { gap: 24px 10px; }
+  .footer-grid > div:not(.footer-logo) a { font-size: 8.7px; }
 }
 {% endstylesheet %}
 

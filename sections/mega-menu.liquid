@@ -211,9 +211,55 @@ a.mega-row:focus-visible::before,
   .mega-inner > div:not(.mega-card) { border-right: 0; padding-right: 0; }
 }
 
-@media (max-width: 680px) {
-  .mega { top: var(--header-h); }
-  .mega-inner { grid-template-columns: 1fr; padding: 32px 0; gap: 28px; }
+/* v96: el mega móvil pasa a 2 columnas (antes 1) para no obligar a un scroll eterno,
+   con safe-area arriba y abajo y scroll contenido dentro del panel. */
+@media (max-width: 780px) {
+  .mega {
+    top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+    max-height: calc(100dvh - var(--header-h) - env(safe-area-inset-top, 0px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .mega-inner {
+    width: calc(100vw - 30px);
+    padding: 24px 0 calc(26px + env(safe-area-inset-bottom, 0px));
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px 18px;
+  }
+
+  .mega-inner > div { min-width: 0; }
+
+  .mega h3 {
+    font-size: 22px;
+    margin-bottom: 13px;
+  }
+
+  .mega ul { gap: 7px; }
+
+  .mega li a {
+    font-size: 9px;
+    line-height: 1.35;
+    letter-spacing: 0.045em;
+    padding: 7px 0;
+    align-items: flex-start;
+  }
+
+  .mega-card { padding: 10px; }
+  .mega-card img { height: 112px; }
+
+  .mega-card p {
+    font-size: 18px;
+    margin: 12px 0 10px;
+  }
+
+  .mega-card .cta { font-size: 8px; }
+}
+
+@media (max-width: 420px) {
+  .mega-inner { gap: 22px 14px; }
+  .mega h3 { font-size: 20px; }
 }
 {% endstylesheet %}
 

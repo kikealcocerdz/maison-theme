@@ -50,9 +50,15 @@
     }
   }
 
-  @media (max-width: 680px) {
+  {%- comment -%} v96: la barra móvil arranca a 780px, no a 680. {%- endcomment -%}
+  @media (max-width: 780px) {
     :root {
       --header-h: {{ settings.header_height_mobile }}px;
+    }
+  }
+
+  @media (max-width: 680px) {
+    :root {
       --content: calc(100vw - 32px);
     }
   }

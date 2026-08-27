@@ -16,6 +16,10 @@
       "settings": {
         "tagline": "Heritage crafted for modern living",
         "tagline_bottom": "© La Cartuja de Sevilla",
+        "social_instagram": "https://www.instagram.com/cartujadesevilla/",
+        "social_facebook": "https://www.facebook.com/lacartujadesevillapickman/",
+        "social_tiktok": "https://www.tiktok.com/@lacartujadesevilla",
+        "social_linkedin": "https://www.linkedin.com/company/la-cartuja-de-sevilla",
         "legal_items": "Aviso legal | /pages/aviso-legal\nPolítica de privacidad | /pages/politica-privacidad\nPolítica de cookies | /pages/politica-de-cookies\nTérminos y condiciones | /pages/terminos-condiciones"
       },
       "blocks": {
@@ -37,7 +41,7 @@
           "type": "column",
           "settings": {
             "heading": "Atención",
-            "items": "Contacto | /pages/contacto\nEnvíos y devoluciones | /pages/envios-devoluciones"
+            "items": "Contacto | /pages/contacto\nEnvíos y devoluciones | /pages/envios-devoluciones\nPrivacidad | /pages/politica-privacidad\nCondiciones | /pages/terminos-condiciones"
           }
         }
       },
