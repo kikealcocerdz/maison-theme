@@ -1,51 +1,622 @@
-<section class="contact-page" data-section-id="{{ section.id }}">
-  <div class="contact-page__intro">
-    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
-    <h1>{{ section.settings.title | default: page.title | escape }}</h1>
-    {%- if section.settings.intro != blank -%}<p>{{ section.settings.intro | escape }}</p>{%- endif -%}
-  </div>
+{%- comment -%}
+  Contacto — port 1:1 de mockups `contacto.html` + `styles/contacto.css` + la
+  revisión v96. El mock encadena tres generaciones de reglas sobre las mismas
+  propiedades; aquí va sólo el estado final que renderiza.
 
-  {%- form 'contact', class: 'contact-form' -%}
-    {%- if form.posted_successfully? -%}
-      <p class="contact-form__message contact-form__message--success">Gracias por escribirnos. Te responderemos lo antes posible.</p>
-    {%- elsif form.errors -%}
-      <div class="contact-form__message contact-form__message--error">{{ form.errors | default_errors }}</div>
-    {%- endif -%}
-    <label for="ContactFormName">Nombre</label>
-    <input id="ContactFormName" type="text" name="contact[name]" autocomplete="name" value="{{ form.name | escape }}" required>
-    <label for="ContactFormEmail">Email</label>
-    <input id="ContactFormEmail" type="email" name="contact[email]" autocomplete="email" value="{{ form.email | escape }}" required>
-    <label for="ContactFormMessage">Mensaje</label>
-    <textarea id="ContactFormMessage" name="contact[body]" rows="7" required>{{ form.body | escape }}</textarea>
-    <button type="submit">Enviar mensaje <span aria-hidden="true">→</span></button>
-  {%- endform -%}
-</section>
+  El formulario es un `{% form 'contact' %}` real de Shopify: los desplegables
+  viajan como campos personalizados (`contact[Motivo]`, `contact[Colección]`) y
+  aparecen así en el email de notificación.
+{%- endcomment -%}
+
+{%- liquid
+  assign hero_alt = section.settings.hero_alt | default: 'Artesanía y piezas de La Cartuja de Sevilla'
+  assign subjects = section.settings.subjects | newline_to_br | strip_newlines | split: '<br />'
+  assign families = section.settings.families | newline_to_br | strip_newlines | split: '<br />'
+  assign privacy_url = section.settings.privacy_url | default: '/pages/politica-privacidad'
+-%}
+
+<main class="contact-page" data-section-id="{{ section.id }}">
+  <section class="contact-hero">
+    <div class="contact-hero-copy">
+      {%- if section.settings.kicker != blank -%}<span class="contact-kicker">{{ section.settings.kicker | escape }}</span>{%- endif -%}
+      <h1>{{ section.settings.title | default: page.title | escape }}</h1>
+      {%- if section.settings.intro != blank -%}<p>{{ section.settings.intro | escape }}</p>{%- endif -%}
+      <div class="contact-hero-rule"></div>
+    </div>
+
+    <figure class="contact-hero-visual">
+      {%- if section.settings.hero_image != blank -%}
+        {% render 'image-responsive', image: section.settings.hero_image, alt: hero_alt, sizes: '(max-width: 780px) 100vw, 55vw' %}
+      {%- else -%}
+        <img src="{{ 'craft.webp' | asset_url }}" alt="{{ hero_alt | escape }}" width="1600" height="1067" loading="lazy" decoding="async">
+      {%- endif -%}
+      <figcaption>
+        <span>{{ section.settings.hero_caption_small | escape }}</span>
+        <strong>{{ section.settings.hero_caption | escape }}</strong>
+      </figcaption>
+    </figure>
+
+    <div class="contact-details">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'detail' -%}
+          <div {{ block.shopify_attributes }}>
+            <span>{{ block.settings.label | escape }}</span>
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}">{{ block.settings.value | escape }}</a>
+            {%- else -%}
+              <strong>{{ block.settings.value | escape }}</strong>
+            {%- endif -%}
+            {%- if block.settings.note != blank -%}<p>{{ block.settings.note }}</p>{%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+
+  <section class="contact-form-section">
+    <div class="contact-form-intro">
+      {%- if section.settings.form_kicker != blank -%}<span class="contact-kicker">{{ section.settings.form_kicker | escape }}</span>{%- endif -%}
+      <h2>{{ section.settings.form_title | escape }}</h2>
+      {%- if section.settings.form_intro != blank -%}<p>{{ section.settings.form_intro | escape }}</p>{%- endif -%}
+
+      {%- if section.settings.card_title != blank -%}
+        <div class="contact-blue-card">
+          {%- if section.settings.card_kicker != blank -%}<span>{{ section.settings.card_kicker | escape }}</span>{%- endif -%}
+          <strong>{{ section.settings.card_title | escape }}</strong>
+          {%- if section.settings.card_text != blank -%}<p>{{ section.settings.card_text }}</p>{%- endif -%}
+          {%- if section.settings.card_link_label != blank -%}
+            <a href="{{ section.settings.card_link | default: '/pages/identifica-tu-sello' }}">{{ section.settings.card_link_label | escape }} <b aria-hidden="true">→</b></a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- form 'contact', class: 'contact-form' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="contact-form__message contact-form__message--success">{{ 'sections.contact.success' | t }}</p>
+      {%- elsif form.errors -%}
+        <div class="contact-form__message contact-form__message--error">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+
+      <div class="contact-field">
+        <label for="ContactFormName">{{ 'sections.contact.name' | t }}</label>
+        <input id="ContactFormName" type="text" name="contact[name]" autocomplete="name" value="{{ form.name | escape }}" required>
+      </div>
+
+      <div class="contact-field">
+        <label for="ContactFormEmail">{{ 'sections.contact.email' | t }}</label>
+        <input id="ContactFormEmail" type="email" name="contact[email]" autocomplete="email" value="{{ form.email | escape }}" required>
+      </div>
+
+      <div class="contact-field contact-select-field">
+        <label for="ContactFormSubject">{{ 'sections.contact.subject' | t }}</label>
+        <div class="contact-select-wrap">
+          <select id="ContactFormSubject" name="contact[Motivo]">
+            {%- for subject in subjects -%}
+              <option value="{{ subject | strip | escape }}">{{ subject | strip }}</option>
+            {%- endfor -%}
+          </select>
+          <span class="contact-select-icon" aria-hidden="true">⌄</span>
+        </div>
+      </div>
+
+      <div class="contact-field contact-select-field">
+        <label for="ContactFormCollection">{{ 'sections.contact.collection' | t }}</label>
+        <div class="contact-select-wrap">
+          <select id="ContactFormCollection" name="contact[Colección]">
+            <option value="">{{ 'sections.contact.collection_empty' | t }}</option>
+            {%- for family in families -%}
+              <option value="{{ family | strip | escape }}">{{ family | strip }}</option>
+            {%- endfor -%}
+          </select>
+          <span class="contact-select-icon" aria-hidden="true">⌄</span>
+        </div>
+      </div>
+
+      <div class="contact-field contact-field-full">
+        <label for="ContactFormMessage">{{ 'sections.contact.message' | t }}</label>
+        <textarea id="ContactFormMessage" name="contact[body]" rows="7" placeholder="{{ 'sections.contact.message_placeholder' | t }}" required>{{ form.body | escape }}</textarea>
+      </div>
+
+      <label class="contact-privacy contact-field-full">
+        <input type="checkbox" name="contact[Privacidad aceptada]" value="Sí" required>
+        <span>{{ 'sections.contact.privacy_html' | t: url: privacy_url }}</span>
+      </label>
+
+      <div class="contact-submit-row contact-field-full">
+        <button type="submit">{{ 'sections.contact.submit' | t }} <span aria-hidden="true">→</span></button>
+      </div>
+    {%- endform -%}
+  </section>
+</main>
 
 {% stylesheet %}
-.contact-page { width: min(760px, var(--content)); margin: 0 auto; padding: calc(var(--header-h) + 120px) 0 140px; }
-.contact-page__intro { margin-bottom: 72px; }
-.contact-page h1 { font-family: var(--serif); font-size: clamp(58px, 8vw, 112px); font-weight: 400; line-height: .95; margin: 20px 0 24px; }
-.contact-page__intro p { max-width: 460px; color: var(--ink-soft); font-size: 15px; line-height: 1.8; }
-.contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 28px; }
-.contact-form label { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
-.contact-form input, .contact-form textarea { grid-column: 1 / -1; width: 100%; border: 0; border-bottom: .5px solid var(--rule); border-radius: 0; background: transparent; padding: 12px 0 14px; color: var(--ink); font: inherit; resize: vertical; }
-.contact-form textarea { margin-top: 18px; }
-.contact-form button { grid-column: 1 / -1; justify-self: start; margin-top: 28px; border: 0; background: transparent; color: var(--ink); font: 500 11px var(--sans); letter-spacing: .16em; text-transform: uppercase; cursor: pointer; }
-.contact-form button span { display: inline-block; margin-left: 14px; font-size: 18px; transition: transform .25s ease; }
-.contact-form button:hover span { transform: translateX(6px); }
-.contact-form__message { grid-column: 1 / -1; margin-bottom: 24px; font-size: 13px; line-height: 1.6; }
+.contact-page {
+  padding-top: var(--header-h);
+  background: #f7f7f5;
+  color: var(--ink);
+}
+
+.contact-hero {
+  width: min(94vw, 1760px);
+  margin: 0 auto;
+  background: var(--paper);
+  padding: clamp(72px, 9vh, 118px) clamp(26px, 3vw, 52px) clamp(80px, 10vh, 125px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(420px, 1.14fr);
+  gap: min(7vw, 105px);
+  align-items: center;
+}
+
+.contact-hero-copy {
+  padding: 40px 0 18px;
+  align-self: center;
+}
+
+.contact-kicker {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.contact-hero h1,
+.contact-form-intro h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.contact-hero h1 {
+  font-size: clamp(66px, 8vw, 132px);
+  line-height: 0.86;
+  margin: 22px 0 28px;
+}
+
+.contact-hero-copy > p {
+  max-width: 560px;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--muted);
+}
+
+.contact-hero-rule {
+  width: 72px;
+  height: 1px;
+  background: var(--brand);
+  margin: 34px 0 22px;
+}
+
+.contact-hero-visual {
+  margin: 0;
+  height: clamp(430px, 62vh, 690px);
+  position: relative;
+  overflow: hidden;
+  background: #eef0f3;
+}
+
+.contact-hero-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 52%, rgba(4, 24, 67, 0.72));
+  pointer-events: none;
+}
+
+.contact-hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.contact-hero-visual figcaption {
+  position: absolute;
+  z-index: 2;
+  left: 28px;
+  right: 28px;
+  bottom: 25px;
+  color: #fff;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.contact-hero-visual figcaption span {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.78;
+}
+
+.contact-hero-visual figcaption strong {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(19px, 2vw, 29px);
+  line-height: 1.05;
+  max-width: 270px;
+  text-align: right;
+}
+
+.contact-details {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1.15fr 0.8fr 1.25fr;
+  margin-top: 18px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.contact-details > div {
+  min-height: 150px;
+  padding: 30px;
+  border-right: 1px solid var(--rule);
+}
+
+.contact-details > div:last-child { border-right: 0; }
+
+.contact-details span {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.contact-details strong {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 9px;
+}
+
+.contact-details a {
+  display: inline-block;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(18px, 1.45vw, 25px);
+  line-height: 1.15;
+  color: var(--brand);
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+
+.contact-details p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.65;
+  color: #6f7888;
+}
+
+.contact-form-section {
+  width: min(94vw, 1760px);
+  margin: clamp(50px, 7vh, 92px) auto clamp(90px, 11vh, 145px);
+  display: grid;
+  grid-template-columns: minmax(320px, 0.78fr) minmax(520px, 1.22fr);
+  gap: 22px;
+  padding: 22px;
+  background: #eceff3;
+  align-items: stretch;
+}
+
+.contact-form-intro {
+  background: var(--brand);
+  color: #fff;
+  padding: clamp(34px, 4vw, 62px);
+  min-height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-form-intro::after {
+  content: "1841";
+  position: absolute;
+  right: -18px;
+  bottom: -44px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(110px, 15vw, 230px);
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.055);
+  pointer-events: none;
+}
+
+.contact-form-intro .contact-kicker { color: rgba(255, 255, 255, 0.62); }
+
+.contact-form-intro h2 {
+  color: #fff;
+  font-size: clamp(44px, 5vw, 78px);
+  line-height: 0.96;
+  margin: 18px 0 24px;
+  max-width: 9ch;
+}
+
+.contact-form-intro > p {
+  font-size: 13px;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 470px;
+}
+
+.contact-blue-card {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  position: relative;
+  z-index: 1;
+}
+
+.contact-blue-card > span {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 12px;
+}
+
+.contact-blue-card strong {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 1.08;
+  max-width: 14ch;
+}
+
+.contact-blue-card p {
+  font-size: 11px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.68);
+  max-width: 430px;
+  margin: 17px 0 22px;
+}
+
+.contact-blue-card a {
+  display: inline-flex;
+  gap: 14px;
+  align-items: center;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+  padding-bottom: 6px;
+}
+
+.contact-form {
+  background: var(--paper);
+  padding: clamp(34px, 4vw, 62px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 28px;
+  align-content: center;
+  box-shadow: 0 22px 60px rgba(15, 26, 46, 0.055);
+  border: 1px solid rgba(15, 26, 46, 0.055);
+}
+
+.contact-field {
+  border-bottom: 1px solid var(--rule);
+  padding: 18px 0 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.contact-field-full { grid-column: 1 / -1; }
+
+.contact-field label {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.contact-field input,
+.contact-field textarea {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 300 13px/1.6 var(--sans);
+  padding: 0;
+  resize: vertical;
+}
+
+.contact-field textarea { min-height: 150px; }
+
+.contact-select-field { position: relative; }
+
+.contact-select-wrap {
+  position: relative;
+  margin-top: 2px;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border: 1px solid #dce1e8;
+  background: #fbfbfa;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+}
+
+.contact-select-wrap:focus-within {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(1, 33, 105, 0.07);
+  background: var(--paper);
+}
+
+.contact-select-wrap select {
+  width: 100%;
+  height: 52px;
+  padding: 0 38px 0 0;
+  appearance: none;
+  background: none;
+  border: 0;
+  font-size: 12px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.contact-select-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--brand);
+  color: #fff;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.contact-privacy {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 22px 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.contact-privacy input {
+  margin-top: 2px;
+  accent-color: var(--ink);
+}
+
+.contact-privacy a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.contact-submit-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 14px;
+}
+
+.contact-submit-row button {
+  min-width: 230px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border: 0.5px solid var(--ink);
+  background: var(--ink);
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.28s ease, color 0.28s ease, border-color 0.28s ease;
+}
+
+.contact-submit-row button:hover {
+  background: var(--brand);
+  border-color: var(--brand);
+}
+
+.contact-form__message {
+  grid-column: 1 / -1;
+  margin: 0 0 24px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 .contact-form__message--success { color: var(--ink); }
 .contact-form__message--error { color: var(--accent-1); }
-@media (max-width: 680px) { .contact-page { width: calc(100vw - 32px); padding-top: calc(var(--header-h) + 84px); } .contact-page__intro { margin-bottom: 56px; } .contact-form { grid-template-columns: 1fr; } }
+
+@media (max-width: 980px) {
+  .contact-hero { grid-template-columns: 1fr; gap: 60px; }
+  .contact-form-section { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 780px) {
+  .contact-hero,
+  .contact-form-section { width: calc(100% - 24px); }
+
+  .contact-hero {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 42px 18px 70px;
+  }
+
+  .contact-hero-copy { padding: 18px 0 0; }
+  .contact-hero h1 { font-size: clamp(58px, 18vw, 82px); }
+  .contact-hero-visual { height: 56dvh; min-height: 390px; }
+  .contact-hero-visual figcaption { left: 18px; right: 18px; bottom: 18px; }
+  .contact-hero-visual figcaption strong { font-size: 20px; }
+
+  .contact-details { grid-template-columns: 1fr; margin-top: 0; }
+  .contact-details > div {
+    min-height: auto;
+    padding: 21px 18px;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .contact-details > div:last-child { border-bottom: 0; }
+
+  .contact-form-section { padding: 12px; gap: 12px; }
+  .contact-form-intro { padding: 32px 24px; }
+  .contact-form-intro h2 { font-size: 44px; }
+  .contact-blue-card { margin-top: 34px; }
+  .contact-form { padding: 28px 20px; grid-template-columns: 1fr; }
+  .contact-field { grid-column: 1 / -1; }
+  .contact-submit-row { align-items: flex-start; flex-direction: column; }
+  .contact-submit-row button { width: 100%; }
+}
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Formulario de contacto",
+  "name": "Contacto",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Estamos aquí para ayudarte" },
-    { "type": "text", "id": "title", "label": "Título", "default": "Contacto" },
-    { "type": "textarea", "id": "intro", "label": "Entradilla", "default": "Cuéntanos cómo podemos ayudarte y te responderemos lo antes posible." }
-  ]
+    { "type": "text", "id": "kicker", "label": "Antetítulo", "default": "Atención al cliente" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Hablemos" },
+    { "type": "textarea", "id": "intro", "label": "Entradilla", "default": "Si tienes una consulta sobre una pieza, un pedido o una colección, cuéntanosla. Nuestro equipo te responderá con la atención que merece cada detalle." },
+    { "type": "header", "content": "Imagen del encabezado" },
+    { "type": "image_picker", "id": "hero_image", "label": "Imagen" },
+    { "type": "text", "id": "hero_alt", "label": "Texto alternativo", "default": "Artesanía y piezas de La Cartuja de Sevilla" },
+    { "type": "text", "id": "hero_caption_small", "label": "Pie (línea pequeña)", "default": "Sevilla · 1841" },
+    { "type": "text", "id": "hero_caption", "label": "Pie (titular)", "default": "Heritage crafted for modern living" },
+    { "type": "header", "content": "Formulario" },
+    { "type": "text", "id": "form_kicker", "label": "Antetítulo", "default": "Escríbenos" },
+    { "type": "text", "id": "form_title", "label": "Título", "default": "¿En qué podemos ayudarte?" },
+    { "type": "textarea", "id": "form_intro", "label": "Entradilla", "default": "Completa el formulario y déjanos la información necesaria para poder ayudarte desde el primer mensaje." },
+    { "type": "textarea", "id": "subjects", "label": "Motivos de consulta (uno por línea)", "default": "Consulta sobre una pieza\nPedido y envío\nReposición de vajilla\nInformación comercial\nPrensa y colaboraciones\nOtra consulta" },
+    { "type": "textarea", "id": "families", "label": "Colecciones o familias (una por línea)", "default": "Aurora\nOchavada\nGifts & Decor\nEmblemas\nNo lo sé / pieza antigua" },
+    { "type": "url", "id": "privacy_url", "label": "Enlace a la política de privacidad" },
+    { "type": "header", "content": "Tarjeta destacada" },
+    { "type": "text", "id": "card_kicker", "label": "Antetítulo", "default": "Atención personal" },
+    { "type": "text", "id": "card_title", "label": "Título", "default": "Piezas, reposiciones, pedidos y proyectos" },
+    { "type": "textarea", "id": "card_text", "label": "Texto", "default": "Si tu consulta se refiere a una vajilla antigua, puedes adjuntar en tu mensaje toda la información disponible sobre la pieza y su sello." },
+    { "type": "text", "id": "card_link_label", "label": "Texto del enlace", "default": "Identifica tu sello" },
+    { "type": "url", "id": "card_link", "label": "Enlace" }
+  ],
+  "blocks": [
+    {
+      "type": "detail",
+      "name": "Dato de contacto",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Etiqueta", "default": "Dirección" },
+        { "type": "text", "id": "value", "label": "Valor", "default": "La Cartuja de Sevilla" },
+        { "type": "url", "id": "link", "label": "Enlace (deja vacío para texto plano)" },
+        { "type": "richtext", "id": "note", "label": "Nota" }
+      ]
+    }
+  ],
+  "max_blocks": 4
 }
 {% endschema %}

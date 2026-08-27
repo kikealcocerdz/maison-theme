@@ -3,10 +3,57 @@
     "main": {
       "type": "contact-form",
       "settings": {
-        "eyebrow": "Estamos aquí para ayudarte",
-        "title": "Contacto",
-        "intro": "Cuéntanos cómo podemos ayudarte y te responderemos lo antes posible."
-      }
+        "kicker": "Atención al cliente",
+        "title": "Hablemos",
+        "intro": "Si tienes una consulta sobre una pieza, un pedido o una colección, cuéntanosla. Nuestro equipo te responderá con la atención que merece cada detalle.",
+        "hero_alt": "Artesanía y piezas de La Cartuja de Sevilla",
+        "hero_caption_small": "Sevilla · 1841",
+        "hero_caption": "Heritage crafted for modern living",
+        "form_kicker": "Escríbenos",
+        "form_title": "¿En qué podemos ayudarte?",
+        "form_intro": "Completa el formulario y déjanos la información necesaria para poder ayudarte desde el primer mensaje.",
+        "subjects": "Consulta sobre una pieza\nPedido y envío\nReposición de vajilla\nInformación comercial\nPrensa y colaboraciones\nOtra consulta",
+        "families": "Aurora\nOchavada\nGifts & Decor\nEmblemas\nNo lo sé / pieza antigua",
+        "privacy_url": "/pages/politica-privacidad",
+        "card_kicker": "Atención personal",
+        "card_title": "Piezas, reposiciones, pedidos y proyectos",
+        "card_text": "Si tu consulta se refiere a una vajilla antigua, puedes adjuntar en tu mensaje toda la información disponible sobre la pieza y su sello.",
+        "card_link_label": "Identifica tu sello",
+        "card_link": "/pages/identifica-tu-sello"
+      },
+      "blocks": {
+        "direccion": {
+          "type": "detail",
+          "settings": {
+            "label": "Dirección",
+            "value": "La Cartuja de Sevilla",
+            "note": "<p>Ctra. Nacional 630, km. 805<br>41909 Salteras · Sevilla · España</p>"
+          }
+        },
+        "telefono": {
+          "type": "detail",
+          "settings": {
+            "label": "Teléfono",
+            "value": "955 518 974",
+            "link": "tel:955518974",
+            "note": "<p>Atención directa de La Cartuja de Sevilla</p>"
+          }
+        },
+        "email": {
+          "type": "detail",
+          "settings": {
+            "label": "Correo electrónico",
+            "value": "info@lacartujadesevilla.com",
+            "link": "mailto:info@lacartujadesevilla.com",
+            "note": "<p>Consultas sobre piezas, pedidos y colecciones</p>"
+          }
+        }
+      },
+      "block_order": [
+        "direccion",
+        "telefono",
+        "email"
+      ]
     }
   },
   "order": [

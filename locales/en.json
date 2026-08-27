@@ -109,9 +109,12 @@
     }
   },
   "sections": {
-    "header": {
-      "menu": "Menu",
-      "search": "Search"
+    "cart": {
+      "empty": "Your cart is empty.",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout",
+      "view": "View cart",
+      "taxes_note": "Shipping and taxes calculated at checkout."
     },
     "collection": {
       "home": "Home",
@@ -131,6 +134,35 @@
       "prev_long": "Previous",
       "next_long": "Next"
     },
+    "contact": {
+      "success": "Thank you for writing to us. We'll get back to you as soon as possible.",
+      "name": "Name",
+      "email": "Email",
+      "subject": "Reason for your enquiry",
+      "collection": "Collection or family",
+      "collection_empty": "Select if applicable",
+      "message": "Message",
+      "message_placeholder": "Tell us briefly what you need",
+      "privacy_html": "I have read and accept the <a href=\"{{ url }}\">privacy policy</a>",
+      "submit": "Send enquiry"
+    },
+    "footer": {
+      "legal_label": "Legal links",
+      "social_label": "Social media"
+    },
+    "header": {
+      "menu": "Menu",
+      "search": "Search"
+    },
+    "heritage": {
+      "timeline": "Historical timeline",
+      "scroll": "Scroll to explore"
+    },
+    "legal": {
+      "tabs_label": "Legal documents",
+      "index_label": "Table of contents",
+      "next_doc": "Next document"
+    },
     "product": {
       "gallery": "Product gallery",
       "prev": "Previous image",
@@ -141,30 +173,6 @@
       "service": "Service",
       "pieces_selector": "Select the number of pieces",
       "pack_intro": "Your set includes:"
-    },
-    "tables": {
-      "filters": "Table filters",
-      "hotspot": "View piece"
-    },
-    "heritage": {
-      "timeline": "Historical timeline",
-      "scroll": "Scroll to explore"
-    },
-    "cart": {
-      "empty": "Your cart is empty.",
-      "subtotal": "Subtotal",
-      "checkout": "Checkout",
-      "view": "View cart",
-      "taxes_note": "Shipping and taxes calculated at checkout."
-    },
-    "legal": {
-      "tabs_label": "Legal documents",
-      "index_label": "Table of contents",
-      "next_doc": "Next document"
-    },
-    "footer": {
-      "legal_label": "Legal links",
-      "social_label": "Social media"
     },
     "stamps": {
       "seal": "Stamp",
@@ -179,6 +187,10 @@
       "scroll": "Scroll",
       "scroll_hint": "to browse the archive",
       "modal_kicker": "Marks archive"
+    },
+    "tables": {
+      "filters": "Table filters",
+      "hotspot": "View piece"
     }
   }
 }
