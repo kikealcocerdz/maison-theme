@@ -1,14 +1,17 @@
 {%- comment -%}
   Artesanía — La Cartuja de Sevilla. Editorial craft page.
   Six sections: hero video / intro sticky-grow video / process 3D plate (scroll
-  driven via self-hosted model-viewer) / quality + badges / collections grid /
+  driven via a self-hosted Three.js plate) / quality + badges / collections grid /
   newsletter. Everything scoped under `.artesania-page`.
 
   Follows §9 scroll-driven pattern (self-contained rAF IIFE writing CSS custom
   props, Math.max guards, reduced-motion + mobile static fallbacks, re-init on
   shopify:section:load) and the global `.reveal` → `.is-visible` IntersectionObserver
-  in assets/theme.js. model-viewer + its script are self-hosted assets; if the
-  web component is unsupported a static <img> fallback is shown.
+  in assets/theme.js. The 3D plate ships as three injected assets (three.min.js +
+  artesania-textures.js then artesania-plate.js — `window.LCPlate.setProgress(0..1)`
+  drives material-morph + decal-swap + fall-with-spin) loaded on IntersectionObserver
+  approach to dodge AssetSizeJavaScript; if WebGL/Three is unavailable, or under
+  reduced-motion, a static <img.plate-fallback> is shown instead.
 
   Title + meta description come from the Shopify Page object — create a Page with
   handle "artesania" + template "artesania".
@@ -17,14 +20,13 @@
 {%- liquid
   assign poster = 'artesania-proceso-poster.jpg'
   assign video  = 'artesania-proceso.mp4'
-  assign plate_fallback = 'artesania-plato-llano.jpg'
-  assign plate_glb = 'artesania-plate.glb'
+  assign plate_fallback = 'artesania-inline-optimized.webp'
 -%}
 
-<main class="artesania-page" data-section-id="{{ section.id }}" data-model-viewer-src="{{ 'model-viewer.min.js' | asset_url }}">
+<main class="artesania-page" data-section-id="{{ section.id }}" data-three-src="{{ 'three.min.js' | asset_url }}" data-textures-src="{{ 'artesania-textures.js' | asset_url }}" data-plate-src="{{ 'artesania-plate.js' | asset_url }}">
 
   {%- comment -%} ============ 1 · HERO ============ {%- endcomment -%}
-  <section class="ap-hero" data-ap-hero>
+  <section class="ap-hero" data-ap-hero data-header-variant="light">
     <img class="ap-hero__poster" src="{{ poster | asset_url }}" alt="" width="1920" height="1080" fetchpriority="high" decoding="async">
     <video class="ap-hero__video" muted loop playsinline preload="metadata" poster="{{ poster | asset_url }}" data-start="3">
       <source src="{{ video | asset_url }}" type="video/mp4">
@@ -86,29 +88,14 @@
   </section>
 
   {%- comment -%} ============ 3 · PROCESO oscuro · plato 3D ============ {%- endcomment -%}
-  <section class="ap-proceso" id="proceso" data-ap-proceso>
-    <div class="ap-proceso__track" data-ap-proceso-track>
+  <section class="ap-proceso" id="proceso" data-ap-proceso data-header-variant="light">
+    <div class="ap-proceso__track process-track" data-ap-proceso-track>
       <div class="ap-proceso__pin">
-        <div class="ap-plate-wrap">
-          <model-viewer
-            id="ap-plate-canvas"
-            class="ap-plate"
-            src="{{ plate_glb | asset_url }}"
-            alt="Plato Aurora 202 Rosa de La Cartuja de Sevilla"
-            camera-controls
-            disable-zoom
-            interaction-prompt="none"
-            auto-rotate
-            auto-rotate-delay="0"
-            rotation-per-second="14deg"
-            shadow-intensity="0.9"
-            exposure="1.05"
-            environment-image="neutral"
-            data-ap-model>
-            <img class="ap-plate__fallback show" slot="poster" src="{{ plate_fallback | asset_url }}" alt="Plato Aurora 202 Rosa" width="800" height="800" loading="lazy" decoding="async">
-          </model-viewer>
+        <div class="ap-plate-wrap plate-wrap">
+          <canvas id="plate-canvas" class="ap-plate"></canvas>
+          <img class="ap-plate__fallback plate-fallback" src="{{ plate_fallback | asset_url }}" alt="Plato Aurora 202 Rosa" width="800" height="800" loading="lazy" decoding="async">
           <noscript>
-            <img class="ap-plate__fallback ap-plate__fallback--static show" src="{{ plate_fallback | asset_url }}" alt="Plato Aurora 202 Rosa" width="800" height="800">
+            <img class="ap-plate__fallback ap-plate__fallback--static" src="{{ plate_fallback | asset_url }}" alt="Plato Aurora 202 Rosa" width="800" height="800">
           </noscript>
         </div>
 
@@ -254,7 +241,7 @@
         <h2 class="ap-news__heading">{{ section.settings.news_heading }}</h2>
       {%- endif -%}
       {%- if section.settings.news_body != blank -%}
-        <p class="ap-news__body">{{ section.settings.news_body }}</p>
+        <div class="ap-news__body">{{ section.settings.news_body }}</div>
       {%- endif -%}
 
       {%- form 'customer', class: 'ap-news__form' -%}
@@ -293,7 +280,10 @@
   color: var(--ap-ink);
   font-family: var(--sans);
   font-weight: 300;
-  overflow-x: hidden;
+  /* clip (not hidden): hidden forces overflow-y:auto → scroll-container →
+     breaks the sticky pins of intro/proceso. clip keeps the horizontal
+     safety-clip without creating a scroll container, so sticky works. */
+  overflow-x: clip;
 }
 .artesania-page img,
 .artesania-page video { display: block; max-width: 100%; }
@@ -482,17 +472,19 @@
   position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none;
 }
 .artesania-page .ap-plate,
-.artesania-page #ap-plate-canvas {
-  width: min(78vmin, 720px); height: min(78vmin, 720px); aspect-ratio: 1/1; object-fit: contain;
-  background: transparent; --poster-color: transparent;
+.artesania-page #plate-canvas {
+  width: min(78vmin, 720px); height: min(78vmin, 720px); aspect-ratio: 1/1;
+  background: transparent;
 }
 .artesania-page .ap-plate__fallback {
-  width: 100%; height: 100%; object-fit: contain;
+  width: min(48vmin, 440px); height: auto; object-fit: contain;
   filter: drop-shadow(0 30px 50px rgba(0,0,0,.5));
 }
-.artesania-page .ap-plate__fallback--static {
-  position: absolute; width: min(48vmin, 440px); height: auto;
+.artesania-page .plate-fallback {
+  position: absolute; opacity: 0; pointer-events: none; transition: opacity .5s ease;
 }
+.artesania-page .plate-fallback.show { opacity: 1; }
+.artesania-page .ap-plate__fallback--static { position: absolute; }
 
 .artesania-page .ap-proceso__copy {
   position: relative; z-index: 3; width: var(--ap-content); height: 100%; margin: 0 auto;
@@ -689,7 +681,7 @@
   .artesania-page .ap-calidad__grid { grid-template-columns: 1fr; gap: 36px; }
   .artesania-page .ap-intro__statement { width: 62%; }
   .artesania-page .ap-plate,
-  .artesania-page #ap-plate-canvas { width: 84vmin; height: 84vmin; }
+  .artesania-page #plate-canvas { width: 84vmin; height: 84vmin; }
 }
 @media (max-width: 780px) {
   /* proceso en móvil: pin más corto, copys apilados, sin recortes */
@@ -704,7 +696,7 @@
   .artesania-page .ap-proc-side--l { display: none; }
   .artesania-page .ap-proc-title { font-size: clamp(34px, 9vw, 52px); }
   .artesania-page .ap-plate,
-  .artesania-page #ap-plate-canvas { width: 92vmin; height: 92vmin; }
+  .artesania-page #plate-canvas { width: 92vmin; height: 92vmin; }
   .artesania-page .ap-proceso__final { bottom: 7vh; }
 
   /* sección 2 en móvil: sin pin, apilado, vídeo estático */
@@ -745,6 +737,99 @@
   .artesania-page .ap-intro__frame { width: 70vw; transform: translate(-50%, -50%); }
   .artesania-page .ap-intro__t { opacity: 1 !important; }
 }
+
+/* ==========================================================================
+   v96 / v98 / v99 — Artesanía.
+   El theme reconstruyó esta página en BEM `ap-*`, así que los selectores del
+   mock van traducidos. Las tres revisiones se pisan entre sí en los mismos
+   valores (altura del hero, del track, del cierre): aquí va sólo el estado
+   final que renderiza el mock.
+   ========================================================================== */
+.artesania-page .ap-intro__statement h2 {
+  font-family: var(--serif) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.02 !important;
+}
+
+.artesania-page .ap-intro__eyebrow,
+.artesania-page .ap-intro__para p { font-family: var(--sans) !important; }
+
+@media (max-width: 760px) {
+  .artesania-page .ap-hero {
+    height: 78dvh !important;
+    min-height: 520px !important;
+    max-height: 700px !important;
+    overflow: hidden !important;
+  }
+
+  .artesania-page .ap-hero__copy {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 20px 5.5dvh !important;
+    margin: 0 !important;
+    justify-content: flex-end !important;
+    overflow: hidden !important;
+  }
+
+  .artesania-page .ap-hero__eyebrow {
+    font-size: 8px !important;
+    line-height: 1.45 !important;
+    max-width: 100% !important;
+    letter-spacing: 0.20em !important;
+  }
+
+  .artesania-page .ap-hero__title {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-right: 3vw !important;
+    font-size: clamp(42px, 12vw, 56px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.025em !important;
+    margin: 17px 0 18px !important;
+    text-wrap: balance !important;
+  }
+
+  .artesania-page .ap-hero__body {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-right: 5px !important;
+    font-size: 12.5px !important;
+    line-height: 1.62 !important;
+    margin: 0 !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .artesania-page .ap-hero__cue { display: none !important; }
+
+  .artesania-page .ap-proceso__track { height: 280dvh !important; min-height: 0 !important; }
+  .artesania-page .ap-proceso__pin { height: 100dvh !important; min-height: 0 !important; }
+  .artesania-page .ap-proceso__copy {
+    width: 100% !important;
+    padding: 9dvh 16px 0 !important;
+    align-content: start !important;
+  }
+  .artesania-page .ap-proc-side--r { width: 100% !important; max-width: 100% !important; }
+  .artesania-page .ap-proc-title { font-size: clamp(30px, 8.5vw, 42px) !important; line-height: 1.02 !important; }
+  .artesania-page .ap-phase p { font-size: 12px !important; line-height: 1.58 !important; }
+
+  .artesania-page #plate-canvas { width: min(72vw, 300px) !important; height: min(72vw, 300px) !important; }
+  .artesania-page .plate-fallback { width: min(68vw, 280px) !important; }
+
+  .artesania-page .ap-proceso__final { bottom: 4.2dvh !important; width: calc(100% - 32px) !important; }
+  .artesania-page .ap-proceso__final-heading { font-size: clamp(27px, 7.7vw, 36px) !important; }
+
+  .artesania-page .ap-cols__grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 22px 10px !important; }
+  .artesania-page .ap-card { grid-column: auto !important; }
+  .artesania-page .ap-card__cap { gap: 4px !important; }
+  .artesania-page .ap-card__name { font-size: 18px !important; }
+  .artesania-page .ap-card__tag { font-size: 7px !important; }
+}
+
+@media (max-width: 420px) {
+  .artesania-page .ap-hero__title { font-size: clamp(39px, 11.2vw, 48px) !important; }
+}
 {% endstylesheet %}
 
 {% javascript %}
@@ -767,23 +852,35 @@
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var mobile = function () { return window.matchMedia('(max-width: 780px)').matches; };
 
-    /* ---- lazy-load self-hosted model-viewer when proceso nears viewport ---- */
-    var mvSrc = root.dataset.modelViewerSrc;
+    /* ---- lazy-load the Three.js plate when proceso nears viewport ----
+       Ships as injected assets (three + textures then plate) to dodge
+       theme-check AssetSizeJavaScript / ParserBlockingJavaScript. Under
+       reduced-motion we skip the ~899KB entirely and show the static plate. */
     var procesoEl = root.querySelector('[data-ap-proceso]');
-    if (mvSrc && procesoEl && !window.customElements.get('model-viewer')) {
-      var loaded = false;
-      var loadMV = function () {
-        if (loaded) return; loaded = true;
+    var plateFb = root.querySelector('.plate-fallback');
+    var booted = false;
+    function loadScript(src) {
+      return new Promise(function (res, rej) {
         var s = document.createElement('script');
-        s.type = 'module'; s.src = mvSrc;
+        s.src = src; s.onload = res; s.onerror = rej;
         document.head.appendChild(s);
-      };
+      });
+    }
+    function bootPlate() {
+      if (booted) return; booted = true;
+      Promise.all([loadScript(root.dataset.threeSrc), loadScript(root.dataset.texturesSrc)])
+        .then(function () { return loadScript(root.dataset.plateSrc); })
+        .catch(function () { if (plateFb) plateFb.classList.add('show'); });
+    }
+    if (reduce) {
+      if (plateFb) plateFb.classList.add('show');
+    } else if (procesoEl) {
       if ('IntersectionObserver' in window) {
-        var mvObs = new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) { if (en.isIntersecting) { loadMV(); mvObs.disconnect(); } });
+        var plObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { if (en.isIntersecting) { bootPlate(); plObs.disconnect(); } });
         }, { rootMargin: '600px 0px' });
-        mvObs.observe(procesoEl);
-      } else { loadMV(); }
+        plObs.observe(procesoEl);
+      } else { bootPlate(); }
     }
 
     /* ---- HERO video: seek to ~3s, autoplay muted, fade in ---- */
@@ -835,7 +932,6 @@
     var details = [].slice.call(root.querySelectorAll('[data-ap-phase-detail]'));
     var ticks = [].slice.call(root.querySelectorAll('[data-ap-tick]'));
     var closing = root.querySelector('[data-ap-closing]');
-    var model = root.querySelector('[data-ap-model]');
     var N = Math.max(titles.length, details.length) || 6;
     var curPhase = -1;
 
@@ -887,9 +983,7 @@
         var raw = clamp01(-pr.top / ptotal);
         setPhase(Math.min(N - 1, Math.floor(raw * N * 0.999)));
         if (closing) closing.classList.toggle('is-visible', raw > 0.9);
-        if (model && 'cameraOrbit' in model) {
-          try { model.cameraOrbit = (raw * 360).toFixed(1) + 'deg 78deg auto'; } catch (e2) {}
-        }
+        if (window.LCPlate) { window.LCPlate.setProgress(raw); }
       }
     }
 
@@ -914,8 +1008,6 @@
       showStatic();
       update(); setInterval(update, 140);
     }, 480);
-
-    if (model) { model.addEventListener('load', function () { update(); }); }
   }
 
   document.querySelectorAll('.artesania-page').forEach(init);
@@ -932,40 +1024,40 @@
     { "type": "header", "content": "1 · Hero" },
     { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Artesanía · La Cartuja de Sevilla · Desde 1841" },
     { "type": "text", "id": "hero_title_1", "label": "Hero title line 1", "default": "Hecho a mano," },
-    { "type": "text", "id": "hero_title_2", "label": "Hero title line 2", "default": "en España." },
-    { "type": "richtext", "id": "hero_body", "label": "Hero body", "default": "<p>Cada pieza atraviesa una cadena de manos, fuego y criterio. Dieciocho etapas, tres cocciones y un sello: el pulso histórico de una casa sevillana, llevado a la mesa contemporánea.</p>" },
+    { "type": "text", "id": "hero_title_2", "label": "Hero title line 2", "default": "en España" },
+    { "type": "richtext", "id": "hero_body", "label": "Hero body", "default": "<p>Cada pieza nace del diálogo entre oficio, tiempo y fuego. A lo largo de dieciocho etapas y tres cocciones, distintas manos especializadas modelan, decoran y esmaltan la loza antes de recibir el sello que certifica su origen en La Cartuja de Sevilla.</p>" },
 
     { "type": "header", "content": "2 · Intro editorial" },
     { "type": "text", "id": "intro_eyebrow", "label": "Intro eyebrow", "default": "El proceso refleja nuestra misión" },
-    { "type": "richtext", "id": "intro_heading", "label": "Intro statement", "default": "<p>Desde 1841, cada pieza de La Cartuja nace de una secuencia precisa de manos, fuego, esmalte y memoria.</p>" },
+    { "type": "richtext", "id": "intro_heading", "label": "Intro statement", "default": "<p>Desde 1841, cada pieza de La Cartuja nace de una secuencia precisa de manos, fuego, esmalte y memoria</p>" },
     { "type": "richtext", "id": "intro_body", "label": "Intro body", "default": "<p>Una loza fina no se entiende solo por su forma. Se entiende por el tiempo que contiene: el molde, el sello, la cocción, la clasificación y el gesto final.</p>" },
     { "type": "text", "id": "intro_video_eyebrow", "label": "Video overlay eyebrow", "default": "El gesto, filmado" },
     { "type": "text", "id": "intro_video_heading", "label": "Video overlay heading", "default": "Descubre nuestro proceso artesanal" },
 
     { "type": "header", "content": "3 · Proceso (cierre)" },
     { "type": "text", "id": "proceso_close_eyebrow", "label": "Closing eyebrow", "default": "La pieza terminada" },
-    { "type": "richtext", "id": "proceso_close_heading", "label": "Closing heading", "default": "<p>La Cartuja de Sevilla, <em>desde 1841.</em></p>" },
+    { "type": "richtext", "id": "proceso_close_heading", "label": "Closing heading", "default": "<p>La Cartuja de Sevilla, <em>desde 1841</em></p>" },
 
     { "type": "header", "content": "4 · Calidad" },
     { "type": "text", "id": "calidad_heading_1", "label": "Heading line 1", "default": "Dieciocho etapas." },
-    { "type": "text", "id": "calidad_heading_2", "label": "Heading line 2", "default": "Hasta ocho miradas." },
+    { "type": "text", "id": "calidad_heading_2", "label": "Heading line 2", "default": "Hasta ocho miradas" },
     { "type": "richtext", "id": "calidad_body", "label": "Calidad body", "default": "<p>El proceso de producción de cada pieza resume <strong>dieciocho etapas</strong>, de las cuales hasta ocho son clasificaciones. Sólo la loza que supera cada control —en bizcocho y en acabado— llega a ver la luz y entra en su mesa.</p>" },
     { "type": "text", "id": "badge1_title", "label": "Badge 1 title", "default": "Máxima calidad" },
     { "type": "text", "id": "badge1_text", "label": "Badge 1 text", "default": "Hasta ocho clasificaciones descartan toda pieza que no alcance el criterio de la casa." },
     { "type": "text", "id": "badge2_title", "label": "Badge 2 title", "default": "Pago seguro" },
     { "type": "text", "id": "badge2_text", "label": "Badge 2 text", "default": "Transacciones cifradas y protegidas en cada paso de tu compra." },
     { "type": "text", "id": "badge3_title", "label": "Badge 3 title", "default": "Fabricación artesanal" },
-    { "type": "text", "id": "badge3_text", "label": "Badge 3 text", "default": "Moldeado, sellado, decoración y vidriado con intervención humana en las fases decisivas." },
+    { "type": "text", "id": "badge3_text", "label": "Badge 3 text", "default": "Moldeado, sellado, decoración y esmaltado con intervención humana en las fases decisivas." },
     { "type": "text", "id": "badge4_title", "label": "Badge 4 title", "default": "Portes gratis" },
-    { "type": "html", "id": "badge4_text", "label": "Badge 4 text", "default": "Envío sin coste en pedidos superiores a 150&nbsp;€ para España (península)." },
+    { "type": "html", "id": "badge4_text", "label": "Badge 4 text", "default": "Envío sin coste en pedidos superiores a 150 € para España (península)." },
 
     { "type": "header", "content": "5 · Colecciones" },
     { "type": "text", "id": "cols_eyebrow", "label": "Colecciones eyebrow", "default": "Un mismo oficio · cuatro relatos" },
-    { "type": "text", "id": "cols_heading", "label": "Colecciones heading", "default": "Las colecciones." },
+    { "type": "text", "id": "cols_heading", "label": "Colecciones heading", "default": "Las colecciones" },
 
     { "type": "header", "content": "6 · Newsletter" },
     { "type": "text", "id": "news_eyebrow", "label": "Newsletter eyebrow", "default": "Recibir nuestra carta" },
-    { "type": "richtext", "id": "news_heading", "label": "Newsletter heading", "default": "<p>Una <em>carta</em> cada estación.</p>" },
+    { "type": "richtext", "id": "news_heading", "label": "Newsletter heading", "default": "<p>Una <em>carta</em> cada estación</p>" },
     { "type": "richtext", "id": "news_body", "label": "Newsletter body", "default": "<p>Cuatro envíos al año. Ediciones, talleres y conversaciones desde Sevilla.</p>" }
   ],
   "blocks": [
