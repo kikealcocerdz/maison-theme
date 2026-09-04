@@ -17,6 +17,23 @@
   assign per_page = section.settings.products_per_page | default: 24
   assign initial_count = section.settings.demo_initial_count | default: 12
 
+  # Editorial insert: per-collection via metafields, falling back to section settings.
+  # Chapter collections carry custom.editorial_image / custom.editorial_text; sub-collection
+  # and product-type pages have neither, so the mid-grid insert is suppressed for them.
+  assign ed_asset = collection.metafields.custom.editorial_image.value
+  if ed_asset == blank
+    assign ed_asset = section.settings.editorial_demo_image
+  endif
+  assign ed_text = collection.metafields.custom.editorial_text.value
+  if ed_text == blank
+    assign ed_text = section.settings.editorial_text
+  endif
+  assign ed_picker = section.settings.editorial_image
+  assign has_editorial = false
+  if ed_picker != blank or ed_asset != blank or ed_text != blank
+    assign has_editorial = true
+  endif
+
   assign intro_kicker = collection.metafields.custom.chapter | metafield_text
   if intro_kicker == blank
     assign intro_kicker = section.settings.kicker
@@ -28,7 +45,7 @@
   endif
 -%}
 
-<div class="collection-grid collection-page" data-section-id="{{ section.id }}">
+<div class="collection-grid collection-page{% if section.settings.budget_mode %} collection-page--budget{% endif %}" data-section-id="{{ section.id }}"{% if section.settings.budget_mode %} data-default-sort="low"{% endif %}>
   <section class="shop-layout">
     {% render 'collection-nav' %}
 
@@ -43,7 +60,13 @@
           {%- if intro_kicker != blank -%}<div class="collection-kicker">{{ intro_kicker | escape }}</div>{%- endif -%}
           {%- if intro_title != blank -%}<h1>{{ intro_title | escape }}</h1>{%- endif -%}
         </div>
-        {%- if intro_copy != blank -%}<p>{{ intro_copy }}</p>{%- endif -%}
+        {%- comment -%}
+          `intro_copy` ya viene en HTML (richtext o collection.description): envolverlo
+          en otro <p> hace que el parser cierre el de fuera y cuele dos <p> vacíos como
+          hijos extra del grid. strip_html deja un único hijo, como en el mock.
+        {%- endcomment -%}
+        {%- assign intro_copy_text = intro_copy | strip_html | strip -%}
+        {%- if intro_copy_text != blank -%}<p>{{ intro_copy_text }}</p>{%- endif -%}
       </section>
 
       <div class="toolbar">
@@ -67,7 +90,6 @@
             {%- for product in collection.products -%}
               {%- liquid
                 assign p_img1 = product.featured_image | image_url: width: 720
-                assign p_img2 = product.images[1] | image_url: width: 720
                 assign p_w = product.featured_image.width | default: 1000
                 assign p_h = product.featured_image.height | default: 1250
                 assign p_price = product.price | money
@@ -76,16 +98,22 @@
                   assign p_new = 1
                 endif
               -%}
-              {% render 'collection-card',
+              {% render 'collection-card', product: product,
                 card_url: product.url, title: product.title,
                 price: p_price, meta: product.type,
-                img1: p_img1, img2: p_img2, img_w: p_w, img_h: p_h,
+                img1: p_img1, img_w: p_w, img_h: p_h,
                 badge: p_new, data_price: product.price, data_new: p_new, data_type: product.type %}
-              {%- if forloop.index == editorial_after -%}{% render 'collection-editorial-insert', section: section %}{%- endif -%}
+              {%- if forloop.index == editorial_after and has_editorial -%}{% render 'collection-editorial-insert', ed_picker: ed_picker, ed_asset: ed_asset, ed_text: ed_text %}{%- endif -%}
             {%- endfor -%}
 
-            {%- if paginate.next -%}
-              <div class="load-more"><a class="ghost-btn" href="{{ paginate.next.url }}" rel="next">{{ 'sections.collection.load_more' | t }}&nbsp;→</a></div>
+            {%- if paginate.pages > 1 -%}
+              {%- assign shown = paginate.current_offset | plus: collection.products.size -%}
+              <div class="load-more" data-total="{{ collection.products_count }}">
+                <p class="load-count">{{ 'sections.collection.showing' | t: shown: shown, total: collection.products_count }}</p>
+                {%- if paginate.next -%}
+                  <a class="ghost-btn" href="{{ paginate.next.url }}" rel="next">{{ 'sections.collection.load_more' | t }}&nbsp;→</a>
+                {%- endif -%}
+              </div>
             {%- endif -%}
           {%- endpaginate -%}
         {%- else -%}
@@ -94,10 +122,6 @@
             {%- if block.type == 'product' -%}
               {%- liquid
                 assign d_img1 = block.settings.demo_image | asset_url
-                assign d_img2 = ''
-                if block.settings.demo_image_2 != blank
-                  assign d_img2 = block.settings.demo_image_2 | asset_url
-                endif
                 assign is_extra = false
                 if forloop.index > initial_count
                   assign is_extra = true
@@ -107,10 +131,10 @@
               {% render 'collection-card',
                 card_url: block.settings.link, title: block.settings.demo_title,
                 price: block.settings.demo_price, meta: block.settings.demo_meta,
-                img1: d_img1, img2: d_img2, badge: block.settings.badge,
+                img1: d_img1, badge: block.settings.badge,
                 data_price: block.settings.data_price, data_new: block.settings.data_new,
                 data_type: block.settings.data_type, extra: is_extra %}
-              {%- if forloop.index == editorial_after -%}{% render 'collection-editorial-insert', section: section %}{%- endif -%}
+              {%- if forloop.index == editorial_after and has_editorial -%}{% render 'collection-editorial-insert', ed_picker: ed_picker, ed_asset: ed_asset, ed_text: ed_text %}{%- endif -%}
             {%- endif -%}
           {%- endfor -%}
 
@@ -124,7 +148,7 @@
 </div>
 
 {% stylesheet %}
-.collection-page { padding-top: calc(var(--header-h) + 56px); }
+.collection-page { padding-top: calc(var(--header-h) + 64px); }
 .collection-page .breadcrumbs { font-size: 10px; color: var(--muted); letter-spacing: .08em; margin-bottom: 28px; }
 .collection-page .breadcrumbs a:hover { color: var(--ink); }
 
@@ -135,6 +159,7 @@
 }
 .collection-page .shop-main { min-width: 0; }
 
+/* Intro a dos columnas (mock v21): título a la izquierda, copy abajo a la derecha. */
 .collection-page .collection-intro {
   width: 100%; margin: 0 0 46px;
   display: grid; grid-template-columns: minmax(260px, 1fr) minmax(320px, .78fr);
@@ -150,6 +175,11 @@
 }
 .collection-page .collection-kicker {
   font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px;
+}
+
+@media (max-width: 1000px) {
+  .collection-page .collection-intro { grid-template-columns: 1fr; gap: 20px; align-items: start; }
+  .collection-page .collection-intro > p { justify-self: start; text-align: left; margin: 0; }
 }
 
 /* Sidebar accordion */
@@ -173,7 +203,7 @@
 .collection-page .side-panel a.active, .collection-page .side-panel a:hover { color: var(--ink); opacity: 1; }
 
 /* Toolbar */
-.collection-page .toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 42px; }
+.collection-page .toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 34px; }
 .collection-page .view-toggle { display: flex; gap: 10px; align-items: center; }
 .collection-page .view-btn { width: 24px; height: 24px; display: grid; place-items: center; color: var(--muted); }
 .collection-page .view-btn.active { color: var(--ink); }
@@ -188,6 +218,11 @@
 .collection-page .sort-menu button { display: block; width: 100%; text-align: left; padding: 12px 18px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
 .collection-page .sort-menu button:hover { background: var(--ink-faint-20); }
 
+/* Budget mode ("Sets para regalo"): the price leads the card instead of trailing it. */
+.collection-page--budget .product-info { align-items: baseline; }
+.collection-page--budget .price { font-family: var(--serif); font-size: clamp(15px, 1.4vw, 19px); line-height: 1.1; }
+@media (max-width: 780px) { .collection-page--budget .price { font-size: 14px; } }
+
 /* Product grid (base card styles are shared in assets/critical.css) */
 .collection-page .products { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 52px 22px; transition: opacity 220ms var(--ease); }
 .collection-page .products.is-list { grid-template-columns: 1fr; gap: 28px; }
@@ -200,26 +235,32 @@
 .collection-page .products.is-list .product-info p { font-size: 11px; }
 .collection-page .products.is-list .price { min-width: 80px; text-align: left; }
 .collection-page .products.is-list .fav { right: auto; left: 88px; top: 8px; }
-.collection-page .products.is-list .media-side-arrow, .collection-page .products.is-list .media-nav { display: none; }
 
 /* Editorial insert */
 .collection-page .editorial-insert { grid-column: 1 / -1; margin: 66px 0 34px; display: block; }
 .collection-page .editorial-insert img { width: 100%; height: min(46vw, 640px); object-fit: cover; background: var(--ink-faint-20); }
 .collection-page .editorial-insert p { font-family: var(--sans); font-size: 12px; line-height: 1.7; letter-spacing: .02em; color: #747b88; max-width: 560px; margin: 16px 0 0; }
+/* Sin pie de texto la foto corre más baja (mock: subcoleccion-gifts-decor). */
+.collection-page .editorial-insert.editorial-photo-only img { height: min(39vw, 560px); object-position: center; }
 
-.collection-page .load-more { display: flex; justify-content: center; margin: 70px 0 126px; grid-column: 1 / -1; }
+.collection-page .load-more { display: flex; flex-direction: column; align-items: center; gap: 18px; margin: 70px 0 126px; grid-column: 1 / -1; }
 .collection-page .load-more .ghost-btn { min-width: 220px; }
+.collection-page .load-count { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.collection-page .load-more.is-loading .ghost-btn { opacity: .45; pointer-events: none; }
 .collection-page .extra-product.is-hidden { display: none !important; }
 
 @media (max-width: 1180px) {
-  .collection-page .collection-intro { grid-template-columns: 1fr; gap: 20px; }
-  .collection-page .collection-intro > p { justify-self: start; text-align: left; margin: 0; }
-  .collection-page .products { grid-template-columns: repeat(2, 1fr); gap: 42px 16px; }
+  .collection-page .products { gap: 42px 16px; }
 }
 @media (max-width: 1000px) {
   .collection-page .shop-layout { grid-template-columns: 1fr; }
   .collection-page .sidebar { margin-top: 0; position: relative; top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .collection-page .side-panel { grid-template-rows: 1fr; }
+  .collection-page .products { grid-template-columns: repeat(2, 1fr); }
+  .collection-page .products.is-list { grid-template-columns: 1fr; }
+  .collection-page .products.is-list .product { grid-template-columns: 88px 1fr; gap: 18px; }
+  .collection-page .products.is-list .product-media { width: 88px; }
+  .collection-page .products.is-list .price { grid-column: 2; }
 }
 @media (max-width: 620px) {
   .collection-page .sidebar { grid-template-columns: 1fr; }
@@ -227,6 +268,92 @@
   .collection-page .product-info { grid-template-columns: 1fr; }
   .collection-page .price { text-align: left; }
   .collection-page .collection-intro h1 { font-size: 42px; }
+  .collection-page .products.is-list .product { grid-template-columns: 76px 1fr; }
+  .collection-page .products.is-list .product-media { width: 76px; }
+  .collection-page .products.is-list .fav { left: 54px; }
+}
+
+/* ==========================================================================
+   v96 / v98 — listado en móvil.
+   El sidebar (que es la nav facetada) se oculta y la barra de herramientas pasa
+   a sticky bajo la cabecera; la rejilla se fija a 2 columnas.
+   Nota: el drawer de filtros que v96 introdujo quedó desactivado en el propio
+   v96 (`if(false)` en su JS + display:none), así que no se porta.
+   ========================================================================== */
+@media (max-width: 780px) {
+  .collection-page { width: 100% !important; max-width: 100% !important; overflow-x: clip !important; }
+  .collection-page .shop-layout { width: calc(100% - 28px) !important; display: block !important; margin: 0 auto !important; }
+  .collection-page .sidebar { display: none !important; }
+  .collection-page .collection-intro { width: 100% !important; padding-top: 28px !important; margin-bottom: 24px !important; gap: 20px !important; }
+  .collection-page .collection-intro h1 { font-size: clamp(42px, 12vw, 62px) !important; }
+  .collection-page .collection-intro > p { font-size: 11px !important; line-height: 1.65 !important; text-align: left !important; }
+  .collection-page .breadcrumbs { font-size: 9px !important; }
+
+  .collection-page .toolbar {
+    position: sticky !important;
+    top: calc(var(--header-h) + env(safe-area-inset-top, 0px)) !important;
+    z-index: 35 !important;
+    width: 100% !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    backdrop-filter: blur(14px) !important;
+    margin: 0 -2px 18px !important;
+    padding: 10px 2px !important;
+    border-bottom: 1px solid rgba(15, 26, 46, 0.08) !important;
+  }
+
+  .collection-page .view-toggle { gap: 6px !important; }
+  .collection-page .view-btn { width: 40px !important; height: 40px !important; }
+  .collection-page .sort-btn { height: 42px !important; min-width: 105px !important; padding: 0 11px !important; font-size: 8px !important; }
+
+  .collection-page .products { width: 100% !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 28px 10px !important; }
+  .collection-page .products.is-list { grid-template-columns: 1fr !important; }
+  .collection-page .product,
+  .collection-page .product-media,
+  .collection-page .product-info { min-width: 0 !important; max-width: 100% !important; }
+  .collection-page .product-media { aspect-ratio: 4 / 5 !important; }
+  .collection-page .product-media img { max-width: 100% !important; }
+  .collection-page .product-info { margin-top: 9px !important; gap: 4px 8px !important; font-size: 10px !important; }
+  .collection-page .product-info h3 { font-size: 10px !important; line-height: 1.32 !important; }
+  .collection-page .product-info p { font-size: 8px !important; line-height: 1.35 !important; }
+  .collection-page .price { font-size: 10px !important; }
+  .collection-page .fav { width: 32px !important; height: 32px !important; right: 6px !important; top: 5px !important; }
+  .collection-page .badge { font-size: 7px !important; padding: 5px 7px !important; top: 7px !important; left: 7px !important; }
+
+  .collection-page .editorial-insert { width: 100% !important; max-width: 100% !important; margin: 34px 0 16px !important; overflow: hidden !important; }
+  .collection-page .editorial-insert img { width: 100% !important; max-width: 100% !important; height: 58vw !important; }
+}
+
+@media (max-width: 760px) {
+  .collection-page { padding-top: calc(var(--header-h) + 24px) !important; overflow-x: hidden !important; }
+  .collection-page .collection-intro { display: flex !important; flex-direction: column !important; gap: 16px !important; margin: 0 0 28px !important; }
+  .collection-page .collection-intro > div,
+  .collection-page .collection-intro > p { width: 100% !important; max-width: 100% !important; }
+  .collection-page .breadcrumbs { font-size: 8.5px !important; line-height: 1.5 !important; margin-bottom: 18px !important; white-space: normal !important; }
+  .collection-page .collection-kicker { font-size: 9px !important; margin-bottom: 12px !important; }
+  .collection-page .collection-intro h1 { font-size: clamp(44px, 14vw, 62px) !important; line-height: 0.94 !important; overflow-wrap: anywhere; }
+  .collection-page .collection-intro p { font-size: 11.5px !important; line-height: 1.65 !important; margin: 0 !important; color: var(--ink-soft) !important; overflow-wrap: anywhere; }
+  .collection-page .toolbar { margin: 0 0 22px !important; padding: 0 !important; gap: 12px !important; }
+  .collection-page .sort-btn { padding: 0 14px !important; }
+
+  .collection-page .product-media { overflow: hidden !important; }
+  .collection-page .product-media img.main { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center !important; }
+  .collection-page .product-info { display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; gap: 3px 7px !important; padding-top: 8px !important; }
+  .collection-page .product-info h3 { font-size: 9.2px !important; overflow-wrap: anywhere !important; }
+  .collection-page .product-info p { grid-column: 1 !important; margin: 0 !important; }
+  .collection-page .product-info .price { font-size: 9px !important; grid-column: 2 !important; grid-row: 1 !important; white-space: nowrap !important; }
+  .collection-page .editorial-insert { grid-column: 1 / -1 !important; margin: 0 !important; }
+  .collection-page .editorial-insert img { height: auto !important; object-fit: cover !important; }
+}
+
+@media (max-width: 420px) {
+  .collection-page .products { gap: 24px 8px !important; }
+  .collection-page .product-info h3 { font-size: 9.5px !important; }
+}
+
+/* En táctil no hay hover: la segunda foto de la tarjeta nunca debe aparecer. */
+@media (hover: none) and (pointer: coarse) {
+  .product:hover .product-media img.main { opacity: 1 !important; transform: none !important; }
+  .product:hover .product-media img.hover { opacity: 0 !important; transform: none !important; }
 }
 {% endstylesheet %}
 
@@ -258,35 +385,50 @@
       });
     });
 
-    // Favourite toggle (visual only)
-    root.querySelectorAll('.fav').forEach(function (b) {
-      b.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); b.classList.toggle('active'); });
+    // Favourite toggle (visual only) — delegated so cards appended by "load more" work too
+    root.addEventListener('click', function (e) {
+      var f = e.target.closest('.fav');
+      if (!f) return;
+      e.preventDefault(); e.stopPropagation();
+      f.classList.toggle('active');
     });
 
-    // Sort
+    // Sort — reorders the cards currently in the DOM.
+    function applySort(mode) {
+      if (!grid) return;
+      var items = [].slice.call(grid.querySelectorAll('.product'));
+      items.sort(function (a, c) {
+        return mode === 'new' ? (+c.dataset.new - +a.dataset.new)
+          : mode === 'high' ? (+c.dataset.price - +a.dataset.price)
+          : mode === 'low' ? (+a.dataset.price - +c.dataset.price) : 0;
+      });
+      var editorial = grid.querySelector('.editorial-insert');
+      items.forEach(function (item, i) {
+        if (editorial && i === 6) grid.insertBefore(editorial, item);
+        grid.appendChild(item);
+      });
+      var lmEl = grid.querySelector('.load-more');
+      if (lmEl) grid.appendChild(lmEl); // keep the load-more block last after re-ordering
+    }
+
     var sw = root.querySelector('.sort-wrap');
     if (sw) {
       var sb = sw.querySelector('.sort-btn');
       if (sb) sb.addEventListener('click', function () { sw.classList.toggle('open'); });
       sw.querySelectorAll('.sort-menu button').forEach(function (b) {
         b.addEventListener('click', function () {
-          if (!grid) return;
-          var items = [].slice.call(grid.querySelectorAll('.product'));
-          var mode = b.dataset.sort;
-          items.sort(function (a, c) {
-            return mode === 'new' ? (+c.dataset.new - +a.dataset.new)
-              : mode === 'high' ? (+c.dataset.price - +a.dataset.price)
-              : mode === 'low' ? (+a.dataset.price - +c.dataset.price) : 0;
-          });
-          var editorial = grid.querySelector('.editorial-insert');
-          items.forEach(function (item, i) {
-            if (editorial && i === 6) grid.insertBefore(editorial, item);
-            grid.appendChild(item);
-          });
+          applySort(b.dataset.sort);
           sw.classList.remove('open');
         });
       });
     }
+
+    // Budget mode ("Sets para regalo"): price ascending without touching the sort menu.
+    // ponytail: this only reorders what is already in the DOM — the collection's own
+    // "Price: low to high" order in the admin is what sorts the whole collection across
+    // pages. This is the backup for when that admin setting drifts.
+    var defaultSort = root.dataset.defaultSort;
+    if (defaultSort) applySort(defaultSort);
 
     // Load more (demo reveal)
     var lm = root.querySelector('#loadMore');
@@ -294,6 +436,65 @@
       root.querySelectorAll('.extra-product.is-hidden').forEach(function (el) { el.classList.remove('is-hidden'); el.classList.add('is-visible'); });
       lm.style.display = 'none';
     });
+
+    // Load more (real path) — append the next paginated page instead of navigating to it,
+    // and auto-fire when the block scrolls into view. The <a href> stays a real link, so
+    // no-JS and crawlers keep the normal ?page=N flow.
+    var more = root.querySelector('.load-more[data-total]');
+    var link = more && more.querySelector('a[rel="next"]');
+    if (grid && link) {
+      var count = more.querySelector('.load-count');
+      var observer = null;
+      var loading = false;
+
+      function done() {
+        if (observer) { observer.disconnect(); observer = null; }
+        link.remove();
+        link = null;
+      }
+
+      function loadNext() {
+        if (loading || !link) return;
+        loading = true;
+        more.classList.add('is-loading');
+        // Section Rendering API: returns just this section, not the whole document.
+        var sid = root.dataset.sectionId;
+        fetch(link.href + (sid ? '&section_id=' + encodeURIComponent(sid) : ''))
+          .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
+          .then(function (html) {
+            var next = new DOMParser().parseFromString(html, 'text/html').querySelector('#productGrid');
+            if (!next) return done();
+            // Only .product nodes: the next page renders its own .editorial-insert, which
+            // must not be duplicated mid-grid.
+            next.querySelectorAll('.product').forEach(function (el) { grid.insertBefore(el, more); });
+            if (defaultSort) applySort(defaultSort); // keep budget mode ordered across pages
+            var nextCount = next.querySelector('.load-count');
+            if (count && nextCount) count.textContent = nextCount.textContent;
+            var nextLink = next.querySelector('.load-more a[rel="next"]');
+            if (nextLink) link.href = nextLink.href; else done();
+            // ponytail: let theme.js's shopify:section:load handler pick up the new cards
+            // (reveal observer) instead of re-implementing it here. init() is guarded by
+            // root.dataset.init, so the section's own listener re-entry is a no-op.
+            root.dispatchEvent(new CustomEvent('shopify:section:load', { bubbles: true }));
+          })
+          .catch(function () { if (link) link.removeAttribute('data-ajax'); }) // fall back to plain navigation
+          .then(function () { loading = false; more.classList.remove('is-loading'); });
+      }
+
+      link.dataset.ajax = '1';
+      link.addEventListener('click', function (e) {
+        if (!link.dataset.ajax) return; // a failed fetch reverts to normal navigation
+        e.preventDefault();
+        loadNext();
+      });
+
+      if ('IntersectionObserver' in window) {
+        observer = new IntersectionObserver(function (entries) {
+          if (entries.some(function (en) { return en.isIntersecting; })) loadNext();
+        }, { rootMargin: '600px' });
+        observer.observe(more);
+      }
+    }
   }
 
   document.querySelectorAll('.collection-grid').forEach(init);
@@ -312,6 +513,7 @@
     { "type": "text", "id": "title", "label": "Title override", "info": "Falls back to the collection title." },
     { "type": "richtext", "id": "intro_copy", "label": "Intro copy", "info": "Falls back to the collection description." },
     { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 12, "max": 48, "step": 6, "default": 24 },
+    { "type": "checkbox", "id": "budget_mode", "label": "Budget mode (price-first, low\u2192high)", "info": "For gift-set style listings. Set the collection's own sort order to \"Price: lowest to highest\" in the admin so every page is ordered.", "default": false },
     { "type": "header", "content": "Editorial insert (mid-grid)" },
     { "type": "range", "id": "editorial_after", "label": "Insert after card #", "min": 3, "max": 12, "step": 1, "default": 6 },
     { "type": "image_picker", "id": "editorial_image", "label": "Editorial image" },
@@ -330,7 +532,6 @@
         { "type": "text", "id": "demo_price", "label": "Price (e.g. 68 €)" },
         { "type": "text", "id": "demo_meta", "label": "Meta line (e.g. subcollection)" },
         { "type": "text", "id": "demo_image", "label": "Image (asset filename)" },
-        { "type": "text", "id": "demo_image_2", "label": "Hover image (asset filename)" },
         { "type": "checkbox", "id": "badge", "label": "Show 'Novedad' badge", "default": false },
         { "type": "header", "content": "Sort / filter data" },
         { "type": "number", "id": "data_price", "label": "Sort price (number)" },
