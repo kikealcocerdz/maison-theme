@@ -1,25 +1,45 @@
 {%- comment -%}
-  Related products row — reused twice on the PDP ("Completa la mesa" same-collection,
-  "Te puede interesar" cross-sell). Auto-fills from a chosen collection; falls back
+  Related products row — reused twice on the PDP ("Completa la mesa" complementary,
+  "Te puede interesar" related). Source = Shopify's Product Recommendations API
+  (fetched client-side via the Section Rendering API) or a chosen collection.
+  Whatever the source, an empty result falls back to the collection grid, and that
   to demo `product` blocks before the catalog migrates (CLAUDE.md §7).
 {%- endcomment -%}
 {%- liquid
-  assign source = collections[section.settings.collection]
+  assign current_id = product.id
   assign limit = section.settings.product_limit | default: 5
+  assign source = collections[section.settings.collection]
+  if source == blank
+    assign source = product.collections.first
+  endif
+  assign list = source.products
+  assign rec_url = ''
+
+  # `recommendations.performed` is only true inside the /recommendations/products render,
+  # so the first paint always ships the collection grid (works with no JS and for crawlers)
+  # and the fetch below swaps it for the real recommendations when there are any.
+  if section.settings.source == 'recommendations'
+    if recommendations.performed
+      assign list = recommendations.products
+    elsif product != blank
+      assign intent = section.settings.intent | default: 'related'
+      assign rec_url = routes.product_recommendations_url | append: '?section_id=' | append: section.id | append: '&product_id=' | append: product.id | append: '&limit=' | append: limit | append: '&intent=' | append: intent
+    endif
+  endif
+
   assign auto = false
-  if source != blank and source.products.size > 0
+  if list != blank and list.size > 0
     assign auto = true
   endif
 -%}
-<section class="product-related reveal" data-section-id="{{ section.id }}">
+<section class="product-related reveal" data-section-id="{{ section.id }}"{% if rec_url != blank %} data-recommendations="{{ rec_url | escape }}"{% endif %}>
   {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
   <div class="related-grid">
     {%- if auto -%}
-      {%- for product in source.products limit: limit -%}
+      {%- for product in list limit: limit -%}
+        {%- if product.id == current_id -%}{%- continue -%}{%- endif -%}
         {%- liquid
           assign r_img1 = product.featured_image | image_url: width: 720
-          assign r_img2 = product.images[1] | image_url: width: 720
-          assign r_img3 = product.images[2] | image_url: width: 720
           assign r_w = product.featured_image.width | default: 1000
           assign r_h = product.featured_image.height | default: 1250
           assign r_price = product.price | money
@@ -29,9 +49,9 @@
             assign r_new = 1
           endif
         -%}
-        {% render 'related-card',
+        {% render 'related-card', product: product,
           card_url: product.url, title: product.title, price: r_price, meta: r_meta,
-          img1: r_img1, img2: r_img2, img3: r_img3, img_w: r_w, img_h: r_h,
+          img1: r_img1, img_w: r_w, img_h: r_h,
           badge: r_new, data_price: product.price, data_new: r_new %}
       {%- endfor -%}
     {%- else -%}
@@ -39,19 +59,11 @@
         {%- if block.type == 'product' -%}
           {%- liquid
             assign d_img1 = block.settings.demo_image | asset_url
-            assign d_img2 = ''
-            if block.settings.demo_image_2 != blank
-              assign d_img2 = block.settings.demo_image_2 | asset_url
-            endif
-            assign d_img3 = ''
-            if block.settings.demo_image_3 != blank
-              assign d_img3 = block.settings.demo_image_3 | asset_url
-            endif
           -%}
           {% render 'related-card',
             card_url: block.settings.link, title: block.settings.demo_title,
             price: block.settings.demo_price, meta: block.settings.demo_meta,
-            img1: d_img1, img2: d_img2, img3: d_img3, badge: block.settings.badge,
+            img1: d_img1, badge: block.settings.badge,
             data_price: block.settings.data_price, data_new: block.settings.data_new %}
         {%- endif -%}
       {%- endfor -%}
@@ -69,21 +81,73 @@
 @media (max-width: 1180px) { .product-related .related-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 720px) { .product-related .related-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 12px; } }
 .product-related .product { cursor: pointer; }
+
+/* v96 / v98 — mismas proporciones de tarjeta que el listado en móvil. */
+@media (max-width: 780px) {
+  .product-related { width: calc(100vw - 28px) !important; }
+  .product-related .related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 28px 10px !important; }
+  .product-related .product-media { aspect-ratio: 4 / 5 !important; }
+  .product-related .product-info { margin-top: 9px !important; gap: 4px 8px !important; font-size: 10px !important; }
+  .product-related .product-info h3 { font-size: 10px !important; line-height: 1.32 !important; }
+  .product-related .product-info p { font-size: 8px !important; line-height: 1.35 !important; }
+  .product-related .price { font-size: 10px !important; }
+  .product-related .fav { width: 32px !important; height: 32px !important; right: 6px !important; top: 5px !important; }
+}
+
+@media (max-width: 760px) {
+  .product-related .related-grid { gap: 24px 10px !important; }
+  .product-related .related-grid .product-media { overflow: hidden !important; }
+  .product-related .related-grid .product-media img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
+}
+
+@media (max-width: 420px) {
+  .product-related .related-grid { gap: 24px 8px !important; }
+  .product-related .product-info h3 { font-size: 9.5px !important; }
+}
 {% endstylesheet %}
 
 {% javascript %}
 (function () {
-  function init(root) {
+  function initCards(root) {
     root.querySelectorAll('.product').forEach(function (card) {
       if (card.dataset.cardLink) return;
       card.dataset.cardLink = '1';
       card.addEventListener('click', function (e) {
-        if (e.target.closest('button, .media-nav')) return;
+        if (e.target.closest('button')) return;
         var link = card.querySelector('.product-info a');
         if (link && link.href) window.location.href = link.href;
       });
     });
   }
+
+  // Product Recommendations API via the Section Rendering API: swap the collection
+  // grid for the real recommendations. Anything that comes back empty (e.g. `complementary`
+  // with no products set in Search & Discovery) leaves the collection grid in place, so
+  // the cross-sell row is never blank.
+  function loadRecommendations(root) {
+    var url = root.dataset.recommendations;
+    if (!url) return;
+    root.removeAttribute('data-recommendations');
+    fetch(url)
+      .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
+      .then(function (html) {
+        var next = new DOMParser().parseFromString(html, 'text/html').querySelector('.related-grid');
+        var grid = root.querySelector('.related-grid');
+        if (!grid || !next || !next.querySelector('.product')) return;
+        grid.replaceWith(next);
+        initCards(root);
+        // ponytail: let theme.js's shopify:section:load handler observe the new .reveal
+        // cards instead of re-implementing the observer here (same as collection-grid).
+        root.dispatchEvent(new CustomEvent('shopify:section:load', { bubbles: true }));
+      })
+      .catch(function () {});
+  }
+
+  function init(root) {
+    initCards(root);
+    loadRecommendations(root);
+  }
+
   document.querySelectorAll('.product-related').forEach(init);
   document.addEventListener('shopify:section:load', function (e) {
     e.target.querySelectorAll('.product-related').forEach(init);
@@ -96,7 +160,22 @@
   "name": "Related products",
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading", "default": "Completa la mesa" },
-    { "type": "collection", "id": "collection", "label": "Collection (auto-fill — overrides demo blocks)" },
+    {
+      "type": "select", "id": "source", "label": "Source", "default": "collection",
+      "options": [
+        { "value": "collection", "label": "Collection (manual)" },
+        { "value": "recommendations", "label": "Shopify recommendations" }
+      ]
+    },
+    {
+      "type": "select", "id": "intent", "label": "Recommendation intent", "default": "related",
+      "info": "Only used when Source = Shopify recommendations. 'Complementary' needs the Search & Discovery app configured per product.",
+      "options": [
+        { "value": "related", "label": "Related (algorithmic)" },
+        { "value": "complementary", "label": "Complementary (curated)" }
+      ]
+    },
+    { "type": "collection", "id": "collection", "label": "Collection (auto-fill / recommendations fallback)" },
     { "type": "range", "id": "product_limit", "label": "Products shown", "min": 3, "max": 6, "step": 1, "default": 5 }
   ],
   "blocks": [
@@ -109,8 +188,6 @@
         { "type": "text", "id": "demo_price", "label": "Price (e.g. 92 €)" },
         { "type": "text", "id": "demo_meta", "label": "Meta line" },
         { "type": "text", "id": "demo_image", "label": "Image (asset filename)" },
-        { "type": "text", "id": "demo_image_2", "label": "Hover image (asset filename)" },
-        { "type": "text", "id": "demo_image_3", "label": "Third carousel image (asset filename)" },
         { "type": "checkbox", "id": "badge", "label": "Show 'Novedad' badge", "default": false },
         { "type": "number", "id": "data_price", "label": "Sort price (number)" },
         { "type": "number", "id": "data_new", "label": "Is new (1/0)" },

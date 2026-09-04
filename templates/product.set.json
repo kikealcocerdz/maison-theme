@@ -1,0 +1,49 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product-detail",
+      "settings": {
+        "layout": "set",
+        "demo_servicio": "Vajilla completa · 12 comensales",
+        "demo_swatch": "#6f8797",
+        "demo_bundles": "42 P. | 1.138,95 \u20ac | plato-llano-ceilan:12, plato-hondo-ceilan:12, plato-postre-ceilan:12, bol-grande-ceilan:2, fuente-red-ceilan:1, sopera-ceilan:1, salsera-ceilan:1, ensaladera-ceilan:1\n56 P. | 1.506,95 \u20ac | plato-llano-ceilan:12, plato-hondo-ceilan:12, plato-postre-ceilan:12, plato-pan-ceilan:12, fuente-red-ceilan:1, fuente-gra-ceilan:2, sopera-ceilan:1, salsera-ceilan:1, ensaladera-ceilan:3"
+      },
+      "blocks": {
+        "a1": { "type": "accordion", "settings": { "label": "Detalles", "content": "<p>Loza fina esmaltada de acabado brillante con decoración aplicada bajo barniz. Las configuraciones agrupan piezas de mesa y servicio de la misma colección.</p>", "show_description": false } },
+        "a2": { "type": "accordion", "settings": { "label": "Cuidados", "content": "<p>Evitar productos abrasivos y golpes térmicos. Recomendamos lavado delicado y secado suave para conservar el brillo y la definición de la decoración.</p>" } },
+        "a3": { "type": "accordion", "settings": { "label": "Envío y devoluciones", "content": "<p>Embalaje específico para cerámica, entrega protegida y seguimiento del pedido. Cambios y devoluciones conforme a las condiciones de venta vigentes.</p>" } }
+      },
+      "block_order": ["a1", "a2", "a3"]
+    },
+    "story": {
+      "type": "product-story",
+      "settings": {
+        "eyebrow": "Bien de Interés Cultural desde 1998",
+        "heading": "No compras una vajilla. Pones una mesa con historia",
+        "body": "<p>Desde Sevilla, la loza fina de La Cartuja conserva el pulso de los oficios lentos: moldes, esmaltes, memoria gráfica y una manera de entender la mesa como ritual.</p>",
+        "cta_label": "Nuestra historia",
+        "cta_link": "/",
+        "ornament": "1841",
+        "demo_image": "mesa_aurora_editorial.webp"
+      }
+    },
+    "related_set": {
+      "type": "product-related",
+      "settings": { "heading": "Completa la mesa", "product_limit": 5, "source": "recommendations", "intent": "complementary" }
+    },
+    "related_cross": {
+      "type": "product-related",
+      "settings": { "heading": "Te puede interesar", "product_limit": 5, "collection": "emblemas", "source": "recommendations", "intent": "related" }
+    }
+  },
+  "order": ["main", "story", "related_set", "related_cross"]
+}
