@@ -200,6 +200,17 @@
     "tables": {
       "filters": "Filtros de mesas",
       "hotspot": "Ver pieza"
+    },
+    "help": {
+      "open": "Abrir consulta",
+      "close": "Cerrar",
+      "title": "Consulta",
+      "faq": "Preguntas frecuentes",
+      "message": "Tu consulta",
+      "message_placeholder": "Pedido, disponibilidad o tienda",
+      "send": "Escribir por WhatsApp",
+      "send_form": "Ir al formulario de contacto",
+      "privacy_html": "Al escribirnos tratamos tus datos para atender tu consulta. Consulta la <a href=\"{{ url }}\">política de privacidad</a>."
     }
   }
 }

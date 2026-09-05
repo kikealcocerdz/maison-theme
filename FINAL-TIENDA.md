@@ -140,6 +140,33 @@ devuelve **302** — la tienda está con contraseña de escaparate. Con esa cont
   en serif, orden ascendente y que «Cargar más» lo conserva. Depende de que la colección
   exista (§1.2 / §1.4).
 
+### Burbuja de consulta / WhatsApp — ✅ código hecho, ⛔ falta el número
+
+`sections/help-bubble.liquid` + `snippets/icon-anchor.liquid`, montada en
+`sections/footer-group.json` para que salga en todas las páginas. Modelo Zara Home, que
+es el que eligió el cliente: ancla abajo a la derecha; al abrir, horario con punto
+verde/gris, 4 FAQs, campo de texto, aviso LOPD.
+
+- El envío es un **deep link `wa.me`**, no un widget: sin script de terceros, sin cookie,
+  sin nada que consentir. El `href` ya funciona sin JS; el JS solo añade `?text=` con lo
+  escrito.
+- **Sin número configurado el botón lleva a `/pages/contacto`** — no queda muerto. Hoy
+  está así: `whatsapp_number` vacío en `footer-group.json`.
+- Abierto/cerrado se calcula en la **zona horaria de la tienda** (`Europe/Madrid`), no en
+  la del visitante. Si el cálculo falla, el punto se queda gris: nunca dice «abierto» sin
+  haberlo comprobado.
+- Las FAQs salen de la política real de `snippets/legal-envios.liquid` (7 días hábiles /
+  15-21 en producción, 150 € de envío gratis, 14 días de devolución). Si cambia la
+  política, cambian aquí también.
+
+**Pendiente del cliente**, y no es código:
+
+| Qué | Dónde |
+|---|---|
+| Dar el número en formato internacional y ponerlo en `whatsapp_number` | Editor de temas → Footer → Help bubble. El PIN **no hace falta para el tema**: es solo para dar de alta la línea en la app de WhatsApp Business |
+| Cargar los dos textos automáticos («Bienvenida» y «Fuera de horario») tal cual los escribió | App WhatsApp Business → Herramientas → Mensaje de bienvenida / Mensaje de ausencia. **El tema no puede enviarlos**: son de WhatsApp |
+| Revisar las 4 FAQs | Editor de temas → Footer → Help bubble → bloques |
+
 ---
 
 ## 3 · Contratos que NO puedes romper

@@ -200,6 +200,17 @@
     "tables": {
       "filters": "Table filters",
       "hotspot": "View piece"
+    },
+    "help": {
+      "open": "Open enquiry",
+      "close": "Close",
+      "title": "Enquiry",
+      "faq": "Frequently asked questions",
+      "message": "Your enquiry",
+      "message_placeholder": "Order, availability or store",
+      "send": "Message us on WhatsApp",
+      "send_form": "Go to the contact form",
+      "privacy_html": "When you write to us we process your data to answer your enquiry. See the <a href=\"{{ url }}\">privacy policy</a>."
     }
   }
 }

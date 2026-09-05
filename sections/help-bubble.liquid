@@ -1,0 +1,310 @@
+{%- comment -%}
+  Help bubble — the floating consultation button (bottom-right, every page).
+
+  Model: Zara Home, which is what the client picked. Anchor emblem, fixed bottom-right;
+  on open it shows opening hours, a few short FAQs, a message box and the LOPD notice.
+
+  What this section does NOT do, on purpose:
+  - It does not chat. The send button hands the typed text to WhatsApp via a `wa.me`
+    deep link — no widget, no third-party script, no cookie, nothing to consent to.
+  - The "Bienvenida" / "Fuera de horario" auto-replies the client wrote are WhatsApp
+    Business features (greeting + away message), configured in that app. What lives here
+    is the on-screen version of the same two texts, so the shopper reads it *before*
+    writing rather than after.
+
+  Renders with no WhatsApp number set: the send button falls back to the contact page,
+  so the bubble is useful from the moment it ships (CLAUDE.md §7).
+{%- endcomment -%}
+
+{%- liquid
+  assign wa = section.settings.whatsapp_number | remove: ' ' | remove: '+' | remove: '-' | remove: '(' | remove: ')' | remove: '.'
+  assign privacy_url = section.settings.privacy_url | default: '/pages/politica-privacidad'
+  assign contact_url = section.settings.contact_url | default: '/pages/contacto'
+  assign hours_label = section.settings.hours_label
+  assign has_faq = false
+  for block in section.blocks
+    if block.type == 'faq'
+      assign has_faq = true
+    endif
+  endfor
+-%}
+
+<div class="help-bubble" data-help
+  data-tz="{{ section.settings.timezone | default: 'Europe/Madrid' | escape }}"
+  data-days="{{ section.settings.open_days | default: '1,2,3,4,5' | escape }}"
+  data-open="{{ section.settings.open_time | default: '07:00' | escape }}"
+  data-close="{{ section.settings.close_time | default: '15:00' | escape }}"
+  data-greeting-closed="{{ section.settings.greeting_closed | strip_html | escape }}">
+
+  <button class="help-fab" type="button" data-help-toggle aria-expanded="false" aria-controls="helpPanel"
+    aria-label="{{ 'sections.help.open' | t }}">
+    {%- if section.settings.icon != blank -%}
+      <img src="{{ section.settings.icon | image_url: width: 96 }}" alt=""
+        width="{{ section.settings.icon.width }}" height="{{ section.settings.icon.height }}" loading="lazy">
+    {%- else -%}
+      {% render 'icon-anchor' %}
+    {%- endif -%}
+  </button>
+
+  <div class="help-panel" id="helpPanel" role="dialog" aria-label="{{ 'sections.help.title' | t }}" hidden>
+    <div class="help-head">
+      <div class="help-head-text">
+        <p class="help-title">{{ section.settings.heading | default: shop.name | escape }}</p>
+        {%- if hours_label != blank -%}
+          <p class="help-hours">
+            <span class="help-dot" data-help-dot aria-hidden="true"></span>{{ hours_label | escape }}
+          </p>
+        {%- endif -%}
+      </div>
+      <button class="help-close" type="button" data-help-close aria-label="{{ 'sections.help.close' | t }}">{% render 'icon-close' %}</button>
+    </div>
+
+    <div class="help-body">
+      {%- if section.settings.greeting != blank -%}
+        <p class="help-greeting" data-help-greeting>{{ section.settings.greeting | strip_html }}</p>
+      {%- endif -%}
+
+      {%- if has_faq -%}
+        {%- comment -%}
+          Native <details>: the whole accordion is free, works with no JS, and is what
+          screen readers and Ctrl+F already understand. No handler needed.
+        {%- endcomment -%}
+        <div class="help-faq">
+          <p class="help-faq-title">{{ 'sections.help.faq' | t }}</p>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'faq' and block.settings.question != blank -%}
+              <details class="help-faq-item" {{ block.shopify_attributes }}>
+                <summary>{{ block.settings.question | escape }}<span class="help-faq-x" aria-hidden="true">+</span></summary>
+                <div class="help-faq-answer">{{ block.settings.answer }}</div>
+              </details>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <label class="help-field">
+        <span class="help-field-label">{{ 'sections.help.message' | t }}</span>
+        <textarea rows="3" data-help-message placeholder="{{ 'sections.help.message_placeholder' | t }}"></textarea>
+      </label>
+
+      {%- comment -%}
+        No JS: a bare wa.me link still opens the chat, just without the text prefilled.
+        The JS below appends ?text= on click. With no number configured it points at the
+        contact page instead, which is a real form rather than a dead button.
+      {%- endcomment -%}
+      {%- if wa != blank -%}
+        <a class="help-send" href="https://wa.me/{{ wa }}" target="_blank" rel="noopener" data-help-send data-wa="{{ wa }}">
+          {{ 'sections.help.send' | t }} <span aria-hidden="true">→</span>
+        </a>
+      {%- else -%}
+        <a class="help-send" href="{{ contact_url }}">{{ 'sections.help.send_form' | t }} <span aria-hidden="true">→</span></a>
+      {%- endif -%}
+
+      <p class="help-legal">{{ 'sections.help.privacy_html' | t: url: privacy_url }}</p>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.help-bubble { position: fixed; right: 22px; bottom: 22px; z-index: 70; }
+
+.help-fab {
+  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%;
+  background: var(--ink); color: var(--paper); cursor: pointer;
+  box-shadow: 0 10px 30px rgba(15, 26, 46, .26);
+  transition: transform 260ms var(--ease), box-shadow 260ms var(--ease);
+}
+.help-fab:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(15, 26, 46, .32); }
+.help-fab img { width: 26px; height: 26px; object-fit: contain; }
+.help-bubble.is-open .help-fab { transform: scale(.9); opacity: .5; }
+
+.help-panel {
+  position: absolute; right: 0; bottom: 68px; width: min(88vw, 348px);
+  max-height: min(76vh, 560px); display: flex; flex-direction: column;
+  background: var(--paper); border: .5px solid var(--rule);
+  box-shadow: 0 24px 70px rgba(15, 26, 46, .18);
+  animation: help-in 280ms var(--ease);
+}
+@keyframes help-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.help-head {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  padding: 18px 18px 14px; border-bottom: .5px solid var(--rule);
+}
+.help-title { font-family: var(--serif); font-size: 17px; margin: 0; color: var(--ink); font-variant: small-caps; letter-spacing: .03em; }
+.help-hours { display: flex; align-items: center; gap: 7px; margin: 5px 0 0; font-size: 10px; letter-spacing: .06em; color: var(--muted); }
+/* Grey until the script decides; never claims "open" without checking the clock. */
+.help-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); flex: 0 0 6px; }
+.help-dot.is-live { background: #3f9d54; }
+.help-close { color: var(--muted); padding: 2px; cursor: pointer; }
+.help-close:hover { color: var(--ink); }
+
+.help-body { padding: 16px 18px 20px; overflow-y: auto; overscroll-behavior: contain; }
+.help-greeting { margin: 0 0 16px; font-size: 12px; line-height: 1.75; color: var(--ink-soft); }
+
+.help-faq { margin-bottom: 18px; }
+.help-faq-title { margin: 0 0 6px; font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.help-faq-item { border-bottom: .5px solid var(--rule); }
+.help-faq-item summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 10px 0; cursor: pointer; list-style: none;
+  font-size: 11px; line-height: 1.5; color: var(--ink-soft);
+}
+.help-faq-item summary::-webkit-details-marker { display: none; }
+.help-faq-item summary:hover { color: var(--ink); }
+.help-faq-x { color: var(--muted); font-size: 14px; line-height: 1; transition: transform 240ms var(--ease); }
+.help-faq-item[open] .help-faq-x { transform: rotate(45deg); }
+.help-faq-answer { padding: 0 0 12px; font-size: 11px; line-height: 1.7; color: var(--muted); }
+.help-faq-answer p { margin: 0 0 8px; }
+.help-faq-answer :last-child { margin-bottom: 0; }
+
+.help-field { display: block; margin-bottom: 12px; }
+.help-field-label { display: block; margin-bottom: 7px; font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.help-field textarea {
+  width: 100%; padding: 11px 12px; background: transparent; border: .5px solid var(--rule);
+  color: var(--ink); font-family: var(--sans); font-size: 12px; line-height: 1.6; resize: vertical;
+}
+.help-field textarea:focus-visible { outline: 1px solid var(--ink); outline-offset: -1px; }
+
+.help-send {
+  display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 44px;
+  background: var(--ink); color: var(--paper); font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  transition: opacity 220ms var(--ease);
+}
+.help-send:hover { opacity: .86; }
+
+.help-legal { margin: 12px 0 0; font-size: 9.5px; line-height: 1.6; color: var(--muted); }
+.help-legal a { text-decoration: underline; text-underline-offset: 2px; }
+.help-legal a:hover { color: var(--ink); }
+
+@media (max-width: 620px) {
+  .help-bubble { right: 16px; bottom: 16px; }
+  .help-fab { width: 48px; height: 48px; }
+  .help-panel { width: calc(100vw - 32px); bottom: 60px; max-height: 74vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .help-panel { animation: none; }
+  .help-fab, .help-faq-x, .help-send { transition: none; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+(function () {
+  function init(root) {
+    if (!root || root.dataset.init) return;
+    root.dataset.init = '1';
+
+    var fab = root.querySelector('[data-help-toggle]');
+    var panel = root.querySelector('#helpPanel');
+    var closeBtn = root.querySelector('[data-help-close]');
+    var box = root.querySelector('[data-help-message]');
+    var send = root.querySelector('[data-help-send]');
+    if (!fab || !panel) return;
+
+    // ── Open / closed ────────────────────────────────────────────────────────
+    // The shop's hours are Madrid time; the visitor's clock is not. Reading "now"
+    // through the shop timezone is the only way a shopper in another country gets
+    // told the truth. Any failure leaves the dot grey and the greeting untouched —
+    // never a wrong "we're open".
+    function shopNow(tz) {
+      try { return new Date(new Date().toLocaleString('en-US', { timeZone: tz })); }
+      catch (e) { return null; }
+    }
+
+    function toMinutes(hhmm) {
+      var p = String(hhmm || '').split(':');
+      var h = parseInt(p[0], 10), m = parseInt(p[1], 10) || 0;
+      return isNaN(h) ? null : h * 60 + m;
+    }
+
+    function isOpen() {
+      var now = shopNow(root.dataset.tz);
+      var from = toMinutes(root.dataset.open);
+      var to = toMinutes(root.dataset.close);
+      if (!now || from === null || to === null) return null;
+      var days = (root.dataset.days || '').split(',').map(function (d) { return parseInt(d, 10); });
+      if (days.indexOf(now.getDay()) === -1) return false;
+      var mins = now.getHours() * 60 + now.getMinutes();
+      return mins >= from && mins < to;
+    }
+
+    var open = isOpen();
+    var dot = root.querySelector('[data-help-dot]');
+    if (dot && open === true) dot.classList.add('is-live');
+    if (open === false) {
+      var greeting = root.querySelector('[data-help-greeting]');
+      var closedText = root.dataset.greetingClosed;
+      if (greeting && closedText) greeting.textContent = closedText;
+    }
+
+    // ── Panel ────────────────────────────────────────────────────────────────
+    function setOpen(on) {
+      root.classList.toggle('is-open', on);
+      panel.hidden = !on;
+      fab.setAttribute('aria-expanded', on ? 'true' : 'false');
+      if (on && box) box.focus();
+      if (!on) fab.focus();
+    }
+
+    fab.addEventListener('click', function () { setOpen(panel.hidden); });
+    if (closeBtn) closeBtn.addEventListener('click', function () { setOpen(false); });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !panel.hidden) setOpen(false);
+    });
+    document.addEventListener('click', function (e) {
+      if (!panel.hidden && !root.contains(e.target)) setOpen(false);
+    });
+
+    // ── Send ─────────────────────────────────────────────────────────────────
+    // The href is already a working wa.me link; this only prefills what was typed.
+    if (send && box) {
+      send.addEventListener('click', function () {
+        var text = box.value.trim();
+        send.href = 'https://wa.me/' + send.dataset.wa + (text ? '?text=' + encodeURIComponent(text) : '');
+      });
+    }
+  }
+
+  document.querySelectorAll('[data-help]').forEach(init);
+  document.addEventListener('shopify:section:load', function (e) {
+    e.target.querySelectorAll('[data-help]').forEach(init);
+  });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Help bubble",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Title", "info": "Falls back to the shop name." },
+    { "type": "image_picker", "id": "icon", "label": "Icon", "info": "Falls back to the anchor emblem." },
+    { "type": "header", "content": "WhatsApp" },
+    { "type": "text", "id": "whatsapp_number", "label": "WhatsApp number", "info": "International format, e.g. 34600123456. Leave empty to send shoppers to the contact page instead." },
+    { "type": "header", "content": "Opening hours" },
+    { "type": "text", "id": "hours_label", "label": "Hours (shown to the shopper)", "default": "Lunes a viernes, 7:00–15:00" },
+    { "type": "text", "id": "open_days", "label": "Open days", "info": "Day numbers, 0 = Sunday. Monday to Friday is 1,2,3,4,5", "default": "1,2,3,4,5" },
+    { "type": "text", "id": "open_time", "label": "Opens at (HH:MM)", "default": "07:00" },
+    { "type": "text", "id": "close_time", "label": "Closes at (HH:MM)", "default": "15:00" },
+    { "type": "text", "id": "timezone", "label": "Time zone", "info": "IANA name. Decides open/closed for visitors in other countries.", "default": "Europe/Madrid" },
+    { "type": "header", "content": "Texts" },
+    { "type": "textarea", "id": "greeting", "label": "Greeting (within hours)" },
+    { "type": "textarea", "id": "greeting_closed", "label": "Greeting (outside hours)" },
+    { "type": "header", "content": "Legal" },
+    { "type": "url", "id": "privacy_url", "label": "Privacy policy link" },
+    { "type": "url", "id": "contact_url", "label": "Contact page link", "info": "Used as the fallback when no WhatsApp number is set." }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "enabled_on": { "groups": ["footer"] }
+}
+{% endschema %}

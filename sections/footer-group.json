@@ -50,9 +50,62 @@
         "col-2",
         "col-3"
       ]
+    },
+    "help-bubble": {
+      "type": "help-bubble",
+      "settings": {
+        "heading": "La Cartuja de Sevilla",
+        "whatsapp_number": "",
+        "hours_label": "Lunes a viernes, 7:00–15:00",
+        "open_days": "1,2,3,4,5",
+        "open_time": "07:00",
+        "close_time": "15:00",
+        "timezone": "Europe/Madrid",
+        "greeting": "Gracias por escribir a La Cartuja de Sevilla. Atendemos de lunes a viernes, de 7:00 a 15:00. Cuéntanos tu consulta (pedido, disponibilidad o tienda) y te respondemos en ese horario.",
+        "greeting_closed": "Ahora mismo estamos fuera de horario. Atendemos de lunes a viernes, de 7:00 a 15:00. Escríbenos y te responderemos el siguiente día laborable.",
+        "privacy_url": "/pages/politica-privacidad",
+        "contact_url": "/pages/contacto"
+      },
+      "blocks": {
+        "faq-1": {
+          "type": "faq",
+          "settings": {
+            "question": "¿Cuánto tarda mi pedido?",
+            "answer": "<p>Si la pieza está en stock, 7 días hábiles. Si está en producción, entre 15 y 21 días hábiles, desde la confirmación del pedido.</p>"
+          }
+        },
+        "faq-2": {
+          "type": "faq",
+          "settings": {
+            "question": "¿Cuánto cuesta el envío?",
+            "answer": "<p>En la Península es gratuito a partir de 150 € y 6,99 € por debajo. Para Baleares, Canarias, Ceuta, Melilla e internacional se calcula en el carrito según el destino.</p>"
+          }
+        },
+        "faq-3": {
+          "type": "faq",
+          "settings": {
+            "question": "¿Puedo devolver una pieza?",
+            "answer": "<p>Tienes 14 días naturales desde que recibes el pedido. Escríbenos con el número de pedido y las piezas, y te confirmamos los pasos. Los pedidos internacionales son venta final.</p>"
+          }
+        },
+        "faq-4": {
+          "type": "faq",
+          "settings": {
+            "question": "¿Tenéis tienda física?",
+            "answer": "<p>Sí, en Salteras (Sevilla), Carretera Nacional 630, km 805. Escríbenos y te contamos horarios y disponibilidad.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq-1",
+        "faq-2",
+        "faq-3",
+        "faq-4"
+      ]
     }
   },
   "order": [
-    "footer-multicol"
+    "footer-multicol",
+    "help-bubble"
   ]
 }
