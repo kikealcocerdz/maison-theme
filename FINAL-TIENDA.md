@@ -163,9 +163,10 @@ verde/gris, 4 FAQs, campo de texto, aviso LOPD.
 
 | Qué | Dónde |
 |---|---|
-| Dar el número en formato internacional y ponerlo en `whatsapp_number` | Editor de temas → Footer → Help bubble. El PIN **no hace falta para el tema**: es solo para dar de alta la línea en la app de WhatsApp Business |
+| ⚠️ **Sustituir el número de ejemplo** `+34 600 000 000` por el real | `sections/footer-group.json` → `help-bubble.whatsapp_number`, o Editor de temas → Footer → Help bubble. **Es un placeholder: hoy el botón lleva a un número que no existe.** El PIN **no hace falta para el tema**: es solo para dar de alta la línea en la app de WhatsApp Business |
 | Cargar los dos textos automáticos («Bienvenida» y «Fuera de horario») tal cual los escribió | App WhatsApp Business → Herramientas → Mensaje de bienvenida / Mensaje de ausencia. **El tema no puede enviarlos**: son de WhatsApp |
 | Revisar las 4 FAQs | Editor de temas → Footer → Help bubble → bloques |
+| Poner **info@lacartujadesevilla.com** como correo de contacto de la tienda | Ajustes → Detalles de la tienda. Es donde Shopify entrega el `{% form 'contact' %}` de `/pages/contacto`, y el tema no lo controla. Desde 2026-09-05 el tema publica **solo** esa dirección (18 apariciones; `pedidos@` retirado), así que si el admin apunta a otro buzón, las respuestas saldrían de una dirección que no está en la web |
 
 ---
 
