@@ -1,0 +1,97 @@
+{%- comment -%}
+  Storefront facets for the collection sidebar (Fase B).
+
+  Renders whatever the Search & Discovery app exposes in `collection.filters` — nothing
+  is hardcoded, so a filter the client adds in the admin shows up here without a code
+  change, and a store with the app off renders nothing at all (the sidebar keeps only
+  `collection-nav`'s chapter tree).
+
+  The <form method="get"> IS the feature: with JS off it navigates normally and Shopify
+  filters server-side. `collection-grid`'s JS upgrades it to an in-place re-render via
+  the Section Rendering API — see the `[data-filters]` block there.
+
+  Markup deliberately reuses `.side-section` / `.side-panel` from `collection-nav` so the
+  accordion CSS and its (delegated) toggle handler apply unchanged.
+
+  Types covered: `list` / `boolean` (checkboxes) and `price_range` (min/max). Any other
+  type Shopify may add is skipped rather than rendered wrong.
+{%- endcomment -%}
+
+{%- if collection.filters.size > 0 -%}
+  <form method="get" class="side-filters" data-filters>
+    <div class="side-filters-head">
+      <span class="side-filters-title">{{ 'sections.collection.filters' | t }}</span>
+      {%- if collection.url != blank -%}
+        <a class="side-filters-clear" href="{{ collection.url }}" data-filters-clear>{{ 'sections.collection.filter_clear' | t }}</a>
+      {%- endif -%}
+    </div>
+
+    <div class="side-accordion">
+      {%- for filter in collection.filters -%}
+        {%- liquid
+          assign is_open = false
+          if filter.active_values.size > 0
+            assign is_open = true
+          endif
+          if filter.type == 'price_range' and filter.min_value.value or filter.max_value.value
+            assign is_open = true
+          endif
+        -%}
+        <div class="side-section{% if is_open %} is-open{% endif %}">
+          <div class="side-section-head">
+            <span class="side-main-link">{{ filter.label | escape }}</span>
+            <button class="side-toggle" type="button" aria-expanded="{{ is_open }}" aria-label="{{ 'sections.collection.toggle' | t: name: filter.label }}"></button>
+          </div>
+          <div class="side-panel"><div>
+            {%- case filter.type -%}
+              {%- when 'list', 'boolean' -%}
+                {%- for value in filter.values -%}
+                  {%- comment -%}
+                    A zero-count value that is not active can never be reached: Shopify would
+                    return an empty grid. Disable it instead of hiding it, so the list of
+                    options does not jump around as the shopper narrows down.
+                  {%- endcomment -%}
+                  {%- liquid
+                    assign is_dead = false
+                    if value.count == 0 and value.active == false
+                      assign is_dead = true
+                    endif
+                  -%}
+                  <label class="facet{% if is_dead %} is-dead{% endif %}">
+                    <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value | escape }}"{% if value.active %} checked{% endif %}{% if is_dead %} disabled{% endif %}>
+                    <span class="facet-label">{{ value.label | escape }}</span>
+                    <span class="facet-count" aria-hidden="true">{{ value.count }}</span>
+                  </label>
+                {%- endfor -%}
+
+              {%- when 'price_range' -%}
+                {%- comment -%}
+                  Shopify hands prices in cents; the inputs speak whole units. `range_max`
+                  is the cap for the whole collection, so it doubles as the max attribute.
+                {%- endcomment -%}
+                <div class="facet-price">
+                  <input type="number" inputmode="numeric" min="0" max="{{ filter.range_max | divided_by: 100 }}" step="1"
+                    name="{{ filter.min_value.param_name }}"
+                    aria-label="{{ 'sections.collection.price_from' | t }}"
+                    placeholder="{{ 'sections.collection.price_from' | t }}"
+                    {%- if filter.min_value.value %} value="{{ filter.min_value.value | divided_by: 100 }}"{% endif %}>
+                  <span class="facet-price-sep" aria-hidden="true">—</span>
+                  <input type="number" inputmode="numeric" min="0" max="{{ filter.range_max | divided_by: 100 }}" step="1"
+                    name="{{ filter.max_value.param_name }}"
+                    aria-label="{{ 'sections.collection.price_to' | t }}"
+                    placeholder="{{ 'sections.collection.price_to' | t }}"
+                    {%- if filter.max_value.value %} value="{{ filter.max_value.value | divided_by: 100 }}"{% endif %}>
+                </div>
+            {%- endcase -%}
+          </div></div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- comment -%}
+      Only reachable with JS off — the enhanced path submits on change. Kept outside
+      <noscript> so keyboard users who hit Enter in a price field get a real submit.
+    {%- endcomment -%}
+    <button class="ghost-btn side-filters-apply" type="submit">{{ 'sections.collection.filter_apply' | t }}</button>
+  </form>
+{%- endif -%}

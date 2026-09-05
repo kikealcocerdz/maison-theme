@@ -18,51 +18,72 @@ comprobar si funciona.
 
 | # | Qué | Para qué | Quién |
 |---|---|---|---|
-| 1 | Activar filtros en la app **Search & Discovery** | Sin esto `collection.filters` es una lista vacía y toda la Fase B es código no verificable | Cliente |
+| ~~1~~ | ~~Activar filtros en la app **Search & Discovery**~~ | ✅ **Hecho.** Comprobado el 2026-09-05: `collection.filters.size == 2`. La Fase B ya está escrita y verificada (§2) | — |
 | 2 | Poner el orden por defecto de la colección `sets-regalo` a **«Precio: de menor a mayor»** | Es lo que sustituye al respaldo cliente de `budget_mode`. Ver §3 | Cliente |
 | 3 | Asignar **productos complementarios** por producto en Search & Discovery | Sin esto `intent=complementary` («Completa la mesa») devuelve vacío y la fila cae al grid de colección. Activar la app (§1.1) **no** basta: hay que rellenarlo producto a producto | Cliente |
 | 4 | Emitir un **token de Admin API** (`shpat_…`) con `read_products` + `write_products` | Único camino para barrer «Calcomanía» / «Vidriado» del catálogo. La CLI de Shopify **no** puede. Ver §2 «Barrido de copy» | Cliente |
 | 5 | Confirmar el **handle** de la colección de sets | La plantilla es `templates/collection.sets-regalo.json` y Shopify la enlaza por handle. Si la colección se crea con otro handle, la plantilla no se aplica y hay que renombrar el archivo a `collection.<handle>.json` | Cliente → agente |
 
+### 1b · Lo que falta tocar en el admin para que las facetas luzcan
+
+Los filtros están activos, pero solo hay **dos** y con los nombres por defecto. Nada de
+esto es código — la UI los recoge sola en cuanto existan.
+
+| Qué | Dónde | Por qué |
+|---|---|---|
+| Renombrar los grupos **«Availability» → «Disponibilidad»** y **«Price» → «Precio»** | Apps → Search & Discovery → Filters → cada filtro → nombre | Hoy los títulos salen **en inglés** sobre una tienda en español. Los *valores* sí vienen traducidos («En existencia» / «Agotado»); solo el nombre del grupo está sin traducir |
+| Añadir el filtro **Tipo de producto** (`product_type`) | Apps → Search & Discovery → Filters → Add filter | Es el que pinta el sidebar del mock («Vajillas», «Platos», «Tazas»…). Sin él las facetas se quedan en Disponibilidad + Precio |
+| Opcional: **Colección**, **Proveedor**, o metacampos (color, nº de piezas) | mismo sitio | Cada uno aparece como un acordeón más, sin tocar el tema |
+| Revisar el orden de los filtros | mismo sitio, arrastrando | Es el orden en que se pintan en la columna |
+
+Después de cambiar cualquiera de estos: recargar `/collections/all` y comprobar que el
+acordeón nuevo aparece. No hace falta `theme push` — el tema no los conoce por nombre.
+
 ---
 
 ## 2 · Pendiente de implementar
 
-### Facetas de colección (Fase B) — ~1 día · BLOQUEADO por §1.1
+### Facetas de colección (Fase B) — ✅ HECHA (2026-09-05)
 
-En `sections/collection-grid.liquid` + `snippets/collection-nav.liquid` + locales.
+Implementada en `snippets/collection-filters.liquid` (nuevo), enganchada desde
+`snippets/collection-nav.liquid` y con CSS/JS en `sections/collection-grid.liquid`.
 
-1. `<form>` GET con `{% for filter in collection.filters %}`. Cubrir `filter.type == 'list'`
-   (checkboxes con `filter_value.count`, `.active`, `.url_to_remove`) y `'price_range'`
-   (inputs `min` / `max`).
-2. Colocarlo en el sidebar — `collection-nav.liquid` ya es la columna izquierda, no rehagas
-   el layout. El bloque demo de `href="#"` de la línea ~63 se queda como fallback cuando
-   `collection.filters == empty`.
-3. Chips de activos + «limpiar»: `filter.active_values` y `collection.url`, preservando
-   `?sort_by=`.
-4. **Re-render sin recarga: reusa el fetch de «Cargar más»** (Section Rendering API con
-   `&section_id=`, ya escrito en el `{% javascript %}` de la sección) + `history.replaceState`.
-   No escribas un segundo fetcher.
-5. Drawer móvil: reusa el patrón de acordeón que ya tiene `collection-nav`.
-6. i18n: claves nuevas en `locales/es.default.json` **y** `en.json`, deep-merge
-   (CLAUDE.md §6), bajo `sections.collection.*`.
+**Nada está hardcodeado**: la UI itera `collection.filters`, así que cualquier filtro que
+el cliente añada en Search & Discovery aparece solo, sin tocar código. Cubre `list` /
+`boolean` (checkboxes con `count`, valores inalcanzables en `disabled`) y `price_range`
+(min/max en unidades enteras; Shopify los da en céntimos).
 
-⚠️ **Corregido el 2026-09-05 (sesión de cierre).** La versión anterior de este documento
-decía que el helper `sort_filter_query` «ya está hecho y no hay que rehacerlo». **No existe.**
-`grep -r sort_filter_query` sobre todas las ramas y todo el historial solo lo encuentra en
-este propio archivo. Hay que escribirlo dentro de la Fase B.
+- El `<form method="get">` **es** la funcionalidad: sin JS navega y Shopify filtra en
+  servidor. El JS solo lo mejora — reemplaza el nodo raíz de la sección con la respuesta
+  de la Section Rendering API y hace `history.replaceState`. Como se sustituye la raíz
+  entera, `init()` vuelve a montar acordeón, orden, «Cargar más» y `budget_mode` sin un
+  segundo camino de código; cualquier fallo cae a `location.assign()`.
+- Chips de activos + «limpiar» sobre la rejilla, cada uno un `<a href="url_to_remove">`
+  real (funcionan sin JS; el JS los intercepta).
+- Móvil: el sidebar **es** el drawer (`.filters-drawer-open`), no hay un segundo árbol de
+  markup. Botón «Filtrar» con contador en la toolbar, cierre por Esc, por la ✕ y por el
+  velo. Dentro del drawer no se auto-aplica al marcar: ahí manda el botón «Aplicar».
+- i18n: 8 claves nuevas bajo `sections.collection.*` en `es.default.json` **y** `en.json`.
 
-Y hay algo más de fondo: **la ordenación de hoy no toca la URL en absoluto.** El menú de
-`.sort-wrap` son tres `<button type="button">` que llaman a `applySort()`, que reordena los
-nodos que **ya están en el DOM**. No hay un solo `sort_by` en ningún `.liquid` del tema
-(`grep -rn 'sort_by' --include='*.liquid'` → 0 resultados). Consecuencias para quien haga la
-Fase B:
+Sobre el helper `sort_filter_query` que la versión anterior de este doc daba por hecho:
+**no hacía falta**. No existen URLs de ordenación donde inyectar los filtros — el orden es
+client-side (`applySort` sobre el DOM). Los filtros son un GET puro y por eso no chocan
+con el contrato de §3.
 
-- No hay «URLs de ordenación» donde inyectar los `filter.*`. Si quieres filtros y orden que
-  convivan, primero hay que convertir esos botones en enlaces `?sort_by=` reales, y eso
-  choca con el contrato de `applySort` / `budget_mode` de §3 — resuélvelo antes de empezar.
-- `applySort()` solo ordena la página cargada. Con `paginate` el orden real de la colección
-  sigue saliendo del admin (§1.2). Por eso `budget_mode` es un respaldo, no la solución.
+Verificado el 2026-09-05 contra la tienda real (`theme dev`, `/collections/all`, 438
+productos):
+
+| Comprobación | Resultado |
+|---|---|
+| `?filter.v.price.gte=0&lte=50` | 261 de 438 |
+| `?filter.v.price.gte=200` | 34 de 438 |
+| `?filter.v.availability=0` | rejilla vacía, sin romper |
+| `paginate.next.url` conserva el filtro | `?filter.v.price.gte=200&page=2` → «34 de 34» |
+| Section Rendering API con `section_id` | 200, devuelve `.collection-grid` con form y chips |
+| «Translation missing» | 0, en `/collections/all` y `/collections/emblemas` |
+| `shopify theme check` | 0 errores |
+
+**Lo que falta es del admin, no del código** — ver §1.1b.
 
 ### Barrido de copy en el catálogo — BLOQUEADO por §1.4
 

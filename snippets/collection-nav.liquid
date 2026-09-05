@@ -14,6 +14,9 @@
 -%}
 
 <aside class="sidebar">
+  {%- comment -%} Only ever visible inside the mobile filters drawer (see collection-grid CSS). {%- endcomment -%}
+  <button class="filters-close" type="button" data-filters-close>{{ 'sections.collection.filters_close' | t }}</button>
+
   <nav class="side-accordion" aria-label="{{ 'sections.collection.nav_label' | t }}">
     {%- if menu != blank and menu.links.size > 0 -%}
       {%- for parent in menu.links -%}
@@ -68,4 +71,11 @@
       </div>
     {%- endif -%}
   </nav>
+
+  {%- comment -%}
+    Facets live under the chapter tree, in the same column. Renders nothing when the
+    Search & Discovery app exposes no filters, so the demo tree above stays the whole
+    sidebar exactly as before.
+  {%- endcomment -%}
+  {% render 'collection-filters' %}
 </aside>

@@ -70,6 +70,19 @@
       </section>
 
       <div class="toolbar">
+        {%- comment -%}
+          Mobile-only door to the sidebar: below 780px `.sidebar` is display:none, so
+          without this the facets would be unreachable on a phone. Hidden when the store
+          exposes no filters — the chapter tree alone doesn't warrant a drawer.
+        {%- endcomment -%}
+        {%- if collection.filters.size > 0 -%}
+          <button class="filters-open" type="button" data-filters-open aria-expanded="false">
+            {{ 'sections.collection.filters_open' | t }}
+            {%- assign active_count = 0 -%}
+            {%- for filter in collection.filters -%}{%- assign active_count = active_count | plus: filter.active_values.size -%}{%- endfor -%}
+            {%- if active_count > 0 -%}<span class="filters-open-count">{{ active_count }}</span>{%- endif -%}
+          </button>
+        {%- endif -%}
         <div class="view-toggle" aria-label="{{ 'sections.collection.view_toggle' | t }}">
           <button class="view-btn active" type="button" data-view="grid" aria-label="{{ 'sections.collection.view_grid' | t }}"><span class="view-icon grid"><i></i><i></i><i></i></span></button>
           <button class="view-btn" type="button" data-view="list" aria-label="{{ 'sections.collection.view_list' | t }}"><span class="view-icon list"><i></i><i></i><i></i></span></button>
@@ -83,6 +96,39 @@
           </div>
         </div>
       </div>
+
+      {%- comment -%}
+        Active-filter chips. Each one is a real link to `url_to_remove`, so removing a
+        filter works with JS off; the facet JS intercepts them like any other filter
+        change. The price chip is a single chip for the whole range, which is how
+        Shopify models it (`min_value` / `max_value` share one `url_to_remove`).
+      {%- endcomment -%}
+      {%- assign has_active = false -%}
+      {%- for filter in collection.filters -%}
+        {%- if filter.active_values.size > 0 or filter.min_value.value or filter.max_value.value -%}{%- assign has_active = true -%}{%- endif -%}
+      {%- endfor -%}
+      {%- if has_active -%}
+        <div class="facet-chips" data-facet-chips>
+          {%- for filter in collection.filters -%}
+            {%- for value in filter.active_values -%}
+              <a class="facet-chip" href="{{ value.url_to_remove }}" aria-label="{{ 'sections.collection.filter_remove' | t: name: value.label }}">
+                <span>{{ value.label | escape }}</span><span class="facet-chip-x" aria-hidden="true">×</span>
+              </a>
+            {%- endfor -%}
+            {%- if filter.type == 'price_range' and filter.min_value.value or filter.type == 'price_range' and filter.max_value.value -%}
+              {%- liquid
+                assign price_lo = filter.min_value.value | default: 0 | money
+                assign price_hi = filter.max_value.value | default: filter.range_max | money
+                assign price_label = price_lo | append: ' – ' | append: price_hi
+              -%}
+              <a class="facet-chip" href="{{ filter.url_to_remove }}" aria-label="{{ 'sections.collection.filter_remove' | t: name: price_label }}">
+                <span>{{ price_label }}</span><span class="facet-chip-x" aria-hidden="true">×</span>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+          <a class="facet-chips-clear" href="{{ collection.url }}">{{ 'sections.collection.filter_clear' | t }}</a>
+        </div>
+      {%- endif -%}
 
       <div class="products" id="productGrid">
         {%- if has_products -%}
@@ -202,6 +248,53 @@
 .collection-page .side-panel a { display: block; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 6px 0; opacity: .82; }
 .collection-page .side-panel a.active, .collection-page .side-panel a:hover { color: var(--ink); opacity: 1; }
 
+/* Facets (snippets/collection-filters.liquid) — same accordion shell as the nav above,
+   so only the controls inside .side-panel need their own rules. */
+.collection-page .side-filters { margin-top: 34px; }
+.collection-page .side-filters-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.collection-page .side-filters-title { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.collection-page .side-filters-clear { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+.collection-page .side-filters-clear:hover { color: var(--ink); }
+.collection-page .facet { display: flex; align-items: center; gap: 10px; padding: 6px 0; cursor: pointer; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.collection-page .facet:hover { color: var(--ink); }
+.collection-page .facet input { width: 13px; height: 13px; flex: 0 0 13px; margin: 0; accent-color: var(--ink); cursor: pointer; }
+.collection-page .facet-label { flex: 1 1 auto; min-width: 0; }
+.collection-page .facet-count { font-size: 9px; opacity: .6; font-variant-numeric: tabular-nums; }
+/* Unreachable value: visible (so the option list keeps its shape) but inert. */
+.collection-page .facet.is-dead { opacity: .38; cursor: default; }
+.collection-page .facet.is-dead:hover { color: var(--muted); }
+.collection-page .facet-price { display: flex; align-items: center; gap: 8px; padding: 8px 0 2px; }
+.collection-page .facet-price input {
+  width: 100%; min-width: 0; height: 34px; padding: 0 9px; background: transparent;
+  border: .5px solid var(--rule); color: var(--ink); font-family: var(--sans); font-size: 11px;
+}
+.collection-page .facet-price input:focus-visible { outline: 1px solid var(--ink); outline-offset: -1px; }
+.collection-page .facet-price-sep { font-size: 11px; color: var(--muted); }
+/* The submit is the no-JS path; the enhanced path applies on change. */
+.collection-page .side-filters-apply { margin-top: 16px; width: 100%; }
+.js-facets .collection-page .side-filters-apply { display: none; }
+
+/* Active-filter chips */
+.collection-page .facet-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: -14px 0 30px; }
+.collection-page .facet-chip {
+  display: inline-flex; align-items: center; gap: 8px; padding: 7px 11px;
+  border: .5px solid var(--rule); font-size: 9.5px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-soft); transition: border-color 200ms var(--ease), color 200ms var(--ease);
+}
+.collection-page .facet-chip:hover { border-color: var(--ink); color: var(--ink); }
+.collection-page .facet-chip-x { font-size: 13px; line-height: 1; opacity: .55; }
+.collection-page .facet-chips-clear { font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+.collection-page .facet-chips-clear:hover { color: var(--ink); }
+
+/* Whole section dims while a facet fetch is in flight — same idea as .load-more.is-loading. */
+.collection-page.is-filtering .products,
+.collection-page.is-filtering .side-filters { opacity: .45; pointer-events: none; transition: opacity 160ms var(--ease); }
+
+/* Desktop has the sidebar; the drawer trigger and its close button are mobile-only
+   (see the 780px block). */
+.collection-page .filters-open,
+.collection-page .filters-close { display: none; }
+
 /* Toolbar */
 .collection-page .toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 34px; }
 .collection-page .view-toggle { display: flex; gap: 10px; align-items: center; }
@@ -284,6 +377,34 @@
   .collection-page { width: 100% !important; max-width: 100% !important; overflow-x: clip !important; }
   .collection-page .shop-layout { width: calc(100% - 28px) !important; display: block !important; margin: 0 auto !important; }
   .collection-page .sidebar { display: none !important; }
+
+  /* Filters drawer. The sidebar is the drawer — it slides in with the facets and the
+     chapter tree both, rather than duplicating either into a second markup tree. */
+  .collection-page .filters-open {
+    display: inline-flex !important; align-items: center; gap: 7px; height: 42px; padding: 0 13px;
+    border: .5px solid var(--rule); font-size: 8px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink);
+  }
+  .collection-page .filters-open-count {
+    display: inline-grid; place-items: center; min-width: 15px; height: 15px; padding: 0 4px;
+    background: var(--ink); color: var(--paper); font-size: 8px; border-radius: 999px;
+  }
+  .collection-page.filters-drawer-open .sidebar {
+    display: block !important; position: fixed; inset: 0 0 0 auto; z-index: 60;
+    width: min(86vw, 340px); margin: 0 !important; padding: 22px 20px 100px;
+    background: var(--paper); overflow-y: auto; overscroll-behavior: contain;
+    box-shadow: -20px 0 60px rgba(15, 26, 46, .16);
+    animation: facets-in 260ms var(--ease);
+  }
+  @keyframes facets-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
+  .collection-page.filters-drawer-open::after {
+    content: ''; position: fixed; inset: 0; z-index: 55; background: rgba(15, 26, 46, .3);
+  }
+  .collection-page .filters-close {
+    display: block; width: 100%; margin-bottom: 18px; text-align: right;
+    font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
+  }
+  /* On mobile the drawer closes on apply, so the submit earns its place back. */
+  .js-facets .collection-page .side-filters-apply { display: block; }
   .collection-page .collection-intro { width: 100% !important; padding-top: 28px !important; margin-bottom: 24px !important; gap: 20px !important; }
   .collection-page .collection-intro h1 { font-size: clamp(42px, 12vw, 62px) !important; }
   .collection-page .collection-intro > p { font-size: 11px !important; line-height: 1.65 !important; text-align: left !important; }
@@ -429,6 +550,86 @@
     // pages. This is the backup for when that admin setting drifts.
     var defaultSort = root.dataset.defaultSort;
     if (defaultSort) applySort(defaultSort);
+
+    // Facets — progressive enhancement only. The <form method="get"> in
+    // snippets/collection-filters.liquid already filters on its own (Shopify does the
+    // work server-side), so everything here is about not reloading the page.
+    //
+    // The swap replaces the whole section root rather than patching pieces of it: the
+    // fetched node carries no stale listeners and init() re-runs on it from scratch, so
+    // the accordion, sort, load-more and budget mode all come back wired without a
+    // second code path. Any failure falls through to a real navigation.
+    var form = root.querySelector('[data-filters]');
+    if (form) {
+      document.documentElement.classList.add('js-facets');
+      var busy = false;
+
+      function facetUrl() {
+        // An empty price box must not travel: `filter.v.price.gte=` pins the range to 0
+        // and returns nothing.
+        var qs = new URLSearchParams();
+        new FormData(form).forEach(function (v, k) { if (String(v).trim() !== '') qs.append(k, v); });
+        var q = qs.toString();
+        return location.pathname + (q ? '?' + q : '');
+      }
+
+      function closeDrawer() {
+        root.classList.remove('filters-drawer-open');
+        var t = root.querySelector('[data-filters-open]');
+        if (t) t.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      function go(url) {
+        if (busy) return;
+        busy = true;
+        root.classList.add('is-filtering');
+        var sid = root.dataset.sectionId;
+        fetch(url + (url.indexOf('?') > -1 ? '&' : '?') + 'section_id=' + encodeURIComponent(sid))
+          .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
+          .then(function (html) {
+            var next = new DOMParser().parseFromString(html, 'text/html').querySelector('.collection-grid');
+            if (!next) return Promise.reject('no section');
+            history.replaceState({}, '', url);
+            document.body.style.overflow = '';
+            root.replaceWith(next);
+            init(next);
+            // ponytail: same trick as load-more — let theme.js rewire the reveal observer.
+            next.dispatchEvent(new CustomEvent('shopify:section:load', { bubbles: true }));
+          })
+          .catch(function () { location.assign(url); })
+          .then(function () { busy = false; });
+      }
+
+      form.addEventListener('change', function () {
+        // In the mobile drawer the shopper ticks several boxes before committing, so
+        // there the "Apply" submit is what fires. On desktop, change is the commit.
+        if (root.classList.contains('filters-drawer-open')) return;
+        go(facetUrl());
+      });
+      form.addEventListener('submit', function (e) { e.preventDefault(); go(facetUrl()); });
+
+      // Chips, "clear" and the sidebar's clear link are ordinary <a href> — intercept
+      // them so they take the same in-place path instead of a full reload.
+      root.addEventListener('click', function (e) {
+        var a = e.target.closest('.facet-chip, .facet-chips-clear, [data-filters-clear]');
+        if (a && a.getAttribute('href')) { e.preventDefault(); go(a.getAttribute('href')); return; }
+
+        if (e.target.closest('[data-filters-open]')) {
+          root.classList.add('filters-drawer-open');
+          e.target.closest('[data-filters-open]').setAttribute('aria-expanded', 'true');
+          document.body.style.overflow = 'hidden';
+          return;
+        }
+        if (e.target.closest('[data-filters-close]')) { closeDrawer(); return; }
+        // Tap on the scrim (the ::after covers the page, so the hit lands on root itself).
+        if (e.target === root && root.classList.contains('filters-drawer-open')) closeDrawer();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && root.classList.contains('filters-drawer-open')) closeDrawer();
+      });
+    }
 
     // Load more (demo reveal)
     var lm = root.querySelector('#loadMore');
