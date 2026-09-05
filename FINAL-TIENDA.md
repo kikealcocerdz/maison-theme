@@ -186,6 +186,16 @@ es del humano, no tuyo. No hagas `git add -A`.
 sesión. O sea: live ≡ working tree, no ≡ `main`. Un `git checkout` de esos ~50 archivos
 perdería lo que hay publicado.
 
+⚠️ **`main` está divergida y este trabajo NO vive en `main`.** El trabajo va en la rama
+`feat/venta-cruzada-sets` (= HEAD local, ya empujada a origin). Base común con `origin/main`:
+`8a8eb51`. A día 2026-09-05 `origin/main` lleva **25 commits** que esta rama no tiene
+(páginas legales, contacto, sellos, pasadas de móvil v96/v98/v99, envíos y devoluciones) y
+esta rama lleva **4** que `main` no tiene. `origin/main` **no contiene este archivo**.
+
+Antes de reconciliar: el árbol tiene ~50 archivos sucios, así que un `rebase` fallará de
+entrada. Y `main` no es lo que está publicado — lo publicado es el árbol de trabajo (arriba).
+Reconciliar es decisión humana, no la tome un agente por su cuenta.
+
 Últimos commits relevantes:
 
 - `43260c6` — copy de Artesanía + sello del plato (§6). 4 archivos añadidos a mano.
