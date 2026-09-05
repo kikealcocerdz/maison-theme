@@ -22,6 +22,12 @@
       {%- assign stamp_img = parts[1] -%}
       <img class="heritage-stamp {{ pos_class }}" src="{{ stamp_img | image_url: width: 380 }}" alt="" width="{{ stamp_img.width }}" height="{{ stamp_img.height }}" loading="lazy" decoding="async">
     {%- endfor -%}
+  {%- else -%}
+    {%- comment -%} Demo fallback (shipped in /assets) until stamps are set — matches mockup. {%- endcomment -%}
+    <img class="heritage-stamp stamp-one" src="{{ 'sello-13.png' | asset_url }}" alt="" width="370" height="422" loading="lazy" decoding="async">
+    <img class="heritage-stamp stamp-two" src="{{ 'sello-71.png' | asset_url }}" alt="" width="473" height="343" loading="lazy" decoding="async">
+    <img class="heritage-stamp stamp-three" src="{{ 'sello-03.png' | asset_url }}" alt="" width="403" height="289" loading="lazy" decoding="async">
+    <img class="heritage-stamp stamp-four" src="{{ 'sello-15.png' | asset_url }}" alt="" width="516" height="375" loading="lazy" decoding="async">
   {%- endif -%}
 
   <div class="heritage-content">
@@ -41,7 +47,7 @@
 {% stylesheet %}
 .heritage-stamp-section {
   position: relative; overflow: hidden; min-height: 60vh;
-  margin: 0 auto clamp(24px, 3vh, 36px);
+  margin: 0 auto;
   padding: clamp(42px, 5vw, 68px) 24px;
   display: flex; align-items: center; justify-content: center;
   text-align: center; isolation: isolate; background: #EEEFF1;
@@ -62,7 +68,7 @@
 .stamp-bg-number {
   position: absolute; z-index: -1; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  font-family: var(--serif); font-size: clamp(120px, 19vw, 300px);
+  font-family: var(--serif); font-size: clamp(7.5rem, 19vw, 18.75rem);
   font-weight: 400; line-height: 0.75; letter-spacing: -0.085em;
   color: rgba(15, 26, 46, 0.05);
   pointer-events: none; white-space: nowrap; user-select: none;
@@ -75,7 +81,7 @@
 .heritage-main-text, .heritage-main-text p {
   margin: 0 auto; max-width: 75%;
   font-family: var(--serif); font-weight: 400;
-  font-size: clamp(26px, 2.75vw, 44px); line-height: 1.05;
+  font-size: clamp(1.625rem, 2.75vw, 2.75rem); line-height: 1.05;
   letter-spacing: -0.03em; color: var(--ink);
 }
 .heritage-main-text { max-width: none; }
@@ -113,10 +119,10 @@
   .heritage-stamp-section:hover .heritage-stamp { opacity: 0.21; }
 }
 @media (max-width: 900px) {
-  .heritage-stamp-section { min-height: 60vh; margin: 0 auto 24px; padding: 56px 20px; }
+  .heritage-stamp-section { min-height: 60vh; margin: 0 auto; padding: 56px 20px; }
   .heritage-kicker { font-size: 9px; letter-spacing: 0.22em; }
-  .heritage-main-text p { max-width: 88%; font-size: clamp(25px, 7vw, 38px); line-height: 1.07; }
-  .stamp-bg-number { font-size: clamp(112px, 36vw, 210px); }
+  .heritage-main-text p { max-width: 88%; font-size: clamp(1.5625rem, 7vw, 2.375rem); line-height: 1.07; }
+  .stamp-bg-number { font-size: clamp(7rem, 36vw, 13.125rem); }
   .heritage-stamp { opacity: 0.10; }
   .stamp-one { top: 8%; left: -28px; }
   .stamp-two { top: 12%; right: -38px; }
@@ -133,7 +139,7 @@
   "name": "Heritage stamp",
   "settings": [
     { "type": "text", "id": "kicker", "label": "Kicker", "default": "Bien de Interés Cultural desde 1998" },
-    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Una herencia que <em>trasciende</em> generaciones.<br>Una forma de vivir la mesa que <em>evoluciona</em> con el tiempo.</p>" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Una herencia que <em>trasciende</em> generaciones.<br>Una forma de vivir la mesa que <em>evoluciona</em> con el tiempo</p>" },
     { "type": "text", "id": "bg_number", "label": "Background number", "default": "1841" },
     { "type": "header", "content": "Decorative stamps (optional)" },
     { "type": "image_picker", "id": "stamp_one", "label": "Stamp 1 (top-left)" },

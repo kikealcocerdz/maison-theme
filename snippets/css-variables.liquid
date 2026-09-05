@@ -5,6 +5,7 @@
 <style>
   :root {
     --paper: {{ settings.color_paper }};
+    --brand: {{ settings.color_brand }};
     --ink: {{ settings.color_ink }};
     --ink-soft: {{ settings.color_ink_soft }};
     --muted: {{ settings.color_muted }};
@@ -20,10 +21,21 @@
     --sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
 
     --fs-body: {{ settings.fs_body }}px;
-    --fs-display: clamp(56px, 7.5vw, 128px);
-    --fs-h2: clamp(28px, 2.6vw, 40px);
+
+    {%- comment -%} Body/UI: fixed rem (resizable, WCAG 1.4.4). Not fluid. {%- endcomment -%}
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.8125rem;  /* 13px */
+
+    {%- comment -%} Display scale: clamp bounds in rem so text zoom works at the
+      pinned min/max; vw drives the desktop fluid band (visuals unchanged). {%- endcomment -%}
+    --fs-display: clamp(3.5rem, 7.5vw, 8rem);     /* 56–128px */
+    --fs-h1: clamp(2.375rem, 3.8vw, 3.5rem);      /* 38–56px  */
+    --fs-h2: clamp(1.75rem, 2.6vw, 2.5rem);       /* 28–40px  */
+    --fs-h3: clamp(1.375rem, 1.8vw, 1.75rem);     /* 22–28px  */
 
     --content: min({{ settings.content_viewport_width }}vw, {{ settings.content_max_width }}px);
+    {%- comment -%} El shell (header, mega, footer) corre más ancho que el contenido editorial. {%- endcomment -%}
+    --content-wide: min(90vw, 1760px);
     --header-h: {{ settings.header_height_desktop }}px;
 
     --rule-width: {{ settings.button_border_width }}px;
@@ -32,15 +44,21 @@
     --ease-long: cubic-bezier(.16,1,.3,1);
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1100px) {
     :root {
-      --header-h: 76px;
+      --content: min(88vw, 1600px);
+    }
+  }
+
+  {%- comment -%} v96: la barra móvil arranca a 780px, no a 680. {%- endcomment -%}
+  @media (max-width: 780px) {
+    :root {
+      --header-h: {{ settings.header_height_mobile }}px;
     }
   }
 
   @media (max-width: 680px) {
     :root {
-      --header-h: {{ settings.header_height_mobile }}px;
       --content: calc(100vw - 32px);
     }
   }

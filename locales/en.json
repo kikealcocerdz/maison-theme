@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "404": {
     "title": "404",
@@ -63,7 +72,9 @@
     "search": {
       "placeholder": "Search products",
       "label": "Search",
-      "submit": "Search"
+      "submit": "Search",
+      "view_all": "View all results",
+      "no_results": "No results for “{{ terms }}”"
     },
     "cart": {
       "label": "Cart",
@@ -98,9 +109,12 @@
     }
   },
   "sections": {
-    "header": {
-      "menu": "Menu",
-      "search": "Search"
+    "cart": {
+      "empty": "Your cart is empty.",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout",
+      "view": "View cart",
+      "taxes_note": "Shipping and taxes calculated at checkout."
     },
     "collection": {
       "home": "Home",
@@ -114,32 +128,69 @@
       "sort_high": "Price - high to low",
       "sort_low": "Price - low to high",
       "load_more": "Load more",
+      "showing": "Showing {{ shown }} of {{ total }}",
       "badge_new": "New",
       "favorite": "Add to favourites",
       "prev_long": "Previous",
       "next_long": "Next"
+    },
+    "contact": {
+      "success": "Thank you for writing to us. We'll get back to you as soon as possible.",
+      "name": "Name",
+      "email": "Email",
+      "subject": "Reason for your enquiry",
+      "collection": "Collection or family",
+      "collection_empty": "Select if applicable",
+      "message": "Message",
+      "message_placeholder": "Tell us briefly what you need",
+      "privacy_html": "I have read and accept the <a href=\"{{ url }}\">privacy policy</a>",
+      "submit": "Send enquiry"
+    },
+    "footer": {
+      "legal_label": "Legal links",
+      "social_label": "Social media"
+    },
+    "header": {
+      "menu": "Menu",
+      "search": "Search"
+    },
+    "heritage": {
+      "timeline": "Historical timeline",
+      "scroll": "Scroll to explore"
+    },
+    "legal": {
+      "tabs_label": "Legal documents",
+      "index_label": "Table of contents",
+      "next_doc": "Next document"
     },
     "product": {
       "gallery": "Product gallery",
       "prev": "Previous image",
       "next": "Next image",
       "close": "Close gallery",
-      "thumbs": "Product thumbnails"
+      "thumbs": "Product thumbnails",
+      "color": "Colour",
+      "service": "Service",
+      "pieces_selector": "Select the number of pieces",
+      "pack_intro": "Your set includes:"
+    },
+    "stamps": {
+      "seal": "Stamp",
+      "go_to_decade": "Go to the",
+      "zoom_in": "Zoom in",
+      "zoom_out": "Zoom out",
+      "archive_label": "Chronological archive of La Cartuja de Sevilla maker's marks",
+      "jump_decade": "Jump to a decade",
+      "viewport_hint": "Scroll through the stamps with the mouse wheel",
+      "timeline_label": "Interactive timeline",
+      "timeline_seek": "Move along the timeline",
+      "scroll": "Scroll",
+      "scroll_hint": "to browse the archive",
+      "modal_kicker": "Marks archive"
     },
     "tables": {
       "filters": "Table filters",
       "hotspot": "View piece"
-    },
-    "heritage": {
-      "timeline": "Historical timeline",
-      "scroll": "Scroll to explore"
-    },
-    "cart": {
-      "empty": "Your cart is empty.",
-      "subtotal": "Subtotal",
-      "checkout": "Checkout",
-      "view": "View cart",
-      "taxes_note": "Shipping and taxes calculated at checkout."
     }
   }
 }

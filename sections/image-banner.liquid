@@ -17,7 +17,7 @@
       {% render 'image-responsive', image: section.settings.image, alt: section.settings.image.alt, sizes: '100vw', loading: 'lazy' %}
     {%- else -%}
       {%- comment -%} Demo fallback (shipped in /assets) until a banner image is set. {%- endcomment -%}
-      <img src="{{ 'summer-banner.webp' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1800" height="1005" loading="lazy" decoding="async">
+      <img src="{{ 'composicion-renacer-web-3-2.webp' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1280" height="800" loading="lazy" decoding="async">
     {%- endif -%}
   {%- endcapture -%}
 
@@ -84,12 +84,15 @@
 .image-banner__mobile-cta { display: none; text-align: center; margin-top: 32px; }
 
 .image-banner__blocks {
-  width: var(--content); margin: 34px auto 0;
+  width: var(--content); margin: 74px auto 0;
   display: flex; flex-direction: column; gap: 24px; align-items: center;
 }
 
-@media (max-width: 680px) {
+@media (max-width: 1100px) {
   .image-banner__media img { height: 48vh; }
+}
+
+@media (max-width: 680px) {
   .image-banner__overlay { display: none; }
   .image-banner__mobile-cta { display: block; }
 }

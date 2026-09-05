@@ -24,6 +24,7 @@
       <span class="block-product-card__price">{{ product.price | money }}</span>
     {%- endif -%}
   </a>
+  {% render 'quick-add', product: product %}
 </article>
 {%- elsif block.settings.demo_image != blank -%}
   {%- comment -%} Demo card — used when no product is selected (e.g. before catalog migration). {%- endcomment -%}
@@ -52,7 +53,7 @@
 {%- endif -%}
 
 {% stylesheet %}
-.block-product-card { text-align: center; }
+.block-product-card { position: relative; text-align: center; }
 .block-product-card__link { display: block; }
 .block-product-card__media {
   position: relative; overflow: hidden; background: transparent;
@@ -74,11 +75,11 @@
 
 .block-product-card__meta {
   font-family: var(--sans); font-weight: 400; font-size: 10px; letter-spacing: 0.22em;
-  text-transform: uppercase; color: var(--muted); margin: 14px 0 4px;
+  text-transform: uppercase; color: var(--muted); margin: 0;
 }
 .block-product-card__title {
   font-family: var(--serif); font-weight: 400; font-size: 16px; line-height: 1.2;
-  color: var(--ink); margin: 0;
+  color: var(--ink); margin: 14px 0 4px;
 }
 .block-product-card__price {
   display: block; margin-top: 4px; font-family: var(--sans); font-weight: 300; font-size: 13px;
@@ -92,6 +93,12 @@
 .block-product-card__placeholder--editor {
   font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em;
   text-transform: uppercase; color: var(--muted);
+}
+
+@media (max-width: 680px) {
+  .block-product-card__media img {
+    max-height: 190px; max-width: 86%; margin-left: auto; margin-right: auto;
+  }
 }
 {% endstylesheet %}
 

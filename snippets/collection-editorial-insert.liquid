@@ -1,18 +1,19 @@
 {%- comment -%}
   Full-width editorial card injected mid-grid on the collection page.
-  Reads from the calling section: editorial_image (image_picker) with an asset
-  fallback (editorial_demo_image), plus editorial_text caption.
+  Rendered only when the caller resolves editorial content (chapter collections via
+  metafields, or the emblemas template via section settings). Accepts:
+    ed_picker — image_picker image (real path, preferred)
+    ed_asset  — asset filename fallback (e.g. collection-aurora.webp)
+    ed_text   — caption (richtext/plain)
 {%- endcomment -%}
 {%- liquid
-  assign ed_image = section.settings.editorial_image
-  assign ed_demo = section.settings.editorial_demo_image | default: 'collection-aurora.webp'
-  assign ed_text = section.settings.editorial_text
+  assign ed_alt = ed_text | default: '' | strip_html | escape
 -%}
 <div class="editorial-insert reveal">
-  {%- if ed_image != blank -%}
-    {% render 'image-responsive', image: ed_image, alt: ed_text | default: '' | strip_html | escape, sizes: '100vw' %}
-  {%- else -%}
-    <img src="{{ ed_demo | asset_url }}" alt="{{ ed_text | default: '' | strip_html | escape }}" width="1760" height="640" loading="lazy" decoding="async">
+  {%- if ed_picker != blank -%}
+    {% render 'image-responsive', image: ed_picker, alt: ed_alt, sizes: '100vw' %}
+  {%- elsif ed_asset != blank -%}
+    <img src="{{ ed_asset | asset_url }}" alt="{{ ed_alt }}" width="1760" height="640" loading="lazy" decoding="async">
   {%- endif -%}
   {%- if ed_text != blank -%}<p>{{ ed_text }}</p>{%- endif -%}
 </div>

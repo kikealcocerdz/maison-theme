@@ -6,9 +6,22 @@
         <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ section.settings.logo_alt | default: shop.name | escape }}" width="88" height="auto" loading="lazy">
       {%- elsif settings.logo != blank -%}
         <img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ settings.logo_alt | default: shop.name | escape }}" width="88" height="auto" loading="lazy">
+      {%- else -%}
+        {%- comment -%} Demo logo (shown until a logo is uploaded in theme settings). {%- endcomment -%}
+        <img src="{{ 'logo-navy.png' | asset_url }}" alt="{{ shop.name | escape }}" width="119" height="124" loading="lazy">
       {%- endif -%}
       {%- if section.settings.tagline != blank -%}
         <p>{{ section.settings.tagline | newline_to_br }}</p>
+      {%- endif -%}
+
+      {%- comment -%} Redes sociales: solo se pintan las que tienen URL. {%- endcomment -%}
+      {%- if section.settings.social_instagram != blank or section.settings.social_facebook != blank or section.settings.social_tiktok != blank or section.settings.social_linkedin != blank -%}
+        <nav class="footer-social" aria-label="{{ 'sections.footer.social_label' | t }}">
+          {%- if section.settings.social_instagram != blank -%}<a href="{{ section.settings.social_instagram }}" aria-label="Instagram" rel="noopener" target="_blank">{%- render 'icon-instagram' -%}</a>{%- endif -%}
+          {%- if section.settings.social_facebook != blank -%}<a href="{{ section.settings.social_facebook }}" aria-label="Facebook" rel="noopener" target="_blank">{%- render 'icon-facebook' -%}</a>{%- endif -%}
+          {%- if section.settings.social_tiktok != blank -%}<a href="{{ section.settings.social_tiktok }}" aria-label="TikTok" rel="noopener" target="_blank">{%- render 'icon-tiktok' -%}</a>{%- endif -%}
+          {%- if section.settings.social_linkedin != blank -%}<a href="{{ section.settings.social_linkedin }}" aria-label="LinkedIn" rel="noopener" target="_blank">{%- render 'icon-linkedin' -%}</a>{%- endif -%}
+        </nav>
       {%- endif -%}
     </div>
 
@@ -19,9 +32,23 @@
         {%- assign linklist = linklists[block.settings.menu] -%}
         <div {{ block.shopify_attributes }}>
           <h4>{{ block.settings.heading | escape }}</h4>
-          {%- for link in linklist.links -%}
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          {%- endfor -%}
+          {%- if linklist.links.size > 0 -%}
+            {%- for link in linklist.links -%}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- endfor -%}
+          {%- elsif block.settings.items != blank -%}
+            {%- comment -%} Manual items, one per line: "Label | url" (mirrors mega-menu §8). {%- endcomment -%}
+            {%- assign lines = block.settings.items | strip | newline_to_br | split: '<br />' -%}
+            {%- for line in lines -%}
+              {%- assign row = line | strip -%}
+              {%- if row == blank -%}{%- continue -%}{%- endif -%}
+              {%- assign parts = row | split: '|' -%}
+              {%- assign label = parts[0] | strip -%}
+              {%- assign url = '' -%}
+              {%- if parts.size > 1 -%}{%- assign url = parts[1] | strip -%}{%- endif -%}
+              {%- if url != blank -%}<a href="{{ url }}">{{ label | escape }}</a>{%- else -%}<span>{{ label | escape }}</span>{%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
         </div>
 
       {%- when 'text_column' -%}
@@ -36,9 +63,48 @@
   </div>
 
   <div class="footer-bottom">
+    <span class="footer-locale">
+      {%- if localization.available_languages.size > 1 -%}
+        {%- comment -%} Conmutador real de idioma: funciona sin JS. {%- endcomment -%}
+        {%- form 'localization', class: 'footer-language-form' -%}
+          <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+          {%- for lang in localization.available_languages -%}
+            <button
+              class="footer-language-option{% if lang.iso_code == localization.language.iso_code %} is-active{% endif %}"
+              type="submit"
+              name="locale_code"
+              value="{{ lang.iso_code }}"
+              lang="{{ lang.iso_code }}"
+              {% if lang.iso_code == localization.language.iso_code %}aria-current="true"{% endif %}
+            >{{ lang.endonym_name | capitalize }}</button>
+            {%- unless forloop.last -%}<span class="footer-language-sep" aria-hidden="true">·</span>{%- endunless -%}
+          {%- endfor -%}
+        {%- endform -%}
+      {%- endif -%}
+    </span>
     {%- if section.settings.tagline_bottom != blank -%}<span>{{ section.settings.tagline_bottom }}</span>{%- endif -%}
-    <span>{{ 'general.footer.copyright' | t: year: 'now' | date: '%Y', shop_name: shop.name }}</span>
   </div>
+
+  {%- assign legal_menu = linklists[section.settings.legal_menu] -%}
+  {%- if legal_menu.links.size > 0 -%}
+    <nav class="footer-legal-links" aria-label="{{ 'sections.footer.legal_label' | t }}">
+      {%- for link in legal_menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+  {%- elsif section.settings.legal_items != blank -%}
+    {%- comment -%} Fallback: una línea por enlace, "Label | url" (mismo formato que las columnas). {%- endcomment -%}
+    <nav class="footer-legal-links" aria-label="{{ 'sections.footer.legal_label' | t }}">
+      {%- assign legal_lines = section.settings.legal_items | strip | newline_to_br | split: '<br />' -%}
+      {%- for line in legal_lines -%}
+        {%- assign row = line | strip -%}
+        {%- if row == blank -%}{%- continue -%}{%- endif -%}
+        {%- assign parts = row | split: '|' -%}
+        {%- assign label = parts[0] | strip -%}
+        {%- if parts.size > 1 -%}<a href="{{ parts[1] | strip }}">{{ label | escape }}</a>{%- endif -%}
+      {%- endfor -%}
+    </nav>
+  {%- endif -%}
 </footer>
 
 {% stylesheet %}
@@ -46,18 +112,19 @@
   padding: 78px 0 44px;
   border-top: 0.5px solid var(--rule);
   background: var(--paper);
+  display: flex;
+  flex-direction: column;
 }
 
 .footer-grid {
-  width: var(--content);
+  width: var(--content-wide);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.2fr repeat(3, 1fr);
+  grid-template-columns: 1.3fr repeat(3, 1fr);
   gap: 48px;
 }
 
 .footer-logo img {
-  width: 88px;
   margin-bottom: 24px;
 }
 
@@ -67,6 +134,51 @@
   line-height: 1;
   margin: 0;
   color: var(--ink);
+}
+
+/* Redes: pastilla circular con filete, sin cambio de color al hover (v96 lo introdujo
+   y v98 lo revirtió — aquí va ya el estado final). Instagram es de trazo; el resto,
+   de relleno. Se seleccionan por aria-label porque los iconos son condicionales. */
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 22px;
+}
+
+.footer-social a {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.footer-social svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin: auto;
+  overflow: visible;
+}
+
+.footer-social a[aria-label="Instagram"] svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.55;
+}
+
+.footer-social a:not([aria-label="Instagram"]) svg {
+  fill: currentColor;
+  stroke: none;
 }
 
 .footer-grid h4 {
@@ -85,7 +197,7 @@
 }
 
 .footer-bottom {
-  width: var(--content);
+  width: var(--content-wide);
   margin: 60px auto 0;
   display: flex;
   justify-content: space-between;
@@ -95,13 +207,118 @@
   color: var(--muted);
 }
 
+.footer-grid a:hover { color: var(--brand); }
+
+.footer-locale {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.footer-language-form { display: inline; }
+
+.footer-language-option {
+  position: relative;
+  padding: 0 0 3px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.footer-language-option::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 420ms var(--ease);
+}
+
+.footer-language-option:hover,
+.footer-language-option.is-active { color: var(--ink); }
+
+.footer-language-option:hover::after,
+.footer-language-option.is-active::after { transform: scaleX(1); transform-origin: left; }
+
+.footer-language-sep { margin: 0 6px; }
+
+.footer-legal-links {
+  width: var(--content-wide);
+  margin: 22px auto 0;
+  padding-top: 18px;
+  border-top: 0.5px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.footer-legal-links a { color: inherit; }
+.footer-legal-links a:hover { color: var(--brand); }
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-language-option::after { transition: none; }
+}
+
 @media (max-width: 1100px) {
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
+/* v96: en móvil el logo ocupa el ancho y las 3 columnas de nav se compactan. */
+@media (max-width: 780px) {
+  .site-footer { overflow-x: hidden; }
+
+  .footer-grid {
+    width: calc(100% - 28px);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px 14px;
+    align-items: start;
+  }
+
+  .footer-logo { grid-column: 1 / -1; }
+
+  .footer-grid h4 {
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+
+  .footer-grid > div:not(.footer-logo) a {
+    font-size: 9.5px;
+    line-height: 1.35;
+    margin-bottom: 9px;
+    word-break: normal;
+  }
+}
+
+@media (max-width: 760px) {
+  .footer-social {
+    width: max-content;
+    max-width: 100%;
+    gap: 7px;
+  }
+
+  .footer-social a { width: 28px; height: 28px; }
+  .footer-social svg { width: 12.5px; height: 12.5px; }
+}
+
 @media (max-width: 680px) {
-  .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { display: grid; gap: 12px; }
+  .footer-legal-links { gap: 14px 22px; }
+}
+
+@media (max-width: 420px) {
+  .footer-grid { gap: 24px 10px; }
+  .footer-grid > div:not(.footer-logo) a { font-size: 8.7px; }
 }
 {% endstylesheet %}
 
@@ -111,8 +328,16 @@
   "settings": [
     { "type": "image_picker", "id": "logo", "label": "Footer logo (overrides theme setting)" },
     { "type": "text", "id": "logo_alt", "label": "Logo alt text" },
-    { "type": "textarea", "id": "tagline", "label": "Tagline under logo", "default": "La Cartuja\nde Sevilla" },
-    { "type": "text", "id": "tagline_bottom", "label": "Tagline bottom left", "default": "España / Español" }
+    { "type": "textarea", "id": "tagline", "label": "Tagline under logo", "default": "Heritage crafted for modern living" },
+    { "type": "text", "id": "tagline_bottom", "label": "Copyright (bottom right)", "default": "© La Cartuja de Sevilla" },
+    { "type": "header", "content": "Redes sociales" },
+    { "type": "url", "id": "social_instagram", "label": "Instagram" },
+    { "type": "url", "id": "social_facebook", "label": "Facebook" },
+    { "type": "url", "id": "social_tiktok", "label": "TikTok" },
+    { "type": "url", "id": "social_linkedin", "label": "LinkedIn" },
+    { "type": "header", "content": "Legal links row" },
+    { "type": "link_list", "id": "legal_menu", "label": "Legal menu" },
+    { "type": "textarea", "id": "legal_items", "label": "Legal links (fallback, one per line: 'Label | url')" }
   ],
   "max_blocks": 6,
   "blocks": [
@@ -121,7 +346,8 @@
       "name": "Menu column",
       "settings": [
         { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
-        { "type": "link_list", "id": "menu", "label": "Menu" }
+        { "type": "link_list", "id": "menu", "label": "Menu" },
+        { "type": "textarea", "id": "items", "label": "Items (fallback, one per line: 'Label | url')" }
       ]
     },
     {

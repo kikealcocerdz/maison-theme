@@ -1,0 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "legal-doc",
+      "settings": {
+        "doc": "terminos",
+        "kicker": "Información legal · La Cartuja de Sevilla",
+        "title": "Términos y condiciones",
+        "intro": "<p>Condiciones que regulan el uso de la tienda online y la contratación de los productos de La Cartuja de Sevilla.</p>",
+        "source_note": "<p>Contenido maquetado a partir de la información legal publicada por La Cartuja de Sevilla.<br><br>Consulta de referencia: julio de 2026.</p>",
+        "next_label": "Aviso legal",
+        "next_url": "/pages/aviso-legal"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

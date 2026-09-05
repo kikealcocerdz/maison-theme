@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "404": {
     "title": "404",
@@ -63,7 +72,9 @@
     "search": {
       "placeholder": "Buscar productos",
       "label": "Buscar",
-      "submit": "Buscar"
+      "submit": "Buscar",
+      "view_all": "Ver todos los resultados",
+      "no_results": "Sin resultados para “{{ terms }}”"
     },
     "cart": {
       "label": "Cesta",
@@ -98,9 +109,12 @@
     }
   },
   "sections": {
-    "header": {
-      "menu": "Menú",
-      "search": "Buscar"
+    "cart": {
+      "empty": "Tu cesta está vacía.",
+      "subtotal": "Subtotal",
+      "checkout": "Finalizar compra",
+      "view": "Ver cesta",
+      "taxes_note": "Gastos de envío e impuestos calculados en el checkout."
     },
     "collection": {
       "home": "Inicio",
@@ -114,32 +128,69 @@
       "sort_high": "Precio - alto a bajo",
       "sort_low": "Precio - bajo a alto",
       "load_more": "Cargar más",
+      "showing": "Mostrando {{ shown }} de {{ total }}",
       "badge_new": "Novedad",
       "favorite": "Añadir a favoritos",
       "prev_long": "Anterior",
       "next_long": "Siguiente"
+    },
+    "contact": {
+      "success": "Gracias por escribirnos. Te responderemos lo antes posible.",
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "subject": "Motivo de la consulta",
+      "collection": "Colección o familia",
+      "collection_empty": "Selecciona si procede",
+      "message": "Mensaje",
+      "message_placeholder": "Cuéntanos brevemente qué necesitas",
+      "privacy_html": "He leído y acepto la <a href=\"{{ url }}\">política de privacidad</a>",
+      "submit": "Enviar consulta"
+    },
+    "footer": {
+      "legal_label": "Enlaces legales",
+      "social_label": "Redes sociales"
+    },
+    "header": {
+      "menu": "Menú",
+      "search": "Buscar"
+    },
+    "heritage": {
+      "timeline": "Cronología histórica",
+      "scroll": "Desplazarse para explorar"
+    },
+    "legal": {
+      "tabs_label": "Documentos legales",
+      "index_label": "Índice del documento",
+      "next_doc": "Siguiente documento"
     },
     "product": {
       "gallery": "Galería de producto",
       "prev": "Imagen anterior",
       "next": "Imagen siguiente",
       "close": "Cerrar galería",
-      "thumbs": "Miniaturas de producto"
+      "thumbs": "Miniaturas de producto",
+      "color": "Color",
+      "service": "Servicio",
+      "pieces_selector": "Selecciona el número de piezas",
+      "pack_intro": "Tu pack contiene:"
+    },
+    "stamps": {
+      "seal": "Sello",
+      "go_to_decade": "Ir a la década de",
+      "zoom_in": "Ampliar",
+      "zoom_out": "Reducir",
+      "archive_label": "Archivo histórico cronológico de sellos de La Cartuja de Sevilla",
+      "jump_decade": "Saltar a una década",
+      "viewport_hint": "Recorre los sellos con la rueda del ratón",
+      "timeline_label": "Línea temporal interactiva",
+      "timeline_seek": "Moverse por la línea temporal",
+      "scroll": "Scroll",
+      "scroll_hint": "recorre el archivo",
+      "modal_kicker": "Archivo de marcas"
     },
     "tables": {
       "filters": "Filtros de mesas",
       "hotspot": "Ver pieza"
-    },
-    "heritage": {
-      "timeline": "Cronología histórica",
-      "scroll": "Desplazarse para explorar"
-    },
-    "cart": {
-      "empty": "Tu cesta está vacía.",
-      "subtotal": "Subtotal",
-      "checkout": "Finalizar compra",
-      "view": "Ver cesta",
-      "taxes_note": "Gastos de envío e impuestos calculados en el checkout."
     }
   }
 }

@@ -1,10 +1,19 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "editorial-hero",
       "settings": {
         "eyebrow": "La Cartuja de Sevilla · 1841",
-        "heading": "<p>El nuevo latir de una casa histórica.</p>",
+        "heading": "<p>Heritage crafted for modern living</p>",
         "subheading": "<p>La Cartuja de Sevilla presenta El Renacer: una colección que reúne memoria, oficio y mesa contemporánea desde 1841.</p>",
         "demo_video": "hero-living-heritage-loop.mp4"
       }
@@ -19,94 +28,13 @@
         "cards_per_row": 3,
         "show_arrows": true,
         "soft_bg": true
-      },
-      "blocks": {
-        "p1": {
-          "type": "product-card",
-          "settings": {
-            "show_price": true,
-            "meta_line_override": "Aurora",
-            "demo_image": "aurora_202_plato.png",
-            "demo_title": "Plato 202 Rosa",
-            "demo_price": "92 €"
-          }
-        },
-        "p2": {
-          "type": "product-card",
-          "settings": {
-            "show_price": true,
-            "meta_line_override": "Aurora",
-            "demo_image": "aurora_202_sopera.png",
-            "demo_title": "Sopera 202 Rosa",
-            "demo_price": "245 €"
-          }
-        },
-        "p2b": {
-          "type": "product-card",
-          "settings": {
-            "show_price": true,
-            "meta_line_override": "Aurora",
-            "demo_image": "aurora_202_cafetera.png",
-            "demo_title": "Cafetera 202 Rosa",
-            "demo_price": "164 €"
-          }
-        },
-        "p3": {
-          "type": "product-card",
-          "settings": {
-            "show_price": true,
-            "meta_line_override": "Bellavista",
-            "demo_image": "bellavista_sopera.png",
-            "demo_title": "Sopera Bellavista",
-            "demo_price": "230 €"
-          }
-        },
-        "p4": {
-          "type": "product-card",
-          "settings": {
-            "show_price": true,
-            "meta_line_override": "Bellavista",
-            "demo_image": "bellavista_fuente.png",
-            "demo_title": "Fuente Bellavista",
-            "demo_price": "128 €"
-          }
-        },
-        "p5": {
-          "type": "product-card",
-          "settings": {
-            "show_price": true,
-            "meta_line_override": "Bellavista",
-            "demo_image": "bellavista_plato.png",
-            "demo_title": "Plato Bellavista",
-            "demo_price": "89 €"
-          }
-        },
-        "p6": {
-          "type": "product-card",
-          "settings": {
-            "show_price": true,
-            "meta_line_override": "Ochavada",
-            "demo_image": "negro_vistas_plato.png",
-            "demo_title": "Plato Negro Vistas",
-            "demo_price": "96 €"
-          }
-        }
-      },
-      "block_order": [
-        "p1",
-        "p2",
-        "p2b",
-        "p3",
-        "p4",
-        "p5",
-        "p6"
-      ]
+      }
     },
     "heritage_stamp": {
       "type": "heritage-stamp",
       "settings": {
         "kicker": "Bien de Interés Cultural desde 1998",
-        "heading": "<p>Una herencia que <em>trasciende</em> generaciones.<br>Una forma de vivir la mesa que <em>evoluciona</em> con el tiempo.</p>",
+        "heading": "<p>Una herencia que <em>trasciende</em> generaciones.<br>Una forma de vivir la mesa que <em>evoluciona</em> con el tiempo</p>",
         "bg_number": "1841"
       }
     },
@@ -126,7 +54,7 @@
             "demo_image": "collection-aurora.webp",
             "chapter": "Capítulo 01",
             "title": "Aurora",
-            "paragraph": "<p>La forma nacida con La Cartuja en 1841. Un repertorio de clásicos vivos: 202 Rosa, Bellavista, Ceilán, Flor de Lis, Viejo Molino y Oaxaca.</p>",
+            "paragraph": "<p>La forma nacida con La Cartuja en 1841. Un repertorio de clásicos vivos: Aurora Blanca, 202 Rosa, Bellavista, Ceilán, Flor de Lis Azul, Flor de Lis Rosa, Viejo Molino.</p>",
             "link": "/collections/aurora",
             "link_label": "Descubrir Aurora"
           }
@@ -134,10 +62,10 @@
         "c2": {
           "type": "chapter-card",
           "settings": {
-            "demo_image": "negro_vistas_bandeja.png",
+            "demo_image": "negro_vistas_bandeja.webp",
             "chapter": "Capítulo 02",
             "title": "Ochavada",
-            "paragraph": "<p>La modernidad que nació en 1841. Líneas geométricas, silueta octogonal y decorados de fuerte presencia para mesas con carácter.</p>",
+            "paragraph": "<p>La modernidad que nació en 1841: Ochavada blanca, Canasto Floral, Negro Vistas, Yedra, Laberinto. Líneas geométricas, silueta octogonal y decorados para mesas con carácter.</p>",
             "link": "/collections/ochavada",
             "link_label": "Descubrir Ochavada"
           }
@@ -145,7 +73,7 @@
         "c3": {
           "type": "chapter-card",
           "settings": {
-            "demo_image": "gifts-decor-vertical.png",
+            "demo_image": "gifts-decor-vertical.webp",
             "chapter": "Capítulo 03",
             "title": "Gifts & Decor",
             "paragraph": "<p>Objetos con memoria: piezas decorativas, bandejas, champaneras, mugs y emblemas que llevan la historia de La Cartuja más allá de la mesa.</p>",
@@ -175,70 +103,71 @@
       "type": "shoppable-scene",
       "settings": {
         "eyebrow": "Nuestras mesas",
-        "heading": "Una escena, cada pieza.",
-        "description": "<p>Mesas editoriales donde las piezas de El Renacer se combinan por color, forma y memoria: del blanco sereno de Aurora al contraste de Negro Vistas.</p>",
+        "heading": "Una escena, cada pieza",
+        "description": "<p>Una escena editorial construida alrededor de Oaxaca: color, naturaleza y piezas con carácter para vestir la mesa de una forma más libre y expresiva.</p>",
         "cta_label": "Descubre nuestras mesas",
-        "cta_link": "/pages/mesas"
+        "cta_link": "/pages/nuestras-mesas",
+        "cta2_label": "Aprende a vestir tu mesa",
+        "cta2_link": "/pages/viste-tu-mesa",
+        "add_label": "Añadir pieza",
+        "set1_product": "",
+        "set1_label": "",
+        "set2_product": "",
+        "set2_label": ""
       },
       "blocks": {
         "i1": {
           "type": "product",
           "settings": {
-            "meta_line": "Aurora Collection",
-            "demo_image": "aurora_202_plato.png",
-            "demo_title": "Plato 202 Rosa",
-            "demo_price": "92 €",
-            "link": "/products/plato-202-rosa",
-            "hotspot_x": 32,
-            "hotspot_y": 42
+            "meta_line": "Aurora · Oaxaca",
+            "product": "plato-postre-oaxaca-verde-by-gaston-y-daniela",
+            "hotspot_x": 50,
+            "hotspot_y": 23
           }
         },
         "i2": {
           "type": "product",
           "settings": {
-            "meta_line": "Aurora Collection",
-            "demo_image": "aurora_202_sopera.png",
-            "demo_title": "Sopera 202 Rosa",
-            "demo_price": "185 €",
-            "link": "/products/sopera-202-rosa",
-            "hotspot_x": 57,
-            "hotspot_y": 51
+            "meta_line": "Aurora · Oaxaca",
+            "product": "plato-llano-oaxaca-azul-by-gaston-y-daniela",
+            "hotspot_x": 38,
+            "hotspot_y": 49
           }
         },
         "i3": {
           "type": "product",
           "settings": {
-            "meta_line": "Aurora Collection",
-            "demo_image": "aurora_202_cafetera.png",
-            "demo_title": "Cafetera 202 Rosa",
-            "demo_price": "128 €",
-            "link": "/products/cafetera-202-rosa",
-            "hotspot_x": 71,
-            "hotspot_y": 34
+            "meta_line": "Aurora · Oaxaca",
+            "product": "plato-llano-oaxaca-amarillo-by-gaston-y-daniela",
+            "hotspot_x": 62,
+            "hotspot_y": 49
           }
         },
         "i4": {
           "type": "product",
           "settings": {
-            "meta_line": "Bellavista",
-            "demo_image": "bellavista_fuente.png",
-            "demo_title": "Fuente Bellavista",
-            "demo_price": "96 €",
-            "link": "/products/fuente-bellavista",
-            "hotspot_x": 43,
-            "hotspot_y": 67
+            "meta_line": "Aurora · Oaxaca",
+            "product": "plato-hondo-oaxaca-rosa-by-gaston-y-daniela-rosa",
+            "hotspot_x": 32,
+            "hotspot_y": 72
           }
         },
         "i5": {
           "type": "product",
           "settings": {
-            "meta_line": "Ochavada Collection",
-            "demo_image": "negro_vistas_plato.png",
-            "demo_title": "Plato Negro Vistas",
-            "demo_price": "98 €",
-            "link": "/products/plato-negro-vistas",
-            "hotspot_x": 79,
-            "hotspot_y": 61
+            "meta_line": "Aurora · Oaxaca",
+            "product": "plato-postre-oaxaca-celeste-by-gaston-y-daniela",
+            "hotspot_x": 50,
+            "hotspot_y": 74
+          }
+        },
+        "i6": {
+          "type": "product",
+          "settings": {
+            "meta_line": "Aurora · Oaxaca",
+            "product": "plato-postre-oaxaca-negro-by-gaston-y-daniela",
+            "hotspot_x": 68,
+            "hotspot_y": 72
           }
         }
       },
@@ -247,15 +176,16 @@
         "i2",
         "i3",
         "i4",
-        "i5"
+        "i5",
+        "i6"
       ]
     },
     "story": {
       "type": "story-scroll",
       "settings": {
         "eyebrow": "185 años de historia",
-        "heading": "<p>El nuevo latir de una casa histórica.</p>",
-        "paragraph": "<p>Fundada en Sevilla en 1841, La Cartuja se proyecta hoy como una lovemark: una historia de oficio, memoria y amor por una marca que vuelve a ocupar su lugar en la mesa contemporánea.</p>",
+        "heading": "<p>Heritage crafted for modern living</p>",
+        "paragraph": "<p>Fundada en Sevilla en 1841, La Cartuja se proyecta hoy como una marca con alma: una historia de oficio, memoria y afecto que vuelve a ocupar su lugar en la mesa contemporánea</p>",
         "cta_label": "Descubre nuestra historia",
         "cta_link": "/pages/historia"
       }
@@ -264,7 +194,7 @@
       "type": "newsletter",
       "settings": {
         "eyebrow": "Recibir nuestra carta",
-        "heading": "<p>Una <em>carta</em> cada estación.</p>",
+        "heading": "<p>Una <em>carta</em> cada estación</p>",
         "description": "<p>Cuatro envíos al año. Ediciones, talleres y conversaciones desde Sevilla.</p>"
       }
     }

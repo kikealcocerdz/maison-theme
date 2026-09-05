@@ -18,6 +18,8 @@
     assign short = product.excerpt | default: section.settings.demo_short
   endif
 
+  assign description = product.description | default: section.settings.demo_description
+
   if has_product
     assign price = product.price | money
   else
@@ -28,28 +30,91 @@
     Build the gallery image list: real product images, else up to 3 demo assets.
   endcomment
   assign demo_imgs = section.settings.demo_images | default: 'aurora-plate.png,bellavista-plate.png,bone-white.png' | split: ','
+
+  comment
+    Set / vajilla layout: the piece-count selector is a plain variant switcher and the
+    "Tu pack contiene" rail comes from the variant metafield custom.pack (list of
+    `pack_item` metaobjects: producto + cantidad). Demo fallback: `demo_bundles`.
+  endcomment
+  assign is_set = false
+  if section.settings.layout == 'set'
+    assign is_set = true
+  endif
+
+  assign servicio = product.metafields.custom.servicio | metafield_text | default: section.settings.demo_servicio
+  assign current_variant = product.selected_or_first_available_variant
+
+  assign pieces_idx = -1
+  assign color_idx = -1
+  for opt in product.options_with_values
+    assign oname = opt.name | downcase
+    if oname contains 'pieza' or oname contains 'unidad'
+      assign pieces_idx = opt.position | minus: 1
+    endif
+    if oname contains 'color'
+      assign color_idx = opt.position | minus: 1
+    endif
+  endfor
+
+  assign current_color = ''
+  if color_idx >= 0
+    assign current_color = current_variant.options[color_idx]
+  endif
+
+  assign current_label = current_variant.title
+  if pieces_idx >= 0
+    assign current_label = current_variant.options[pieces_idx]
+  endif
+
+  comment
+    Demo bundles (CLAUDE.md §7) — one line per pack:
+    `42 piezas | 1.290 € | plato-llano-ceilan:12, sopera-ceilan:1`
+  endcomment
+  assign demo_bundles = ''
+  if is_set and pieces_idx < 0 and section.settings.demo_bundles != blank
+    assign demo_bundles = section.settings.demo_bundles | strip | newline_to_br | split: '<br />'
+    assign first_bundle = demo_bundles[0] | split: '|'
+    assign current_label = first_bundle[0] | strip
+    assign price = first_bundle[1] | strip
+  endif
 -%}
 
-<div class="product-page" data-section-id="{{ section.id }}">
-  <section class="product-detail" data-product-gallery>
+{%- liquid
+  assign crumb_collection = product.collections.first
+  assign chapter = crumb_collection.metafields.custom.chapter
+-%}
+{%- capture breadcrumbs_html -%}
+  <div class="product-breadcrumbs">
+    <a href="{{ routes.root_url }}">{{ 'sections.collection.home' | t }}</a> /
+    <a href="{{ routes.collections_url }}">{{ 'collections.title' | t }}</a>
+    {%- if chapter.value.title != blank -%}
+      / <a href="{{ chapter.value.url }}">{{ chapter.value.title | escape }}</a>
+    {%- elsif chapter != blank -%}
+      / <span>{{ chapter | metafield_text | escape }}</span>
+    {%- endif -%}
+    {%- if crumb_collection != blank -%}
+      / <a href="{{ crumb_collection.url }}">{{ crumb_collection.title | escape }}</a>
+    {%- endif -%}
+  </div>
+{%- endcapture -%}
+
+<div class="product-page{% if is_set %} product-page--set{% endif %}" data-section-id="{{ section.id }}" style="--pdp-desc-size: {{ section.settings.description_size | default: 15 }}px;">
+  {%- if is_set -%}
+    <div class="product-set-above-fold">
+      <div class="product-set-breadcrumb-bar">{{ breadcrumbs_html }}</div>
+  {%- endif -%}
+  <section class="product-detail{% if is_set %} product-set-detail{% endif %}" data-product-gallery>
 
     <aside class="product-title-panel">
-      <div class="product-title-sticky">
-        <div class="product-breadcrumbs">
-          <a href="{{ routes.root_url }}">{{ 'sections.collection.home' | t }}</a> /
-          <a href="{{ routes.collections_url }}">{{ 'collections.title' | t }}</a>
-          {%- if has_product and product.collections.first -%}
-            / <a href="{{ product.collections.first.url }}">{{ product.collections.first.title | escape }}</a>
-          {%- endif -%}
-          {%- if title != blank %} / {{ title | escape }}{% endif -%}
-        </div>
+      <div class="product-title-sticky{% if is_set %} product-set-title{% endif %}">
+        {%- unless is_set -%}{{ breadcrumbs_html }}{%- endunless -%}
         {%- if kicker != blank -%}<p class="product-kicker">{{ kicker | escape }}</p>{%- endif -%}
         {%- if title != blank -%}<h1>{{ title | escape }}</h1>{%- endif -%}
         {%- if short != blank -%}<p class="product-short">{{ short }}</p>{%- endif -%}
       </div>
     </aside>
 
-    <section class="product-gallery-panel" aria-label="{{ 'sections.product.gallery' | t }}">
+    <section class="product-gallery-panel{% if is_set %} product-set-gallery{% endif %}" aria-label="{{ 'sections.product.gallery' | t }}">
       <div class="product-main-media">
         <button class="fav product-fav" type="button" aria-label="{{ 'sections.collection.favorite' | t }}">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.1c0 5.2-8.8 10.3-8.8 10.3S3.2 13.3 3.2 8.1A4.5 4.5 0 0 1 12 6.6a4.5 4.5 0 0 1 8.8 1.5Z"/></svg>
@@ -76,17 +141,88 @@
     </section>
 
     <aside class="product-info-panel">
-      <div class="product-info-sticky">
+      <div class="product-info-sticky{% if is_set %} product-set-info{% endif %}">
+        {%- if is_set -%}
+          <div class="product-set-info-core">
+          {%- if color_idx >= 0 -%}
+            <div class="piece-color-row">
+              <span>{{ 'sections.product.color' | t }}</span>
+              <div class="color-options">
+                {%- for value in product.options_with_values[color_idx].values -%}
+                  {%- assign vname = value.name | default: value -%}
+                  {%- assign swatch = value.swatch.color | default: section.settings.demo_swatch | default: '#6f8797' -%}
+                  <button class="color-dot{% if vname == current_color %} active{% endif %}" type="button" aria-label="{{ vname | escape }}" style="--swatch: {{ swatch }}"{% if value.variant.id %} data-color-url="{{ product.url }}?variant={{ value.variant.id }}"{% endif %}></button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endif -%}
+          {%- if servicio != blank -%}
+            <div class="piece-dimension-row">
+              <span>{{ 'sections.product.service' | t }}</span>
+              <strong>{{ servicio | escape }}</strong>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'accordion' -%}
             <div class="product-accordion" {{ block.shopify_attributes }}>
               <button type="button">{{ block.settings.label | escape }} <span aria-hidden="true"></span></button>
-              <div><p>{{ block.settings.content }}</p></div>
+              <div class="product-accordion__panel"><div class="product-accordion__content">
+                {{ block.settings.content }}
+                {%- if block.settings.show_description and description != blank -%}
+                  <div class="product-description rte">{{ description }}</div>
+                {%- endif -%}
+              </div></div>
             </div>
           {%- endif -%}
         {%- endfor -%}
 
-        {%- if has_product -%}
+        {%- if is_set -%}
+          </div>{%- comment -%} /.product-set-info-core {%- endcomment -%}
+
+          {%- capture bundle_options_html -%}
+            {%- if has_product and pieces_idx >= 0 -%}
+              <div class="bundle-options" role="group" aria-label="{{ 'sections.product.pieces_selector' | t }}">
+                {%- for v in product.variants -%}
+                  {%- if color_idx < 0 or v.options[color_idx] == current_color -%}
+                    {%- assign vlabel = v.title -%}
+                    {%- if pieces_idx >= 0 -%}{%- assign vlabel = v.options[pieces_idx] -%}{%- endif -%}
+                    <button class="bundle-option{% if v.id == current_variant.id %} is-active{% endif %}" type="button" data-pack-key="{{ v.id }}" data-variant-id="{{ v.id }}" data-price="{{ v.price | money }}" data-label="{{ vlabel | escape }}"{% unless v.available %} disabled{% endunless %}>{{ vlabel | escape }}</button>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- elsif demo_bundles != blank -%}
+              <div class="bundle-options" role="group" aria-label="{{ 'sections.product.pieces_selector' | t }}">
+                {%- for row in demo_bundles -%}
+                  {%- assign parts = row | split: '|' -%}
+                  {%- assign vlabel = parts[0] | strip -%}
+                  <button class="bundle-option{% if forloop.first %} is-active{% endif %}" type="button" data-pack-key="{{ vlabel | escape }}" data-variant-id="" data-price="{{ parts[1] | strip | escape }}" data-label="{{ vlabel | escape }}">{{ vlabel | escape }}</button>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          {%- endcapture -%}
+
+          {%- if has_product -%}
+            {%- form 'product', product, class: 'product-buy-block product-set-bundle-footer' -%}
+              <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-input>
+              <div class="product-set-price-row">
+                {{ bundle_options_html }}
+                <span class="product-price-large" data-bundle-price>{{ price }}</span>
+              </div>
+              <button class="add-to-bag" type="submit" name="add"{% unless product.available %} disabled{% endunless %}>
+                {%- if product.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+              </button>
+            {%- endform -%}
+          {%- else -%}
+            <div class="product-buy-block product-set-bundle-footer">
+              <div class="product-set-price-row">
+                {{ bundle_options_html }}
+                <span class="product-price-large" data-bundle-price>{{ price }}</span>
+              </div>
+              <button class="add-to-bag" type="button">{{ 'products.product.add_to_cart' | t }}</button>
+            </div>
+          {%- endif -%}
+        {%- elsif has_product -%}
           {%- form 'product', product, class: 'product-buy-block' -%}
             <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
             <span class="product-price-large">{{ price }}</span>
@@ -103,6 +239,78 @@
       </div>
     </aside>
   </section>
+
+  {%- if is_set -%}
+    <section class="product-set-pack" aria-label="{{ 'sections.product.pack_intro' | t | strip_html | escape }}">
+      <div class="product-set-pack-intro">
+        <p>{{ 'sections.product.pack_intro' | t }}</p>
+        <span data-bundle-label>{{ current_label | escape }}</span>
+      </div>
+      {%- if has_product and pieces_idx >= 0 -%}
+        {%- for v in product.variants -%}
+          {%- if color_idx < 0 or v.options[color_idx] == current_color -%}
+            {%- assign items = v.metafields.custom.pack.value -%}
+            {%- if items != blank -%}
+              {%- assign cols = items.size -%}{%- if cols > 8 -%}{%- assign cols = cols | plus: 1 | divided_by: 2 -%}{%- endif -%}
+              <div class="product-set-includes-list{% if v.id == current_variant.id %} is-visible{% endif %}" data-pack-for="{{ v.id }}" style="--pack-cols: {{ cols }}">
+                {%- for item in items -%}
+                  {%- assign ip = item.producto.value -%}
+                  <article class="product-set-include-card">
+                    <div class="product-set-include-thumb">
+                      {%- if ip.featured_image -%}
+                        <img src="{{ ip.featured_image | image_url: width: 320 }}" alt="{{ ip.title | escape }}" width="{{ ip.featured_image.width }}" height="{{ ip.featured_image.height }}" loading="lazy" decoding="async">
+                      {%- endif -%}
+                    </div>
+                    <div class="product-set-include-copy">
+                      <strong>{{ ip.title | escape }}</strong>
+                      <span>x {{ item.cantidad.value }}</span>
+                    </div>
+                  </article>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- elsif demo_bundles != blank -%}
+        {%- for row in demo_bundles -%}
+          {%- assign parts = row | split: '|' -%}
+          {%- assign raw_items = parts[2] | default: '' | split: ',' -%}
+          {%- assign cols = raw_items.size -%}{%- if cols > 8 -%}{%- assign cols = cols | plus: 1 | divided_by: 2 -%}{%- endif -%}
+          <div class="product-set-includes-list{% if forloop.first %} is-visible{% endif %}" data-pack-for="{{ parts[0] | strip | escape }}" style="--pack-cols: {{ cols }}">
+            {%- for raw in raw_items -%}
+              {%- assign bits = raw | strip | split: ':' -%}
+              {%- assign ip = all_products[bits[0]] -%}
+              <article class="product-set-include-card">
+                <div class="product-set-include-thumb">
+                  {%- if ip.featured_image -%}
+                    <img src="{{ ip.featured_image | image_url: width: 320 }}" alt="{{ ip.title | escape }}" width="{{ ip.featured_image.width }}" height="{{ ip.featured_image.height }}" loading="lazy" decoding="async">
+                  {%- endif -%}
+                </div>
+                <div class="product-set-include-copy">
+                  <strong>{{ ip.title | default: bits[0] | escape }}</strong>
+                  <span>x {{ bits[1] | strip | default: 1 }}</span>
+                </div>
+              </article>
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </section>
+    </div>{%- comment -%} /.product-set-above-fold {%- endcomment -%}
+  {%- endif -%}
+
+  {%- comment -%} Sticky add-to-cart: shows when the buy block scrolls out of view {%- endcomment -%}
+  <div class="pdp-sticky-bar" aria-hidden="true" data-pdp-sticky>
+    <div class="pdp-sticky-bar__inner">
+      <div class="pdp-sticky-bar__info">
+        {%- if title != blank -%}<span class="pdp-sticky-bar__title">{{ title | escape }}</span>{%- endif -%}
+        <span class="pdp-sticky-bar__price" data-sticky-price>{{ price }}</span>
+      </div>
+      <button class="add-to-bag pdp-sticky-bar__btn" type="button" data-pdp-sticky-add{% if has_product and product.available == false %} disabled{% endif %}>
+        {%- if has_product and product.available == false -%}{{ 'products.product.sold_out' | t }}{%- else -%}{{ 'products.product.add_to_cart' | t }}{%- endif -%}
+      </button>
+    </div>
+  </div>
 </div>
 
 {%- comment -%} Fullscreen gallery lightbox {%- endcomment -%}
@@ -136,9 +344,8 @@
 .product-page { padding-top: var(--header-h); background: var(--paper); color: var(--ink); }
 .product-detail { width: var(--content); margin: 0 auto; display: grid; grid-template-columns: minmax(220px, 25%) minmax(420px, 44%) minmax(280px, 31%); gap: min(4vw, 70px); align-items: start; padding-bottom: 6vh; }
 
-.product-title-panel, .product-info-panel { position: relative; min-height: auto; }
+.product-title-panel, .product-info-panel { display: flex; justify-content:center; height: 100%; }
 .product-title-sticky { position: relative; top: auto; padding-top: 24vh; }
-.product-detail.info-expanded .product-title-sticky { padding-top: 18vh; }
 .product-breadcrumbs { position: absolute; top: 18px; left: 0; font-size: 10px; letter-spacing: .08em; color: var(--muted); white-space: nowrap; }
 .product-breadcrumbs a { text-decoration: underline; text-underline-offset: 3px; }
 .product-kicker { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin: 0 0 18px; }
@@ -162,15 +369,30 @@
 
 .product-info-sticky { position: relative; top: auto; padding-top: 18vh; display: flex; flex-direction: column; justify-content: flex-start; min-height: min(740px, calc(100vh - var(--header-h) - 18px)); transition: padding-top 360ms var(--ease-long); }
 .product-detail.info-expanded .product-info-sticky { padding-top: 5vh; }
+.product-description { margin: 0; color: var(--ink-soft); font-size: var(--pdp-desc-size, 15px); line-height: 1.7; }
+.product-description > :first-child { margin-top: 0; }
+.product-description > :last-child { margin-bottom: 0; }
+.product-description p { margin: 0 0 12px; }
+.product-description h1, .product-description h2, .product-description h3, .product-description h4 { font-family: var(--serif); font-weight: 400; color: var(--ink); line-height: 1.25; margin: 22px 0 10px; }
+.product-description h2 { font-size: 21px; } .product-description h3 { font-size: 17px; } .product-description h4 { font-size: 14px; }
+.product-description ul, .product-description ol { margin: 0 0 12px; padding-left: 18px; }
+.product-description li { margin-bottom: 5px; }
+.product-description a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.product-description strong { color: var(--ink); }
+.product-description img { max-width: 100%; height: auto; margin: 14px 0; }
+
 .product-accordion { border-bottom: .5px solid var(--rule); }
 .product-accordion:first-of-type { border-top: .5px solid var(--rule); }
 .product-accordion button { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 17px 0; font-size: 12px; color: var(--ink); }
 .product-accordion button span { font-size: 0; width: 16px; height: 16px; display: grid; place-items: center; }
 .product-accordion button span::before { content: "+"; font-size: 16px; line-height: 1; }
 .product-accordion.is-open button span::before { content: "−"; font-size: 18px; }
-.product-accordion > div { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 320ms var(--ease), padding 320ms var(--ease); overflow: hidden; }
-.product-accordion.is-open > div { grid-template-rows: 1fr; padding: 0 0 14px; }
-.product-accordion > div > p { overflow: hidden; margin: 0; font-size: 11px; line-height: 1.58; color: var(--muted); padding-right: 4px; }
+.product-accordion__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 320ms var(--ease); overflow: hidden; }
+.product-accordion.is-open .product-accordion__panel { grid-template-rows: 1fr; }
+.product-accordion__content { overflow: hidden; min-height: 0; padding-bottom: 0; transition: padding-bottom 320ms var(--ease); }
+.product-accordion.is-open .product-accordion__content { padding-bottom: 14px; }
+.product-accordion__content > * { margin: 0; font-size: 11px; line-height: 1.58; color: var(--muted); padding-right: 4px; }
+.product-accordion__content > * + * { margin-top: 8px; }
 .product-buy-block { margin-top: 22px; display: grid; gap: 18px; background: var(--paper); }
 .product-price-large { font-family: var(--serif); font-size: 30px; line-height: 1; text-align: right; color: var(--ink); }
 .add-to-bag { height: 54px; background: var(--ink); color: #fff; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; width: 100%; transition: background 260ms var(--ease); }
@@ -213,6 +435,221 @@
   .lightbox-thumbs button { width: 46px; height: 62px; }
   .lightbox-close { top: 14px; right: 18px; }
   .lightbox-scroll figure img { width: 82vw; height: 80vh; }
+}
+
+.pdp-sticky-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: var(--paper); border-top: .5px solid var(--rule); transform: translateY(100%); transition: transform 320ms var(--ease); pointer-events: none; }
+.pdp-sticky-bar.is-visible { transform: translateY(0); pointer-events: auto; }
+.pdp-sticky-bar__inner { width: var(--content); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 12px 0; }
+.pdp-sticky-bar__info { display: flex; align-items: baseline; gap: 16px; min-width: 0; }
+.pdp-sticky-bar__title { font-family: var(--serif); font-size: 17px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pdp-sticky-bar__price { font-family: var(--serif); font-size: 17px; color: var(--ink); white-space: nowrap; }
+.pdp-sticky-bar__btn { width: auto; min-width: 220px; height: 48px; padding: 0 32px; flex: none; }
+@media (max-width: 620px) {
+  .pdp-sticky-bar__inner { width: calc(100vw - 24px); gap: 12px; }
+  .pdp-sticky-bar__title { display: none; }
+  .pdp-sticky-bar__btn { flex: 1; min-width: 0; padding: 0 16px; }
+}
+
+/* ===== Set / vajilla layout (templates/product.set.json) ===== */
+.product-set-breadcrumb-bar { width: var(--content); margin: 0 auto; padding: 18px 0 12px; }
+.product-set-breadcrumb-bar .product-breadcrumbs { position: relative; top: auto; left: auto; font-size: 12px; letter-spacing: .04em; line-height: 1.4; }
+.product-set-detail { width: var(--content); max-width: none; height: calc(100svh - var(--header-h) - 50px); min-height: 630px; grid-template-columns: minmax(220px, 25%) minmax(420px, 44%) minmax(310px, 31%); align-items: center; padding-bottom: 0; }
+.product-set-detail .product-title-panel, .product-set-detail .product-info-panel, .product-set-gallery { height: min(72vh, 735px); min-height: 0; }
+.product-set-title, .product-set-info { position: relative; top: auto; padding: 0; width: 100%; height: 100%; box-sizing: border-box; }
+.product-set-title { display: flex; flex-direction: column; justify-content: center; padding-right: min(2vw, 28px); }
+.product-page--set .product-title-panel h1 { font-size: clamp(38px, 3.35vw, 58px); line-height: .96; }
+.product-set-title .product-short { font-size: 12px; line-height: 1.78; max-width: 390px; margin-top: 18px; }
+.product-set-gallery { padding: 0; display: flex; align-items: center; }
+.product-set-gallery .product-main-media { height: min(72vh, 735px); width: 100%; margin: 0; }
+.product-set-info { display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 14px; min-height: 0; }
+.product-page--set .product-detail .product-info-sticky,
+.product-page--set .product-detail.info-expanded .product-info-sticky { padding-top: 0; }
+.product-set-info-core { min-height: 0; display: flex; flex-direction: column; justify-content: center; overflow: auto; scrollbar-width: none; padding-right: 2px; }
+.product-set-info-core::-webkit-scrollbar { display: none; }
+.product-set-info-core .product-accordion button { padding: 14px 0; }
+
+.piece-color-row, .piece-dimension-row { display: grid; grid-template-columns: 110px 1fr; gap: 24px; padding: 14px 0; border-bottom: .5px solid var(--rule); font-size: 12px; align-items: center; }
+.piece-color-row > span, .piece-dimension-row > span { font-weight: 400; }
+.piece-dimension-row strong { font-weight: 300; text-align: right; color: var(--muted); }
+.color-options { display: flex; gap: 10px; justify-content: flex-end; }
+.color-dot { width: 24px; height: 24px; border-radius: 50%; border: 1px solid transparent; padding: 3px; background: var(--paper); }
+.color-dot::before { content: ""; display: block; width: 100%; height: 100%; border-radius: 50%; background: var(--swatch); }
+.color-dot.active { border-color: var(--ink); }
+
+.product-set-bundle-footer { margin-top: 0; border-top: .5px solid var(--rule); padding-top: 12px; display: grid; gap: 14px; background: var(--paper); }
+.product-set-bundle-footer > .add-to-bag { width: 100%; height: 44px; }
+.product-set-price-row { display: grid; grid-template-columns: minmax(228px, auto) 1fr; align-items: center; gap: 18px; }
+.product-set-price-row .bundle-options { grid-column: 1; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(108px, 1fr); gap: 8px; min-width: 244px; width: max-content; }
+.product-set-price-row .product-price-large { grid-column: 2; justify-self: end; text-align: right; margin: 0; white-space: nowrap; }
+.bundle-option { height: 42px; padding: 0 18px; border-radius: 999px; border: 1px solid rgba(8, 40, 107, .22); background: var(--paper); color: #08286b; font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; transition: background 300ms var(--ease), color 300ms var(--ease), border-color 300ms var(--ease), transform 300ms var(--ease); }
+.bundle-option:hover { border-color: #08286b; transform: translateY(-1px); }
+.bundle-option.is-active { background: #08286b; border-color: #08286b; color: #fff; box-shadow: 0 10px 26px rgba(8, 40, 107, .16); }
+.bundle-option[disabled] { opacity: .4; cursor: default; transform: none; }
+
+.product-set-pack { width: var(--content); margin: 18px auto 88px; padding: 34px 0 10px; border-top: .5px solid var(--rule); }
+.product-set-pack-intro { text-align: center; margin: 0 auto 26px; }
+.product-set-pack-intro p { margin: 0; font: 400 clamp(18px, 1.45vw, 25px)/1.15 var(--serif); color: var(--ink); }
+.product-set-pack-intro span { display: block; margin-top: 8px; font: 400 9px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.product-set-includes-list { display: none; grid-template-columns: repeat(var(--pack-cols, 8), minmax(0, 1fr)); gap: 12px; }
+.product-set-includes-list.is-visible { display: grid; }
+.product-set-include-card { min-width: 0; padding: 11px; border: .5px solid rgba(15, 26, 46, .12); border-radius: 12px; background: #f7f8f9; transition: transform 300ms var(--ease), background 300ms var(--ease), border-color 300ms var(--ease); }
+.product-set-include-card:hover { transform: translateY(-4px); background: var(--paper); border-color: rgba(8, 40, 107, .22); }
+.product-set-include-thumb { width: 100%; aspect-ratio: 1 / 1; border-radius: 8px; background: var(--paper); margin-bottom: 11px; display: grid; place-items: center; overflow: hidden; }
+.product-set-include-thumb img { width: 88%; height: 88%; object-fit: contain; }
+.product-set-include-copy { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 8px; }
+.product-set-include-copy strong { font: 400 10px/1.35 var(--sans); color: var(--ink); }
+.product-set-include-copy span { font: 500 10px/1 var(--sans); color: #08286b; white-space: nowrap; }
+
+@media (max-width: 1180px) {
+  .product-set-breadcrumb-bar { width: calc(100vw - 32px); padding: 18px 0 4px; }
+  .product-set-detail { width: calc(100vw - 32px); max-width: none; height: auto; min-height: 0; grid-template-columns: 1fr; }
+  .product-set-detail .product-title-panel, .product-set-detail .product-info-panel, .product-set-gallery { height: auto; }
+  .product-set-title { padding: 46px 0 26px; }
+  .product-set-gallery .product-main-media { height: min(72vh, 720px); }
+  .product-set-info { display: block; padding: 40px 0 55px; }
+  .product-set-bundle-footer { margin-top: 25px; }
+  .piece-color-row, .piece-dimension-row { grid-template-columns: 1fr; gap: 8px; }
+  .color-options { justify-content: flex-start; }
+  .piece-dimension-row strong { text-align: left; }
+  .product-set-pack { width: calc(100vw - 32px); margin-top: 8px; padding-top: 30px; }
+  .product-set-includes-list.is-visible { display: flex; overflow-x: auto; gap: 12px; padding-bottom: 12px; scroll-snap-type: x proximity; }
+  .product-set-include-card { flex: 0 0 168px; scroll-snap-align: start; }
+}
+@media (max-width: 700px) {
+  .product-set-price-row { grid-template-columns: 1fr; gap: 12px; }
+  .product-set-price-row .bundle-options { grid-column: 1; width: 100%; min-width: 0; grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .product-set-price-row .product-price-large { grid-column: 1; justify-self: start; text-align: left; }
+}
+@media (max-width: 620px) {
+  .product-set-breadcrumb-bar { width: calc(100vw - 24px); overflow-x: auto; white-space: nowrap; }
+  .product-set-detail { width: calc(100vw - 24px); }
+  .product-page--set .product-title-panel h1 { font-size: 40px; }
+  .product-set-gallery .product-main-media { height: 62vh; }
+  .product-set-pack { width: calc(100vw - 24px); margin-bottom: 62px; }
+  .product-set-pack-intro { margin-bottom: 20px; }
+  .product-set-include-card { flex-basis: 148px; }
+}
+
+/* ==========================================================================
+   v96 / v98 — PDP en móvil: la columna sticky de tres paneles se convierte en
+   una sola columna. En 761–780px la foto va primero (v96); a partir de 760px
+   manda v98 y el orden pasa a título → foto → compra.
+   Las clases del mock `ceilan-*` son aquí `product-set-*`.
+   ========================================================================== */
+@media (max-width: 780px) {
+  .product-page { width: 100% !important; max-width: 100% !important; overflow-x: clip !important; }
+  .product-breadcrumbs,
+  .product-set-breadcrumb-bar { padding-top: 12px !important; }
+
+  .product-page .product-detail {
+    width: calc(100% - 28px) !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    padding-top: 14px !important;
+  }
+
+  .product-page .product-gallery-panel,
+  .product-page .product-title-panel,
+  .product-page .product-info-panel { width: 100% !important; min-width: 0 !important; max-width: 100% !important; }
+  .product-page .product-gallery-panel { order: 1 !important; }
+  .product-page .product-title-panel { order: 2 !important; }
+  .product-page .product-info-panel { order: 3 !important; }
+
+  .product-page .product-title-sticky { padding: 26px 2px 20px !important; text-align: left !important; }
+  .product-page .product-title-sticky h1 { font-size: clamp(34px, 10vw, 48px) !important; line-height: 0.96 !important; }
+  .product-page .product-short { font-size: 12px !important; line-height: 1.68 !important; max-width: 95% !important; }
+  .product-page .product-info-sticky { padding: 0 !important; min-height: 0 !important; }
+
+  .product-page .product-main-media {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: min(62dvh, 510px) !important;
+    min-height: 360px !important;
+    background: #eeeff1 !important;
+    margin: 0 !important;
+  }
+
+  .product-page .product-main-media .product-gallery-slide { object-fit: contain !important; object-position: center !important; background: #eeeff1 !important; }
+
+  .product-page .product-buy-block {
+    position: sticky !important;
+    bottom: 0 !important;
+    z-index: 45 !important;
+    background: rgba(255, 255, 255, 0.97) !important;
+    padding: 12px 0 calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+    margin-top: 8px !important;
+    border-top: 1px solid rgba(15, 26, 46, 0.10) !important;
+    box-shadow: 0 -10px 30px rgba(15, 26, 46, 0.05) !important;
+  }
+
+  .product-page .piece-color-row,
+  .product-page .piece-dimension-row { min-height: 48px !important; padding: 13px 0 !important; }
+  .product-page .product-accordion button { min-height: 50px !important; padding: 14px 0 !important; }
+  .product-page .product-accordion > div > p { font-size: 11.5px !important; line-height: 1.65 !important; }
+  .product-page .product-price-large { font-size: 25px !important; }
+  .product-page .add-to-bag { height: 50px !important; }
+  .product-page .bundle-options { gap: 6px !important; }
+  .product-page .bundle-option { min-height: 40px !important; padding: 0 12px !important; font-size: 9px !important; }
+
+  .product-page .product-set-price-row { gap: 10px !important; align-items: center !important; }
+  .product-page .product-set-pack {
+    width: calc(100% - 28px) !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 46px 0 !important;
+  }
+  .product-page .product-set-includes-list {
+    grid-auto-columns: min(72vw, 270px) !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overscroll-behavior-inline: contain !important;
+  }
+
+  .product-lightbox { grid-template-columns: 1fr !important; }
+  .product-lightbox .lightbox-thumbs { display: none !important; }
+  .product-lightbox .lightbox-scroll figure img { width: 94vw !important; height: 88dvh !important; object-fit: contain !important; }
+}
+
+@media (max-width: 760px) {
+  .product-page { overflow-x: hidden !important; }
+
+  .product-page .product-detail {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding-top: 18px !important;
+  }
+
+  .product-page .product-title-panel,
+  .product-page .product-gallery-panel,
+  .product-page .product-info-panel { height: auto !important; max-height: none !important; min-height: 0 !important; position: relative !important; }
+  .product-page .product-title-sticky,
+  .product-page .product-info-sticky { position: relative !important; top: auto !important; transform: none !important; height: auto !important; min-height: 0 !important; }
+
+  .product-page .product-title-panel { order: 1 !important; }
+  .product-page .product-gallery-panel { order: 2 !important; }
+  .product-page .product-info-panel { order: 3 !important; }
+
+  .product-page .product-title-panel h1 { font-size: clamp(36px, 11vw, 50px) !important; line-height: 0.96 !important; margin-bottom: 12px !important; }
+  .product-page .product-short { font-size: 11.5px !important; line-height: 1.65 !important; max-width: 46ch !important; }
+
+  .product-page .product-main-media { height: auto !important; aspect-ratio: 4 / 5 !important; min-height: 0 !important; max-height: none !important; overflow: hidden !important; }
+  .product-page .product-gallery-slide { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center !important; }
+
+  .product-page .product-buy-block { position: relative !important; bottom: auto !important; margin-top: 14px !important; }
+  .product-page .piece-color-row,
+  .product-page .piece-dimension-row { padding: 13px 0 !important; }
+  .product-page .product-accordion button { padding: 13px 0 !important; }
+  .product-page .product-set-pack { overflow: hidden !important; }
 }
 {% endstylesheet %}
 
@@ -257,6 +694,51 @@
       });
     });
     refresh();
+
+    // Sticky add-to-cart: visible only while the real buy block is off-screen
+    var buyBlock = root.querySelector('.product-buy-block');
+    var bar = root.querySelector('[data-pdp-sticky]');
+    var realAdd = root.querySelector('.product-buy-block .add-to-bag');
+    var stickyAdd = root.querySelector('[data-pdp-sticky-add]');
+    if (stickyAdd && realAdd) stickyAdd.addEventListener('click', function () { realAdd.click(); });
+    if (buyBlock && bar) {
+      var barObs = new IntersectionObserver(function (entries) {
+        bar.classList.toggle('is-visible', !entries[0].isIntersecting);
+        bar.setAttribute('aria-hidden', entries[0].isIntersecting ? 'true' : 'false');
+      }, { threshold: 0 });
+      barObs.observe(buyBlock);
+    }
+
+    // Set layout: the piece-count buttons are a variant switcher + pack-rail toggle
+    var options = [].slice.call(root.querySelectorAll('.bundle-option'));
+    if (options.length) {
+      var variantInput = root.querySelector('[data-variant-input]');
+      var priceEl = root.querySelector('[data-bundle-price]');
+      var labelEl = root.querySelector('[data-bundle-label]');
+      var stickyPrice = root.querySelector('[data-sticky-price]');
+      var packs = [].slice.call(root.querySelectorAll('[data-pack-for]'));
+      options.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (btn.disabled) return;
+          var key = btn.getAttribute('data-pack-key');
+          options.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+          packs.forEach(function (p) { p.classList.toggle('is-visible', p.getAttribute('data-pack-for') === key); });
+          if (priceEl) priceEl.textContent = btn.getAttribute('data-price');
+          if (stickyPrice) stickyPrice.textContent = btn.getAttribute('data-price');
+          if (labelEl) labelEl.textContent = btn.getAttribute('data-label');
+          var vid = btn.getAttribute('data-variant-id');
+          if (variantInput && vid) {
+            variantInput.value = vid;
+            history.replaceState(null, '', '?variant=' + vid);
+          }
+        });
+      });
+    }
+
+    // Colour swatches jump to that colour's variant
+    root.querySelectorAll('.color-dot[data-color-url]').forEach(function (dot) {
+      dot.addEventListener('click', function () { window.location.href = dot.getAttribute('data-color-url'); });
+    });
   }
 
   function initLightbox() {
@@ -309,12 +791,28 @@
 {
   "name": "Product detail",
   "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "standard",
+      "options": [
+        { "value": "standard", "label": "Standard (single piece)" },
+        { "value": "set", "label": "Set / vajilla (piece-count selector)" }
+      ],
+      "info": "Set mode reads the product option named \"Piezas\"/\"Unidades\" and the variant metafield custom.pack."
+    },
     { "type": "text", "id": "demo_kicker", "label": "Kicker", "info": "Falls back to product metafield custom.kicker." },
+    { "type": "text", "id": "demo_servicio", "label": "Service line", "info": "Set layout only. Falls back to product metafield custom.servicio. e.g. Vajilla completa \u00b7 12 comensales" },
     { "type": "header", "content": "Demo (when no product / before catalog migration)" },
     { "type": "text", "id": "demo_title", "label": "Demo title" },
     { "type": "textarea", "id": "demo_short", "label": "Demo short description" },
+    { "type": "richtext", "id": "demo_description", "label": "Demo description", "info": "Falls back when the product has no description." },
+    { "type": "range", "id": "description_size", "min": 12, "max": 20, "step": 1, "unit": "px", "label": "Description text size", "default": 15 },
     { "type": "text", "id": "demo_price", "label": "Demo price (e.g. 92 €)" },
-    { "type": "text", "id": "demo_images", "label": "Demo gallery images (comma-separated asset filenames)", "info": "e.g. aurora-plate.png,bellavista-plate.png,bone-white.png" }
+    { "type": "text", "id": "demo_images", "label": "Demo gallery images (comma-separated asset filenames)", "info": "e.g. aurora-plate.png,bellavista-plate.png,bone-white.png" },
+    { "type": "text", "id": "demo_swatch", "label": "Demo colour swatch (hex)", "info": "Used when the Color option has no swatch. e.g. #6f8797" },
+    { "type": "textarea", "id": "demo_bundles", "label": "Demo packs (set layout)", "info": "One line per pack: Label | Price | handle:qty, handle:qty \u2014 e.g. 42 piezas | 1.290 \u20ac | plato-llano-ceilan:12, sopera-ceilan:1. Only used until the product has a Piezas option." }
   ],
   "blocks": [
     {
@@ -322,7 +820,8 @@
       "name": "Accordion row",
       "settings": [
         { "type": "text", "id": "label", "label": "Label", "default": "Detalles" },
-        { "type": "richtext", "id": "content", "label": "Content" }
+        { "type": "richtext", "id": "content", "label": "Content" },
+        { "type": "checkbox", "id": "show_description", "label": "Append product description", "default": false, "info": "Adds the product's description (when non-empty) below this accordion's content." }
       ]
     }
   ]

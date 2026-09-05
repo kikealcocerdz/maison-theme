@@ -1,19 +1,22 @@
 {%- comment -%}
-  Nuestras mesas — editorial page: hero + text filter bar + alternating table
-  scenes (full-bleed photo with pulsing hotspots + a featured product panel).
-  Filters toggle scenes by their `type_slug`. Scenes are `scene` blocks.
+  Nuestras mesas — editorial page: hero + text filter bar + alternating shoppable
+  table scenes. Each scene = full-bleed photo with pulsing hotspots + a product
+  mini-carousel (arrows, dots, hotspot→product switching, per-product note and
+  add-to-cart CTAs). Scenes are `scene` blocks; their products are flat `product`
+  blocks linked by `scene_id` == the scene's `type_slug`. Filters toggle scenes.
+  All product slides are server-rendered; JS only swaps the active one.
 {%- endcomment -%}
 {%- liquid
   assign all_label = section.settings.filter_all_label | default: 'Todas'
   assign filter_rows = section.settings.filters | newline_to_br | split: '<br />'
 -%}
-<main class="tables-page" data-section-id="{{ section.id }}">
+<main class="tables-page tables-page-v48" data-section-id="{{ section.id }}">
   <section class="tables-hero">
     <div>
       {%- if section.settings.kicker != blank -%}<p class="collection-kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
       {%- if section.settings.heading != blank -%}<h1>{{ section.settings.heading | escape }}</h1>{%- endif -%}
     </div>
-    {%- if section.settings.intro != blank -%}<p>{{ section.settings.intro }}</p>{%- endif -%}
+    {%- if section.settings.intro != blank -%}<p>{{ section.settings.intro | strip_html }}</p>{%- endif -%}
   </section>
 
   {%- if filter_rows.size > 0 -%}
@@ -28,42 +31,111 @@
     </section>
   {%- endif -%}
 
-  <section class="table-scenes-list">
+  <section class="table-scenes-list table-scenes-list-v48">
     {%- for block in section.blocks -%}
       {%- if block.type == 'scene' -%}
         {%- liquid
+          assign slug = block.settings.type_slug | default: 'all' | strip | handleize
           assign hotspot_rows = block.settings.hotspots | newline_to_br | split: '<br />'
+          assign v42 = block.settings.vajilla42
+          assign v56 = block.settings.vajilla56
+
+          # How many product blocks belong to this scene (needed for the dot rows).
+          assign prod_count = 0
+          for b in section.blocks
+            if b.type == 'product' and b.settings.scene_id == block.settings.type_slug
+              assign prod_count = prod_count | plus: 1
+            endif
+          endfor
         -%}
-        <article class="table-scene-block{% if block.settings.reverse %} reverse{% endif %}" data-table-type="{{ block.settings.type_slug | default: 'all' | strip | handleize }}" {{ block.shopify_attributes }}>
+        <article class="table-scene-block table-shop-scene{% if block.settings.reverse %} reverse{% endif %}" data-table-type="{{ slug }}" {{ block.shopify_attributes }}>
           <div class="table-scene-photo">
             {%- if block.settings.photo != blank -%}
-              {% render 'image-responsive', image: block.settings.photo, alt: block.settings.product_title, sizes: '(max-width: 1000px) 100vw, 55vw' %}
+              {% render 'image-responsive', image: block.settings.photo, alt: block.settings.photo_alt, sizes: '(max-width: 1000px) 100vw, 55vw' %}
             {%- else -%}
-              <img src="{{ block.settings.demo_photo | default: 'scene-table.webp' | asset_url }}" alt="{{ block.settings.product_title | escape }}" width="1200" height="900" loading="lazy" decoding="async">
+              <img src="{{ block.settings.demo_photo | default: 'scene-table.webp' | asset_url }}" alt="{{ block.settings.photo_alt | escape }}" width="1800" height="1343" loading="lazy" decoding="async">
             {%- endif -%}
             {%- for row in hotspot_rows -%}
               {%- assign xy = row | split: '|' -%}
               {%- if xy[0] != blank -%}
-                <button class="scene-hotspot{% if forloop.first %} active{% endif %}" type="button" aria-label="{{ 'sections.tables.hotspot' | t }}" style="left:{{ xy[0] | strip }}%;top:{{ xy[1] | default: '50' | strip }}%"></button>
+                {%- liquid
+                  assign hs_label = xy[2] | strip
+                  if hs_label == blank
+                    assign hs_label = 'sections.tables.hotspot' | t
+                  endif
+                -%}
+                <button class="scene-hotspot{% if forloop.first %} active{% endif %}" type="button" data-table-hotspot="{{ forloop.index0 }}" aria-label="{{ hs_label | escape }}" style="left:{{ xy[0] | strip }}%;top:{{ xy[1] | default: '50' | strip }}%"></button>
               {%- endif -%}
             {%- endfor -%}
           </div>
-          <aside class="table-scene-product">
-            <button class="table-prod-arrow prev" type="button" aria-hidden="true" tabindex="-1">‹</button>
-            {%- if block.settings.product_link != blank -%}<a class="table-product-link" href="{{ block.settings.product_link }}">{%- endif -%}
-              {%- if block.settings.product_image != blank -%}
-                {% render 'image-responsive', image: block.settings.product_image, alt: block.settings.product_title, sizes: '(max-width: 1000px) 80vw, 30vw' %}
-              {%- else -%}
-                <img src="{{ block.settings.demo_product_image | default: 'aurora-plate.png' | asset_url }}" alt="{{ block.settings.product_title | escape }}" width="900" height="900" loading="lazy" decoding="async">
-              {%- endif -%}
-            {%- if block.settings.product_link != blank -%}</a>{%- endif -%}
-            {%- if block.settings.product_meta != blank -%}<p>{{ block.settings.product_meta | escape }}</p>{%- endif -%}
-            {%- if block.settings.product_title != blank -%}
-              <h2>{%- if block.settings.product_link != blank -%}<a href="{{ block.settings.product_link }}">{{ block.settings.product_title | escape }}</a>{%- else -%}{{ block.settings.product_title | escape }}{%- endif -%}</h2>
-            {%- endif -%}
-            {%- if block.settings.product_price != blank -%}<span>{{ block.settings.product_price | escape }}</span>{%- endif -%}
-            <div class="table-scene-actions"><button class="ghost-btn" type="button">Añadir al carrito</button></div>
-            <button class="table-prod-arrow next" type="button" aria-hidden="true" tabindex="-1">›</button>
+          <aside class="table-scene-product" aria-live="polite">
+            <button class="table-prod-arrow prev" type="button" data-table-prev aria-label="{{ 'general.accessibility.previous' | t }}">&lsaquo;</button>
+            <div class="table-product-slot">
+              {%- assign idx = -1 -%}
+              {%- for b in section.blocks -%}
+                {%- if b.type == 'product' and b.settings.scene_id == block.settings.type_slug -%}
+                  {%- liquid
+                    assign idx = idx | plus: 1
+                    assign p = b.settings.product
+                    assign p_name = b.settings.demo_title
+                    assign p_url = b.settings.demo_url
+                    if p != blank
+                      assign p_name = p.title
+                      assign p_url = p.url
+                    endif
+                  -%}
+                  <div class="table-product-item{% if idx == 0 %} is-active{% endif %}" {{ b.shopify_attributes }}>
+                    {%- if p != blank and p.featured_image != blank -%}
+                      <a class="table-product-link" href="{{ p.url }}">
+                        {% render 'image-responsive', image: p.featured_image, alt: p.title, sizes: '(max-width: 1000px) 80vw, 30vw' %}
+                      </a>
+                    {%- elsif b.settings.demo_image != blank -%}
+                      <a class="table-product-link" href="{{ p_url | default: '#' }}">
+                        <img src="{{ b.settings.demo_image | asset_url }}" alt="{{ p_name | escape }}" width="884" height="884" loading="lazy" decoding="async">
+                      </a>
+                    {%- endif -%}
+                    {%- if b.settings.meta_line != blank -%}<p class="table-product-label">{{ b.settings.meta_line | escape }}</p>{%- endif -%}
+                    {%- if p_name != blank -%}<h2>{{ p_name | escape }}</h2>{%- endif -%}
+                    {%- if p != blank -%}
+                      <span>{{ p.price | money }}</span>
+                    {%- elsif b.settings.demo_price != blank -%}
+                      <span>{{ b.settings.demo_price | escape }}</span>
+                    {%- endif -%}
+                    {%- if b.settings.note != blank -%}<p class="table-product-note">{{ b.settings.note | escape }}</p>{%- endif -%}
+                    {%- if prod_count > 1 -%}
+                      <div class="table-product-lines">
+                        {%- for j in (1..prod_count) -%}
+                          <button type="button" class="{% if forloop.index0 == idx %}active{% endif %}" data-go="{{ forloop.index0 }}" aria-label="Ver producto {{ forloop.index }}"></button>
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                    <div class="table-scene-actions">
+                      {%- if p != blank and p.selected_or_first_available_variant != blank -%}
+                        <form action="{{ routes.cart_add_url }}" method="post">
+                          <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id }}">
+                          <button class="ghost-btn table-add-piece" type="submit">Añadir pieza</button>
+                        </form>
+                      {%- else -%}
+                        <a class="ghost-btn table-add-piece" href="{{ p_url | default: '#' }}">Añadir pieza</a>
+                      {%- endif -%}
+                      {%- if v42 != blank and v42.selected_or_first_available_variant != blank -%}
+                        <form action="{{ routes.cart_add_url }}" method="post">
+                          <input type="hidden" name="id" value="{{ v42.selected_or_first_available_variant.id }}">
+                          <button class="ghost-btn" type="submit">Añadir vajilla · 42 platos</button>
+                        </form>
+                      {%- endif -%}
+                      {%- if v56 != blank and v56.selected_or_first_available_variant != blank -%}
+                        <form action="{{ routes.cart_add_url }}" method="post">
+                          <input type="hidden" name="id" value="{{ v56.selected_or_first_available_variant.id }}">
+                          <button class="ghost-btn" type="submit">Añadir vajilla · 56 platos</button>
+                        </form>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            <button class="table-prod-arrow next" type="button" data-table-next aria-label="{{ 'general.accessibility.next' | t }}">&rsaquo;</button>
           </aside>
         </article>
       {%- endif -%}
@@ -87,27 +159,45 @@
 .tables-page .table-filter:hover::after { width: 100%; opacity: .42; }
 
 .tables-page .table-scenes-list { width: var(--content); margin: 0 auto 140px; display: grid; gap: 96px; }
-.tables-page .table-scene-block { display: grid; grid-template-columns: 1.1fr .9fr; gap: min(5vw, 76px); align-items: stretch; }
+.tables-page .table-scene-block { display: grid; grid-template-columns: 1.1fr .9fr; gap: min(5vw, 76px); align-items: center; scroll-margin-top: 120px; }
 .tables-page .table-scene-block.reverse .table-scene-photo { order: 2; }
 .tables-page .table-scene-block.reverse .table-scene-product { order: 1; }
-.tables-page .table-scene-block.is-hidden { display: none; }
-.tables-page .table-scene-photo { height: 640px; background: var(--ink-faint-20); position: relative; overflow: hidden; }
-.tables-page .table-scene-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1000ms var(--ease-long); }
+/* !important a propósito: el bloque de v98 fija `display:grid!important` en móvil
+   y sin esto el filtro dejaría de ocultar escenas por debajo de 760px. */
+.tables-page .table-scene-block.is-hidden { display: none !important; }
+.tables-page .table-scene-photo { height: 640px; min-height: 640px; background: var(--ink-faint-20); position: relative; overflow: hidden; }
+.tables-page .table-scene-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 1000ms var(--ease-long); }
 .tables-page .table-scene-photo:hover img { transform: scale(1.025); }
-.tables-page .table-scene-product { position: relative; border-top: .5px solid var(--rule); border-bottom: .5px solid var(--rule); min-height: 640px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 84px; }
-.tables-page .table-scene-product img { height: min(42vh, 360px); width: 100%; object-fit: contain; margin-bottom: 32px; }
-.tables-page .table-scene-product p { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
-.tables-page .table-scene-product h2 { font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.1; margin: 0 0 10px; color: var(--ink); }
-.tables-page .table-scene-product span { font-size: 13px; color: var(--ink); }
-.tables-page .table-scene-actions { display: grid; gap: 10px; width: min(100%, 300px); margin: 24px auto 0; }
-.tables-page .table-scene-actions .ghost-btn { height: 42px; font-size: 10px; letter-spacing: .18em; width: 100%; padding: 0 18px; }
-.tables-page .table-product-link { display: block; color: inherit; text-decoration: none; }
-.tables-page .table-product-link img { cursor: pointer; }
-.tables-page .table-product-link img { width: 100%; height: auto; object-fit: contain; }
-.tables-page .table-prod-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--serif); font-size: 34px; line-height: 1; color: var(--ink); opacity: .75; }
+.tables-page .table-scene-product { position: relative; border-top: .5px solid var(--rule); border-bottom: .5px solid var(--rule); height: 640px; min-height: 640px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 84px; }
+
+.tables-page .table-product-slot { width: 100%; min-height: 100%; display: grid; align-content: center; justify-items: center; transition: opacity .28s var(--ease), transform .36s var(--ease); }
+.tables-page .table-product-slot.is-changing { opacity: 0; transform: translateY(10px); }
+.tables-page .table-product-item { display: none; width: 100%; }
+.tables-page .table-product-item.is-active { display: grid; justify-items: center; }
+.tables-page .table-product-link { display: block; width: 100%; color: inherit; text-decoration: none; }
+.tables-page .table-product-link img { height: min(40vh, 320px); max-height: 320px; width: 100%; object-fit: contain; margin-bottom: 22px; cursor: pointer; }
+.tables-page .table-product-label { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.tables-page .table-product-item h2 { font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.1; margin: 0 0 10px; color: var(--ink); max-width: 360px; }
+.tables-page .table-product-item > span { font-size: 13px; color: var(--ink); }
+.tables-page .table-scene-product .table-product-note { font-size: 12px; line-height: 1.7; color: var(--muted); text-transform: none; letter-spacing: .02em; max-width: 360px; margin: 14px auto 0; }
+.tables-page .table-product-lines { display: flex; justify-content: center; gap: 7px; margin: 20px 0 0; }
+.tables-page .table-product-lines button { width: 26px; height: 1px; padding: 0; border: 0; background: rgba(15, 26, 46, .22); cursor: pointer; transition: width .25s var(--ease), background .25s var(--ease); }
+.tables-page .table-product-lines button.active { width: 38px; background: var(--ink); }
+
+.tables-page .table-scene-actions { display: grid; grid-template-columns: 1fr; gap: 10px; width: min(100%, 340px); margin: 24px auto 0; }
+.tables-page .table-scene-actions form { display: contents; }
+.tables-page .table-scene-actions .ghost-btn { width: 100%; min-width: 0; height: 42px; font-size: 10px; letter-spacing: .18em; padding: 0 18px; }
+@media (min-width: 1180px) {
+  .tables-page .table-scene-actions { grid-template-columns: 1fr 1fr; }
+  .tables-page .table-scene-actions .table-add-piece { grid-column: 1 / -1; }
+}
+
+.tables-page .table-prod-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-family: var(--serif); font-size: 34px; line-height: 1; color: var(--ink); opacity: .75; background: transparent; border: 0; cursor: pointer; z-index: 2; transition: opacity 220ms var(--ease); }
+.tables-page .table-prod-arrow:hover { opacity: 1; }
 .tables-page .table-prod-arrow.prev { left: 24px; }
 .tables-page .table-prod-arrow.next { right: 24px; }
-.tables-page .scene-hotspot { position: absolute; width: 18px; height: 18px; border: .5px solid var(--ink); background: var(--paper); border-radius: 999px; box-shadow: 0 0 0 9px rgba(255, 255, 255, .48); animation: tableHotspotPulse 2600ms infinite; }
+
+.tables-page .scene-hotspot { position: absolute; width: 18px; height: 18px; border: .5px solid var(--ink); background: var(--paper); border-radius: 999px; box-shadow: 0 0 0 9px rgba(255, 255, 255, .48); cursor: pointer; animation: tableHotspotPulse 2600ms infinite; }
 .tables-page .scene-hotspot.active { background: var(--ink); }
 @keyframes tableHotspotPulse {
   0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, .5); }
@@ -121,36 +211,128 @@
   .tables-page .table-filters { flex-wrap: wrap; row-gap: 18px; }
   .tables-page .table-scene-block, .tables-page .table-scene-block.reverse { grid-template-columns: 1fr; }
   .tables-page .table-scene-block.reverse .table-scene-photo, .tables-page .table-scene-block.reverse .table-scene-product { order: initial; }
-  .tables-page .table-scene-photo, .tables-page .table-scene-product { min-height: auto; height: 520px; }
+  .tables-page .table-scene-photo, .tables-page .table-scene-product { height: 520px; min-height: 520px; }
 }
 @media (max-width: 620px) {
   .tables-page .table-filters { justify-content: flex-start; gap: 20px; overflow-x: auto; padding: 22px 0 24px; }
   .tables-page .table-filter { flex: 0 0 auto; }
-  .tables-page .table-scene-photo, .tables-page .table-scene-product { height: 420px; }
+  .tables-page .table-scene-photo, .tables-page .table-scene-product { height: 420px; min-height: 420px; }
   .tables-page .table-scene-product { padding: 42px 54px; }
-  .tables-page .table-scene-product img { height: 260px; }
+  .tables-page .table-product-link img { height: 210px; }
+  .tables-page .table-scene-actions { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tables-page .scene-hotspot { animation: none; }
+  .tables-page .table-product-slot, .tables-page .table-scene-photo img { transition: none; }
+}
+
+/* ==========================================================================
+   v98 / v99 — Nuestras mesas en móvil.
+   Los filtros pasan a una píldora scrollable con snap y cada escena a un
+   módulo de 90dvh: foto arriba, producto debajo.
+   ========================================================================== */
+@media(max-width:760px) {
+  .tables-page { overflow-x:hidden!important;padding-top:calc(var(--header-h,64px) + 28px)!important }
+  .tables-hero { width:calc(100% - 28px)!important;margin:0 auto 28px!important;gap:14px!important }
+  .tables-hero h1 { font-size:clamp(38px,11vw,52px)!important }
+  .tables-hero>p { font-size:11.5px!important;line-height:1.65!important;margin:0!important }
+  .table-filters { width:calc(100% - 28px)!important;margin:0 auto 28px!important;padding:8px!important;border:1px solid rgba(15,26,46,.10)!important;border-radius:999px!important;background:#f7f7f5!important;display:flex!important;flex-wrap:nowrap!important;justify-content:flex-start!important;gap:7px!important;overflow-x:auto!important;scrollbar-width:none!important;scroll-snap-type:x proximity!important }
+  .table-filters::-webkit-scrollbar { display:none }
+  .table-filter { flex:0 0 auto!important;min-height:38px!important;padding:0 15px!important;border-radius:999px!important;background:#fff!important;border:1px solid rgba(15,26,46,.10)!important;scroll-snap-align:start!important;color:var(--ink-soft,#445066)!important }
+  .table-filter:after { display:none!important }
+  .table-filter.active { background:var(--ink,#0f1a2e)!important;color:#fff!important;border-color:var(--ink,#0f1a2e)!important }
+  .table-filter span { font-size:8.5px!important;letter-spacing:.12em!important }
+  .table-scenes-list { width:calc(100% - 28px)!important;margin:0 auto 70px!important;gap:28px!important }
+  .table-scene-block,.table-scene-block.reverse { height:90dvh!important;min-height:620px!important;max-height:820px!important;display:grid!important;grid-template-columns:1fr!important;grid-template-rows:minmax(0,1.08fr) minmax(0,.92fr)!important;gap:0!important;border:1px solid rgba(15,26,46,.10)!important;background:#fff!important;overflow:hidden!important }
+  .table-scene-block.reverse .table-scene-photo,.table-scene-block.reverse .table-scene-product { order:initial!important }
+  .table-scene-photo { width:100%!important;height:100%!important;min-height:0!important }
+  .table-scene-product { width:100%!important;height:100%!important;min-height:0!important;padding:16px 38px 18px!important;border-top:1px solid rgba(15,26,46,.10)!important;border-bottom:0!important;justify-content:center!important }
+  .table-shop-scene .table-product-link img { height:min(20dvh,150px)!important;margin:0 auto 8px!important }
+  .table-scene-product h2 { font-size:22px!important;margin:0 0 4px!important }
+  .table-product-note { display:none!important }
+  .table-product-lines { margin:9px 0 5px!important }
+  .table-shop-scene .table-scene-actions { display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important;margin-top:6px!important }
+  .table-shop-scene .table-scene-actions .ghost-btn:first-child { grid-column:1/-1!important }
+  .table-shop-scene .table-scene-actions .ghost-btn { width:100%!important;min-width:0!important;min-height:35px!important;padding:0 7px!important;font-size:7.5px!important;letter-spacing:.08em!important }
+    margin-left:auto!important;
+    margin-right:auto!important; }
+  .tables-page-body .table-filters { position:relative!important;
+    z-index:4!important;
+    scroll-behavior:smooth!important;
+    scroll-snap-type:x proximity!important;
+    -webkit-overflow-scrolling:touch!important; }
+  .tables-page-body .table-filter { cursor:pointer!important;
+    touch-action:manipulation!important; }
+  .tables-page-body .table-filter.active { box-shadow:0 8px 20px rgba(15,26,46,.12)!important; }
 }
 {% endstylesheet %}
 
 {% javascript %}
 (function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function initScene(scene) {
+    var slot = scene.querySelector('.table-product-slot');
+    if (!slot) return;
+    var items = [].slice.call(slot.querySelectorAll('.table-product-item'));
+    if (!items.length) return;
+    var hotspots = [].slice.call(scene.querySelectorAll('[data-table-hotspot]'));
+    var current = 0;
+
+    function apply() {
+      items.forEach(function (it, i) { it.classList.toggle('is-active', i === current); });
+      hotspots.forEach(function (h, i) { h.classList.toggle('active', i === current); });
+    }
+    function show(i) {
+      current = ((i % items.length) + items.length) % items.length;
+      if (reduce.matches) { apply(); return; }
+      slot.classList.add('is-changing');
+      setTimeout(function () { apply(); slot.classList.remove('is-changing'); }, 120);
+    }
+
+    var prev = scene.querySelector('[data-table-prev]');
+    var next = scene.querySelector('[data-table-next]');
+    if (prev) prev.addEventListener('click', function () { show(current - 1); });
+    if (next) next.addEventListener('click', function () { show(current + 1); });
+    hotspots.forEach(function (h) {
+      h.addEventListener('click', function () { show(Number(h.dataset.tableHotspot || 0)); });
+    });
+    slot.addEventListener('click', function (e) {
+      var go = e.target.closest('[data-go]');
+      if (go) show(Number(go.dataset.go));
+    });
+  }
+
   function init(root) {
     if (!root || root.dataset.init) return;
     root.dataset.init = '1';
+
     var filters = [].slice.call(root.querySelectorAll('[data-table-filter]'));
     var blocks = [].slice.call(root.querySelectorAll('[data-table-type]'));
-    if (!filters.length || !blocks.length) return;
     filters.forEach(function (btn) {
+      btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
       btn.addEventListener('click', function () {
-        var type = btn.dataset.tableFilter;
-        filters.forEach(function (b) { b.classList.toggle('active', b === btn); });
-        blocks.forEach(function (block) { block.classList.toggle('is-hidden', type !== 'all' && block.dataset.tableType !== type); });
-      });
+        var type = btn.dataset.tableFilter || 'all';
+        filters.forEach(function (b) {
+          var active = b === btn;
+          b.classList.toggle('active', active);
+          b.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        blocks.forEach(function (block) {
+          var show = type === 'all' || block.dataset.tableType === type;
+          block.classList.toggle('is-hidden', !show);
+          block.setAttribute('aria-hidden', show ? 'false' : 'true');
+        });
+        /* v99: en móvil los filtros van en una tira scrollable — centra el pulsado. */
+        if (window.innerWidth <= 760) {
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }, { passive: true });
     });
+
+    root.querySelectorAll('.table-shop-scene').forEach(initScene);
   }
+
   document.querySelectorAll('.tables-page').forEach(init);
   document.addEventListener('shopify:section:load', function (e) { e.target.querySelectorAll('.tables-page').forEach(init); });
 })();
@@ -161,11 +343,11 @@
   "name": "Our tables",
   "settings": [
     { "type": "text", "id": "kicker", "label": "Kicker", "default": "Editorial · Nuestras mesas" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Mesas que cuentan una historia." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Mesas que cuentan una historia" },
     { "type": "richtext", "id": "intro", "label": "Intro copy" },
     { "type": "header", "content": "Filters" },
     { "type": "text", "id": "filter_all_label", "label": "\"All\" label", "default": "Todas" },
-    { "type": "textarea", "id": "filters", "label": "Filters (one per line: Label|slug)", "info": "slug must match a scene's Type slug.", "default": "Aurora|aurora\n202 Rosa|rosa\nNegro Vistas|negro" }
+    { "type": "textarea", "id": "filters", "label": "Filters (one per line: Label|slug)", "info": "slug must match a scene's Type slug.", "default": "Aurora Oaxaca|oaxaca\nFlor de Lis Azul|flor\nAurora Ceilán|ceilan\nBellavista|bellavista\nNegro Vistas|negro" }
   ],
   "blocks": [
     {
@@ -173,18 +355,30 @@
       "name": "Table scene",
       "settings": [
         { "type": "checkbox", "id": "reverse", "label": "Reverse layout (product on left)", "default": false },
-        { "type": "text", "id": "type_slug", "label": "Type slug (matches a filter)", "default": "aurora" },
+        { "type": "text", "id": "type_slug", "label": "Type slug (matches a filter)", "default": "oaxaca", "info": "Product blocks with the same Scene id belong to this scene." },
         { "type": "header", "content": "Scene photo" },
         { "type": "image_picker", "id": "photo", "label": "Photo" },
         { "type": "text", "id": "demo_photo", "label": "Demo photo (asset filename)" },
-        { "type": "textarea", "id": "hotspots", "label": "Hotspots (one per line: left%|top%)", "default": "34|45\n58|52\n73|37" },
-        { "type": "header", "content": "Featured product" },
-        { "type": "image_picker", "id": "product_image", "label": "Product image" },
-        { "type": "text", "id": "demo_product_image", "label": "Demo product image (asset filename)" },
-        { "type": "text", "id": "product_meta", "label": "Meta line" },
-        { "type": "text", "id": "product_title", "label": "Product title" },
-        { "type": "text", "id": "product_price", "label": "Price (e.g. 92 €)" },
-        { "type": "url", "id": "product_link", "label": "Product link" }
+        { "type": "text", "id": "photo_alt", "label": "Photo alt text" },
+        { "type": "textarea", "id": "hotspots", "label": "Hotspots (one per line: left%|top%|label)", "info": "Hotspot n shows the scene's n-th product.", "default": "34|45|Ver pieza\n58|52|Ver pieza\n73|37|Ver pieza" },
+        { "type": "header", "content": "Vajilla CTAs" },
+        { "type": "product", "id": "vajilla42", "label": "Vajilla 42 piezas (product)" },
+        { "type": "product", "id": "vajilla56", "label": "Vajilla 56 piezas (product)" }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Scene product",
+      "settings": [
+        { "type": "text", "id": "scene_id", "label": "Scene id (matches a scene's Type slug)", "default": "oaxaca" },
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "meta_line", "label": "Meta line (e.g. 'Aurora Collection · Oaxaca')" },
+        { "type": "textarea", "id": "note", "label": "Editorial note" },
+        { "type": "header", "content": "Demo (when no product selected)" },
+        { "type": "text", "id": "demo_image", "label": "Demo image (asset filename)" },
+        { "type": "text", "id": "demo_title", "label": "Demo title" },
+        { "type": "text", "id": "demo_price", "label": "Demo price (e.g. 92 €)" },
+        { "type": "url", "id": "demo_url", "label": "Demo link" }
       ]
     }
   ],

@@ -43,4 +43,57 @@ main {
 
 .soft-bg { background: var(--ink-faint-20); }
 
+@media (max-width: 680px) {
+  .section {
+    padding-top: 74px;
+    padding-bottom: 82px;
+  }
+}
+
 /* Per-section CSS gets appended below in subsequent tasks. */
+
+/* ==========================================================================
+   v96 / v98 — Reglas transversales de móvil.
+   Sólo lo que necesita alcanzar html/body o cualquier sección: seguro contra
+   desbordamiento horizontal y respiración lateral. Lo específico de cada
+   página vive en el {% stylesheet %} de su sección.
+   ========================================================================== */
+@media (max-width: 780px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+}
+
+@media (max-width: 760px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  main,
+  section,
+  article,
+  aside,
+  div { min-width: 0; }
+
+  img,
+  video,
+  canvas,
+  svg { max-width: 100%; }
+
+  .section-head {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* El hero y el story de la home van a sangre; el resto respira 14px. */
+  .home-page main > section:not(.editorial-hero):not(.story-scroll) {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}

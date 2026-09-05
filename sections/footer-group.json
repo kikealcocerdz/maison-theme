@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "Footer",
@@ -5,28 +14,45 @@
     "footer-multicol": {
       "type": "footer-multicol",
       "settings": {
-        "tagline": "La Cartuja\nde Sevilla",
-        "tagline_bottom": "España / Español"
+        "tagline": "Heritage crafted for modern living",
+        "tagline_bottom": "© La Cartuja de Sevilla",
+        "social_instagram": "https://www.instagram.com/cartujadesevilla/",
+        "social_facebook": "https://www.facebook.com/lacartujadesevillapickman/",
+        "social_tiktok": "https://www.tiktok.com/@lacartujadesevilla",
+        "social_linkedin": "https://www.linkedin.com/company/la-cartuja-de-sevilla",
+        "legal_items": "Aviso legal | /pages/aviso-legal\nPolítica de privacidad | /pages/politica-privacidad\nPolítica de cookies | /pages/politica-de-cookies\nTérminos y condiciones | /pages/terminos-condiciones"
       },
       "blocks": {
         "col-1": {
           "type": "column",
-          "settings": { "heading": "Comprar" }
+          "settings": {
+            "heading": "Colecciones",
+            "items": "Aurora | /collections/aurora\nOchavada | /collections/ochavada\nGifts & Decor | /collections/decoracion\nEmblemas | /collections/emblemas"
+          }
         },
         "col-2": {
           "type": "column",
-          "settings": { "heading": "La casa" }
+          "settings": {
+            "heading": "Editorial",
+            "items": "Artesanía | /pages/artesania\nCalidad | /pages/artesania#calidad\nHeritage 1841 | /pages/heritage-1841"
+          }
         },
         "col-3": {
-          "type": "text_column",
+          "type": "column",
           "settings": {
-            "heading": "Contacto",
-            "content": "<p>Atención al cliente<br>Newsletter<br>ES / EN</p>"
+            "heading": "Atención",
+            "items": "Contacto | /pages/contacto\nEnvíos y devoluciones | /pages/envios-devoluciones\nPrivacidad | /pages/politica-privacidad\nCondiciones | /pages/terminos-condiciones"
           }
         }
       },
-      "block_order": ["col-1", "col-2", "col-3"]
+      "block_order": [
+        "col-1",
+        "col-2",
+        "col-3"
+      ]
     }
   },
-  "order": ["footer-multicol"]
+  "order": [
+    "footer-multicol"
+  ]
 }

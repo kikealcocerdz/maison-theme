@@ -17,7 +17,7 @@
           {% render 'image-responsive', image: section.settings.image, alt: section.settings.image.alt, sizes: '(max-width: 1000px) 100vw, 55vw' %}
         {%- else -%}
           {%- comment -%} Demo fallback (shipped in /assets) until a scene image is set. {%- endcomment -%}
-          <img src="{{ 'scene-left-tableware.webp' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="2400" height="1792" loading="lazy" decoding="async">
+          <img src="{{ 'mesa_aurora_oaxaca.webp' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1800" height="1343" loading="lazy" decoding="async">
         {%- endif -%}
         {%- for block in products -%}
           {%- liquid
@@ -40,12 +40,42 @@
     </div>
 
     {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
-      <div class="center reveal"><a href="{{ section.settings.cta_link }}" class="ghost-btn">{{ section.settings.cta_label | escape }}</a></div>
+      <div class="center reveal scene-cta-row">
+        <a href="{{ section.settings.cta_link }}" class="ghost-btn">{{ section.settings.cta_label | escape }}</a>
+        {%- if section.settings.cta2_label != blank and section.settings.cta2_link != blank -%}
+          <a href="{{ section.settings.cta2_link }}" class="ghost-btn">{{ section.settings.cta2_label | escape }}</a>
+        {%- endif -%}
+      </div>
     {%- endif -%}
 
     {%- comment -%} Product data consumed by JS to render the right-side panel. {%- endcomment -%}
+    {%- liquid
+      assign set1 = all_products[section.settings.set1_product]
+      assign set2 = all_products[section.settings.set2_product]
+    -%}
     <script type="application/json" data-scene-data>
-      [
+      {
+        "cartUrl": {{ routes.cart_add_url | json }},
+        "addLabel": {{ section.settings.add_label | default: '' | json }},
+        "sets": [
+          {%- liquid
+            assign show_set1 = false
+            assign show_set2 = false
+            if set1 != blank and section.settings.set1_label != blank
+              assign show_set1 = true
+            endif
+            if set2 != blank and section.settings.set2_label != blank
+              assign show_set2 = true
+            endif
+          -%}
+          {%- if show_set1 -%}
+            { "label": {{ section.settings.set1_label | json }}, "variant": {{ set1.selected_or_first_available_variant.id | json }} }{%- if show_set2 -%},{%- endif -%}
+          {%- endif -%}
+          {%- if show_set2 -%}
+            { "label": {{ section.settings.set2_label | json }}, "variant": {{ set2.selected_or_first_available_variant.id | json }} }
+          {%- endif -%}
+        ],
+        "items": [
         {%- for block in products -%}
           {%- liquid
             assign p = all_products[block.settings.product]
@@ -54,6 +84,7 @@
             assign p_price = block.settings.demo_price
             assign p_url = block.settings.link
             assign p_img = ''
+            assign p_variant = nil
             if block.settings.demo_image != blank
               assign p_img = block.settings.demo_image | asset_url
             endif
@@ -61,6 +92,7 @@
               assign p_name = p.title
               assign p_url = p.url
               assign p_price = p.price | money
+              assign p_variant = p.selected_or_first_available_variant.id
               if p.featured_image != blank
                 assign p_img = p.featured_image | image_url: width: 840
               endif
@@ -71,10 +103,12 @@
             "meta": {{ p_meta | default: '' | json }},
             "price": {{ p_price | default: '' | json }},
             "img": {{ p_img | default: '' | json }},
-            "url": {{ p_url | default: '#' | json }}
+            "url": {{ p_url | default: '#' | json }},
+            "variant": {{ p_variant | json }}
           }{%- unless forloop.last -%},{%- endunless -%}
         {%- endfor -%}
-      ]
+        ]
+      }
     </script>
   </div>
 </section>
@@ -84,7 +118,7 @@
 .scene-redesign .scene-layout { width: var(--content); margin: 0 auto; display: block; }
 .scene-redesign .scene-copy { text-align: center; margin: 0 auto 46px; max-width: 740px; }
 .scene-redesign .scene-copy h2 {
-  font-family: var(--serif); font-size: clamp(28px, 2.6vw, 40px); line-height: 1.12;
+  font-family: var(--serif); font-size: var(--fs-h2); line-height: 1.12;
   font-weight: 400; margin: 0 0 16px;
 }
 .scene-redesign .scene-copy p {
@@ -112,8 +146,29 @@
   position: relative; min-height: 620px; background: var(--paper);
   display: flex; align-items: center; justify-content: center;
   border-top: 0.5px solid var(--rule); border-bottom: 0.5px solid var(--rule);
+  /* Grid item. Its column is minmax(auto, .92fr), and the slide track below is a
+     non-wrapping flex row, so its min-content is the SUM of all 5 slides (~1400px).
+     Without this the column claims that as its minimum and squeezes the sibling
+     .scene-left-image — which has overflow:hidden, so it collapses to zero — off screen. */
+  min-width: 0;
 }
-.scene-product-inner { text-align: center; width: 100%; padding: 46px 72px; }
+
+/* Native scroll-snap track: the finger drags the slide itself, with momentum,
+   trackpad and keyboard for free. Arrows/dots/hotspots just scrollTo() into it. */
+.scene-product-inner {
+  width: 100%; min-width: 0; display: flex; overflow-x: auto;
+  scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  overscroll-behavior-x: contain; scrollbar-width: none;
+}
+.scene-product-inner::-webkit-scrollbar { display: none; }
+/* -webkit- prefix still needed for Safari < 17, which is plenty of Mac traffic. */
+.scene-product-inner.is-dragging { cursor: grabbing; -webkit-user-select: none; user-select: none; }
+/* min-width:0 keeps a slide exactly one track wide; let it grow to its min-content
+   on a narrow phone and the scrollTo(i * clientWidth) maths drifts out of step. */
+.scene-slide {
+  flex: 0 0 100%; min-width: 0; scroll-snap-align: start;
+  text-align: center; padding: 46px 72px;
+}
 .scene-product-inner img {
   height: min(48vh, 420px); width: 100%; object-fit: contain; margin: 0 auto 34px;
   transition: transform 700ms var(--ease-long), opacity 360ms var(--ease);
@@ -145,12 +200,21 @@
 .scene-dots span.active { background: var(--ink); width: 36px; }
 
 .scene-redesign .center { text-align: center; margin-top: 72px; }
+.scene-cta-row { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; }
+.scene-cta-row .ghost-btn { min-width: 220px; }
 
 .scene-image-open { display: block; width: 100%; background: transparent; border: 0; padding: 0; margin: 0 auto 34px; cursor: zoom-in; }
 .scene-image-open img { height: min(48vh, 420px) !important; margin: 0 auto !important; }
-.scene-actions { display: grid; gap: 10px; margin: 26px auto 0; width: min(100%, 300px); }
+.scene-actions { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin: 26px auto 0; width: min(100%, 360px); }
+.scene-actions form { display: contents; }
+.scene-actions > .ghost-btn.small-cart:first-child { grid-column: 1 / -1; }
 .ghost-btn.small-cart { height: 42px; padding: 0 18px; font-size: 10px; letter-spacing: 0.18em; width: 100%; }
-.ghost-btn.small-cart.alt { background: transparent; color: var(--ink); }
+.ghost-btn.small-cart.alt { background: transparent; color: var(--ink); padding: 0 10px; font-size: 9px; letter-spacing: 0.12em; white-space: nowrap; }
+.ghost-btn.small-cart:hover { background: var(--brand); border-color: var(--brand); color: var(--paper); }
+
+@media (max-width: 680px) {
+  .ghost-btn.small-cart.alt { font-size: 8px; letter-spacing: 0.08em; padding: 0 7px; }
+}
 
 .quick-image-lightbox {
   position: fixed; inset: 0; z-index: 9999; background: rgba(15, 26, 46, 0.82);
@@ -166,25 +230,47 @@
   .scene-product-inner img { height: 320px; }
 }
 @media (max-width: 680px) {
-  .table-scene.scene-redesign { padding: 74px 0 130px; }
   .scene-left-image, .scene-product-view { min-height: 420px; }
-  .scene-product-inner { padding: 38px 48px; }
+  .scene-slide { padding: 38px 48px; }
   .scene-product-inner img { height: 260px; }
   .scene-nav.prev { left: 6px; }
   .scene-nav.next { right: 6px; }
-  .scene-redesign .center { margin-top: 58px; }
   .scene-actions { width: 100%; }
+  .scene-cta-row { display: grid; gap: 12px; }
+  .scene-cta-row .ghost-btn { min-width: 0; width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   .scene-left-image img, .scene-hotspot, .scene-product-inner img { transition: none; }
+  .scene-product-inner { scroll-behavior: auto; }
+}
+
+/* ==========================================================================
+   v98 / v99 — Escena comprable de la home en móvil: foto arriba, ficha de
+   producto debajo, dentro de un módulo de 90dvh.
+   ========================================================================== */
+@media(max-width:760px) {
+  .scene-redesign { padding-left:14px!important;padding-right:14px!important }
+  .scene-layout { display:block!important;width:100%!important }
+  .scene-copy { text-align:left!important;margin-bottom:18px!important }
+  .scene-interactive { display:grid!important;grid-template-columns:1fr!important;grid-template-rows:minmax(0,50dvh) minmax(0,40dvh)!important;height:90dvh!important;min-height:660px!important;max-height:820px!important;border:1px solid rgba(15,26,46,.10)!important;overflow:hidden!important }
+  .scene-left-image { height:100%!important;min-height:0!important }
+  .scene-product-view { height:100%!important;min-height:0!important;border-top:1px solid rgba(15,26,46,.10)!important }
+  .scene-product-inner { height:100%!important;padding:14px 38px 18px!important;display:flex!important;flex-direction:column!important;justify-content:center!important }
+  .scene-product-inner img { height:min(19dvh,150px)!important;margin-bottom:7px!important }
+  .scene-product-inner h3 { font-size:22px!important }
+  .scene-product-inner p { font-size:8px!important }
+  .scene-product-inner .scene-price { font-size:10px!important }
+  .scene-actions { width:100%!important;gap:6px!important }
+  .scene-actions>.ghost-btn { min-height:34px!important;font-size:7px!important;letter-spacing:.07em!important;padding:0 6px!important }
+  .home-page .scene-copy,
+  .home-page .scene-copy h2,
+  .home-page .scene-copy p { text-align:center!important;
+  .home-page .scene-copy { padding-inline:8px!important }
 }
 {% endstylesheet %}
 
 {% javascript %}
 (function () {
-  const ADD = 'Añadir al carrito';
-  const BUY_TABLE = 'Comprar mesa completa';
-
   document.querySelectorAll('.scene-redesign:not([data-init])').forEach(initScene);
 
   function initScene(root) {
@@ -195,43 +281,183 @@
     const hotspots = [...root.querySelectorAll('[data-scene-hotspot]')];
     if (!dataEl || !panel || !dots) return;
 
-    let items = [];
-    try { items = JSON.parse(dataEl.textContent.trim()); } catch (e) { items = []; }
+    let data = {};
+    try { data = JSON.parse(dataEl.textContent.trim()); } catch (e) { data = {}; }
+    const items = data.items || [];
+    const sets = data.sets || [];
+    const cartUrl = data.cartUrl || '/cart/add';
     if (!items.length) return;
 
     let current = 0;
 
-    function render() {
-      const p = items[current];
+    // Real variant -> /cart/add form (intercepted globally by the cart drawer); demo -> inert button.
+    function actionBtn(label, variant, alt) {
+      if (!label) return '';
+      const cls = 'ghost-btn small-cart' + (alt ? ' alt' : '');
+      if (variant) {
+        return `<form method="post" action="${cartUrl}"><input type="hidden" name="id" value="${variant}"><button class="${cls}" type="submit">${label}</button></form>`;
+      }
+      return `<button class="${cls}" type="button">${label}</button>`;
+    }
+
+    function slideHtml(p) {
       const imgHtml = p.img
-        ? `<a class="scene-image-open" href="${p.url || '#'}"><img src="${p.img}" alt="${p.name || ''}"></a>`
+        ? `<a class="scene-image-open" href="${p.url || '#'}"><img src="${p.img}" alt="${p.name || ''}" loading="lazy" decoding="async"></a>`
         : '';
-      panel.innerHTML =
+      return `<article class="scene-slide">` +
         imgHtml +
         (p.meta ? `<p>${p.meta}</p>` : '') +
         `<h3>${p.name || ''}</h3>` +
         (p.price ? `<span class="scene-price">${p.price}</span>` : '') +
-        `<div class="scene-actions">
-           <button class="ghost-btn small-cart" type="button">${ADD}</button>
-           <button class="ghost-btn small-cart alt" type="button">${BUY_TABLE}</button>
-         </div>`;
-      dots.innerHTML = items.map((_, i) => `<span class="${i === current ? 'active' : ''}"></span>`).join('');
-      hotspots.forEach((h, i) => h.classList.toggle('active', i === current));
+        `<div class="scene-actions">` +
+        actionBtn(data.addLabel, p.variant, false) +
+        sets.map(s => actionBtn(s.label, s.variant, true)).join('') +
+        `</div>` +
+      `</article>`;
     }
 
-    function set(i) { current = (i + items.length) % items.length; render(); }
+    const N = items.length;
+    const loop = N > 1;
 
-    hotspots.forEach(h => h.addEventListener('click', () => set(Number(h.dataset.sceneHotspot))));
-    root.querySelector('[data-scene-prev]')?.addEventListener('click', () => set(current - 1));
-    root.querySelector('[data-scene-next]')?.addEventListener('click', () => set(current + 1));
+    // Three identical copies of the strip. A drag can run off either end and be
+    // silently recentred onto the middle one — the content there is the same, so
+    // the jump is invisible and the loop never hits a wall.
+    panel.innerHTML = Array.from({ length: loop ? 3 : 1 }, () => items.map(slideHtml).join('')).join('');
+    dots.innerHTML = items.map((_, i) => `<span class="${i === 0 ? 'active' : ''}"></span>`).join('');
+    hotspots.forEach((h, i) => h.classList.toggle('active', i === 0));
+
+    let down = false, startX = 0, startLeft = 0, moved = false;
+    let vx = 0, lastX = 0, lastT = 0, ticking = false, idle = 0, resizeT = 0;
+
+    const width = () => panel.clientWidth || 1;
+    const rawIndex = () => Math.round(panel.scrollLeft / width());
+    const realIndex = (raw) => ((raw % N) + N) % N;
+
+    // Reposition with no animation and no snap interference.
+    function jumpTo(px) {
+      const snap = panel.style.scrollSnapType;
+      panel.style.scrollSnapType = 'none';
+      panel.style.scrollBehavior = 'auto';
+      panel.scrollLeft = px;
+      panel.style.scrollSnapType = snap;
+      panel.style.scrollBehavior = '';
+    }
+
+    function glideTo(raw) {
+      panel.style.scrollBehavior = '';   // back to the CSS smooth glide
+      panel.scrollTo({ left: raw * width() });
+    }
+
+    function sync() {
+      const i = realIndex(rawIndex());
+      if (i === current) return;
+      current = i;
+      [...dots.children].forEach((d, n) => d.classList.toggle('active', n === current));
+      hotspots.forEach((h, n) => h.classList.toggle('active', n === current));
+    }
+
+    // Once movement stops: let snap take over again, then slide the scroll
+    // position back into the middle copy if it wandered into an outer one.
+    function onIdle() {
+      if (down) return;
+      panel.style.scrollSnapType = '';
+      panel.style.scrollBehavior = '';
+      if (!loop) return;
+      const raw = rawIndex();
+      if (raw < N || raw >= 2 * N) jumpTo((N + realIndex(raw)) * width());
+    }
+
+    panel.addEventListener('scroll', () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => { ticking = false; sync(); });
+      }
+      clearTimeout(idle);
+      idle = setTimeout(onIdle, 140);
+    }, { passive: true });
+
+    // Arrows step from wherever we are, so crossing the seam costs one slide.
+    const step = (d) => glideTo(rawIndex() + d);
+
+    // Dots and hotspots target whichever copy of that slide is nearest.
+    function goToIndex(j) {
+      if (!loop) return glideTo(j);
+      const raw = rawIndex();
+      const base = Math.floor(raw / N) * N;
+      glideTo([base - N + j, base + j, base + N + j]
+        .reduce((a, b) => (Math.abs(b - raw) < Math.abs(a - raw) ? b : a)));
+    }
+
+    hotspots.forEach(h => h.addEventListener('click', () => goToIndex(Number(h.dataset.sceneHotspot))));
+    root.querySelector('[data-scene-prev]')?.addEventListener('click', () => step(-1));
+    root.querySelector('[data-scene-next]')?.addEventListener('click', () => step(1));
 
     dots.addEventListener('click', e => {
       const span = e.target.closest('span');
       if (!span) return;
-      set([...dots.children].indexOf(span));
+      goToIndex([...dots.children].indexOf(span));
     });
 
-    render();
+    // Start on the middle copy so there is runway in both directions.
+    requestAnimationFrame(() => { if (loop) jumpTo(N * width()); });
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeT);
+      resizeT = setTimeout(() => jumpTo(((loop ? N : 0) + current) * width()), 150);
+    });
+
+    // Native scrolling covers touch, trackpad, shift+wheel and keyboard. Mouse
+    // click-drag is the one gesture no scroll container gives you, so add just
+    // that and let the scroller keep owning the position.
+    panel.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      down = true; moved = false;
+      startX = lastX = e.clientX; startLeft = panel.scrollLeft;
+      lastT = e.timeStamp; vx = 0;
+      // user-select:none alone doesn't stop a selection the browser has already
+      // begun on mousedown; preventDefault does. Form controls keep their default
+      // so focus and clicks still behave.
+      if (!e.target.closest('button, input, select, textarea')) e.preventDefault();
+      // Snap fights a drag in progress, and smooth would animate every step.
+      clearTimeout(idle);
+      panel.style.scrollSnapType = 'none';
+      panel.style.scrollBehavior = 'auto';
+      panel.classList.add('is-dragging');
+    });
+    panel.addEventListener('pointermove', e => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 3) moved = true;
+      const dt = e.timeStamp - lastT;
+      if (dt > 0) vx = (e.clientX - lastX) / dt;  // px/ms, positive = dragging right
+      lastX = e.clientX; lastT = e.timeStamp;
+      panel.scrollLeft = startLeft - dx;
+    });
+    function endDrag() {
+      if (!down) return;
+      down = false;
+      panel.classList.remove('is-dragging');
+
+      // Re-enabling snap here would jump, not glide, so pick the slide ourselves.
+      // A fast flick carries to the next one even if it barely travelled;
+      // otherwise the nearest wins, which is the usual past-halfway rule.
+      const at = panel.scrollLeft / width();
+      let target = Math.abs(vx) > 0.4 ? (vx < 0 ? Math.ceil(at) : Math.floor(at)) : Math.round(at);
+      if (!loop) target = Math.max(0, Math.min(N - 1, target));
+      glideTo(target);
+      // A release with no movement fires no scroll event, so arm onIdle by hand
+      // or snap would stay switched off.
+      clearTimeout(idle);
+      idle = setTimeout(onIdle, 160);
+    }
+    panel.addEventListener('pointerup', endDrag);
+    panel.addEventListener('pointercancel', endDrag);
+    panel.addEventListener('pointerleave', endDrag);
+    // Dragging an <img> or <a> starts a native HTML5 drag and eats the gesture.
+    panel.addEventListener('dragstart', e => e.preventDefault());
+    // Swallow the click that ends a drag so it doesn't open the product link.
+    panel.addEventListener('click', e => {
+      if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+    }, true);
   }
 
   document.addEventListener('shopify:section:load', (e) => {
@@ -263,11 +489,19 @@
   ],
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Nuestras mesas" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Una escena, cada pieza." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Una escena, cada pieza" },
     { "type": "richtext", "id": "description", "label": "Description" },
     { "type": "image_picker", "id": "image", "label": "Scene image (left side)" },
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Descubre nuestras mesas" },
-    { "type": "url", "id": "cta_link", "label": "CTA link" }
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "text", "id": "cta2_label", "label": "Second CTA label", "default": "Aprende a vestir tu mesa" },
+    { "type": "url", "id": "cta2_link", "label": "Second CTA link" },
+    { "type": "header", "content": "Product panel actions" },
+    { "type": "text", "id": "add_label", "label": "Add-to-cart label (shown piece)", "default": "Añadir pieza" },
+    { "type": "product", "id": "set1_product", "label": "Set 1 product (e.g. full vajilla)" },
+    { "type": "text", "id": "set1_label", "label": "Set 1 button label", "default": "Añadir vajilla · 42 platos" },
+    { "type": "product", "id": "set2_product", "label": "Set 2 product" },
+    { "type": "text", "id": "set2_label", "label": "Set 2 button label", "default": "Añadir vajilla · 56 platos" }
   ],
   "presets": [
     {

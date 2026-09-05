@@ -2,12 +2,22 @@
 <html lang="{{ request.locale.iso_code }}">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="{{ settings.color_paper }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="{{ settings.color_brand }}">
   <link rel="canonical" href="{{ canonical_url }}">
 
+  {%- comment -%}
+    Iconos de marca. Si el comerciante sube un favicon en los ajustes manda ése;
+    si no, el juego que viaja en /assets (SVG + PNG cubren todo navegador actual).
+  {%- endcomment -%}
   {%- if settings.favicon != blank -%}
     <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
+  {%- else -%}
+    <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon-32x32.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="48x48" href="{{ 'favicon-48x48.png' | asset_url }}">
+    <link rel="apple-touch-icon" href="{{ 'apple-touch-icon.png' | asset_url }}">
   {%- endif -%}
 
   <title>
@@ -29,7 +39,24 @@
 
   {{ content_for_header }}
 </head>
-<body class="template-{{ template.name | handle }}">
+{%- comment -%}
+  Clase de página con los nombres del mockup, para las reglas que necesitan alcanzar
+  body/html (overflow y padding lateral en móvil). Las secciones que ya pintan su propio
+  wrapper (.artesania-page, .contact-page…) no necesitan entrada aquí.
+{%- endcomment -%}
+{%- liquid
+  assign page_class = ''
+  case template.suffix
+    when 'viste-tu-mesa' then assign page_class = 'viste-page'
+    when 'nuestras-mesas' then assign page_class = 'tables-page-body'
+    when 'identifica-tu-sello' then assign page_class = 'stamps-page-body'
+    when 'heritage' then assign page_class = 'heritage-page-body'
+  endcase
+  if template.name == 'index'
+    assign page_class = 'home-page'
+  endif
+-%}
+<body class="template-{{ template.name | handle }}{% if page_class != blank %} {{ page_class }}{% endif %}">
   <a class="skip-link" href="#main">{{ 'general.accessibility.skip_to_content' | t }}</a>
 
   {% sections 'header-group' %}
