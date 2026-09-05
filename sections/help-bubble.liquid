@@ -84,7 +84,12 @@
 
       <label class="help-field">
         <span class="help-field-label">{{ 'sections.help.message' | t }}</span>
-        <textarea rows="3" data-help-message placeholder="{{ 'sections.help.message_placeholder' | t }}"></textarea>
+        {%- comment -%}
+          The text travels inside the wa.me URL, and browsers start truncating past a
+          couple of thousand characters. 600 is well clear of that and plenty for an
+          enquiry — the conversation continues in WhatsApp anyway.
+        {%- endcomment -%}
+        <textarea rows="3" maxlength="600" data-help-message placeholder="{{ 'sections.help.message_placeholder' | t }}"></textarea>
       </label>
 
       {%- comment -%}
