@@ -3,7 +3,7 @@
    Un plato (perfil torneado + decal top-down de Aurora 202 Rosa) que cae con
    gravedad girando, y cuya MATERIA evoluciona con el scroll:
    barbotina → moldeado → bizcocho (1ª cocción) → sellado → decoración
-   (calcomanía) → esmaltado/vidriado (brillo) → pieza final mirando al frente.
+   (decorado) → esmaltado/vidriado (brillo) → pieza final mirando al frente.
    Requiere THREE r147 (UMD global) cargado antes.
    ============================================================================ */
 (function () {
@@ -133,7 +133,7 @@
     const envStops=[ {at:0.0,val:0.45},{at:0.30,val:1.0},{at:0.5,val:1.4},{at:0.74,val:1.9},{at:1.0,val:2.1} ];
     // sello del reverso: aparece en SELLAR (raw≈0.46) y permanece
     const backStops=[ {at:0.0,val:0},{at:0.42,val:0},{at:0.50,val:1},{at:1.0,val:1} ];
-    // calcomanía Aurora del frente: aparece en DECORAR (raw≈0.7) y permanece
+    // decorado Aurora del frente: aparece en DECORAR (raw≈0.7) y permanece
     const frontStops=[ {at:0.0,val:0},{at:0.66,val:0},{at:0.76,val:1},{at:1.0,val:1} ];
     const patRoughStops=[ {at:0.0,val:0.45},{at:0.70,val:0.4},{at:0.8,val:0.06},{at:1.0,val:0.05} ];
     const patCoatStops=[ {at:0.0,val:0},{at:0.7,val:0.3},{at:0.8,val:1},{at:1.0,val:1} ];

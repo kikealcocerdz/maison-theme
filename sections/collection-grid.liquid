@@ -45,7 +45,7 @@
   endif
 -%}
 
-<div class="collection-grid collection-page" data-section-id="{{ section.id }}">
+<div class="collection-grid collection-page{% if section.settings.budget_mode %} collection-page--budget{% endif %}" data-section-id="{{ section.id }}"{% if section.settings.budget_mode %} data-default-sort="low"{% endif %}>
   <section class="shop-layout">
     {% render 'collection-nav' %}
 
@@ -218,6 +218,11 @@
 .collection-page .sort-menu button { display: block; width: 100%; text-align: left; padding: 12px 18px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
 .collection-page .sort-menu button:hover { background: var(--ink-faint-20); }
 
+/* Budget mode ("Sets para regalo"): the price leads the card instead of trailing it. */
+.collection-page--budget .product-info { align-items: baseline; }
+.collection-page--budget .price { font-family: var(--serif); font-size: clamp(15px, 1.4vw, 19px); line-height: 1.1; }
+@media (max-width: 780px) { .collection-page--budget .price { font-size: 14px; } }
+
 /* Product grid (base card styles are shared in assets/critical.css) */
 .collection-page .products { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 52px 22px; transition: opacity 220ms var(--ease); }
 .collection-page .products.is-list { grid-template-columns: 1fr; gap: 28px; }
@@ -388,32 +393,42 @@
       f.classList.toggle('active');
     });
 
-    // Sort
+    // Sort — reorders the cards currently in the DOM.
+    function applySort(mode) {
+      if (!grid) return;
+      var items = [].slice.call(grid.querySelectorAll('.product'));
+      items.sort(function (a, c) {
+        return mode === 'new' ? (+c.dataset.new - +a.dataset.new)
+          : mode === 'high' ? (+c.dataset.price - +a.dataset.price)
+          : mode === 'low' ? (+a.dataset.price - +c.dataset.price) : 0;
+      });
+      var editorial = grid.querySelector('.editorial-insert');
+      items.forEach(function (item, i) {
+        if (editorial && i === 6) grid.insertBefore(editorial, item);
+        grid.appendChild(item);
+      });
+      var lmEl = grid.querySelector('.load-more');
+      if (lmEl) grid.appendChild(lmEl); // keep the load-more block last after re-ordering
+    }
+
     var sw = root.querySelector('.sort-wrap');
     if (sw) {
       var sb = sw.querySelector('.sort-btn');
       if (sb) sb.addEventListener('click', function () { sw.classList.toggle('open'); });
       sw.querySelectorAll('.sort-menu button').forEach(function (b) {
         b.addEventListener('click', function () {
-          if (!grid) return;
-          var items = [].slice.call(grid.querySelectorAll('.product'));
-          var mode = b.dataset.sort;
-          items.sort(function (a, c) {
-            return mode === 'new' ? (+c.dataset.new - +a.dataset.new)
-              : mode === 'high' ? (+c.dataset.price - +a.dataset.price)
-              : mode === 'low' ? (+a.dataset.price - +c.dataset.price) : 0;
-          });
-          var editorial = grid.querySelector('.editorial-insert');
-          items.forEach(function (item, i) {
-            if (editorial && i === 6) grid.insertBefore(editorial, item);
-            grid.appendChild(item);
-          });
-          var lmEl = grid.querySelector('.load-more');
-          if (lmEl) grid.appendChild(lmEl); // keep the load-more block last after re-ordering
+          applySort(b.dataset.sort);
           sw.classList.remove('open');
         });
       });
     }
+
+    // Budget mode ("Sets para regalo"): price ascending without touching the sort menu.
+    // ponytail: this only reorders what is already in the DOM — the collection's own
+    // "Price: low to high" order in the admin is what sorts the whole collection across
+    // pages. This is the backup for when that admin setting drifts.
+    var defaultSort = root.dataset.defaultSort;
+    if (defaultSort) applySort(defaultSort);
 
     // Load more (demo reveal)
     var lm = root.querySelector('#loadMore');
@@ -452,6 +467,7 @@
             // Only .product nodes: the next page renders its own .editorial-insert, which
             // must not be duplicated mid-grid.
             next.querySelectorAll('.product').forEach(function (el) { grid.insertBefore(el, more); });
+            if (defaultSort) applySort(defaultSort); // keep budget mode ordered across pages
             var nextCount = next.querySelector('.load-count');
             if (count && nextCount) count.textContent = nextCount.textContent;
             var nextLink = next.querySelector('.load-more a[rel="next"]');
@@ -497,6 +513,7 @@
     { "type": "text", "id": "title", "label": "Title override", "info": "Falls back to the collection title." },
     { "type": "richtext", "id": "intro_copy", "label": "Intro copy", "info": "Falls back to the collection description." },
     { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 12, "max": 48, "step": 6, "default": 24 },
+    { "type": "checkbox", "id": "budget_mode", "label": "Budget mode (price-first, low\u2192high)", "info": "For gift-set style listings. Set the collection's own sort order to \"Price: lowest to highest\" in the admin so every page is ordered.", "default": false },
     { "type": "header", "content": "Editorial insert (mid-grid)" },
     { "type": "range", "id": "editorial_after", "label": "Insert after card #", "min": 3, "max": 12, "step": 1, "default": 6 },
     { "type": "image_picker", "id": "editorial_image", "label": "Editorial image" },

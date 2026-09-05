@@ -34,7 +34,7 @@
         "badge2_title": "Pago seguro",
         "badge2_text": "Transacciones cifradas y protegidas en cada paso de tu compra.",
         "badge3_title": "Fabricación artesanal",
-        "badge3_text": "Moldeado, sellado, decoración y vidriado con intervención humana en las fases decisivas.",
+        "badge3_text": "Moldeado, sellado, decoración y esmaltado con intervención humana en las fases decisivas.",
         "badge4_title": "Portes gratis",
         "badge4_text": "Envío sin coste en pedidos superiores a 150&nbsp;€ para España (península).",
 
@@ -87,7 +87,7 @@
           "settings": {
             "number": "05",
             "title": "Decorar",
-            "label": "Calcomanía · 800°C",
+            "label": "Decorado · 800°C",
             "description": "La decoradora transfiere el dibujo a mano sobre el bizcocho. Una segunda cocción a 800°C fija el color: así nace <em>Aurora 202 Rosa</em>."
           }
         },
@@ -95,8 +95,8 @@
           "type": "phase",
           "settings": {
             "number": "06",
-            "title": "El <em>vidriado</em>",
-            "label": "Vidriado · 1.050°C",
+            "title": "El <em>esmaltado</em>",
+            "label": "Esmaltado · 1.050°C",
             "description": "Bañada en barniz pieza a pieza, una tercera cocción convierte ese polvo en cristal. Brillo, transparencia y un color protegido para siempre."
           }
         },

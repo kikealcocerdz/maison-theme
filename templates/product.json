@@ -34,11 +34,11 @@
     },
     "related_set": {
       "type": "product-related",
-      "settings": { "heading": "Completa la mesa", "product_limit": 5 }
+      "settings": { "heading": "Completa la mesa", "product_limit": 5, "source": "recommendations", "intent": "complementary" }
     },
     "related_cross": {
       "type": "product-related",
-      "settings": { "heading": "Te puede interesar", "product_limit": 5, "collection": "emblemas" }
+      "settings": { "heading": "Te puede interesar", "product_limit": 5, "collection": "emblemas", "source": "recommendations", "intent": "related" }
     }
   },
   "order": ["main", "story", "related_set", "related_cross"]
