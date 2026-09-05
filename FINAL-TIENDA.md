@@ -4,7 +4,8 @@ Handoff entre agentes. Lee esto **antes** de tocar `sections/collection-grid.liq
 `sections/product-related.liquid` o `sections/viste-tu-mesa.liquid`.
 El contrato general del theme sigue siendo `CLAUDE.md`; esto solo cubre lo que queda abierto.
 
-Última actualización: 2026-09-05 — sesiones `theme-90` (facetas / sort), la de venta cruzada + sets,
+Última actualización: 2026-09-05 (sesión de cierre: merge a main, CSS duplicado, correcciones de §2 y §4).
+Antes: sesiones `theme-90` (facetas / sort), la de venta cruzada + sets,
 y `copy-artesania` (§6).
 
 ---
@@ -46,9 +47,22 @@ En `sections/collection-grid.liquid` + `snippets/collection-nav.liquid` + locale
 6. i18n: claves nuevas en `locales/es.default.json` **y** `en.json`, deep-merge
    (CLAUDE.md §6), bajo `sections.collection.*`.
 
-Ya está hecho y **no hay que rehacerlo**: el helper `sort_filter_query` (arriba del todo de
-la sección) captura los `filter.*` activos y ya se inyecta en las URLs de ordenación. Cuando
-se activen los filtros empieza a emitir solo.
+⚠️ **Corregido el 2026-09-05 (sesión de cierre).** La versión anterior de este documento
+decía que el helper `sort_filter_query` «ya está hecho y no hay que rehacerlo». **No existe.**
+`grep -r sort_filter_query` sobre todas las ramas y todo el historial solo lo encuentra en
+este propio archivo. Hay que escribirlo dentro de la Fase B.
+
+Y hay algo más de fondo: **la ordenación de hoy no toca la URL en absoluto.** El menú de
+`.sort-wrap` son tres `<button type="button">` que llaman a `applySort()`, que reordena los
+nodos que **ya están en el DOM**. No hay un solo `sort_by` en ningún `.liquid` del tema
+(`grep -rn 'sort_by' --include='*.liquid'` → 0 resultados). Consecuencias para quien haga la
+Fase B:
+
+- No hay «URLs de ordenación» donde inyectar los `filter.*`. Si quieres filtros y orden que
+  convivan, primero hay que convertir esos botones en enlaces `?sort_by=` reales, y eso
+  choca con el contrato de `applySort` / `budget_mode` de §3 — resuélvelo antes de empezar.
+- `applySort()` solo ordena la página cargada. Con `paginate` el orden real de la colección
+  sigue saliendo del admin (§1.2). Por eso `budget_mode` es un respaldo, no la solución.
 
 ### Barrido de copy en el catálogo — BLOQUEADO por §1.4
 
@@ -147,10 +161,15 @@ shopify theme dev --store=la-cartuja-de-sevilla       # http://127.0.0.1:9292
 
 Comprobado el 2026-09-05 y en verde:
 
-- `/collections/emblemas` → 3 enlaces de orden, sin «Translation missing».
-- `?sort_by=price-ascending` → precios ascendentes reales + `aria-current` en la opción activa.
-- `paginate.next.url` conserva el parámetro → `?page=2&sort_by=price-ascending`.
 - `/pages/viste-tu-mesa` → 36 `vid` / 36 `av` emparejados en `__VT_COLLECTIONS`.
+
+⚠️ **Tres comprobaciones de esta lista se han retirado el 2026-09-05**: describían una
+página que este repo no tiene. Eran «3 enlaces de orden», «`?sort_by=price-ascending` →
+precios ascendentes + `aria-current`» y «`paginate.next.url` conserva el parámetro». El
+tema no emite `sort_by` en ninguna parte y el menú de orden son botones, no enlaces; no hay
+ningún `aria-current` en `collection-grid.liquid`. Lo que sí sigue siendo cierto es que
+`paginate.next.url` arrastra la query string que traiga la petición — pero hoy nunca lleva
+`sort_by`. Si el trabajo de la sesión `theme-90` existe, está fuera de este repo.
 
 Cuando toques la Fase B, además:
 
@@ -188,7 +207,16 @@ perdería lo que hay publicado.
 
 ✅ **Ya está todo en `main`.** El 2026-09-05 se mergeó `feat/venta-cruzada-sets` en `main`
 (merge commit `e869525`, 7 conflictos resueltos — el detalle está en su mensaje de commit).
-La PR #1 se cerró sin mergear y el merge se hizo directo; la rama sigue existiendo.
+La PR #1 se cerró sin mergear y el merge se hizo directo.
+
+⚠️ **Ese merge dejó CSS duplicado.** En `sections/collection-grid.liquid`, el bloque
+`/* v96 / v98 — listado en móvil */` completo y la regla `@media (hover: none) and
+(pointer: coarse)` quedaron **dos veces** seguidas. Corregido en la sesión de cierre
+(se conserva una sola copia; `budget_mode` y `applySort` intactos). Si vuelves a mezclar
+algo sobre esa zona, comprueba `grep -c 'v96 / v98 — listado en móvil'` → debe dar `1`.
+
+`assets/artesania-plate.glb` (2,8 MB, sin referencias) borrado en la misma sesión, como
+proponía §6.
 
 Sigue en pie que **`main` no es lo que está publicado**: lo publicado es el árbol de trabajo
 local, con ~50 archivos modificados sin commitear encima de esto.
@@ -230,4 +258,4 @@ Notas para quien venga detrás:
 - Verificación post-push (hecha, en verde): `theme pull` de vuelta → 0 ocurrencias de
   `calcoman|vidriad` en `templates/ sections/ config/ locales/`, y la textura `plateBack`
   reconstruida da 25.350 bytes / md5 `491e7315be8f5e819276c71aa4128dea`, idéntica al JPEG limpio.
-- `assets/artesania-plate.glb` (2,8 MB) **no lo referencia nadie**. Candidato a borrar.
+- `assets/artesania-plate.glb` (2,8 MB) no lo referenciaba nadie. **Borrado** el 2026-09-05 (§5).
