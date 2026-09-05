@@ -125,6 +125,10 @@
   box-shadow: 0 24px 70px rgba(15, 26, 46, .18);
   animation: help-in 280ms var(--ease);
 }
+/* The panel ships closed. `display:flex` above and the UA's `[hidden]{display:none}` have
+   the same specificity, so this stylesheet wins and the panel would render open — this
+   rule is what makes the `hidden` attribute actually close it. Keep them together. */
+.help-panel[hidden] { display: none; }
 @keyframes help-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 .help-head {
