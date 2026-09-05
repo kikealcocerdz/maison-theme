@@ -7,7 +7,7 @@
       <div class="scene-copy reveal">
         {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
         {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
-        {%- if section.settings.description != blank -%}<p>{{ section.settings.description }}</p>{%- endif -%}
+        {%- if section.settings.description != blank -%}{{ section.settings.description }}{%- endif -%}
       </div>
     {%- endif -%}
 
@@ -264,7 +264,7 @@
   .scene-actions>.ghost-btn { min-height:34px!important;font-size:7px!important;letter-spacing:.07em!important;padding:0 6px!important }
   .home-page .scene-copy,
   .home-page .scene-copy h2,
-  .home-page .scene-copy p { text-align:center!important;
+  .home-page .scene-copy p { text-align:center!important; }
   .home-page .scene-copy { padding-inline:8px!important }
 }
 {% endstylesheet %}

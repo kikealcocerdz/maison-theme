@@ -1,0 +1,13 @@
+{%- comment -%}
+  Badge de la esquina de cualquier tarjeta de producto.
+  "Set" (vajillas y juegos: plantilla product.set) manda sobre "Novedad".
+
+  Accepts:
+    product   — Shopify product object (opcional; sin él sólo puede salir "Novedad")
+    badge_new — truthy para la etiqueta "Novedad"
+{%- endcomment -%}
+{%- if product.template_suffix == 'set' -%}
+  <span class="badge badge--set">{{ 'sections.collection.badge_set' | t }}</span>
+{%- elsif badge_new -%}
+  <span class="badge">{{ 'sections.collection.badge_new' | t }}</span>
+{%- endif -%}

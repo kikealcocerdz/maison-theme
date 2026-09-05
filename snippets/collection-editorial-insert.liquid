@@ -5,15 +5,21 @@
     ed_picker — image_picker image (real path, preferred)
     ed_asset  — asset filename fallback (e.g. collection-aurora.webp)
     ed_text   — caption (richtext/plain)
+
+  El pie llega como texto plano (metafield multi_line_text_field) o como richtext
+  (ajuste de sección). Sin <p> propio se cae fuera de `.editorial-insert p` y hereda
+  los 16px del body, igual que le pasaba a `intro_copy` en collection-grid.
+  Sin pie, la variante `editorial-photo-only` del mock (subcoleccion-gifts-decor).
 {%- endcomment -%}
 {%- liquid
-  assign ed_alt = ed_text | default: '' | strip_html | escape
+  assign ed_caption = ed_text | strip_html | strip
+  assign ed_alt = ed_caption | escape
 -%}
-<div class="editorial-insert reveal">
+<div class="editorial-insert{% if ed_caption == blank %} editorial-photo-only{% endif %} reveal">
   {%- if ed_picker != blank -%}
     {% render 'image-responsive', image: ed_picker, alt: ed_alt, sizes: '100vw' %}
   {%- elsif ed_asset != blank -%}
     <img src="{{ ed_asset | asset_url }}" alt="{{ ed_alt }}" width="1760" height="640" loading="lazy" decoding="async">
   {%- endif -%}
-  {%- if ed_text != blank -%}<p>{{ ed_text }}</p>{%- endif -%}
+  {%- if ed_caption != blank -%}<p>{{ ed_caption }}</p>{%- endif -%}
 </div>

@@ -3,7 +3,7 @@
     <div class="section-head reveal">
       {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
       {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
-      {%- if section.settings.description != blank -%}<p>{{ section.settings.description }}</p>{%- endif -%}
+      {%- if section.settings.description != blank -%}{{ section.settings.description }}{%- endif -%}
     </div>
   {%- endif -%}
 
@@ -65,14 +65,14 @@
   content: ""; position: absolute; inset: 0;
   background: rgba(15, 26, 46, 0.44);
   opacity: 0; z-index: 2;
-  transition: opacity 520ms var(--ease);
+  transition: opacity 260ms var(--ease);
 }
 .image-banner__media--link:hover::after { opacity: 1; }
 .image-banner__overlay {
   position: absolute; inset: 0; z-index: 3;
   display: grid; place-items: center;
   opacity: 0; transform: translateY(10px);
-  transition: opacity 520ms var(--ease), transform 520ms var(--ease);
+  transition: opacity 260ms var(--ease), transform 260ms var(--ease);
   pointer-events: none;
 }
 .image-banner__media--link:hover .image-banner__overlay { opacity: 1; transform: translateY(0); }

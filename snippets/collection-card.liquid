@@ -9,7 +9,7 @@
     meta      — small meta line under the title (e.g. subcollection name)
     img1      — image URL; for real products use featured_image
     img_w, img_h — intrinsic dimensions for the <img> (Theme Check requires width+height)
-    badge     — truthy to show the "Novedad" badge
+    badge     — truthy to show the "Novedad" badge (un producto set manda sobre él)
     data_price, data_new, data_type — dataset values used by client-side sort/filter
     extra     — truthy to hide the card behind "Cargar más"
 {%- endcomment -%}
@@ -20,11 +20,11 @@
   assign c_w = img_w | default: 1000
   assign c_h = img_h | default: 1250
 -%}
-<article class="product reveal{% if extra %} extra-product is-hidden{% endif %}"
+<article class="product reveal{% if product.template_suffix == 'set' %} set-product{% endif %}{% if extra %} extra-product is-hidden{% endif %}"
   data-type="{{ data_type | default: '' }}" data-price="{{ data_price | default: 0 }}" data-new="{{ data_new | default: 0 }}">
   <div class="product-media">
     <a class="product-cover" href="{{ c_url }}" aria-label="{{ c_title | escape }}"></a>
-    {%- if badge -%}<span class="badge">{{ 'sections.collection.badge_new' | t }}</span>{%- endif -%}
+    {% render 'product-badge', product: product, badge_new: badge %}
     <button class="fav" type="button" aria-label="{{ 'sections.collection.favorite' | t }}">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.1c0 5.2-8.8 10.3-8.8 10.3S3.2 13.3 3.2 8.1A4.5 4.5 0 0 1 12 6.6a4.5 4.5 0 0 1 8.8 1.5Z"/></svg>
     </button>

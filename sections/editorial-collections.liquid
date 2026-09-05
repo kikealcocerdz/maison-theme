@@ -3,7 +3,7 @@
     <div class="section-head reveal">
       {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
       {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
-      {%- if section.settings.description != blank -%}<p>{{ section.settings.description }}</p>{%- endif -%}
+      {%- if section.settings.description != blank -%}{{ section.settings.description }}{%- endif -%}
     </div>
   {%- endif -%}
 

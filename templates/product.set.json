@@ -9,7 +9,7 @@
         "demo_bundles": "42 P. | 1.138,95 \u20ac | plato-llano-ceilan:12, plato-hondo-ceilan:12, plato-postre-ceilan:12, bol-grande-ceilan:2, fuente-red-ceilan:1, sopera-ceilan:1, salsera-ceilan:1, ensaladera-ceilan:1\n56 P. | 1.506,95 \u20ac | plato-llano-ceilan:12, plato-hondo-ceilan:12, plato-postre-ceilan:12, plato-pan-ceilan:12, fuente-red-ceilan:1, fuente-gra-ceilan:2, sopera-ceilan:1, salsera-ceilan:1, ensaladera-ceilan:3"
       },
       "blocks": {
-        "a1": { "type": "accordion", "settings": { "label": "Detalles", "content": "<p>Loza fina esmaltada de acabado brillante con decoración aplicada bajo barniz. Las configuraciones agrupan piezas de mesa y servicio de la misma colección.</p>", "show_description": true } },
+        "a1": { "type": "accordion", "settings": { "label": "Detalles", "content": "<p>Loza fina esmaltada de acabado brillante con decoración aplicada bajo barniz. Las configuraciones agrupan piezas de mesa y servicio de la misma colección.</p>", "show_description": false } },
         "a2": { "type": "accordion", "settings": { "label": "Cuidados", "content": "<p>Evitar productos abrasivos y golpes térmicos. Recomendamos lavado delicado y secado suave para conservar el brillo y la definición de la decoración.</p>" } },
         "a3": { "type": "accordion", "settings": { "label": "Envío y devoluciones", "content": "<p>Embalaje específico para cerámica, entrega protegida y seguimiento del pedido. Cambios y devoluciones conforme a las condiciones de venta vigentes.</p>" } }
       },

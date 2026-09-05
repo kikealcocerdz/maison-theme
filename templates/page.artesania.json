@@ -106,7 +106,7 @@
             "name": "Aurora",
             "tag": "Capítulo 01",
             "demo_image": "collection-aurora.webp",
-            "link": ""
+            "link": "/collections/aurora"
           }
         },
         "col-2": {
@@ -115,7 +115,7 @@
             "name": "Ochavada",
             "tag": "Capítulo 02",
             "demo_image": "negro_vistas_bandeja.webp",
-            "link": ""
+            "link": "/collections/ochavada"
           }
         },
         "col-3": {
@@ -124,7 +124,7 @@
             "name": "Gifts & Decor",
             "tag": "Capítulo 03",
             "demo_image": "gifts_decor_arch.webp",
-            "link": ""
+            "link": "/collections/decoracion"
           }
         },
         "col-4": {
@@ -133,7 +133,7 @@
             "name": "Emblemas",
             "tag": "Selección",
             "demo_image": "emblemas-cover.webp",
-            "link": ""
+            "link": "/collections/emblemas"
           }
         }
       },

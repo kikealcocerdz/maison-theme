@@ -14,7 +14,7 @@
     <div class="section-head reveal">
       {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
       {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
-      {%- if section.settings.description != blank -%}<p>{{ section.settings.description }}</p>{%- endif -%}
+      {%- if section.settings.description != blank -%}{{ section.settings.description }}{%- endif -%}
     </div>
   {%- endif -%}
 
@@ -79,10 +79,39 @@
 .featured-products__track.is-dragging a { pointer-events: none; }
 .featured-products__card { position: relative; flex: 0 0 calc(100% / 3); padding: 0 18px; text-align: center; }
 
-/* Auto-fill cards reuse .block-product-card__* markup but not its block stylesheet,
-   so give them a self-contained hover lift (matches mockup .best-card img). */
-.featured-products__card .block-product-card__media img { transition: transform 700ms var(--ease); will-change: transform; }
+/* Auto-fill cards (collection source) reuse .block-product-card__* markup but NOT
+   blocks/product-card.liquid's stylesheet — that only ships when the block itself is
+   rendered. Without this the img keeps its width/height attributes and comes out
+   stretched, so mirror the block's card styles here. Keep both in sync. */
+.featured-products__card .block-product-card__link { display: block; }
+.featured-products__card .block-product-card__media {
+  position: relative; overflow: hidden; background: transparent;
+  display: grid; place-items: center;
+}
+.featured-products__card .block-product-card__media--portrait { aspect-ratio: 4/5; }
+.featured-products__card .block-product-card__media::after {
+  content: ""; position: absolute; width: 44%; height: 28px; bottom: 44px; left: 28%;
+  background: radial-gradient(ellipse, rgba(15, 26, 46, 0.12), transparent 68%);
+  filter: blur(9px);
+}
+.featured-products__card .block-product-card__media img {
+  width: auto; height: auto; max-width: 80%; max-height: 300px;
+  object-fit: contain; position: relative; z-index: 2;
+  transition: transform 700ms var(--ease); will-change: transform;
+}
 .featured-products__card:hover .block-product-card__media img { transform: translateY(-6px) scale(1.03); }
+.featured-products__card .block-product-card__meta {
+  font-family: var(--sans); font-weight: 400; font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--muted); margin: 0;
+}
+.featured-products__card .block-product-card__title {
+  font-family: var(--serif); font-weight: 400; font-size: 16px; line-height: 1.2;
+  color: var(--ink); margin: 14px 0 4px;
+}
+.featured-products__card .block-product-card__price {
+  display: block; margin-top: 4px; font-family: var(--sans); font-weight: 300; font-size: 13px;
+  color: var(--ink-soft);
+}
 @media (prefers-reduced-motion: reduce) {
   .featured-products__card:hover .block-product-card__media img { transform: none; }
 }
@@ -91,9 +120,9 @@
 .featured-products[data-cards-per-row="4"] .featured-products__card { flex-basis: 25%; }
 
 /* 4-up cards are smaller than the 3-up bestsellers (matches mockup .mini-product) */
-.featured-products[data-cards-per-row="4"] .block-product-card__media img { max-height: 235px; }
-.featured-products[data-cards-per-row="4"] .block-product-card__media::after { height: 24px; bottom: 34px; }
-.featured-products[data-cards-per-row="4"] .block-product-card__title { margin-top: 14px; }
+.featured-products[data-cards-per-row="4"] .featured-products__card .block-product-card__media img { max-height: 235px; }
+.featured-products[data-cards-per-row="4"] .featured-products__card .block-product-card__media::after { height: 24px; bottom: 34px; }
+.featured-products[data-cards-per-row="4"] .featured-products__card .block-product-card__title { margin-top: 14px; }
 
 .featured-products__cta { width: var(--content); margin: 74px auto 0; text-align: center; }
 

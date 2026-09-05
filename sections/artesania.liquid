@@ -241,7 +241,7 @@
         <h2 class="ap-news__heading">{{ section.settings.news_heading }}</h2>
       {%- endif -%}
       {%- if section.settings.news_body != blank -%}
-        <p class="ap-news__body">{{ section.settings.news_body }}</p>
+        <div class="ap-news__body">{{ section.settings.news_body }}</div>
       {%- endif -%}
 
       {%- form 'customer', class: 'ap-news__form' -%}

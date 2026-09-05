@@ -15,7 +15,14 @@
   assign title = product.title | default: section.settings.demo_title
   assign short = product.metafields.custom.short_description | metafield_text
   if short == blank
-    assign short = product.excerpt | default: section.settings.demo_short
+    assign short = product.excerpt
+  endif
+  comment
+    El mock pone la descripción bajo el título. Sin `custom.short_description` ni
+    excerpt, la línea queda vacía a propósito: nunca se recorta la descripción.
+  endcomment
+  if short == blank
+    assign short = section.settings.demo_short
   endif
 
   assign description = product.description | default: section.settings.demo_description
@@ -102,12 +109,13 @@
   {%- if is_set -%}
     <div class="product-set-above-fold">
       <div class="product-set-breadcrumb-bar">{{ breadcrumbs_html }}</div>
+  {%- else -%}
+    <div class="product-breadcrumb-bar">{{ breadcrumbs_html }}</div>
   {%- endif -%}
   <section class="product-detail{% if is_set %} product-set-detail{% endif %}" data-product-gallery>
 
     <aside class="product-title-panel">
       <div class="product-title-sticky{% if is_set %} product-set-title{% endif %}">
-        {%- unless is_set -%}{{ breadcrumbs_html }}{%- endunless -%}
         {%- if kicker != blank -%}<p class="product-kicker">{{ kicker | escape }}</p>{%- endif -%}
         {%- if title != blank -%}<h1>{{ title | escape }}</h1>{%- endif -%}
         {%- if short != blank -%}<p class="product-short">{{ short }}</p>{%- endif -%}
@@ -144,24 +152,59 @@
       <div class="product-info-sticky{% if is_set %} product-set-info{% endif %}">
         {%- if is_set -%}
           <div class="product-set-info-core">
-          {%- if color_idx >= 0 -%}
-            <div class="piece-color-row">
-              <span>{{ 'sections.product.color' | t }}</span>
-              <div class="color-options">
-                {%- for value in product.options_with_values[color_idx].values -%}
-                  {%- assign vname = value.name | default: value -%}
-                  {%- assign swatch = value.swatch.color | default: section.settings.demo_swatch | default: '#6f8797' -%}
-                  <button class="color-dot{% if vname == current_color %} active{% endif %}" type="button" aria-label="{{ vname | escape }}" style="--swatch: {{ swatch }}"{% if value.variant.id %} data-color-url="{{ product.url }}?variant={{ value.variant.id }}"{% endif %}></button>
-                {%- endfor -%}
-              </div>
+        {%- else -%}
+          <div class="product-info-core">
+        {%- endif -%}
+
+        {%- comment -%} Selector de color: cualquier producto con una opción "Color" (Flor de Lis azul/rosa…). {%- endcomment -%}
+        {%- if color_idx >= 0 -%}
+          <div class="piece-color-row">
+            <span>{{ 'sections.product.color' | t }}</span>
+            <div class="color-options">
+              {%- for value in product.options_with_values[color_idx].values -%}
+                {%- assign vname = value.name | default: value -%}
+                {%- assign swatch = value.swatch.color | default: section.settings.demo_swatch | default: '#6f8797' -%}
+                <button class="color-dot{% if vname == current_color %} active{% endif %}" type="button" aria-label="{{ vname | escape }}" style="--swatch: {{ swatch }}"{% if value.variant.id %} data-color-url="{{ product.url }}?variant={{ value.variant.id }}"{% endif %}></button>
+              {%- endfor -%}
             </div>
-          {%- endif -%}
-          {%- if servicio != blank -%}
-            <div class="piece-dimension-row">
-              <span>{{ 'sections.product.service' | t }}</span>
-              <strong>{{ servicio | escape }}</strong>
+          </div>
+        {%- endif -%}
+        {%- comment -%}
+          Piezas hermanas por color cuando cada color es un producto distinto
+          (Flor de Lis Azul / Rosa): metafield `custom.color_siblings`
+          (lista de referencias a producto) + `custom.swatch` (color o texto hex)
+          en cada uno. Si el producto ya tiene opción "Color", manda la opción.
+        {%- endcomment -%}
+        {%- assign siblings = product.metafields.custom.color_siblings.value -%}
+        {%- if color_idx < 0 and siblings != blank and siblings.size > 0 -%}
+          {%- assign self_listed = false -%}
+          {%- for sib in siblings -%}
+            {%- if sib.id == product.id -%}{%- assign self_listed = true -%}{%- endif -%}
+          {%- endfor -%}
+          <div class="piece-color-row">
+            <span>{{ 'sections.product.color' | t }}</span>
+            <div class="color-options">
+              {%- unless self_listed -%}
+                {%- assign own_swatch = product.metafields.custom.swatch.value | default: section.settings.demo_swatch | default: '#6f8797' -%}
+                <button class="color-dot active" type="button" aria-current="true" aria-label="{{ title | escape }}" style="--swatch: {{ own_swatch }}"></button>
+              {%- endunless -%}
+              {%- for sib in siblings -%}
+                {%- assign sib_swatch = sib.metafields.custom.swatch.value | default: section.settings.demo_swatch | default: '#6f8797' -%}
+                {%- if sib.id == product.id -%}
+                  <button class="color-dot active" type="button" aria-current="true" aria-label="{{ sib.title | escape }}" style="--swatch: {{ sib_swatch }}"></button>
+                {%- else -%}
+                  <button class="color-dot" type="button" aria-label="{{ sib.title | escape }}" style="--swatch: {{ sib_swatch }}" data-color-url="{{ sib.url }}"></button>
+                {%- endif -%}
+              {%- endfor -%}
             </div>
-          {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if is_set and servicio != blank -%}
+          <div class="piece-dimension-row">
+            <span>{{ 'sections.product.service' | t }}</span>
+            <strong>{{ servicio | escape }}</strong>
+          </div>
         {%- endif -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'accordion' -%}
@@ -176,6 +219,10 @@
             </div>
           {%- endif -%}
         {%- endfor -%}
+
+        {%- unless is_set -%}
+          </div>{%- comment -%} /.product-info-core {%- endcomment -%}
+        {%- endunless -%}
 
         {%- if is_set -%}
           </div>{%- comment -%} /.product-set-info-core {%- endcomment -%}
@@ -251,14 +298,14 @@
           {%- if color_idx < 0 or v.options[color_idx] == current_color -%}
             {%- assign items = v.metafields.custom.pack.value -%}
             {%- if items != blank -%}
-              {%- assign cols = items.size -%}{%- if cols > 8 -%}{%- assign cols = cols | plus: 1 | divided_by: 2 -%}{%- endif -%}
+              {%- assign cols = items.size -%}{%- if cols > 8 -%}{%- assign cols = 8 -%}{%- endif -%}
               <div class="product-set-includes-list{% if v.id == current_variant.id %} is-visible{% endif %}" data-pack-for="{{ v.id }}" style="--pack-cols: {{ cols }}">
                 {%- for item in items -%}
                   {%- assign ip = item.producto.value -%}
                   <article class="product-set-include-card">
                     <div class="product-set-include-thumb">
                       {%- if ip.featured_image -%}
-                        <img src="{{ ip.featured_image | image_url: width: 320 }}" alt="{{ ip.title | escape }}" width="{{ ip.featured_image.width }}" height="{{ ip.featured_image.height }}" loading="lazy" decoding="async">
+                        <img src="{{ ip.featured_image | image_url: width: 480, height: 480, crop: 'center' }}" alt="{{ ip.title | escape }}" width="480" height="480" loading="lazy" decoding="async">
                       {%- endif -%}
                     </div>
                     <div class="product-set-include-copy">
@@ -275,7 +322,7 @@
         {%- for row in demo_bundles -%}
           {%- assign parts = row | split: '|' -%}
           {%- assign raw_items = parts[2] | default: '' | split: ',' -%}
-          {%- assign cols = raw_items.size -%}{%- if cols > 8 -%}{%- assign cols = cols | plus: 1 | divided_by: 2 -%}{%- endif -%}
+          {%- assign cols = raw_items.size -%}{%- if cols > 8 -%}{%- assign cols = 8 -%}{%- endif -%}
           <div class="product-set-includes-list{% if forloop.first %} is-visible{% endif %}" data-pack-for="{{ parts[0] | strip | escape }}" style="--pack-cols: {{ cols }}">
             {%- for raw in raw_items -%}
               {%- assign bits = raw | strip | split: ':' -%}
@@ -283,7 +330,7 @@
               <article class="product-set-include-card">
                 <div class="product-set-include-thumb">
                   {%- if ip.featured_image -%}
-                    <img src="{{ ip.featured_image | image_url: width: 320 }}" alt="{{ ip.title | escape }}" width="{{ ip.featured_image.width }}" height="{{ ip.featured_image.height }}" loading="lazy" decoding="async">
+                    <img src="{{ ip.featured_image | image_url: width: 480, height: 480, crop: 'center' }}" alt="{{ ip.title | escape }}" width="480" height="480" loading="lazy" decoding="async">
                   {%- endif -%}
                 </div>
                 <div class="product-set-include-copy">
@@ -495,7 +542,7 @@
 .product-set-include-card { min-width: 0; padding: 11px; border: .5px solid rgba(15, 26, 46, .12); border-radius: 12px; background: #f7f8f9; transition: transform 300ms var(--ease), background 300ms var(--ease), border-color 300ms var(--ease); }
 .product-set-include-card:hover { transform: translateY(-4px); background: var(--paper); border-color: rgba(8, 40, 107, .22); }
 .product-set-include-thumb { width: 100%; aspect-ratio: 1 / 1; border-radius: 8px; background: var(--paper); margin-bottom: 11px; display: grid; place-items: center; overflow: hidden; }
-.product-set-include-thumb img { width: 88%; height: 88%; object-fit: contain; }
+.product-set-include-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .product-set-include-copy { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 8px; }
 .product-set-include-copy strong { font: 400 10px/1.35 var(--sans); color: var(--ink); }
 .product-set-include-copy span { font: 500 10px/1 var(--sans); color: #08286b; white-space: nowrap; }
@@ -650,6 +697,75 @@
   .product-page .piece-dimension-row { padding: 13px 0 !important; }
   .product-page .product-accordion button { padding: 13px 0 !important; }
   .product-page .product-set-pack { overflow: hidden !important; }
+}
+/* ==========================================================================
+   Capa final del mock (`flor-*` en collections.css): la ficha de pieza suelta
+   ocupa el alto del viewport, las tres columnas se centran verticalmente y el
+   bloque de compra queda anclado abajo. La ficha de juego (`product-page--set`)
+   conserva su propia capa (`ceilan-*`), así que todo va scopeado.
+   ========================================================================== */
+.product-breadcrumb-bar { width: var(--content); margin: 0 auto; padding: 22px 0 12px; }
+.product-breadcrumb-bar .product-breadcrumbs { position: relative; top: auto; left: auto; font: 300 12px/1.4 var(--sans); letter-spacing: .045em; }
+.product-breadcrumb-bar .product-breadcrumbs a { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: .5px; }
+.product-info-core { width: 100%; }
+
+/* La foto llena la caja (aurora refresh del mock), no se encaja con margen. */
+.product-main-media { padding: 0; }
+.product-main-media .product-gallery-slide { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+@media (min-width: 1181px) {
+  .product-page:not(.product-page--set) .product-breadcrumb-bar { padding: 38px 0 24px; }
+  .product-page:not(.product-page--set) .product-breadcrumbs { font-size: 13px; line-height: 1.5; letter-spacing: .035em; }
+  .product-page:not(.product-page--set) .product-detail {
+    height: calc(100vh - var(--header-h) - 94px); min-height: 650px;
+    align-items: center; padding-bottom: 0;
+  }
+  .product-page:not(.product-page--set) .product-title-panel,
+  .product-page:not(.product-page--set) .product-info-panel,
+  .product-page:not(.product-page--set) .product-gallery-panel { height: min(76vh, 780px); min-height: 0; }
+  .product-page:not(.product-page--set) .product-title-sticky { width: 100%; height: 100%; padding: 0 min(2vw, 28px) 0 0; display: flex; flex-direction: column; justify-content: center; }
+  .product-page:not(.product-page--set) .product-title-panel h1 { font-size: clamp(38px, 3.35vw, 58px); line-height: .96; }
+  .product-page:not(.product-page--set) .product-kicker { margin-bottom: 16px; }
+  .product-page:not(.product-page--set) .product-short { max-width: 390px; line-height: 1.78; margin-top: 18px; }
+  .product-page:not(.product-page--set) .product-gallery-panel { padding: 0; align-items: center; }
+  .product-page:not(.product-page--set) .product-main-media { height: min(76vh, 780px); margin: 0; }
+  .product-page:not(.product-page--set) .product-info-panel { position: relative; align-self: center; }
+  .product-page:not(.product-page--set) .product-info-sticky { display: block; width: 100%; height: 100%; min-height: 0; padding: 0; overflow: visible; }
+  .product-page:not(.product-page--set) .product-info-core {
+    position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); margin: 0;
+    transition: transform .28s ease;
+  }
+  .product-page:not(.product-page--set) .product-info-core .piece-color-row,
+  .product-page:not(.product-page--set) .product-info-core .piece-dimension-row { padding: 18px 0; }
+  .product-page:not(.product-page--set) .product-info-core .product-accordion button { padding: 19px 0; }
+  .product-page:not(.product-page--set) .product-buy-block {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 5;
+    margin: 0; padding: 0; background: var(--paper); display: grid; gap: 14px;
+  }
+  .product-page:not(.product-page--set) .product-buy-block .product-price-large { display: block; margin: 0 0 14px; text-align: right; }
+  .product-page:not(.product-page--set) .product-detail.info-expanded .product-info-core { top: 50%; transform: translateY(-50%); }
+}
+
+@media (max-width: 1180px) {
+  .product-page:not(.product-page--set) .product-breadcrumb-bar { padding: 18px 0 4px; }
+  .product-page:not(.product-page--set) .product-detail { height: auto; min-height: 0; }
+  .product-page:not(.product-page--set) .product-title-sticky { height: auto; padding: 46px 0 26px; }
+  .product-page:not(.product-page--set) .product-main-media { height: min(72vh, 720px); }
+  .product-page:not(.product-page--set) .product-info-sticky { height: auto; display: block; padding: 42px 0 0; }
+  .product-page:not(.product-page--set) .product-buy-block { position: relative; margin-top: 44px; }
+  .product-page:not(.product-page--set) .product-price-large { text-align: left; }
+}
+
+@media (max-width: 620px) {
+  .product-page:not(.product-page--set) .product-breadcrumb-bar { width: calc(100vw - 24px); padding-top: 14px; overflow-x: auto; white-space: nowrap; }
+  .product-page:not(.product-page--set) .product-breadcrumbs { font-size: 10px; }
+  .product-page:not(.product-page--set) .product-title-panel h1 { font-size: 40px; }
+  .product-page:not(.product-page--set) .product-short { font-size: 11px; }
+  .product-page:not(.product-page--set) .product-main-media { height: 62vh; }
+  .product-page:not(.product-page--set) .product-buy-block {
+    position: sticky; bottom: 0; margin-top: 34px; padding: 14px 0 18px;
+    border-top: .5px solid var(--rule); background: var(--paper); z-index: 8;
+  }
 }
 {% endstylesheet %}
 

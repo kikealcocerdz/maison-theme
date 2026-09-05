@@ -62,4 +62,15 @@
       --content: calc(100vw - 32px);
     }
   }
+
+  {%- comment -%}
+    Sólo la home corre estrecha (mock index.html: 70vw/1600). El resto del sitio
+    —colecciones, producto, contacto, nuestras mesas, artesanía, sellos— va a
+    90vw/1760 como sus mocks. Las páginas con ancho propio (legal 78vw/1420,
+    viste-tu-mesa 92vw en tablet) siguen mandando desde su propia clase.
+  {%- endcomment -%}
+  {%- unless template.name == 'index' -%}
+    :root { --content: min(90vw, 1760px); }
+    @media (max-width: 680px) { :root { --content: calc(100vw - 32px); } }
+  {%- endunless -%}
 </style>

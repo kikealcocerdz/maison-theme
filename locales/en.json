@@ -130,6 +130,7 @@
       "load_more": "Load more",
       "showing": "Showing {{ shown }} of {{ total }}",
       "badge_new": "New",
+      "badge_set": "Set",
       "favorite": "Add to favourites",
       "prev_long": "Previous",
       "next_long": "Next"

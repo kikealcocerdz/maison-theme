@@ -19,7 +19,15 @@
     <h3 class="block-chapter-card__title">{{ block.settings.title | escape }}</h3>
   {%- endif -%}
   {%- if block.settings.paragraph != blank -%}
-    <p class="block-chapter-card__paragraph">{{ block.settings.paragraph }}</p>
+    {%- comment -%}
+      ponytail: richtext siempre envuelve su valor en <p>. Anidarlo dentro de otro <p>
+      hace que el navegador cierre el wrapper y la copia pierda la clase. Le quitamos
+      su <p> en vez de usar un <div>, porque el clamp de móvil (-webkit-line-clamp en
+      editorial-collections) necesita que el texto sea hijo directo del elemento clampado.
+      Techo: varios párrafos se concatenan en uno. Si el cliente los necesita, pasar el
+      setting a inline_richtext + un bloque por párrafo.
+    {%- endcomment -%}
+    <p class="block-chapter-card__paragraph">{{ block.settings.paragraph | remove: '<p>' | remove: '</p>' }}</p>
   {%- endif -%}
   {%- if block.settings.link != blank and block.settings.link_label != blank -%}
     <span class="cta block-chapter-card__cta">{{ block.settings.link_label | escape }}</span>

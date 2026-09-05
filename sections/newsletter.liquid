@@ -14,7 +14,7 @@
       <h2>{{ section.settings.heading | remove: '<p>' | remove: '</p>' }}</h2>
     {%- endif -%}
     {%- if section.settings.description != blank -%}
-      <p>{{ section.settings.description }}</p>
+      {{ section.settings.description }}
     {%- endif -%}
 
     {%- form 'customer', class: 'newsletter__form' -%}

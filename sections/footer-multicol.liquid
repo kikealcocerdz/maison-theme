@@ -17,10 +17,10 @@
       {%- comment -%} Redes sociales: solo se pintan las que tienen URL. {%- endcomment -%}
       {%- if section.settings.social_instagram != blank or section.settings.social_facebook != blank or section.settings.social_tiktok != blank or section.settings.social_linkedin != blank -%}
         <nav class="footer-social" aria-label="{{ 'sections.footer.social_label' | t }}">
-          {%- if section.settings.social_instagram != blank -%}<a href="{{ section.settings.social_instagram }}" aria-label="Instagram" rel="noopener" target="_blank">{%- render 'icon-instagram' -%}</a>{%- endif -%}
-          {%- if section.settings.social_facebook != blank -%}<a href="{{ section.settings.social_facebook }}" aria-label="Facebook" rel="noopener" target="_blank">{%- render 'icon-facebook' -%}</a>{%- endif -%}
-          {%- if section.settings.social_tiktok != blank -%}<a href="{{ section.settings.social_tiktok }}" aria-label="TikTok" rel="noopener" target="_blank">{%- render 'icon-tiktok' -%}</a>{%- endif -%}
-          {%- if section.settings.social_linkedin != blank -%}<a href="{{ section.settings.social_linkedin }}" aria-label="LinkedIn" rel="noopener" target="_blank">{%- render 'icon-linkedin' -%}</a>{%- endif -%}
+          {%- if section.settings.social_instagram != blank -%}<a href="{{ section.settings.social_instagram }}" aria-label="Instagram" rel="noopener noreferrer" target="_blank">{%- render 'icon-instagram' -%}</a>{%- endif -%}
+          {%- if section.settings.social_facebook != blank -%}<a href="{{ section.settings.social_facebook }}" aria-label="Facebook" rel="noopener noreferrer" target="_blank">{%- render 'icon-facebook' -%}</a>{%- endif -%}
+          {%- if section.settings.social_tiktok != blank -%}<a href="{{ section.settings.social_tiktok }}" aria-label="TikTok" rel="noopener noreferrer" target="_blank">{%- render 'icon-tiktok' -%}</a>{%- endif -%}
+          {%- if section.settings.social_linkedin != blank -%}<a href="{{ section.settings.social_linkedin }}" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">{%- render 'icon-linkedin' -%}</a>{%- endif -%}
         </nav>
       {%- endif -%}
     </div>
@@ -109,7 +109,7 @@
 
 {% stylesheet %}
 .site-footer {
-  padding: 78px 0 44px;
+  padding: 80px 0 42px;
   border-top: 0.5px solid var(--rule);
   background: var(--paper);
   display: flex;
@@ -125,13 +125,16 @@
 }
 
 .footer-logo img {
-  margin-bottom: 24px;
+  height: 64px;
+  width: auto;
+  margin: 0 0 22px;
 }
 
 .footer-logo p {
   font-family: var(--serif);
-  font-size: 34px;
-  line-height: 1;
+  font-size: 23px;
+  line-height: 1.08;
+  max-width: 19ch;
   margin: 0;
   color: var(--ink);
 }
@@ -146,7 +149,7 @@
   margin-top: 22px;
 }
 
-.footer-social a {
+.footer-grid .footer-social a {
   display: grid;
   place-items: center;
   width: 34px;
@@ -162,7 +165,7 @@
   transition: border-color 0.2s ease;
 }
 
-.footer-social svg {
+.footer-grid .footer-social svg {
   display: block;
   width: 15px;
   height: 15px;
@@ -170,19 +173,20 @@
   overflow: visible;
 }
 
-.footer-social a[aria-label="Instagram"] svg {
+.footer-grid .footer-social a[aria-label="Instagram"] svg {
   fill: none;
   stroke: currentColor;
   stroke-width: 1.55;
 }
 
-.footer-social a:not([aria-label="Instagram"]) svg {
+.footer-grid .footer-social a:not([aria-label="Instagram"]) svg {
   fill: currentColor;
   stroke: none;
 }
 
 .footer-grid h4 {
   font-size: 10px;
+  font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   margin: 0 0 18px;
@@ -192,22 +196,27 @@
 .footer-grid span {
   display: block;
   font-size: 12px;
+  line-height: 1.45;
   color: var(--ink-soft);
-  margin-bottom: 10px;
+  margin: 0 0 11px;
+  transition: color 0.25s ease, transform 0.25s var(--ease);
 }
 
 .footer-bottom {
   width: var(--content-wide);
-  margin: 60px auto 0;
+  margin: 58px auto 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 20px;
   font-size: 10px;
+  line-height: 1.4;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
 }
 
-.footer-grid a:hover { color: var(--brand); }
+.footer-grid a:hover { color: var(--brand); transform: translateX(3px); }
 
 .footer-locale {
   display: inline-flex;
@@ -219,7 +228,7 @@
 
 .footer-language-option {
   position: relative;
-  padding: 0 0 3px;
+  padding: 1px 0 3px;
   border: 0;
   background: transparent;
   font: inherit;
@@ -231,46 +240,68 @@
   content: "";
   position: absolute;
   left: 0;
+  right: 0;
   bottom: 0;
-  width: 100%;
   height: 0.5px;
   background: currentColor;
   transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 420ms var(--ease);
+  transition: transform 0.3s ease;
 }
 
 .footer-language-option:hover,
 .footer-language-option.is-active { color: var(--ink); }
 
 .footer-language-option:hover::after,
-.footer-language-option.is-active::after { transform: scaleX(1); transform-origin: left; }
+.footer-language-option.is-active::after { transform: scaleX(1); }
 
 .footer-language-sep { margin: 0 6px; }
 
 .footer-legal-links {
   width: var(--content-wide);
-  margin: 22px auto 0;
-  padding-top: 18px;
+  margin: 30px auto 0;
+  padding-top: 22px;
   border-top: 0.5px solid var(--rule);
   display: flex;
   flex-wrap: wrap;
-  gap: 26px;
-  font-size: 10px;
-  letter-spacing: 0.14em;
+  align-items: center;
+  gap: 10px 28px;
+  font-size: 9px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
 }
 
-.footer-legal-links a { color: inherit; }
-.footer-legal-links a:hover { color: var(--brand); }
-
-@media (prefers-reduced-motion: reduce) {
-  .footer-language-option::after { transition: none; }
+.footer-legal-links a {
+  position: relative;
+  display: inline-flex;
+  color: inherit;
+  transition: color 0.25s ease;
 }
 
-@media (max-width: 1100px) {
-  .footer-grid { grid-template-columns: 1fr 1fr; }
+.footer-legal-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 0.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.footer-legal-links a:hover { color: var(--ink); }
+.footer-legal-links a:hover::after { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-language-option::after,
+  .footer-legal-links a::after,
+  .footer-grid a { transition: none; }
+}
+
+@media (max-width: 1000px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 38px; }
 }
 
 /* v96: en móvil el logo ocupa el ancho y las 3 columnas de nav se compactan. */
@@ -307,13 +338,33 @@
     gap: 7px;
   }
 
-  .footer-social a { width: 28px; height: 28px; }
-  .footer-social svg { width: 12.5px; height: 12.5px; }
+  .footer-grid .footer-social a { width: 28px; height: 28px; }
+  .footer-grid .footer-social svg { width: 12.5px; height: 12.5px; }
 }
 
 @media (max-width: 680px) {
-  .footer-bottom { display: grid; gap: 12px; }
-  .footer-legal-links { gap: 14px 22px; }
+  .site-footer { padding: 62px 0 34px; }
+
+  .footer-bottom {
+    width: calc(100vw - 32px);
+    margin-top: 42px;
+    display: grid;
+    gap: 12px;
+  }
+
+  .footer-locale { flex-wrap: wrap; }
+
+  .footer-legal-links {
+    width: calc(100vw - 32px);
+    margin-top: 28px;
+    padding-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 18px;
+    font-size: 8px;
+  }
+
+  .footer-legal-links a { line-height: 1.5; }
 }
 
 @media (max-width: 420px) {
