@@ -229,7 +229,14 @@
 }
 
 /* Sidebar accordion */
-.collection-page .sidebar { margin-top: 205px; position: sticky; top: calc(var(--header-h) + 22px); }
+/* Sticky column. The cap + scroll is what stops a tall sidebar (several panels open, or
+   a long chapter tree) from running past the viewport with no way to reach the bottom:
+   sticky pins it, so the page scroll never brings the overflow back. */
+.collection-page .sidebar {
+  margin-top: 205px; position: sticky; top: calc(var(--header-h) + 22px);
+  max-height: calc(100vh - var(--header-h) - 44px);
+  overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin;
+}
 .collection-page .side-accordion { display: grid; border-top: .5px solid var(--rule); }
 .collection-page .side-section { border-bottom: .5px solid var(--rule); }
 .collection-page .side-section-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 42px; }
@@ -248,10 +255,18 @@
 .collection-page .side-panel a { display: block; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 6px 0; opacity: .82; }
 .collection-page .side-panel a.active, .collection-page .side-panel a:hover { color: var(--ink); opacity: 1; }
 
-/* Facets (snippets/collection-filters.liquid) — same accordion shell as the nav above,
-   so only the controls inside .side-panel need their own rules. */
-.collection-page .side-filters { margin-top: 34px; }
-.collection-page .side-filters-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+/* Facets (snippets/collection-filters.liquid) — same accordion shell as the chapter tree
+   below, but read as a control panel rather than navigation: boxed on the faint ground,
+   headings in full ink. The nav keeps its plain editorial list. */
+.collection-page .side-filters {
+  margin: 0 0 30px; padding: 15px 15px 4px;
+  background: var(--ink-faint-20); border: .5px solid var(--rule);
+}
+.collection-page .side-filters .side-accordion { border-top: .5px solid var(--rule); }
+.collection-page .side-filters .side-section:last-child { border-bottom: none; }
+.collection-page .side-filters .side-main-link { color: var(--ink); opacity: 1; letter-spacing: .2em; }
+.collection-page .side-filters .side-section.is-open .side-panel { padding-bottom: 12px; }
+.collection-page .side-filters-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
 .collection-page .side-filters-title { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
 .collection-page .side-filters-clear { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
 .collection-page .side-filters-clear:hover { color: var(--ink); }
@@ -484,12 +499,32 @@
     if (!root || root.dataset.init) return;
     root.dataset.init = '1';
 
-    // Sidebar accordion
+    // Sidebar accordion — one panel open at a time, facets and chapter tree sharing the
+    // same rule. The column is sticky and capped to the viewport height, so every extra
+    // open panel pushes the ones below out of reach with no page scroll left to recover
+    // them; closing the previous panel is what keeps them all reachable.
+    var side = root.querySelector('.sidebar');
+
+    function openOnly(section) {
+      if (!side) return;
+      side.querySelectorAll('.side-section').forEach(function (s) {
+        var on = s === section;
+        s.classList.toggle('is-open', on);
+        var t = s.querySelector('.side-toggle');
+        if (t) t.setAttribute('aria-expanded', on ? 'true' : 'false');
+      });
+    }
+
+    // Server-rendered state can open more than one (an active facet *and* the current
+    // chapter), so collapse down to the first before anyone touches it.
+    if (side) openOnly(side.querySelector('.side-section.is-open'));
+
     root.querySelectorAll('.side-toggle').forEach(function (btn) {
       btn.addEventListener('click', function (e) {
         e.preventDefault(); e.stopPropagation();
         var s = btn.closest('.side-section');
-        if (s) { var open = s.classList.toggle('is-open'); btn.setAttribute('aria-expanded', open); }
+        if (!s) return;
+        openOnly(s.classList.contains('is-open') ? null : s); // null closes everything
       });
     });
 

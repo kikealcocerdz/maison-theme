@@ -24,20 +24,22 @@ comprobar si funciona.
 | 4 | Emitir un **token de Admin API** (`shpat_…`) con `read_products` + `write_products` | Único camino para barrer «Calcomanía» / «Vidriado» del catálogo. La CLI de Shopify **no** puede. Ver §2 «Barrido de copy» | Cliente |
 | 5 | Confirmar el **handle** de la colección de sets | La plantilla es `templates/collection.sets-regalo.json` y Shopify la enlaza por handle. Si la colección se crea con otro handle, la plantilla no se aplica y hay que renombrar el archivo a `collection.<handle>.json` | Cliente → agente |
 
-### 1b · Lo que falta tocar en el admin para que las facetas luzcan
+### 1b · Filtros en el admin — ✅ hecho (2026-09-05)
 
-Los filtros están activos, pero solo hay **dos** y con los nombres por defecto. Nada de
-esto es código — la UI los recoge sola en cuanto existan.
+El cliente activó y configuró los filtros en Search & Discovery. Comprobado sirviendo
+`/collections/all`: tres grupos, ya en español.
 
-| Qué | Dónde | Por qué |
+| Grupo | Tipo | Valores |
 |---|---|---|
-| Renombrar los grupos **«Availability» → «Disponibilidad»** y **«Price» → «Precio»** | Apps → Search & Discovery → Filters → cada filtro → nombre | Hoy los títulos salen **en inglés** sobre una tienda en español. Los *valores* sí vienen traducidos («En existencia» / «Agotado»); solo el nombre del grupo está sin traducir |
-| Añadir el filtro **Tipo de producto** (`product_type`) | Apps → Search & Discovery → Filters → Add filter | Es el que pinta el sidebar del mock («Vajillas», «Platos», «Tazas»…). Sin él las facetas se quedan en Disponibilidad + Precio |
-| Opcional: **Colección**, **Proveedor**, o metacampos (color, nº de piezas) | mismo sitio | Cada uno aparece como un acordeón más, sin tocar el tema |
-| Revisar el orden de los filtros | mismo sitio, arrastrando | Es el orden en que se pintan en la columna |
+| Disponibilidad | `list` | En existencia · Agotado |
+| Precio | `price_range` | rango sobre los 438 productos |
+| Tipo de producto | `list` | 23 valores (Plato, Taza, Fuente, Sopera…) |
 
-Después de cambiar cualquiera de estos: recargar `/collections/all` y comprobar que el
-acordeón nuevo aparece. No hace falta `theme push` — el tema no los conoce por nombre.
+Filtrado real verificado: `?filter.p.product_type=Plato` → 71 · `=Taza` → 65 ·
+`?filter.v.price.gte=200` → 34 · tipo + precio combinados → 2 chips activos.
+
+Si en el futuro se añade otro filtro (Colección, Proveedor, un metacampo), **no hay que
+tocar el tema**: la UI itera `collection.filters` y lo pinta solo.
 
 ---
 
