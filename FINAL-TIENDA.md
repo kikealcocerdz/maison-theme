@@ -47,8 +47,9 @@ En `sections/collection-grid.liquid` + `snippets/collection-nav.liquid` + locale
    (CLAUDE.md §6), bajo `sections.collection.*`.
 
 Ya está hecho y **no hay que rehacerlo**: el helper `sort_filter_query` (arriba del todo de
-la sección) captura los `filter.*` activos y ya se inyecta en las URLs de ordenación. Cuando
-se activen los filtros empieza a emitir solo.
+la sección) captura los `filter.*` activos y se inyecta en las URLs de ordenación. Cuando
+se activen los filtros empieza a emitir solo. Las opciones de orden son enlaces nativos a
+Shopify, por lo que ordenan la colección completa y `paginate.next.url` conserva el criterio.
 
 ### Barrido de copy en el catálogo — BLOQUEADO por §1.4
 
@@ -107,7 +108,7 @@ devuelve **302** — la tienda está con contraseña de escaparate. Con esa cont
 
 ## 3 · Contratos que NO puedes romper
 
-### `budget_mode` / `applySort()` en `collection-grid.liquid`
+### `budget_mode` / respaldo local en `collection-grid.liquid`
 
 - `budget_mode` pone `.collection-page--budget` (precio serif) + `data-default-sort="low"`
   en el root. Es lo que ordena «Sets para regalo» por precio ascendente **en la página
@@ -115,8 +116,11 @@ devuelve **302** — la tienda está con contraseña de escaparate. Con esa cont
 - **Una plantilla JSON no puede fijar `?sort_by=`.** Se elige por handle/suffix, y `sort_by`
   es un parámetro de la petición. Quien ocupa el sitio del respaldo cliente es el orden por
   defecto de la colección en el admin (§1.2 → `collection.default_sort_by`).
-- Por tanto: **no borres `applySort()` ni `data-default-sort` hasta que §1.2 esté confirmado.**
-  La parte visual de `budget_mode` se queda pase lo que pase.
+- La ordenación del menú es de servidor. `applySort()` ya no responde a esas opciones: queda
+  exclusivamente como respaldo de la primera visita a `sets-regalo` mientras §1.2 no esté
+  confirmado. `data-default-sort` solo se emite si no hay un `sort_by` explícito, para no pisar
+  la elección del usuario. No borres ese respaldo hasta confirmar §1.2.
+- La parte visual de `budget_mode` se queda pase lo que pase.
 - Alternativa si el cliente no quiere depender del admin: un setting `force_sort` que pinte
   el parámetro en los enlaces internos cuando `collection.sort_by != 'price-ascending'`.
   No cubre la primera visita limpia a `/collections/sets-regalo`. **No recomendado.**
