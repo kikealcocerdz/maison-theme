@@ -14,7 +14,7 @@
     <div class="section-head reveal">
       {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
       {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
-      {%- if section.settings.description != blank -%}<p>{{ section.settings.description }}</p>{%- endif -%}
+      {%- if section.settings.description != blank -%}{{ section.settings.description }}{%- endif -%}
     </div>
   {%- endif -%}
 
@@ -38,6 +38,7 @@
                 <h3 class="block-product-card__title">{{ product.title | escape }}</h3>
                 <span class="block-product-card__price">{{ product.price | money }}</span>
               </a>
+              {% render 'quick-add', product: product %}
             </article>
           {%- endfor -%}
         {%- else -%}
@@ -63,20 +64,68 @@
 
 {% stylesheet %}
 .featured-products { padding: 42px 0 142px; }
-.featured-products.soft-bg { padding: 0 0 152px; }
+.featured-products.soft-bg { padding: clamp(24px, 3vh, 36px) 0 152px; }
 .featured-products.soft-bg .section-head { margin-bottom: 18px; }
 .featured-products__window { position: relative; width: var(--content); margin: 0 auto; }
-.featured-products__viewport { overflow: hidden; }
-.featured-products__track { display: flex; transition: transform 680ms var(--ease-long); }
-.featured-products__card { flex: 0 0 calc(100% / 3); padding: 0 18px; text-align: center; }
+.featured-products__viewport {
+  overflow-x: auto; overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  /* Sin `-webkit-overflow-scrolling: touch`: en iOS crea una capa de scroll aparte
+     donde las escrituras de scrollLeft a media inercia se pierden — justo lo que
+     hace el bucle infinito de abajo — y deja repintados a medias. El momentum es
+     nativo desde iOS 13. */
+  scrollbar-width: none;
+}
+.featured-products__viewport::-webkit-scrollbar { display: none; }
+.featured-products__track { display: flex; cursor: grab; -webkit-user-select: none; user-select: none; }
+.featured-products__track.is-dragging { cursor: grabbing; }
+.featured-products__track.is-dragging a { pointer-events: none; }
+.featured-products__card { position: relative; flex: 0 0 calc(100% / 3); padding: 0 18px; text-align: center; }
+
+/* Auto-fill cards (collection source) reuse .block-product-card__* markup but NOT
+   blocks/product-card.liquid's stylesheet — that only ships when the block itself is
+   rendered. Without this the img keeps its width/height attributes and comes out
+   stretched, so mirror the block's card styles here. Keep both in sync. */
+.featured-products__card .block-product-card__link { display: block; }
+.featured-products__card .block-product-card__media {
+  position: relative; overflow: hidden; background: var(--paper);
+  display: grid; place-items: center;
+}
+.featured-products__card .block-product-card__media--portrait { aspect-ratio: 4/5; }
+.featured-products__card .block-product-card__media::after {
+  content: ""; position: absolute; width: 44%; height: 28px; bottom: 44px; left: 28%;
+  background: radial-gradient(ellipse, rgba(15, 26, 46, 0.12), transparent 68%);
+  filter: blur(9px);
+}
+.featured-products__card .block-product-card__media img {
+  width: auto; height: auto; max-width: 78%; max-height: 78%;
+  object-fit: contain; position: relative; z-index: 2;
+  transition: transform 700ms var(--ease); will-change: transform;
+}
+.featured-products__card:hover .block-product-card__media img { transform: translateY(-6px) scale(1.03); }
+.featured-products__card .block-product-card__meta {
+  font-family: var(--sans); font-weight: 400; font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--muted); margin: 0;
+}
+.featured-products__card .block-product-card__title {
+  font-family: var(--serif); font-weight: 400; font-size: 16px; line-height: 1.2;
+  color: var(--ink); margin: 14px 0 4px;
+}
+.featured-products__card .block-product-card__price {
+  display: block; margin-top: 4px; font-family: var(--sans); font-weight: 300; font-size: 13px;
+  color: var(--ink-soft);
+}
+@media (prefers-reduced-motion: reduce) {
+  .featured-products__card:hover .block-product-card__media img { transform: none; }
+}
 
 .featured-products[data-cards-per-row="2"] .featured-products__card { flex-basis: 50%; }
 .featured-products[data-cards-per-row="4"] .featured-products__card { flex-basis: 25%; }
 
 /* 4-up cards are smaller than the 3-up bestsellers (matches mockup .mini-product) */
-.featured-products[data-cards-per-row="4"] .block-product-card__media img { max-height: 235px; }
-.featured-products[data-cards-per-row="4"] .block-product-card__media::after { height: 24px; bottom: 34px; }
-.featured-products[data-cards-per-row="4"] .block-product-card__title { margin-top: 14px; }
+.featured-products[data-cards-per-row="4"] .featured-products__card .block-product-card__media img { max-width: 72%; max-height: 72%; }
+.featured-products[data-cards-per-row="4"] .featured-products__card .block-product-card__media::after { height: 24px; bottom: 34px; }
+.featured-products[data-cards-per-row="4"] .featured-products__card .block-product-card__title { margin-top: 14px; }
 
 .featured-products__cta { width: var(--content); margin: 74px auto 0; text-align: center; }
 
@@ -98,6 +147,8 @@
 }
 
 @media (max-width: 680px) {
+  .featured-products { padding-top: 0; padding-bottom: 82px; }
+  .featured-products.soft-bg { padding-top: 24px; padding-bottom: 82px; }
   .featured-products__viewport { overflow: visible; }
   .featured-products__track {
     display: grid !important;
@@ -107,6 +158,9 @@
   }
   .featured-products__card { flex: initial !important; padding: 0 !important; min-width: 0; }
   .featured-products__card:nth-child(n+5) { display: none; }
+  .featured-products__card .block-product-card__media img {
+    max-height: 78%; max-width: 82%; margin-left: auto; margin-right: auto;
+  }
   .nav-arrow { display: none; }
 }
 {% endstylesheet %}
@@ -119,22 +173,89 @@
   function initCarousel(root) {
     root.dataset.init = '1';
     const track = root.querySelector('[data-carousel-track]');
+    const viewport = track && track.parentElement;
     const prev = root.querySelector('[data-carousel-prev]');
     const next = root.querySelector('[data-carousel-next]');
-    const cardsPerRow = Number(root.dataset.cardsPerRow || 3);
-    if (!track || !prev || !next) return;
+    if (!track || !viewport) return;
 
-    let index = 0;
-    function update() {
-      const count = track.children.length;
-      const max = Math.max(count - cardsPerRow, 0);
-      index = Math.max(0, Math.min(index, max));
-      const stepPct = 100 / cardsPerRow;
-      track.style.transform = `translateX(${-index * stepPct}%)`;
+    const cardW = () => {
+      const c = track.firstElementChild;
+      return c ? c.getBoundingClientRect().width : viewport.clientWidth;
+    };
+
+    // Infinite loop: clone the set before + after, scroll lives in the middle copy.
+    // ponytail: desktop carousel only — mobile is a static grid, so we skip cloning
+    // (it would duplicate the grid). No re-clone on breakpoint resize.
+    let loop = false, setW = 0;
+    if (window.matchMedia('(min-width: 681px)').matches && track.children.length > 1) {
+      const originals = [...track.children];
+      originals.forEach(c => { const cl = c.cloneNode(true); cl.setAttribute('aria-hidden', 'true'); track.appendChild(cl); });
+      for (let i = originals.length - 1; i >= 0; i--) { const cl = originals[i].cloneNode(true); cl.setAttribute('aria-hidden', 'true'); track.insertBefore(cl, track.firstChild); }
+      requestAnimationFrame(() => {
+        setW = originals.reduce((s, c) => s + c.getBoundingClientRect().width, 0);
+        if (setW > viewport.clientWidth) { loop = true; viewport.scrollLeft = setW; }
+        // Con tantas tarjetas como columnas (3 fichas a 3 por fila) el set no desborda:
+        // no hay bucle que corregir y los clones se quedarían a la vista al arrastrar.
+        else [...track.children].forEach(c => { if (c.getAttribute('aria-hidden') === 'true') c.remove(); });
+      });
+      viewport.addEventListener('scroll', () => {
+        if (!loop) return;
+        if (viewport.scrollLeft >= setW * 2) viewport.scrollLeft -= setW;
+        else if (viewport.scrollLeft < setW) viewport.scrollLeft += setW;
+      });
     }
-    prev.addEventListener('click', () => { index -= 1; update(); });
-    next.addEventListener('click', () => { index += 1; update(); });
-    update();
+
+    // Arrows nudge one card; native smooth scroll handles the glide.
+    prev && prev.addEventListener('click', () => viewport.scrollBy({ left: -cardW(), behavior: 'smooth' }));
+    next && next.addEventListener('click', () => viewport.scrollBy({ left: cardW(), behavior: 'smooth' }));
+
+    // Mouse drag with kinetic inertia (free glide, no snap). Touch uses native momentum.
+    let down = false, startX = 0, startLeft = 0, moved = false, lastX = 0, lastT = 0, vx = 0, raf = 0;
+    const maxLeft = () => viewport.scrollWidth - viewport.clientWidth;
+    track.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'touch') return;            // native touch scroll
+      if (e.button !== 0) return;
+      cancelAnimationFrame(raf);
+      down = true; moved = false; startX = lastX = e.clientX; startLeft = viewport.scrollLeft;
+      vx = 0; lastT = performance.now();
+    });
+    track.addEventListener('pointermove', (e) => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 5 && !moved) {
+        // Real drag started — capture now (NOT on pointerdown, or a plain
+        // click would target the track instead of the card's <a> and never navigate).
+        moved = true;
+        track.setPointerCapture?.(e.pointerId);
+        track.classList.add('is-dragging');
+      }
+      viewport.scrollLeft = startLeft - dx;
+      const now = performance.now(), dt = now - lastT || 16;
+      vx = (e.clientX - lastX) / dt;                    // px per ms (signed)
+      lastX = e.clientX; lastT = now;
+    });
+    const end = (e) => {
+      if (!down) return;
+      down = false;
+      track.releasePointerCapture?.(e.pointerId);
+      track.classList.remove('is-dragging');
+      let v = -vx * 16;                                 // px per frame, continues the flick
+      const glide = () => {
+        v *= 0.94;                                      // friction
+        viewport.scrollLeft += v;
+        const at = viewport.scrollLeft;
+        if (Math.abs(v) > 0.4 && at > 0 && at < maxLeft()) raf = requestAnimationFrame(glide);
+      };
+      if (moved && Math.abs(v) > 0.4) raf = requestAnimationFrame(glide);
+    };
+    track.addEventListener('pointerup', end);
+    track.addEventListener('pointercancel', end);
+    // Block native image/link drag so a press-drag scrolls instead of ghost-dragging an image.
+    track.addEventListener('dragstart', (e) => e.preventDefault());
+    // Swallow only the click that ends a real drag; `moved` resets on every pointerdown.
+    track.addEventListener('click', (e) => {
+      if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+    }, true);
   }
 
   document.addEventListener('shopify:section:load', (e) => {
