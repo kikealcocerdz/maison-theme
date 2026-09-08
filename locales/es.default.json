@@ -205,7 +205,10 @@
     },
     "tables": {
       "filters": "Filtros de mesas",
-      "hotspot": "Ver pieza"
+      "hotspot": "Ver pieza",
+      "view_product": "Ver producto {{ index }}",
+      "add_piece": "Añadir pieza",
+      "add_set": "Añadir vajilla · {{ pieces }} p."
     },
     "help": {
       "open": "¿Hablamos? Escríbenos por WhatsApp",

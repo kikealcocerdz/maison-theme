@@ -108,7 +108,7 @@
                     {%- if prod_count > 1 -%}
                       <div class="table-product-lines">
                         {%- for j in (1..prod_count) -%}
-                          <button type="button" class="{% if forloop.index0 == idx %}active{% endif %}" data-go="{{ forloop.index0 }}" aria-label="Ver producto {{ forloop.index }}"></button>
+                          <button type="button" class="{% if forloop.index0 == idx %}active{% endif %}" data-go="{{ forloop.index0 }}" aria-label="{{ 'sections.tables.view_product' | t: index: forloop.index }}"></button>
                         {%- endfor -%}
                       </div>
                     {%- endif -%}
@@ -123,26 +123,26 @@
                       {%- if p != blank and p.selected_or_first_available_variant != blank -%}
                         <form action="{{ routes.cart_add_url }}" method="post">
                           <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id }}">
-                          <button class="ghost-btn table-add-piece" type="submit">Añadir pieza</button>
+                          <button class="ghost-btn table-add-piece" type="submit">{{ 'sections.tables.add_piece' | t }}</button>
                         </form>
                       {%- else -%}
-                        <a class="ghost-btn table-add-piece" href="{{ p_link }}">Añadir pieza</a>
+                        <a class="ghost-btn table-add-piece" href="{{ p_link }}">{{ 'sections.tables.add_piece' | t }}</a>
                       {%- endif -%}
                       {%- if v42 != blank and v42.selected_or_first_available_variant != blank -%}
                         <form action="{{ routes.cart_add_url }}" method="post">
                           <input type="hidden" name="id" value="{{ v42.selected_or_first_available_variant.id }}">
-                          <button class="ghost-btn" type="submit">Añadir vajilla · 42 p.</button>
+                          <button class="ghost-btn" type="submit">{{ 'sections.tables.add_set' | t: pieces: 42 }}</button>
                         </form>
                       {%- else -%}
-                        <a class="ghost-btn" href="{{ set_url }}">Añadir vajilla · 42 p.</a>
+                        <a class="ghost-btn" href="{{ set_url }}">{{ 'sections.tables.add_set' | t: pieces: 42 }}</a>
                       {%- endif -%}
                       {%- if v56 != blank and v56.selected_or_first_available_variant != blank -%}
                         <form action="{{ routes.cart_add_url }}" method="post">
                           <input type="hidden" name="id" value="{{ v56.selected_or_first_available_variant.id }}">
-                          <button class="ghost-btn" type="submit">Añadir vajilla · 56 p.</button>
+                          <button class="ghost-btn" type="submit">{{ 'sections.tables.add_set' | t: pieces: 56 }}</button>
                         </form>
                       {%- else -%}
-                        <a class="ghost-btn" href="{{ set_url }}">Añadir vajilla · 56 p.</a>
+                        <a class="ghost-btn" href="{{ set_url }}">{{ 'sections.tables.add_set' | t: pieces: 56 }}</a>
                       {%- endif -%}
                     </div>
                   </div>

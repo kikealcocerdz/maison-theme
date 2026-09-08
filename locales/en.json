@@ -205,7 +205,10 @@
     },
     "tables": {
       "filters": "Table filters",
-      "hotspot": "View piece"
+      "hotspot": "View piece",
+      "view_product": "View product {{ index }}",
+      "add_piece": "Add piece",
+      "add_set": "Add {{ pieces }}-piece dinner set"
     },
     "help": {
       "open": "Need help? Message us on WhatsApp",
