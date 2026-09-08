@@ -1,11 +1,5 @@
 # Maison theme — working guide (La Cartuja de Sevilla)
 
-> **Parallel-agent coordination:** before acting, read `AGENTS.md`, especially
-> “Admin API through Shopify CLI Connector”, “Two-agent coordination contract” and
-> “Web audit and Admin hand-off”. While Codex owns the repository workstream, Claude owns
-> Shopify Admin only and must not edit theme files; exchange template assignments through an
-> explicit reviewed `handle -> templateSuffix` manifest.
-
 Custom Shopify Online Store 2.0 theme, forked from **Shopify Skeleton**. Doubles as (1) the
 Cartuja v1 storefront and (2) a future reusable / Theme-Store agency theme. This file is the
 contract for implementing the **remaining pages** (PDP, PLP, cart, blog, search, account…)
@@ -27,8 +21,9 @@ Repo: `kikealcocerdz/maison-theme` (this is its own git repo, cloned into the gi
   never hardcode brand colors/fonts.
 - **Don't touch settled decisions:** Liquid OS 2.0 (not Hydrogen), Skeleton baseline (not
   Dawn/Horizon), ES default locale. See memory `project-gropius-cartuja`.
-- **Run `shopify theme check` before every commit.** Target: 0 errors. The only acceptable
-  warnings are 3× `RemoteAsset` (the Google Fonts links — see §5).
+- **Run `shopify theme check` before every commit.** Target: 0 errors. The current accepted
+  baseline is 7× `RemoteAsset` warnings (3 Google Fonts links plus 4 dynamic/remote media
+  references). Do not introduce any other warning or error.
 
 ## 2. Dev workflow
 
@@ -38,11 +33,73 @@ shopify theme dev --store=la-cartuja-de-sevilla       # local preview + live rel
 shopify theme push --development --store=la-cartuja-de-sevilla   # sync to dev theme
 ```
 
-- Dev store: `la-cartuja-de-sevilla.myshopify.com`. Development theme id `#198198559061`.
-- Commit per logical change to `main`. Push when you want the dev theme updated.
+- Store: `la-cartuja-de-sevilla.myshopify.com`. Current development theme id
+  `#203235295573`.
+- The working tree, not local `main`, is the current storefront baseline. It contains many
+  intentional dirty/untracked files and local `main` is behind `origin/main`. Work on the
+  current feature branch, commit one logical change at a time, stage explicit paths only,
+  and never use `git add -A`, reset, rebase, or broad cleanup without a human decision.
 - **Verify locale/asset uploads landed** with `shopify theme pull --development --path /tmp/x`
   then inspect — Shopify can *silently reject* bad locale JSON (push says "success", files
   never land). `theme check` does NOT catch that.
+
+### Admin API through Shopify CLI Connector
+
+The Homebrew CLI is still 3.86.0 and has no `store` topic. Use the newer CLI without changing
+the installed binary:
+
+```bash
+npx -y @shopify/cli@4.7.1 store auth \
+  --store la-cartuja-de-sevilla.myshopify.com \
+  --scopes <comma-separated-scopes>
+
+npx -y @shopify/cli@4.7.1 store execute \
+  --store la-cartuja-de-sevilla.myshopify.com \
+  --query '<GraphQL query>' --json
+```
+
+`store auth` uses Shopify's installed CLI Connector app and opens a browser for the merchant
+to approve scopes. As verified on 2026-09-08, the stored authorization currently grants:
+
+```text
+read_content, write_content
+read_locales
+read_metaobjects, write_metaobjects
+read_online_store_navigation, write_online_store_navigation
+read_online_store_pages, write_online_store_pages
+read_products, write_products
+read_translations, write_translations
+```
+
+It does **not** currently grant `read_legal_policies` / `write_legal_policies`; those must be
+added in a new browser approval before native policies can be inspected or changed. Payment
+provider activation is not an Admin GraphQL task and stays manual in Settings → Payments.
+
+For every Admin mutation:
+
+1. Query and save the current resource first.
+2. Use `store execute --allow-mutations`; inspect both GraphQL errors and payload `userErrors`.
+3. Query the resource again and record the exact before/after result.
+4. Never invent catalog, legal, WhatsApp, translation, or product-assignment data. Stop for
+   the merchant when the authoritative value is missing.
+
+### Two-agent coordination contract
+
+When Codex and Claude work at the same time, divide ownership by mutation surface:
+
+- **Codex owns the repository:** theme code, templates, locales, tests, documentation and Git
+  commits. Codex does not mutate Shopify Admin while Claude owns the Admin workstream.
+- **Claude owns Shopify Admin:** GraphQL queries/mutations, page/product `templateSuffix`, URL
+  redirects, metafield definitions/values and translations. Claude writes only to its
+  scratchpad/report, never to repository files.
+- Template assignment is a hand-off: Codex produces a checked manifest of
+  `resource handle -> templateSuffix`; Claude applies that exact manifest and returns the
+  before/after query. No agent guesses assignments.
+- Only one agent runs `theme dev` on a port: Codex uses 9292 and Claude uses 9293 if a second
+  preview is explicitly necessary. Neither agent pushes or publishes the live theme without
+  explicit instruction.
+- Before switching ownership, finish or report the current unit of work. Never leave the same
+  theme file modified by both agents without a diff review and a dedicated commit.
 
 ## 3. Architecture
 
@@ -55,9 +112,10 @@ shopify theme push --development --store=la-cartuja-de-sevilla   # sync to dev t
 - **Container sections + theme blocks**: standard surfaces are container sections that render
   blocks via `{% content_for 'blocks' %}` or `{% for block in section.blocks %}{% render block %}`.
   Distinctive single-instance sections stay opinionated/self-contained.
-- **Stock Skeleton sections/templates remain as scaffolds** for not-yet-designed pages
-  (product, collection, cart, search, blog, page, customers/*, 404, password, gift_card). They
-  use `t:` schema-locale keys — keep them working until the client sends real designs.
+- **Some stock Skeleton sections/templates remain as scaffolds** for secondary pages
+  (customers/*, password, gift_card and any surface not yet audited). Product, collection,
+  cart, search, blog, page and 404 already have project-specific work; inspect the current
+  implementation before assuming a Skeleton stub remains.
 
 ### Section & block inventory (homepage, all custom)
 
@@ -200,4 +258,34 @@ uses smaller media than 3-up (`[data-cards-per-row="4"]` overrides).
 - [ ] No `font_picker` for EB Garamond/Montserrat (load via Google Fonts).
 - [ ] Scroll/CSS-var sections: `Math.max(_,1)` guard + reduced-motion + mobile fallback.
 - [ ] After push, verify locale/asset files actually landed (pull + inspect).
-- [ ] Only the 3 Google-Fonts `RemoteAsset` warnings; everything else is 0.
+- [ ] Exactly the accepted 7 `RemoteAsset` warnings; everything else is 0.
+
+## 14. Web audit and Admin hand-off (2026-09-08)
+
+The 12-point web audit is implemented on branch `auditoria-web-12-puntos` through commit
+`665b023`, with a later uncommitted cart refinement. See `FINAL-TIENDA.md` for commit-level
+detail. Current verified facts that future agents must not rediscover or contradict:
+
+- The catalog has 438 active products. `custom.dimensiones` exists and has a value on 339;
+  99 products still lack it. `custom.detalles` has no definition yet. Never synthesize these
+  values from unrelated products.
+- Oaxaca's six product handles are real and already wired in
+  `templates/page.nuestras-mesas.json`.
+- English and Spanish are both published. The 80 historical stamp descriptions and periods
+  in `assets/sellos.js` remain Spanish-only and require a reviewed English translation before
+  publication; names and historical marks are not translated.
+- `/pages/historia -> /pages/heritage-1841` still needs a verified Admin redirect until an
+  after-query proves it exists.
+- The real WhatsApp number is still required; `sections/footer-group.json` contains the
+  placeholder `+34 600 000 000`.
+- Native policy ownership is unresolved (DORINDA vs LA CARTUJA DE SEVILLA). Do not mutate legal
+  text until the merchant confirms the responsible entity and approved wording.
+- Checkout payment providers must be enabled and tested manually in Shopify Admin.
+- No `sets-regalo` collection currently exists in the Admin API inventory, although
+  `templates/collection.sets-regalo.json` exists. The merchant must confirm which products
+  belong to it; then the Admin owner can create/assign the collection, use handle
+  `sets-regalo`, set price ascending, assign the template, and return a verification query.
+- Assigning templates to pages/products is an Admin operation. First inventory every resource
+  and every available `templates/*.json` suffix, generate an explicit manifest, review
+  unmatched/ambiguous cases, then apply in batches and re-query all assignments. Do not infer
+  an assignment from a title alone when multiple custom templates could apply.
