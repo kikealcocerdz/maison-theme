@@ -59,7 +59,7 @@
   {%- endfor -%}
 {%- endcapture -%}
 
-<div class="collection-grid collection-page{% if section.settings.budget_mode %} collection-page--budget{% endif %}" data-section-id="{{ section.id }}"{% if section.settings.budget_mode and collection.sort_by == blank %} data-default-sort="low"{% endif %}>
+<div class="collection-grid collection-page{% if section.settings.budget_mode %} collection-page--budget{% endif %}{% if template.suffix == 'emblemas' %} collection-page--emblemas{% endif %}" data-section-id="{{ section.id }}"{% if section.settings.budget_mode and collection.sort_by == blank %} data-default-sort="low"{% endif %}>
   <section class="shop-layout">
     {% render 'collection-nav' %}
 
@@ -348,6 +348,7 @@
 
 /* Product grid (base card styles are shared in assets/critical.css) */
 .collection-page .products { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 52px 22px; transition: opacity 220ms var(--ease); }
+.collection-page--emblemas .product-media img.main { background: transparent; }
 .collection-page .products.is-list { grid-template-columns: 1fr; gap: 28px; }
 
 /* List view */
