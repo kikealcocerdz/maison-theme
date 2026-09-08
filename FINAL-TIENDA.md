@@ -4,8 +4,42 @@ Handoff entre agentes. Lee esto **antes** de tocar `sections/collection-grid.liq
 `sections/product-related.liquid` o `sections/viste-tu-mesa.liquid`.
 El contrato general del theme sigue siendo `CLAUDE.md`; esto solo cubre lo que queda abierto.
 
-Última actualización: 2026-09-05 — sesiones `theme-90` (facetas / sort), la de venta cruzada + sets,
-y `copy-artesania` (§6).
+Última actualización: 2026-09-08 - auditoría web de 12 puntos, además de las sesiones
+`theme-90` (facetas / sort), venta cruzada + sets y `copy-artesania` (§6).
+
+## 0 · Auditoría web de lanzamiento (2026-09-08)
+
+Implementado en la rama `auditoria-web-12-puntos`, partiendo del árbol publicado y sin
+descartar los cambios locales anteriores:
+
+| Área | Commit | Resultado |
+|---|---|---|
+| Carrito | `e2dcce4` + `0be4e31` | Página completa, formulario nativo, resumen y estado vacío |
+| Acordeones PDP | `8e12fb5` | `custom.dimensiones` / `custom.detalles`; la fila se oculta si no hay dato |
+| Orden de colección | `4f74426` | Enlaces `sort_by` de servidor; filtros y paginación conservados |
+| Oaxaca | `3ccfb91` | Los seis handles ya estaban en `index.json`; conectados también en Nuestras mesas |
+| Historia | `7828d3c` | Home y ambos PDP apuntan a `/pages/heritage-1841` |
+| Búsqueda | `5ce58c4` | Productos con la tarjeta y rejilla del PLP; páginas/artículos separados |
+| Encuadre de producto | `fc88dcc` | `contain` y fondo `--paper` en PLP, búsqueda, relacionados y home |
+| Sellos, texto completo | `9b8a1ea` | Acción visible que abre el modal existente del sello activo |
+| Acciones de Nuestras mesas | `d88894c` | Literales de compra traducidos mediante locales ES/EN |
+
+Comprobado con `shopify theme check`: 0 errores y 7 avisos `RemoteAsset` preexistentes.
+En `theme dev`, búsqueda, sort/paginación, metafield real de PDP, handles Oaxaca y acción
+de Sellos renderizan sin `Translation missing`.
+
+Sigue pendiente:
+
+1. Traducción y revisión humana de los 80 periodos y descripciones históricas de
+   `assets/sellos.js`. No publicar una traducción automática sin validación de archivo.
+2. Translate & Adapt para los settings de `page.identifica-tu-sello`: heading
+   “Discover the history behind your tableware mark”; intro “Find the mark on the base of
+   your piece and discover when it was used and what it reveals about its origin”;
+   `HOY` → `TODAY`; archive kicker “Chronological archive”; archive heading
+   “The marks through time”.
+3. Confirmar si `viste-tu-mesa.liquid` debe seguir deliberadamente solo en español.
+4. Crear y completar `custom.dimensiones` / `custom.detalles` en todo el catálogo.
+5. Crear en el admin la redirección `/pages/historia` → `/pages/heritage-1841`.
 
 ---
 
