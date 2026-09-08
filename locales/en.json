@@ -200,7 +200,8 @@
       "timeline_seek": "Move along the timeline",
       "scroll": "Scroll",
       "scroll_hint": "to browse the archive",
-      "modal_kicker": "Marks archive"
+      "modal_kicker": "Marks archive",
+      "read_more": "Read full description"
     },
     "tables": {
       "filters": "Table filters",

@@ -200,7 +200,8 @@
       "timeline_seek": "Moverse por la línea temporal",
       "scroll": "Scroll",
       "scroll_hint": "recorre el archivo",
-      "modal_kicker": "Archivo de marcas"
+      "modal_kicker": "Archivo de marcas",
+      "read_more": "Leer descripción completa"
     },
     "tables": {
       "filters": "Filtros de mesas",
