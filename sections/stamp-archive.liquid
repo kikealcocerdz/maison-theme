@@ -58,7 +58,6 @@
         <div class="stamp-active-caption" id="stampActiveCaption" aria-live="polite">
           <p class="stamp-caption-period" id="stampCaptionPeriod"></p>
           <p class="stamp-caption-desc" id="stampCaptionDesc"></p>
-          <button class="stamp-caption-more" id="stampCaptionMore" type="button">{{ 'sections.stamps.read_more' | t }}</button>
         </div>
       </div>
 
@@ -253,7 +252,7 @@
   -webkit-line-clamp:3;
   -webkit-box-orient:vertical;
   overflow:hidden;
-}.stamp-caption-more{margin:13px auto 0;padding:0 0 4px;border-bottom:1px solid rgba(255,255,255,.72);color:#fff;font:500 8px/1.2 var(--sans);letter-spacing:.13em;text-transform:uppercase;cursor:pointer}.stamp-caption-more:hover{border-color:#fff}.stamp-caption-more:focus-visible{outline:1px solid #fff;outline-offset:5px}.stamp-timeline-wrap{bottom:17px!important}.stamp-timeline-labels{margin-bottom:5px!important}.stamp-scroll-cue{bottom:54px!important}
+}.stamp-timeline-wrap{bottom:17px!important}.stamp-timeline-labels{margin-bottom:5px!important}.stamp-scroll-cue{bottom:54px!important}
 
 @media(max-width:980px){.stamp-horizontal-story{--seal-card-w:clamp(180px,28vw,235px)}.stamp-archive-head{grid-template-columns:1fr auto!important;top:calc(var(--header-h) + 17px)!important}.stamp-era-menu{grid-column:1/-1!important;justify-content:flex-start!important;margin-top:8px!important}.stamp-era-menu button{min-width:54px!important;height:32px!important;font-size:8px!important}.stamp-coverflow-viewport{top:calc(var(--header-h) + 107px)!important;bottom:88px!important}.stamp-coverflow-track{top:26%!important}.stamp-active-caption{top:61%!important;width:min(90vw,520px)!important}
 }
@@ -611,7 +610,12 @@
     line-height:1.58!important; }
   .stamps-page-body .stamp-horizontal-story { height:auto!important;
     min-height:0!important;
-    --seal-card-w:min(68vw,250px)!important; }
+    /* Era la única de las 14 declaraciones de `--seal-card-w` que sólo medía el
+       ancho, y al llevar !important ganaba en todo el móvil. La carta es cuadrada:
+       en pantallas bajas —un teléfono en horizontal, sobre todo— 250px no cabían
+       de alto y se cortaba. Se le añade el mismo tope por altura que ya usa el
+       breakpoint de al lado (línea 523), así que manda el eje con menos sitio. */
+    --seal-card-w:max(130px, min(68vw, 250px, calc((100svh - var(--header-h) - 140px) * .35)))!important; }
   .stamps-page-body .stamp-scroll-pin { position:relative!important;
     top:auto!important;
     height:auto!important;
@@ -625,6 +629,11 @@
     transform:none!important;
     width:calc(100% - 32px)!important;
     margin:0 auto 8px!important; }
+  /* El titular del archivo seguia oculto desde el breakpoint de 700px: sin el,
+     el movil abre la seccion con las decadas sueltas y sin contexto. */
+  .stamps-page-body .stamp-archive-title { display:block!important;margin:0 0 12px!important }
+  .stamps-page-body .stamp-archive-title p { font-size:7px!important;margin:0 0 6px!important }
+  .stamps-page-body .stamp-archive-title h2 { font-size:23px!important;white-space:normal!important;line-height:1.02!important }
   .stamps-page-body .stamp-era-menu { display:flex!important;
     width:100%!important;
     overflow-x:auto!important;
@@ -635,9 +644,11 @@
   .stamps-page-body .stamp-coverflow-viewport { position:relative!important;
     left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
     width:100%!important;
-    height:42dvh!important;
-    min-height:330px!important;
-    max-height:420px!important;
+    /* Solo tiene que caber la tarjeta: la ficha ya no vive dentro del visor
+       (sellos.js la mueve al pin en movil), asi que 42dvh dejaba un hueco muerto. */
+    height:calc(var(--seal-card-w) + 40px)!important;
+    min-height:0!important;
+    max-height:none!important;
     margin:6px 0 0!important;
     overflow-x:auto!important;
     overflow-y:hidden!important;

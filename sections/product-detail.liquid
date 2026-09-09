@@ -11,16 +11,40 @@
     assign has_product = true
   endif
 
-  assign kicker = product.metafields.custom.kicker | metafield_text | default: section.settings.demo_kicker
+  assign kicker = product.metafields.custom.kicker | metafield_text
+  comment
+    El mock rotula "Aurora · Flor de Lis": son las colecciones a las que pertenece
+    la pieza. Sin `custom.kicker` se componen de las dos primeras, que es lo que el
+    catálogo ya sabe hoy, en vez de dejar el rótulo vacío.
+  endcomment
+  if kicker == blank and product.collections.size > 0
+    assign kicker_parts = ''
+    for col in product.collections limit: 2
+      if kicker_parts == blank
+        assign kicker_parts = col.title
+      else
+        assign kicker_parts = kicker_parts | append: ' · ' | append: col.title
+      endif
+    endfor
+    assign kicker = kicker_parts
+  endif
+  if kicker == blank
+    assign kicker = section.settings.demo_kicker
+  endif
+
   assign title = product.title | default: section.settings.demo_title
   assign short = product.metafields.custom.short_description | metafield_text
   if short == blank
     assign short = product.excerpt
   endif
   comment
-    El mock pone la descripción bajo el título. Sin `custom.short_description` ni
-    excerpt, la línea queda vacía a propósito: nunca se recorta la descripción.
+    El mock pone una descripción corta bajo el título. Sin `custom.short_description`
+    ni excerpt se toma el arranque de la descripción: recortar por palabras es
+    preferible a dejar la columna izquierda coja en 438 fichas.
   endcomment
+  if short == blank and product.description != blank
+    assign short = product.description | strip_html | truncatewords: 40
+  endif
   if short == blank
     assign short = section.settings.demo_short
   endif
@@ -124,7 +148,7 @@
 
     <section class="product-gallery-panel{% if is_set %} product-set-gallery{% endif %}" aria-label="{{ 'sections.product.gallery' | t }}">
       <div class="product-main-media">
-        <button class="fav product-fav" type="button" aria-label="{{ 'sections.collection.favorite' | t }}">
+        <button class="fav product-fav" type="button" data-fav-key="{{ product.url }}" aria-label="{{ 'sections.collection.favorite' | t }}">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.1c0 5.2-8.8 10.3-8.8 10.3S3.2 13.3 3.2 8.1A4.5 4.5 0 0 1 12 6.6a4.5 4.5 0 0 1 8.8 1.5Z"/></svg>
         </button>
         <button class="product-gallery-arrow prev" type="button" aria-label="{{ 'sections.product.prev' | t }}">‹</button>
@@ -206,6 +230,21 @@
             <strong>{{ servicio | escape }}</strong>
           </div>
         {%- endif -%}
+
+        {%- comment -%}
+          Pieza suelta: el mock enseña la medida junto al color, no sólo dentro del
+          acordeón. Sale de `custom.dimensiones` — la fila desaparece en las 99 fichas
+          que aún no lo tienen, sin inventar una medida.
+        {%- endcomment -%}
+        {%- assign dimensiones = product.metafields.custom.dimensiones | metafield_text -%}
+        {%- unless is_set -%}
+          {%- if dimensiones != blank -%}
+            <div class="piece-dimension-row">
+              <span>{{ 'sections.product.dimensions' | t }}</span>
+              <strong>{{ dimensiones | escape }}</strong>
+            </div>
+          {%- endif -%}
+        {%- endunless -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'accordion' -%}
             {%- liquid
@@ -297,7 +336,10 @@
         {%- elsif has_product -%}
           {%- form 'product', product, class: 'product-buy-block' -%}
             <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-            <span class="product-price-large">{{ price }}</span>
+            <div class="product-price-row">
+              <span class="product-price-large">{{ price }}</span>
+              <span class="product-price-note">{{ 'sections.product.tax_note' | t }}</span>
+            </div>
             <button class="add-to-bag" type="submit" name="add"{% unless product.available %} disabled{% endunless %}>
               {%- if product.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
             </button>
@@ -646,7 +688,7 @@
     margin: 0 !important;
   }
 
-  .product-page .product-main-media .product-gallery-slide { object-fit: contain !important; object-position: center !important; background: #eeeff1 !important; }
+  .product-page .product-main-media .product-gallery-slide { object-fit: cover !important; object-position: center !important; }
 
   .product-page .product-buy-block {
     position: sticky !important;
@@ -802,6 +844,85 @@
     border-top: .5px solid var(--rule); background: var(--paper); z-index: 8;
   }
 }
+
+/* ==========================================================================
+   Fila de precio (mock: "26,95 €  ·  IVA incluido")
+   ========================================================================== */
+.product-price-row { display: flex; align-items: baseline; gap: 14px; }
+.product-price-note {
+  font-family: var(--sans); font-size: 10px; font-weight: 300;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+}
+
+/* ==========================================================================
+   Pasada móvil — mockup `producto-movil`.
+
+   Va al final a propósito: las capas v96 y v98 de arriba dejaron dos órdenes
+   distintos (galería primero en un breakpoint, título primero en otro) y varias
+   reglas con !important. Esta capa fija UN orden, el del mock: galería, cabecera,
+   compra, especificaciones, acordeones. ponytail: lo limpio sería fundir las tres
+   capas en una, pero eso toca el set de Ceilán y la caja de bundles — otra sesión.
+   ========================================================================== */
+@media (max-width: 760px) {
+  .product-page:not(.product-page--set) .product-gallery-panel { order: 1 !important; }
+  .product-page:not(.product-page--set) .product-title-panel { order: 2 !important; }
+  .product-page:not(.product-page--set) .product-info-panel { order: 3 !important; }
+
+  /* Comprar antes que especificar: en el mock el precio y el botón van pegados
+     al título, y color/medidas quedan debajo. */
+  .product-page:not(.product-page--set) .product-info-sticky {
+    display: flex !important; flex-direction: column !important;
+  }
+  .product-page:not(.product-page--set) .product-buy-block {
+    order: 1 !important; position: static !important;
+    margin: 0 0 8px !important; padding: 0 0 24px !important;
+    border-top: 0 !important; border-bottom: .5px solid var(--rule) !important;
+  }
+  .product-page:not(.product-page--set) .product-info-core { order: 2 !important; }
+
+  .product-page:not(.product-page--set) .product-price-row {
+    justify-content: flex-start; margin-bottom: 18px;
+  }
+  .product-page:not(.product-page--set) .product-price-large { font-size: 26px !important; }
+  .product-page:not(.product-page--set) .add-to-bag {
+    width: 100% !important; min-height: 54px !important;
+  }
+
+  /* Especificaciones: etiqueta a la izquierda, valor a la derecha, con filete. */
+  .product-page:not(.product-page--set) .piece-color-row,
+  .product-page:not(.product-page--set) .piece-dimension-row {
+    display: flex !important; align-items: center; justify-content: space-between;
+    gap: 18px; padding: 16px 0 !important; border-bottom: .5px solid var(--rule);
+  }
+  .product-page:not(.product-page--set) .piece-color-row > span,
+  .product-page:not(.product-page--set) .piece-dimension-row > span {
+    font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
+  }
+  .product-page:not(.product-page--set) .piece-dimension-row strong {
+    font-family: var(--sans); font-size: 13px; font-weight: 400;
+  }
+
+  /* Los trazos de la galería pasan a puntos, como en el mock móvil. */
+  .product-page:not(.product-page--set) .product-gallery-lines span {
+    width: 6px !important; height: 6px !important; border-radius: 50%;
+  }
+
+  /* Las filas de relacionados ruedan en horizontal en vez de apilarse. */
+  .product-page .product-related .related-grid {
+    display: grid !important;
+    grid-auto-flow: column !important;
+    grid-auto-columns: 66vw !important;
+    grid-template-columns: none !important;
+    gap: 14px !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 -14px; padding: 0 14px;
+  }
+  .product-page .product-related .related-grid::-webkit-scrollbar { display: none; }
+  .product-page .product-related .related-grid > * { scroll-snap-align: start; }
+}
 {% endstylesheet %}
 
 {% javascript %}
@@ -831,7 +952,7 @@
 
     // Favourite (visual)
     root.querySelectorAll('.product-fav').forEach(function (b) {
-      b.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); b.classList.toggle('active'); });
+      /* El corazón lo gestiona el handler global de assets/theme.js (guarda en localStorage). */
     });
 
     // Accordions + info-expanded state (keeps the buy block visible)

@@ -120,8 +120,7 @@
         "cta2_label": "Aprende a vestir tu mesa",
         "cta2_link": "/pages/viste-tu-mesa",
         "add_label": "Añadir pieza",
-        "set_product": "vajilla-aurora-blanca",
-        "set_label_prefix": "Añadir vajilla"
+                "set_label_prefix": "Añadir vajilla"
       },
       "blocks": {
         "i1": {

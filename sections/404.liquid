@@ -5,6 +5,7 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/404
 {% endcomment %}
 
+<div class="shell-pad">
 <h1>{{ '404.title' | t }}</h1>
 
 <p>
@@ -14,6 +15,8 @@
 <a href="{{ routes.all_products_collection_url }}">
   {{ '404.back_to_shopping' | t }}
 </a>
+
+</div>
 
 {% schema %}
 {

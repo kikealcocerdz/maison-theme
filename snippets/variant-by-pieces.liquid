@@ -1,0 +1,34 @@
+{%- comment -%}
+  Devuelve el id de la variante de una vajilla para un número de piezas, o vacío.
+
+  El catálogo se consolidó (2026-09): antes había un producto por tamaño
+  (`vajilla-42-p-ceilan`, `vajilla-56-p-ceilan`, ambos de una sola variante) y
+  ahora hay uno solo, `vajilla-ceilan`, con la opción "Piezas" → "42 P." / "56 P.".
+  El respaldo del final mantiene vivo el caso antiguo por si algún producto
+  vuelve a partirse en dos.
+
+  Uso:
+    {% render 'variant-by-pieces', product: block.settings.vajilla42, pieces: '42' %}
+
+  ponytail: empareja contra el título de la variante, que hoy es la opción
+  "Piezas" a secas. Si una vajilla llega a tener dos opciones (piezas + color),
+  hay que mirar `variant.options` en vez del título.
+{%- endcomment -%}
+{%- liquid
+  assign match = ''
+
+  if product != blank
+    for variant in product.variants
+      if variant.title contains pieces
+        assign match = variant.id
+        break
+      endif
+    endfor
+
+    # Producto de un solo tamaño: no hay nada que emparejar.
+    if match == blank and product.variants.size == 1
+      assign match = product.variants.first.id
+    endif
+  endif
+-%}
+{{- match -}}

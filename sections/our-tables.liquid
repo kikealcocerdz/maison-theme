@@ -48,6 +48,14 @@
             endif
           endfor
         -%}
+        {%- comment -%}
+          Una vajilla es hoy un producto con opción "Piezas"; los dos ajustes
+          apuntan al mismo. Se resuelve una vez por escena, no por producto.
+        {%- endcomment -%}
+        {%- capture v42_id -%}{%- render 'variant-by-pieces', product: v42, pieces: '42' -%}{%- endcapture -%}
+        {%- capture v56_id -%}{%- render 'variant-by-pieces', product: v56, pieces: '56' -%}{%- endcapture -%}
+        {%- assign v42_id = v42_id | strip -%}
+        {%- assign v56_id = v56_id | strip -%}
         <article class="table-scene-block table-shop-scene{% if block.settings.reverse %} reverse{% endif %}" data-table-type="{{ slug }}" {{ block.shopify_attributes }}>
           <div class="table-scene-photo">
             {%- if block.settings.photo != blank -%}
@@ -114,11 +122,11 @@
                     {%- endif -%}
                     <div class="table-scene-actions">
                       {%- comment -%}
-                        Los tres CTAs se pintan siempre. Sin catálogo migrado los productos de
-                        vajilla no resuelven y la escena se quedaba sin botones; el respaldo es
-                        un enlace a la colección (mismo patrón que "Añadir pieza").
-                        ponytail: si la vajilla acaba siendo UN producto con variantes 42/56 P.
-                        (ver shoppable-scene), esto pasa a un bucle sobre `vajilla.variants`.
+                        "Añadir pieza" siempre; los dos botones de vajilla sólo si la escena
+                        declara una. Oaxaca no tiene vajilla de conjunto, así que ahí no se
+                        pintan — antes caían al respaldo y ofrecían un set inexistente.
+                        El respaldo por enlace se queda para el caso en que sí haya vajilla
+                        declarada pero el handle no resuelva.
                       {%- endcomment -%}
                       {%- if p != blank and p.selected_or_first_available_variant != blank -%}
                         <form action="{{ routes.cart_add_url }}" method="post">
@@ -128,20 +136,20 @@
                       {%- else -%}
                         <a class="ghost-btn table-add-piece" href="{{ p_link }}">{{ 'sections.tables.add_piece' | t }}</a>
                       {%- endif -%}
-                      {%- if v42 != blank and v42.selected_or_first_available_variant != blank -%}
+                      {%- if v42_id != blank -%}
                         <form action="{{ routes.cart_add_url }}" method="post">
-                          <input type="hidden" name="id" value="{{ v42.selected_or_first_available_variant.id }}">
+                          <input type="hidden" name="id" value="{{ v42_id }}">
                           <button class="ghost-btn" type="submit">{{ 'sections.tables.add_set' | t: pieces: 42 }}</button>
                         </form>
-                      {%- else -%}
+                      {%- elsif v42 != blank -%}
                         <a class="ghost-btn" href="{{ set_url }}">{{ 'sections.tables.add_set' | t: pieces: 42 }}</a>
                       {%- endif -%}
-                      {%- if v56 != blank and v56.selected_or_first_available_variant != blank -%}
+                      {%- if v56_id != blank -%}
                         <form action="{{ routes.cart_add_url }}" method="post">
-                          <input type="hidden" name="id" value="{{ v56.selected_or_first_available_variant.id }}">
+                          <input type="hidden" name="id" value="{{ v56_id }}">
                           <button class="ghost-btn" type="submit">{{ 'sections.tables.add_set' | t: pieces: 56 }}</button>
                         </form>
-                      {%- else -%}
+                      {%- elsif v56 != blank -%}
                         <a class="ghost-btn" href="{{ set_url }}">{{ 'sections.tables.add_set' | t: pieces: 56 }}</a>
                       {%- endif -%}
                     </div>
@@ -173,20 +181,22 @@
 .tables-page .table-filter:hover::after { width: 100%; opacity: .42; }
 
 .tables-page .table-scenes-list { width: var(--content); margin: 0 auto 140px; display: grid; gap: 96px; }
-.tables-page .table-scene-block { display: grid; grid-template-columns: 1.1fr .9fr; gap: min(5vw, 76px); align-items: center; scroll-margin-top: 120px; }
+.tables-page .table-scene-block { display: grid; grid-template-columns: 1.1fr .9fr; gap: min(5vw, 76px); align-items: stretch; scroll-margin-top: 120px; }
 .tables-page .table-scene-block.reverse .table-scene-photo { order: 2; }
 .tables-page .table-scene-block.reverse .table-scene-product { order: 1; }
 /* !important a propósito: el bloque de v98 fija `display:grid!important` en móvil
    y sin esto el filtro dejaría de ocultar escenas por debajo de 760px. */
 .tables-page .table-scene-block.is-hidden { display: none !important; }
-.tables-page .table-scene-photo { height: 640px; min-height: 640px; background: var(--ink-faint-20); position: relative; overflow: hidden; }
-.tables-page .table-scene-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 1000ms var(--ease-long); }
+.tables-page .table-scene-photo { height: auto; min-height: 640px; background: var(--ink-faint-20); position: relative; overflow: hidden; }
+.tables-page .table-scene-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 1000ms var(--ease-long); }
 @media (hover: hover) and (pointer: fine) {
   .tables-page .table-scene-photo:hover img { transform: scale(1.025); }
 }
-.tables-page .table-scene-product { position: relative; border-top: .5px solid var(--rule); border-bottom: .5px solid var(--rule); height: 640px; min-height: 640px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 84px; }
+.tables-page .table-scene-product { position: relative; border-top: .5px solid var(--rule); border-bottom: .5px solid var(--rule); height: auto; min-height: 640px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 84px; }
 
-.tables-page .table-product-slot { width: 100%; min-height: 100%; display: grid; align-content: center; justify-items: center; transition: opacity .28s var(--ease), transform .36s var(--ease); }
+.tables-page .table-product-slot { width: 100%; min-height: 100%; display: grid; align-content: center; justify-items: center; touch-action: pan-y; cursor: grab; transition: opacity .28s var(--ease), transform .36s var(--ease); }
+.tables-page .table-product-slot:active { cursor: grabbing; }
+.tables-page .table-product-slot img { -webkit-user-drag: none; user-select: none; }
 .tables-page .table-product-slot.is-changing { opacity: 0; transform: translateY(10px); }
 .tables-page .table-product-item { display: none; width: 100%; }
 .tables-page .table-product-item.is-active { display: grid; justify-items: center; }
@@ -200,7 +210,7 @@
 .tables-page .table-product-lines button { width: 26px; height: 1px; padding: 0; border: 0; background: rgba(15, 26, 46, .22); cursor: pointer; transition: width .25s var(--ease), background .25s var(--ease); }
 .tables-page .table-product-lines button.active { width: 38px; background: var(--ink); }
 
-.tables-page .table-scene-actions { display: grid; grid-template-columns: 1fr; gap: 10px; width: min(100%, 340px); margin: 24px auto 0; }
+.tables-page .table-scene-actions { display: grid; grid-template-columns: 1fr; gap: 10px; width: min(100%, 340px); margin: 24px auto 4px; }
 .tables-page .table-scene-actions form { display: contents; }
 .tables-page .table-scene-actions .ghost-btn { width: 100%; min-width: 0; height: 42px; font-size: 10px; letter-spacing: .18em; padding: 0 18px; }
 @media (min-width: 1180px) {
@@ -227,12 +237,12 @@
   .tables-page .table-filters { flex-wrap: wrap; row-gap: 18px; }
   .tables-page .table-scene-block, .tables-page .table-scene-block.reverse { grid-template-columns: 1fr; }
   .tables-page .table-scene-block.reverse .table-scene-photo, .tables-page .table-scene-block.reverse .table-scene-product { order: initial; }
-  .tables-page .table-scene-photo, .tables-page .table-scene-product { height: 520px; min-height: 520px; }
+  .tables-page .table-scene-photo, .tables-page .table-scene-product { height: auto; min-height: 520px; }
 }
 @media (max-width: 620px) {
   .tables-page .table-filters { justify-content: flex-start; gap: 20px; overflow-x: auto; padding: 22px 0 24px; }
   .tables-page .table-filter { flex: 0 0 auto; }
-  .tables-page .table-scene-photo, .tables-page .table-scene-product { height: 420px; min-height: 420px; }
+  .tables-page .table-scene-photo, .tables-page .table-scene-product { height: auto; min-height: 420px; }
   .tables-page .table-scene-product { padding: 42px 54px; }
   .tables-page .table-product-link img { height: 210px; }
   .tables-page .table-scene-actions { width: 100%; }
@@ -317,6 +327,55 @@
       var go = e.target.closest('[data-go]');
       if (go) show(Number(go.dataset.go));
     });
+
+    /* Arrastrar entre piezas, con dedo y con ratón. Pointer Events cubren los dos;
+       `touch-action: pan-y` en el slot deja el scroll vertical al navegador y nos
+       reserva el horizontal. Los items van apilados (sólo uno visible), así que es
+       un gesto por umbral —45 px— y no un carril que sigue al puntero.
+       ponytail: si hace falta que la imagen siga al puntero, hay que pasar los
+       items a un track con transform, como el carrusel de la home. */
+    if (items.length > 1 && window.PointerEvent) {
+      var startX = 0, startY = 0, tracking = false, dragged = false;
+
+      /* Sin esto, arrastrar sobre la foto arranca el drag nativo de la imagen. */
+      slot.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+      slot.addEventListener('pointerdown', function (e) {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        startX = e.clientX; startY = e.clientY;
+        tracking = true; dragged = false;
+        /* Capturar el puntero para seguir recibiendo eventos si sale del slot. */
+        if (slot.setPointerCapture) { try { slot.setPointerCapture(e.pointerId); } catch (err) {} }
+      });
+
+      slot.addEventListener('pointermove', function (e) {
+        if (!tracking) return;
+        var dx = e.clientX - startX;
+        var dy = e.clientY - startY;
+        /* Gesto más vertical que horizontal: es scroll, no cambio de pieza. */
+        if (!dragged && Math.abs(dy) > Math.abs(dx)) { tracking = false; return; }
+        if (Math.abs(dx) > 8) dragged = true;
+      });
+
+      slot.addEventListener('pointerup', function (e) {
+        if (!tracking) return;
+        tracking = false;
+        var dx = e.clientX - startX;
+        if (Math.abs(dx) < 45) return;
+        show(dx < 0 ? current + 1 : current - 1);
+      });
+
+      slot.addEventListener('pointercancel', function () { tracking = false; });
+
+      /* Un arrastre no debe abrir la ficha ni saltar de punto. En captura para
+         llegar antes que el handler de [data-go] y que el enlace de la imagen. */
+      slot.addEventListener('click', function (e) {
+        if (!dragged) return;
+        dragged = false;
+        e.preventDefault();
+        e.stopPropagation();
+      }, true);
+    }
   }
 
   function init(root) {

@@ -7,7 +7,7 @@
       <div class="scene-copy reveal">
         {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
         {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
-        {%- if section.settings.description != blank -%}<p>{{ section.settings.description }}</p>{%- endif -%}
+        {%- if section.settings.description != blank -%}{{ section.settings.description }}{%- endif -%}
       </div>
     {%- endif -%}
 
@@ -17,7 +17,7 @@
           {% render 'image-responsive', image: section.settings.image, alt: section.settings.image.alt, sizes: '(max-width: 1000px) 100vw, 55vw' %}
         {%- else -%}
           {%- comment -%} Demo fallback (shipped in /assets) until a scene image is set. {%- endcomment -%}
-          <img src="{{ 'scene-left-tableware.webp' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="2400" height="1792" loading="lazy" decoding="async">
+          <img src="{{ 'mesa_aurora_oaxaca.webp' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1800" height="1343" loading="lazy" decoding="async">
         {%- endif -%}
         {%- for block in products -%}
           {%- liquid
@@ -27,25 +27,45 @@
               assign p_name = p.title
             endif
           -%}
-          <button class="scene-hotspot{% if forloop.first %} active{% endif %}" style="left: {{ block.settings.hotspot_x }}%; top: {{ block.settings.hotspot_y }}%;" data-scene-hotspot="{{ forloop.index0 }}" aria-label="Ver {{ p_name | escape }}" {{ block.shopify_attributes }}></button>
+          <button class="scene-hotspot{% if forloop.first %} active{% endif %}" style="left: {{ block.settings.hotspot_x }}%; top: {{ block.settings.hotspot_y }}%;" data-scene-hotspot="{{ forloop.index0 }}" aria-label="{{ p_name | escape }}" {{ block.shopify_attributes }}></button>
         {%- endfor -%}
       </div>
 
-      <aside class="scene-product-view" aria-live="polite">
+      <aside class="scene-product-view" aria-label="{{ section.settings.heading | escape }}">
         <button class="scene-nav prev" data-scene-prev type="button" aria-label="{{ 'general.accessibility.previous' | t }}">&lsaquo;</button>
-        <div class="scene-product-inner" data-scene-product></div>
+        <div class="scene-product-inner" data-scene-product tabindex="0"></div>
         <button class="scene-nav next" data-scene-next type="button" aria-label="{{ 'general.accessibility.next' | t }}">&rsaquo;</button>
         <div class="scene-dots" data-scene-dots></div>
+        <p class="scene-status" data-scene-status aria-live="polite" aria-atomic="true"></p>
       </aside>
     </div>
 
     {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
-      <div class="center reveal"><a href="{{ section.settings.cta_link }}" class="ghost-btn">{{ section.settings.cta_label | escape }}</a></div>
+      <div class="center reveal scene-cta-row">
+        <a href="{{ section.settings.cta_link }}" class="ghost-btn">{{ section.settings.cta_label | escape }}</a>
+        {%- if section.settings.cta2_label != blank and section.settings.cta2_link != blank -%}
+          <a href="{{ section.settings.cta2_link }}" class="ghost-btn">{{ section.settings.cta2_label | escape }}</a>
+        {%- endif -%}
+      </div>
     {%- endif -%}
 
     {%- comment -%} Product data consumed by JS to render the right-side panel. {%- endcomment -%}
+    {%- comment -%}
+      La vajilla se vende como UN producto con las piezas en variantes (42 P. / 56 P.),
+      así que los botones salen de las variantes, no de dos productos distintos.
+    {%- endcomment -%}
+    {%- assign vajilla = all_products[section.settings.set_product] -%}
     <script type="application/json" data-scene-data>
-      [
+      {
+        "cartUrl": {{ routes.cart_add_url | json }},
+        "addLabel": {{ section.settings.add_label | default: '' | json }},
+        "sets": [
+          {%- for v in vajilla.variants -%}
+            {%- assign set_label = section.settings.set_label_prefix | default: 'Vajilla' | append: ' · ' | append: v.title -%}
+            { "label": {{ set_label | json }}, "variant": {{ v.id | json }} }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ],
+        "items": [
         {%- for block in products -%}
           {%- liquid
             assign p = all_products[block.settings.product]
@@ -54,16 +74,19 @@
             assign p_price = block.settings.demo_price
             assign p_url = block.settings.link
             assign p_img = ''
-            if block.settings.demo_image != blank
-              assign p_img = block.settings.demo_image | asset_url
-            endif
+            assign p_variant = nil
             if p != blank
               assign p_name = p.title
               assign p_url = p.url
               assign p_price = p.price | money
+              assign p_variant = p.selected_or_first_available_variant.id
               if p.featured_image != blank
                 assign p_img = p.featured_image | image_url: width: 840
               endif
+            endif
+            # El packshot PNG de /assets manda sobre la foto de catálogo.
+            if block.settings.demo_image != blank
+              assign p_img = block.settings.demo_image | asset_url
             endif
           -%}
           {
@@ -71,10 +94,12 @@
             "meta": {{ p_meta | default: '' | json }},
             "price": {{ p_price | default: '' | json }},
             "img": {{ p_img | default: '' | json }},
-            "url": {{ p_url | default: '#' | json }}
+            "url": {{ p_url | default: '#' | json }},
+            "variant": {{ p_variant | json }}
           }{%- unless forloop.last -%},{%- endunless -%}
         {%- endfor -%}
-      ]
+        ]
+      }
     </script>
   </div>
 </section>
@@ -84,7 +109,7 @@
 .scene-redesign .scene-layout { width: var(--content); margin: 0 auto; display: block; }
 .scene-redesign .scene-copy { text-align: center; margin: 0 auto 46px; max-width: 740px; }
 .scene-redesign .scene-copy h2 {
-  font-family: var(--serif); font-size: clamp(28px, 2.6vw, 40px); line-height: 1.12;
+  font-family: var(--serif); font-size: var(--fs-h2); line-height: 1.12;
   font-weight: 400; margin: 0 0 16px;
 }
 .scene-redesign .scene-copy p {
@@ -101,19 +126,50 @@
 .scene-left-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 1100ms var(--ease-long); }
 .scene-left-image:hover img { transform: scale(1.025); }
 .scene-hotspot {
-  position: absolute; width: 18px; height: 18px;
-  border: 0.5px solid var(--ink); background: var(--paper);
-  border-radius: 999px; box-shadow: 0 0 0 9px rgba(255, 255, 255, 0.48);
-  transition: transform 260ms var(--ease), background 260ms var(--ease), color 260ms var(--ease);
+  position: absolute; width: 44px; height: 44px;
+  border: 0; background: transparent; color: var(--ink);
+  transform: translate(-50%, -50%); cursor: pointer;
 }
-.scene-hotspot:hover, .scene-hotspot.active { transform: scale(1.24); background: var(--ink); color: var(--paper); }
-.scene-hotspot::after { content: ""; position: absolute; inset: 6px; border-radius: 999px; background: currentColor; }
+.scene-hotspot::before {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 18px; height: 18px;
+  border: 0.5px solid var(--ink); background: var(--paper); border-radius: 999px;
+  box-shadow: 0 0 0 9px rgba(255, 255, 255, 0.48);
+  transform: translate(-50%, -50%);
+  transition: transform 260ms var(--ease), background 260ms var(--ease);
+}
+.scene-hotspot::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 4px; height: 4px;
+  border-radius: 999px; background: var(--ink); transform: translate(-50%, -50%);
+}
+.scene-hotspot:hover::before, .scene-hotspot.active::before { transform: translate(-50%, -50%) scale(1.24); background: var(--ink); }
+.scene-hotspot:hover::after, .scene-hotspot.active::after { background: var(--paper); }
 .scene-product-view {
   position: relative; min-height: 620px; background: var(--paper);
   display: flex; align-items: center; justify-content: center;
   border-top: 0.5px solid var(--rule); border-bottom: 0.5px solid var(--rule);
+  /* Grid item. Its column is minmax(auto, .92fr), and the slide track below is a
+     non-wrapping flex row, so its min-content is the SUM of all 5 slides (~1400px).
+     Without this the column claims that as its minimum and squeezes the sibling
+     .scene-left-image — which has overflow:hidden, so it collapses to zero — off screen. */
+  min-width: 0;
 }
-.scene-product-inner { text-align: center; width: 100%; padding: 46px 72px; }
+
+/* Native scroll-snap track: the finger drags the slide itself, with momentum,
+   trackpad and keyboard for free. Arrows/dots/hotspots just scrollTo() into it. */
+.scene-product-inner {
+  width: 100%; min-width: 0; display: flex; overflow-x: auto;
+  scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  overscroll-behavior-x: contain; scrollbar-width: none;
+}
+.scene-product-inner::-webkit-scrollbar { display: none; }
+/* -webkit- prefix still needed for Safari < 17, which is plenty of Mac traffic. */
+.scene-product-inner.is-dragging { cursor: grabbing; -webkit-user-select: none; user-select: none; }
+/* min-width:0 keeps a slide exactly one track wide; let it grow to its min-content
+   on a narrow phone and the scrollTo(i * clientWidth) maths drifts out of step. */
+.scene-slide {
+  flex: 0 0 100%; min-width: 0; scroll-snap-align: start;
+  text-align: center; padding: 46px 72px;
+}
 .scene-product-inner img {
   height: min(48vh, 420px); width: 100%; object-fit: contain; margin: 0 auto 34px;
   transition: transform 700ms var(--ease-long), opacity 360ms var(--ease);
@@ -129,7 +185,7 @@
 .scene-product-inner .scene-price { font-size: 13px; color: var(--ink); }
 .scene-nav {
   position: absolute; top: 50%; transform: translateY(-50%);
-  width: 42px; height: 42px; display: grid; place-items: center;
+  width: 44px; height: 44px; display: grid; place-items: center;
   color: var(--ink); font-size: 28px; line-height: 1; opacity: 0.82;
   transition: opacity 220ms var(--ease), transform 220ms var(--ease);
   background: transparent; border: 0; cursor: pointer;
@@ -138,19 +194,33 @@
 .scene-nav.prev { left: 18px; }
 .scene-nav.next { right: 18px; }
 .scene-dots {
-  position: absolute; left: 0; right: 0; bottom: 28px;
-  display: flex; justify-content: center; gap: 8px;
+  position: absolute; left: 0; right: 0; bottom: 6px;
+  display: flex; justify-content: center; gap: 0;
 }
-.scene-dots span { width: 26px; height: 1px; background: rgba(15, 26, 46, 0.22); transition: background 220ms var(--ease), width 220ms var(--ease); }
-.scene-dots span.active { background: var(--ink); width: 36px; }
+.scene-dot { width: 44px; height: 44px; border: 0; background: transparent; display: grid; place-items: center; cursor: pointer; }
+.scene-dot::before { content: ""; width: 26px; height: 1px; background: rgba(15, 26, 46, 0.22); transition: background 220ms var(--ease), width 220ms var(--ease); }
+.scene-dot.active::before { background: var(--ink); width: 36px; }
+.scene-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
 .scene-redesign .center { text-align: center; margin-top: 72px; }
+.scene-cta-row { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; }
+.scene-cta-row .ghost-btn { min-width: 220px; }
 
 .scene-image-open { display: block; width: 100%; background: transparent; border: 0; padding: 0; margin: 0 auto 34px; cursor: zoom-in; }
 .scene-image-open img { height: min(48vh, 420px) !important; margin: 0 auto !important; }
-.scene-actions { display: grid; gap: 10px; margin: 26px auto 0; width: min(100%, 300px); }
+.scene-actions { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin: 26px auto 0; width: min(100%, 360px); }
+.scene-actions form { display: contents; }
+/* Los botones con variante real van envueltos en un <form display:contents>: el
+   botón sigue siendo hijo del form en el DOM, así que hay que apuntar a los dos casos. */
+.scene-actions > .ghost-btn.small-cart:first-child,
+.scene-actions > form:first-child > .ghost-btn.small-cart { grid-column: 1 / -1; }
 .ghost-btn.small-cart { height: 42px; padding: 0 18px; font-size: 10px; letter-spacing: 0.18em; width: 100%; }
-.ghost-btn.small-cart.alt { background: transparent; color: var(--ink); }
+.ghost-btn.small-cart.alt { background: transparent; color: var(--ink); padding: 0 10px; font-size: 9px; letter-spacing: 0.12em; white-space: nowrap; }
+.ghost-btn.small-cart:hover { background: var(--brand); border-color: var(--brand); color: var(--paper); }
+
+@media (max-width: 680px) {
+  .ghost-btn.small-cart.alt { font-size: 8px; letter-spacing: 0.08em; padding: 0 7px; }
+}
 
 .quick-image-lightbox {
   position: fixed; inset: 0; z-index: 9999; background: rgba(15, 26, 46, 0.82);
@@ -166,25 +236,54 @@
   .scene-product-inner img { height: 320px; }
 }
 @media (max-width: 680px) {
-  .table-scene.scene-redesign { padding: 74px 0 130px; }
   .scene-left-image, .scene-product-view { min-height: 420px; }
-  .scene-product-inner { padding: 38px 48px; }
+  .scene-slide { padding: 38px 48px; }
   .scene-product-inner img { height: 260px; }
   .scene-nav.prev { left: 6px; }
   .scene-nav.next { right: 6px; }
-  .scene-redesign .center { margin-top: 58px; }
   .scene-actions { width: 100%; }
+  .scene-cta-row { display: grid; gap: 12px; }
+  .scene-cta-row .ghost-btn { min-width: 0; width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
   .scene-left-image img, .scene-hotspot, .scene-product-inner img { transition: none; }
+  .scene-product-inner { scroll-behavior: auto; }
+}
+
+/* ==========================================================================
+   v98 / v99 — Escena comprable de la home en móvil: foto arriba y ficha de
+   producto debajo dentro de un módulo estable.
+   ========================================================================== */
+@media(max-width:760px) {
+  .scene-redesign { padding-left:14px!important;padding-right:14px!important }
+  .scene-layout { display:block!important;width:100%!important }
+  .scene-copy { text-align:left!important;margin-bottom:18px!important }
+  /* Filas en fracciones, no en dvh: con min-height/max-height activos las filas fijas
+     no llegaban al alto del módulo y dejaban un hueco dentro del marco. svh además no
+     cambia al plegarse la barra del navegador. */
+  .scene-interactive { display:grid!important;grid-template-columns:1fr!important;grid-template-rows:minmax(0,44fr) minmax(0,56fr)!important;height:100svh!important;min-height:680px!important;max-height:860px!important;border:1px solid rgba(15,26,46,.10)!important;overflow:hidden!important }
+  .scene-left-image { height:100%!important;min-height:0!important }
+  .scene-product-view { height:100%!important;min-height:0!important;border-top:1px solid rgba(15,26,46,.10)!important;overflow:hidden!important }
+  .scene-product-inner { height:100%!important;padding:0!important;display:flex!important;flex-direction:row!important;justify-content:flex-start!important }
+  .scene-slide { height:100%!important;padding:12px 44px 48px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important }
+  .scene-image-open { margin-bottom:6px!important }
+  .scene-product-inner img { height:clamp(88px,16svh,128px)!important;margin-bottom:0!important }
+  .scene-product-inner h3 { font-size:19px!important;line-height:1.08!important;margin-bottom:5px!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important }
+  .scene-product-inner p { font-size:10px!important;line-height:1.35!important;margin-bottom:6px!important }
+  .scene-product-inner .scene-price { font-size:12px!important }
+  .scene-actions { width:min(100%,280px)!important;grid-template-columns:1fr!important;gap:6px!important;margin-top:10px!important }
+  .scene-actions .ghost-btn { min-height:44px!important;height:44px!important;font-size:9px!important;letter-spacing:.08em!important;padding:0 6px!important }
+  .scene-nav.prev { left:2px!important }
+  .scene-nav.next { right:2px!important }
+  .home-page .scene-copy,
+  .home-page .scene-copy h2,
+  .home-page .scene-copy p { text-align:center!important; }
+  .home-page .scene-copy { padding-inline:8px!important }
 }
 {% endstylesheet %}
 
 {% javascript %}
 (function () {
-  const ADD = 'Añadir al carrito';
-  const BUY_TABLE = 'Comprar mesa completa';
-
   document.querySelectorAll('.scene-redesign:not([data-init])').forEach(initScene);
 
   function initScene(root) {
@@ -192,46 +291,168 @@
     const dataEl = root.querySelector('[data-scene-data]');
     const panel = root.querySelector('[data-scene-product]');
     const dots = root.querySelector('[data-scene-dots]');
+    const status = root.querySelector('[data-scene-status]');
     const hotspots = [...root.querySelectorAll('[data-scene-hotspot]')];
     if (!dataEl || !panel || !dots) return;
 
-    let items = [];
-    try { items = JSON.parse(dataEl.textContent.trim()); } catch (e) { items = []; }
+    let data = {};
+    try { data = JSON.parse(dataEl.textContent.trim()); } catch (e) { data = {}; }
+    const items = data.items || [];
+    const sets = data.sets || [];
+    const cartUrl = data.cartUrl || '/cart/add';
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!items.length) return;
 
     let current = 0;
+    const N = items.length;
 
-    function render() {
-      const p = items[current];
-      const imgHtml = p.img
-        ? `<a class="scene-image-open" href="${p.url || '#'}"><img src="${p.img}" alt="${p.name || ''}"></a>`
-        : '';
-      panel.innerHTML =
-        imgHtml +
-        (p.meta ? `<p>${p.meta}</p>` : '') +
-        `<h3>${p.name || ''}</h3>` +
-        (p.price ? `<span class="scene-price">${p.price}</span>` : '') +
-        `<div class="scene-actions">
-           <button class="ghost-btn small-cart" type="button">${ADD}</button>
-           <button class="ghost-btn small-cart alt" type="button">${BUY_TABLE}</button>
-         </div>`;
-      dots.innerHTML = items.map((_, i) => `<span class="${i === current ? 'active' : ''}"></span>`).join('');
-      hotspots.forEach((h, i) => h.classList.toggle('active', i === current));
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+      })[char]);
     }
 
-    function set(i) { current = (i + items.length) % items.length; render(); }
+    // Real variant -> /cart/add form (intercepted globally by the cart drawer); demo -> inert button.
+    function actionBtn(label, variant, alt) {
+      if (!label) return '';
+      const cls = 'ghost-btn small-cart' + (alt ? ' alt' : '');
+      if (variant) {
+        return `<form method="post" action="${escapeHtml(cartUrl)}"><input type="hidden" name="id" value="${escapeHtml(variant)}"><button class="${cls}" type="submit" name="add">${escapeHtml(label)}</button></form>`;
+      }
+      return `<button class="${cls}" type="button">${escapeHtml(label)}</button>`;
+    }
 
-    hotspots.forEach(h => h.addEventListener('click', () => set(Number(h.dataset.sceneHotspot))));
-    root.querySelector('[data-scene-prev]')?.addEventListener('click', () => set(current - 1));
-    root.querySelector('[data-scene-next]')?.addEventListener('click', () => set(current + 1));
+    function slideHtml(p, index) {
+      const imgHtml = p.img
+        ? `<a class="scene-image-open" href="${escapeHtml(p.url || '#')}"><img src="${escapeHtml(p.img)}" alt="${escapeHtml(p.name || '')}" loading="lazy" decoding="async"></a>`
+        : '';
+      return `<article class="scene-slide" data-scene-slide="${index}">` +
+        imgHtml +
+        (p.meta ? `<p>${escapeHtml(p.meta)}</p>` : '') +
+        `<h3>${escapeHtml(p.name || '')}</h3>` +
+        (p.price ? `<span class="scene-price">${escapeHtml(p.price)}</span>` : '') +
+        `<div class="scene-actions">` +
+        actionBtn(data.addLabel, p.variant, false) +
+        sets.map(s => actionBtn(s.label, s.variant, true)).join('') +
+        `</div>` +
+      `</article>`;
+    }
+
+    // One semantic copy is enough. It avoids duplicated links and forms while
+    // native scroll-snap still provides touch, trackpad and keyboard movement.
+    panel.innerHTML = items.map(slideHtml).join('');
+    dots.innerHTML = items.map((item, i) =>
+      `<button class="scene-dot${i === 0 ? ' active' : ''}" type="button" data-scene-dot="${i}" aria-label="${escapeHtml(item.name || `${i + 1}`)}" aria-current="${i === 0 ? 'true' : 'false'}"></button>`
+    ).join('');
+
+    let down = false, startX = 0, startLeft = 0, moved = false;
+    let vx = 0, lastX = 0, lastT = 0, ticking = false, resizeT = 0;
+
+    const width = () => panel.clientWidth || 1;
+    const visibleIndex = () => Math.max(0, Math.min(N - 1, Math.round(panel.scrollLeft / width())));
+
+    function update(index, announce) {
+      current = Math.max(0, Math.min(N - 1, index));
+      [...dots.children].forEach((dot, i) => {
+        const active = i === current;
+        dot.classList.toggle('active', active);
+        dot.setAttribute('aria-current', active ? 'true' : 'false');
+      });
+      hotspots.forEach((hotspot, i) => {
+        const active = i === current;
+        hotspot.classList.toggle('active', active);
+        hotspot.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      if (announce && status) status.textContent = items[current].name || `${current + 1}`;
+    }
+
+    function sync() {
+      const i = visibleIndex();
+      if (i === current) return;
+      update(i, true);
+    }
+
+    panel.addEventListener('scroll', () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => { ticking = false; sync(); });
+      }
+    }, { passive: true });
+
+    function goToIndex(j) {
+      const next = ((j % N) + N) % N;
+      const wraps = Math.abs(next - current) > 1;
+      update(next, true);
+      panel.scrollTo({ left: next * width(), behavior: wraps || reduceMotion ? 'auto' : 'smooth' });
+    }
+
+    hotspots.forEach(h => h.addEventListener('click', () => goToIndex(Number(h.dataset.sceneHotspot))));
+    root.querySelector('[data-scene-prev]')?.addEventListener('click', () => goToIndex(current - 1));
+    root.querySelector('[data-scene-next]')?.addEventListener('click', () => goToIndex(current + 1));
 
     dots.addEventListener('click', e => {
-      const span = e.target.closest('span');
-      if (!span) return;
-      set([...dots.children].indexOf(span));
+      const dot = e.target.closest('[data-scene-dot]');
+      if (!dot) return;
+      goToIndex(Number(dot.dataset.sceneDot));
     });
 
-    render();
+    update(0, false);
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeT);
+      resizeT = setTimeout(() => { panel.scrollLeft = current * width(); }, 150);
+    });
+
+    // Native scrolling covers touch, trackpad, shift+wheel and keyboard. Mouse
+    // click-drag is the one gesture no scroll container gives you, so add just
+    // that and let the scroller keep owning the position.
+    panel.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      down = true; moved = false;
+      startX = lastX = e.clientX; startLeft = panel.scrollLeft;
+      lastT = e.timeStamp; vx = 0;
+      // user-select:none alone doesn't stop a selection the browser has already
+      // begun on mousedown; preventDefault does. Form controls keep their default
+      // so focus and clicks still behave.
+      if (!e.target.closest('button, input, select, textarea')) e.preventDefault();
+      // Snap fights a drag in progress, and smooth would animate every step.
+      panel.style.scrollSnapType = 'none';
+      panel.style.scrollBehavior = 'auto';
+      panel.classList.add('is-dragging');
+    });
+    panel.addEventListener('pointermove', e => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 3) moved = true;
+      const dt = e.timeStamp - lastT;
+      if (dt > 0) vx = (e.clientX - lastX) / dt;  // px/ms, positive = dragging right
+      lastX = e.clientX; lastT = e.timeStamp;
+      panel.scrollLeft = startLeft - dx;
+    });
+    function endDrag() {
+      if (!down) return;
+      down = false;
+      panel.classList.remove('is-dragging');
+
+      // Re-enabling snap here would jump, not glide, so pick the slide ourselves.
+      // A fast flick carries to the next one even if it barely travelled;
+      // otherwise the nearest wins, which is the usual past-halfway rule.
+      const at = panel.scrollLeft / width();
+      let target = Math.abs(vx) > 0.4 ? (vx < 0 ? Math.ceil(at) : Math.floor(at)) : Math.round(at);
+      target = Math.max(0, Math.min(N - 1, target));
+      panel.style.scrollSnapType = '';
+      panel.style.scrollBehavior = '';
+      update(target, true);
+      panel.scrollTo({ left: target * width(), behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+    panel.addEventListener('pointerup', endDrag);
+    panel.addEventListener('pointercancel', endDrag);
+    panel.addEventListener('pointerleave', endDrag);
+    // Dragging an <img> or <a> starts a native HTML5 drag and eats the gesture.
+    panel.addEventListener('dragstart', e => e.preventDefault());
+    // Swallow the click that ends a drag so it doesn't open the product link.
+    panel.addEventListener('click', e => {
+      if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+    }, true);
   }
 
   document.addEventListener('shopify:section:load', (e) => {
@@ -254,8 +475,8 @@
         { "type": "url", "id": "link", "label": "Link (used for demo / image open)" },
         { "type": "range", "id": "hotspot_x", "label": "Hotspot X position (%)", "min": 2, "max": 98, "step": 1, "default": 50 },
         { "type": "range", "id": "hotspot_y", "label": "Hotspot Y position (%)", "min": 2, "max": 98, "step": 1, "default": 50 },
-        { "type": "header", "content": "Demo (when no product selected)" },
-        { "type": "text", "id": "demo_image", "label": "Demo image (asset filename)", "info": "e.g. aurora_202_plato.png" },
+        { "type": "header", "content": "Imagen propia / demo" },
+        { "type": "text", "id": "demo_image", "label": "Image override (asset filename)", "info": "e.g. aurora_202_plato.png — replaces the catalogue photo, and is the image used when no product is chosen." },
         { "type": "text", "id": "demo_title", "label": "Demo title" },
         { "type": "text", "id": "demo_price", "label": "Demo price", "default": "Consultar" }
       ]
@@ -263,11 +484,17 @@
   ],
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Nuestras mesas" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Una escena, cada pieza." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Una escena, cada pieza" },
     { "type": "richtext", "id": "description", "label": "Description" },
     { "type": "image_picker", "id": "image", "label": "Scene image (left side)" },
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Descubre nuestras mesas" },
-    { "type": "url", "id": "cta_link", "label": "CTA link" }
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "text", "id": "cta2_label", "label": "Second CTA label", "default": "Aprende a vestir tu mesa" },
+    { "type": "url", "id": "cta2_link", "label": "Second CTA link" },
+    { "type": "header", "content": "Product panel actions" },
+    { "type": "text", "id": "add_label", "label": "Add-to-cart label (shown piece)", "default": "Añadir pieza" },
+    { "type": "product", "id": "set_product", "label": "Vajilla product (one button per variant)" },
+    { "type": "text", "id": "set_label_prefix", "label": "Vajilla button label prefix", "default": "Añadir vajilla", "info": "The variant name is appended, e.g. 'Añadir vajilla · 42 P.'" }
   ],
   "presets": [
     {

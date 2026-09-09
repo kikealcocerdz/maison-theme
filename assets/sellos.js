@@ -46,9 +46,9 @@ const progressTrack=document.getElementById('stampProgressTrack');
 const progressFill=document.getElementById('stampProgressFill');
 const progressThumb=document.getElementById('stampProgressThumb');
 const timelineTicks=document.getElementById('stampTimelineTicks');
+const caption=document.getElementById('stampActiveCaption');
 const captionPeriod=document.getElementById('stampCaptionPeriod');
 const captionDesc=document.getElementById('stampCaptionDesc');
-const captionMore=document.getElementById('stampCaptionMore');
 const drawer=document.getElementById('stampDrawer');
 let metrics={storyTop:0,scrollDistance:1,cardW:230,pitch:235};
 let raf=0,activeIndex=0,currentId=SEALS[0]?.id||1,dragging=false,dragMoved=false,dragStartX=0,dragStoryY=0;
@@ -86,8 +86,23 @@ function buildArchive(){
   measure();
 }
 
+/* La ficha vive dentro del visor porque en escritorio flota sobre el coverflow.
+   En movil el visor es un scroll horizontal con overflow-y:hidden, asi que ahi
+   la recorta y ademas viaja con las tarjetas: se saca al pin y vuelve al salir. */
+function placeCaption(){
+  if(!caption||!viewport)return;
+  const pin=viewport.parentElement;
+  const timeline=pin?pin.querySelector('.stamp-timeline-wrap'):null;
+  if(mobileArchive()){
+    if(caption.parentElement!==pin&&pin)pin.insertBefore(caption,timeline);
+  }else if(caption.parentElement!==viewport){
+    viewport.appendChild(caption);
+  }
+}
+
 function measure(){
   if(!story||!viewport||!track||!track.children.length)return;
+  placeCaption();
   const first=track.children[0];
   const cardW=first.getBoundingClientRect().width||230;
   const pitch=cardW*1.05;
@@ -246,7 +261,6 @@ function openSeal(id){
   const i=SEALS.findIndex(x=>x.id===id);document.getElementById('stampPrev').disabled=i<=0;document.getElementById('stampNext').disabled=i>=SEALS.length-1;
   drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');document.body.classList.add('stamp-modal-lock');
 }
-captionMore?.addEventListener('click',()=>openSeal(SEALS[activeIndex].id));
 function closeDrawer(){drawer.classList.remove('open');setStampZoomState(false);drawer.setAttribute('aria-hidden','true');document.body.classList.remove('stamp-modal-lock')}
 function moveSeal(dir){let i=SEALS.findIndex(x=>x.id===currentId);if(i<0)return;i=clamp(i+dir,0,SEALS.length-1);openSeal(SEALS[i].id)}
 const zoomTrigger=document.getElementById('stampZoomTrigger');

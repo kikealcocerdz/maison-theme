@@ -88,7 +88,7 @@
    stretched, so mirror the block's card styles here. Keep both in sync. */
 .featured-products__card .block-product-card__link { display: block; }
 .featured-products__card .block-product-card__media {
-  position: relative; overflow: hidden; background: var(--paper);
+  position: relative; overflow: hidden;
   display: grid; place-items: center;
 }
 .featured-products__card .block-product-card__media--portrait { aspect-ratio: 4/5; }
@@ -161,6 +161,8 @@
   .featured-products__card .block-product-card__media img {
     max-height: 78%; max-width: 82%; margin-left: auto; margin-right: auto;
   }
+  .featured-products .quick-add { top: 8px; right: 8px; }
+  .featured-products .quick-add button { width: 44px; height: 44px; }
   .nav-arrow { display: none; }
 }
 {% endstylesheet %}

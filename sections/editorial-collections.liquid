@@ -3,17 +3,25 @@
     <div class="section-head reveal">
       {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
       {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
-      {%- if section.settings.description != blank -%}<p>{{ section.settings.description }}</p>{%- endif -%}
+      {%- if section.settings.description != blank -%}{{ section.settings.description }}{%- endif -%}
     </div>
   {%- endif -%}
 
-  <div class="editorial-collections__grid">
+  <div class="editorial-collections__grid" data-ec-track>
     {%- for block in section.blocks -%}
       <div class="editorial-collections__item reveal">
         {%- render block -%}
       </div>
     {%- endfor -%}
   </div>
+
+  {%- if section.blocks.size > 1 -%}
+    {%- comment -%} Flechas del carrusel móvil: en escritorio el tríptico es una rejilla y se ocultan. {%- endcomment -%}
+    <div class="editorial-collections__nav">
+      <button class="editorial-collections__arrow" type="button" data-ec-prev aria-label="{{ 'general.accessibility.previous' | t }}">{% render 'icon-arrow-left' %}</button>
+      <button class="editorial-collections__arrow" type="button" data-ec-next aria-label="{{ 'general.accessibility.next' | t }}">{% render 'icon-arrow-right' %}</button>
+    </div>
+  {%- endif -%}
 
   {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
     <div class="editorial-collections__cta reveal">
@@ -29,11 +37,97 @@
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px 72px;
 }
 .editorial-collections__cta { text-align: center; margin-top: 64px; }
+.editorial-collections__nav { display: none; }
+.editorial-collections__arrow {
+  width: 44px; height: 44px;
+  border: 0.5px solid var(--ink); border-radius: 999px;
+  background: transparent; display: grid; place-items: center;
+  color: var(--ink); cursor: pointer; transition: transform 240ms var(--ease);
+}
+.editorial-collections__arrow:active { transform: scale(0.94); }
 
 @media (max-width: 1100px) {
-  .editorial-collections__grid { grid-template-columns: 1fr; gap: 46px; }
+  .editorial-collections__grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 680px) {
+  .editorial-collections__grid { gap: 46px; }
+}
+
+/* ==========================================================================
+   v98 — El tríptico pasa a carrusel con snap en móvil en vez de apilarse.
+   ========================================================================== */
+@media (max-width: 760px) {
+  .editorial-collections { padding-left: 14px !important; padding-right: 14px !important; }
+
+  .editorial-collections__grid {
+    display: flex !important;
+    gap: 10px !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    scrollbar-width: none !important;
+    padding-bottom: 8px !important;
+    /* Sin este relleno la primera y la última tarjeta no pueden centrarse: el
+       snap-align:center las deja pegadas al borde. */
+    padding-inline: max(0px, calc((100% - min(78vw, 330px)) / 2)) !important;
+  }
+
+  .editorial-collections__grid::-webkit-scrollbar { display: none !important; }
+
+  .editorial-collections__nav {
+    display: flex !important; justify-content: center; gap: 20px; margin-top: 20px;
+  }
+
+  .editorial-collections__item {
+    flex: 0 0 78vw !important;
+    max-width: 330px !important;
+    scroll-snap-align: center !important;
+    margin: 0 !important;
+    text-align: center !important;
+  }
+  .editorial-collections__item .block-chapter-card { text-align: center !important; }
+  .editorial-collections__item .block-chapter-card__paragraph { margin-inline: auto !important; }
+
+  /* svh, no dvh: dvh se recalcula al plegarse la barra del navegador y las
+     tarjetas cambiaban de alto durante el scroll. */
+  .editorial-collections__item .block-chapter-card__media { height: 42svh !important; max-height: 380px !important; }
+  .editorial-collections__item .block-chapter-card__title { font-size: 29px !important; margin: 10px 0 5px !important; }
+
+  .editorial-collections__item .block-chapter-card__paragraph {
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+    display: block !important;
+    overflow: visible !important;
+  }
 }
 {% endstylesheet %}
+
+{% javascript %}
+(function () {
+  document.querySelectorAll('.editorial-collections:not([data-init])').forEach(init);
+
+  function init(root) {
+    root.dataset.init = '1';
+    const track = root.querySelector('[data-ec-track]');
+    if (!track) return;
+
+    // En escritorio el track es una rejilla sin overflow, así que scrollBy no hace
+    // nada y las flechas están ocultas: no hace falta comprobar el breakpoint.
+    function step(dir) {
+      const card = track.querySelector('.editorial-collections__item');
+      if (!card) return;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      track.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' });
+    }
+
+    root.querySelector('[data-ec-prev]')?.addEventListener('click', () => step(-1));
+    root.querySelector('[data-ec-next]')?.addEventListener('click', () => step(1));
+  }
+
+  document.addEventListener('shopify:section:load', (e) => {
+    e.target.querySelectorAll('.editorial-collections:not([data-init])').forEach(init);
+  });
+})();
+{% endjavascript %}
 
 {% schema %}
 {

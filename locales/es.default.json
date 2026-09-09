@@ -119,7 +119,36 @@
       "remove": "Quitar",
       "variant": "Variante",
       "summary": "Resumen",
-      "continue_shopping": "Seguir comprando"
+      "continue_shopping": "Seguir comprando",
+      "product": "Pieza",
+      "total": "Total",
+      "unit_price": "Precio unitario",
+      "increase": "Aumentar cantidad",
+      "decrease": "Reducir cantidad",
+      "shipping": "Envío peninsular",
+      "shipping_value": "Calculado en el pago",
+      "shipping_free": "Cortesía de la casa",
+      "or": "o",
+      "secure_note": "Pago seguro · Envío protegido para piezas cerámicas",
+      "unit": "{{ price }} / ud.",
+      "collection_label": "Colección",
+      "gift_row": "Envoltorio de regalo",
+      "gift_add": "Añadir envoltorio de regalo — papel de seda y sello de la casa, {{ price }}",
+      "gift_remove": "Quitar el envoltorio de regalo",
+      "removed": "Ha retirado una pieza de la cesta.",
+      "undo": "Deshacer",
+      "empty_body": "Aún no ha reservado ninguna pieza. Nuestras mesas se componen despacio: empiece por una colección.",
+      "empty_cta": "Ver las colecciones",
+      "paybar_total": "Total · {{ count }} piezas",
+      "count_words": "ninguna,Una,Dos,Tres,Cuatro,Cinco,Seis,Siete,Ocho,Nueve,Diez,Once,Doce",
+      "count_line": {
+        "one": "{{ n }} pieza reservada",
+        "other": "{{ n }} piezas reservadas"
+      },
+      "items": {
+        "one": "{{ count }} pieza",
+        "other": "{{ count }} piezas"
+      }
     },
     "collection": {
       "home": "Inicio",
@@ -140,6 +169,10 @@
       "sort_new": "Novedad",
       "sort_high": "Precio - alto a bajo",
       "sort_low": "Precio - bajo a alto",
+      "no_results": "No encontramos piezas con esos filtros.",
+      "no_results_body": "Prueba a quitar alguno o a ampliar el rango de precio. También puedes empezar de nuevo desde el catálogo.",
+      "no_results_clear": "Quitar los filtros",
+      "show_results": "Mostrar resultados",
       "load_more": "Cargar más",
       "showing": "Mostrando {{ shown }} de {{ total }}",
       "badge_new": "Novedad",
@@ -184,6 +217,8 @@
       "close": "Cerrar galería",
       "thumbs": "Miniaturas de producto",
       "color": "Color",
+      "tax_note": "IVA incluido",
+      "dimensions": "Dimensiones",
       "service": "Servicio",
       "pieces_selector": "Selecciona el número de piezas",
       "pack_intro": "Tu pack contiene:"
@@ -200,8 +235,7 @@
       "timeline_seek": "Moverse por la línea temporal",
       "scroll": "Scroll",
       "scroll_hint": "recorre el archivo",
-      "modal_kicker": "Archivo de marcas",
-      "read_more": "Leer descripción completa"
+      "modal_kicker": "Archivo de marcas"
     },
     "tables": {
       "filters": "Filtros de mesas",

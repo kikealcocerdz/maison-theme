@@ -3,7 +3,7 @@
     <div class="section-head reveal">
       {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>{%- endif -%}
       {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
-      {%- if section.settings.description != blank -%}<p>{{ section.settings.description }}</p>{%- endif -%}
+      {%- if section.settings.description != blank -%}{{ section.settings.description }}{%- endif -%}
     </div>
   {%- endif -%}
 
@@ -17,7 +17,7 @@
       {% render 'image-responsive', image: section.settings.image, alt: section.settings.image.alt, sizes: '100vw', loading: 'lazy' %}
     {%- else -%}
       {%- comment -%} Demo fallback (shipped in /assets) until a banner image is set. {%- endcomment -%}
-      <img src="{{ 'summer-banner.webp' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1800" height="1005" loading="lazy" decoding="async">
+      <img src="{{ 'composicion-renacer-web-3-2.webp' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1280" height="800" loading="lazy" decoding="async">
     {%- endif -%}
   {%- endcapture -%}
 
@@ -65,31 +65,34 @@
   content: ""; position: absolute; inset: 0;
   background: rgba(15, 26, 46, 0.44);
   opacity: 0; z-index: 2;
-  transition: opacity 520ms var(--ease);
+  transition: opacity 260ms var(--ease);
 }
 .image-banner__media--link:hover::after { opacity: 1; }
 .image-banner__overlay {
   position: absolute; inset: 0; z-index: 3;
   display: grid; place-items: center;
   opacity: 0; transform: translateY(10px);
-  transition: opacity 520ms var(--ease), transform 520ms var(--ease);
+  transition: opacity 260ms var(--ease), transform 260ms var(--ease);
   pointer-events: none;
 }
 .image-banner__media--link:hover .image-banner__overlay { opacity: 1; transform: translateY(0); }
 .image-banner__overlay-btn {
   border-color: var(--paper); color: var(--paper);
-  background: rgba(15, 26, 46, 0.12); backdrop-filter: blur(6px);
+  background: rgba(15, 26, 46, 0.12); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
 }
 .image-banner__overlay-btn:hover { background: var(--paper); color: var(--ink); }
 .image-banner__mobile-cta { display: none; text-align: center; margin-top: 32px; }
 
 .image-banner__blocks {
-  width: var(--content); margin: 34px auto 0;
+  width: var(--content); margin: 74px auto 0;
   display: flex; flex-direction: column; gap: 24px; align-items: center;
 }
 
-@media (max-width: 680px) {
+@media (max-width: 1100px) {
   .image-banner__media img { height: 48vh; }
+}
+
+@media (max-width: 680px) {
   .image-banner__overlay { display: none; }
   .image-banner__mobile-cta { display: block; }
 }

@@ -119,7 +119,36 @@
       "remove": "Remove",
       "variant": "Variant",
       "summary": "Summary",
-      "continue_shopping": "Continue shopping"
+      "continue_shopping": "Continue shopping",
+      "product": "Piece",
+      "total": "Total",
+      "unit_price": "Unit price",
+      "increase": "Increase quantity",
+      "decrease": "Decrease quantity",
+      "shipping": "Mainland shipping",
+      "shipping_value": "Calculated at checkout",
+      "shipping_free": "With our compliments",
+      "or": "or",
+      "secure_note": "Secure payment · Protected shipping for ceramic pieces",
+      "unit": "{{ price }} each",
+      "collection_label": "Collection",
+      "gift_row": "Gift wrapping",
+      "gift_add": "Add gift wrapping — tissue paper and the house seal, {{ price }}",
+      "gift_remove": "Remove the gift wrapping",
+      "removed": "You removed a piece from your cart.",
+      "undo": "Undo",
+      "empty_body": "You have not reserved a piece yet. Our tables are composed slowly: begin with a collection.",
+      "empty_cta": "See the collections",
+      "paybar_total": "Total · {{ count }} pieces",
+      "count_words": "no,One,Two,Three,Four,Five,Six,Seven,Eight,Nine,Ten,Eleven,Twelve",
+      "count_line": {
+        "one": "{{ n }} piece reserved",
+        "other": "{{ n }} pieces reserved"
+      },
+      "items": {
+        "one": "{{ count }} piece",
+        "other": "{{ count }} pieces"
+      }
     },
     "collection": {
       "home": "Home",
@@ -140,6 +169,10 @@
       "sort_new": "Newest",
       "sort_high": "Price - high to low",
       "sort_low": "Price - low to high",
+      "no_results": "No pieces match those filters.",
+      "no_results_body": "Try removing one or widening the price range. You can also start again from the catalogue.",
+      "no_results_clear": "Clear the filters",
+      "show_results": "Show results",
       "load_more": "Load more",
       "showing": "Showing {{ shown }} of {{ total }}",
       "badge_new": "New",
@@ -184,6 +217,8 @@
       "close": "Close gallery",
       "thumbs": "Product thumbnails",
       "color": "Colour",
+      "tax_note": "VAT included",
+      "dimensions": "Dimensions",
       "service": "Service",
       "pieces_selector": "Select the number of pieces",
       "pack_intro": "Your set includes:"
@@ -200,8 +235,7 @@
       "timeline_seek": "Move along the timeline",
       "scroll": "Scroll",
       "scroll_hint": "to browse the archive",
-      "modal_kicker": "Marks archive",
-      "read_more": "Read full description"
+      "modal_kicker": "Marks archive"
     },
     "tables": {
       "filters": "Table filters",

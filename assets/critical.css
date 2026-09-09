@@ -148,15 +148,24 @@ button {
 .product-media { position: relative; background: var(--ink-faint-20); aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .product-cover { position: absolute; inset: 0; z-index: 1; }
 .product-media img.main {
-  width: 100%; height: 100%; padding: clamp(14px, 2.2vw, 32px);
-  object-fit: contain; object-position: center; background: var(--paper);
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center; background: var(--paper);
   position: relative; z-index: 0;
 }
 .badge { position: absolute; top: 12px; left: 12px; background: var(--paper); padding: 6px 10px; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); z-index: 3; }
 .badge--set { background: #012169; color: var(--paper); }
-.fav { position: absolute; right: 12px; top: 10px; z-index: 3; width: 26px; height: 26px; display: grid; place-items: center; color: var(--ink); opacity: 0.65; }
-.fav svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 1; fill: none; }
-.fav.active svg { fill: currentColor; }
+.fav {
+  position: absolute; right: 12px; top: 10px; z-index: 3;
+  width: 32px; height: 32px; border-radius: 999px;
+  display: grid; place-items: center; color: var(--ink);
+  background: rgba(255, 255, 255, 0.82);
+  transition: background 240ms var(--ease), transform 160ms var(--ease), color 240ms var(--ease);
+}
+.fav:hover { background: var(--paper); transform: scale(1.08); }
+.fav svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 1.2; fill: none; }
+.fav.active { color: var(--accent-1); }
+.fav.active svg { fill: currentColor; stroke: currentColor; }
+.fav:focus-visible { outline: 1px solid var(--ink); outline-offset: 2px; }
 
 /* Quick add (snippets/quick-add.liquid) — revealed on card hover where the
    device has a real pointer, always visible on touch. */

@@ -11,10 +11,22 @@
   "sections": {
     "main": {
       "type": "cart",
-      "settings": {}
+      "settings": {
+        "gift_wrap_product": "envoltorio-de-regalo"
+      }
+    },
+    "suggested": {
+      "type": "product-related",
+      "settings": {
+        "heading": "Quizá le interese",
+        "source": "collection",
+        "collection": "emblemas",
+        "product_limit": 3
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "suggested"
   ]
 }

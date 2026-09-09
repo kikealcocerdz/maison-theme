@@ -14,7 +14,7 @@
       <h2>{{ section.settings.heading | remove: '<p>' | remove: '</p>' }}</h2>
     {%- endif -%}
     {%- if section.settings.description != blank -%}
-      <p>{{ section.settings.description }}</p>
+      {{ section.settings.description }}
     {%- endif -%}
 
     {%- form 'customer', class: 'newsletter__form' -%}
@@ -75,7 +75,12 @@
 
 @media (max-width: 680px) {
   .newsletter { padding: 88px 0 104px; }
-  .newsletter__form { grid-template-columns: 1fr; gap: 18px; text-align: left; }
+  .newsletter p { margin-bottom: 40px; }
+  /* Apilado, la línea del formulario quedaba bajo el botón y el input sin subrayar,
+     y el bloque se alineaba a la izquierda dentro de una sección centrada. */
+  .newsletter__form { grid-template-columns: 1fr; gap: 14px; text-align: center; border-bottom: 0; padding-bottom: 0; }
+  .newsletter__form input[type="email"] { border-bottom: 0.5px solid var(--ink); padding-bottom: 12px; text-align: center; }
+  .newsletter__form button { justify-content: center; min-height: 44px; }
 }
 {% endstylesheet %}
 
@@ -84,7 +89,7 @@
   "name": "Newsletter",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Recibir nuestra carta" },
-    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Una <em>carta</em> cada estación.</p>" },
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Una <em>carta</em> cada estación</p>" },
     { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Cuatro envíos al año. Ediciones, talleres y conversaciones desde Sevilla.</p>" },
     { "type": "url", "id": "endpoint_url", "label": "Form endpoint override", "info": "Defaults to Shopify customer signup. Replace with Klaviyo or other ESP URL if needed." }
   ],

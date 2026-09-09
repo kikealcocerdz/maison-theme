@@ -61,7 +61,7 @@
 
 <div class="collection-grid collection-page{% if section.settings.budget_mode %} collection-page--budget{% endif %}{% if template.suffix == 'emblemas' %} collection-page--emblemas{% endif %}" data-section-id="{{ section.id }}"{% if section.settings.budget_mode and collection.sort_by == blank %} data-default-sort="low"{% endif %}>
   <section class="shop-layout">
-    {% render 'collection-nav' %}
+    {% render 'collection-nav', sort_query: sort_filter_query, current_sort: current_sort %}
 
     <div class="shop-main">
       <section class="collection-intro">
@@ -141,6 +141,22 @@
             {%- endif -%}
           {%- endfor -%}
           <a class="facet-chips-clear" href="{{ collection.url }}">{{ 'sections.collection.filter_clear' | t }}</a>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%}
+        Sin resultados. Antes no se pintaba nada —ni el contenedor— entre la barra
+        de herramientas y el pie: la página parecía rota en vez de vacía.
+      {%- endcomment -%}
+      {%- if collection != blank and collection.products.size == 0 and section.blocks.size == 0 -%}
+        <div class="collection-empty">
+          <p class="collection-empty__title">{{ 'sections.collection.no_results' | t }}</p>
+          <p class="collection-empty__body">{{ 'sections.collection.no_results_body' | t }}</p>
+          {%- if has_active -%}
+            <a class="ghost-btn" href="{{ collection.url }}">{{ 'sections.collection.no_results_clear' | t }}</a>
+          {%- else -%}
+            <a class="ghost-btn" href="{{ routes.collections_url }}">{{ 'collections.title' | t }}</a>
+          {%- endif -%}
         </div>
       {%- endif -%}
 
@@ -272,10 +288,30 @@
 /* Facets (snippets/collection-filters.liquid) — same accordion shell as the chapter tree
    below, but read as a control panel rather than navigation: boxed on the faint ground,
    headings in full ink. The nav keeps its plain editorial list. */
+/* Sin resultados */
+.collection-page .collection-empty {
+  display: grid; justify-items: start; gap: 16px;
+  padding: 64px 0 72px; border-top: .5px solid var(--rule);
+}
+.collection-page .collection-empty__title {
+  margin: 0; font-family: var(--serif); font-size: clamp(26px, 3vw, 38px); line-height: 1.1;
+}
+.collection-page .collection-empty__body {
+  margin: 0; max-width: 46ch; color: var(--muted); font-size: 13px; line-height: 1.75;
+}
+.collection-page .collection-empty + .products:empty { display: none; }
+
 .collection-page .side-filters {
   margin: 0 0 30px; padding: 15px 15px 4px;
-  background: var(--ink-faint-20); border: .5px solid var(--rule);
+  background: var(--ink-faint-08); border: .5px solid var(--rule);
 }
+/* La cabecera es un <button>: ocupa el ancho para que el rótulo sea pulsable. */
+.collection-page .side-filters .side-section-head {
+  width: 100%; padding: 0; background: transparent;
+  color: inherit; font: inherit; text-align: left; cursor: pointer;
+}
+.collection-page .side-filters .side-section-head:focus-visible { outline: 1px solid var(--ink); outline-offset: 2px; }
+.collection-page .side-filters .side-section-head:hover .side-main-link { color: var(--ink); }
 .collection-page .side-filters .side-accordion { border-top: .5px solid var(--rule); }
 .collection-page .side-filters .side-section:last-child { border-bottom: none; }
 .collection-page .side-filters .side-main-link { color: var(--ink); opacity: 1; letter-spacing: .2em; }
@@ -298,6 +334,32 @@
   border: .5px solid var(--rule); color: var(--ink); font-family: var(--sans); font-size: 11px;
 }
 .collection-page .facet-price input:focus-visible { outline: 1px solid var(--ink); outline-offset: -1px; }
+
+/* Barra, pie y chips de orden: sólo existen dentro del cajón móvil. En escritorio
+   `display: contents` deja el scroll y el sticky donde estaban, en `.sidebar`. */
+.collection-page .filters-bar,
+.collection-page .filters-foot,
+.collection-page .side-sort { display: none; }
+.collection-page .sidebar__scroll { display: contents; }
+
+/* Doble slider de precio (snippets/collection-filters.liquid). Se revela sólo con JS. */
+.collection-page .facet-range { position: relative; height: 34px; display: flex; align-items: center; margin: 4px 0 2px; }
+.collection-page .facet-range__track { position: absolute; left: 0; right: 0; height: 2px; background: var(--rule); }
+.collection-page .facet-range__fill { position: absolute; height: 2px; background: var(--ink); }
+.collection-page .facet-range input[type="range"] {
+  position: absolute; left: 0; width: 100%; height: 2px; margin: 0;
+  background: none; pointer-events: none; -webkit-appearance: none; appearance: none;
+}
+.collection-page .facet-range input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--paper); border: 1.5px solid var(--ink);
+  box-shadow: 0 2px 8px rgba(15, 26, 46, .22); cursor: pointer; pointer-events: auto;
+}
+.collection-page .facet-range input[type="range"]::-moz-range-thumb {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--paper); border: 1.5px solid var(--ink);
+  box-shadow: 0 2px 8px rgba(15, 26, 46, .22); cursor: pointer; pointer-events: auto;
+}
 .collection-page .facet-price-sep { font-size: 11px; color: var(--muted); }
 /* The submit is the no-JS path; the enhanced path applies on change. */
 .collection-page .side-filters-apply { margin-top: 16px; width: 100%; }
@@ -419,23 +481,137 @@
     display: inline-grid; place-items: center; min-width: 15px; height: 15px; padding: 0 4px;
     background: var(--ink); color: var(--paper); font-size: 8px; border-radius: 999px;
   }
+  /* Cajón de filtros a pantalla completa (mockup `filtros movil`). La barra y el pie
+     quedan fijos y sólo el centro rueda, así "Mostrar resultados" siempre está a mano. */
+  /* El cajon es fijo a pantalla completa y tiene que quedar por encima de la
+     cabecera fija (z 90) y de la burbuja de ayuda (z 70): con z 60 la cabecera
+     tapaba la barra superior y el aspa caia justo debajo de la hamburguesa, asi
+     que el cajon no se podia cerrar. Mismo escalon que el cajon de la cesta. */
   .collection-page.filters-drawer-open .sidebar {
-    display: block !important; position: fixed; inset: 0 0 0 auto; z-index: 60;
-    width: min(86vw, 340px); margin: 0 !important; padding: 22px 20px 100px;
-    background: var(--paper); overflow-y: auto; overscroll-behavior: contain;
-    box-shadow: -20px 0 60px rgba(15, 26, 46, .16);
+    display: flex !important; flex-direction: column; position: fixed; inset: 0; z-index: 120;
+    width: 100%; max-height: none; margin: 0 !important; padding: 0;
+    background: var(--paper); overflow: hidden; overscroll-behavior: contain;
     animation: facets-in 260ms var(--ease);
   }
+  @media (min-width: 620px) {
+    .collection-page.filters-drawer-open .sidebar {
+      inset: 0 0 0 auto; width: min(460px, 100vw);
+      border-left: .5px solid var(--rule); box-shadow: -20px 0 60px rgba(15, 26, 46, .16);
+    }
+    .collection-page.filters-drawer-open::after {
+      content: ''; position: fixed; inset: 0; z-index: 115; background: rgba(15, 26, 46, .3);
+    }
+  }
   @keyframes facets-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
-  .collection-page.filters-drawer-open::after {
-    content: ''; position: fixed; inset: 0; z-index: 55; background: rgba(15, 26, 46, .3);
+
+  .collection-page.filters-drawer-open .sidebar__scroll {
+    display: block; flex: 1 1 auto; overflow-y: auto;
+    -webkit-overflow-scrolling: touch; padding: 8px 0 24px;
   }
-  .collection-page .filters-close {
-    display: block; width: 100%; margin-bottom: 18px; text-align: right;
-    font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
+
+  /* Barra superior: cerrar · Filtrar · Limpiar */
+  .collection-page.filters-drawer-open .filters-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    flex: 0 0 auto; padding: 18px 20px; border-bottom: .5px solid var(--rule);
   }
-  /* On mobile the drawer closes on apply, so the submit earns its place back. */
-  .js-facets .collection-page .side-filters-apply { display: block; }
+  .collection-page .filters-bar__title { font-family: var(--serif); font-size: 23px; letter-spacing: .01em; }
+  .collection-page .filters-bar__clear {
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+  }
+  .collection-page.filters-drawer-open .filters-close {
+    display: grid; place-items: center; width: 30px; height: 30px; margin-left: -6px;
+    position: relative; color: var(--ink);
+  }
+  .collection-page .filters-close span,
+  .collection-page .filters-close span::before {
+    content: ""; position: absolute; width: 20px; height: 1.3px; background: currentColor;
+  }
+  .collection-page .filters-close span { transform: rotate(45deg); }
+  .collection-page .filters-close span::before { left: 0; transform: rotate(-90deg); }
+
+  /* Pie fijo */
+  .collection-page.filters-drawer-open .filters-foot {
+    display: block; flex: 0 0 auto;
+    padding: 16px 20px calc(16px + env(safe-area-inset-bottom, 0px));
+    border-top: .5px solid var(--rule); box-shadow: 0 -8px 24px rgba(15, 26, 46, .05);
+  }
+  .collection-page .filters-apply {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; min-height: 56px; background: var(--ink); color: var(--paper);
+    font-size: 12px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+    transition: background 240ms var(--ease);
+  }
+  .collection-page .filters-apply:hover { background: var(--accent-1); }
+  .collection-page .filters-apply__count {
+    font-family: var(--serif); font-size: 15px; font-weight: 400;
+    letter-spacing: .02em; text-transform: none;
+  }
+
+  /* Ordenar por: chips deslizables */
+  .collection-page.filters-drawer-open .side-sort {
+    display: block; padding: 24px 20px; border-bottom: .5px solid var(--rule);
+  }
+  .collection-page .side-sort__label {
+    display: block; margin-bottom: 18px;
+    font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--ink);
+  }
+  .collection-page .side-sort__chips {
+    display: flex; gap: 10px; flex-wrap: nowrap; overflow-x: auto;
+    scrollbar-width: none; margin: 0 -20px; padding: 2px 20px;
+  }
+  .collection-page .side-sort__chips::-webkit-scrollbar { display: none; }
+  .collection-page .fchip {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px;
+    border: .5px solid var(--rule); border-radius: 999px;
+    font-size: 13px; color: var(--ink-soft); white-space: nowrap;
+    transition: background 220ms var(--ease), color 220ms var(--ease), border-color 220ms var(--ease);
+  }
+  .collection-page .fchip.is-on { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+  /* El panel de facetas pierde la caja: en el cajón cada faceta es una sección propia. */
+  .collection-page.filters-drawer-open .side-filters {
+    margin: 0; padding: 0; background: transparent; border: 0;
+  }
+  .collection-page.filters-drawer-open .side-filters-head { display: none; }
+  .collection-page.filters-drawer-open .side-filters .side-accordion,
+  .collection-page.filters-drawer-open .side-accordion { border-top: 0; }
+  .collection-page.filters-drawer-open .side-section { padding: 24px 20px; border-bottom: .5px solid var(--rule); }
+  .collection-page.filters-drawer-open .side-main-link {
+    font-size: 11px; font-weight: 500; letter-spacing: .2em; color: var(--ink); opacity: 1;
+  }
+  .collection-page.filters-drawer-open .side-section.is-open .side-panel { padding-bottom: 0; }
+
+  /* Cada valor es una pastilla con casilla, en dos columnas.
+     ponytail: el mockup usaba chips redondas para Disponibilidad y pastillas para Tipo
+     de producto. Una sola forma para todas las facetas evita ramificar por etiqueta,
+     que se rompe en cuanto el cliente añade un filtro nuevo. */
+  .collection-page.filters-drawer-open .side-panel > div {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; padding-top: 4px;
+  }
+  .collection-page.filters-drawer-open .side-panel > div > .facet-price,
+  .collection-page.filters-drawer-open .side-panel > div > .facet-range { grid-column: 1 / -1; }
+  .collection-page.filters-drawer-open .facet {
+    display: flex; align-items: center; gap: 11px; min-height: 48px; padding: 0 14px;
+    border: .5px solid var(--rule); text-transform: none; letter-spacing: .01em;
+    font-size: 13px; color: var(--ink);
+    transition: border-color 200ms var(--ease);
+  }
+  .collection-page.filters-drawer-open .facet:has(input:checked) { border-color: var(--ink); }
+  .collection-page.filters-drawer-open .facet input { width: 18px; height: 18px; flex: 0 0 18px; }
+  /* Sin min-width:0 la etiqueta en nowrap fija el minimo del item flex, la columna
+     deja de caber en su 1fr y la pastilla se sale del cajon: el contador quedaba
+     fuera de pantalla. El puntos suspensivos solo recorta si puede encoger. */
+  .collection-page.filters-drawer-open .facet-label {
+    min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  }
+  .collection-page.filters-drawer-open .facet-count { font-size: 11px; color: var(--muted); }
+  .collection-page.filters-drawer-open .facet-price { display: flex; gap: 14px; padding: 0 0 6px; }
+  .collection-page.filters-drawer-open .facet-price input { height: 52px; font-size: 15px; padding: 0 12px; }
+
+  /* El cajón se cierra con "Mostrar resultados": el submit deja de tener sitio. */
+  .js-facets .collection-page .side-filters-apply { display: none; }
+  /* Sin JS no hay cajón ni pie, así que el submit vuelve a ser la única salida. */
+  .collection-page .side-filters-apply { display: block; }
   .collection-page .collection-intro { width: 100% !important; padding-top: 28px !important; margin-bottom: 24px !important; gap: 20px !important; }
   .collection-page .collection-intro h1 { font-size: clamp(42px, 12vw, 62px) !important; }
   .collection-page .collection-intro > p { font-size: 11px !important; line-height: 1.65 !important; text-align: left !important; }
@@ -488,7 +664,7 @@
   .collection-page .sort-btn { padding: 0 14px !important; }
 
   .collection-page .product-media { overflow: hidden !important; }
-  .collection-page .product-media img.main { width: 100% !important; height: 100% !important; padding: 12px !important; object-fit: contain !important; object-position: center !important; }
+  .collection-page .product-media img.main { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center !important; }
   .collection-page .product-info { display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; gap: 3px 7px !important; padding-top: 8px !important; }
   .collection-page .product-info h3 { font-size: 9.2px !important; overflow-wrap: anywhere !important; }
   .collection-page .product-info p { grid-column: 1 !important; margin: 0 !important; }
@@ -526,7 +702,7 @@
       side.querySelectorAll('.side-section').forEach(function (s) {
         var on = s === section;
         s.classList.toggle('is-open', on);
-        var t = s.querySelector('.side-toggle');
+        var t = s.querySelector('[data-side-toggle]') || s.querySelector('.side-toggle');
         if (t) t.setAttribute('aria-expanded', on ? 'true' : 'false');
       });
     }
@@ -535,7 +711,7 @@
     // chapter), so collapse down to the first before anyone touches it.
     if (side) openOnly(side.querySelector('.side-section.is-open'));
 
-    root.querySelectorAll('.side-toggle').forEach(function (btn) {
+    root.querySelectorAll('.side-toggle, [data-side-toggle]').forEach(function (btn) {
       btn.addEventListener('click', function (e) {
         e.preventDefault(); e.stopPropagation();
         var s = btn.closest('.side-section');
@@ -557,13 +733,7 @@
       });
     });
 
-    // Favourite toggle (visual only) — delegated so cards appended by "load more" work too
-    root.addEventListener('click', function (e) {
-      var f = e.target.closest('.fav');
-      if (!f) return;
-      e.preventDefault(); e.stopPropagation();
-      f.classList.toggle('active');
-    });
+    // El corazón lo gestiona el handler global de assets/theme.js, que además lo guarda.
 
     // Budget mode fallback. Normal sort options are real links and Shopify orders the
     // complete collection before pagination. This local sorter only protects the first
@@ -631,6 +801,9 @@
         if (busy) return;
         busy = true;
         root.classList.add('is-filtering');
+        // El cajón sobrevive al re-render: el nodo se sustituye entero, así que su
+        // estado abierto hay que volver a ponerlo o cada clic lo cerraría de golpe.
+        var wasOpen = root.classList.contains('filters-drawer-open');
         var sid = root.dataset.sectionId;
         fetch(url + (url.indexOf('?') > -1 ? '&' : '?') + 'section_id=' + encodeURIComponent(sid))
           .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
@@ -638,8 +811,14 @@
             var next = new DOMParser().parseFromString(html, 'text/html').querySelector('.collection-grid');
             if (!next) return Promise.reject('no section');
             history.replaceState({}, '', url);
-            document.body.style.overflow = '';
             root.replaceWith(next);
+            if (wasOpen) {
+              next.classList.add('filters-drawer-open');
+              var opener = next.querySelector('[data-filters-open]');
+              if (opener) opener.setAttribute('aria-expanded', 'true');
+            } else {
+              document.body.style.overflow = '';
+            }
             init(next);
             // ponytail: same trick as load-more — let theme.js rewire the reveal observer.
             next.dispatchEvent(new CustomEvent('shopify:section:load', { bubbles: true }));
@@ -648,12 +827,9 @@
           .then(function () { busy = false; });
       }
 
-      form.addEventListener('change', function () {
-        // In the mobile drawer the shopper ticks several boxes before committing, so
-        // there the "Apply" submit is what fires. On desktop, change is the commit.
-        if (root.classList.contains('filters-drawer-open')) return;
-        go(facetUrl());
-      });
+      // También en el cajón: el pie dice "Mostrar resultados (246)" y ese número tiene
+      // que ser el de verdad, así que cada marca se aplica y vuelve con el recuento nuevo.
+      form.addEventListener('change', function () { go(facetUrl()); });
       form.addEventListener('submit', function (e) { e.preventDefault(); go(facetUrl()); });
 
       // Chips, "clear" and the sidebar's clear link are ordinary <a href> — intercept
@@ -676,6 +852,55 @@
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && root.classList.contains('filters-drawer-open')) closeDrawer();
       });
+
+      // Doble slider de precio. Sólo escribe en los dos inputs numéricos, que son los
+      // que llevan `name`; al soltar dispara el mismo `change` que cualquier faceta.
+      var range = root.querySelector('[data-price-range]');
+      if (range) {
+        var low = range.querySelector('[data-range-low]');
+        var high = range.querySelector('[data-range-high]');
+        var fill = range.querySelector('[data-range-fill]');
+        var numMin = root.querySelector('[data-price-min]');
+        var numMax = root.querySelector('[data-price-max]');
+        var cap = parseInt(range.dataset.cap, 10) || 0;
+        range.hidden = false;
+
+        function paint() {
+          if (!cap) return;
+          fill.style.left = (low.value / cap * 100) + '%';
+          fill.style.width = ((high.value - low.value) / cap * 100) + '%';
+        }
+
+        function pull(fromSlider) {
+          var a = parseInt(low.value, 10);
+          var b = parseInt(high.value, 10);
+          if (a > b) { if (fromSlider === low) { a = b; low.value = b; } else { b = a; high.value = a; } }
+          // Un extremo pegado al tope no es un filtro: se deja vacío para no mandarlo.
+          numMin.value = a > 0 ? a : '';
+          numMax.value = b < cap ? b : '';
+          paint();
+        }
+
+        [low, high].forEach(function (el) {
+          el.addEventListener('input', function () { pull(el); });
+          el.addEventListener('change', function () {
+            pull(el);
+            numMax.dispatchEvent(new Event('change', { bubbles: true }));
+          });
+        });
+
+        // Teclear en los números mueve los tiradores.
+        [numMin, numMax].forEach(function (el, i) {
+          el.addEventListener('input', function () {
+            var v = parseInt(el.value, 10);
+            if (isNaN(v)) v = i === 0 ? 0 : cap;
+            (i === 0 ? low : high).value = Math.min(Math.max(v, 0), cap);
+            paint();
+          });
+        });
+
+        paint();
+      }
     }
 
     // Load more (demo reveal)

@@ -1,0 +1,39 @@
+{%- comment -%}
+  Resolves a "handle | qty" list (one line each) into a real multi-item cart payload.
+  Input:  items_text — newline-separated "product-handle | quantity" lines.
+  Output: "<total_cents>~~<json>" where json is a /cart/add.js items array
+          [{"id":<variantId>,"quantity":<n>}, ...]. Callers split on '~~'.
+  Skips blank lines and handles with no purchasable variant. Uses all_products
+  (keep total unique handles under 20 across the page — Shopify's cap).
+{%- endcomment -%}
+{%- liquid
+  assign json = '['
+  assign total = 0
+  assign first = true
+  assign lines = items_text | strip | newline_to_br | split: '<br />'
+  for line in lines
+    assign parts = line | split: '|'
+    assign handle = parts[0] | strip
+    if handle == blank
+      continue
+    endif
+    assign qty = parts[1] | default: '1' | strip | plus: 0
+    if qty < 1
+      assign qty = 1
+    endif
+    assign prod = all_products[handle]
+    assign v = prod.selected_or_first_available_variant
+    if v == nil or v.id == blank
+      continue
+    endif
+    unless first
+      assign json = json | append: ','
+    endunless
+    assign json = json | append: '{"id":' | append: v.id | append: ',"quantity":' | append: qty | append: '}'
+    assign line_total = v.price | times: qty
+    assign total = total | plus: line_total
+    assign first = false
+  endfor
+  assign json = json | append: ']'
+  echo total | append: '~~' | append: json
+-%}

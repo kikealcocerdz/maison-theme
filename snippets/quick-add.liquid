@@ -1,0 +1,20 @@
+{%- comment -%}
+  Quick add-to-cart for a product card (hover on pointer devices, always
+  visible on touch). Posts to /cart/add; the global submit handler in
+  sections/cart-drawer.liquid intercepts it and opens the drawer.
+
+  Needs a positioned ancestor (.product / .block-product-card /
+  .featured-products__card). Styles live in assets/critical.css.
+
+  Accepts:
+    product — Shopify product object. Renders nothing without one (demo cards
+              have no variant to add).
+{%- endcomment -%}
+{%- if product.available -%}
+  {%- form 'product', product, class: 'quick-add' -%}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    <button type="submit" name="add" aria-label="{{ 'products.product.add_to_cart' | t }}">
+      {%- render 'icon-cart' -%}
+    </button>
+  {%- endform -%}
+{%- endif -%}

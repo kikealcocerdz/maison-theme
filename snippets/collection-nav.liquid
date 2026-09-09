@@ -14,7 +14,43 @@
 -%}
 
 <aside class="sidebar">
-  <nav class="side-accordion" aria-label="{{ 'sections.collection.nav_label' | t }}">
+  {%- comment -%}
+    Barra y pie: sólo existen visualmente dentro del cajón móvil (ver el CSS de
+    collection-grid). En escritorio la columna es la de siempre.
+  {%- endcomment -%}
+  <header class="filters-bar">
+    <button class="filters-close" type="button" data-filters-close aria-label="{{ 'general.accessibility.close' | t }}">
+      <span aria-hidden="true"></span>
+    </button>
+    <span class="filters-bar__title">{{ 'sections.collection.filters_open' | t }}</span>
+    <a class="filters-bar__clear" href="{{ collection.url | default: '#' }}">{{ 'sections.collection.filter_clear' | t }}</a>
+  </header>
+
+  <div class="sidebar__scroll">
+    {%- comment -%}
+      "Ordenar por" vive en la barra de herramientas en escritorio. En el cajón se
+      repite como chips porque es lo primero que se toca en un móvil; son los mismos
+      enlaces de servidor, así que ordena Shopify y la paginación conserva el criterio.
+    {%- endcomment -%}
+    {%- if sort_query != nil -%}
+      <section class="side-sort">
+        <span class="side-sort__label">{{ 'sections.collection.sort' | t }}</span>
+        <div class="side-sort__chips">
+          <a class="fchip{% if current_sort == 'created-descending' %} is-on{% endif %}" href="{{ collection.url }}?sort_by=created-descending{{ sort_query }}">{{ 'sections.collection.sort_new' | t }}</a>
+          <a class="fchip{% if current_sort == 'price-ascending' %} is-on{% endif %}" href="{{ collection.url }}?sort_by=price-ascending{{ sort_query }}">{{ 'sections.collection.sort_low' | t }}</a>
+          <a class="fchip{% if current_sort == 'price-descending' %} is-on{% endif %}" href="{{ collection.url }}?sort_by=price-descending{{ sort_query }}">{{ 'sections.collection.sort_high' | t }}</a>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%}
+      Facets first: they are what a shopper actually operates, and the sidebar is sticky,
+      so whatever sits at the bottom is the hardest thing to reach. Renders nothing when
+      the Search & Discovery app exposes no filters.
+    {%- endcomment -%}
+    {% render 'collection-filters' %}
+
+    <nav class="side-accordion" aria-label="{{ 'sections.collection.nav_label' | t }}">
     {%- if menu != blank and menu.links.size > 0 -%}
       {%- for parent in menu.links -%}
         {%- liquid
@@ -63,9 +99,17 @@
       <div class="side-section">
         <div class="side-section-head"><a class="side-main-link" href="#">Tipo de producto</a><button class="side-toggle" type="button" aria-expanded="false" aria-label="Tipo de producto"></button></div>
         <div class="side-panel"><div>
-          <a href="#">Platos</a><a href="#">Fuentes</a><a href="#">Bowls</a><a href="#">Jarras y teteras</a><a href="#">Soperas</a><a href="#">Bandejas</a><a href="#">Objetos decorativos</a><a href="#">Tazas y café</a>
+          <a href="#">Vajillas</a><a href="#">Juegos de café</a><a href="#">Juegos de té</a><a href="#">Juegos de boles</a><a href="#">Fuentes</a><a href="#">Jarras y teteras</a><a href="#">Bandejas</a><a href="#">Objetos decorativos</a><a href="#">Platos</a><a href="#">Boles y cuencos</a><a href="#">Tazas</a>
         </div></div>
       </div>
-    {%- endif -%}
-  </nav>
+      {%- endif -%}
+    </nav>
+  </div>
+
+  <footer class="filters-foot">
+    <button class="filters-apply" type="button" data-filters-close>
+      {{ 'sections.collection.show_results' | t }}
+      <span class="filters-apply__count">({{ collection.products_count }})</span>
+    </button>
+  </footer>
 </aside>
