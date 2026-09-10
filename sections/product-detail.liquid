@@ -159,8 +159,17 @@
         </button>
         <button class="product-gallery-arrow prev" type="button" aria-label="{{ 'sections.product.prev' | t }}">‹</button>
         {%- if has_product -%}
+          {%- comment -%}
+            La foto de la variante elegida abre la galería: con un producto de
+            variantes (el mug por letra) la primera imagen tiene que ser la suya.
+          {%- endcomment -%}
+          {%- assign variant_image_id = current_variant.featured_image.id -%}
+          {%- if variant_image_id != blank -%}
+            <img class="product-gallery-slide is-active" src="{{ current_variant.featured_image | image_url: width: 1200 }}" alt="{{ current_variant.featured_image.alt | default: product.title | escape }}" width="{{ current_variant.featured_image.width }}" height="{{ current_variant.featured_image.height }}" loading="eager" decoding="async">
+          {%- endif -%}
           {%- for image in product.images limit: 6 -%}
-            <img class="product-gallery-slide{% if forloop.first %} is-active{% endif %}" src="{{ image | image_url: width: 1200 }}" alt="{{ image.alt | default: product.title | escape }}" width="{{ image.width }}" height="{{ image.height }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async">
+            {%- if image.id == variant_image_id -%}{%- continue -%}{%- endif -%}
+            <img class="product-gallery-slide{% if forloop.first and variant_image_id == blank %} is-active{% endif %}" src="{{ image | image_url: width: 1200 }}" alt="{{ image.alt | default: product.title | escape }}" width="{{ image.width }}" height="{{ image.height }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async">
           {%- endfor -%}
         {%- else -%}
           {%- for img in demo_imgs -%}
@@ -170,7 +179,11 @@
         <button class="product-gallery-arrow next" type="button" aria-label="{{ 'sections.product.next' | t }}">›</button>
         <div class="product-gallery-lines" aria-hidden="true">
           {%- if has_product -%}
-            {%- for image in product.images limit: 6 -%}<span{% if forloop.first %} class="active"{% endif %}></span>{%- endfor -%}
+            {%- if variant_image_id != blank -%}<span class="active"></span>{%- endif -%}
+            {%- for image in product.images limit: 6 -%}
+              {%- if image.id == variant_image_id -%}{%- continue -%}{%- endif -%}
+              <span{% if forloop.first and variant_image_id == blank %} class="active"{% endif %}></span>
+            {%- endfor -%}
           {%- else -%}
             {%- for img in demo_imgs -%}<span{% if forloop.first %} class="active"{% endif %}></span>{%- endfor -%}
           {%- endif -%}
@@ -184,6 +197,34 @@
           <div class="product-set-info-core">
         {%- else -%}
           <div class="product-info-core">
+        {%- endif -%}
+
+        {%- comment -%}
+          Opciones que no son color ni número de piezas — la letra del mug, por
+          ejemplo. Cada valor es un enlace a su variante, así que funciona sin JS
+          y la galería abre ya con la foto de esa letra.
+        {%- endcomment -%}
+        {%- if has_product -%}
+          {%- for opt in product.options_with_values -%}
+            {%- assign opt_idx = opt.position | minus: 1 -%}
+            {%- if opt_idx == color_idx or opt_idx == pieces_idx -%}{%- continue -%}{%- endif -%}
+            {%- if opt.values.size < 2 -%}{%- continue -%}{%- endif -%}
+            <div class="piece-option-row">
+              <span>{{ opt.name | escape }}</span>
+              <div class="piece-option-values" role="group" aria-label="{{ opt.name | escape }}">
+                {%- for value in opt.values -%}
+                  {%- assign vname = value.name | default: value -%}
+                  {%- assign is_on = false -%}
+                  {%- if vname == current_variant.options[opt_idx] -%}{%- assign is_on = true -%}{%- endif -%}
+                  {%- if value.variant.id -%}
+                    <a class="piece-option{% if is_on %} is-active{% endif %}" href="{{ product.url }}?variant={{ value.variant.id }}"{% if is_on %} aria-current="true"{% endif %}>{{ vname | escape }}</a>
+                  {%- else -%}
+                    <span class="piece-option is-dead">{{ vname | escape }}</span>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
         {%- endif -%}
 
         {%- comment -%} Selector de color: cualquier producto con una opción "Color" (Flor de Lis azul/rosa…). {%- endcomment -%}
@@ -607,6 +648,23 @@
 .piece-color-row, .piece-dimension-row { display: grid; grid-template-columns: 110px 1fr; gap: 24px; padding: 14px 0; border-bottom: .5px solid var(--rule); font-size: 14px; align-items: center; }
 .piece-color-row > span, .piece-dimension-row > span { font-weight: 400; }
 .piece-dimension-row strong { font-weight: 300; text-align: right; color: var(--muted); }
+/* Opciones sueltas (letra del mug…): pastillas que enlazan a su variante. */
+.piece-option-row { display: grid; grid-template-columns: 110px 1fr; gap: 24px; padding: 14px 0; border-bottom: .5px solid var(--rule); font-size: 14px; align-items: center; }
+.piece-option-values { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+.piece-option {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 34px; min-height: 34px; padding: 0 10px;
+  border: .5px solid var(--rule); font-size: 12px; color: var(--ink-soft);
+  transition: border-color 200ms var(--ease), color 200ms var(--ease);
+}
+.piece-option:hover { border-color: var(--ink); color: var(--ink); }
+.piece-option.is-active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.piece-option.is-dead { opacity: .35; }
+@media (max-width: 1180px) {
+  .piece-option-row { grid-template-columns: 1fr; gap: 8px; }
+  .piece-option-values { justify-content: flex-start; }
+}
+
 /* La medida fija se lee de primeras: tinta, no gris. */
 .piece-dimension-row--plain strong { color: var(--ink); }
 .color-options { display: flex; gap: 10px; justify-content: flex-end; }
