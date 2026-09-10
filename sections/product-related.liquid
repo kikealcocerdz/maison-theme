@@ -15,6 +15,45 @@
   assign list = source.products
   assign rec_url = ''
 
+  comment
+    La colección «propia» de la pieza: la primera que no sea un cajón de sastre.
+    De ahí salen las dos lógicas que pidió el cliente — debajo, más piezas del
+    mismo decorado (sets y vajilla incluidos); en «te puede interesar», la misma
+    pieza en otros decorados.
+  endcomment
+  assign skip_handles = 'all,frontpage,novedades,fin-de-existencias,nuevo' | split: ','
+  assign own_collection = blank
+  for c in product.collections
+    if own_collection == blank
+      unless skip_handles contains c.handle
+        assign own_collection = c
+      endunless
+    endif
+  endfor
+  if own_collection == blank
+    assign own_collection = product.collections.first
+  endif
+
+  assign exclude_own = false
+  if section.settings.source == 'same_collection'
+    assign list = own_collection.products
+  elsif section.settings.source == 'same_type'
+    comment
+      Las colecciones por tipo de producto (platos, vajillas, azucareros…) son las
+      del menú lateral. Sin colección para ese tipo, se cae a la de siempre.
+    endcomment
+    assign type_handle = product.type | handleize
+    assign type_col = collections[type_handle]
+    if type_col != blank and type_col.products.size > 0
+      assign list = type_col.products
+      assign exclude_own = true
+    endif
+  endif
+  if list == blank or list.size == 0
+    assign list = own_collection.products
+    assign exclude_own = false
+  endif
+
   # `recommendations.performed` is only true inside the /recommendations/products render,
   # so the first paint always ships the collection grid (works with no JS and for crawlers)
   # and the fetch below swaps it for the real recommendations when there are any.
@@ -36,8 +75,22 @@
   {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
   <div class="related-grid">
     {%- if auto -%}
-      {%- for product in list limit: limit -%}
+      {%- comment -%}
+        El recuento va a mano: saltarse la pieza actual (o las de su propio decorado
+        en «te puede interesar») dentro de un `limit` dejaba huecos en la fila.
+      {%- endcomment -%}
+      {%- assign shown = 0 -%}
+      {%- for product in list -%}
+        {%- if shown >= limit -%}{%- break -%}{%- endif -%}
         {%- if product.id == current_id -%}{%- continue -%}{%- endif -%}
+        {%- if exclude_own and own_collection != blank -%}
+          {%- assign in_own = false -%}
+          {%- for c in product.collections -%}
+            {%- if c.handle == own_collection.handle -%}{%- assign in_own = true -%}{%- break -%}{%- endif -%}
+          {%- endfor -%}
+          {%- if in_own -%}{%- continue -%}{%- endif -%}
+        {%- endif -%}
+        {%- assign shown = shown | plus: 1 -%}
         {%- liquid
           assign r_img1 = product.featured_image | image_url: width: 720
           assign r_w = product.featured_image.width | default: 1000
@@ -197,6 +250,8 @@
       "type": "select", "id": "source", "label": "Source", "default": "collection",
       "options": [
         { "value": "collection", "label": "Collection (manual)" },
+        { "value": "same_collection", "label": "Same collection as this product" },
+        { "value": "same_type", "label": "Same product type, other collections" },
         { "value": "recommendations", "label": "Shopify recommendations" }
       ]
     },

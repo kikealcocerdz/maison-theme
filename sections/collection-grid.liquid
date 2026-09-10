@@ -859,12 +859,48 @@
       if (sb) sb.addEventListener('click', function () { sw.classList.toggle('open'); });
     }
 
+    // Resultados intercalados. Sin esto, el orden del admin agrupa las tres
+    // palanganas (o los tres colores de la misma pieza) una detrás de otra y la
+    // rejilla se ve monótona. Sólo actúa sobre el orden por defecto: en cuanto el
+    // comprador elige «precio» o «novedades» manda Shopify, que ordena la colección
+    // entera, no sólo la página pintada.
+    // ponytail: baraja por tipo de producto porque es el dato que ya viaja en la
+    // tarjeta. Cuando el cliente diga qué piezas destacar primero, ese criterio
+    // entra aquí como primer corte.
+    function interleave() {
+      if (!grid || location.search.indexOf('sort_by=') > -1) return;
+      var items = [].slice.call(grid.querySelectorAll('.product'));
+      if (items.length < 6) return;
+
+      var buckets = [];
+      var byKey = {};
+      items.forEach(function (el) {
+        var key = el.dataset.type || '';
+        if (!byKey[key]) { byKey[key] = []; buckets.push(byKey[key]); }
+        byKey[key].push(el);
+      });
+      if (buckets.length < 2) return;
+
+      var mixed = [];
+      for (var round = 0; mixed.length < items.length; round++) {
+        buckets.forEach(function (b) { if (b[round]) mixed.push(b[round]); });
+      }
+
+      var editorial = grid.querySelector('.editorial-insert');
+      mixed.forEach(function (item, i) {
+        if (editorial && i === 6) grid.insertBefore(editorial, item);
+        grid.appendChild(item);
+      });
+      var lmEl = grid.querySelector('.load-more');
+      if (lmEl) grid.appendChild(lmEl);
+    }
+
     // Budget mode ("Sets para regalo"): price ascending without touching the sort menu.
     // ponytail: this only reorders what is already in the DOM — the collection's own
     // "Price: low to high" order in the admin is what sorts the whole collection across
     // pages. This is the backup for when that admin setting drifts.
     var defaultSort = root.dataset.defaultSort;
-    if (defaultSort) applySort(defaultSort);
+    if (defaultSort) applySort(defaultSort); else interleave();
 
     // Facets — progressive enhancement only. The <form method="get"> in
     // snippets/collection-filters.liquid already filters on its own (Shopify does the
@@ -1044,7 +1080,7 @@
             // Only .product nodes: the next page renders its own .editorial-insert, which
             // must not be duplicated mid-grid.
             next.querySelectorAll('.product').forEach(function (el) { grid.insertBefore(el, more); });
-            if (defaultSort) applySort(defaultSort); // keep budget mode ordered across pages
+            if (defaultSort) applySort(defaultSort); else interleave(); // mantiene el criterio al paginar
             var nextCount = next.querySelector('.load-count');
             if (count && nextCount) count.textContent = nextCount.textContent;
             var nextLink = next.querySelector('.load-more a[rel="next"]');
