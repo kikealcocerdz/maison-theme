@@ -55,6 +55,11 @@
       <form class="search-panel__form" action="{{ routes.search_url }}" method="get" role="search">
         <input class="search-panel__input" type="search" name="q" placeholder="{{ 'general.search.label' | t }}…" autocomplete="off" aria-label="{{ 'general.search.label' | t }}">
         <button class="search-panel__submit" type="submit" aria-label="{{ 'general.search.label' | t }}">{% render 'icon-search' %}</button>
+        {%- comment -%}
+          Una sola aspa: limpia lo escrito y cierra el panel. La del navegador
+          (input type=search) se oculta por CSS para no tener dos.
+        {%- endcomment -%}
+        <button class="search-panel__close" type="button" data-search-close aria-label="{{ 'general.accessibility.close' | t }}">{% render 'icon-close' %}</button>
       </form>
       <div class="search-panel__results" id="searchResults" aria-live="polite"></div>
     </div>
@@ -206,7 +211,17 @@
   color: var(--ink);
 }
 
+.search-panel__input::-webkit-search-cancel-button,
+.search-panel__input::-webkit-search-decoration { -webkit-appearance: none; appearance: none; }
 .search-panel__input::placeholder { color: var(--muted); }
+
+.search-panel__close {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; flex: 0 0 34px; color: var(--muted); cursor: pointer;
+  transition: color 220ms var(--ease);
+}
+.search-panel__close:hover { color: var(--ink); }
+.search-panel__close svg { width: 14px; height: 14px; }
 .search-panel__input:focus { outline: none; border-color: var(--ink); }
 
 .search-panel__submit {
@@ -410,6 +425,13 @@
       clearTimeout(timer);
       if (term.length < 2) { results.innerHTML = ''; return; }
       timer = setTimeout(() => fetchResults(term), 220);
+    });
+
+    const searchClose = searchPanel.querySelector('[data-search-close]');
+    if (searchClose) searchClose.addEventListener('click', () => {
+      if (input) input.value = '';
+      if (results) results.innerHTML = '';
+      closeSearch();
     });
 
     searchToggle.addEventListener('click', (e) => {

@@ -75,6 +75,15 @@
     {%- endif -%}
   </header>
 
+  {%- comment -%}
+    El aviso de «deshacer» vive fuera de la rama de la cesta llena: quitar la última
+    pieza deja la cesta vacía y ahí es justo donde hace falta poder recuperarla.
+  {%- endcomment -%}
+  <p class="cart-page__undo" data-cart-undo hidden>
+    <span>{{ 'sections.cart.removed' | t }}</span>
+    <button class="cart-page__quiet-link" type="button" data-cart-undo-button>{{ 'sections.cart.undo' | t }}</button>
+  </p>
+
   {%- if cart.item_count == 0 -%}
     <div class="cart-page__empty">
       <h2>{{ section.settings.empty_heading }}</h2>
@@ -175,11 +184,6 @@
             </article>
           {%- endfor -%}
         </div>
-
-        <p class="cart-page__undo" data-cart-undo hidden>
-          <span>{{ 'sections.cart.removed' | t }}</span>
-          <button class="cart-page__quiet-link" type="button" data-cart-undo-button>{{ 'sections.cart.undo' | t }}</button>
-        </p>
 
         <div class="cart-page__line-actions">
           <button class="cart-page__quiet-link" type="submit" name="update">{{ 'cart.update' | t }}</button>
@@ -790,8 +794,13 @@
     var root = document.querySelector('[data-cart-page]');
     if (!root) return;
 
+    // El aviso sólo vale para la retirada que acaba de pasar: se marca con la hora
+    // y se borra del almacén nada más leerlo, así que volver a la cesta más tarde
+    // (o entrar de nuevas) ya no lo saca sin que nadie haya quitado nada.
     var note = root.querySelector('[data-cart-undo]');
     var pending = read();
+    store(null);
+    if (pending && pending.at && Date.now() - pending.at > 120000) pending = null;
     if (note && pending && pending.id) note.hidden = false;
 
     root.addEventListener('click', function (event) {
@@ -802,14 +811,14 @@
       var line = link.closest('.cart-page__line');
       if (line) line.classList.add('is-out');
 
-      store({ id: link.dataset.variantId, quantity: parseInt(link.dataset.qty, 10) || 1 });
+      store({ id: link.dataset.variantId, quantity: parseInt(link.dataset.qty, 10) || 1, at: Date.now() });
       window.location.href = link.href;
     });
 
     var undo = root.querySelector('[data-cart-undo-button]');
     if (!undo) return;
     undo.addEventListener('click', function () {
-      var item = read();
+      var item = pending;
       if (!item || !item.id) return;
       undo.disabled = true;
       fetch(window.Shopify && window.Shopify.routes ? window.Shopify.routes.root + 'cart/add.js' : '/cart/add.js', {
@@ -817,7 +826,6 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: item.id, quantity: item.quantity })
       }).then(function () {
-        store(null);
         window.location.reload();
       }).catch(function () {
         undo.disabled = false;
