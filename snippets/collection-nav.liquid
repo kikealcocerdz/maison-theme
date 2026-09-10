@@ -11,6 +11,8 @@
 
 {%- liquid
   assign menu = linklists[section.settings.sidebar_menu]
+  assign url_new = section.settings.link_novedades | default: '/collections/novedades'
+  assign url_end = section.settings.link_fin_existencias | default: '/collections/fin-de-existencias'
 -%}
 
 <aside class="sidebar">
@@ -49,6 +51,16 @@
       the Search & Discovery app exposes no filters.
     {%- endcomment -%}
     {% render 'collection-filters' %}
+
+    {%- comment -%}
+      Novedades y Fin de existencias van por encima del árbol: son accesos, no
+      facetas. «Fin de existencias» se destaca en otro color, como en el menú.
+    {%- endcomment -%}
+    <div class="sidebar__nav">
+    <nav class="side-quick" aria-label="{{ 'sections.collection.quick_label' | t }}">
+      <a class="side-quick__link" href="{{ url_new }}">{{ 'sections.collection.quick_new' | t }}</a>
+      <a class="side-quick__link side-quick__link--end" href="{{ url_end }}">{{ 'sections.collection.quick_last_units' | t }}</a>
+    </nav>
 
     <nav class="side-accordion" aria-label="{{ 'sections.collection.nav_label' | t }}">
     {%- if menu != blank and menu.links.size > 0 -%}
@@ -90,23 +102,38 @@
         </div></div>
       </div>
       <div class="side-section">
-        <div class="side-section-head"><a class="side-main-link" href="#">Gifts &amp; Decor</a><button class="side-toggle" type="button" aria-expanded="false" aria-label="Gifts & Decor"></button></div>
-        <div class="side-panel"><div><a href="#">Piezas decorativas</a></div></div>
-      </div>
-      <div class="side-section">
-        <div class="side-section-head"><a class="side-main-link" href="#">Emblemas</a></div>
+        <div class="side-section-head"><a class="side-main-link" href="#">Decoraci&oacute;n</a><button class="side-toggle" type="button" aria-expanded="false" aria-label="Decoración"></button></div>
+        <div class="side-panel"><div>
+          <a href="#">Art&iacute;stico</a><a href="#">Ba&ntilde;o</a><a href="#">Gifts</a>
+        </div></div>
       </div>
       <div class="side-section">
         <div class="side-section-head"><a class="side-main-link" href="#">Tipo de producto</a><button class="side-toggle" type="button" aria-expanded="false" aria-label="Tipo de producto"></button></div>
         <div class="side-panel"><div>
-          <a href="#">Vajillas</a><a href="#">Juegos de café</a><a href="#">Juegos de té</a><a href="#">Juegos de boles</a><a href="#">Fuentes</a><a href="#">Jarras y teteras</a><a href="#">Bandejas</a><a href="#">Objetos decorativos</a><a href="#">Platos</a><a href="#">Boles y cuencos</a><a href="#">Tazas</a>
+          <a href="#">Bandejas</a><a href="#">Boles y cuencos</a><a href="#">Cafeteras y teteras</a><a href="#">Fuentes</a><a href="#">Juegos de caf&eacute;</a><a href="#">Juegos de desayuno</a><a href="#">Juegos de t&eacute;</a><a href="#">Objetos decorativos</a><a href="#">Platos</a><a href="#">Tazas</a><a href="#">Vajillas</a>
         </div></div>
       </div>
       {%- endif -%}
     </nav>
+    </div>
+
+    {%- comment -%}
+      Puerta de escritorio al cajón de filtros adicionales. En móvil la puerta es el
+      botón «Filtrar» de la barra de herramientas, así que aquí se oculta.
+    {%- endcomment -%}
+    {%- if collection.filters.size > 0 -%}
+      <button class="more-filters" type="button" data-filters-open aria-expanded="false">
+        <span aria-hidden="true">+</span> {{ 'sections.collection.more_filters' | t }}
+      </button>
+    {%- endif -%}
   </div>
 
+  {%- comment -%}
+    Pie del cajón: limpiar y ver resultados. El «limpiar» es un enlace real a la
+    colección sin parámetros, así que también funciona sin JS.
+  {%- endcomment -%}
   <footer class="filters-foot">
+    <a class="filters-reset" href="{{ collection.url | default: '#' }}" data-filters-clear>{{ 'sections.collection.filter_clear_all' | t }}</a>
     <button class="filters-apply" type="button" data-filters-close>
       {{ 'sections.collection.show_results' | t }}
       <span class="filters-apply__count">({{ collection.products_count }})</span>

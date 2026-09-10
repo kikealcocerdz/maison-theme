@@ -21,5 +21,9 @@
   {%- elsif ed_asset != blank -%}
     <img src="{{ ed_asset | asset_url }}" alt="{{ ed_alt }}" width="1760" height="640" loading="lazy" decoding="async">
   {%- endif -%}
-  {%- if ed_caption != blank -%}<p>{{ ed_caption }}</p>{%- endif -%}
+  {%- comment -%}
+    ponytail: el pie ya no se pinta (petición del cliente: fuera los textos pequeños
+    bajo las fotos horizontales). El texto se sigue leyendo para el alt, así que la
+    foto no pierde su descripción. Para recuperarlo basta con volver a sacar el <p>.
+  {%- endcomment -%}
 </div>

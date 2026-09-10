@@ -285,6 +285,99 @@
 .collection-page .side-panel a { display: block; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 6px 0; opacity: .82; }
 .collection-page .side-panel a.active, .collection-page .side-panel a:hover { color: var(--ink); opacity: 1; }
 
+/* Accesos rápidos del lateral (Novedades / Fin de existencias) y puerta al cajón
+   de filtros adicionales. El árbol de capítulos queda debajo, sin cambios. */
+.collection-page .side-quick { display: grid; border-top: .5px solid var(--rule); }
+.collection-page .side-quick__link {
+  display: flex; align-items: center; min-height: 42px;
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink); border-bottom: .5px solid var(--rule);
+}
+.collection-page .side-quick__link--end { color: var(--accent-1); }
+.collection-page .side-quick__link:hover { opacity: .7; }
+.collection-page .sidebar__nav .side-accordion { border-top: 0; }
+.collection-page .more-filters {
+  display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px;
+  margin-top: 20px; padding: 0 14px; border: .5px solid var(--rule);
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink);
+  transition: border-color 200ms var(--ease);
+}
+.collection-page .more-filters:hover { border-color: var(--ink); }
+
+/* Cajón de filtros adicionales en escritorio: entra por la izquierda, sobre fondo
+   oscuro para que se distinga del lateral normal. El árbol se oculta dentro — el
+   cajón lleva «únicamente los filtros adicionales». */
+@media (min-width: 781px) {
+  .collection-page .side-filters { display: none; }
+
+  .collection-page.filters-drawer-open .sidebar {
+    position: fixed; inset: 0 auto 0 0; z-index: 120;
+    width: min(420px, 92vw); margin: 0; max-height: none;
+    display: flex; flex-direction: column; overflow: hidden;
+    background: #12171F; color: #EDEFF3;
+    animation: facets-left-in 280ms var(--ease);
+  }
+  @keyframes facets-left-in { from { transform: translateX(-100%); } to { transform: none; } }
+  .collection-page.filters-drawer-open::after {
+    content: ''; position: fixed; inset: 0; z-index: 115; background: rgba(15, 26, 46, .34);
+  }
+
+  .collection-page.filters-drawer-open .sidebar__nav,
+  .collection-page.filters-drawer-open .more-filters,
+  .collection-page.filters-drawer-open .filters-bar__clear { display: none; }
+  .collection-page.filters-drawer-open .sidebar__scroll {
+    display: block; flex: 1 1 auto; overflow-y: auto; padding: 8px 24px 24px;
+  }
+  .collection-page.filters-drawer-open .side-filters {
+    display: block; margin: 0; padding: 0; background: transparent; border: 0;
+  }
+  .collection-page.filters-drawer-open .side-filters-head { display: none; }
+
+  .collection-page.filters-drawer-open .filters-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    flex: 0 0 auto; padding: 20px 24px; border-bottom: .5px solid rgba(255, 255, 255, .14);
+  }
+  .collection-page.filters-drawer-open .filters-close {
+    display: grid; place-items: center; width: 30px; height: 30px; color: inherit;
+    position: relative; order: 2;
+  }
+  .collection-page.filters-drawer-open .filters-bar__title { color: inherit; }
+
+  /* Sobre fondo oscuro las reglas claras del lateral no se ven. */
+  .collection-page.filters-drawer-open .side-section,
+  .collection-page.filters-drawer-open .side-accordion { border-color: rgba(255, 255, 255, .14); }
+  .collection-page.filters-drawer-open .side-main-link,
+  .collection-page.filters-drawer-open .facet,
+  .collection-page.filters-drawer-open .side-toggle { color: inherit; opacity: 1; }
+  .collection-page.filters-drawer-open .facet:hover { color: inherit; opacity: .74; }
+  .collection-page.filters-drawer-open .facet-count { color: inherit; opacity: .55; }
+  .collection-page.filters-drawer-open .facet input { accent-color: #EDEFF3; }
+  .collection-page.filters-drawer-open .facet-price input,
+  .collection-page.filters-drawer-open .facet-range__track { border-color: rgba(255, 255, 255, .26); background-color: transparent; }
+  .collection-page.filters-drawer-open .facet-price input { color: inherit; }
+  .collection-page.filters-drawer-open .facet-range__track { background: rgba(255, 255, 255, .26); }
+  .collection-page.filters-drawer-open .facet-range__fill { background: #EDEFF3; }
+  .collection-page.filters-drawer-open .facet-price-sep { color: inherit; opacity: .6; }
+
+  .collection-page.filters-drawer-open .filters-foot {
+    display: flex; align-items: center; gap: 16px; flex: 0 0 auto;
+    padding: 16px 24px; border-top: .5px solid rgba(255, 255, 255, .14);
+  }
+  .collection-page.filters-drawer-open .filters-reset {
+    flex: 0 0 auto; font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+    color: inherit; opacity: .72; text-decoration: underline; text-underline-offset: 3px;
+  }
+  .collection-page.filters-drawer-open .filters-reset:hover { opacity: 1; }
+  .collection-page.filters-drawer-open .filters-apply {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    flex: 1 1 auto; min-height: 48px; background: #EDEFF3; color: #12171F;
+    font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  }
+  .collection-page.filters-drawer-open .filters-apply__count {
+    font-family: var(--serif); font-size: 14px; letter-spacing: .02em; text-transform: none;
+  }
+}
+
 /* Facets (snippets/collection-filters.liquid) — same accordion shell as the chapter tree
    below, but read as a control panel rather than navigation: boxed on the faint ground,
    headings in full ink. The nav keeps its plain editorial list. */
@@ -531,13 +624,18 @@
 
   /* Pie fijo */
   .collection-page.filters-drawer-open .filters-foot {
-    display: block; flex: 0 0 auto;
+    display: flex; align-items: center; gap: 14px; flex: 0 0 auto;
     padding: 16px 20px calc(16px + env(safe-area-inset-bottom, 0px));
     border-top: .5px solid var(--rule); box-shadow: 0 -8px 24px rgba(15, 26, 46, .05);
   }
+  .collection-page .filters-reset {
+    flex: 0 0 auto; font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--muted); text-decoration: underline; text-underline-offset: 3px;
+  }
+  .collection-page .more-filters { display: none; }
   .collection-page .filters-apply {
     display: flex; align-items: center; justify-content: center; gap: 10px;
-    width: 100%; min-height: 56px; background: var(--ink); color: var(--paper);
+    flex: 1 1 auto; min-height: 56px; background: var(--ink); color: var(--paper);
     font-size: 12px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
     transition: background 240ms var(--ease);
   }
@@ -790,10 +888,14 @@
         return location.pathname + (q ? '?' + q : '');
       }
 
+      // Dos puertas al mismo cajón: «Filtrar» en la barra (móvil) y «+ Filtros» en
+      // el lateral (escritorio). Ambas llevan data-filters-open, así que el aria hay
+      // que devolverlo en las dos.
       function closeDrawer() {
         root.classList.remove('filters-drawer-open');
-        var t = root.querySelector('[data-filters-open]');
-        if (t) t.setAttribute('aria-expanded', 'false');
+        root.querySelectorAll('[data-filters-open]').forEach(function (t) {
+          t.setAttribute('aria-expanded', 'false');
+        });
         document.body.style.overflow = '';
       }
 
@@ -840,7 +942,9 @@
 
         if (e.target.closest('[data-filters-open]')) {
           root.classList.add('filters-drawer-open');
-          e.target.closest('[data-filters-open]').setAttribute('aria-expanded', 'true');
+          root.querySelectorAll('[data-filters-open]').forEach(function (t) {
+            t.setAttribute('aria-expanded', 'true');
+          });
           document.body.style.overflow = 'hidden';
           return;
         }
@@ -982,6 +1086,8 @@
   "name": "Collection grid",
   "settings": [
     { "type": "link_list", "id": "sidebar_menu", "label": "Sidebar navigation menu", "info": "Nested menu (chapters → subcollections). Falls back to a demo tree when empty." },
+    { "type": "url", "id": "link_novedades", "label": "Sidebar link: Novedades", "info": "Defaults to /collections/novedades." },
+    { "type": "url", "id": "link_fin_existencias", "label": "Sidebar link: Fin de existencias", "info": "Defaults to /collections/fin-de-existencias." },
     { "type": "text", "id": "kicker", "label": "Kicker", "info": "Small label above the title, e.g. 'Capítulo 01'. Overridden by the collection metafield custom.chapter." },
     { "type": "text", "id": "title", "label": "Title override", "info": "Falls back to the collection title." },
     { "type": "richtext", "id": "intro_copy", "label": "Intro copy", "info": "Falls back to the collection description." },
