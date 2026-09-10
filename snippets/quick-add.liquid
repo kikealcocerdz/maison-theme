@@ -9,9 +9,17 @@
   Accepts:
     product — Shopify product object. Renders nothing without one (demo cards
               have no variant to add).
+    scope   — string que distingue esta rejilla de las demas de la pagina. Sin el,
+              dos tarjetas del mismo producto (p.ej. el mismo articulo en
+              "Completa la mesa" y en "Te puede interesar") generarian dos
+              formularios con el id `product_form_<id>` de Shopify -> HTML invalido.
 {%- endcomment -%}
+{%- liquid
+  assign form_scope = scope | default: 'card'
+  assign form_id = 'quick-add-' | append: form_scope | append: '-' | append: product.id
+-%}
 {%- if product.available -%}
-  {%- form 'product', product, class: 'quick-add' -%}
+  {%- form 'product', product, class: 'quick-add', id: form_id -%}
     <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
     <button type="submit" name="add" aria-label="{{ 'products.product.add_to_cart' | t }}">
       {%- render 'icon-cart' -%}

@@ -38,7 +38,7 @@
                 <h3 class="block-product-card__title">{{ product.title | escape }}</h3>
                 <span class="block-product-card__price">{{ product.price | money }}</span>
               </a>
-              {% render 'quick-add', product: product %}
+              {% render 'quick-add', product: product, scope: section.id %}
             </article>
           {%- endfor -%}
         {%- else -%}

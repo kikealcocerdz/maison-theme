@@ -19,13 +19,16 @@
 {%- endcomment -%}
 {%- liquid
   assign hero_img = section.settings.hero_image
-  assign hero_demo = section.settings.hero_demo_image | default: 'history-sunset.png'
+  assign hero_demo = section.settings.hero_demo_image | default: 'history-sunset.webp'
   assign hero_video = section.settings.hero_video
   assign hero_video_demo = section.settings.hero_video_demo | default: 'heritage-hero-loop.mp4'
   assign hero_poster = section.settings.hero_video_poster | default: 'heritage-hero-poster.jpg'
   assign finale_img = section.settings.finale_image
   assign finale_demo = section.settings.finale_demo_image | default: 'collection-aurora.webp'
-  assign asset_files = 'history-dawn.png,history-sunset.png,craft.webp,collection-aurora.webp,mesa_bodegon_lujo_el_renacer.webp,gifts-decor-vertical.webp,gifts_decor_arch.png,gifts-decor-vertical.png,mesa_aurora_editorial.jpg,mesa_bodegon_el_renacer.webp,negro_vistas_bandeja.png,negro_vistas_bandeja_photo.jpg,negro_vistas_plato.png,aurora_202_plato.png,aurora_202_sopera.png,aurora_202_cafetera.png,bellavista_plato.png,bellavista_sopera.png,bellavista_fuente.png,heritage-dossier_p03.webp,heritage-dossier_p05.webp,heritage-dossier_p06.webp,heritage-dossier_p07.webp,heritage-dossier_p08.webp,heritage-dossier_p09.webp,heritage-dossier_p10.webp,heritage-dossier_p11.webp,heritage-dossier_p12.webp,heritage-dossier_p13.webp,heritage-dossier_p14.webp,heritage-dossier_p15.webp,heritage-dossier_p21.webp,heritage-dossier_p22.webp,heritage-dossier_p23.webp,heritage-dossier_p24.webp,heritage-dossier_p25.webp' | split: ','
+  # Solo estas tres las resuelve resolve() en los datos de milestones; el resto del
+  # mapa era herencia de la migracion a heritage2026-opt-*.webp y emitia 33 asset_url
+  # muertos en cada render.
+  assign asset_files = 'collection-aurora.webp,mesa_bodegon_lujo_el_renacer.webp,gifts-decor-vertical.webp' | split: ','
   comment
     The 50 real heritage-2026 photos now ship as `heritage2026-opt-<NAME>.webp`. The
     JS milestone data builds logical paths `assets/heritage-2026/opt-<NAME>.webp`, so

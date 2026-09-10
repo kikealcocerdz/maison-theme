@@ -62,6 +62,8 @@ main {
   html,
   body {
     max-width: 100%;
+    /* mismo respaldo que en el bloque de 760px: Safari < 16 ignora `clip`. */
+    overflow-x: hidden;
     overflow-x: clip;
   }
 }

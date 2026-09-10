@@ -51,7 +51,7 @@
                     assign result_new = 1
                   endif
                 -%}
-                {% render 'collection-card', product: result,
+                {% render 'collection-card', product: result, scope: section.id,
                   card_url: result.url, title: result.title,
                   price: result_price, meta: result.type,
                   img1: image_url, img_w: image_width, img_h: image_height,

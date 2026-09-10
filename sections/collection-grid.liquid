@@ -174,7 +174,7 @@
                   assign p_new = 1
                 endif
               -%}
-              {% render 'collection-card', product: product,
+              {% render 'collection-card', product: product, scope: section.id,
                 card_url: product.url, title: product.title,
                 price: p_price, meta: product.type,
                 img1: p_img1, img_w: p_w, img_h: p_h,
@@ -204,7 +204,7 @@
                   assign has_extra = true
                 endif
               -%}
-              {% render 'collection-card',
+              {% render 'collection-card', scope: section.id,
                 card_url: block.settings.link, title: block.settings.demo_title,
                 price: block.settings.demo_price, meta: block.settings.demo_meta,
                 img1: d_img1, badge: block.settings.badge,

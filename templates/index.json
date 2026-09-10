@@ -30,7 +30,7 @@
         "soft_bg": true
       },
       "blocks": {
-        "e1": { "type": "product-card", "settings": { "product": "plato-llano-202-rosa", "demo_image": "aurora_202_plato.png", "meta_line_override": "Aurora · 202 Rosa" } },
+        "e1": { "type": "product-card", "settings": { "product": "plato-llano-202-rosa", "demo_image": "aurora_202_plato.webp", "meta_line_override": "Aurora · 202 Rosa" } },
         "e2": { "type": "product-card", "settings": { "product": "sopera-202-rosa", "demo_image": "aurora_202_sopera.png", "meta_line_override": "Aurora · 202 Rosa" } },
         "e3": { "type": "product-card", "settings": { "product": "cafetera-202-rosa", "demo_image": "aurora_202_cafetera.png", "meta_line_override": "Aurora · 202 Rosa" } },
         "e4": { "type": "product-card", "settings": { "product": "plato-llano-bellavista", "demo_image": "bellavista_plato.png", "meta_line_override": "Aurora · Bellavista" } },

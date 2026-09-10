@@ -49,7 +49,7 @@
             assign r_new = 1
           endif
         -%}
-        {% render 'related-card', product: product,
+        {% render 'related-card', product: product, scope: section.id,
           card_url: product.url, title: product.title, price: r_price, meta: r_meta,
           img1: r_img1, img_w: r_w, img_h: r_h,
           badge: r_new, data_price: product.price, data_new: r_new %}
@@ -60,7 +60,7 @@
           {%- liquid
             assign d_img1 = block.settings.demo_image | asset_url
           -%}
-          {% render 'related-card',
+          {% render 'related-card', scope: section.id,
             card_url: block.settings.link, title: block.settings.demo_title,
             price: block.settings.demo_price, meta: block.settings.demo_meta,
             img1: d_img1, badge: block.settings.badge,
@@ -136,6 +136,7 @@
         if (!grid || !next || !next.querySelector('.product')) return;
         grid.replaceWith(next);
         initCards(root);
+        dedupeAcrossRows();
         // ponytail: let theme.js's shopify:section:load handler observe the new .reveal
         // cards instead of re-implementing the observer here (same as collection-grid).
         root.dispatchEvent(new CustomEvent('shopify:section:load', { bubbles: true }));
@@ -143,9 +144,31 @@
       .catch(function () {});
   }
 
+  // Las dos filas de la PDP ("Completa la mesa" y "Te puede interesar") piden sus
+  // recomendaciones por separado y no se ven entre si, asi que el mismo producto
+  // puede caer en ambas. Se recorre el documento en orden y se quitan las tarjetas
+  // repetidas: gana la primera fila. Es en cliente porque el contenido definitivo
+  // llega del fetch, no del render de Liquid.
+  function dedupeAcrossRows() {
+    var seen = {};
+    document.querySelectorAll('.product-related .related-grid .product').forEach(function (card) {
+      var link = card.querySelector('.product-info a');
+      var key = link && link.getAttribute('href');
+      if (!key) return;
+      key = key.split('?')[0];
+      if (seen[key]) { card.remove(); return; }
+      seen[key] = 1;
+    });
+    document.querySelectorAll('.product-related').forEach(function (row) {
+      var grid = row.querySelector('.related-grid');
+      row.hidden = !(grid && grid.querySelector('.product'));
+    });
+  }
+
   function init(root) {
     initCards(root);
     loadRecommendations(root);
+    dedupeAcrossRows();
   }
 
   document.querySelectorAll('.product-related').forEach(init);

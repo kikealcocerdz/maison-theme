@@ -27,7 +27,7 @@
       <span class="block-product-card__price">{{ product.price | money }}</span>
     {%- endif -%}
   </a>
-  {% render 'quick-add', product: product %}
+  {% render 'quick-add', product: product, scope: block.id %}
 </article>
 {%- elsif block.settings.demo_image != blank -%}
   {%- comment -%} Demo card — used when no product is selected (e.g. before catalog migration). {%- endcomment -%}
@@ -128,7 +128,7 @@
       "info": "Falls back to product metafield custom.meta_line if empty."
     },
     { "type": "header", "content": "Imagen propia / demo" },
-    { "type": "text", "id": "demo_image", "label": "Image override (asset filename)", "info": "e.g. aurora_202_plato.png — replaces the catalogue photo, and is the image used when no product is chosen." },
+    { "type": "text", "id": "demo_image", "label": "Image override (asset filename)", "info": "e.g. aurora_202_plato.webp — replaces the catalogue photo, and is the image used when no product is chosen." },
     { "type": "text", "id": "demo_title", "label": "Demo title" },
     { "type": "text", "id": "demo_price", "label": "Demo price (e.g. 68 €)" }
   ]
