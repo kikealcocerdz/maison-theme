@@ -230,6 +230,7 @@
       "tax_note": "IVA incluido",
       "dimensions": "Dimensiones",
       "service": "Servicio",
+      "pieces": "Piezas",
       "pieces_selector": "Selecciona el número de piezas",
       "pack_intro": "Tu pack contiene:"
     },

@@ -230,6 +230,7 @@
       "tax_note": "VAT included",
       "dimensions": "Dimensions",
       "service": "Service",
+      "pieces": "Pieces",
       "pieces_selector": "Select the number of pieces",
       "pack_intro": "Your set includes:"
     },

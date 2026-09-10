@@ -92,10 +92,16 @@
     assign current_color = current_variant.options[color_idx]
   endif
 
+  comment
+    El cliente pregunta qué es la «P» de «42 P.»: la etiqueta la escribe entera.
+    Cuando en el admin renombren la opción, la cadena ya no encuentra nada que
+    sustituir y el rótulo pasa tal cual.
+  endcomment
   assign current_label = current_variant.title
   if pieces_idx >= 0
     assign current_label = current_variant.options[pieces_idx]
   endif
+  assign current_label = current_label | replace: 'P.', 'piezas' | replace: 'p.', 'piezas' | replace: '  ', ' ' | strip
 
   comment
     Demo bundles (CLAUDE.md §7) — one line per pack:
@@ -105,7 +111,7 @@
   if is_set and pieces_idx < 0 and section.settings.demo_bundles != blank
     assign demo_bundles = section.settings.demo_bundles | strip | newline_to_br | split: '<br />'
     assign first_bundle = demo_bundles[0] | split: '|'
-    assign current_label = first_bundle[0] | strip
+    assign current_label = first_bundle[0] | replace: 'P.', 'piezas' | replace: 'p.', 'piezas' | replace: '  ', ' ' | strip
     assign price = first_bundle[1] | strip
   endif
 -%}
@@ -232,6 +238,17 @@
         {%- endif -%}
 
         {%- comment -%}
+          El número de piezas del pack elegido, junto al resto de la ficha: pulsar
+          «56 piezas» abajo tenía que verse también aquí (lo pidió el cliente).
+        {%- endcomment -%}
+        {%- if is_set and current_label != blank -%}
+          <div class="piece-dimension-row piece-dimension-row--plain">
+            <span>{{ 'sections.product.pieces' | t }}</span>
+            <strong data-bundle-label>{{ current_label | escape }}</strong>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%}
           La medida se ve de primeras, en fila fija y en tinta (no en gris): es el dato
           que más se consulta. El acordeón «Dimensiones» del mismo metafield se salta
           más abajo para no repetirla.
@@ -299,6 +316,7 @@
                   {%- if color_idx < 0 or v.options[color_idx] == current_color -%}
                     {%- assign vlabel = v.title -%}
                     {%- if pieces_idx >= 0 -%}{%- assign vlabel = v.options[pieces_idx] -%}{%- endif -%}
+                    {%- assign vlabel = vlabel | replace: 'P.', 'piezas' | replace: 'p.', 'piezas' | replace: '  ', ' ' | strip -%}
                     <button class="bundle-option{% if v.id == current_variant.id %} is-active{% endif %}" type="button" data-pack-key="{{ v.id }}" data-variant-id="{{ v.id }}" data-price="{{ v.price | money }}" data-label="{{ vlabel | escape }}"{% unless v.available %} disabled{% endunless %}>{{ vlabel | escape }}</button>
                   {%- endif -%}
                 {%- endfor -%}
@@ -307,7 +325,7 @@
               <div class="bundle-options" role="group" aria-label="{{ 'sections.product.pieces_selector' | t }}">
                 {%- for row in demo_bundles -%}
                   {%- assign parts = row | split: '|' -%}
-                  {%- assign vlabel = parts[0] | strip -%}
+                  {%- assign vlabel = parts[0] | replace: 'P.', 'piezas' | replace: 'p.', 'piezas' | replace: '  ', ' ' | strip -%}
                   <button class="bundle-option{% if forloop.first %} is-active{% endif %}" type="button" data-pack-key="{{ vlabel | escape }}" data-variant-id="" data-price="{{ parts[1] | strip | escape }}" data-label="{{ vlabel | escape }}">{{ vlabel | escape }}</button>
                 {%- endfor -%}
               </div>
@@ -366,11 +384,11 @@
           {%- if color_idx < 0 or v.options[color_idx] == current_color -%}
             {%- assign items = v.metafields.custom.pack.value -%}
             {%- if items != blank -%}
-              {%- assign cols = items.size -%}{%- if cols > 8 -%}{%- assign cols = 8 -%}{%- endif -%}
-              <div class="product-set-includes-list{% if v.id == current_variant.id %} is-visible{% endif %}" data-pack-for="{{ v.id }}" style="--pack-cols: {{ cols }}">
+              <div class="product-set-includes-list{% if v.id == current_variant.id %} is-visible{% endif %}" data-pack-for="{{ v.id }}">
                 {%- for item in items -%}
                   {%- assign ip = item.producto.value -%}
                   <article class="product-set-include-card">
+                    <a class="product-set-include-link" href="{{ ip.url | default: '#' }}">
                     <div class="product-set-include-thumb">
                       {%- if ip.featured_image -%}
                         <img src="{{ ip.featured_image | image_url: width: 480, height: 480, crop: 'center' }}" alt="{{ ip.title | escape }}" width="480" height="480" loading="lazy" decoding="async">
@@ -380,6 +398,7 @@
                       <strong>{{ ip.title | escape }}</strong>
                       <span>x {{ item.cantidad.value }}</span>
                     </div>
+                    </a>
                   </article>
                 {%- endfor -%}
               </div>
@@ -390,12 +409,14 @@
         {%- for row in demo_bundles -%}
           {%- assign parts = row | split: '|' -%}
           {%- assign raw_items = parts[2] | default: '' | split: ',' -%}
-          {%- assign cols = raw_items.size -%}{%- if cols > 8 -%}{%- assign cols = 8 -%}{%- endif -%}
-          <div class="product-set-includes-list{% if forloop.first %} is-visible{% endif %}" data-pack-for="{{ parts[0] | strip | escape }}" style="--pack-cols: {{ cols }}">
+          {%- comment -%} La clave tiene que coincidir con la del botón, ya reescrita a «piezas». {%- endcomment -%}
+          {%- assign pack_key = parts[0] | replace: 'P.', 'piezas' | replace: 'p.', 'piezas' | replace: '  ', ' ' | strip -%}
+          <div class="product-set-includes-list{% if forloop.first %} is-visible{% endif %}" data-pack-for="{{ pack_key | escape }}">
             {%- for raw in raw_items -%}
               {%- assign bits = raw | strip | split: ':' -%}
               {%- assign ip = all_products[bits[0]] -%}
               <article class="product-set-include-card">
+                <a class="product-set-include-link" href="{{ ip.url | default: '#' }}">
                 <div class="product-set-include-thumb">
                   {%- if ip.featured_image -%}
                     <img src="{{ ip.featured_image | image_url: width: 480, height: 480, crop: 'center' }}" alt="{{ ip.title | escape }}" width="480" height="480" loading="lazy" decoding="async">
@@ -405,6 +426,7 @@
                   <strong>{{ ip.title | default: bits[0] | escape }}</strong>
                   <span>x {{ bits[1] | strip | default: 1 }}</span>
                 </div>
+                </a>
               </article>
             {%- endfor -%}
           </div>
@@ -606,15 +628,16 @@
 .product-set-pack-intro { text-align: center; margin: 0 auto 26px; }
 .product-set-pack-intro p { margin: 0; font: 400 clamp(18px, 1.45vw, 25px)/1.15 var(--serif); color: var(--ink); }
 .product-set-pack-intro span { display: block; margin-top: 8px; font: 400 9px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.product-set-includes-list { display: none; grid-template-columns: repeat(var(--pack-cols, 8), minmax(0, 1fr)); gap: 12px; }
+.product-set-includes-list { display: none; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 14px; }
 .product-set-includes-list.is-visible { display: grid; }
-.product-set-include-card { min-width: 0; padding: 11px; border: .5px solid rgba(15, 26, 46, .12); border-radius: 12px; background: #f7f8f9; transition: transform 300ms var(--ease), background 300ms var(--ease), border-color 300ms var(--ease); }
+.product-set-include-link { display: block; color: inherit; }
+.product-set-include-card { min-width: 0; padding: 12px; border: .5px solid rgba(15, 26, 46, .12); border-radius: 12px; background: #f7f8f9; transition: transform 300ms var(--ease), background 300ms var(--ease), border-color 300ms var(--ease); }
 .product-set-include-card:hover { transform: translateY(-4px); background: var(--paper); border-color: rgba(8, 40, 107, .22); }
 .product-set-include-thumb { width: 100%; aspect-ratio: 1 / 1; border-radius: 8px; background: var(--paper); margin-bottom: 11px; display: grid; place-items: center; overflow: hidden; }
 .product-set-include-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .product-set-include-copy { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 8px; }
-.product-set-include-copy strong { font: 400 10px/1.35 var(--sans); color: var(--ink); }
-.product-set-include-copy span { font: 500 10px/1 var(--sans); color: #08286b; white-space: nowrap; }
+.product-set-include-copy strong { font: 400 11.5px/1.35 var(--sans); color: var(--ink); }
+.product-set-include-copy span { font: 500 11px/1 var(--sans); color: #08286b; white-space: nowrap; }
 
 @media (max-width: 1180px) {
   .product-set-breadcrumb-bar { width: calc(100vw - 32px); padding: 18px 0 4px; }
@@ -995,7 +1018,7 @@
     if (options.length) {
       var variantInput = root.querySelector('[data-variant-input]');
       var priceEl = root.querySelector('[data-bundle-price]');
-      var labelEl = root.querySelector('[data-bundle-label]');
+      var labelEls = [].slice.call(root.querySelectorAll('[data-bundle-label]'));
       var stickyPrice = root.querySelector('[data-sticky-price]');
       var packs = [].slice.call(root.querySelectorAll('[data-pack-for]'));
       options.forEach(function (btn) {
@@ -1006,7 +1029,7 @@
           packs.forEach(function (p) { p.classList.toggle('is-visible', p.getAttribute('data-pack-for') === key); });
           if (priceEl) priceEl.textContent = btn.getAttribute('data-price');
           if (stickyPrice) stickyPrice.textContent = btn.getAttribute('data-price');
-          if (labelEl) labelEl.textContent = btn.getAttribute('data-label');
+          labelEls.forEach(function (el) { el.textContent = btn.getAttribute('data-label'); });
           var vid = btn.getAttribute('data-variant-id');
           if (variantInput && vid) {
             variantInput.value = vid;
