@@ -66,9 +66,10 @@
     scroll-snap-type: x mandatory !important;
     scrollbar-width: none !important;
     padding-bottom: 8px !important;
-    /* Sin este relleno la primera y la última tarjeta no pueden centrarse: el
-       snap-align:center las deja pegadas al borde. */
-    padding-inline: max(0px, calc((100% - min(78vw, 330px)) / 2)) !important;
+    /* El relleno se calcula sobre la pantalla, no sobre la caja de la sección:
+       con los 14px de la sección descontados, la tarjeta quedaba descentrada. */
+    margin-inline: -14px !important;
+    padding-inline: max(0px, calc((100vw - min(78vw, 330px)) / 2)) !important;
   }
 
   .editorial-collections__grid::-webkit-scrollbar { display: none !important; }

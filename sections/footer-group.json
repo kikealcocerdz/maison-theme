@@ -27,7 +27,7 @@
           "type": "column",
           "settings": {
             "heading": "Colecciones",
-            "items": "Aurora | /collections/aurora\nOchavada | /collections/ochavada\nGifts & Decor | /collections/decoracion\nEmblemas | /collections/emblemas"
+            "items": "Aurora | /collections/aurora\nOchavada | /collections/ochavada\nDecoración | /collections/decoracion\nNuevo | /collections/novedades"
           }
         },
         "col-2": {

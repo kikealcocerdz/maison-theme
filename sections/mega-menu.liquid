@@ -20,6 +20,12 @@
                 {%- if row == blank -%}{%- continue -%}{%- endif -%}
                 {%- assign parts = row | split: '|' -%}
                 {%- assign label = parts[0] | strip -%}
+                {%- comment -%} Un «!» delante del rótulo lo pinta en acento (Fin de existencias). {%- endcomment -%}
+                {%- assign is_flag = false -%}
+                {%- if label contains '!' -%}
+                  {%- assign is_flag = true -%}
+                  {%- assign label = label | remove_first: '!' | strip -%}
+                {%- endif -%}
                 {%- assign meta = '' -%}
                 {%- assign url = '' -%}
                 {%- if parts.size > 1 -%}{%- assign meta = parts[1] | strip -%}{%- endif -%}
@@ -27,9 +33,9 @@
                 {%- if url != blank -%}
                   {%- assign is_current = false -%}
                   {%- if url == request.path -%}{%- assign is_current = true -%}{%- endif -%}
-                  <li><a class="mega-row{% if is_current %} is-current{% endif %}" href="{{ url }}"{% if is_current %} aria-current="page"{% endif %}><span>{{ label | escape }}</span>{%- if meta != blank -%}<span aria-hidden="true">{{ meta | escape }}</span>{%- endif -%}</a></li>
+                  <li><a class="mega-row{% if is_current %} is-current{% endif %}{% if is_flag %} mega-row--flag{% endif %}" href="{{ url }}"{% if is_current %} aria-current="page"{% endif %}><span>{{ label | escape }}</span>{%- if meta != blank -%}<span aria-hidden="true">{{ meta | escape }}</span>{%- endif -%}</a></li>
                 {%- else -%}
-                  <li><span class="mega-row"><span>{{ label | escape }}</span>{%- if meta != blank -%}<span aria-hidden="true">{{ meta | escape }}</span>{%- endif -%}</span></li>
+                  <li><span class="mega-row{% if is_flag %} mega-row--flag{% endif %}"><span>{{ label | escape }}</span>{%- if meta != blank -%}<span aria-hidden="true">{{ meta | escape }}</span>{%- endif -%}</span></li>
                 {%- endif -%}
               {%- endfor -%}
             {%- endif -%}
@@ -199,6 +205,7 @@ a.mega-row:focus-visible::before,
 }
 
 .mega-card .cta { font-size: 12px; letter-spacing: 0.17em; }
+.mega-row--flag > span:first-child { color: var(--accent-1); }
 
 @media (prefers-reduced-motion: reduce) {
   .mega-row,
@@ -246,8 +253,8 @@ a.mega-row:focus-visible::before,
     align-items: flex-start;
   }
 
-  .mega-card { padding: 10px; }
-  .mega-card img { height: 112px; }
+  .mega-card { padding: 10px; height: 100%; display: flex; flex-direction: column; }
+  .mega-card img { flex: 1 1 auto; height: auto; min-height: 150px; aspect-ratio: 3 / 4; object-fit: cover; }
 
   .mega-card p {
     font-size: 18px;

@@ -813,17 +813,18 @@
     width: 100% !important;
     /* 9dvh se quedaba por debajo de la cabecera fija en pantallas de 640px:
        el rotulo de la fase caia justo encima de "Menu". */
-    padding: calc(var(--header-h) + 22px) 16px 0 !important;
+    padding: calc(var(--header-h) + 10px) 16px 0 !important;
     align-content: start !important;
   }
   .artesania-page .ap-proc-side--r { width: 100% !important; max-width: 100% !important; }
   .artesania-page .ap-proc-title { font-size: clamp(30px, 8.5vw, 42px) !important; line-height: 1.02 !important; }
   .artesania-page .ap-phase p { font-size: 12px !important; line-height: 1.58 !important; }
 
-  .artesania-page #plate-canvas { width: min(72vw, 300px) !important; height: min(72vw, 300px) !important; }
-  .artesania-page .plate-fallback { width: min(68vw, 280px) !important; }
+  /* El plato queda menos suelto: crece y el texto de arriba y abajo se le acerca. */
+  .artesania-page #plate-canvas { width: min(82vw, 340px) !important; height: min(82vw, 340px) !important; }
+  .artesania-page .plate-fallback { width: min(78vw, 320px) !important; }
 
-  .artesania-page .ap-proceso__final { bottom: 4.2dvh !important; width: calc(100% - 32px) !important; }
+  .artesania-page .ap-proceso__final { bottom: 2.6dvh !important; width: calc(100% - 32px) !important; }
   .artesania-page .ap-proceso__final-heading { font-size: clamp(27px, 7.7vw, 36px) !important; }
 
   .artesania-page .ap-cols__grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 22px 10px !important; }

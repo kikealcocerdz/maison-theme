@@ -42,7 +42,7 @@
     },
     "related_cross": {
       "type": "product-related",
-      "settings": { "heading": "Te puede interesar", "product_limit": 5, "collection": "emblemas", "source": "recommendations", "intent": "related" }
+      "settings": { "heading": "Te puede interesar", "product_limit": 5, "collection": "novedades", "source": "recommendations", "intent": "related" }
     }
   },
   "order": ["main", "story", "related_set", "related_cross"]

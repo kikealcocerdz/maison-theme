@@ -130,10 +130,10 @@
         "col-4": {
           "type": "collection",
           "settings": {
-            "name": "Emblemas",
-            "tag": "Selección",
+            "name": "Novedades",
+            "tag": "Nuevo",
             "demo_image": "emblemas-cover.webp",
-            "link": "/collections/emblemas"
+            "link": "/collections/novedades"
           }
         }
       },

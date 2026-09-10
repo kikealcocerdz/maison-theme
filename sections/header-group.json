@@ -24,14 +24,14 @@
           "type": "column",
           "settings": {
             "heading": "Producto",
-            "items": "Platos | | /collections/platos\nVajillas | | /collections/vajillas\nJuegos de té / café / boles | | /collections/juegos-te\nJarras y teteras | | /collections/jarras-teteras\nFuentes | | /collections/fuentes\nBandejas | | /collections/bandejas\nMugs | | /collections/mugs"
+            "items": "Platos | | /collections/platos\nVajillas | | /collections/vajillas\nJuegos de té / café / desayuno | | /collections/juegos-te\nCafeteras y teteras | | /collections/cafeteras-teteras\nFuentes | | /collections/fuentes\nBandejas | | /collections/bandejas\nMugs | | /collections/mugs"
           }
         },
         "col-2": {
           "type": "column",
           "settings": {
             "heading": "Colecciones",
-            "items": "Aurora | Cap. 01 | /collections/aurora\nOchavada | Cap. 02 | /collections/ochavada\nGifts & Decor | Cap. 03 | /collections/decoracion\nEmblemas | Selección | /collections/emblemas"
+            "items": "Aurora | Cap. 01 | /collections/aurora\nOchavada | Cap. 02 | /collections/ochavada\nDecoración | Cap. 03 | /collections/decoracion\nNuevo | | /collections/novedades\n!Fin de existencias | | /collections/fin-de-existencias"
           }
         },
         "col-3": {

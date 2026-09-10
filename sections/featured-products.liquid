@@ -147,17 +147,27 @@
 }
 
 @media (max-width: 680px) {
-  .featured-products { padding-top: 0; padding-bottom: 82px; }
-  .featured-products.soft-bg { padding-top: 24px; padding-bottom: 82px; }
-  .featured-products__viewport { overflow: visible; }
+  .featured-products { padding-top: 0; padding-bottom: 62px; }
+  .featured-products.soft-bg { padding-top: 20px; padding-bottom: 62px; }
+  /* Rueda en horizontal: la rejilla de dos columnas obligaba a bajar media
+     pantalla y escondía todo lo que pasara de la cuarta pieza. La tarjeta
+     asomada por el borde es la que avisa de que hay más a la derecha. */
+  .featured-products__viewport {
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x proximity; overscroll-behavior-inline: contain;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    margin: 0 -14px; padding: 0 14px;
+  }
+  .featured-products__viewport::-webkit-scrollbar { display: none; }
   .featured-products__track {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px 14px;
+    display: flex !important;
+    gap: 12px;
     transform: none !important;
   }
-  .featured-products__card { flex: initial !important; padding: 0 !important; min-width: 0; }
-  .featured-products__card:nth-child(n+5) { display: none; }
+  .featured-products__card {
+    flex: 0 0 64% !important; padding: 0 !important; min-width: 0;
+    scroll-snap-align: start;
+  }
   .featured-products__card .block-product-card__media img {
     max-height: 78%; max-width: 82%; margin-left: auto; margin-right: auto;
   }
