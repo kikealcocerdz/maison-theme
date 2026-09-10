@@ -95,7 +95,17 @@
 }
 
 @media (max-width: 760px) {
-  .product-related .related-grid { gap: 24px 10px !important; }
+  /* Scroll lateral: apilados en dos columnas, «Completa tu mesa» y «Te puede
+     interesar» sumaban media pantalla de alto cada uno. */
+  .product-related .related-grid {
+    display: grid !important; grid-auto-flow: column !important;
+    grid-template-columns: none !important; grid-auto-columns: 62vw !important;
+    gap: 14px !important; overflow-x: auto !important;
+    scroll-snap-type: x proximity; overscroll-behavior-inline: contain;
+    scrollbar-width: none; margin: 0 -14px !important; padding: 0 14px 6px !important;
+  }
+  .product-related .related-grid::-webkit-scrollbar { display: none; }
+  .product-related .related-grid > * { scroll-snap-align: start; }
   .product-related .related-grid .product-media { overflow: hidden !important; }
   .product-related .related-grid .product-media img { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center !important; }
 }

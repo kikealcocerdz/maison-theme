@@ -184,7 +184,22 @@
 @media (max-width: 620px) {
   .help-bubble { right: 16px; bottom: 16px; }
   .help-fab { width: 48px; height: 48px; }
-  .help-panel { width: calc(100vw - 32px); bottom: 60px; max-height: 74vh; }
+
+  /* A pantalla completa: al escribir sale el teclado y, en un panel flotante, la
+     mitad del mensaje quedaba tapada. `dvh` sigue a la barra del navegador. */
+  .help-panel {
+    position: fixed; inset: 0; width: 100%; height: 100dvh;
+    max-height: none; border: 0; animation: none;
+  }
+  .help-body { flex: 1 1 auto; }
+  .help-head { padding: calc(16px + env(safe-area-inset-top, 0px)) 18px 14px; }
+  .help-bubble.is-open .help-fab { display: none; }
+}
+
+/* En la ficha de producto el botón de compra queda pegado abajo: la burbuja sube
+   por encima para no solaparlo. */
+@media (max-width: 760px) {
+  body.template-product .help-bubble { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
