@@ -11,3 +11,7 @@ Thumbs.db
 .shopify
 node_modules/
 *.log
+
+# Documentación y utilidades: no forman parte del theme
+docs/
+scripts/
