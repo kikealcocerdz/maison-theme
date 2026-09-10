@@ -145,15 +145,34 @@ button {
 /* ---- Product card (shared: collection grid + PDP related grids) ----
    Markup: snippets/collection-card.liquid. One static image per card. */
 .product { position: relative; }
-.product-media { position: relative; background: var(--ink-faint-20); aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.product-media { position: relative; background: var(--paper); aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .product-cover { position: absolute; inset: 0; z-index: 1; }
 .product-media img.main {
   width: 100%; height: 100%;
   object-fit: cover; object-position: center; background: var(--paper);
   position: relative; z-index: 0;
+  transition: opacity 620ms var(--ease);
+}
+/* Segunda foto: se revela en hover con fundido cruzado (sólo con puntero real;
+   el bloque táctil de collection-grid la mantiene oculta). Sin segunda imagen
+   en el producto no se pinta nada y la tarjeta queda como estaba. */
+.product-media img.hover {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center; background: var(--paper);
+  opacity: 0; z-index: 0; transition: opacity 620ms var(--ease);
+}
+@media (hover: hover) {
+  .product:hover .product-media img.hover { opacity: 1; }
+  .product:hover .product-media img.main { opacity: 0; }
 }
 .badge { position: absolute; top: 12px; left: 12px; background: var(--paper); padding: 6px 10px; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); z-index: 3; }
-.badge--set { background: #012169; color: var(--paper); }
+/* Los packshots van sobre fondo blanco: una etiqueta blanca desaparecería, así que
+   cada estado lleva su propio fondo. Azul = novedad, tinta = demanda/agotado. */
+.badge--new { background: #012169; color: var(--paper); }
+.badge--set { background: var(--paper); color: var(--ink); border: 0.5px solid var(--rule); }
+.badge--stock { background: var(--accent-1); color: var(--paper); }
+.badge--demand { background: var(--ink); color: var(--paper); }
+.badge--out { background: var(--muted); color: var(--paper); }
 .fav {
   position: absolute; right: 12px; top: 10px; z-index: 3;
   width: 32px; height: 32px; border-radius: 999px;

@@ -1,13 +1,43 @@
 {%- comment -%}
   Badge de la esquina de cualquier tarjeta de producto.
-  "Set" (vajillas y juegos: plantilla product.set) manda sobre "Novedad".
+
+  Una sola etiqueta por tarjeta, por prioridad: el estado más urgente para el
+  comprador manda. "Set" (vajillas y juegos: plantilla product.set) queda al
+  final porque es información de formato, no de disponibilidad.
+
+    Agotado → Última unidad → Últimas unidades → Novedad → Éxito en ventas
+    → Muy solicitado → Set
 
   Accepts:
     product   — Shopify product object (opcional; sin él sólo puede salir "Novedad")
     badge_new — truthy para la etiqueta "Novedad"
+
+  ponytail: el stock se lee de la primera variante disponible. En un set (42p/56p)
+  eso es la variante que verá el comprador; si hiciera falta el total del producto,
+  sumar product.variants aquí.
 {%- endcomment -%}
-{%- if product.template_suffix == 'set' -%}
-  <span class="badge badge--set">{{ 'sections.collection.badge_set' | t }}</span>
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign qty = 0
+  assign tracked = false
+  if variant.inventory_management != blank
+    assign tracked = true
+    assign qty = variant.inventory_quantity
+  endif
+  assign low_stock = 5
+-%}
+{%- if product != blank and product.available == false -%}
+  <span class="badge badge--out">{{ 'sections.collection.badge_sold_out' | t }}</span>
+{%- elsif tracked and qty == 1 -%}
+  <span class="badge badge--stock">{{ 'sections.collection.badge_last_unit' | t }}</span>
+{%- elsif tracked and qty > 1 and qty <= low_stock -%}
+  <span class="badge badge--stock">{{ 'sections.collection.badge_few_left' | t }}</span>
 {%- elsif badge_new -%}
-  <span class="badge">{{ 'sections.collection.badge_new' | t }}</span>
+  <span class="badge badge--new">{{ 'sections.collection.badge_new' | t }}</span>
+{%- elsif product.tags contains 'exito-ventas' -%}
+  <span class="badge badge--demand">{{ 'sections.collection.badge_bestseller' | t }}</span>
+{%- elsif product.tags contains 'muy-solicitado' -%}
+  <span class="badge badge--demand">{{ 'sections.collection.badge_popular' | t }}</span>
+{%- elsif product.template_suffix == 'set' -%}
+  <span class="badge badge--set">{{ 'sections.collection.badge_set' | t }}</span>
 {%- endif -%}

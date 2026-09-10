@@ -30,8 +30,13 @@
     </button>
     {%- if img1 != blank -%}
       <img class="main" src="{{ img1 }}" alt="{{ c_title | escape }}" width="{{ c_w }}" height="{{ c_h }}" loading="lazy" decoding="async">
+      {%- comment -%} Segunda foto del producto: fundido en hover (CSS en critical.css). {%- endcomment -%}
+      {%- assign img2 = product.images[1] -%}
+      {%- if img2 != blank -%}
+        <img class="hover" src="{{ img2 | image_url: width: 720 }}" alt="" aria-hidden="true" width="{{ img2.width }}" height="{{ img2.height }}" loading="lazy" decoding="async">
+      {%- endif -%}
     {%- endif -%}
-    {% render 'quick-add', product: product %}
+    {% render 'quick-add', product: product, scope: scope %}
   </div>
   <div class="product-info">
     <h3><a href="{{ c_url }}">{{ c_title | escape }}</a></h3>

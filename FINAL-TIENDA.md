@@ -4,6 +4,9 @@ Handoff entre agentes. Lee esto **antes** de tocar `sections/collection-grid.liq
 `sections/product-related.liquid` o `sections/viste-tu-mesa.liquid`.
 El contrato general del theme sigue siendo `CLAUDE.md`; esto solo cubre lo que queda abierto.
 
+Brief de cliente del 2026-09-09 troceado por área y propietario en
+`docs/cambios-2026-09-09/00-INDICE.md` — contexto sin implementar.
+
 Última actualización: 2026-09-08 - auditoría web de 12 puntos, además de las sesiones
 `theme-90` (facetas / sort), venta cruzada + sets y `copy-artesania` (§6).
 
