@@ -17,6 +17,7 @@
     "color_ink_soft": "#1F2A40",
     "color_muted": "#6B7280",
     "color_rule": "#D9DDE4",
+    "color_product_bg": "#EDEFF1",
     "color_accent_1": "#9B2C3A",
     "color_accent_2": "#B07A3B",
     "color_accent_3": "#1F3A5F",
@@ -40,6 +41,7 @@
       "color_ink_soft": "#1F2A40",
       "color_muted": "#6B7280",
       "color_rule": "#D9DDE4",
+      "color_product_bg": "#EDEFF1",
       "color_accent_1": "#9B2C3A",
       "color_accent_2": "#B07A3B",
       "color_accent_3": "#1F3A5F"

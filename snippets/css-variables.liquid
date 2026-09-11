@@ -18,8 +18,9 @@
       Fondo de la caja de foto de producto (tarjetas, ficha, relacionados). Los
       packshots nuevos son PNG con transparencia y sobre blanco puro se pierde el
       borde de la pieza: este gris frío la recorta sin ensuciar la foto.
+      Se ajusta en Personalizar → Colores → «Fondo de la foto de producto».
     {%- endcomment -%}
-    --product-bg: #EDEFF1;
+    --product-bg: {{ settings.color_product_bg | default: '#EDEFF1' }};
 
     --ink-faint: #A8AEBA;
     --ink-faint-20: {{ '#A8AEBA' | color_modify: 'alpha', 0.20 }};

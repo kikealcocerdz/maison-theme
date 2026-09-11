@@ -47,6 +47,7 @@
       { "type": "color", "id": "color_ink_soft", "label": "Ink soft (secondary text)", "default": "#1F2A40" },
       { "type": "color", "id": "color_muted", "label": "Muted (captions, eyebrows)", "default": "#6B7280" },
       { "type": "color", "id": "color_rule", "label": "Rule (hairlines, borders)", "default": "#D9DDE4" },
+      { "type": "color", "id": "color_product_bg", "label": "Fondo de la foto de producto", "default": "#EDEFF1", "info": "Caja donde se ve el packshot: tarjetas del listado, b\u00fasqueda, relacionados y ficha. Con PNG transparentes, un gris fr\u00edo recorta la pieza mejor que el blanco puro." },
       { "type": "color", "id": "color_accent_1", "label": "Accent 1", "default": "#9B2C3A", "info": "Cartuja: Aurora" },
       { "type": "color", "id": "color_accent_2", "label": "Accent 2", "default": "#B07A3B", "info": "Cartuja: Peces" },
       { "type": "color", "id": "color_accent_3", "label": "Accent 3", "default": "#1F3A5F", "info": "Cartuja: Bellavista" }
