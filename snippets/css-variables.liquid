@@ -14,6 +14,13 @@
     --accent-2: {{ settings.color_accent_2 }};
     --accent-3: {{ settings.color_accent_3 }};
 
+    {%- comment -%}
+      Fondo de la caja de foto de producto (tarjetas, ficha, relacionados). Los
+      packshots nuevos son PNG con transparencia y sobre blanco puro se pierde el
+      borde de la pieza: este gris frío la recorta sin ensuciar la foto.
+    {%- endcomment -%}
+    --product-bg: #EDEFF1;
+
     --ink-faint: #A8AEBA;
     --ink-faint-20: {{ '#A8AEBA' | color_modify: 'alpha', 0.20 }};
 --ink-faint-08: {{ '#A8AEBA' | color_modify: 'alpha', 0.08 }};

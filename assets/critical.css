@@ -145,11 +145,11 @@ button {
 /* ---- Product card (shared: collection grid + PDP related grids) ----
    Markup: snippets/collection-card.liquid. One static image per card. */
 .product { position: relative; }
-.product-media { position: relative; background: var(--paper); aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.product-media { position: relative; background: var(--product-bg); aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .product-cover { position: absolute; inset: 0; z-index: 1; }
 .product-media img.main {
   width: 100%; height: 100%;
-  object-fit: cover; object-position: center; background: var(--paper);
+  object-fit: cover; object-position: center; background: var(--product-bg);
   position: relative; z-index: 0;
   transition: opacity 620ms var(--ease);
 }
@@ -158,7 +158,7 @@ button {
    en el producto no se pinta nada y la tarjeta queda como estaba. */
 .product-media img.hover {
   position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; object-position: center; background: var(--paper);
+  object-fit: cover; object-position: center; background: var(--product-bg);
   opacity: 0; z-index: 0; transition: opacity 620ms var(--ease);
 }
 @media (hover: hover) {

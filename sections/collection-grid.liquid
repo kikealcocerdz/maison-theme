@@ -59,7 +59,12 @@
   {%- endfor -%}
 {%- endcapture -%}
 
-<div class="collection-grid collection-page{% if section.settings.budget_mode %} collection-page--budget{% endif %}{% if template.suffix == 'emblemas' %} collection-page--emblemas{% endif %}" data-section-id="{{ section.id }}"{% if section.settings.budget_mode and collection.sort_by == blank %} data-default-sort="low"{% endif %}>
+{%- comment -%}
+  `sort_mode` viaja al JS para que el barajado no pise nunca un orden colocado a mano
+  en el admin: con «Manual» el orden de la colección es una decisión, no un descuido.
+{%- endcomment -%}
+{%- assign sort_mode = collection.sort_by | default: collection.default_sort_by -%}
+<div class="collection-grid collection-page{% if section.settings.budget_mode %} collection-page--budget{% endif %}{% if template.suffix == 'emblemas' %} collection-page--emblemas{% endif %}" data-section-id="{{ section.id }}" data-sort-mode="{{ sort_mode }}"{% if section.settings.interleave_results %} data-interleave="1"{% endif %}{% if section.settings.budget_mode and collection.sort_by == blank %} data-default-sort="low"{% endif %}>
   <section class="shop-layout">
     {% render 'collection-nav', sort_query: sort_filter_query, current_sort: current_sort %}
 
@@ -160,7 +165,7 @@
         </div>
       {%- endif -%}
 
-      <div class="products" id="productGrid">
+      <div class="products" id="productGrid" data-editorial-after="{{ editorial_after }}">
         {%- if has_products -%}
           {%- paginate collection.products by per_page -%}
             {%- for product in collection.products -%}
@@ -233,7 +238,7 @@
   display: grid; grid-template-columns: minmax(190px, 230px) minmax(0, 1fr);
   gap: min(4vw, 64px); align-items: start;
 }
-.collection-page .shop-main { min-width: 0; }
+.collection-page .shop-main { min-width: 0; grid-column: 2; }
 
 /* Intro a dos columnas (mock v21): título a la izquierda, copy abajo a la derecha. */
 .collection-page .collection-intro {
@@ -404,10 +409,10 @@
   color: inherit; font: inherit; text-align: left; cursor: pointer;
 }
 .collection-page .side-filters .side-section-head:focus-visible { outline: 1px solid var(--ink); outline-offset: 2px; }
-.collection-page .side-filters .side-section-head:hover .side-main-link { color: var(--ink); }
+.collection-page .side-filters .side-section-head:hover .side-main-link { color: inherit; }
 .collection-page .side-filters .side-accordion { border-top: .5px solid var(--rule); }
 .collection-page .side-filters .side-section:last-child { border-bottom: none; }
-.collection-page .side-filters .side-main-link { color: var(--ink); opacity: 1; letter-spacing: .2em; }
+.collection-page .side-filters .side-main-link { color: inherit; opacity: 1; letter-spacing: .2em; }
 .collection-page .side-filters .side-section.is-open .side-panel { padding-bottom: 12px; }
 .collection-page .side-filters-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
 .collection-page .side-filters-title { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
@@ -533,6 +538,7 @@
 }
 @media (max-width: 1000px) {
   .collection-page .shop-layout { grid-template-columns: 1fr; }
+  .collection-page .shop-main { grid-column: 1; }
   .collection-page .sidebar { margin-top: 0; position: relative; top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .collection-page .side-panel { grid-template-rows: 1fr; }
   .collection-page .products { grid-template-columns: repeat(2, 1fr); }
@@ -822,6 +828,15 @@
 
     var grid = root.querySelector('#productGrid');
 
+    function placeItems(items) {
+      var editorial = grid.querySelector('.editorial-insert');
+      var editorialAfter = parseInt(grid.dataset.editorialAfter, 10) || 6;
+      items.forEach(function (item) { grid.appendChild(item); });
+      if (editorial) grid.insertBefore(editorial, items[editorialAfter] || null);
+      var loadMore = grid.querySelector('.load-more');
+      if (loadMore) grid.appendChild(loadMore);
+    }
+
     // View toggle
     root.querySelectorAll('.view-btn').forEach(function (b) {
       b.addEventListener('click', function () {
@@ -844,13 +859,7 @@
           : mode === 'high' ? (+c.dataset.price - +a.dataset.price)
           : mode === 'low' ? (+a.dataset.price - +c.dataset.price) : 0;
       });
-      var editorial = grid.querySelector('.editorial-insert');
-      items.forEach(function (item, i) {
-        if (editorial && i === 6) grid.insertBefore(editorial, item);
-        grid.appendChild(item);
-      });
-      var lmEl = grid.querySelector('.load-more');
-      if (lmEl) grid.appendChild(lmEl); // keep the load-more block last after re-ordering
+      placeItems(items);
     }
 
     var sw = root.querySelector('.sort-wrap');
@@ -859,16 +868,14 @@
       if (sb) sb.addEventListener('click', function () { sw.classList.toggle('open'); });
     }
 
-    // Resultados intercalados. Sin esto, el orden del admin agrupa las tres
-    // palanganas (o los tres colores de la misma pieza) una detrás de otra y la
-    // rejilla se ve monótona. Sólo actúa sobre el orden por defecto: en cuanto el
-    // comprador elige «precio» o «novedades» manda Shopify, que ordena la colección
-    // entera, no sólo la página pintada.
-    // ponytail: baraja por tipo de producto porque es el dato que ya viaja en la
-    // tarjeta. Cuando el cliente diga qué piezas destacar primero, ese criterio
-    // entra aquí como primer corte.
+    // Resultados intercalados: baraja por tipo para que no salgan las tres palanganas
+    // seguidas. Va APAGADO salvo que se marque en los ajustes de la sección, y aun así
+    // no se activa si el orden de la colección es «Manual» o si el comprador ha elegido
+    // uno: colocar las piezas a mano en el admin es una decisión y manda sobre esto.
     function interleave() {
-      if (!grid || location.search.indexOf('sort_by=') > -1) return;
+      if (!grid || !root.dataset.interleave) return;
+      if (root.dataset.sortMode === 'manual') return;
+      if (location.search.indexOf('sort_by=') > -1) return;
       var items = [].slice.call(grid.querySelectorAll('.product'));
       if (items.length < 6) return;
 
@@ -886,13 +893,7 @@
         buckets.forEach(function (b) { if (b[round]) mixed.push(b[round]); });
       }
 
-      var editorial = grid.querySelector('.editorial-insert');
-      mixed.forEach(function (item, i) {
-        if (editorial && i === 6) grid.insertBefore(editorial, item);
-        grid.appendChild(item);
-      });
-      var lmEl = grid.querySelector('.load-more');
-      if (lmEl) grid.appendChild(lmEl);
+      placeItems(mixed);
     }
 
     // Budget mode ("Sets para regalo"): price ascending without touching the sort menu.
@@ -1128,6 +1129,7 @@
     { "type": "text", "id": "title", "label": "Title override", "info": "Falls back to the collection title." },
     { "type": "richtext", "id": "intro_copy", "label": "Intro copy", "info": "Falls back to the collection description." },
     { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 12, "max": 48, "step": 6, "default": 24 },
+    { "type": "checkbox", "id": "interleave_results", "label": "Intercalar resultados por tipo", "info": "Baraja la página para que no salgan varias piezas iguales seguidas. No se aplica si la colección está ordenada a mano ni si el comprador elige un orden.", "default": false },
     { "type": "checkbox", "id": "budget_mode", "label": "Budget mode (price-first, low\u2192high)", "info": "For gift-set style listings. Set the collection's own sort order to \"Price: lowest to highest\" in the admin so every page is ordered.", "default": false },
     { "type": "header", "content": "Editorial insert (mid-grid)" },
     { "type": "range", "id": "editorial_after", "label": "Insert after card #", "min": 3, "max": 12, "step": 1, "default": 6 },
