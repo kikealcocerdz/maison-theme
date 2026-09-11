@@ -1,0 +1,242 @@
+{
+  "modo": "ensayo",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "main-menu ANTES",
+      "resultado": {
+        "id": "gid://shopify/Menu/321835762005",
+        "handle": "main-menu",
+        "title": "Main menu",
+        "items": [
+          {
+            "title": "Mesa",
+            "type": "COLLECTION",
+            "url": "/collections/vajillas",
+            "items": []
+          },
+          {
+            "title": "Colecciones",
+            "type": "HTTP",
+            "url": "/collections",
+            "items": []
+          },
+          {
+            "title": "Nuestras mesas",
+            "type": "HTTP",
+            "url": "/pages/nuestras-mesas",
+            "items": []
+          },
+          {
+            "title": "Viste tu mesa",
+            "type": "HTTP",
+            "url": "/pages/viste-tu-mesa",
+            "items": []
+          },
+          {
+            "title": "Artesanía",
+            "type": "HTTP",
+            "url": "/pages/artesania",
+            "items": []
+          },
+          {
+            "title": "Heritage 1841",
+            "type": "HTTP",
+            "url": "/pages/heritage-1841",
+            "items": []
+          },
+          {
+            "title": "Contacto",
+            "type": "HTTP",
+            "url": "/pages/contact",
+            "items": []
+          },
+          {
+            "title": "Café & Té",
+            "type": "COLLECTION",
+            "url": "/collections/juegos-cafe",
+            "items": []
+          }
+        ]
+      }
+    }
+  ],
+  "planificado": [
+    {
+      "paso": "reescribir `main-menu` con el árbol de la izquierda",
+      "variables": {
+        "id": "gid://shopify/Menu/321835762005",
+        "title": "Main menu",
+        "handle": "main-menu",
+        "items": [
+          {
+            "title": "Mesa",
+            "type": "HTTP",
+            "url": "/collections",
+            "items": [
+              {
+                "title": "Vajilla",
+                "type": "COLLECTION",
+                "resourceId": "gid://shopify/Collection/674484945237"
+              }
+            ]
+          },
+          {
+            "title": "Café & Té",
+            "type": "HTTP",
+            "url": "/collections",
+            "items": [
+              {
+                "title": "Juego de Café",
+                "type": "COLLECTION",
+                "resourceId": "gid://shopify/Collection/679848968533"
+              },
+              {
+                "title": "Juego de Té",
+                "type": "COLLECTION",
+                "resourceId": "gid://shopify/Collection/679849001301"
+              },
+              {
+                "title": "Mug",
+                "type": "COLLECTION",
+                "resourceId": "gid://shopify/Collection/680074248533"
+              }
+            ]
+          },
+          {
+            "title": "Decoración",
+            "type": "COLLECTION",
+            "resourceId": "gid://shopify/Collection/674485141845"
+          },
+          {
+            "title": "Colecciones",
+            "type": "HTTP",
+            "url": "/collections",
+            "items": [
+              {
+                "title": "Clásicas",
+                "type": "HTTP",
+                "url": "/collections",
+                "items": [
+                  {
+                    "title": "202 Rosa",
+                    "type": "COLLECTION",
+                    "resourceId": "gid://shopify/Collection/674484912469"
+                  },
+                  {
+                    "title": "Negro Vistas",
+                    "type": "COLLECTION",
+                    "resourceId": "gid://shopify/Collection/674484748629"
+                  },
+                  {
+                    "title": "Ceilán",
+                    "type": "COLLECTION",
+                    "resourceId": "gid://shopify/Collection/674484846933"
+                  },
+                  {
+                    "title": "Flor de Lis Azul",
+                    "type": "COLLECTION",
+                    "resourceId": "gid://shopify/Collection/675574874453"
+                  },
+                  {
+                    "title": "Flor de Lis Rosa",
+                    "type": "COLLECTION",
+                    "resourceId": "gid://shopify/Collection/675574907221"
+                  },
+                  {
+                    "title": "Viejo Molino",
+                    "type": "COLLECTION",
+                    "resourceId": "gid://shopify/Collection/674484715861"
+                  },
+                  {
+                    "title": "Bellavista",
+                    "type": "COLLECTION",
+                    "resourceId": "gid://shopify/Collection/674484879701"
+                  },
+                  {
+                    "title": "Aurora Blanco",
+                    "type": "COLLECTION",
+                    "resourceId": "gid://shopify/Collection/675574841685"
+                  },
+                  {
+                    "title": "Ochavado Blanco",
+                    "type": "COLLECTION",
+                    "resourceId": "gid://shopify/Collection/679848935765"
+                  }
+                ]
+              },
+              {
+                "title": "Contemporáneas",
+                "type": "HTTP",
+                "url": "/collections",
+                "items": [
+                  {
+                    "title": "Aaron Stewart",
+                    "type": "COLLECTION",
+                    "resourceId": "gid://shopify/Collection/674484781397"
+                  },
+                  {
+                    "title": "Oaxaca",
+                    "type": "COLLECTION",
+                    "resourceId": "gid://shopify/Collection/679848804693"
+                  }
+                ]
+              },
+              {
+                "title": "Fin de existencias",
+                "type": "COLLECTION",
+                "resourceId": "gid://shopify/Collection/681647014229"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paso": "crear `menu-derecha`",
+      "variables": {
+        "title": "Menú derecha",
+        "handle": "menu-derecha",
+        "items": [
+          {
+            "title": "Nuevo",
+            "type": "COLLECTION",
+            "resourceId": "gid://shopify/Collection/681646981461"
+          },
+          {
+            "title": "Viste tu mesa",
+            "type": "PAGE",
+            "resourceId": "gid://shopify/Page/169238528341"
+          },
+          {
+            "title": "Ambientes",
+            "type": "PAGE",
+            "resourceId": "gid://shopify/Page/169238495573"
+          },
+          {
+            "title": "Legado",
+            "type": "PAGE",
+            "resourceId": "gid://shopify/Page/168197325141",
+            "items": [
+              {
+                "title": "Heritage 1842",
+                "type": "PAGE",
+                "resourceId": "gid://shopify/Page/168197325141"
+              },
+              {
+                "title": "Artesanía",
+                "type": "PAGE",
+                "resourceId": "gid://shopify/Page/168197194069"
+              },
+              {
+                "title": "Sellos",
+                "type": "PAGE",
+                "resourceId": "gid://shopify/Page/170972086613"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

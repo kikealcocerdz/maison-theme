@@ -31,11 +31,13 @@ class AdminError(RuntimeError):
 
 
 class Admin:
-    def __init__(self, apply=False, store=STORE):
+    def __init__(self, apply=False, store=STORE, strict=True):
         self.apply = apply
         self.store = store
+        self.strict = strict  # con False, un userErrors se anota y el script sigue
         self.done = []      # (etiqueta, payload) de lo ejecutado
         self.planned = []   # (etiqueta, variables) de lo que se ejecutaría
+        self.failed = []    # (etiqueta, userErrors)
 
     # ---- transporte ------------------------------------------------------
     def _run(self, query, variables=None, mutation=False):
@@ -107,7 +109,10 @@ class Admin:
         if errors:
             print("  ✗ userErrors:")
             print(_indent(json.dumps(errors, indent=2, ensure_ascii=False), 4))
-            raise AdminError("%s devolvió userErrors" % label)
+            self.failed.append((label, errors))
+            if self.strict:
+                raise AdminError("%s devolvió userErrors" % label)
+            return None
         print("  ✓ " + json.dumps(_summary(body), ensure_ascii=False)[:400])
         self.done.append((label, body))
         return body
@@ -119,6 +124,7 @@ class Admin:
             "tienda": self.store,
             "ejecutado": [{"paso": l, "resultado": b} for l, b in self.done],
             "planificado": [{"paso": l, "variables": v} for l, v in self.planned],
+            "fallido": [{"paso": l, "userErrors": e} for l, e in self.failed],
         }
         with open(path, "w") as fh:
             json.dump(data, fh, indent=2, ensure_ascii=False)

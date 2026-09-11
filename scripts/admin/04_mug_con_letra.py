@@ -81,10 +81,16 @@ def main():
                         help="archiva los «Mug Letra X» sueltos tras crear el unificado")
     parser.add_argument("--archivar-tazas", default="",
                         help="handles de tazas a archivar, separados por comas (vacío = ninguna)")
+    parser.add_argument("--sin-sku", action="store_true",
+                        help="crea las variantes sin SKU (si la tienda exige SKU único)")
+    parser.add_argument("--sin-fotos", action="store_true",
+                        help="crea las variantes sin imagen (para aislar un error de media)")
     add_common_args(parser, "informe-04-mug.json")
     args = parser.parse_args()
 
-    admin = Admin(apply=args.apply)
+    # Sin `strict`: un userErrors se imprime y el script sigue, en vez de reventar
+    # con un traceback que esconde el error de verdad.
+    admin = Admin(apply=args.apply, strict=False)
     banner("Lote 4 · Mug con letra", admin)
 
     if admin.query(Q_EXISTE)["productByIdentifier"]:
@@ -95,7 +101,7 @@ def main():
     mugs.sort(key=lambda m: m["title"])
     print("\n%d mugs de letra encontrados" % len(mugs))
 
-    valores, variantes, sin_foto = [], [], []
+    valores, variantes, ficheros, sin_foto = [], [], [], []
     for m in mugs:
         letra = letra_de(m["title"])
         var = (m["variants"]["nodes"] or [{}])[0]
@@ -109,9 +115,18 @@ def main():
             "price": var.get("price"),
             "inventoryPolicy": "DENY",
         }
-        if var.get("sku"):
+        if var.get("sku") and not args.sin_sku:
+            # El SKU ya vive en el mug suelto. Si la tienda exige SKU único, esto es lo
+            # primero que protesta: se relanza con --sin-sku y se rellenan luego.
             v["inventoryItem"] = {"sku": var["sku"], "tracked": True}
-        if url:
+        if url and not args.sin_fotos:
+            # `productSet` exige que la foto de una variante esté también en los
+            # `files` del producto; si sólo va en la variante, devuelve userErrors.
+            ficheros.append({
+                "originalSource": url,
+                "contentType": "IMAGE",
+                "alt": "Mug letra %s" % letra,
+            })
             v["file"] = {"originalSource": url, "contentType": "IMAGE"}
         variantes.append(v)
         print("  · %-6s %-8s %s" % (letra, var.get("price", "?"), m["handle"]))
@@ -119,20 +134,32 @@ def main():
     if sin_foto:
         print("\n⚠ Sin foto (la variante quedará sin imagen): %s" % ", ".join(sin_foto))
 
-    admin.mutate(
+    entrada = {
+        "title": "Mug con letra",
+        "handle": "mug-con-letra",
+        "productType": "Mug",
+        "status": "DRAFT",
+        "descriptionHtml": "<p>Elige tu inicial. Loza fina de La Cartuja de Sevilla.</p>",
+        "productOptions": [{"name": "Letra", "values": valores}],
+        "variants": variantes,
+    }
+    if ficheros:
+        entrada["files"] = ficheros
+
+    creado = admin.mutate(
         "crear «Mug con letra» con %d variantes (borrador)" % len(variantes),
         M_PRODUCT_SET,
-        {"input": {
-            "title": "Mug con letra",
-            "handle": "mug-con-letra",
-            "productType": "Mug",
-            "status": "DRAFT",
-            "descriptionHtml": "<p>Elige tu inicial. Loza fina de La Cartuja de Sevilla.</p>",
-            "productOptions": [{"name": "Letra", "values": valores}],
-            "variants": variantes,
-        }},
+        {"input": entrada},
         "productSet",
     )
+
+    if admin.apply and not creado:
+        print("\n--- no se creó: qué probar según lo que diga el error de arriba ---")
+        print("  «SKU has already been taken» / duplicado  →  --sin-sku")
+        print("  algo sobre file, media o image            →  --sin-fotos")
+        print("  otra cosa                                 →  pásame el bloque userErrors")
+        admin.report(args.report)
+        return
 
     if args.archivar_originales:
         for m in mugs:

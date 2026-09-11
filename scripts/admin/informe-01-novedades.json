@@ -1,0 +1,31 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "crear colección automática «Novedades» (etiqueta: novedad)",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681646981461",
+          "handle": "novedades",
+          "title": "Novedades",
+          "sortOrder": "CREATED_DESC"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear colección automática «Fin de existencias» (etiqueta: fin-de-existencias)",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681647014229",
+          "handle": "fin-de-existencias",
+          "title": "Fin de existencias",
+          "sortOrder": "CREATED_DESC"
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": []
+}

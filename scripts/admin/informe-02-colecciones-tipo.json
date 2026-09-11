@@ -1,0 +1,487 @@
+{
+  "modo": "ensayo",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [],
+  "planificado": [
+    {
+      "paso": "crear colección «Azucareros» (tipo = Azucarero)",
+      "variables": {
+        "input": {
+          "title": "Azucareros",
+          "handle": "azucarero",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Azucarero"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Bajo plato» (tipo = Bajoplato)",
+      "variables": {
+        "input": {
+          "title": "Bajo plato",
+          "handle": "bajoplato",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Bajoplato"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Bandejas» (tipo = Bandeja)",
+      "variables": {
+        "input": {
+          "title": "Bandejas",
+          "handle": "bandeja",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Bandeja"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Boles» (tipo = Bol)",
+      "variables": {
+        "input": {
+          "title": "Boles",
+          "handle": "bol",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Bol"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Bomboneras» (tipo = Bombonera)",
+      "variables": {
+        "input": {
+          "title": "Bomboneras",
+          "handle": "bombonera",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Bombonera"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Cabezas frenológicas» (tipo = Cabeza)",
+      "variables": {
+        "input": {
+          "title": "Cabezas frenológicas",
+          "handle": "cabeza",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Cabeza"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Cafeteras» (tipo = Cafetera)",
+      "variables": {
+        "input": {
+          "title": "Cafeteras",
+          "handle": "cafetera",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Cafetera"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Champaneras» (tipo = Champanera)",
+      "variables": {
+        "input": {
+          "title": "Champaneras",
+          "handle": "champanera",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Champanera"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Ensaladeras» (tipo = Ensaladera)",
+      "variables": {
+        "input": {
+          "title": "Ensaladeras",
+          "handle": "ensaladera",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Ensaladera"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Floreros, tibores y jarrones» (tipo = Florero)",
+      "variables": {
+        "input": {
+          "title": "Floreros, tibores y jarrones",
+          "handle": "florero",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Florero"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Fuentes» (tipo = Fuente)",
+      "variables": {
+        "input": {
+          "title": "Fuentes",
+          "handle": "fuente",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Fuente"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Jarros» (tipo = Jarro)",
+      "variables": {
+        "input": {
+          "title": "Jarros",
+          "handle": "jarro",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Jarro"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Juegos» (tipo = Juego)",
+      "variables": {
+        "input": {
+          "title": "Juegos",
+          "handle": "juego",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Juego"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Lecheras» (tipo = Lechera)",
+      "variables": {
+        "input": {
+          "title": "Lecheras",
+          "handle": "lechera",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Lechera"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Mugs» (tipo = Mug)",
+      "variables": {
+        "input": {
+          "title": "Mugs",
+          "handle": "mug",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Mug"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Aguamaniles» (tipo = Palangana)",
+      "variables": {
+        "input": {
+          "title": "Aguamaniles",
+          "handle": "palangana",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Palangana"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Platillos» (tipo = Platillo)",
+      "variables": {
+        "input": {
+          "title": "Platillos",
+          "handle": "platillo",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Platillo"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Platos» (tipo = Plato)",
+      "variables": {
+        "input": {
+          "title": "Platos",
+          "handle": "plato",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Plato"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Salseras» (tipo = Salsera)",
+      "variables": {
+        "input": {
+          "title": "Salseras",
+          "handle": "salsera",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Salsera"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Servicios» (tipo = Servicio)",
+      "variables": {
+        "input": {
+          "title": "Servicios",
+          "handle": "servicio",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Servicio"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Soperas» (tipo = Sopera)",
+      "variables": {
+        "input": {
+          "title": "Soperas",
+          "handle": "sopera",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Sopera"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Tazas» (tipo = Taza)",
+      "variables": {
+        "input": {
+          "title": "Tazas",
+          "handle": "taza",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Taza"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Teteras» (tipo = Tetera)",
+      "variables": {
+        "input": {
+          "title": "Teteras",
+          "handle": "tetera",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Tetera"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "paso": "crear colección «Vajillas» (tipo = Vajilla)",
+      "variables": {
+        "input": {
+          "title": "Vajillas",
+          "handle": "vajilla",
+          "sortOrder": "BEST_SELLING",
+          "ruleSet": {
+            "appliedDisjunctively": false,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Vajilla"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
