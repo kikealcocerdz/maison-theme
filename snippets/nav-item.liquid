@@ -1,0 +1,75 @@
+{%- comment -%}
+  Una entrada de la barra del header. Si el enlace tiene hijos, se pinta con panel
+  desplegable al pasar el ratón; si no, es un enlace suelto como siempre.
+
+  El panel reparte los hijos en columnas: los que a su vez tienen hijos (Plato,
+  Bol y Taza de consomé, Clásicas…) ocupan una columna con su rótulo arriba, y los
+  hijos sueltos (Vajilla, Sopera, Salsera…) se agrupan en la primera columna. Es
+  exactamente cómo está escrito el menú en el admin, sin reglas ocultas.
+
+  El desplegable es CSS puro (`:hover` / `:focus-within`). Por debajo de 1241px la
+  barra no se pinta —manda el hamburguesa— así que en táctil no hay hover huérfano.
+
+  Accepts:
+    link  — un enlace de linklist (Shopify)
+    side  — 'left' | 'right', para anclar el panel al borde que toca
+{%- endcomment -%}
+
+{%- liquid
+  assign has_children = false
+  if link.links.size > 0
+    assign has_children = true
+  endif
+  assign is_on = false
+  if link.current or link.child_active
+    assign is_on = true
+  endif
+-%}
+
+{%- if has_children -%}
+  <div class="nav-item nav-item--{{ side | default: 'left' }}">
+    <a class="nav-item__link" href="{{ link.url }}" aria-haspopup="true"{% if is_on %} aria-current="page"{% endif %}>{{ link.title }}</a>
+
+    <div class="nav-drop">
+      <div class="nav-drop__inner">
+        {%- comment -%} Primera columna: los hijos que no abren rama propia. {%- endcomment -%}
+        {%- assign loose = 0 -%}
+        {%- for child in link.links -%}
+          {%- if child.links.size == 0 -%}{%- assign loose = loose | plus: 1 -%}{%- endif -%}
+        {%- endfor -%}
+
+        {%- if loose > 0 -%}
+          <div class="nav-drop__col">
+            <ul>
+              {%- for child in link.links -%}
+                {%- if child.links.size == 0 -%}
+                  <li><a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title }}</a></li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- for child in link.links -%}
+          {%- if child.links.size > 0 -%}
+            {%- comment -%}
+              «Fin de existencias» se destaca en otro color, como pidió el cliente.
+              Se reconoce por el rótulo, que es lo único que viaja desde el admin.
+            {%- endcomment -%}
+            {%- assign child_slug = child.title | downcase | strip -%}
+            <div class="nav-drop__col{% if child_slug contains 'fin de existencias' %} nav-drop__col--flag{% endif %}">
+              <a class="nav-drop__head" href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title }}</a>
+              <ul>
+                {%- for grandchild in child.links -%}
+                  <li><a href="{{ grandchild.url }}"{% if grandchild.current %} aria-current="page"{% endif %}>{{ grandchild.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- else -%}
+  <a href="{{ link.url }}"{% if is_on %} aria-current="page"{% endif %}>{{ link.title }}</a>
+{%- endif -%}

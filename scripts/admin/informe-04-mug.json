@@ -1,0 +1,110 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "crear «Mug con letra» con 27 variantes (borrador)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11598057046357",
+          "handle": "mug-con-letra",
+          "status": "DRAFT",
+          "options": [
+            {
+              "name": "Letra",
+              "optionValues": [
+                {
+                  "name": "A"
+                },
+                {
+                  "name": "B"
+                },
+                {
+                  "name": "C"
+                },
+                {
+                  "name": "D"
+                },
+                {
+                  "name": "E"
+                },
+                {
+                  "name": "F"
+                },
+                {
+                  "name": "G"
+                },
+                {
+                  "name": "H"
+                },
+                {
+                  "name": "I"
+                },
+                {
+                  "name": "J"
+                },
+                {
+                  "name": "K"
+                },
+                {
+                  "name": "L"
+                },
+                {
+                  "name": "M"
+                },
+                {
+                  "name": "N"
+                },
+                {
+                  "name": "O"
+                },
+                {
+                  "name": "P"
+                },
+                {
+                  "name": "Q"
+                },
+                {
+                  "name": "R"
+                },
+                {
+                  "name": "S"
+                },
+                {
+                  "name": "T"
+                },
+                {
+                  "name": "U"
+                },
+                {
+                  "name": "V"
+                },
+                {
+                  "name": "W"
+                },
+                {
+                  "name": "X"
+                },
+                {
+                  "name": "Y"
+                },
+                {
+                  "name": "Z"
+                },
+                {
+                  "name": "Ñ"
+                }
+              ]
+            }
+          ],
+          "variantsCount": {
+            "count": 27
+          }
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}
