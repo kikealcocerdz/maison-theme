@@ -43,7 +43,7 @@
     "heritage_stamp": {
       "type": "heritage-stamp",
       "settings": {
-        "kicker": "La Cartuja de Sevilla-Pickman . 1841",
+        "kicker": "Bien de Interés Cultural desde 1998",
         "heading": "<p>Una herencia que <em>trasciende</em> generaciones<br>Una forma de vivir la mesa que <em>evoluciona</em> con el tiempo</p>",
         "bg_number": "1841"
       }
@@ -196,7 +196,7 @@
     "story": {
       "type": "story-scroll",
       "settings": {
-        "eyebrow": "185 años de historia",
+        "eyebrow": "La Cartuja de Sevilla-Pickman . 1841",
         "heading": "<p>Heritage crafted for modern living</p>",
         "paragraph": "<p>Fundada en Sevilla en 1841, La Cartuja se proyecta hoy como una marca con alma: una historia de oficio, memoria y afecto que vuelve a ocupar su lugar en la mesa contemporánea</p>",
         "cta_label": "Descubre nuestra historia",
