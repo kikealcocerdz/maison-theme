@@ -200,14 +200,21 @@
 }
 
 /* Banda a sangre en papel; las columnas dentro respetan el ancho del shell. */
+/* Las columnas se reparten el ancho del shell a partes iguales; la primera (los
+   hijos sueltos) fluye en varias columnas internas cuando la lista es larga —
+   Café & Té trae trece— en vez de estirarse hacia abajo. */
 .nav-drop__inner {
-  display: flex;
-  gap: clamp(40px, 5vw, 92px);
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: clamp(32px, 4vw, 72px);
   width: var(--content-wide);
   margin: 0 auto;
   padding: 44px 0 52px;
   color: var(--ink);
 }
+.nav-drop__col > ul { column-width: 168px; column-gap: 32px; }
+.nav-drop__col > ul > li { break-inside: avoid; }
 .nav-drop::before {
   content: "";
   position: absolute;
@@ -218,8 +225,9 @@
   box-shadow: 0 30px 70px rgba(15, 26, 46, 0.10);
   z-index: -1;
 }
-/* El panel de la derecha alinea sus columnas al lado que le toca. */
-.nav-item--right .nav-drop__inner { justify-content: flex-end; }
+/* El panel de la derecha es corto (Nuevo, Legado): columnas a su medida y
+   pegadas al lado que les toca, no estiradas a todo el ancho. */
+.nav-item--right .nav-drop__inner { grid-auto-columns: max-content; justify-content: end; }
 
 .nav-drop__col { min-width: 0; }
 .nav-drop__head {
