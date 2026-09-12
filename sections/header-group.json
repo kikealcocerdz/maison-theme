@@ -14,7 +14,8 @@
     "header": {
       "type": "header",
       "settings": {
-        "nav_left_limit": 3
+        "menu": "main-menu",
+        "nav_left_limit": 4
       }
     },
     "mega-menu": {

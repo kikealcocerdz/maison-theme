@@ -41,14 +41,20 @@
     </a>
 
     <div class="nav-right">
+      {%- comment -%}
+        Mientras no exista el menú de la derecha, y el de la izquierda no sobre
+        entradas para este lado, se pintan los enlaces del brief a mano.
+      {%- endcomment -%}
+      {%- assign right_from_left = menu.links.size | minus: section.settings.nav_left_limit -%}
       {%- if menu_right.links.size > 0 -%}
         {%- for link in menu_right.links -%}{% render 'nav-item', link: link, side: 'right' %}{%- endfor -%}
-      {%- elsif menu.links.size > 0 -%}
+      {%- elsif right_from_left > 0 -%}
         {%- for link in menu.links offset: section.settings.nav_left_limit -%}{% render 'nav-item', link: link, side: 'right' %}{%- endfor -%}
       {%- else -%}
+        <a href="/collections/novedades">Nuevo</a>
         <a href="/pages/viste-tu-mesa">Viste tu mesa</a>
-        <a href="/pages/identifica-tu-sello">Sellos</a>
-        <a href="/pages/heritage-1841">Heritage 1841</a>
+        <a href="/pages/nuestras-mesas">Ambientes</a>
+        <a href="/pages/heritage-1841">Legado</a>
       {%- endif -%}
       <button type="button" class="search-link" id="searchToggle" aria-label="{{ 'general.search.label' | t }}" aria-expanded="false" aria-controls="searchPanel">{% render 'icon-search' %}</button>
       <a href="{{ routes.cart_url }}" class="header-cart" data-cart-toggle aria-label="{{ 'general.cart.label' | t }}">
