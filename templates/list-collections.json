@@ -18,11 +18,12 @@
         "intro": "<p>Una primera edición para volver a mirar La Cartuja desde el presente: formas históricas, decorados icónicos y objetos de conversación reinterpretados para la vida contemporánea</p>"
       },
       "blocks": {
+        "ch0": { "type": "chapter", "settings": { "kicker": "Nuevo", "title": "Novedades", "demo_image": "collection-novedades.webp", "link": "/collections/novedades" } },
         "ch1": { "type": "chapter", "settings": { "kicker": "Capítulo 01", "title": "Aurora", "demo_image": "collection-aurora.webp", "link": "/collections/aurora" } },
         "ch2": { "type": "chapter", "settings": { "kicker": "Capítulo 02", "title": "Ochavada", "demo_image": "negro_vistas_bandeja.webp", "link": "/collections/ochavada" } },
-        "ch3": { "type": "chapter", "settings": { "kicker": "Capítulo 03", "title": "Decoración", "demo_image": "gifts-decor-vertical.webp", "link": "/collections/decoracion" } }
+        "ch3": { "type": "chapter", "settings": { "kicker": "Capítulo 03", "title": "Decoración", "image": "shopify://shop_images/Gifst_decor_imagen2.webp", "demo_image": "gifts-decor-vertical.webp", "link": "/collections/decoracion" } }
       },
-      "block_order": ["ch1", "ch2", "ch3"]
+      "block_order": ["ch0", "ch1", "ch2", "ch3"]
     }
   },
   "order": ["main"]
