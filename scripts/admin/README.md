@@ -44,6 +44,7 @@ El del menú guarda además el `main-menu` anterior entero, por si hay que recon
 | `02_colecciones_por_tipo.py` | Una colección automática por tipo de producto (24 hoy), con el handle que busca el theme para «te puede interesar» | Borrar las colecciones creadas (van en el informe) |
 | `03_menu_nuevo.py` | Reescribe `main-menu` y crea `menu-derecha` con el árbol del brief; salta las entradas sin destino y las lista | Reconstruir desde el informe |
 | `04_mug_con_letra.py` | Crea `mug-con-letra` en borrador con 27 variantes (A–Z + Ñ), precio, SKU y foto de cada letra | Borrar el producto |
+| `10_fin_existencias_productos.py` | Da de alta los 52 productos de «Fin de existencias» de la web antigua (`datos-10-fin-existencias.json`): activos, precio rebajado + anterior tachado, SKU/EAN, foto importada, metafields y etiqueta `fin-de-existencias` | Borrar los productos (van en el informe) |
 
 ## Lo que estos scripts NO resuelven
 
@@ -69,9 +70,9 @@ y `menu-derecha`; en **Collection grid**, el menú del lateral.
   Mancerina, Hoja de parra, Vela, Lapicero, Bandeja Vistas, Bandeja Conmemorativa,
   Vaciabolsillo, Conjunto de baño, Cepillero, Jabonera, Algodonera, Libro, Camiseta,
   Bolsa, y los agrupadores Artístico / Baño / Gifts.
-- Las colecciones de decorado que faltan: Áurea, Georgica, Edén y las doce de fin de
-  existencias (Escenas, Infanta Luisa, María Cristina, Paraíso azul, Kensington,
-  Azahar, Azahar New, Yedra, Basic Line Blue, Basic Line Red, Laberinto, Peces).
+- Las colecciones de decorado que faltan: Áurea, Georgica, Edén, Laberinto, Peces y
+  Basic Line Blue. Los productos de fin de existencias (lote 10) ya existen con
+  `custom.decorado`; falta `custom.forma` en todos menos Yedra y Basic Line Red.
 - Cuál es exactamente el «Taza sin platillo» que hay que eliminar: las 21 tazas sin
   «con platillo» en el título son Consomé y Desayuno, y el menú nuevo las mantiene.
 - Las fotos IA: la principal del mug unificado y las segundas imágenes del hover.

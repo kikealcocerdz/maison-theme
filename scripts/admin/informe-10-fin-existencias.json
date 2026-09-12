@@ -1,0 +1,518 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "crear «Salsera Azahar Nuevo» (020230160, 23.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602315149653",
+          "handle": "salsera-azahar-nuevo",
+          "title": "Salsera Azahar Nuevo",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "020230160",
+                "price": "23.95",
+                "compareAtPrice": "39.95",
+                "barcode": null
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589827465557",
+                "status": "PROCESSING"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Sopera Azahar Nuevo» (020230170, 76.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602315346261",
+          "handle": "sopera-azahar-nuevo",
+          "title": "Sopera Azahar Nuevo",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "020230170",
+                "price": "76.95",
+                "compareAtPrice": "127.95",
+                "barcode": null
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589833363797",
+                "status": "PROCESSING"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Plato Pastas Azahar Nuevo» (020230300, 12.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602315608405",
+          "handle": "plato-pastas-azahar-nuevo",
+          "title": "Plato Pastas Azahar Nuevo",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "020230300",
+                "price": "12.95",
+                "compareAtPrice": "20.95",
+                "barcode": null
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589835329877",
+                "status": "PROCESSING"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Plato Hondo Azahar Nuevo» (020230320, 16.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602315936085",
+          "handle": "plato-hondo-azahar-nuevo",
+          "title": "Plato Hondo Azahar Nuevo",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "020230320",
+                "price": "16.95",
+                "compareAtPrice": "26.95",
+                "barcode": null
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589836640597",
+                "status": "UPLOADED"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Platillo Consome Azahar Nuevo» (020230340, 10.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602316099925",
+          "handle": "platillo-consome-azahar-nuevo",
+          "title": "Platillo Consome Azahar Nuevo",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "020230340",
+                "price": "10.95",
+                "compareAtPrice": "16.95",
+                "barcode": null
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589837754709",
+                "status": "PROCESSING"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Taza Consome Azahar Nuevo» (020230441, 17.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602316329301",
+          "handle": "taza-consome-azahar-nuevo",
+          "title": "Taza Consome Azahar Nuevo",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "020230441",
+                "price": "17.95",
+                "compareAtPrice": "29.95",
+                "barcode": null
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589838737749",
+                "status": "PROCESSING"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Salsera Basic Line Red» (02R010160, 23.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602316624213",
+          "handle": "salsera-basic-line-red",
+          "title": "Salsera Basic Line Red",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "02R010160",
+                "price": "23.95",
+                "compareAtPrice": "39.95",
+                "barcode": "8435386720556"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589840343381",
+                "status": "UPLOADED"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Azucarero Yedra» (020220100, 31.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602316886357",
+          "handle": "azucarero-yedra",
+          "title": "Azucarero Yedra",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "020220100",
+                "price": "31.95",
+                "compareAtPrice": "52.95",
+                "barcode": "8435386707601"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589842178389",
+                "status": "PROCESSING"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Bajoplato Yedra» (070220380, 34.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602317115733",
+          "handle": "bajoplato-yedra",
+          "title": "Bajoplato Yedra",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "070220380",
+                "price": "34.95",
+                "compareAtPrice": "57.95",
+                "barcode": "8435386712407"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589848371541",
+                "status": "PROCESSING"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Bandeja Pastas Yedra» (020220140, 23.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602317345109",
+          "handle": "bandeja-pastas-yedra",
+          "title": "Bandeja Pastas Yedra",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "020220140",
+                "price": "23.95",
+                "compareAtPrice": "39.95",
+                "barcode": "8435386707700"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589849977173",
+                "status": "UPLOADED"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Cafetera Yedra» (020220120, 49.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602317705557",
+          "handle": "cafetera-yedra",
+          "title": "Cafetera Yedra",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "020220120",
+                "price": "49.95",
+                "compareAtPrice": "82.95",
+                "barcode": "8435386707649"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589851255125",
+                "status": "PROCESSING"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Fuente Redonda Yedra» (020220230, 35.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602317967701",
+          "handle": "fuente-redonda-yedra",
+          "title": "Fuente Redonda Yedra",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "020220230",
+                "price": "35.95",
+                "compareAtPrice": "59.95",
+                "barcode": "8435386707885"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589852369237",
+                "status": "UPLOADED"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Lechera Yedra» (020220110, 26.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602318262613",
+          "handle": "lechera-yedra",
+          "title": "Lechera Yedra",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "020220110",
+                "price": "26.95",
+                "compareAtPrice": "43.95",
+                "barcode": "8435386707632"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589853319509",
+                "status": "PROCESSING"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Plato Pan Yedra» (070220370, 10.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602318491989",
+          "handle": "plato-pan-yedra",
+          "title": "Plato Pan Yedra",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "070220370",
+                "price": "10.95",
+                "compareAtPrice": "16.95",
+                "barcode": "8435386712384"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589854368085",
+                "status": "PROCESSING"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Plato Pastas Yedra» (020220300, 12.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602318819669",
+          "handle": "plato-pastas-yedra",
+          "title": "Plato Pastas Yedra",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "020220300",
+                "price": "12.95",
+                "compareAtPrice": "20.95",
+                "barcode": "8435386707892"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589856072021",
+                "status": "PROCESSING"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Taza Consome Yedra» (020220441, 17.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602319049045",
+          "handle": "taza-consome-yedra",
+          "title": "Taza Consome Yedra",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "020220441",
+                "price": "17.95",
+                "compareAtPrice": "29.95",
+                "barcode": "8435386708127"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589856596309",
+                "status": "PROCESSING"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Taza Desayuno Yedra» (070220431, 14.95 €)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602319376725",
+          "handle": "taza-desayuno-yedra",
+          "title": "Taza Desayuno Yedra",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": "070220431",
+                "price": "14.95",
+                "compareAtPrice": "23.95",
+                "barcode": "8435386712445"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58589860757845",
+                "status": "PROCESSING"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}
