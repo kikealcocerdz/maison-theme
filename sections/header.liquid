@@ -177,6 +177,9 @@
 .nav-item { position: static; align-self: stretch; display: flex; align-items: center; }
 .nav-item__link { position: relative; }
 
+/* Sin desplazamiento y con el cierre retrasado: al pasar de Mesa a Café & Té el
+   panel nuevo entra por encima (z 21) mientras el viejo aguanta 90 ms antes de
+   fundirse, así que las dos bandas blancas se solapan y no hay parpadeo. */
 .nav-drop {
   position: absolute;
   top: 100%;
@@ -185,16 +188,15 @@
   z-index: 20;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-6px);
-  transition: opacity 280ms var(--ease), transform 280ms var(--ease), visibility 0s linear 280ms;
+  transition: opacity 220ms var(--ease) 90ms, visibility 0s linear 310ms;
 }
 
 .nav-item:hover .nav-drop,
 .nav-item:focus-within .nav-drop {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
-  transition: opacity 280ms var(--ease), transform 280ms var(--ease), visibility 0s linear 0s;
+  z-index: 21;
+  transition: opacity 180ms var(--ease) 0s, visibility 0s linear 0s;
 }
 
 /* Banda a sangre en papel; las columnas dentro respetan el ancho del shell. */
@@ -251,20 +253,25 @@
 
 /* Con un desplegable abierto la cabecera pasa a papel, también sobre el hero
    claro: el logo vuelve a su tinta y el texto deja de ser blanco. */
-.site-header:has(.nav-item:hover),
+/* La cabecera se queda en papel mientras el ratón esté sobre la barra entera
+   (huecos entre entradas incluidos), no solo sobre una entrada: si no, al
+   cruzar de una a otra volvía a transparente un instante y parpadeaba. */
+.site-header:has(.nav-left:hover),
+.site-header:has(.nav-right:hover),
 .site-header:has(.nav-item:focus-within) {
   background: var(--paper);
   color: var(--ink);
   border-color: rgba(15, 26, 46, 0.08);
   -webkit-backdrop-filter: none; backdrop-filter: none;
 }
-.site-header:has(.nav-item:hover) .logo,
+.site-header:has(.nav-left:hover) .logo,
+.site-header:has(.nav-right:hover) .logo,
 .site-header:has(.nav-item:focus-within) .logo { filter: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .nav-drop { transition: opacity 1ms linear, visibility 0s; transform: none; }
+  .nav-drop,
   .nav-item:hover .nav-drop,
-  .nav-item:focus-within .nav-drop { transform: none; }
+  .nav-item:focus-within .nav-drop { transition: opacity 1ms linear, visibility 0s; }
 }
 }
 
