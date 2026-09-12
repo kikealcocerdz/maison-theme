@@ -5,29 +5,38 @@ Solo toca ese menú; `main-menu` no se mira siquiera. Después de aplicarlo hay 
 elegirlo en Personalizar → Cabecera → «Menú de la derecha».
 
 Los seis hijos de «Nuevo» (Áurea, Vela aromática, Lapicero, Caja 6 posavasos,
-Vaciabolsillos, Abanico) no existen todavía como producto, así que «Nuevo» sale
-sin hijos apuntando a la colección Novedades. Cuando los den de alta se añaden
-desde el admin, o se vuelve a lanzar esto con la lista rellena en HIJOS_NUEVO.
+Vaciabolsillos, Abanico) no existen todavía como producto. Van igualmente, como
+en el menú principal: si el producto existe, enlace directo; si no, una búsqueda
+por su nombre, que devolverá la pieza en cuanto se dé de alta.
 
     python3 06_menu_derecha.py            # ensayo
     python3 06_menu_derecha.py --apply
 """
 
 import argparse
+import urllib.parse
 
 from shopify_admin import Admin, add_common_args, banner
 
 HANDLE = "menu-derecha"
 TITULO = "Menú derecha"
 
-# (rótulo, handle de producto). Vacío hasta que existan.
-HIJOS_NUEVO = []
+# (rótulo, término de búsqueda). Si hay un producto cuyo título lo contiene, se
+# enlaza directo; si no, la entrada apunta a /search con ese término.
+HIJOS_NUEVO = [
+    ("Áurea", "Aurea"),
+    ("Vela aromática", "Vela aromatica"),
+    ("Lapicero", "Lapicero"),
+    ("Caja con 6 posavasos", "Posavasos"),
+    ("Vaciabolsillo", "Vaciabolsillo"),
+    ("Abanico", "Abanico"),
+]
 
 Q_DATOS = """
 query {
   novedades: collectionByHandle(handle: "novedades") { id }
   pages(first: 50) { nodes { id handle } }
-  products(first: 50, query: "tag:novedad") { nodes { id handle title } }
+  products(first: 250, query: "tag:novedad OR title:*Aurea* OR title:*Vela* OR title:*Lapicero* OR title:*Posavasos* OR title:*Vaciabolsillo* OR title:*Abanico*") { nodes { id handle title } }
   menus(first: 25) { nodes { id handle title items { title type url items { title type url } } } }
 }
 """
@@ -79,13 +88,15 @@ def main():
         nuevo = {"title": "Nuevo", "type": "HTTP", "url": "/collections/novedades"}
         faltan.append(("Nuevo", "colección /novedades (lanza antes el lote 01)"))
     hijos = []
-    for rotulo, handle in HIJOS_NUEVO:
-        if handle in productos:
-            hijos.append({"title": rotulo, "type": "PRODUCT", "resourceId": productos[handle]["id"]})
+    for rotulo, termino in HIJOS_NUEVO:
+        directo = [p for p in productos.values() if termino.lower() in p["title"].lower()]
+        if directo:
+            hijos.append({"title": rotulo, "type": "PRODUCT", "resourceId": directo[0]["id"]})
         else:
-            faltan.append(("Nuevo › " + rotulo, "producto /%s" % handle))
-    if hijos:
-        nuevo["items"] = hijos
+            url = "/search?q=%s&type=product" % urllib.parse.quote(termino)
+            hijos.append({"title": rotulo, "type": "HTTP", "url": url})
+            faltan.append(("Nuevo › " + rotulo, "sin producto aún → %s" % url))
+    nuevo["items"] = hijos
 
     # ---- resto ----------------------------------------------------------
     items = [nuevo]
