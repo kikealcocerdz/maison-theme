@@ -59,6 +59,9 @@
     "results_for_html": "{{ count }} resultados para {{ terms }}"
   },
   "general": {
+    "account": {
+      "label": "Cuenta"
+    },
     "accessibility": {
       "skip_to_content": "Saltar al contenido",
       "open_menu": "Abrir menú",
@@ -232,7 +235,10 @@
       "service": "Servicio",
       "pieces": "Piezas",
       "pieces_selector": "Selecciona el número de piezas",
-      "pack_intro": "Tu pack contiene:"
+      "pack_intro": "Tu pack contiene:",
+      "pack_hint": "Pasa el cursor o selecciona una pieza para verla en detalle.",
+      "pack_unit": { "one": "unidad incluida", "other": "unidades incluidas" },
+      "discover_collection": "Descubre la colección"
     },
     "stamps": {
       "seal": "Sello",

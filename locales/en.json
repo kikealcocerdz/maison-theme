@@ -59,6 +59,9 @@
     "results_for_html": "{{ count }} results found for {{ terms }}"
   },
   "general": {
+    "account": {
+      "label": "Account"
+    },
     "accessibility": {
       "skip_to_content": "Skip to content",
       "open_menu": "Open menu",
@@ -232,7 +235,10 @@
       "service": "Service",
       "pieces": "Pieces",
       "pieces_selector": "Select the number of pieces",
-      "pack_intro": "Your set includes:"
+      "pack_intro": "Your set includes:",
+      "pack_hint": "Hover or select a piece to see it in detail.",
+      "pack_unit": { "one": "unit included", "other": "units included" },
+      "discover_collection": "Discover the collection"
     },
     "stamps": {
       "seal": "Stamp",
