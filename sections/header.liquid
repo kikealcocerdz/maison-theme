@@ -120,6 +120,9 @@
 .nav-left,
 .nav-right {
   display: flex;
+  /* A todo el alto del header: así cada entrada con desplegable llega hasta el
+     borde inferior y el ratón baja al panel sin salir de su área. */
+  align-self: stretch;
   /* Con el árbol nuevo la barra lleva cinco entradas por lado: el hueco cede
      antes que dejar que el logo se desplace. */
   gap: clamp(20px, 2.1vw, 44px);
@@ -166,50 +169,62 @@
 
 /* ==========================================================================
    Desplegables de la barra (snippets/nav-item.liquid).
-   Sólo CSS: se abren con el ratón encima o con el foco dentro. El relleno
-   superior del panel cubre el hueco entre el rótulo y la caja, para que el
-   puntero pueda bajar sin que se cierre por el camino.
+   Sólo CSS: se abren con el ratón encima o con el foco dentro. El panel va a
+   todo el ancho de la cabecera: la entrada ocupa el alto entero del header
+   (align-self: stretch), así que el panel arranca justo en su borde inferior
+   y el puntero baja hasta él sin salir del área de hover.
    ========================================================================== */
-.nav-item { position: relative; display: flex; align-items: center; }
+.nav-item { position: static; align-self: stretch; display: flex; align-items: center; }
+.nav-item__link { position: relative; }
 
 .nav-drop {
   position: absolute;
   top: 100%;
-  left: -22px;
+  left: 0;
+  right: 0;
   z-index: 20;
-  padding-top: 20px;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-6px);
-  transition: opacity 260ms var(--ease), transform 260ms var(--ease), visibility 0s linear 260ms;
+  transition: opacity 280ms var(--ease), transform 280ms var(--ease), visibility 0s linear 280ms;
 }
-.nav-item--right .nav-drop { left: auto; right: -22px; }
 
 .nav-item:hover .nav-drop,
 .nav-item:focus-within .nav-drop {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-  transition: opacity 260ms var(--ease), transform 260ms var(--ease), visibility 0s linear 0s;
+  transition: opacity 280ms var(--ease), transform 280ms var(--ease), visibility 0s linear 0s;
 }
 
+/* Banda a sangre en papel; las columnas dentro respetan el ancho del shell. */
 .nav-drop__inner {
   display: flex;
-  gap: 46px;
-  padding: 30px 34px 32px;
-  background: var(--paper);
+  gap: clamp(40px, 5vw, 92px);
+  width: var(--content-wide);
+  margin: 0 auto;
+  padding: 44px 0 52px;
   color: var(--ink);
-  border: 0.5px solid var(--rule);
-  box-shadow: 0 26px 60px rgba(15, 26, 46, 0.10);
-  max-width: min(86vw, 900px);
 }
+.nav-drop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+  border-top: 0.5px solid var(--rule);
+  border-bottom: 0.5px solid var(--rule);
+  box-shadow: 0 30px 70px rgba(15, 26, 46, 0.10);
+  z-index: -1;
+}
+/* El panel de la derecha alinea sus columnas al lado que le toca. */
+.nav-item--right .nav-drop__inner { justify-content: flex-end; }
 
 .nav-drop__col { min-width: 0; }
 .nav-drop__head {
   display: block;
-  margin-bottom: 13px;
+  margin-bottom: 16px;
   font-family: var(--serif);
-  font-size: 17px;
+  font-size: 19px;
   font-variant: small-caps;
   letter-spacing: 0.03em;
   text-transform: none;
@@ -219,7 +234,7 @@
 .nav-drop__head:hover { opacity: 0.62; }
 .nav-drop__col--flag .nav-drop__head { color: var(--accent-1); }
 
-.nav-drop ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+.nav-drop ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .nav-drop li a {
   display: block;
   font-size: 10px;
@@ -234,13 +249,23 @@
 .nav-drop__col--flag li a { color: var(--accent-1); opacity: 0.78; }
 .nav-drop__col--flag li a:hover { opacity: 1; }
 
-/* Con la cabecera en claro sobre foto, el panel sigue siendo papel. */
-.site-header.light .nav-drop__inner { color: var(--ink); }
+/* Con un desplegable abierto la cabecera pasa a papel, también sobre el hero
+   claro: el logo vuelve a su tinta y el texto deja de ser blanco. */
+.site-header:has(.nav-item:hover),
+.site-header:has(.nav-item:focus-within) {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: rgba(15, 26, 46, 0.08);
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+.site-header:has(.nav-item:hover) .logo,
+.site-header:has(.nav-item:focus-within) .logo { filter: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .nav-drop { transition: opacity 1ms linear, visibility 0s; transform: none; }
   .nav-item:hover .nav-drop,
   .nav-item:focus-within .nav-drop { transform: none; }
+}
 }
 
 @media (prefers-reduced-motion: reduce) {
