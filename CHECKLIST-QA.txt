@@ -1,0 +1,241 @@
+===============================================================================
+CHECKLIST DE QA MANUAL — Maison / La Cartuja de Sevilla
+Generada el 2026-09-05. Estado del repo en ese momento: main = b136e2d
+===============================================================================
+
+Esto es SOLO lo que hay que comprobar con un navegador delante. Lo que se puede
+verificar sirviendo HTML ya está hecho y sale listado al final, en "YA VERIFICADO"
+— no lo repitas.
+
+Regla de oro antes de empezar:
+
+    shopify theme dev --store=la-cartuja-de-sevilla     # http://127.0.0.1:9292
+
+Todo lo de aquí se prueba contra ese servidor, NO contra el tema live. El live
+(#198652100949) no tiene nada de lo nuevo.
+
+
+-------------------------------------------------------------------------------
+0 · ANTES DE NADA
+-------------------------------------------------------------------------------
+
+[ ] shopify theme check  ->  0 errores. 5 warnings son los esperados.
+[ ] git status limpio y main == origin/main.
+[ ] La tienda tiene contraseña de escaparate: si el navegador la pide, es normal.
+
+
+-------------------------------------------------------------------------------
+1 · FACETAS DE COLECCIÓN  (escritorio)
+    URL: /collections/all   y   /collections/emblemas
+-------------------------------------------------------------------------------
+
+[ ] La caja de filtros aparece ARRIBA del árbol de capítulos, no debajo.
+[ ] Se distingue del árbol: fondo gris suave, borde, títulos más oscuros.
+[ ] Salen los tres grupos: Disponibilidad, Precio, Tipo de producto.
+
+[ ] ACORDEÓN — abrir un grupo cierra el que estuviera abierto. Nunca dos a la vez.
+[ ] Volver a pulsar el mismo grupo lo cierra y deja todos cerrados.
+[ ] Abrir "Tipo de producto" (23 valores): la columna NO se sale de pantalla.
+    Debe aparecer scroll dentro del propio sidebar y llegarse al último valor.
+    >>> Este era el fallo original. Probar con la ventana en 900px de alto o menos.
+
+[ ] Marcar una casilla -> la rejilla se actualiza SIN recargar la página.
+    (La pestaña no debe mostrar el spinner de carga completa.)
+[ ] La URL de la barra de direcciones cambia y refleja el filtro.
+[ ] Aparece un chip encima de la rejilla con el filtro aplicado.
+[ ] Pulsar la "x" del chip lo quita, también sin recargar.
+[ ] "Limpiar" quita todos los filtros de golpe.
+[ ] Marcar dos filtros de grupos distintos (p. ej. Plato + Precio) -> 2 chips,
+    y los productos cumplen los dos a la vez.
+[ ] Los contadores junto a cada valor se actualizan al filtrar.
+[ ] Un valor con contador 0 sale atenuado y NO se puede marcar.
+
+[ ] PRECIO — escribir un mínimo y salir del campo aplica el filtro.
+[ ] Pulsar Enter dentro del campo de precio también aplica (no recarga en blanco).
+[ ] Vaciar el campo y salir quita el filtro (no debe quedarse pinchado en 0).
+
+[ ] COPIAR Y PEGAR la URL con filtros en una pestaña nueva -> se abre con los
+    mismos filtros marcados y los mismos productos.
+[ ] Recargar con F5 estando filtrado -> se mantiene.
+[ ] Botón ATRÁS del navegador después de filtrar.
+    >>> OJO: se usa history.replaceState, así que atrás NO deshace filtro a filtro,
+        sale de la colección. Es a propósito. Confirmar que no se rompe nada.
+
+[ ] "Cargar más" (o bajar hasta el final) estando filtrado: los productos nuevos
+    también cumplen el filtro y el chip sigue puesto.
+
+[ ] SIN JAVASCRIPT (DevTools -> Settings -> Debugger -> Disable JavaScript):
+    marcar una casilla y pulsar "Aplicar filtros" navega y filtra igual.
+    Los chips siguen funcionando como enlaces normales.
+
+
+-------------------------------------------------------------------------------
+2 · FACETAS EN MÓVIL   (DevTools, ancho <= 780px, o un móvil real)
+-------------------------------------------------------------------------------
+
+[ ] El sidebar no se ve. En la barra de herramientas sale el botón "Filtrar".
+[ ] Con filtros activos, el botón muestra el número al lado.
+[ ] Pulsar "Filtrar" abre el panel deslizando desde la derecha, con velo oscuro.
+[ ] El fondo NO hace scroll mientras el panel está abierto.
+[ ] Marcar varias casillas NO cierra el panel ni recarga a cada clic.
+    >>> En móvil manda el botón "Aplicar filtros". En escritorio se aplica al marcar.
+[ ] "Aplicar filtros" cierra el panel y actualiza la rejilla.
+[ ] Cierra también con la ✕, con Esc y tocando el velo.
+[ ] Después de cerrar, la página vuelve a hacer scroll con normalidad.
+[ ] La rejilla se queda en 2 columnas.
+
+
+-------------------------------------------------------------------------------
+3 · BURBUJA DE CONSULTA  (todas las páginas)
+-------------------------------------------------------------------------------
+
+[ ] El ancla sale abajo a la derecha en: home, una colección, una ficha de
+    producto, /pages/contacto y una página legal.
+[ ] AL CARGAR, EL PANEL ESTÁ CERRADO. Solo se ve el círculo.
+    >>> Esto se rompió una vez. Comprobarlo en varias páginas, no solo en home.
+[ ] Pulsar el ancla abre el panel con animación.
+[ ] Al abrir, el cursor queda dentro del campo de texto.
+[ ] Cierra con la ✕, con Esc, y pulsando fuera del panel.
+[ ] Al cerrar, el foco vuelve al botón del ancla.
+[ ] Las 4 preguntas se despliegan al pulsarlas. Se pueden abrir varias.
+[ ] El texto de las respuestas coincide con /pages/envios-devoluciones
+    (7 días hábiles, 150 €, 14 días, Salteras).
+
+[ ] HORARIO — el punto está VERDE de lunes a viernes entre 07:00 y 15:00 (Madrid),
+    y GRIS el resto. Para probar sin esperar: cambiar la hora del sistema, o
+    editar open_time/close_time en el editor de temas.
+[ ] Fuera de horario, el saludo cambia al texto de "fuera de horario".
+[ ] El punto NUNCA sale verde si algo falla. Ante la duda, gris.
+
+[ ] WHATSAPP — escribir algo y pulsar el botón. Debe abrirse WhatsApp
+    (app en móvil, web.whatsapp.com en escritorio) CON EL TEXTO YA ESCRITO
+    en la caja de mensaje, pendiente de que el usuario le dé a enviar.
+    >>> HOY EL NÚMERO ES DE EJEMPLO (+34 600 000 000). Se abrirá un chat con un
+        número inexistente. Eso es lo correcto de momento: lo que se comprueba
+        es que el texto viaja, no que llegue a nadie.
+[ ] Pulsar el botón SIN escribir nada: abre el chat vacío, sin romperse.
+[ ] Escribir 600 caracteres: el campo no deja meter más.
+[ ] Sin JavaScript: el botón sigue abriendo WhatsApp, pero sin el texto.
+    Es lo esperado.
+
+[ ] El enlace de la política de privacidad abre /pages/politica-privacidad.
+[ ] MÓVIL: el panel ocupa casi todo el ancho y no se sale de la pantalla.
+[ ] La burbuja no tapa nada importante: revisar el pie de página y, sobre todo,
+    el botón de añadir al carrito en una ficha de producto.
+
+
+-------------------------------------------------------------------------------
+4 · QUE NO SE HAYA ROTO NADA  (regresión)
+-------------------------------------------------------------------------------
+
+Se ha tocado collection-grid, collection-nav, footer-group y los dos locales.
+
+[ ] /collections/emblemas — la rejilla, el orden y el insert editorial siguen bien.
+[ ] El menú de ordenar (Novedad / Precio) sigue reordenando las tarjetas.
+[ ] Cambiar entre vista cuadrícula y vista lista.
+[ ] El árbol de capítulos del sidebar sigue navegando a sus colecciones.
+[ ] La home entera: héroe, story-scroll, escena comprable, carruseles.
+[ ] Una ficha de producto normal y una de tipo "set".
+[ ] /pages/viste-tu-mesa — el asesor visual y añadir al carrito.
+[ ] /pages/artesania — el plato 3D y el copy corregido
+    (debe poner "Decorado" y "Esmaltado", NUNCA "Calcomanía" ni "Vidriado").
+[ ] Buscar "Translation missing" en el HTML de cada página que abras. Cero.
+
+
+-------------------------------------------------------------------------------
+5 · NUNCA SE HA PROBADO CONTRA SHOPIFY  (viene de FINAL-TIENDA §2)
+-------------------------------------------------------------------------------
+
+Esto es anterior a este trabajo y sigue igual de verde sin comprobar:
+
+[ ] VENTA CRUZADA — abrir una ficha de producto con la pestaña Red abierta.
+    Debe verse una llamada a /recommendations/products?...&intent=related con 200,
+    y las tarjetas de "Te puede interesar" deben CAMBIAR respecto al primer pintado.
+    >>> Requiere haber asignado productos complementarios en Search & Discovery.
+[ ] "Completa la mesa" sin complementarios configurados: la fila se queda con la
+    rejilla de colección. Nunca vacía.
+[ ] Sin JavaScript: las dos filas siguen pintando la rejilla de colección.
+
+[ ] /collections/sets-regalo — HOY DA 404. La colección no existe todavía.
+    Cuando exista: precio en serif, orden de menor a mayor, y que "Cargar más"
+    lo conserve.
+
+
+-------------------------------------------------------------------------------
+6 · DESPUÉS DE HACER PUSH  (no antes)
+-------------------------------------------------------------------------------
+
+    shopify theme push --development --store=la-cartuja-de-sevilla
+
+[ ] mkdir -p /tmp/verifica && shopify theme pull --development --path /tmp/verifica
+[ ] Comprobar que llegaron de verdad:
+        locales/es.default.json   -> tiene sections.help y sections.collection.filters
+        locales/en.json           -> lo mismo
+        sections/help-bubble.liquid
+        snippets/collection-filters.liquid
+        sections/footer-group.json -> incluye help-bubble en "order"
+    >>> Shopify RECHAZA EN SILENCIO el JSON de locales malo: el push dice "success"
+        y el archivo no aterriza. theme check no lo detecta. Por eso este paso.
+[ ] Abrir la tienda y confirmar que no sale "Translation missing" en ningún sitio.
+
+[ ] ANTES DE CUALQUIER PUSH A LIVE: mirar la deriva del editor.
+        mkdir -p /tmp/live && shopify theme pull --theme=198652100949 --path /tmp/live
+        diff -rq /tmp/live .
+    El admin puede haber pisado valores de las plantillas JSON.
+
+
+-------------------------------------------------------------------------------
+7 · TAREAS DEL ADMIN — no son código, no las puede hacer el tema
+-------------------------------------------------------------------------------
+
+[ ] Poner el número REAL de WhatsApp en lugar de +34 600 000 000.
+    Editor de temas -> Footer -> Help bubble -> WhatsApp number.
+    El PIN no hace falta para la web: es para dar de alta la línea en la app.
+[ ] Cargar los dos mensajes automáticos ("Bienvenida" y "Fuera de horario")
+    en WhatsApp Business -> Herramientas -> Mensajes automáticos.
+    El tema NO puede enviarlos.
+[ ] Ajustes -> Detalles de la tienda: que el correo de contacto sea
+    info@lacartujadesevilla.com. Es donde Shopify entrega el formulario de
+    /pages/contacto, y el tema no lo controla. La web ya solo publica esa
+    dirección (18 apariciones, pedidos@ retirado).
+[ ] Crear la colección de sets y confirmar su handle (sets-regalo) y su orden
+    por defecto (precio de menor a mayor).
+[ ] Asignar productos complementarios producto a producto en Search & Discovery.
+[ ] Token de Admin API para barrer "Calcomanía"/"Vidriado" de las descripciones
+    del catálogo. La CLI de Shopify no sirve para esto.
+
+
+===============================================================================
+YA VERIFICADO — NO LO REPITAS
+===============================================================================
+
+Comprobado el 2026-09-05 sirviendo la tienda real con theme dev. Son
+comprobaciones de HTML de servidor, no de comportamiento en el navegador.
+
+  Facetas
+    - ?filter.v.price.gte=0&lte=50            -> 261 de 438 productos
+    - ?filter.v.price.gte=200                 -> 34 de 438
+    - ?filter.p.product_type=Plato            -> 71     |  =Taza -> 65
+    - ?filter.v.availability=0                -> rejilla vacía, sin romperse
+    - tipo + precio a la vez                  -> 2 chips activos
+    - paginate.next.url conserva el filtro    -> ?...gte=200&page=2, "34 de 34"
+    - Section Rendering API con section_id    -> 200, devuelve .collection-grid
+    - Los filtros salen arriba del árbol de capítulos
+    - 0 "Translation missing" en /collections/all y /collections/emblemas
+
+  Burbuja
+    - Sale en home, colección y contacto. 4 FAQs. 0 "Translation missing".
+    - Llega con el atributo hidden y aria-expanded="false"
+    - Sin número configurado -> el botón cae a /pages/contacto
+    - Con número -> normaliza "+34 600 12 34 56" a wa.me/34600123456
+
+  General
+    - shopify theme check: 0 errores, 5 warnings
+    - /pages/envios-devoluciones enlaza solo a mailto:info@
+
+===============================================================================
+Temas de la tienda
+  Live         Theme Cartuja - EAD                   #198652100949
+  Desarrollo   Development (b98ad3-Kike)             #202124951893
+  Review       Maison - WhatsApp + popup (review)    #202722443605
+===============================================================================

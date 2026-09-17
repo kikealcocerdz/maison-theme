@@ -1,7 +1,7 @@
 {%- comment -%}
   Help bubble — the floating consultation button (bottom-right, every page).
 
-  Model: Zara Home, which is what the client picked. Chat bubble, fixed bottom-right;
+  Model: Zara Home, which is what the client picked. Anchor emblem, fixed bottom-right;
   on open it shows opening hours, a few short FAQs, a message box and the LOPD notice.
 
   What this section does NOT do, on purpose:
@@ -37,12 +37,12 @@
   data-greeting-closed="{{ section.settings.greeting_closed | strip_html | escape }}">
 
   <button class="help-fab" type="button" data-help-toggle aria-expanded="false" aria-controls="helpPanel"
-    aria-label="{{ 'sections.help.open' | t }}" title="{{ 'sections.help.open' | t }}">
+    aria-label="{{ 'sections.help.open' | t }}">
     {%- if section.settings.icon != blank -%}
       <img src="{{ section.settings.icon | image_url: width: 96 }}" alt=""
         width="{{ section.settings.icon.width }}" height="{{ section.settings.icon.height }}" loading="lazy">
     {%- else -%}
-      {% render 'icon-chat' %}
+      {% render 'icon-anchor' %}
     {%- endif -%}
   </button>
 
@@ -84,7 +84,7 @@
 
       <label class="help-field">
         <span class="help-field-label">{{ 'sections.help.message' | t }}</span>
-        <textarea rows="3" data-help-message placeholder="{{ 'sections.help.message_placeholder' | t }}"></textarea>
+        <textarea rows="3" maxlength="600" data-help-message placeholder="{{ 'sections.help.message_placeholder' | t }}"></textarea>
       </label>
 
       {%- comment -%}
@@ -303,7 +303,7 @@
   "name": "Help bubble",
   "settings": [
     { "type": "text", "id": "heading", "label": "Title", "info": "Falls back to the shop name." },
-    { "type": "image_picker", "id": "icon", "label": "Icon", "info": "Falls back to the chat icon." },
+    { "type": "image_picker", "id": "icon", "label": "Icon", "info": "Falls back to the anchor emblem." },
     { "type": "header", "content": "WhatsApp" },
     { "type": "text", "id": "whatsapp_number", "label": "WhatsApp number", "info": "International format, e.g. 34600123456. Leave empty to send shoppers to the contact page instead." },
     { "type": "header", "content": "Opening hours" },
