@@ -1,0 +1,1340 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "main-menu ANTES",
+      "resultado": {
+        "id": "gid://shopify/Menu/321835762005",
+        "handle": "main-menu",
+        "title": "Main menu",
+        "items": [
+          {
+            "title": "Mesa",
+            "type": "HTTP",
+            "url": "/collections/all?filter.p.product_type=Vajilla",
+            "items": [
+              {
+                "title": "Vajilla",
+                "type": "HTTP",
+                "url": "/collections/all?filter.p.product_type=Vajilla",
+                "items": []
+              },
+              {
+                "title": "Plato",
+                "type": "HTTP",
+                "url": "/collections/all?filter.p.product_type=Plato",
+                "items": [
+                  {
+                    "title": "Bajo plato",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Bajoplato"
+                  },
+                  {
+                    "title": "Plato llano",
+                    "type": "HTTP",
+                    "url": "/search?q=Plato%20Llano&type=product"
+                  },
+                  {
+                    "title": "Plato hondo",
+                    "type": "HTTP",
+                    "url": "/search?q=Plato%20Hondo&type=product"
+                  },
+                  {
+                    "title": "Plato postre",
+                    "type": "HTTP",
+                    "url": "/search?q=Plato%20Postre&type=product"
+                  },
+                  {
+                    "title": "Plato pan",
+                    "type": "HTTP",
+                    "url": "/search?q=Plato%20Pan&type=product"
+                  },
+                  {
+                    "title": "Platillo de consomé",
+                    "type": "HTTP",
+                    "url": "/search?q=Platillo%20Consome&type=product"
+                  }
+                ]
+              },
+              {
+                "title": "Bol y taza de consomé",
+                "type": "HTTP",
+                "url": "/collections/all?filter.p.product_type=Bol",
+                "items": [
+                  {
+                    "title": "Bol grande",
+                    "type": "HTTP",
+                    "url": "/search?q=Bol%20Grande&type=product"
+                  },
+                  {
+                    "title": "Bol pequeño",
+                    "type": "HTTP",
+                    "url": "/search?q=Bol%20Peque%C3%B1o&type=product"
+                  },
+                  {
+                    "title": "Bol mini",
+                    "type": "HTTP",
+                    "url": "/search?q=Bol%20Mini&type=product"
+                  },
+                  {
+                    "title": "Taza de consomé",
+                    "type": "HTTP",
+                    "url": "/search?q=Taza%20Consome&type=product"
+                  },
+                  {
+                    "title": "Taza de consomé con platillo",
+                    "type": "HTTP",
+                    "url": "/search?q=Taza%20Consome%20Con%20Platillo&type=product"
+                  }
+                ]
+              },
+              {
+                "title": "Servir",
+                "type": "HTTP",
+                "url": "/collections/all?filter.p.product_type=Fuente",
+                "items": [
+                  {
+                    "title": "Fuente y ensaladera",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Fuente"
+                  },
+                  {
+                    "title": "Sopera",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Sopera"
+                  },
+                  {
+                    "title": "Salsera",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Salsera"
+                  },
+                  {
+                    "title": "Cubitera",
+                    "type": "HTTP",
+                    "url": "/search?q=Cubitera&type=product"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Café & Té",
+            "type": "HTTP",
+            "url": "/collections/all?filter.p.product_type=Taza",
+            "items": [
+              {
+                "title": "Juego de Café",
+                "type": "HTTP",
+                "url": "/search?q=Juego%20Cafe&type=product",
+                "items": []
+              },
+              {
+                "title": "Juego de Té",
+                "type": "HTTP",
+                "url": "/search?q=Juego%20Te&type=product",
+                "items": []
+              },
+              {
+                "title": "Tazas",
+                "type": "HTTP",
+                "url": "/collections/all?filter.p.product_type=Taza",
+                "items": [
+                  {
+                    "title": "Mug",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Mug"
+                  },
+                  {
+                    "title": "Taza de café con platillo",
+                    "type": "HTTP",
+                    "url": "/search?q=Taza%20Cafe%20Con%20Platillo&type=product"
+                  },
+                  {
+                    "title": "Taza de té con platillo",
+                    "type": "HTTP",
+                    "url": "/search?q=Taza%20Te%20Con%20Platillo&type=product"
+                  },
+                  {
+                    "title": "Taza de desayuno con platillo",
+                    "type": "HTTP",
+                    "url": "/search?q=Taza%20Desayuno%20Con%20Platillo&type=product"
+                  },
+                  {
+                    "title": "Taza de desayuno",
+                    "type": "HTTP",
+                    "url": "/search?q=Taza%20Desayuno&type=product"
+                  }
+                ]
+              },
+              {
+                "title": "Servicio",
+                "type": "HTTP",
+                "url": "/collections/all?filter.p.product_type=Cafetera",
+                "items": [
+                  {
+                    "title": "Azucarero",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Azucarero"
+                  },
+                  {
+                    "title": "Bandeja de pastas",
+                    "type": "HTTP",
+                    "url": "/search?q=Bandeja%20Pastas&type=product"
+                  },
+                  {
+                    "title": "Bombonera",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Bombonera"
+                  },
+                  {
+                    "title": "Cafetera",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Cafetera"
+                  },
+                  {
+                    "title": "Lechera",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Lechera"
+                  },
+                  {
+                    "title": "Tetera",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Tetera"
+                  }
+                ]
+              },
+              {
+                "title": "Platos",
+                "type": "HTTP",
+                "url": "/collections/all?filter.p.product_type=Platillo",
+                "items": [
+                  {
+                    "title": "Plato de pastas",
+                    "type": "HTTP",
+                    "url": "/search?q=Plato%20Pastas&type=product"
+                  },
+                  {
+                    "title": "Platillo de desayuno",
+                    "type": "HTTP",
+                    "url": "/search?q=Platillo%20Desayuno&type=product"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Decoración",
+            "type": "COLLECTION",
+            "url": "/collections/decoracion",
+            "items": [
+              {
+                "title": "Arte y colección",
+                "type": "COLLECTION",
+                "url": "/collections/arte-y-coleccion",
+                "items": [
+                  {
+                    "title": "Aguamanil",
+                    "type": "HTTP",
+                    "url": "/collections/arte-y-coleccion?filter.p.product_type=Palangana&filter.p.product_type=Jarro"
+                  },
+                  {
+                    "title": "Cabeza frenológica",
+                    "type": "PRODUCT",
+                    "url": "/products/cabeza-frenologica"
+                  },
+                  {
+                    "title": "Floreros · Tibores · Jarrones",
+                    "type": "HTTP",
+                    "url": "/collections/arte-y-coleccion?filter.p.product_type=Florero"
+                  },
+                  {
+                    "title": "Tarros de botica",
+                    "type": "PRODUCT",
+                    "url": "/products/tarro-de-botica"
+                  },
+                  {
+                    "title": "Mancerina",
+                    "type": "PRODUCT",
+                    "url": "/products/mancerina"
+                  },
+                  {
+                    "title": "Caja 6 posavasos",
+                    "type": "PRODUCT",
+                    "url": "/products/caja-6-posavasos"
+                  },
+                  {
+                    "title": "Hoja de parra",
+                    "type": "PRODUCT",
+                    "url": "/products/hoja-de-parra"
+                  }
+                ]
+              },
+              {
+                "title": "Objetos decorativos",
+                "type": "COLLECTION",
+                "url": "/collections/objetos-decorativos",
+                "items": [
+                  {
+                    "title": "Vela aromática",
+                    "type": "HTTP",
+                    "url": "/collections/objetos-decorativos?filter.p.product_type=Vela"
+                  },
+                  {
+                    "title": "Lapicero",
+                    "type": "PRODUCT",
+                    "url": "/products/lapicero"
+                  },
+                  {
+                    "title": "Bandeja y vaciabolsillos",
+                    "type": "COLLECTION",
+                    "url": "/collections/objetos-decorativos"
+                  },
+                  {
+                    "title": "Bandeja Vistas",
+                    "type": "HTTP",
+                    "url": "/collections/objetos-decorativos?filter.p.product_type=Bandeja"
+                  },
+                  {
+                    "title": "Bandeja conmemorativa",
+                    "type": "PRODUCT",
+                    "url": "/products/bandeja-conmemorativa"
+                  },
+                  {
+                    "title": "Vaciabolsillo",
+                    "type": "PRODUCT",
+                    "url": "/products/vaciabolsillos"
+                  }
+                ]
+              },
+              {
+                "title": "Baño",
+                "type": "COLLECTION",
+                "url": "/collections/bano",
+                "items": [
+                  {
+                    "title": "Conjunto de baño",
+                    "type": "PRODUCT",
+                    "url": "/products/conjunto-de-bano"
+                  },
+                  {
+                    "title": "Cepillero",
+                    "type": "PRODUCT",
+                    "url": "/products/cepillero"
+                  },
+                  {
+                    "title": "Jabonera",
+                    "type": "PRODUCT",
+                    "url": "/products/jabonera"
+                  },
+                  {
+                    "title": "Algodonera",
+                    "type": "PRODUCT",
+                    "url": "/products/algodonera"
+                  },
+                  {
+                    "title": "Aguamanil",
+                    "type": "HTTP",
+                    "url": "/collections/bano?filter.p.product_type=Palangana&filter.p.product_type=Jarro"
+                  }
+                ]
+              },
+              {
+                "title": "Gifts",
+                "type": "COLLECTION",
+                "url": "/collections/gifts",
+                "items": [
+                  {
+                    "title": "Libro",
+                    "type": "PRODUCT",
+                    "url": "/products/libro"
+                  },
+                  {
+                    "title": "Camiseta",
+                    "type": "PRODUCT",
+                    "url": "/products/camiseta"
+                  },
+                  {
+                    "title": "Bolsa",
+                    "type": "PRODUCT",
+                    "url": "/products/bolsa"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Colecciones",
+            "type": "HTTP",
+            "url": "/collections",
+            "items": [
+              {
+                "title": "Nuevo",
+                "type": "COLLECTION",
+                "url": "/collections/novedades",
+                "items": []
+              },
+              {
+                "title": "Fin de existencias",
+                "type": "COLLECTION",
+                "url": "/collections/fin-de-existencias",
+                "items": []
+              },
+              {
+                "title": "Clásicas",
+                "type": "HTTP",
+                "url": "/collections",
+                "items": [
+                  {
+                    "title": "202 Rosa",
+                    "type": "COLLECTION",
+                    "url": "/collections/202-rosa"
+                  },
+                  {
+                    "title": "Negro Vistas",
+                    "type": "COLLECTION",
+                    "url": "/collections/negro-vistas"
+                  },
+                  {
+                    "title": "Ceilán",
+                    "type": "COLLECTION",
+                    "url": "/collections/ceilan"
+                  },
+                  {
+                    "title": "Flor de Lis Azul",
+                    "type": "COLLECTION",
+                    "url": "/collections/flor-de-lis-azul"
+                  },
+                  {
+                    "title": "Flor de Lis Rosa",
+                    "type": "COLLECTION",
+                    "url": "/collections/flor-de-lis-rosa"
+                  },
+                  {
+                    "title": "Viejo Molino",
+                    "type": "COLLECTION",
+                    "url": "/collections/viejo-molino"
+                  },
+                  {
+                    "title": "Bellavista",
+                    "type": "COLLECTION",
+                    "url": "/collections/bellavista"
+                  },
+                  {
+                    "title": "Aurora Blanco",
+                    "type": "COLLECTION",
+                    "url": "/collections/aurora-blanca"
+                  },
+                  {
+                    "title": "Ochavado Blanco",
+                    "type": "COLLECTION",
+                    "url": "/collections/ochavada-blanca"
+                  }
+                ]
+              },
+              {
+                "title": "Contemporáneas",
+                "type": "HTTP",
+                "url": "/collections",
+                "items": [
+                  {
+                    "title": "Áurea",
+                    "type": "COLLECTION",
+                    "url": "/collections/aurea"
+                  },
+                  {
+                    "title": "Aaron Stewart",
+                    "type": "COLLECTION",
+                    "url": "/collections/vistas-stewart"
+                  },
+                  {
+                    "title": "Oaxaca",
+                    "type": "COLLECTION",
+                    "url": "/collections/oaxaca"
+                  },
+                  {
+                    "title": "Georgica",
+                    "type": "COLLECTION",
+                    "url": "/collections/georgica"
+                  },
+                  {
+                    "title": "Edén",
+                    "type": "COLLECTION",
+                    "url": "/collections/eden"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paso": "reescribir `main-menu` con grupo Blancas",
+      "resultado": {
+        "menu": {
+          "id": "gid://shopify/Menu/321835762005",
+          "handle": "main-menu",
+          "items": [
+            {
+              "title": "Mesa",
+              "url": "/collections/all?filter.p.product_type=Vajilla",
+              "items": [
+                {
+                  "title": "Vajilla",
+                  "url": "/collections/all?filter.p.product_type=Vajilla",
+                  "items": []
+                },
+                {
+                  "title": "Plato",
+                  "url": "/collections/all?filter.p.product_type=Plato",
+                  "items": [
+                    {
+                      "title": "Bajo plato",
+                      "url": "/collections/all?filter.p.product_type=Bajoplato"
+                    },
+                    {
+                      "title": "Plato llano",
+                      "url": "/search?q=Plato%20Llano&type=product"
+                    },
+                    {
+                      "title": "Plato hondo",
+                      "url": "/search?q=Plato%20Hondo&type=product"
+                    },
+                    {
+                      "title": "Plato postre",
+                      "url": "/search?q=Plato%20Postre&type=product"
+                    },
+                    {
+                      "title": "Plato pan",
+                      "url": "/search?q=Plato%20Pan&type=product"
+                    },
+                    {
+                      "title": "Platillo de consomé",
+                      "url": "/search?q=Platillo%20Consome&type=product"
+                    }
+                  ]
+                },
+                {
+                  "title": "Bol y taza de consomé",
+                  "url": "/collections/all?filter.p.product_type=Bol",
+                  "items": [
+                    {
+                      "title": "Bol grande",
+                      "url": "/search?q=Bol%20Grande&type=product"
+                    },
+                    {
+                      "title": "Bol pequeño",
+                      "url": "/search?q=Bol%20Peque%C3%B1o&type=product"
+                    },
+                    {
+                      "title": "Bol mini",
+                      "url": "/search?q=Bol%20Mini&type=product"
+                    },
+                    {
+                      "title": "Taza de consomé",
+                      "url": "/search?q=Taza%20Consome&type=product"
+                    },
+                    {
+                      "title": "Taza de consomé con platillo",
+                      "url": "/search?q=Taza%20Consome%20Con%20Platillo&type=product"
+                    }
+                  ]
+                },
+                {
+                  "title": "Servir",
+                  "url": "/collections/all?filter.p.product_type=Fuente",
+                  "items": [
+                    {
+                      "title": "Fuente y ensaladera",
+                      "url": "/collections/all?filter.p.product_type=Fuente"
+                    },
+                    {
+                      "title": "Sopera",
+                      "url": "/collections/all?filter.p.product_type=Sopera"
+                    },
+                    {
+                      "title": "Salsera",
+                      "url": "/collections/all?filter.p.product_type=Salsera"
+                    },
+                    {
+                      "title": "Cubitera",
+                      "url": "/search?q=Cubitera&type=product"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Café & Té",
+              "url": "/collections/all?filter.p.product_type=Taza",
+              "items": [
+                {
+                  "title": "Juego de Café",
+                  "url": "/search?q=Juego%20Cafe&type=product",
+                  "items": []
+                },
+                {
+                  "title": "Juego de Té",
+                  "url": "/search?q=Juego%20Te&type=product",
+                  "items": []
+                },
+                {
+                  "title": "Tazas",
+                  "url": "/collections/all?filter.p.product_type=Taza",
+                  "items": [
+                    {
+                      "title": "Mug",
+                      "url": "/collections/all?filter.p.product_type=Mug"
+                    },
+                    {
+                      "title": "Taza de café con platillo",
+                      "url": "/search?q=Taza%20Cafe%20Con%20Platillo&type=product"
+                    },
+                    {
+                      "title": "Taza de té con platillo",
+                      "url": "/search?q=Taza%20Te%20Con%20Platillo&type=product"
+                    },
+                    {
+                      "title": "Taza de desayuno con platillo",
+                      "url": "/search?q=Taza%20Desayuno%20Con%20Platillo&type=product"
+                    },
+                    {
+                      "title": "Taza de desayuno",
+                      "url": "/search?q=Taza%20Desayuno&type=product"
+                    }
+                  ]
+                },
+                {
+                  "title": "Servicio",
+                  "url": "/collections/all?filter.p.product_type=Cafetera",
+                  "items": [
+                    {
+                      "title": "Azucarero",
+                      "url": "/collections/all?filter.p.product_type=Azucarero"
+                    },
+                    {
+                      "title": "Bandeja de pastas",
+                      "url": "/search?q=Bandeja%20Pastas&type=product"
+                    },
+                    {
+                      "title": "Bombonera",
+                      "url": "/collections/all?filter.p.product_type=Bombonera"
+                    },
+                    {
+                      "title": "Cafetera",
+                      "url": "/collections/all?filter.p.product_type=Cafetera"
+                    },
+                    {
+                      "title": "Lechera",
+                      "url": "/collections/all?filter.p.product_type=Lechera"
+                    },
+                    {
+                      "title": "Tetera",
+                      "url": "/collections/all?filter.p.product_type=Tetera"
+                    }
+                  ]
+                },
+                {
+                  "title": "Platos",
+                  "url": "/collections/all?filter.p.product_type=Platillo",
+                  "items": [
+                    {
+                      "title": "Plato de pastas",
+                      "url": "/search?q=Plato%20Pastas&type=product"
+                    },
+                    {
+                      "title": "Platillo de desayuno",
+                      "url": "/search?q=Platillo%20Desayuno&type=product"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Decoración",
+              "url": "/collections/decoracion",
+              "items": [
+                {
+                  "title": "Arte y colección",
+                  "url": "/collections/arte-y-coleccion",
+                  "items": [
+                    {
+                      "title": "Aguamanil",
+                      "url": "/collections/arte-y-coleccion?filter.p.product_type=Palangana&filter.p.product_type=Jarro"
+                    },
+                    {
+                      "title": "Cabeza frenológica",
+                      "url": "/products/cabeza-frenologica"
+                    },
+                    {
+                      "title": "Floreros · Tibores · Jarrones",
+                      "url": "/collections/arte-y-coleccion?filter.p.product_type=Florero"
+                    },
+                    {
+                      "title": "Tarros de botica",
+                      "url": "/products/tarro-de-botica"
+                    },
+                    {
+                      "title": "Mancerina",
+                      "url": "/products/mancerina"
+                    },
+                    {
+                      "title": "Caja 6 posavasos",
+                      "url": "/products/caja-6-posavasos"
+                    },
+                    {
+                      "title": "Hoja de parra",
+                      "url": "/products/hoja-de-parra"
+                    }
+                  ]
+                },
+                {
+                  "title": "Objetos decorativos",
+                  "url": "/collections/objetos-decorativos",
+                  "items": [
+                    {
+                      "title": "Vela aromática",
+                      "url": "/collections/objetos-decorativos?filter.p.product_type=Vela"
+                    },
+                    {
+                      "title": "Lapicero",
+                      "url": "/products/lapicero"
+                    },
+                    {
+                      "title": "Bandeja y vaciabolsillos",
+                      "url": "/collections/objetos-decorativos"
+                    },
+                    {
+                      "title": "Bandeja Vistas",
+                      "url": "/collections/objetos-decorativos?filter.p.product_type=Bandeja"
+                    },
+                    {
+                      "title": "Bandeja conmemorativa",
+                      "url": "/products/bandeja-conmemorativa"
+                    },
+                    {
+                      "title": "Vaciabolsillo",
+                      "url": "/products/vaciabolsillos"
+                    }
+                  ]
+                },
+                {
+                  "title": "Baño",
+                  "url": "/collections/bano",
+                  "items": [
+                    {
+                      "title": "Conjunto de baño",
+                      "url": "/products/conjunto-de-bano"
+                    },
+                    {
+                      "title": "Cepillero",
+                      "url": "/products/cepillero"
+                    },
+                    {
+                      "title": "Jabonera",
+                      "url": "/products/jabonera"
+                    },
+                    {
+                      "title": "Algodonera",
+                      "url": "/products/algodonera"
+                    },
+                    {
+                      "title": "Aguamanil",
+                      "url": "/collections/bano?filter.p.product_type=Palangana&filter.p.product_type=Jarro"
+                    }
+                  ]
+                },
+                {
+                  "title": "Gifts",
+                  "url": "/collections/gifts",
+                  "items": [
+                    {
+                      "title": "Libro",
+                      "url": "/products/libro"
+                    },
+                    {
+                      "title": "Camiseta",
+                      "url": "/products/camiseta"
+                    },
+                    {
+                      "title": "Bolsa",
+                      "url": "/products/bolsa"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Colecciones",
+              "url": "/collections",
+              "items": [
+                {
+                  "title": "Nuevo",
+                  "url": "/collections/novedades",
+                  "items": []
+                },
+                {
+                  "title": "Fin de existencias",
+                  "url": "/collections/fin-de-existencias",
+                  "items": []
+                },
+                {
+                  "title": "Clásicas",
+                  "url": "/collections",
+                  "items": [
+                    {
+                      "title": "202 Rosa",
+                      "url": "/collections/202-rosa"
+                    },
+                    {
+                      "title": "Negro Vistas",
+                      "url": "/collections/negro-vistas"
+                    },
+                    {
+                      "title": "Ceilán",
+                      "url": "/collections/ceilan"
+                    },
+                    {
+                      "title": "Flor de Lis Azul",
+                      "url": "/collections/flor-de-lis-azul"
+                    },
+                    {
+                      "title": "Flor de Lis Rosa",
+                      "url": "/collections/flor-de-lis-rosa"
+                    },
+                    {
+                      "title": "Viejo Molino",
+                      "url": "/collections/viejo-molino"
+                    },
+                    {
+                      "title": "Bellavista",
+                      "url": "/collections/bellavista"
+                    }
+                  ]
+                },
+                {
+                  "title": "Contemporáneas",
+                  "url": "/collections",
+                  "items": [
+                    {
+                      "title": "Áurea",
+                      "url": "/collections/aurea"
+                    },
+                    {
+                      "title": "Aaron Stewart",
+                      "url": "/collections/vistas-stewart"
+                    },
+                    {
+                      "title": "Oaxaca",
+                      "url": "/collections/oaxaca"
+                    },
+                    {
+                      "title": "Georgica",
+                      "url": "/collections/georgica"
+                    },
+                    {
+                      "title": "Edén",
+                      "url": "/collections/eden"
+                    }
+                  ]
+                },
+                {
+                  "title": "Blancas",
+                  "url": "/collections",
+                  "items": [
+                    {
+                      "title": "Aurora Blanco",
+                      "url": "/collections/aurora-blanca"
+                    },
+                    {
+                      "title": "Ochavado Blanco",
+                      "url": "/collections/ochavada-blanca"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "main-menu DESPUÉS",
+      "resultado": {
+        "id": "gid://shopify/Menu/321835762005",
+        "handle": "main-menu",
+        "title": "Main menu",
+        "items": [
+          {
+            "title": "Mesa",
+            "type": "HTTP",
+            "url": "/collections/all?filter.p.product_type=Vajilla",
+            "items": [
+              {
+                "title": "Vajilla",
+                "type": "HTTP",
+                "url": "/collections/all?filter.p.product_type=Vajilla",
+                "items": []
+              },
+              {
+                "title": "Plato",
+                "type": "HTTP",
+                "url": "/collections/all?filter.p.product_type=Plato",
+                "items": [
+                  {
+                    "title": "Bajo plato",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Bajoplato"
+                  },
+                  {
+                    "title": "Plato llano",
+                    "type": "HTTP",
+                    "url": "/search?q=Plato%20Llano&type=product"
+                  },
+                  {
+                    "title": "Plato hondo",
+                    "type": "HTTP",
+                    "url": "/search?q=Plato%20Hondo&type=product"
+                  },
+                  {
+                    "title": "Plato postre",
+                    "type": "HTTP",
+                    "url": "/search?q=Plato%20Postre&type=product"
+                  },
+                  {
+                    "title": "Plato pan",
+                    "type": "HTTP",
+                    "url": "/search?q=Plato%20Pan&type=product"
+                  },
+                  {
+                    "title": "Platillo de consomé",
+                    "type": "HTTP",
+                    "url": "/search?q=Platillo%20Consome&type=product"
+                  }
+                ]
+              },
+              {
+                "title": "Bol y taza de consomé",
+                "type": "HTTP",
+                "url": "/collections/all?filter.p.product_type=Bol",
+                "items": [
+                  {
+                    "title": "Bol grande",
+                    "type": "HTTP",
+                    "url": "/search?q=Bol%20Grande&type=product"
+                  },
+                  {
+                    "title": "Bol pequeño",
+                    "type": "HTTP",
+                    "url": "/search?q=Bol%20Peque%C3%B1o&type=product"
+                  },
+                  {
+                    "title": "Bol mini",
+                    "type": "HTTP",
+                    "url": "/search?q=Bol%20Mini&type=product"
+                  },
+                  {
+                    "title": "Taza de consomé",
+                    "type": "HTTP",
+                    "url": "/search?q=Taza%20Consome&type=product"
+                  },
+                  {
+                    "title": "Taza de consomé con platillo",
+                    "type": "HTTP",
+                    "url": "/search?q=Taza%20Consome%20Con%20Platillo&type=product"
+                  }
+                ]
+              },
+              {
+                "title": "Servir",
+                "type": "HTTP",
+                "url": "/collections/all?filter.p.product_type=Fuente",
+                "items": [
+                  {
+                    "title": "Fuente y ensaladera",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Fuente"
+                  },
+                  {
+                    "title": "Sopera",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Sopera"
+                  },
+                  {
+                    "title": "Salsera",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Salsera"
+                  },
+                  {
+                    "title": "Cubitera",
+                    "type": "HTTP",
+                    "url": "/search?q=Cubitera&type=product"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Café & Té",
+            "type": "HTTP",
+            "url": "/collections/all?filter.p.product_type=Taza",
+            "items": [
+              {
+                "title": "Juego de Café",
+                "type": "HTTP",
+                "url": "/search?q=Juego%20Cafe&type=product",
+                "items": []
+              },
+              {
+                "title": "Juego de Té",
+                "type": "HTTP",
+                "url": "/search?q=Juego%20Te&type=product",
+                "items": []
+              },
+              {
+                "title": "Tazas",
+                "type": "HTTP",
+                "url": "/collections/all?filter.p.product_type=Taza",
+                "items": [
+                  {
+                    "title": "Mug",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Mug"
+                  },
+                  {
+                    "title": "Taza de café con platillo",
+                    "type": "HTTP",
+                    "url": "/search?q=Taza%20Cafe%20Con%20Platillo&type=product"
+                  },
+                  {
+                    "title": "Taza de té con platillo",
+                    "type": "HTTP",
+                    "url": "/search?q=Taza%20Te%20Con%20Platillo&type=product"
+                  },
+                  {
+                    "title": "Taza de desayuno con platillo",
+                    "type": "HTTP",
+                    "url": "/search?q=Taza%20Desayuno%20Con%20Platillo&type=product"
+                  },
+                  {
+                    "title": "Taza de desayuno",
+                    "type": "HTTP",
+                    "url": "/search?q=Taza%20Desayuno&type=product"
+                  }
+                ]
+              },
+              {
+                "title": "Servicio",
+                "type": "HTTP",
+                "url": "/collections/all?filter.p.product_type=Cafetera",
+                "items": [
+                  {
+                    "title": "Azucarero",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Azucarero"
+                  },
+                  {
+                    "title": "Bandeja de pastas",
+                    "type": "HTTP",
+                    "url": "/search?q=Bandeja%20Pastas&type=product"
+                  },
+                  {
+                    "title": "Bombonera",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Bombonera"
+                  },
+                  {
+                    "title": "Cafetera",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Cafetera"
+                  },
+                  {
+                    "title": "Lechera",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Lechera"
+                  },
+                  {
+                    "title": "Tetera",
+                    "type": "HTTP",
+                    "url": "/collections/all?filter.p.product_type=Tetera"
+                  }
+                ]
+              },
+              {
+                "title": "Platos",
+                "type": "HTTP",
+                "url": "/collections/all?filter.p.product_type=Platillo",
+                "items": [
+                  {
+                    "title": "Plato de pastas",
+                    "type": "HTTP",
+                    "url": "/search?q=Plato%20Pastas&type=product"
+                  },
+                  {
+                    "title": "Platillo de desayuno",
+                    "type": "HTTP",
+                    "url": "/search?q=Platillo%20Desayuno&type=product"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Decoración",
+            "type": "COLLECTION",
+            "url": "/collections/decoracion",
+            "items": [
+              {
+                "title": "Arte y colección",
+                "type": "COLLECTION",
+                "url": "/collections/arte-y-coleccion",
+                "items": [
+                  {
+                    "title": "Aguamanil",
+                    "type": "HTTP",
+                    "url": "/collections/arte-y-coleccion?filter.p.product_type=Palangana&filter.p.product_type=Jarro"
+                  },
+                  {
+                    "title": "Cabeza frenológica",
+                    "type": "PRODUCT",
+                    "url": "/products/cabeza-frenologica"
+                  },
+                  {
+                    "title": "Floreros · Tibores · Jarrones",
+                    "type": "HTTP",
+                    "url": "/collections/arte-y-coleccion?filter.p.product_type=Florero"
+                  },
+                  {
+                    "title": "Tarros de botica",
+                    "type": "PRODUCT",
+                    "url": "/products/tarro-de-botica"
+                  },
+                  {
+                    "title": "Mancerina",
+                    "type": "PRODUCT",
+                    "url": "/products/mancerina"
+                  },
+                  {
+                    "title": "Caja 6 posavasos",
+                    "type": "PRODUCT",
+                    "url": "/products/caja-6-posavasos"
+                  },
+                  {
+                    "title": "Hoja de parra",
+                    "type": "PRODUCT",
+                    "url": "/products/hoja-de-parra"
+                  }
+                ]
+              },
+              {
+                "title": "Objetos decorativos",
+                "type": "COLLECTION",
+                "url": "/collections/objetos-decorativos",
+                "items": [
+                  {
+                    "title": "Vela aromática",
+                    "type": "HTTP",
+                    "url": "/collections/objetos-decorativos?filter.p.product_type=Vela"
+                  },
+                  {
+                    "title": "Lapicero",
+                    "type": "PRODUCT",
+                    "url": "/products/lapicero"
+                  },
+                  {
+                    "title": "Bandeja y vaciabolsillos",
+                    "type": "COLLECTION",
+                    "url": "/collections/objetos-decorativos"
+                  },
+                  {
+                    "title": "Bandeja Vistas",
+                    "type": "HTTP",
+                    "url": "/collections/objetos-decorativos?filter.p.product_type=Bandeja"
+                  },
+                  {
+                    "title": "Bandeja conmemorativa",
+                    "type": "PRODUCT",
+                    "url": "/products/bandeja-conmemorativa"
+                  },
+                  {
+                    "title": "Vaciabolsillo",
+                    "type": "PRODUCT",
+                    "url": "/products/vaciabolsillos"
+                  }
+                ]
+              },
+              {
+                "title": "Baño",
+                "type": "COLLECTION",
+                "url": "/collections/bano",
+                "items": [
+                  {
+                    "title": "Conjunto de baño",
+                    "type": "PRODUCT",
+                    "url": "/products/conjunto-de-bano"
+                  },
+                  {
+                    "title": "Cepillero",
+                    "type": "PRODUCT",
+                    "url": "/products/cepillero"
+                  },
+                  {
+                    "title": "Jabonera",
+                    "type": "PRODUCT",
+                    "url": "/products/jabonera"
+                  },
+                  {
+                    "title": "Algodonera",
+                    "type": "PRODUCT",
+                    "url": "/products/algodonera"
+                  },
+                  {
+                    "title": "Aguamanil",
+                    "type": "HTTP",
+                    "url": "/collections/bano?filter.p.product_type=Palangana&filter.p.product_type=Jarro"
+                  }
+                ]
+              },
+              {
+                "title": "Gifts",
+                "type": "COLLECTION",
+                "url": "/collections/gifts",
+                "items": [
+                  {
+                    "title": "Libro",
+                    "type": "PRODUCT",
+                    "url": "/products/libro"
+                  },
+                  {
+                    "title": "Camiseta",
+                    "type": "PRODUCT",
+                    "url": "/products/camiseta"
+                  },
+                  {
+                    "title": "Bolsa",
+                    "type": "PRODUCT",
+                    "url": "/products/bolsa"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Colecciones",
+            "type": "HTTP",
+            "url": "/collections",
+            "items": [
+              {
+                "title": "Nuevo",
+                "type": "COLLECTION",
+                "url": "/collections/novedades",
+                "items": []
+              },
+              {
+                "title": "Fin de existencias",
+                "type": "COLLECTION",
+                "url": "/collections/fin-de-existencias",
+                "items": []
+              },
+              {
+                "title": "Clásicas",
+                "type": "HTTP",
+                "url": "/collections",
+                "items": [
+                  {
+                    "title": "202 Rosa",
+                    "type": "COLLECTION",
+                    "url": "/collections/202-rosa"
+                  },
+                  {
+                    "title": "Negro Vistas",
+                    "type": "COLLECTION",
+                    "url": "/collections/negro-vistas"
+                  },
+                  {
+                    "title": "Ceilán",
+                    "type": "COLLECTION",
+                    "url": "/collections/ceilan"
+                  },
+                  {
+                    "title": "Flor de Lis Azul",
+                    "type": "COLLECTION",
+                    "url": "/collections/flor-de-lis-azul"
+                  },
+                  {
+                    "title": "Flor de Lis Rosa",
+                    "type": "COLLECTION",
+                    "url": "/collections/flor-de-lis-rosa"
+                  },
+                  {
+                    "title": "Viejo Molino",
+                    "type": "COLLECTION",
+                    "url": "/collections/viejo-molino"
+                  },
+                  {
+                    "title": "Bellavista",
+                    "type": "COLLECTION",
+                    "url": "/collections/bellavista"
+                  }
+                ]
+              },
+              {
+                "title": "Contemporáneas",
+                "type": "HTTP",
+                "url": "/collections",
+                "items": [
+                  {
+                    "title": "Áurea",
+                    "type": "COLLECTION",
+                    "url": "/collections/aurea"
+                  },
+                  {
+                    "title": "Aaron Stewart",
+                    "type": "COLLECTION",
+                    "url": "/collections/vistas-stewart"
+                  },
+                  {
+                    "title": "Oaxaca",
+                    "type": "COLLECTION",
+                    "url": "/collections/oaxaca"
+                  },
+                  {
+                    "title": "Georgica",
+                    "type": "COLLECTION",
+                    "url": "/collections/georgica"
+                  },
+                  {
+                    "title": "Edén",
+                    "type": "COLLECTION",
+                    "url": "/collections/eden"
+                  }
+                ]
+              },
+              {
+                "title": "Blancas",
+                "type": "HTTP",
+                "url": "/collections",
+                "items": [
+                  {
+                    "title": "Aurora Blanco",
+                    "type": "COLLECTION",
+                    "url": "/collections/aurora-blanca"
+                  },
+                  {
+                    "title": "Ochavado Blanco",
+                    "type": "COLLECTION",
+                    "url": "/collections/ochavada-blanca"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

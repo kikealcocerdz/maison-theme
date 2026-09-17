@@ -45,6 +45,7 @@ El del menú guarda además el `main-menu` anterior entero, por si hay que recon
 | `03_menu_nuevo.py` | Reescribe `main-menu` y crea `menu-derecha` con el árbol del brief; salta las entradas sin destino y las lista | Reconstruir desde el informe |
 | `04_mug_con_letra.py` | Crea `mug-con-letra` en borrador con 27 variantes (A–Z + Ñ), precio, SKU y foto de cada letra | Borrar el producto |
 | `10_fin_existencias_productos.py` | Da de alta los 52 productos de «Fin de existencias» de la web antigua (`datos-10-fin-existencias.json`): activos, precio rebajado + anterior tachado, SKU/EAN, foto importada, metafields y etiqueta `fin-de-existencias` | Borrar los productos (van en el informe) |
+| `23_menu_colecciones_blancas.py` | Mueve Aurora Blanco y Ochavado Blanco de «Clásicas» al nuevo grupo «Blancas» de `main-menu` | Restaurar `main-menu` desde el bloque ANTES del informe |
 
 ## Lo que estos scripts NO resuelven
 
