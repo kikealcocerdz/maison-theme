@@ -1,0 +1,445 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "colecciones-sidebar ANTES",
+      "resultado": {
+        "id": "gid://shopify/Menu/326292930901",
+        "handle": "colecciones-sidebar",
+        "title": "Colecciones sidebar",
+        "items": [
+          {
+            "id": "gid://shopify/MenuItem/818530222421",
+            "title": "Aurora",
+            "type": "HTTP",
+            "url": "/collections/aurora",
+            "resourceId": null,
+            "tags": [],
+            "items": [
+              {
+                "id": "gid://shopify/MenuItem/818530255189",
+                "title": "Aurora Blanca",
+                "type": "HTTP",
+                "url": "/collections/aurora-blanca",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/818530287957",
+                "title": "202 Rosa",
+                "type": "HTTP",
+                "url": "/collections/202-rosa",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/818530320725",
+                "title": "Bellavista",
+                "type": "HTTP",
+                "url": "/collections/bellavista",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/818530353493",
+                "title": "Ceilán",
+                "type": "HTTP",
+                "url": "/collections/ceilan",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/818530386261",
+                "title": "Flor de Lis Azul",
+                "type": "HTTP",
+                "url": "/collections/flor-de-lis-azul",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/818530419029",
+                "title": "Flor de Lis Rosa",
+                "type": "HTTP",
+                "url": "/collections/flor-de-lis-rosa",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/818530451797",
+                "title": "Viejo Molino",
+                "type": "HTTP",
+                "url": "/collections/viejo-molino",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/818530484565",
+                "title": "Oaxaca x G. y Daniela",
+                "type": "HTTP",
+                "url": "/collections/oaxaca",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/MenuItem/818530517333",
+            "title": "Ochavada",
+            "type": "HTTP",
+            "url": "/collections/ochavada",
+            "resourceId": null,
+            "tags": [],
+            "items": [
+              {
+                "id": "gid://shopify/MenuItem/818530550101",
+                "title": "Ochavada Blanca",
+                "type": "HTTP",
+                "url": "/collections/ochavada-blanca",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/818530582869",
+                "title": "Negro Vistas",
+                "type": "HTTP",
+                "url": "/collections/negro-vistas",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/818530615637",
+                "title": "Negro Vistas by ASH Blue",
+                "type": "HTTP",
+                "url": "/collections/negro-vistas-ash-blue",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/818530648405",
+                "title": "Negro Vistas by ASH Yellow",
+                "type": "HTTP",
+                "url": "/collections/negro-vistas-ash-yellow",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/MenuItem/818530681173",
+            "title": "Gifts & Decor",
+            "type": "HTTP",
+            "url": "/collections/decoracion",
+            "resourceId": null,
+            "tags": [],
+            "items": [
+              {
+                "id": "gid://shopify/MenuItem/818530713941",
+                "title": "Piezas decorativas",
+                "type": "HTTP",
+                "url": "/collections/decoracion",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/819699614037",
+                "title": "Mugs",
+                "type": "HTTP",
+                "url": "/collections/mugs",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/818530746709",
+                "title": "Emblemas",
+                "type": "HTTP",
+                "url": "/collections/emblemas",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/MenuItem/831464014165",
+            "title": "Tipo de producto",
+            "type": "HTTP",
+            "url": "/collections/all",
+            "resourceId": null,
+            "tags": [],
+            "items": [
+              {
+                "id": "gid://shopify/MenuItem/831464046933",
+                "title": "Vajillas",
+                "type": "HTTP",
+                "url": "/collections/vajillas",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/831464079701",
+                "title": "Juegos de café",
+                "type": "HTTP",
+                "url": "/collections/juegos-cafe",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/831464112469",
+                "title": "Juegos de té",
+                "type": "HTTP",
+                "url": "/collections/juegos-te",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/831464145237",
+                "title": "Juegos de boles",
+                "type": "HTTP",
+                "url": "/collections/juegos-boles",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/831464178005",
+                "title": "Fuentes",
+                "type": "HTTP",
+                "url": "/collections/fuentes",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/831464210773",
+                "title": "Jarras y teteras",
+                "type": "HTTP",
+                "url": "/collections/jarras-teteras",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/831464243541",
+                "title": "Bandejas",
+                "type": "HTTP",
+                "url": "/collections/bandejas",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/831464276309",
+                "title": "Mugs",
+                "type": "HTTP",
+                "url": "/collections/mugs",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/831464309077",
+                "title": "Objetos decorativos",
+                "type": "HTTP",
+                "url": "/collections/decoracion",
+                "resourceId": null,
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/831464341845",
+                "title": "Platos",
+                "type": "COLLECTION",
+                "url": "/collections/platos",
+                "resourceId": "gid://shopify/Collection/674484978005",
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/831464374613",
+                "title": "Boles y cuencos",
+                "type": "COLLECTION",
+                "url": "/collections/bowls",
+                "resourceId": "gid://shopify/Collection/674485010773",
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/831464407381",
+                "title": "Tazas",
+                "type": "COLLECTION",
+                "url": "/collections/tazas",
+                "resourceId": "gid://shopify/Collection/674485076309",
+                "tags": [],
+                "items": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paso": "reescribir `colecciones-sidebar`",
+      "resultado": {
+        "menu": {
+          "id": "gid://shopify/Menu/326292930901",
+          "handle": "colecciones-sidebar",
+          "items": [
+            {
+              "title": "Aurora",
+              "url": "/collections/aurora",
+              "items": [
+                {
+                  "title": "Aurora Blanca",
+                  "url": "/collections/aurora-blanca"
+                },
+                {
+                  "title": "202 Rosa",
+                  "url": "/collections/202-rosa"
+                },
+                {
+                  "title": "Bellavista",
+                  "url": "/collections/bellavista"
+                },
+                {
+                  "title": "Ceilán",
+                  "url": "/collections/ceilan"
+                },
+                {
+                  "title": "Flor de Lis Azul",
+                  "url": "/collections/flor-de-lis-azul"
+                },
+                {
+                  "title": "Flor de Lis Rosa",
+                  "url": "/collections/flor-de-lis-rosa"
+                },
+                {
+                  "title": "Viejo Molino",
+                  "url": "/collections/viejo-molino"
+                },
+                {
+                  "title": "Oaxaca x G. y Daniela",
+                  "url": "/collections/oaxaca"
+                }
+              ]
+            },
+            {
+              "title": "Ochavada",
+              "url": "/collections/ochavada",
+              "items": [
+                {
+                  "title": "Ochavada Blanca",
+                  "url": "/collections/ochavada-blanca"
+                },
+                {
+                  "title": "Negro Vistas",
+                  "url": "/collections/negro-vistas"
+                },
+                {
+                  "title": "Negro Vistas by ASH Blue",
+                  "url": "/collections/negro-vistas-ash-blue"
+                },
+                {
+                  "title": "Negro Vistas by ASH Yellow",
+                  "url": "/collections/negro-vistas-ash-yellow"
+                }
+              ]
+            },
+            {
+              "title": "Decoración",
+              "url": "/collections/decoracion",
+              "items": [
+                {
+                  "title": "Piezas decorativas",
+                  "url": "/collections/decoracion"
+                },
+                {
+                  "title": "Mugs",
+                  "url": "/collections/mugs"
+                },
+                {
+                  "title": "Emblemas",
+                  "url": "/collections/emblemas"
+                }
+              ]
+            },
+            {
+              "title": "Tipo de producto",
+              "url": "/collections/all",
+              "items": [
+                {
+                  "title": "Vajillas",
+                  "url": "/collections/vajillas"
+                },
+                {
+                  "title": "Juegos de café",
+                  "url": "/collections/juegos-cafe"
+                },
+                {
+                  "title": "Juegos de té",
+                  "url": "/collections/juegos-te"
+                },
+                {
+                  "title": "Juegos de boles",
+                  "url": "/collections/juegos-boles"
+                },
+                {
+                  "title": "Fuentes",
+                  "url": "/collections/fuentes"
+                },
+                {
+                  "title": "Jarras y teteras",
+                  "url": "/collections/jarras-teteras"
+                },
+                {
+                  "title": "Bandejas",
+                  "url": "/collections/bandejas"
+                },
+                {
+                  "title": "Mugs",
+                  "url": "/collections/mugs"
+                },
+                {
+                  "title": "Objetos decorativos",
+                  "url": "/collections/decoracion"
+                },
+                {
+                  "title": "Platos",
+                  "url": "/collections/platos"
+                },
+                {
+                  "title": "Boles y cuencos",
+                  "url": "/collections/bowls"
+                },
+                {
+                  "title": "Tazas",
+                  "url": "/collections/tazas"
+                }
+              ]
+            }
+          ]
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

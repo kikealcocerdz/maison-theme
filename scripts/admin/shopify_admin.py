@@ -131,6 +131,29 @@ class Admin:
         print("\nInforme en %s" % path)
 
 
+# ---- publicar en los canales de venta -----------------------------------------
+# Lo creado por API nace sin canal (ni «Tienda online» ni «Shop»): es invisible en el
+# storefront aunque esté activo. Un paso tras cada collectionCreate / productCreate.
+Q_PUBLICATIONS = 'query { publications(first: 10) { nodes { id name } } }'
+M_PUBLISH = """
+mutation ($id: ID!, $input: [PublicationInput!]!) {
+  publishablePublish(id: $id, input: $input) {
+    publishable { ... on Product { handle } ... on Collection { handle } }
+    userErrors { field message }
+  }
+}
+"""
+
+
+def publicar(admin, gid, etiqueta):
+    """Publica un producto o colección en Tienda online + Shop."""
+    if not hasattr(admin, "_pubs"):
+        admin._pubs = [{"publicationId": n["id"]} for n in admin.query(Q_PUBLICATIONS)["publications"]["nodes"]
+                       if n["name"] in ("Tienda online", "Online Store", "Shop")]
+    return admin.mutate("publicar %s en Tienda online" % etiqueta, M_PUBLISH,
+                        {"id": gid, "input": admin._pubs}, "publishablePublish")
+
+
 def _indent(text, spaces=2):
     pad = " " * spaces
     return "\n".join(pad + line for line in text.splitlines())

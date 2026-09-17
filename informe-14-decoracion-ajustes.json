@@ -1,0 +1,321 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "quitar 4 fotos de «Vaciabolsillos»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58650801766741",
+          "gid://shopify/MediaImage/58650801799509",
+          "gid://shopify/MediaImage/58650801832277",
+          "gid://shopify/MediaImage/58650801865045"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "actualizar «Vaciabolsillos» (11 fotos, 5 variantes, 5 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602289656149",
+          "handle": "vaciabolsillos",
+          "title": "Vaciabolsillos",
+          "status": "ACTIVE",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Abanico Azul"
+              },
+              {
+                "title": "Abanico Ocre"
+              },
+              {
+                "title": "Abanico Rojo"
+              },
+              {
+                "title": "Blanco"
+              },
+              {
+                "title": "Fábrica Cartuja"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58651249115477",
+                "alt": "WhatsApp Image 2026-09-14 at 11.43.36"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58651249148245",
+                "alt": "Bandeja azul con abanico y bambú"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58651249181013",
+                "alt": "Bandeja cerámica azul con abanico decorativo"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58651249213781",
+                "alt": "Bandeja ocre con abanico oriental"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58651249246549",
+                "alt": "Bandeja ocre con abanico y pato"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58651249279317",
+                "alt": "Bandeja cerámica roja con abanico oriental"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58651249312085",
+                "alt": "Bandeja roja con abanico ilustrado"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58651249344853",
+                "alt": "Bandeja La Cartuja sobre consola de piedra"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58651249377621",
+                "alt": "Bandeja blanca La Cartuja con ancla azul"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58651249410389",
+                "alt": "Bandeja azul con fábrica histórica"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58651249443157",
+                "alt": "Bandeja azul en consola sevillana"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "borrar «Abanico» (gid://shopify/Product/11602289819989)",
+      "resultado": {
+        "deletedProductId": "gid://shopify/Product/11602289819989",
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "etiquetar «Lapicero» como novedad",
+      "resultado": {
+        "node": {
+          "id": "gid://shopify/Product/11602289361237"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Jabonera» (0 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609080234325",
+          "handle": "jabonera",
+          "title": "Jabonera",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58639992324437",
+                "alt": "Próximamente"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Algodonera» (0 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609080267093",
+          "handle": "algodonera",
+          "title": "Algodonera",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58639992324437",
+                "alt": "Próximamente"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Conjunto de baño» (0 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609080332629",
+          "handle": "conjunto-de-bano",
+          "title": "Conjunto de baño",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58639992324437",
+                "alt": "Próximamente"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Bandeja conmemorativa» (0 fotos, 1 variantes, 0 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609080365397",
+          "handle": "bandeja-conmemorativa",
+          "title": "Bandeja conmemorativa",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58639992324437",
+                "alt": "Próximamente"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [
+    {
+      "paso": "copia de «Abanico» antes de borrarlo",
+      "variables": {
+        "id": "gid://shopify/Product/11602289819989",
+        "handle": "abanico",
+        "title": "Abanico",
+        "status": "ACTIVE",
+        "tags": [
+          "novedad"
+        ],
+        "productType": "Abanico",
+        "media": {
+          "nodes": [
+            {
+              "id": "gid://shopify/MediaImage/58650809696597",
+              "alt": "WhatsApp Image 2026-09-14 at 11.43.36",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/WhatsApp_Image_2026-09-14_at_11.43.36.jpg?v=1789403199"
+              }
+            },
+            {
+              "id": "gid://shopify/MediaImage/58650809729365",
+              "alt": "Bandeja azul con abanico y bambú",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Bandeja_azul_con_abanico_y_bambu.png?v=1789403200"
+              }
+            },
+            {
+              "id": "gid://shopify/MediaImage/58650809762133",
+              "alt": "Bandeja cerámica azul con abanico decorativo",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Bandeja_ceramica_azul_con_abanico_decorativo.png?v=1789403199"
+              }
+            },
+            {
+              "id": "gid://shopify/MediaImage/58650809794901",
+              "alt": "Bandeja ocre con abanico oriental",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Bandeja_ocre_con_abanico_oriental.png?v=1789403199"
+              }
+            },
+            {
+              "id": "gid://shopify/MediaImage/58650809827669",
+              "alt": "Bandeja ocre con abanico y pato",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Bandeja_ocre_con_abanico_y_pato.png?v=1789403200"
+              }
+            },
+            {
+              "id": "gid://shopify/MediaImage/58650809860437",
+              "alt": "Bandeja cerámica roja con abanico oriental",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Bandeja_ceramica_roja_con_abanico_oriental.png?v=1789403199"
+              }
+            },
+            {
+              "id": "gid://shopify/MediaImage/58650809893205",
+              "alt": "Bandeja roja con abanico ilustrado",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Bandeja_roja_con_abanico_ilustrado.png?v=1789403199"
+              }
+            }
+          ]
+        },
+        "variants": {
+          "nodes": [
+            {
+              "title": "Azul",
+              "price": "0.00"
+            },
+            {
+              "title": "Ocre",
+              "price": "0.00"
+            },
+            {
+              "title": "Rojo",
+              "price": "0.00"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fallido": []
+}

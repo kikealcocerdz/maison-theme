@@ -1,487 +1,272 @@
 {
-  "modo": "ensayo",
+  "modo": "aplicado",
   "tienda": "la-cartuja-de-sevilla.myshopify.com",
-  "ejecutado": [],
-  "planificado": [
+  "ejecutado": [
     {
       "paso": "crear colección «Azucareros» (tipo = Azucarero)",
-      "variables": {
-        "input": {
-          "title": "Azucareros",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681691611477",
           "handle": "azucarero",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Azucarero"
-              }
-            ]
-          }
-        }
+          "title": "Azucareros"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Bajo plato» (tipo = Bajoplato)",
-      "variables": {
-        "input": {
-          "title": "Bajo plato",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681691644245",
           "handle": "bajoplato",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Bajoplato"
-              }
-            ]
-          }
-        }
+          "title": "Bajo plato"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Bandejas» (tipo = Bandeja)",
-      "variables": {
-        "input": {
-          "title": "Bandejas",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681691677013",
           "handle": "bandeja",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Bandeja"
-              }
-            ]
-          }
-        }
+          "title": "Bandejas"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Boles» (tipo = Bol)",
-      "variables": {
-        "input": {
-          "title": "Boles",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681691709781",
           "handle": "bol",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Bol"
-              }
-            ]
-          }
-        }
+          "title": "Boles"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Bomboneras» (tipo = Bombonera)",
-      "variables": {
-        "input": {
-          "title": "Bomboneras",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681691742549",
           "handle": "bombonera",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Bombonera"
-              }
-            ]
-          }
-        }
+          "title": "Bomboneras"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Cabezas frenológicas» (tipo = Cabeza)",
-      "variables": {
-        "input": {
-          "title": "Cabezas frenológicas",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681691775317",
           "handle": "cabeza",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Cabeza"
-              }
-            ]
-          }
-        }
+          "title": "Cabezas frenológicas"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Cafeteras» (tipo = Cafetera)",
-      "variables": {
-        "input": {
-          "title": "Cafeteras",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681691808085",
           "handle": "cafetera",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Cafetera"
-              }
-            ]
-          }
-        }
+          "title": "Cafeteras"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Champaneras» (tipo = Champanera)",
-      "variables": {
-        "input": {
-          "title": "Champaneras",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681691840853",
           "handle": "champanera",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Champanera"
-              }
-            ]
-          }
-        }
+          "title": "Champaneras"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Ensaladeras» (tipo = Ensaladera)",
-      "variables": {
-        "input": {
-          "title": "Ensaladeras",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681691873621",
           "handle": "ensaladera",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Ensaladera"
-              }
-            ]
-          }
-        }
+          "title": "Ensaladeras"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Floreros, tibores y jarrones» (tipo = Florero)",
-      "variables": {
-        "input": {
-          "title": "Floreros, tibores y jarrones",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681691906389",
           "handle": "florero",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Florero"
-              }
-            ]
-          }
-        }
+          "title": "Floreros, tibores y jarrones"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Fuentes» (tipo = Fuente)",
-      "variables": {
-        "input": {
-          "title": "Fuentes",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681691939157",
           "handle": "fuente",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Fuente"
-              }
-            ]
-          }
-        }
+          "title": "Fuentes"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Jarros» (tipo = Jarro)",
-      "variables": {
-        "input": {
-          "title": "Jarros",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681692004693",
           "handle": "jarro",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Jarro"
-              }
-            ]
-          }
-        }
+          "title": "Jarros"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Juegos» (tipo = Juego)",
-      "variables": {
-        "input": {
-          "title": "Juegos",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681692070229",
           "handle": "juego",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Juego"
-              }
-            ]
-          }
-        }
+          "title": "Juegos"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Lecheras» (tipo = Lechera)",
-      "variables": {
-        "input": {
-          "title": "Lecheras",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681692102997",
           "handle": "lechera",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Lechera"
-              }
-            ]
-          }
-        }
+          "title": "Lecheras"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Mugs» (tipo = Mug)",
-      "variables": {
-        "input": {
-          "title": "Mugs",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681692135765",
           "handle": "mug",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Mug"
-              }
-            ]
-          }
-        }
+          "title": "Mugs"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Aguamaniles» (tipo = Palangana)",
-      "variables": {
-        "input": {
-          "title": "Aguamaniles",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681692168533",
           "handle": "palangana",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Palangana"
-              }
-            ]
-          }
-        }
+          "title": "Aguamaniles"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Platillos» (tipo = Platillo)",
-      "variables": {
-        "input": {
-          "title": "Platillos",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681692201301",
           "handle": "platillo",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Platillo"
-              }
-            ]
-          }
-        }
+          "title": "Platillos"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Platos» (tipo = Plato)",
-      "variables": {
-        "input": {
-          "title": "Platos",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681692234069",
           "handle": "plato",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Plato"
-              }
-            ]
-          }
-        }
+          "title": "Platos"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Salseras» (tipo = Salsera)",
-      "variables": {
-        "input": {
-          "title": "Salseras",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681692266837",
           "handle": "salsera",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Salsera"
-              }
-            ]
-          }
-        }
+          "title": "Salseras"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Servicios» (tipo = Servicio)",
-      "variables": {
-        "input": {
-          "title": "Servicios",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681692299605",
           "handle": "servicio",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Servicio"
-              }
-            ]
-          }
-        }
+          "title": "Servicios"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Soperas» (tipo = Sopera)",
-      "variables": {
-        "input": {
-          "title": "Soperas",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681692332373",
           "handle": "sopera",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Sopera"
-              }
-            ]
-          }
-        }
+          "title": "Soperas"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Tazas» (tipo = Taza)",
-      "variables": {
-        "input": {
-          "title": "Tazas",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681692365141",
           "handle": "taza",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Taza"
-              }
-            ]
-          }
-        }
+          "title": "Tazas"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Teteras» (tipo = Tetera)",
-      "variables": {
-        "input": {
-          "title": "Teteras",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681692397909",
           "handle": "tetera",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Tetera"
-              }
-            ]
-          }
-        }
+          "title": "Teteras"
+        },
+        "userErrors": []
       }
     },
     {
       "paso": "crear colección «Vajillas» (tipo = Vajilla)",
-      "variables": {
-        "input": {
-          "title": "Vajillas",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681692430677",
           "handle": "vajilla",
-          "sortOrder": "BEST_SELLING",
-          "ruleSet": {
-            "appliedDisjunctively": false,
-            "rules": [
-              {
-                "column": "TYPE",
-                "relation": "EQUALS",
-                "condition": "Vajilla"
-              }
-            ]
-          }
-        }
+          "title": "Vajillas"
+        },
+        "userErrors": []
       }
     }
-  ]
+  ],
+  "planificado": [],
+  "fallido": []
 }

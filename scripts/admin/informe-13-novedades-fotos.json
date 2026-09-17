@@ -1,0 +1,1139 @@
+{
+  "modo": "ensayo",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [],
+  "planificado": [
+    {
+      "paso": "actualizar «Áurea» (13 fotos, 1 variantes, 0 con precio)",
+      "variables": {
+        "input": {
+          "id": "gid://shopify/Product/11602289033557",
+          "handle": "aurea",
+          "title": "Áurea",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Decoración",
+          "tags": [
+            "novedad"
+          ],
+          "status": "ACTIVE",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Aurea/CartujadeSevilla-2 (2).jpg",
+              "alt": "CartujadeSevilla-2 (2)",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Aurea/CartujadeSevilla-3 (1).jpg",
+              "alt": "CartujadeSevilla-3 (1)",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Aurea/CartujadeSevilla-4 (2).jpg",
+              "alt": "CartujadeSevilla-4 (2)",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Aurea/CartujadeSevilla-5.jpg",
+              "alt": "CartujadeSevilla-5",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Aurea/img10.jpg",
+              "alt": "img10",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Aurea/img12.jpg",
+              "alt": "img12",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Aurea/img14.jpg",
+              "alt": "img14",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Aurea/img16.jpg",
+              "alt": "img16",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Aurea/img18.jpg",
+              "alt": "img18",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Aurea/img20.jpg",
+              "alt": "img20",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Aurea/img22.jpg",
+              "alt": "img22",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Aurea/img4.jpg",
+              "alt": "img4",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Aurea/img8.jpg",
+              "alt": "img8",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "actualizar «Vela aromática» (10 fotos, 4 variantes, 0 con precio)",
+      "variables": {
+        "input": {
+          "id": "gid://shopify/Product/11602289230165",
+          "handle": "vela-aromatica",
+          "title": "Vela aromática",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Vela",
+          "tags": [
+            "novedad"
+          ],
+          "status": "ACTIVE",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Vela aromática/WhatsApp Image 2026-09-14 at 11.40.51.jpeg",
+              "alt": "WhatsApp Image 2026-09-14 at 11.40.51",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Vela aromática/WhatsApp Image 2026-09-14 at 11.42.11.jpeg",
+              "alt": "WhatsApp Image 2026-09-14 at 11.42.11",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Vela aromática/202 rosa/Vela arquitectónica bajo campana de vidrio.png",
+              "alt": "Vela arquitectónica bajo campana de vidrio",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Vela aromática/202 rosa/Vela marfil encendida con campana de cristal.png",
+              "alt": "Vela marfil encendida con campana de cristal",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Vela aromática/Ceilan/Vela azul con cloche de cristal.png",
+              "alt": "Vela azul con cloche de cristal",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Vela aromática/Ceilan/Vela marfil, jinete azul bajo cloche.png",
+              "alt": "Vela marfil, jinete azul bajo cloche",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Vela aromática/eden/Vela tropical encendida con campana de cristal.png",
+              "alt": "Vela tropical encendida con campana de cristal",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Vela aromática/eden/Vela tropical verde bajo campana de cristal.png",
+              "alt": "Vela tropical verde bajo campana de cristal",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Vela aromática/Negro vistas/Composicion vertical - Vela Negro Vistas.png",
+              "alt": "Composicion vertical - Vela Negro Vistas",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Vela aromática/Negro vistas/Vela marfil bajo campana de cristal.png",
+              "alt": "Vela marfil bajo campana de cristal",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Aroma",
+              "position": 1,
+              "values": [
+                {
+                  "name": "202 Rosa"
+                },
+                {
+                  "name": "Ceilán"
+                },
+                {
+                  "name": "Edén"
+                },
+                {
+                  "name": "Negro Vistas"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Aroma",
+                  "name": "202 Rosa"
+                }
+              ],
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Vela aromática/202 rosa/Vela arquitectónica bajo campana de vidrio.png",
+                "alt": "Vela arquitectónica bajo campana de vidrio",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Aroma",
+                  "name": "Ceilán"
+                }
+              ],
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Vela aromática/Ceilan/Vela azul con cloche de cristal.png",
+                "alt": "Vela azul con cloche de cristal",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Aroma",
+                  "name": "Edén"
+                }
+              ],
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Vela aromática/eden/Vela tropical encendida con campana de cristal.png",
+                "alt": "Vela tropical encendida con campana de cristal",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Aroma",
+                  "name": "Negro Vistas"
+                }
+              ],
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Vela aromática/Negro vistas/Composicion vertical - Vela Negro Vistas.png",
+                "alt": "Composicion vertical - Vela Negro Vistas",
+                "contentType": "IMAGE"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "actualizar «Caja con 6 posavasos» (3 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "id": "gid://shopify/Product/11602289525077",
+          "handle": "caja-6-posavasos",
+          "title": "Caja con 6 posavasos",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Posavasos",
+          "tags": [
+            "novedad"
+          ],
+          "status": "ACTIVE",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/caja 6 posavasos/Caja cerámica rosa con posavasos.png",
+              "alt": "Caja cerámica rosa con posavasos",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/caja 6 posavasos/Caja octogonal rosa con posavasos.png",
+              "alt": "Caja octogonal rosa con posavasos",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/caja 6 posavasos/WhatsApp Image 2026-09-14 at 11.50.429.jpeg",
+              "alt": "WhatsApp Image 2026-09-14 at 11.50.429",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "95.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "actualizar «Vaciabolsillos» (4 fotos, 2 variantes, 2 con precio)",
+      "variables": {
+        "input": {
+          "id": "gid://shopify/Product/11602289656149",
+          "handle": "vaciabolsillos",
+          "title": "Vaciabolsillos",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Vaciabolsillo",
+          "tags": [
+            "novedad"
+          ],
+          "status": "ACTIVE",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Blanco/Bandeja La Cartuja sobre consola de piedra.png",
+              "alt": "Bandeja La Cartuja sobre consola de piedra",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Blanco/Bandeja blanca La Cartuja con ancla azul.png",
+              "alt": "Bandeja blanca La Cartuja con ancla azul",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Fabrica caruja/Bandeja azul con fábrica histórica.png",
+              "alt": "Bandeja azul con fábrica histórica",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Fabrica caruja/Bandeja azul en consola sevillana.png",
+              "alt": "Bandeja azul en consola sevillana",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Diseño",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Blanco"
+                },
+                {
+                  "name": "Fábrica Cartuja"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Diseño",
+                  "name": "Blanco"
+                }
+              ],
+              "price": "37.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Blanco/Bandeja La Cartuja sobre consola de piedra.png",
+                "alt": "Bandeja La Cartuja sobre consola de piedra",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Diseño",
+                  "name": "Fábrica Cartuja"
+                }
+              ],
+              "price": "46.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Fabrica caruja/Bandeja azul con fábrica histórica.png",
+                "alt": "Bandeja azul con fábrica histórica",
+                "contentType": "IMAGE"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "crear «Abanico» (7 fotos, 3 variantes, 0 con precio)",
+      "variables": {
+        "input": {
+          "handle": "abanico",
+          "title": "Abanico",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Abanico",
+          "tags": [
+            "novedad"
+          ],
+          "status": "DRAFT",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/WhatsApp Image 2026-09-14 at 11.43.36.jpeg",
+              "alt": "WhatsApp Image 2026-09-14 at 11.43.36",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Azul/Bandeja azul con abanico y bambú.png",
+              "alt": "Bandeja azul con abanico y bambú",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Azul/Bandeja cerámica azul con abanico decorativo.png",
+              "alt": "Bandeja cerámica azul con abanico decorativo",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Ocre/Bandeja ocre con abanico oriental.png",
+              "alt": "Bandeja ocre con abanico oriental",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Ocre/Bandeja ocre con abanico y pato.png",
+              "alt": "Bandeja ocre con abanico y pato",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Rojo/Bandeja cerámica roja con abanico oriental.png",
+              "alt": "Bandeja cerámica roja con abanico oriental",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Rojo/Bandeja roja con abanico ilustrado.png",
+              "alt": "Bandeja roja con abanico ilustrado",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Color",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Azul"
+                },
+                {
+                  "name": "Ocre"
+                },
+                {
+                  "name": "Rojo"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Color",
+                  "name": "Azul"
+                }
+              ],
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Azul/Bandeja azul con abanico y bambú.png",
+                "alt": "Bandeja azul con abanico y bambú",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Color",
+                  "name": "Ocre"
+                }
+              ],
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Ocre/Bandeja ocre con abanico oriental.png",
+                "alt": "Bandeja ocre con abanico oriental",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Color",
+                  "name": "Rojo"
+                }
+              ],
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Rojo/Bandeja cerámica roja con abanico oriental.png",
+                "alt": "Bandeja cerámica roja con abanico oriental",
+                "contentType": "IMAGE"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "actualizar «Hoja de parra» (3 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "id": "gid://shopify/Product/11609045238101",
+          "handle": "hoja-de-parra",
+          "title": "Hoja de parra",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Decoración",
+          "tags": [
+            "novedad"
+          ],
+          "status": "ACTIVE",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Hoja de parra/Hoja cerámica y llave de latón.png",
+              "alt": "Hoja cerámica y llave de latón",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Hoja de parra/Plato cerámico blanco de hoja de parra.png",
+              "alt": "Plato cerámico blanco de hoja de parra",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Hoja de parra/WhatsApp Image 2026-09-14 at 11.50.2249.jpeg",
+              "alt": "WhatsApp Image 2026-09-14 at 11.50.2249",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "29.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "actualizar «Mancerina» (2 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "id": "gid://shopify/Product/11609045565781",
+          "handle": "mancerina",
+          "title": "Mancerina",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Mancerina",
+          "tags": [
+            "novedad"
+          ],
+          "status": "ACTIVE",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/mancerina/Juego de mancerina azul y plata.png",
+              "alt": "Juego de mancerina azul y plata",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/mancerina/Mancerina sevillana con dos tazas.png",
+              "alt": "Mancerina sevillana con dos tazas",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "120.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "actualizar «Tarro de botica» (12 fotos, 12 variantes, 12 con precio)",
+      "variables": {
+        "input": {
+          "id": "gid://shopify/Product/11609036554581",
+          "handle": "tarro-de-botica",
+          "title": "Tarro de botica",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Tarro",
+          "tags": [
+            "novedad"
+          ],
+          "status": "ACTIVE",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/WhatsApp Image 2026-09-14 at 11.52.50.jpeg",
+              "alt": "WhatsApp Image 2026-09-14 at 11.52.50",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/WhatsApp Image 2026-09-14 at 11.53.00.jpeg",
+              "alt": "WhatsApp Image 2026-09-14 at 11.53.00",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/WhatsApp Image 2026-09-14 at 11.53.17.jpeg",
+              "alt": "WhatsApp Image 2026-09-14 at 11.53.17",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/WhatsApp Image 2026-09-14 at 11.53.30.jpeg",
+              "alt": "WhatsApp Image 2026-09-14 at 11.53.30",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica azul/Jarra azul en un rincón sevillano.png",
+              "alt": "Jarra azul en un rincón sevillano",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica azul/Tarro apotecario azul con paisaje grabado.png",
+              "alt": "Tarro apotecario azul con paisaje grabado",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica negro/Jarra boticaria de inspiración sevillana.png",
+              "alt": "Jarra boticaria de inspiración sevillana",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica negro/Tarro cerámico azul con paisaje negro.png",
+              "alt": "Tarro cerámico azul con paisaje negro",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica rosa/Tarro boticario rosa bajo luz sevillana.png",
+              "alt": "Tarro boticario rosa bajo luz sevillana",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica rosa/Tarro cerámico rosa con paisaje costero.png",
+              "alt": "Tarro cerámico rosa con paisaje costero",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica verde/Jarrón blanco con paisaje tropical verde.png",
+              "alt": "Jarrón blanco con paisaje tropical verde",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica verde/Tarro boticario bajo luz sevillana.png",
+              "alt": "Tarro boticario bajo luz sevillana",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Color",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Azul"
+                },
+                {
+                  "name": "Negro"
+                },
+                {
+                  "name": "Rosa"
+                },
+                {
+                  "name": "Verde"
+                }
+              ]
+            },
+            {
+              "name": "Tamaño",
+              "position": 2,
+              "values": [
+                {
+                  "name": "Pequeño"
+                },
+                {
+                  "name": "Mediano"
+                },
+                {
+                  "name": "Grande"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Color",
+                  "name": "Azul"
+                },
+                {
+                  "optionName": "Tamaño",
+                  "name": "Pequeño"
+                }
+              ],
+              "price": "56.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica azul/Jarra azul en un rincón sevillano.png",
+                "alt": "Jarra azul en un rincón sevillano",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Color",
+                  "name": "Azul"
+                },
+                {
+                  "optionName": "Tamaño",
+                  "name": "Mediano"
+                }
+              ],
+              "price": "72.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica azul/Jarra azul en un rincón sevillano.png",
+                "alt": "Jarra azul en un rincón sevillano",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Color",
+                  "name": "Azul"
+                },
+                {
+                  "optionName": "Tamaño",
+                  "name": "Grande"
+                }
+              ],
+              "price": "96.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica azul/Jarra azul en un rincón sevillano.png",
+                "alt": "Jarra azul en un rincón sevillano",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Color",
+                  "name": "Negro"
+                },
+                {
+                  "optionName": "Tamaño",
+                  "name": "Pequeño"
+                }
+              ],
+              "price": "56.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica negro/Jarra boticaria de inspiración sevillana.png",
+                "alt": "Jarra boticaria de inspiración sevillana",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Color",
+                  "name": "Negro"
+                },
+                {
+                  "optionName": "Tamaño",
+                  "name": "Mediano"
+                }
+              ],
+              "price": "72.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica negro/Jarra boticaria de inspiración sevillana.png",
+                "alt": "Jarra boticaria de inspiración sevillana",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Color",
+                  "name": "Negro"
+                },
+                {
+                  "optionName": "Tamaño",
+                  "name": "Grande"
+                }
+              ],
+              "price": "96.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica negro/Jarra boticaria de inspiración sevillana.png",
+                "alt": "Jarra boticaria de inspiración sevillana",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Color",
+                  "name": "Rosa"
+                },
+                {
+                  "optionName": "Tamaño",
+                  "name": "Pequeño"
+                }
+              ],
+              "price": "56.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica rosa/Tarro boticario rosa bajo luz sevillana.png",
+                "alt": "Tarro boticario rosa bajo luz sevillana",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Color",
+                  "name": "Rosa"
+                },
+                {
+                  "optionName": "Tamaño",
+                  "name": "Mediano"
+                }
+              ],
+              "price": "72.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica rosa/Tarro boticario rosa bajo luz sevillana.png",
+                "alt": "Tarro boticario rosa bajo luz sevillana",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Color",
+                  "name": "Rosa"
+                },
+                {
+                  "optionName": "Tamaño",
+                  "name": "Grande"
+                }
+              ],
+              "price": "96.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica rosa/Tarro boticario rosa bajo luz sevillana.png",
+                "alt": "Tarro boticario rosa bajo luz sevillana",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Color",
+                  "name": "Verde"
+                },
+                {
+                  "optionName": "Tamaño",
+                  "name": "Pequeño"
+                }
+              ],
+              "price": "56.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica verde/Jarrón blanco con paisaje tropical verde.png",
+                "alt": "Jarrón blanco con paisaje tropical verde",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Color",
+                  "name": "Verde"
+                },
+                {
+                  "optionName": "Tamaño",
+                  "name": "Mediano"
+                }
+              ],
+              "price": "72.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica verde/Jarrón blanco con paisaje tropical verde.png",
+                "alt": "Jarrón blanco con paisaje tropical verde",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Color",
+                  "name": "Verde"
+                },
+                {
+                  "optionName": "Tamaño",
+                  "name": "Grande"
+                }
+              ],
+              "price": "96.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Artístico/Tarros de botica/Tarro de botica verde/Jarrón blanco con paisaje tropical verde.png",
+                "alt": "Jarrón blanco con paisaje tropical verde",
+                "contentType": "IMAGE"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "actualizar «Cepillero» (3 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "id": "gid://shopify/Product/11609046679893",
+          "handle": "cepillero",
+          "title": "Cepillero",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Cepillero",
+          "tags": [
+            "novedad"
+          ],
+          "status": "ACTIVE",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Baño/Cepillero/Portacepillos de marfil, elegancia sevillana.png",
+              "alt": "Portacepillos de marfil, elegancia sevillana",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Baño/Cepillero/Portacepillos marfil abierto con banda roja.png",
+              "alt": "Portacepillos marfil abierto con banda roja",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Baño/Cepillero/WhatsApp Image 2026-09-14 at 11.50.49.jpeg",
+              "alt": "WhatsApp Image 2026-09-14 at 11.50.49",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "44.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "actualizar «Bolsa» (2 fotos, 1 variantes, 0 con precio)",
+      "variables": {
+        "input": {
+          "id": "gid://shopify/Product/11609046942037",
+          "handle": "bolsa",
+          "title": "Bolsa",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Bolsa",
+          "tags": [
+            "novedad"
+          ],
+          "status": "ACTIVE",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Gifts/Bolsa/Bolso tote de algodón crema.png",
+              "alt": "Bolso tote de algodón crema",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Gifts/Bolsa/Elegante bolsa La Cartuja en patio sevillano.png",
+              "alt": "Elegante bolsa La Cartuja en patio sevillano",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "actualizar «Camiseta» (2 fotos, 1 variantes, 0 con precio)",
+      "variables": {
+        "input": {
+          "id": "gid://shopify/Product/11609047302485",
+          "handle": "camiseta",
+          "title": "Camiseta",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Camiseta",
+          "tags": [
+            "novedad"
+          ],
+          "status": "ACTIVE",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Gifts/Camiseta/Camiseta blanca La Cartuja Sevilla 1841.png",
+              "alt": "Camiseta blanca La Cartuja Sevilla 1841",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Gifts/Camiseta/Camiseta blanca La Cartuja en patio mediterráneo.png",
+              "alt": "Camiseta blanca La Cartuja en patio mediterráneo",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "actualizar «Libro» (2 fotos, 1 variantes, 0 con precio)",
+      "variables": {
+        "input": {
+          "id": "gid://shopify/Product/11609047630165",
+          "handle": "libro",
+          "title": "Libro",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Libro",
+          "tags": [
+            "novedad"
+          ],
+          "status": "ACTIVE",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Gifts/Libro/Clásico sevillano sobre mesa de nogal.png",
+              "alt": "Clásico sevillano sobre mesa de nogal",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Gifts/Libro/Libro de lujo La Cartuja Sevilla.png",
+              "alt": "Libro de lujo La Cartuja Sevilla",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fallido": []
+}

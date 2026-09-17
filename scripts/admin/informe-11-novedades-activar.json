@@ -1,0 +1,108 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "activar «Mug Viejo Molino»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148424533",
+          "handle": "mug-viejo-molino",
+          "status": "ACTIVE"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Mug Viejo Molino» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "mug-viejo-molino"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "activar «Mug N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148457301",
+          "handle": "mug-n-vistas-azul-a-stewart",
+          "status": "ACTIVE"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Mug N. Vistas Azul A. Stewart» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "mug-n-vistas-azul-a-stewart"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "activar «Mug N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148522837",
+          "handle": "mug-n-vistas-amarillo-a-stewart",
+          "status": "ACTIVE"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Mug N. Vistas Amarillo A. Stewart» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "mug-n-vistas-amarillo-a-stewart"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "activar «Mug Georgica»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148588373",
+          "handle": "mug-georgica",
+          "status": "ACTIVE"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Mug Georgica» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "mug-georgica"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "activar «Mug Eden»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148621141",
+          "handle": "mug-eden",
+          "status": "ACTIVE"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Mug Eden» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "mug-eden"
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

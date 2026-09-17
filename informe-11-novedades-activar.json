@@ -1,0 +1,62 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "publicar «Áurea» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "aurea"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Vela aromática» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "vela-aromatica"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Lapicero» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "lapicero"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Caja con 6 posavasos» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "caja-6-posavasos"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Vaciabolsillos» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "vaciabolsillos"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Abanico» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "abanico"
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

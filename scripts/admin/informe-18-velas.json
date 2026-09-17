@@ -1,0 +1,312 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "crear «Vela aromática 202 Rosa» (4 fotos, 1 variantes, 0 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609274417493",
+          "handle": "vela-aromatica-202-rosa",
+          "title": "Vela aromática 202 Rosa",
+          "status": "ACTIVE",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58654108156245",
+                "alt": "Vela arquitectónica bajo campana de vidrio"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58654108189013",
+                "alt": "Vela marfil encendida con campana de cristal"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58654108221781",
+                "alt": "WhatsApp Image 2026-09-14 at 11.40.51"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58654108254549",
+                "alt": "WhatsApp Image 2026-09-14 at 11.42.11"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Vela aromática 202 Rosa» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "vela-aromatica-202-rosa"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Vela aromática Ceilan» (4 fotos, 1 variantes, 0 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609274974549",
+          "handle": "vela-aromatica-ceilan",
+          "title": "Vela aromática Ceilan",
+          "status": "ACTIVE",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58654115791189",
+                "alt": "Vela azul con cloche de cristal"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58654115823957",
+                "alt": "Vela marfil, jinete azul bajo cloche"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58654115856725",
+                "alt": "WhatsApp Image 2026-09-14 at 11.40.51"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58654115889493",
+                "alt": "WhatsApp Image 2026-09-14 at 11.42.11"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Vela aromática Ceilan» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "vela-aromatica-ceilan"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Vela aromática Edén» (4 fotos, 1 variantes, 0 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609275400533",
+          "handle": "vela-aromatica-eden",
+          "title": "Vela aromática Edén",
+          "status": "ACTIVE",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58654117560661",
+                "alt": "Vela tropical encendida con campana de cristal"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58654117593429",
+                "alt": "Vela tropical verde bajo campana de cristal"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58654117626197",
+                "alt": "WhatsApp Image 2026-09-14 at 11.40.51"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58654117658965",
+                "alt": "WhatsApp Image 2026-09-14 at 11.42.11"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Vela aromática Edén» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "vela-aromatica-eden"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Vela aromática Negro Vistas» (4 fotos, 1 variantes, 0 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609275892053",
+          "handle": "vela-aromatica-negro-vistas",
+          "title": "Vela aromática Negro Vistas",
+          "status": "ACTIVE",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58654119723349",
+                "alt": "Composicion vertical - Vela Negro Vistas"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58654119756117",
+                "alt": "Vela marfil bajo campana de cristal"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58654119788885",
+                "alt": "WhatsApp Image 2026-09-14 at 11.40.51"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58654119821653",
+                "alt": "WhatsApp Image 2026-09-14 at 11.42.11"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Vela aromática Negro Vistas» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "vela-aromatica-negro-vistas"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "borrar «Vela aromática» (gid://shopify/Product/11602289230165)",
+      "resultado": {
+        "deletedProductId": "gid://shopify/Product/11602289230165",
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [
+    {
+      "paso": "copia de «Vela aromática» antes de borrarla",
+      "variables": {
+        "id": "gid://shopify/Product/11602289230165",
+        "handle": "vela-aromatica",
+        "title": "Vela aromática",
+        "status": "ACTIVE",
+        "tags": [
+          "novedad"
+        ],
+        "productType": "Vela",
+        "descriptionHtml": "",
+        "media": {
+          "nodes": [
+            {
+              "alt": "WhatsApp Image 2026-09-14 at 11.40.51",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/WhatsApp_Image_2026-09-14_at_11.40.51.jpg?v=1789403174"
+              }
+            },
+            {
+              "alt": "Vela arquitectónica bajo campana de vidrio",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Vela_arquitectonica_bajo_campana_de_vidrio.png?v=1789403174"
+              }
+            },
+            {
+              "alt": "Vela marfil encendida con campana de cristal",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Vela_marfil_encendida_con_campana_de_cristal.png?v=1789403175"
+              }
+            },
+            {
+              "alt": "Vela azul con cloche de cristal",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Vela_azul_con_cloche_de_cristal.png?v=1789403175"
+              }
+            },
+            {
+              "alt": "Vela marfil, jinete azul bajo cloche",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Vela_marfil_jinete_azul_bajo_cloche.png?v=1789403174"
+              }
+            },
+            {
+              "alt": "Vela tropical encendida con campana de cristal",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Vela_tropical_encendida_con_campana_de_cristal.png?v=1789403175"
+              }
+            },
+            {
+              "alt": "Vela tropical verde bajo campana de cristal",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Vela_tropical_verde_bajo_campana_de_cristal.png?v=1789403174"
+              }
+            },
+            {
+              "alt": "Composicion vertical - Vela Negro Vistas",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Composicion_vertical_-_Vela_Negro_Vistas.png?v=1789403175"
+              }
+            },
+            {
+              "alt": "Vela marfil bajo campana de cristal",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Vela_marfil_bajo_campana_de_cristal.png?v=1789403175"
+              }
+            }
+          ]
+        },
+        "variants": {
+          "nodes": [
+            {
+              "title": "202 Rosa",
+              "price": "0.00"
+            },
+            {
+              "title": "Ceilán",
+              "price": "0.00"
+            },
+            {
+              "title": "Edén",
+              "price": "0.00"
+            },
+            {
+              "title": "Negro Vistas",
+              "price": "0.00"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fallido": []
+}

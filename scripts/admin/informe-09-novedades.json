@@ -1,0 +1,213 @@
+{
+  "modo": "ensayo",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [],
+  "planificado": [
+    {
+      "paso": "crear «Áurea» (borrador, tipo Decoración)",
+      "variables": {
+        "product": {
+          "title": "Áurea",
+          "handle": "aurea",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Decoración",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ]
+        },
+        "media": [
+          {
+            "originalSource": "https://la-cartuja-de-sevilla.myshopify.com/cdn/shop/t/7/assets/craft.webp?v=136599900388307154411788559705",
+            "mediaContentType": "IMAGE",
+            "alt": "Áurea — imagen provisional"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "crear «Vela aromática» (borrador, tipo Vela)",
+      "variables": {
+        "product": {
+          "title": "Vela aromática",
+          "handle": "vela-aromatica",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Vela",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ]
+        },
+        "media": [
+          {
+            "originalSource": "https://la-cartuja-de-sevilla.myshopify.com/cdn/shop/t/7/assets/craft.webp?v=136599900388307154411788559705",
+            "mediaContentType": "IMAGE",
+            "alt": "Vela aromática — imagen provisional"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "crear «Lapicero» (borrador, tipo Lapicero)",
+      "variables": {
+        "product": {
+          "title": "Lapicero",
+          "handle": "lapicero",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Lapicero",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ]
+        },
+        "media": [
+          {
+            "originalSource": "https://la-cartuja-de-sevilla.myshopify.com/cdn/shop/t/7/assets/craft.webp?v=136599900388307154411788559705",
+            "mediaContentType": "IMAGE",
+            "alt": "Lapicero — imagen provisional"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "crear «Caja con 6 posavasos» (borrador, tipo Posavasos)",
+      "variables": {
+        "product": {
+          "title": "Caja con 6 posavasos",
+          "handle": "caja-6-posavasos",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Posavasos",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ]
+        },
+        "media": [
+          {
+            "originalSource": "https://la-cartuja-de-sevilla.myshopify.com/cdn/shop/t/7/assets/craft.webp?v=136599900388307154411788559705",
+            "mediaContentType": "IMAGE",
+            "alt": "Caja con 6 posavasos — imagen provisional"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "crear «Vaciabolsillos» (borrador, tipo Vaciabolsillo)",
+      "variables": {
+        "product": {
+          "title": "Vaciabolsillos",
+          "handle": "vaciabolsillos",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Vaciabolsillo",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ]
+        },
+        "media": [
+          {
+            "originalSource": "https://la-cartuja-de-sevilla.myshopify.com/cdn/shop/t/7/assets/craft.webp?v=136599900388307154411788559705",
+            "mediaContentType": "IMAGE",
+            "alt": "Vaciabolsillos — imagen provisional"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "crear «Abanico» (borrador, tipo Abanico)",
+      "variables": {
+        "product": {
+          "title": "Abanico",
+          "handle": "abanico",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Abanico",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ]
+        },
+        "media": [
+          {
+            "originalSource": "https://la-cartuja-de-sevilla.myshopify.com/cdn/shop/t/7/assets/craft.webp?v=136599900388307154411788559705",
+            "mediaContentType": "IMAGE",
+            "alt": "Abanico — imagen provisional"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "«Decoración»: añadir tipos Decoración, Vela, Lapicero, Posavasos, Vaciabolsillo, Abanico",
+      "variables": {
+        "input": {
+          "id": "gid://shopify/Collection/674485141845",
+          "ruleSet": {
+            "appliedDisjunctively": true,
+            "rules": [
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Florero"
+              },
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Bombonera"
+              },
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Champanera"
+              },
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Cabeza"
+              },
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Palangana"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Juego Cartuja"
+              },
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Decoración"
+              },
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Vela"
+              },
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Lapicero"
+              },
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Posavasos"
+              },
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Vaciabolsillo"
+              },
+              {
+                "column": "TYPE",
+                "relation": "EQUALS",
+                "condition": "Abanico"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "fallido": []
+}

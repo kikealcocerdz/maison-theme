@@ -1,0 +1,17 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "publicar colección all en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "all"
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

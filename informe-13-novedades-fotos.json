@@ -1,0 +1,617 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "actualizar «Áurea» (13 fotos, 1 variantes, 0 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602289033557",
+          "handle": "aurea",
+          "title": "Áurea",
+          "status": "ACTIVE",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58650788331861",
+                "alt": "CartujadeSevilla-2 (2)"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650788364629",
+                "alt": "CartujadeSevilla-3 (1)"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650788397397",
+                "alt": "CartujadeSevilla-4 (2)"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650788430165",
+                "alt": "CartujadeSevilla-5"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650788462933",
+                "alt": "img10"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650788495701",
+                "alt": "img12"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650788528469",
+                "alt": "img14"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650788561237",
+                "alt": "img16"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650788594005",
+                "alt": "img18"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650788626773",
+                "alt": "img20"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650788659541",
+                "alt": "img22"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650788692309",
+                "alt": "img4"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650788725077",
+                "alt": "img8"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "actualizar «Vela aromática» (10 fotos, 4 variantes, 0 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602289230165",
+          "handle": "vela-aromatica",
+          "title": "Vela aromática",
+          "status": "ACTIVE",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "202 Rosa"
+              },
+              {
+                "title": "Ceilán"
+              },
+              {
+                "title": "Edén"
+              },
+              {
+                "title": "Negro Vistas"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58650797539669",
+                "alt": "WhatsApp Image 2026-09-14 at 11.40.51"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650797572437",
+                "alt": "WhatsApp Image 2026-09-14 at 11.42.11"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650797605205",
+                "alt": "Vela arquitectónica bajo campana de vidrio"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650797637973",
+                "alt": "Vela marfil encendida con campana de cristal"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650797670741",
+                "alt": "Vela azul con cloche de cristal"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650797703509",
+                "alt": "Vela marfil, jinete azul bajo cloche"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650797736277",
+                "alt": "Vela tropical encendida con campana de cristal"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650797769045",
+                "alt": "Vela tropical verde bajo campana de cristal"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650797801813",
+                "alt": "Composicion vertical - Vela Negro Vistas"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650797834581",
+                "alt": "Vela marfil bajo campana de cristal"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "actualizar «Caja con 6 posavasos» (3 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602289525077",
+          "handle": "caja-6-posavasos",
+          "title": "Caja con 6 posavasos",
+          "status": "ACTIVE",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58650799767893",
+                "alt": "Caja cerámica rosa con posavasos"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650799800661",
+                "alt": "Caja octogonal rosa con posavasos"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650799833429",
+                "alt": "WhatsApp Image 2026-09-14 at 11.50.429"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "actualizar «Vaciabolsillos» (4 fotos, 2 variantes, 2 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602289656149",
+          "handle": "vaciabolsillos",
+          "title": "Vaciabolsillos",
+          "status": "ACTIVE",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Blanco"
+              },
+              {
+                "title": "Fábrica Cartuja"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58650801766741",
+                "alt": "Bandeja La Cartuja sobre consola de piedra"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650801799509",
+                "alt": "Bandeja blanca La Cartuja con ancla azul"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650801832277",
+                "alt": "Bandeja azul con fábrica histórica"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650801865045",
+                "alt": "Bandeja azul en consola sevillana"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "actualizar «Abanico» (7 fotos, 3 variantes, 0 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11602289819989",
+          "handle": "abanico",
+          "title": "Abanico",
+          "status": "ACTIVE",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Azul"
+              },
+              {
+                "title": "Ocre"
+              },
+              {
+                "title": "Rojo"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58650809696597",
+                "alt": "WhatsApp Image 2026-09-14 at 11.43.36"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650809729365",
+                "alt": "Bandeja azul con abanico y bambú"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650809762133",
+                "alt": "Bandeja cerámica azul con abanico decorativo"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650809794901",
+                "alt": "Bandeja ocre con abanico oriental"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650809827669",
+                "alt": "Bandeja ocre con abanico y pato"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650809860437",
+                "alt": "Bandeja cerámica roja con abanico oriental"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650809893205",
+                "alt": "Bandeja roja con abanico ilustrado"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Hoja de parra» (3 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609045238101",
+          "handle": "hoja-de-parra",
+          "title": "Hoja de parra",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58650810941781",
+                "alt": "Hoja cerámica y llave de latón"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650810974549",
+                "alt": "Plato cerámico blanco de hoja de parra"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650811007317",
+                "alt": "WhatsApp Image 2026-09-14 at 11.50.2249"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Mancerina» (2 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609045565781",
+          "handle": "mancerina",
+          "title": "Mancerina",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58650812711253",
+                "alt": "Juego de mancerina azul y plata"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650812744021",
+                "alt": "Mancerina sevillana con dos tazas"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "actualizar «Tarro de botica» (12 fotos, 12 variantes, 12 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609036554581",
+          "handle": "tarro-de-botica",
+          "title": "Tarro de botica",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Azul / Pequeño"
+              },
+              {
+                "title": "Azul / Mediano"
+              },
+              {
+                "title": "Azul / Grande"
+              },
+              {
+                "title": "Negro / Pequeño"
+              },
+              {
+                "title": "Negro / Mediano"
+              },
+              {
+                "title": "Negro / Grande"
+              },
+              {
+                "title": "Rosa / Pequeño"
+              },
+              {
+                "title": "Rosa / Mediano"
+              },
+              {
+                "title": "Rosa / Grande"
+              },
+              {
+                "title": "Verde / Pequeño"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58650819723605",
+                "alt": "WhatsApp Image 2026-09-14 at 11.52.50"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650819756373",
+                "alt": "WhatsApp Image 2026-09-14 at 11.53.00"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650819789141",
+                "alt": "WhatsApp Image 2026-09-14 at 11.53.17"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650819821909",
+                "alt": "WhatsApp Image 2026-09-14 at 11.53.30"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650819854677",
+                "alt": "Jarra azul en un rincón sevillano"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650819887445",
+                "alt": "Tarro apotecario azul con paisaje grabado"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650819920213",
+                "alt": "Jarra boticaria de inspiración sevillana"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650819952981",
+                "alt": "Tarro cerámico azul con paisaje negro"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650819985749",
+                "alt": "Tarro boticario rosa bajo luz sevillana"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650820018517",
+                "alt": "Tarro cerámico rosa con paisaje costero"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650820051285",
+                "alt": "Jarrón blanco con paisaje tropical verde"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650820084053",
+                "alt": "Tarro boticario bajo luz sevillana"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Cepillero» (3 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609046679893",
+          "handle": "cepillero",
+          "title": "Cepillero",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58650821591381",
+                "alt": "Portacepillos de marfil, elegancia sevillana"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650821624149",
+                "alt": "Portacepillos marfil abierto con banda roja"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650821656917",
+                "alt": "WhatsApp Image 2026-09-14 at 11.50.49"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Bolsa» (2 fotos, 1 variantes, 0 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609046942037",
+          "handle": "bolsa",
+          "title": "Bolsa",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58650822574421",
+                "alt": "Bolso tote de algodón crema"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650822607189",
+                "alt": "Elegante bolsa La Cartuja en patio sevillano"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Camiseta» (2 fotos, 1 variantes, 0 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609047302485",
+          "handle": "camiseta",
+          "title": "Camiseta",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58650824212821",
+                "alt": "Camiseta blanca La Cartuja Sevilla 1841"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650824245589",
+                "alt": "Camiseta blanca La Cartuja en patio mediterráneo"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Libro» (2 fotos, 1 variantes, 0 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609047630165",
+          "handle": "libro",
+          "title": "Libro",
+          "status": "DRAFT",
+          "tags": [
+            "novedad"
+          ],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58650829390165",
+                "alt": "Clásico sevillano sobre mesa de nogal"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58650829422933",
+                "alt": "Libro de lujo La Cartuja Sevilla"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

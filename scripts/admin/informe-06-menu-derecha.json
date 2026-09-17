@@ -1,0 +1,128 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "menu-derecha ANTES",
+      "resultado": {
+        "id": "gid://shopify/Menu/333477151061",
+        "handle": "menu-derecha",
+        "title": "Menú derecha",
+        "items": [
+          {
+            "title": "Nuevo",
+            "type": "COLLECTION",
+            "url": "/collections/novedades",
+            "items": []
+          },
+          {
+            "title": "Viste tu mesa",
+            "type": "PAGE",
+            "url": "/pages/viste-tu-mesa",
+            "items": []
+          },
+          {
+            "title": "Ambientes",
+            "type": "PAGE",
+            "url": "/pages/nuestras-mesas",
+            "items": []
+          },
+          {
+            "title": "Legado",
+            "type": "PAGE",
+            "url": "/pages/heritage-1841",
+            "items": [
+              {
+                "title": "Heritage 1842",
+                "type": "PAGE",
+                "url": "/pages/heritage-1841"
+              },
+              {
+                "title": "Artesanía",
+                "type": "PAGE",
+                "url": "/pages/artesania"
+              },
+              {
+                "title": "Sellos",
+                "type": "PAGE",
+                "url": "/pages/identifica-tu-sello"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paso": "reescribir `menu-derecha`",
+      "resultado": {
+        "menu": {
+          "id": "gid://shopify/Menu/333477151061",
+          "handle": "menu-derecha",
+          "items": [
+            {
+              "title": "Nuevo",
+              "url": "/collections/novedades",
+              "items": [
+                {
+                  "title": "Áurea",
+                  "url": "/search?q=Aurea&type=product"
+                },
+                {
+                  "title": "Vela aromática",
+                  "url": "/search?q=Vela%20aromatica&type=product"
+                },
+                {
+                  "title": "Lapicero",
+                  "url": "/search?q=Lapicero&type=product"
+                },
+                {
+                  "title": "Caja con 6 posavasos",
+                  "url": "/search?q=Posavasos&type=product"
+                },
+                {
+                  "title": "Vaciabolsillo",
+                  "url": "/search?q=Vaciabolsillo&type=product"
+                },
+                {
+                  "title": "Abanico",
+                  "url": "/search?q=Abanico&type=product"
+                }
+              ]
+            },
+            {
+              "title": "Viste tu mesa",
+              "url": "/pages/viste-tu-mesa",
+              "items": []
+            },
+            {
+              "title": "Ambientes",
+              "url": "/pages/nuestras-mesas",
+              "items": []
+            },
+            {
+              "title": "Legado",
+              "url": "/pages/heritage-1841",
+              "items": [
+                {
+                  "title": "Heritage 1842",
+                  "url": "/pages/heritage-1841"
+                },
+                {
+                  "title": "Artesanía",
+                  "url": "/pages/artesania"
+                },
+                {
+                  "title": "Sellos",
+                  "url": "/pages/identifica-tu-sello"
+                }
+              ]
+            }
+          ]
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

@@ -1,0 +1,462 @@
+{
+  "modo": "ensayo",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [],
+  "planificado": [
+    {
+      "paso": "quitar 4 fotos de «Vaciabolsillos»",
+      "variables": {
+        "id": "gid://shopify/Product/11602289656149",
+        "media": [
+          "gid://shopify/MediaImage/58650801766741",
+          "gid://shopify/MediaImage/58650801799509",
+          "gid://shopify/MediaImage/58650801832277",
+          "gid://shopify/MediaImage/58650801865045"
+        ]
+      }
+    },
+    {
+      "paso": "actualizar «Vaciabolsillos» (11 fotos, 5 variantes, 5 con precio)",
+      "variables": {
+        "input": {
+          "id": "gid://shopify/Product/11602289656149",
+          "handle": "vaciabolsillos",
+          "title": "Vaciabolsillos",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Vaciabolsillo",
+          "tags": [
+            "novedad"
+          ],
+          "status": "ACTIVE",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/WhatsApp Image 2026-09-14 at 11.43.36.jpeg",
+              "alt": "WhatsApp Image 2026-09-14 at 11.43.36",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Azul/Bandeja azul con abanico y bambú.png",
+              "alt": "Bandeja azul con abanico y bambú",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Azul/Bandeja cerámica azul con abanico decorativo.png",
+              "alt": "Bandeja cerámica azul con abanico decorativo",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Ocre/Bandeja ocre con abanico oriental.png",
+              "alt": "Bandeja ocre con abanico oriental",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Ocre/Bandeja ocre con abanico y pato.png",
+              "alt": "Bandeja ocre con abanico y pato",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Rojo/Bandeja cerámica roja con abanico oriental.png",
+              "alt": "Bandeja cerámica roja con abanico oriental",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Rojo/Bandeja roja con abanico ilustrado.png",
+              "alt": "Bandeja roja con abanico ilustrado",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Blanco/Bandeja La Cartuja sobre consola de piedra.png",
+              "alt": "Bandeja La Cartuja sobre consola de piedra",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Blanco/Bandeja blanca La Cartuja con ancla azul.png",
+              "alt": "Bandeja blanca La Cartuja con ancla azul",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Fabrica caruja/Bandeja azul con fábrica histórica.png",
+              "alt": "Bandeja azul con fábrica histórica",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Fabrica caruja/Bandeja azul en consola sevillana.png",
+              "alt": "Bandeja azul en consola sevillana",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Diseño",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Abanico Azul"
+                },
+                {
+                  "name": "Abanico Ocre"
+                },
+                {
+                  "name": "Abanico Rojo"
+                },
+                {
+                  "name": "Blanco"
+                },
+                {
+                  "name": "Fábrica Cartuja"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Diseño",
+                  "name": "Abanico Azul"
+                }
+              ],
+              "price": "46.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Azul/Bandeja azul con abanico y bambú.png",
+                "alt": "Bandeja azul con abanico y bambú",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Diseño",
+                  "name": "Abanico Ocre"
+                }
+              ],
+              "price": "46.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Ocre/Bandeja ocre con abanico oriental.png",
+                "alt": "Bandeja ocre con abanico oriental",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Diseño",
+                  "name": "Abanico Rojo"
+                }
+              ],
+              "price": "46.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Novedad colección Abanico/Rojo/Bandeja cerámica roja con abanico oriental.png",
+                "alt": "Bandeja cerámica roja con abanico oriental",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Diseño",
+                  "name": "Blanco"
+                }
+              ],
+              "price": "37.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Blanco/Bandeja La Cartuja sobre consola de piedra.png",
+                "alt": "Bandeja La Cartuja sobre consola de piedra",
+                "contentType": "IMAGE"
+              }
+            },
+            {
+              "optionValues": [
+                {
+                  "optionName": "Diseño",
+                  "name": "Fábrica Cartuja"
+                }
+              ],
+              "price": "46.95",
+              "file": {
+                "originalSource": "file:///Users/kikealcocerdz/Downloads/Novedades/Bandejas y vaciabolsillos/Fabrica caruja/Bandeja azul con fábrica histórica.png",
+                "alt": "Bandeja azul con fábrica histórica",
+                "contentType": "IMAGE"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "copia de «Abanico» antes de borrarlo",
+      "variables": {
+        "id": "gid://shopify/Product/11602289819989",
+        "handle": "abanico",
+        "title": "Abanico",
+        "status": "ACTIVE",
+        "tags": [
+          "novedad"
+        ],
+        "productType": "Abanico",
+        "media": {
+          "nodes": [
+            {
+              "id": "gid://shopify/MediaImage/58650809696597",
+              "alt": "WhatsApp Image 2026-09-14 at 11.43.36",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/WhatsApp_Image_2026-09-14_at_11.43.36.jpg?v=1789403199"
+              }
+            },
+            {
+              "id": "gid://shopify/MediaImage/58650809729365",
+              "alt": "Bandeja azul con abanico y bambú",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Bandeja_azul_con_abanico_y_bambu.png?v=1789403200"
+              }
+            },
+            {
+              "id": "gid://shopify/MediaImage/58650809762133",
+              "alt": "Bandeja cerámica azul con abanico decorativo",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Bandeja_ceramica_azul_con_abanico_decorativo.png?v=1789403199"
+              }
+            },
+            {
+              "id": "gid://shopify/MediaImage/58650809794901",
+              "alt": "Bandeja ocre con abanico oriental",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Bandeja_ocre_con_abanico_oriental.png?v=1789403199"
+              }
+            },
+            {
+              "id": "gid://shopify/MediaImage/58650809827669",
+              "alt": "Bandeja ocre con abanico y pato",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Bandeja_ocre_con_abanico_y_pato.png?v=1789403200"
+              }
+            },
+            {
+              "id": "gid://shopify/MediaImage/58650809860437",
+              "alt": "Bandeja cerámica roja con abanico oriental",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Bandeja_ceramica_roja_con_abanico_oriental.png?v=1789403199"
+              }
+            },
+            {
+              "id": "gid://shopify/MediaImage/58650809893205",
+              "alt": "Bandeja roja con abanico ilustrado",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Bandeja_roja_con_abanico_ilustrado.png?v=1789403199"
+              }
+            }
+          ]
+        },
+        "variants": {
+          "nodes": [
+            {
+              "title": "Azul",
+              "price": "0.00"
+            },
+            {
+              "title": "Ocre",
+              "price": "0.00"
+            },
+            {
+              "title": "Rojo",
+              "price": "0.00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "borrar «Abanico» (gid://shopify/Product/11602289819989)",
+      "variables": {
+        "input": {
+          "id": "gid://shopify/Product/11602289819989"
+        }
+      }
+    },
+    {
+      "paso": "etiquetar «Lapicero» como novedad",
+      "variables": {
+        "id": "gid://shopify/Product/11602289361237",
+        "tags": [
+          "novedad"
+        ]
+      }
+    },
+    {
+      "paso": "crear «Jabonera» (0 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "handle": "jabonera",
+          "title": "Jabonera",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Jabonera",
+          "tags": [
+            "novedad"
+          ],
+          "status": "DRAFT",
+          "files": [
+            {
+              "originalSource": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Cartuja_18_Composiciones_Proximamente_16.jpg",
+              "alt": "Próximamente",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "29.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "crear «Algodonera» (0 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "handle": "algodonera",
+          "title": "Algodonera",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Algodonera",
+          "tags": [
+            "novedad"
+          ],
+          "status": "DRAFT",
+          "files": [
+            {
+              "originalSource": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Cartuja_18_Composiciones_Proximamente_16.jpg",
+              "alt": "Próximamente",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "68.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "crear «Conjunto de baño» (0 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "handle": "conjunto-de-bano",
+          "title": "Conjunto de baño",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Conjunto de baño",
+          "tags": [
+            "novedad"
+          ],
+          "status": "DRAFT",
+          "files": [
+            {
+              "originalSource": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Cartuja_18_Composiciones_Proximamente_16.jpg",
+              "alt": "Próximamente",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "129.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "crear «Bandeja conmemorativa» (0 fotos, 1 variantes, 0 con precio)",
+      "variables": {
+        "input": {
+          "handle": "bandeja-conmemorativa",
+          "title": "Bandeja conmemorativa",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Bandeja",
+          "tags": [
+            "novedad"
+          ],
+          "status": "DRAFT",
+          "files": [
+            {
+              "originalSource": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/Cartuja_18_Composiciones_Proximamente_16.jpg",
+              "alt": "Próximamente",
+              "contentType": "IMAGE"
+            }
+          ],
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fallido": []
+}

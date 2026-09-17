@@ -1,0 +1,440 @@
+{
+  "modo": "ensayo",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [],
+  "planificado": [
+    {
+      "paso": "crear «Mug Flor Lis Azul» (2 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "handle": "mug-flor-lis-azul",
+          "title": "Mug Flor Lis Azul",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Mug",
+          "tags": [],
+          "status": "DRAFT",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-flor-lis-azul.jpg",
+              "alt": "mug-flor-lis-azul",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-flor-lis-azul.png",
+              "alt": "mug-flor-lis-azul",
+              "contentType": "IMAGE"
+            }
+          ],
+          "descriptionHtml": "<p>Mug colección Flor de Lis Azul. Pieza fabricada a mano con loza fina en España.</p><p>Medidas: 12 x 8 x 8,4 cm.</p>",
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "29.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "crear «Mug Flor Lis Rosa» (2 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "handle": "mug-flor-lis-rosa",
+          "title": "Mug Flor Lis Rosa",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Mug",
+          "tags": [],
+          "status": "DRAFT",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-flor-lis-rosa.jpg",
+              "alt": "mug-flor-lis-rosa",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-flor-lis-rosa.png",
+              "alt": "mug-flor-lis-rosa",
+              "contentType": "IMAGE"
+            }
+          ],
+          "descriptionHtml": "<p>Mug colección Flor de Lis Rosa. Pieza fabricada a mano con loza fina en España.</p><p>Medidas: 12 x 8 x 8,4 cm.</p>",
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "29.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "crear «Mug Ceilan» (2 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "handle": "mug-ceilan",
+          "title": "Mug Ceilan",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Mug",
+          "tags": [],
+          "status": "DRAFT",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-ceilan.jpg",
+              "alt": "mug-ceilan",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-ceilan.png",
+              "alt": "mug-ceilan",
+              "contentType": "IMAGE"
+            }
+          ],
+          "descriptionHtml": "<p>Mug colección Ceilán. Pieza fabricada a mano con loza fina en España.</p><p>Medidas: 12 x 8 x 8,4 cm.</p>",
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "29.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "crear «Mug Bellavista» (2 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "handle": "mug-bellavista",
+          "title": "Mug Bellavista",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Mug",
+          "tags": [],
+          "status": "DRAFT",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-bellavista.jpg",
+              "alt": "mug-bellavista",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-bellavista.png",
+              "alt": "mug-bellavista",
+              "contentType": "IMAGE"
+            }
+          ],
+          "descriptionHtml": "<p>Mug colección Bellavista. Pieza fabricada a mano con loza fina en España.</p><p>Medidas: 12 x 8 x 8,4 cm.</p>",
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "29.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "crear «Mug Viejo Molino» (2 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "handle": "mug-viejo-molino",
+          "title": "Mug Viejo Molino",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Mug",
+          "tags": [],
+          "status": "DRAFT",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-viejo-molino.jpg",
+              "alt": "mug-viejo-molino",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-viejo-molino.png",
+              "alt": "mug-viejo-molino",
+              "contentType": "IMAGE"
+            }
+          ],
+          "descriptionHtml": "<p>Mug colección Viejo Molino. Pieza fabricada a mano con loza fina en España.</p><p>Medidas: 12 x 8 x 8,4 cm.</p>",
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "29.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "crear «Mug N. Vistas Azul A. Stewart» (2 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "handle": "mug-n-vistas-azul-a-stewart",
+          "title": "Mug N. Vistas Azul A. Stewart",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Mug",
+          "tags": [],
+          "status": "DRAFT",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-negro-vistas-blue-aaron-stewart.jpg",
+              "alt": "mug-negro-vistas-blue-aaron-stewart",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-negro-vistas-blue-aaron-stewart.png",
+              "alt": "mug-negro-vistas-blue-aaron-stewart",
+              "contentType": "IMAGE"
+            }
+          ],
+          "descriptionHtml": "<p>Mug colección Negro Vistas Azul by Aaron Stewart. Pieza fabricada a mano con loza fina en España.</p><p>Medidas: 12 x 8 x 8,4 cm.</p>",
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "29.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "crear «Mug N. Vistas Amarillo A. Stewart» (2 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "handle": "mug-n-vistas-amarillo-a-stewart",
+          "title": "Mug N. Vistas Amarillo A. Stewart",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Mug",
+          "tags": [],
+          "status": "DRAFT",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-negro-vistas-yellow-aaron-stewart.jpg",
+              "alt": "mug-negro-vistas-yellow-aaron-stewart",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-negro-vistas-yellow-aaron-stewart.png",
+              "alt": "mug-negro-vistas-yellow-aaron-stewart",
+              "contentType": "IMAGE"
+            }
+          ],
+          "descriptionHtml": "<p>Mug colección Negro Vistas Amarillo by Aaron Stewart. Pieza fabricada a mano con loza fina en España.</p><p>Medidas: 12 x 8 x 8,4 cm.</p>",
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "29.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "crear «Mug Georgica» (2 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "handle": "mug-georgica",
+          "title": "Mug Georgica",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Mug",
+          "tags": [],
+          "status": "DRAFT",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-georgica.jpg",
+              "alt": "mug-georgica",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-georgica.png",
+              "alt": "mug-georgica",
+              "contentType": "IMAGE"
+            }
+          ],
+          "descriptionHtml": "<p>Mug colección Georgica. Pieza fabricada a mano con loza fina en España.</p><p>Medidas: 12 x 8 x 8,4 cm.</p>",
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "29.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "crear «Mug Eden» (2 fotos, 1 variantes, 1 con precio)",
+      "variables": {
+        "input": {
+          "handle": "mug-eden",
+          "title": "Mug Eden",
+          "vendor": "La Cartuja de Sevilla",
+          "productType": "Mug",
+          "tags": [],
+          "status": "DRAFT",
+          "files": [
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-eden.jpg",
+              "alt": "mug-eden",
+              "contentType": "IMAGE"
+            },
+            {
+              "originalSource": "file:///Users/kikealcocerdz/Downloads/Mugs/mug-eden.png",
+              "alt": "mug-eden",
+              "contentType": "IMAGE"
+            }
+          ],
+          "descriptionHtml": "<p>Mug colección Eden. Pieza fabricada a mano con loza fina en España.</p><p>Medidas: 12 x 8 x 8,4 cm.</p>",
+          "productOptions": [
+            {
+              "name": "Title",
+              "position": 1,
+              "values": [
+                {
+                  "name": "Default Title"
+                }
+              ]
+            }
+          ],
+          "variants": [
+            {
+              "optionValues": [
+                {
+                  "optionName": "Title",
+                  "name": "Default Title"
+                }
+              ],
+              "price": "29.95"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fallido": []
+}

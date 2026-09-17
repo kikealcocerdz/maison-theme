@@ -1,0 +1,736 @@
+{
+  "modo": "ensayo",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [],
+  "planificado": [
+    {
+      "paso": "publicar «Platillo Consome/Desayuno Yedra» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602296963413",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Ensaladera Basic Line Red» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602298437973",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Sopera Basic Line Red» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602298667349",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Tetera Yedra» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602298929493",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Taza Te Con Platillo Yedra» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602299158869",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Taza Cafe Con Platillo Yedra» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602299453781",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Lechera Maria Cristina» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602299715925",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Cafetera Maria Cristina» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602300010837",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Fuente Gra. Maria Cristina» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602300305749",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Plato Postre Maria Cristina» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602300567893",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Lechera Infanta Luisa» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602300797269",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Cafetera Infanta Luisa» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602301059413",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Fuente Mini Infanta Luisa» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602301256021",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Salsera Infanta Luisa» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602301485397",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Fuente Gra. Infanta Luisa» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602301780309",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Plato Hondo Infanta Luisa» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602302140757",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Plato Llano Infanta Luisa» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602302402901",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Fuente Mini Kensington» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602302632277",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Sopera Kensington» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602302894421",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Plato Postre Kensington» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602303222101",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Plato Llano Kensington» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602303451477",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Cafetera Paraiso Azul» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602303680853",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Salsera Paraiso Azul» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602303942997",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Azucarero Escenas» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602304172373",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Lechera Escenas» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602304434517",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Cafetera Escenas» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602304696661",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Salsera Escenas» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602304926037",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Plato Hondo Escenas» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602305188181",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Cafetera Azahar» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602305450325",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Tetera Azahar» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602305712469",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Plato Hondo Azahar» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602305941845",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Platillo Consome Azahar» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602306302293",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Lechera Azahar Nuevo» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602306629973",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Cafetera Azahar Nuevo» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602306924885",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Tetera Azahar Nuevo» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602307318101",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Salsera Azahar Nuevo» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602315149653",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Sopera Azahar Nuevo» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602315346261",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Plato Pastas Azahar Nuevo» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602315608405",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Plato Hondo Azahar Nuevo» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602315936085",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Platillo Consome Azahar Nuevo» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602316099925",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Taza Consome Azahar Nuevo» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602316329301",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Salsera Basic Line Red» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602316624213",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Azucarero Yedra» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602316886357",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Bajoplato Yedra» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602317115733",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Bandeja Pastas Yedra» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602317345109",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Cafetera Yedra» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602317705557",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Fuente Redonda Yedra» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602317967701",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Lechera Yedra» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602318262613",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Plato Pan Yedra» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602318491989",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Plato Pastas Yedra» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602318819669",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Taza Consome Yedra» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602319049045",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    },
+    {
+      "paso": "publicar «Taza Desayuno Yedra» en Tienda online",
+      "variables": {
+        "id": "gid://shopify/Product/11602319376725",
+        "input": [
+          {
+            "publicationId": "gid://shopify/Publication/341423653205"
+          },
+          {
+            "publicationId": "gid://shopify/Publication/341423751509"
+          }
+        ]
+      }
+    }
+  ],
+  "fallido": []
+}

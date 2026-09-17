@@ -1,0 +1,338 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "+10 en 32 variantes (lote 1)",
+      "resultado": {
+        "inventoryAdjustmentGroup": {
+          "changes": [
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "available",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            },
+            {
+              "name": "on_hand",
+              "delta": 10,
+              "quantityAfterChange": null
+            }
+          ]
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

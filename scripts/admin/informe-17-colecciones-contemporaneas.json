@@ -1,0 +1,41 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "crear «Áurea»",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681864233301",
+          "handle": "aurea",
+          "title": "Áurea"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Georgica»",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681864266069",
+          "handle": "georgica",
+          "title": "Georgica"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Edén»",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/681864298837",
+          "handle": "eden",
+          "title": "Edén"
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

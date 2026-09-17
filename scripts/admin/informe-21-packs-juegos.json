@@ -1,0 +1,334 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "crear pieza taza-cafe-con-platillo-aurora-blanca-6",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455631896917",
+          "handle": "taza-cafe-con-platillo-aurora-blanca-6"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en juego-cafe-aurora-blanca 15 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/423774093653\",\"gid://shopify/Metaobject/423774421333\",\"gid://shopify/Metaobject/423776813397\",\"gid://shopify/Metaobject/455631896917\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza taza-cafe-con-platillo-bellavista-6",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455631962453",
+          "handle": "taza-cafe-con-platillo-bellavista-6"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en juego-cafe-bellavista 15 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/423774126421\",\"gid://shopify/Metaobject/423774486869\",\"gid://shopify/Metaobject/423776846165\",\"gid://shopify/Metaobject/455631962453\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza taza-cafe-con-platillo-flor-lis-azul-6",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455632060757",
+          "handle": "taza-cafe-con-platillo-flor-lis-azul-6"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en juego-cafe-flor-lis-azul 15 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/423774191957\",\"gid://shopify/Metaobject/423774552405\",\"gid://shopify/Metaobject/423776911701\",\"gid://shopify/Metaobject/455632060757\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza taza-cafe-con-platillo-n-vistas-amarillo-a-stewart-6",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455632126293",
+          "handle": "taza-cafe-con-platillo-n-vistas-amarillo-a-stewart-6"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en juego-cafe-n-vistas-amarillo-a-stewart 15 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/423774257493\",\"gid://shopify/Metaobject/423774617941\",\"gid://shopify/Metaobject/423776977237\",\"gid://shopify/Metaobject/455632126293\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza azucarero-n-vistas-azul-a-stewart-1",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455632191829",
+          "handle": "azucarero-n-vistas-azul-a-stewart-1"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza cafetera-n-vistas-azul-a-stewart-1",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455632224597",
+          "handle": "cafetera-n-vistas-azul-a-stewart-1"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza lechera-n-vistas-azul-a-stewart-1",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455632290133",
+          "handle": "lechera-n-vistas-azul-a-stewart-1"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza taza-cafe-con-platillo-n-vistas-azul-a-stewart-6",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455632322901",
+          "handle": "taza-cafe-con-platillo-n-vistas-azul-a-stewart-6"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en juego-cafe-n-vistas-azul-a-stewart 15 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/455632191829\",\"gid://shopify/Metaobject/455632224597\",\"gid://shopify/Metaobject/455632290133\",\"gid://shopify/Metaobject/455632322901\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza taza-cafe-con-platillo-n-vistas-azul-a-stewart-12",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455632421205",
+          "handle": "taza-cafe-con-platillo-n-vistas-azul-a-stewart-12"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en juego-cafe-n-vistas-azul-a-stewart 27 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/455632191829\",\"gid://shopify/Metaobject/455632224597\",\"gid://shopify/Metaobject/455632290133\",\"gid://shopify/Metaobject/455632421205\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza taza-cafe-con-platillo-ochavado-blanco-12",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455632519509",
+          "handle": "taza-cafe-con-platillo-ochavado-blanco-12"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en juego-cafe-ochavado-blanco 27 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/423774323029\",\"gid://shopify/Metaobject/423774683477\",\"gid://shopify/Metaobject/423777042773\",\"gid://shopify/Metaobject/455632519509\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza taza-te-con-platillo-bellavista-12",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455632650581",
+          "handle": "taza-te-con-platillo-bellavista-12"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en juego-te-bellavista 27 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/423774126421\",\"gid://shopify/Metaobject/423776846165\",\"gid://shopify/Metaobject/423780286805\",\"gid://shopify/Metaobject/455632650581\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza taza-te-con-platillo-ceilan-6",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455632716117",
+          "handle": "taza-te-con-platillo-ceilan-6"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en juego-te-ceilan 15 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/423774159189\",\"gid://shopify/Metaobject/423776878933\",\"gid://shopify/Metaobject/423780319573\",\"gid://shopify/Metaobject/455632716117\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza tetera-n-vistas-azul-a-stewart-1",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455632748885",
+          "handle": "tetera-n-vistas-azul-a-stewart-1"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza taza-te-con-platillo-n-vistas-azul-a-stewart-6",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455632781653",
+          "handle": "taza-te-con-platillo-n-vistas-azul-a-stewart-6"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en juego-te-n-vistas-azul-a-stewart 15 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/455632191829\",\"gid://shopify/Metaobject/455632290133\",\"gid://shopify/Metaobject/455632748885\",\"gid://shopify/Metaobject/455632781653\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza taza-te-con-platillo-n-vistas-azul-a-stewart-12",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455632879957",
+          "handle": "taza-te-con-platillo-n-vistas-azul-a-stewart-12"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en juego-te-n-vistas-azul-a-stewart 27 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/455632191829\",\"gid://shopify/Metaobject/455632290133\",\"gid://shopify/Metaobject/455632748885\",\"gid://shopify/Metaobject/455632879957\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza taza-te-con-platillo-negro-vistas-12",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455633043797",
+          "handle": "taza-te-con-platillo-negro-vistas-12"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en juego-te-negro-vistas 27 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/423774290261\",\"gid://shopify/Metaobject/423777010005\",\"gid://shopify/Metaobject/423780450645\",\"gid://shopify/Metaobject/455633043797\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza taza-te-con-platillo-viejo-molino-6",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455633076565",
+          "handle": "taza-te-con-platillo-viejo-molino-6"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en juego-te-viejo-molino 15 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/423774355797\",\"gid://shopify/Metaobject/423777075541\",\"gid://shopify/Metaobject/423780516181\",\"gid://shopify/Metaobject/455633076565\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

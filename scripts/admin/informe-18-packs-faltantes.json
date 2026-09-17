@@ -1,0 +1,156 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "crear pieza fuente-gra-flor-lis-azul-1",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455162397013",
+          "handle": "fuente-gra-flor-lis-azul-1"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza plato-llano-flor-lis-azul-24",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455162495317",
+          "handle": "plato-llano-flor-lis-azul-24"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza fuente-mini-flor-lis-azul-2",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455162528085",
+          "handle": "fuente-mini-flor-lis-azul-2"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en vajilla-flor-lis-azul 56 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/455162397013\",\"gid://shopify/Metaobject/423775568213\",\"gid://shopify/Metaobject/423776518485\",\"gid://shopify/Metaobject/423777239381\",\"gid://shopify/Metaobject/455162495317\",\"gid://shopify/Metaobject/423778222421\",\"gid://shopify/Metaobject/455162528085\",\"gid://shopify/Metaobject/423778582869\",\"gid://shopify/Metaobject/423778943317\",\"gid://shopify/Metaobject/423774880085\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza plato-llano-n-vistas-azul-a-stewart-12",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455162626389",
+          "handle": "plato-llano-n-vistas-azul-a-stewart-12"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza fuente-mini-n-vistas-azul-a-stewart-1",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455162724693",
+          "handle": "fuente-mini-n-vistas-azul-a-stewart-1"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en vajilla-n-vistas-azul-a-stewart 42 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/423775666517\",\"gid://shopify/Metaobject/423776616789\",\"gid://shopify/Metaobject/423777337685\",\"gid://shopify/Metaobject/455162626389\",\"gid://shopify/Metaobject/423778320725\",\"gid://shopify/Metaobject/455162724693\",\"gid://shopify/Metaobject/423778681173\",\"gid://shopify/Metaobject/423779041621\",\"gid://shopify/Metaobject/423774978389\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza fuente-gra-n-vistas-amarillo-a-stewart-1",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455162822997",
+          "handle": "fuente-gra-n-vistas-amarillo-a-stewart-1"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza plato-llano-n-vistas-amarillo-a-stewart-24",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455162855765",
+          "handle": "plato-llano-n-vistas-amarillo-a-stewart-24"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza fuente-mini-n-vistas-amarillo-a-stewart-2",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455162888533",
+          "handle": "fuente-mini-n-vistas-amarillo-a-stewart-2"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en vajilla-n-vistas-amarillo-a-stewart 56 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/455162822997\",\"gid://shopify/Metaobject/423775633749\",\"gid://shopify/Metaobject/423776584021\",\"gid://shopify/Metaobject/423777304917\",\"gid://shopify/Metaobject/455162855765\",\"gid://shopify/Metaobject/423778287957\",\"gid://shopify/Metaobject/455162888533\",\"gid://shopify/Metaobject/423778648405\",\"gid://shopify/Metaobject/423779008853\",\"gid://shopify/Metaobject/423774945621\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza plato-llano-negro-vistas-12",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455163085141",
+          "handle": "plato-llano-negro-vistas-12"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear pieza fuente-mini-negro-vistas-1",
+      "resultado": {
+        "metaobject": {
+          "id": "gid://shopify/Metaobject/455163216213",
+          "handle": "fuente-mini-negro-vistas-1"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "custom.pack en vajilla-negro-vistas 42 P.",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "pack",
+            "value": "[\"gid://shopify/Metaobject/423775699285\",\"gid://shopify/Metaobject/423776649557\",\"gid://shopify/Metaobject/423777370453\",\"gid://shopify/Metaobject/455163085141\",\"gid://shopify/Metaobject/423778353493\",\"gid://shopify/Metaobject/455163216213\",\"gid://shopify/Metaobject/423778713941\",\"gid://shopify/Metaobject/423779074389\",\"gid://shopify/Metaobject/423775011157\"]"
+          }
+        ],
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

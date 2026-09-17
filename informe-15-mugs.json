@@ -1,0 +1,377 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "crear «Mug Flor Lis Azul» (2 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148260693",
+          "handle": "mug-flor-lis-azul",
+          "title": "Mug Flor Lis Azul",
+          "status": "DRAFT",
+          "tags": [],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58653130686805",
+                "alt": "mug-flor-lis-azul"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58653130719573",
+                "alt": "mug-flor-lis-azul"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Mug Flor Lis Azul» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "mug-flor-lis-azul"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Mug Flor Lis Rosa» (2 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148293461",
+          "handle": "mug-flor-lis-rosa",
+          "title": "Mug Flor Lis Rosa",
+          "status": "DRAFT",
+          "tags": [],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58653130948949",
+                "alt": "mug-flor-lis-rosa"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58653130981717",
+                "alt": "mug-flor-lis-rosa"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Mug Flor Lis Rosa» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "mug-flor-lis-rosa"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Mug Ceilan» (2 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148358997",
+          "handle": "mug-ceilan",
+          "title": "Mug Ceilan",
+          "status": "DRAFT",
+          "tags": [],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58653132652885",
+                "alt": "mug-ceilan"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58653132685653",
+                "alt": "mug-ceilan"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Mug Ceilan» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "mug-ceilan"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Mug Bellavista» (2 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148391765",
+          "handle": "mug-bellavista",
+          "title": "Mug Bellavista",
+          "status": "DRAFT",
+          "tags": [],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58653136879957",
+                "alt": "mug-bellavista"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58653136912725",
+                "alt": "mug-bellavista"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Mug Bellavista» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "mug-bellavista"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Mug Viejo Molino» (2 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148424533",
+          "handle": "mug-viejo-molino",
+          "title": "Mug Viejo Molino",
+          "status": "DRAFT",
+          "tags": [],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58653138190677",
+                "alt": "mug-viejo-molino"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58653138223445",
+                "alt": "mug-viejo-molino"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Mug Viejo Molino» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "mug-viejo-molino"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Mug N. Vistas Azul A. Stewart» (2 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148457301",
+          "handle": "mug-n-vistas-azul-a-stewart",
+          "title": "Mug N. Vistas Azul A. Stewart",
+          "status": "DRAFT",
+          "tags": [],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58653138321749",
+                "alt": "mug-negro-vistas-blue-aaron-stewart"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58653138354517",
+                "alt": "mug-negro-vistas-blue-aaron-stewart"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Mug N. Vistas Azul A. Stewart» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "mug-n-vistas-azul-a-stewart"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Mug N. Vistas Amarillo A. Stewart» (2 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148522837",
+          "handle": "mug-n-vistas-amarillo-a-stewart",
+          "title": "Mug N. Vistas Amarillo A. Stewart",
+          "status": "DRAFT",
+          "tags": [],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58653139861845",
+                "alt": "mug-negro-vistas-yellow-aaron-stewart"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58653139894613",
+                "alt": "mug-negro-vistas-yellow-aaron-stewart"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Mug N. Vistas Amarillo A. Stewart» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "mug-n-vistas-amarillo-a-stewart"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Mug Georgica» (2 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148588373",
+          "handle": "mug-georgica",
+          "title": "Mug Georgica",
+          "status": "DRAFT",
+          "tags": [],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58653140582741",
+                "alt": "mug-georgica"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58653140615509",
+                "alt": "mug-georgica"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Mug Georgica» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "mug-georgica"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "crear «Mug Eden» (2 fotos, 1 variantes, 1 con precio)",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148621141",
+          "handle": "mug-eden",
+          "title": "Mug Eden",
+          "status": "DRAFT",
+          "tags": [],
+          "variants": {
+            "nodes": [
+              {
+                "title": "Default Title"
+              }
+            ]
+          },
+          "media": {
+            "nodes": [
+              {
+                "id": "gid://shopify/MediaImage/58653144711509",
+                "alt": "mug-eden"
+              },
+              {
+                "id": "gid://shopify/MediaImage/58653144744277",
+                "alt": "mug-eden"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar «Mug Eden» en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "mug-eden"
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}
