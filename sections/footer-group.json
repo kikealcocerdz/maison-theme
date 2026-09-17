@@ -51,6 +51,17 @@
         "col-3"
       ]
     },
+    "welcome-popup": {
+      "type": "welcome-popup",
+      "settings": {
+        "eyebrow": "Bienvenida",
+        "heading": "Regístrate y llévate un 5% en tu primera compra",
+        "text": "<p>Déjanos tu correo para recibir novedades de La Cartuja de Sevilla.</p>",
+        "button_label": "Quiero mi 5%",
+        "delay_seconds": 4,
+        "dismiss_days": 30
+      }
+    },
     "help-bubble": {
       "type": "help-bubble",
       "settings": {
@@ -106,6 +117,7 @@
   },
   "order": [
     "footer-multicol",
+    "welcome-popup",
     "help-bubble"
   ]
 }

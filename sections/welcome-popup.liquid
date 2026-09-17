@@ -1,0 +1,164 @@
+<dialog
+  class="welcome-popup"
+  data-welcome-popup
+  data-delay="{{ section.settings.delay_seconds }}"
+  data-dismiss-days="{{ section.settings.dismiss_days }}"
+  aria-labelledby="WelcomePopupTitle-{{ section.id }}"
+>
+  <div class="welcome-popup__panel">
+    <button class="welcome-popup__close" type="button" data-welcome-close aria-label="{{ 'general.accessibility.close' | t }}">
+      {% render 'icon-close' %}
+    </button>
+
+    <div class="welcome-popup__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="welcome-popup__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 id="WelcomePopupTitle-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.text != blank -%}
+        <div class="welcome-popup__text">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      {%- form 'customer', class: 'welcome-popup__form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter,welcome-popup-5">
+        <label for="WelcomePopupEmail-{{ section.id }}">{{ 'general.newsletter.email_label' | t }}</label>
+        <div class="welcome-popup__fields">
+          <input
+            id="WelcomePopupEmail-{{ section.id }}"
+            type="email"
+            name="contact[email]"
+            value="{{ form.email | escape }}"
+            placeholder="{{ 'general.newsletter.placeholder' | t }}"
+            autocomplete="email"
+            required
+          >
+          <button type="submit">{{ section.settings.button_label | escape }}</button>
+        </div>
+
+        {%- if form.posted_successfully? -%}
+          <p class="welcome-popup__message" data-welcome-status tabindex="-1">{{ 'general.newsletter.success' | t }}</p>
+        {%- elsif form.errors -%}
+          <p class="welcome-popup__message welcome-popup__message--error" data-welcome-status tabindex="-1">{{ 'general.newsletter.error' | t }}</p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</dialog>
+
+{% stylesheet %}
+.welcome-popup {
+  width: min(620px, calc(100% - 32px)); max-width: none; padding: 0;
+  border: 0; background: transparent; color: var(--ink);
+}
+.welcome-popup::backdrop { background: rgba(15, 26, 46, .54); }
+.welcome-popup__panel {
+  position: relative; background: var(--paper); border: .5px solid var(--rule);
+  box-shadow: 0 28px 90px rgba(15, 26, 46, .22); padding: clamp(44px, 7vw, 76px);
+}
+.welcome-popup__close {
+  position: absolute; top: 18px; right: 18px; display: grid; place-items: center;
+  width: 44px; height: 44px; color: var(--ink);
+}
+.welcome-popup__close:focus-visible,
+.welcome-popup__form input:focus-visible,
+.welcome-popup__form button:focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
+.welcome-popup__eyebrow {
+  margin: 0 0 20px; font: 500 10px/1.2 var(--sans);
+  letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
+}
+.welcome-popup h2 {
+  max-width: 12ch; margin: 0; font: 400 clamp(38px, 5.4vw, 62px)/1 var(--serif);
+  letter-spacing: -.025em; color: var(--ink);
+}
+.welcome-popup__text { max-width: 46ch; margin-top: 24px; color: var(--ink-soft); font-size: 14px; line-height: 1.7; }
+.welcome-popup__text p { margin: 0; }
+.welcome-popup__form { margin-top: 36px; }
+.welcome-popup__form label {
+  display: block; margin-bottom: 10px; font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--muted);
+}
+.welcome-popup__fields { display: grid; grid-template-columns: minmax(0, 1fr) auto; border-bottom: 1px solid var(--ink); }
+.welcome-popup__form input {
+  min-width: 0; padding: 14px 0; border: 0; background: transparent;
+  color: var(--ink); font: 400 14px/1.4 var(--sans);
+}
+.welcome-popup__form input::placeholder { color: var(--muted); opacity: 1; }
+.welcome-popup__form button {
+  min-height: 48px; padding: 0 2px 0 24px; color: var(--ink); white-space: nowrap;
+  font: 500 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase;
+}
+.welcome-popup__message { margin: 16px 0 0; color: var(--ink); font-size: 12px; line-height: 1.5; }
+.welcome-popup__message--error { color: var(--accent-1); }
+
+@media (max-width: 560px) {
+  .welcome-popup { width: calc(100% - 20px); }
+  .welcome-popup__panel { padding: 54px 24px 32px; }
+  .welcome-popup h2 { font-size: clamp(36px, 12vw, 50px); }
+  .welcome-popup__fields { grid-template-columns: 1fr; border-bottom: 0; gap: 12px; }
+  .welcome-popup__form input { border-bottom: 1px solid var(--ink); }
+  .welcome-popup__form button { justify-self: stretch; padding: 0 18px; background: var(--ink); color: var(--paper); }
+}
+{% endstylesheet %}
+
+{% javascript %}
+(function () {
+  var key = 'cartuja-welcome-popup-dismissed';
+
+  function init(root) {
+    root.querySelectorAll('[data-welcome-popup]').forEach(function (dialog) {
+      if (dialog.dataset.ready) return;
+      dialog.dataset.ready = 'true';
+      var status = dialog.querySelector('[data-welcome-status]');
+      var days = Number(dialog.dataset.dismissDays) || 30;
+      var delay = (Number(dialog.dataset.delay) || 0) * 1000;
+
+      function dismissed() {
+        try {
+          return Date.now() - Number(localStorage.getItem(key)) < days * 86400000;
+        } catch (error) {
+          return false;
+        }
+      }
+
+      function close() {
+        try { localStorage.setItem(key, String(Date.now())); } catch (error) {}
+        dialog.close();
+      }
+
+      function open() {
+        if (!dialog.isConnected || dialog.open) return;
+        dialog.showModal();
+        if (status) status.focus();
+      }
+
+      dialog.querySelector('[data-welcome-close]').addEventListener('click', close);
+      dialog.addEventListener('cancel', function (event) { event.preventDefault(); close(); });
+      dialog.addEventListener('click', function (event) { if (event.target === dialog) close(); });
+
+      if (status || (window.Shopify && Shopify.designMode)) open();
+      else if (!dismissed()) window.setTimeout(open, delay);
+    });
+  }
+
+  init(document);
+  document.addEventListener('shopify:section:load', function (event) { init(event.target); });
+  document.addEventListener('shopify:section:select', function (event) {
+    var dialog = event.target.querySelector('[data-welcome-popup]');
+    if (dialog && !dialog.open) dialog.showModal();
+  });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Popup de bienvenida",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Bienvenida" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Regístrate y llévate un 5% en tu primera compra" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Déjanos tu correo para recibir novedades de La Cartuja de Sevilla.</p>" },
+    { "type": "text", "id": "button_label", "label": "Botón", "default": "Quiero mi 5%" },
+    { "type": "range", "id": "delay_seconds", "label": "Retraso al abrir", "min": 0, "max": 20, "step": 1, "unit": "s", "default": 4 },
+    { "type": "range", "id": "dismiss_days", "label": "Días antes de volver a mostrar", "min": 1, "max": 90, "step": 1, "unit": "d", "default": 30 }
+  ]
+}
+{% endschema %}
