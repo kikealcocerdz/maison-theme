@@ -581,12 +581,9 @@
   }
   /* Cajón de filtros a pantalla completa (mockup `filtros movil`). La barra y el pie
      quedan fijos y sólo el centro rueda, así "Mostrar resultados" siempre está a mano. */
-  /* El cajon es fijo a pantalla completa y tiene que quedar por encima de la
-     cabecera fija (z 90) y de la burbuja de ayuda (z 70): con z 60 la cabecera
-     tapaba la barra superior y el aspa caia justo debajo de la hamburguesa, asi
-     que el cajon no se podia cerrar. Mismo escalon que el cajon de la cesta. */
+  /* El cajón queda por encima de la cabecera móvil (z 130) y de la ayuda (z 70). */
   .collection-page.filters-drawer-open .sidebar {
-    display: flex !important; flex-direction: column; position: fixed; inset: 0; z-index: 120;
+    display: flex !important; flex-direction: column; position: fixed; inset: 0; z-index: 160;
     width: 100%; max-height: none; margin: 0 !important; padding: 0;
     background: var(--paper); overflow: hidden; overscroll-behavior: contain;
     animation: facets-in 260ms var(--ease);
@@ -597,7 +594,7 @@
       border-left: .5px solid var(--rule); box-shadow: -20px 0 60px rgba(15, 26, 46, .16);
     }
     .collection-page.filters-drawer-open::after {
-      content: ''; position: fixed; inset: 0; z-index: 115; background: rgba(15, 26, 46, .3);
+      content: ''; position: fixed; inset: 0; z-index: 155; background: rgba(15, 26, 46, .3);
     }
   }
   @keyframes facets-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
