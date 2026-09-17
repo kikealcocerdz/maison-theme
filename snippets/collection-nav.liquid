@@ -63,14 +63,13 @@
     {% render 'collection-filters' %}
 
     {%- comment -%}
-      Novedades y Fin de existencias van por encima del árbol: son accesos, no
-      facetas. «Fin de existencias» se destaca en otro color, como en el menú.
+      Novedades va por encima del árbol. «Fin de existencias» queda al final de
+      la navegación y se destaca en otro color, como en el menú.
     {%- endcomment -%}
     <div class="sidebar__nav">
     <nav class="side-quick" aria-label="{{ 'sections.collection.quick_label' | t }}">
       <a class="side-quick__link" href="{{ routes.all_products_collection_url }}">{{ 'sections.collection.quick_all' | t }}</a>
       <a class="side-quick__link" href="{{ url_new }}">{{ 'sections.collection.quick_new' | t }}</a>
-      <a class="side-quick__link side-quick__link--end" href="{{ url_end }}">{{ 'sections.collection.quick_last_units' | t }}</a>
     </nav>
 
     <nav class="side-accordion" aria-label="{{ 'sections.collection.nav_label' | t }}">
@@ -140,6 +139,9 @@
         </div></div>
       </div>
       {%- endif -%}
+    </nav>
+    <nav class="side-quick" aria-label="{{ 'sections.collection.quick_last_units' | t }}">
+      <a class="side-quick__link side-quick__link--end" href="{{ url_end }}">{{ 'sections.collection.quick_last_units' | t }}</a>
     </nav>
     </div>
 
