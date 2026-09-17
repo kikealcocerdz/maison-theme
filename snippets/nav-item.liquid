@@ -4,10 +4,12 @@
 
   El panel reparte los hijos en columnas: los que a su vez tienen hijos (Plato,
   Bol y Taza de consomé, Clásicas…) ocupan una columna con su rótulo arriba, y los
-  hijos sueltos (Vajilla, Sopera, Salsera…) se agrupan en la primera columna. Es
-  exactamente cómo está escrito el menú en el admin, sin reglas ocultas.
+  hijos sueltos se agrupan en la primera columna. Es exactamente cómo está escrito
+  el menú en el admin, con una sola regla extra: el hijo suelto con foto en
+  `snippets/menu-card-image` (Vajilla, Juego de café, Fin de existencias, Heritage
+  1842…) se pinta como tarjeta, igual que en el módulo de menú del cliente.
 
-  El desplegable es CSS puro (`:hover` / `:focus-within`). Por debajo de 1241px la
+  El desplegable es CSS puro (`:hover` / `:focus-within`). Por debajo de 1051px la
   barra no se pinta —manda el hamburguesa— así que en táctil no hay hover huérfano.
 
   Accepts:
@@ -32,19 +34,48 @@
 
     <div class="nav-drop">
       <div class="nav-drop__inner">
-        {%- comment -%} Primera columna: los hijos que no abren rama propia. {%- endcomment -%}
+        {%- comment -%}
+          Tarjetas con foto: hijos sueltos con imagen en assets (snippets/menu-card-image).
+          Nuevo y Fin de existencias llevan además la pastilla de debajo, como en el
+          módulo del cliente.
+        {%- endcomment -%}
         {%- assign loose = 0 -%}
+        {%- assign card_slugs = '' -%}
         {%- for child in link.links -%}
-          {%- if child.links.size == 0 -%}{%- assign loose = loose | plus: 1 -%}{%- endif -%}
+          {%- if child.links.size > 0 -%}{%- continue -%}{%- endif -%}
+          {%- capture card_image -%}{% render 'menu-card-image', title: child.title %}{%- endcapture -%}
+          {%- if card_image == blank -%}
+            {%- assign loose = loose | plus: 1 -%}
+            {%- continue -%}
+          {%- endif -%}
+          {%- assign child_slug = child.title | downcase | strip -%}
+          {%- assign card_slugs = card_slugs | append: '|' | append: child_slug | append: '|' -%}
+          {%- assign pill = '' -%}
+          {%- if child_slug == 'nuevo' or child_slug == 'novedades' -%}
+            {%- assign pill = 'sections.header.pill_new' | t -%}
+          {%- elsif child_slug == 'fin de existencias' -%}
+            {%- assign pill = 'sections.header.pill_sale' | t -%}
+          {%- endif -%}
+          {%- if pill != blank -%}<div class="nav-drop__visual">{%- endif -%}
+          <a class="nav-drop__card" href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>
+            <img src="{{ card_image | asset_url }}" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+            <span class="nav-drop__card-copy"><strong>{{ child.title }}</strong></span>
+          </a>
+          {%- if pill != blank -%}
+            <a class="nav-drop__pill{% if child_slug == 'fin de existencias' %} nav-drop__pill--sale{% endif %}" href="{{ child.url }}"><span>{{ pill }}</span><span aria-hidden="true">→</span></a>
+          </div>
+          {%- endif -%}
         {%- endfor -%}
 
+        {%- comment -%} Primera columna de texto: el resto de hijos sueltos. {%- endcomment -%}
         {%- if loose > 0 -%}
           <div class="nav-drop__col">
             <ul>
               {%- for child in link.links -%}
-                {%- if child.links.size == 0 -%}
-                  <li><a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title }}</a></li>
-                {%- endif -%}
+                {%- if child.links.size > 0 -%}{%- continue -%}{%- endif -%}
+                {%- assign child_slug = child.title | downcase | strip | prepend: '|' | append: '|' -%}
+                {%- if card_slugs contains child_slug -%}{%- continue -%}{%- endif -%}
+                <li><a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}><span>{{ child.title }}</span></a></li>
               {%- endfor -%}
             </ul>
           </div>
@@ -61,7 +92,7 @@
               <a class="nav-drop__head" href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title }}</a>
               <ul>
                 {%- for grandchild in child.links -%}
-                  <li><a href="{{ grandchild.url }}"{% if grandchild.current %} aria-current="page"{% endif %}>{{ grandchild.title }}</a></li>
+                  <li><a href="{{ grandchild.url }}"{% if grandchild.current %} aria-current="page"{% endif %}><span>{{ grandchild.title }}</span></a></li>
                 {%- endfor -%}
               </ul>
             </div>

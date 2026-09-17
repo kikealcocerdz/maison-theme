@@ -72,7 +72,7 @@
                     assign hs_label = 'sections.tables.hotspot' | t
                   endif
                 -%}
-                <button class="scene-hotspot{% if forloop.first %} active{% endif %}" type="button" data-table-hotspot="{{ forloop.index0 }}" aria-label="{{ hs_label | escape }}" style="left:{{ xy[0] | strip }}%;top:{{ xy[1] | default: '50' | strip }}%"></button>
+                <button class="scene-hotspot{% if forloop.first %} active{% endif %}" type="button" data-table-hotspot="{{ forloop.index0 }}" data-x="{{ xy[0] | strip }}" data-y="{{ xy[1] | default: '50' | strip }}" aria-label="{{ hs_label | escape }}" style="left:{{ xy[0] | strip }}%;top:{{ xy[1] | default: '50' | strip }}%"></button>
               {%- endif -%}
             {%- endfor -%}
           </div>
@@ -223,7 +223,7 @@
 .tables-page .table-prod-arrow.prev { left: 24px; }
 .tables-page .table-prod-arrow.next { right: 24px; }
 
-.tables-page .scene-hotspot { position: absolute; width: 18px; height: 18px; border: .5px solid var(--ink); background: var(--paper); border-radius: 999px; box-shadow: 0 0 0 9px rgba(255, 255, 255, .48); cursor: pointer; animation: tableHotspotPulse 2600ms infinite; }
+.tables-page .scene-hotspot { position: absolute; transform: translate(-50%, -50%); width: 18px; height: 18px; border: .5px solid var(--ink); background: var(--paper); border-radius: 999px; box-shadow: 0 0 0 9px rgba(255, 255, 255, .48); cursor: pointer; animation: tableHotspotPulse 2600ms infinite; }
 .tables-page .scene-hotspot.active { background: var(--ink); }
 @keyframes tableHotspotPulse {
   0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, .5); }
@@ -304,6 +304,31 @@
     if (!items.length) return;
     var hotspots = [].slice.call(scene.querySelectorAll('[data-table-hotspot]'));
     var current = 0;
+
+    /* Las coordenadas de un hotspot son % de la FOTO, no de la caja: la foto va en
+       object-fit: cover y la caja cambia de proporción por breakpoint, así que se
+       recalcula el recorte y se coloca el punto en px. El % inline queda de respaldo. */
+    var photo = scene.querySelector('.table-scene-photo');
+    var img = photo && photo.querySelector('img');
+    function placeHotspots() {
+      if (!img || !img.naturalWidth || !hotspots.length) return;
+      var bw = photo.clientWidth, bh = photo.clientHeight;
+      var k = Math.max(bw / img.naturalWidth, bh / img.naturalHeight);
+      var w = img.naturalWidth * k, h = img.naturalHeight * k;
+      var ox = (bw - w) / 2, oy = (bh - h) / 2;
+      /* El recorte puede dejar una pieza fuera: el punto se queda pegado al borde. */
+      var m = 16;
+      hotspots.forEach(function (hs) {
+        var x = ox + w * (parseFloat(hs.dataset.x) || 0) / 100;
+        var y = oy + h * (parseFloat(hs.dataset.y) || 0) / 100;
+        hs.style.left = Math.min(Math.max(x, m), bw - m) + 'px';
+        hs.style.top = Math.min(Math.max(y, m), bh - m) + 'px';
+      });
+    }
+    if (img) {
+      if (img.complete) placeHotspots(); else img.addEventListener('load', placeHotspots);
+      window.addEventListener('resize', placeHotspots);
+    }
 
     function apply() {
       items.forEach(function (it, i) { it.classList.toggle('is-active', i === current); });

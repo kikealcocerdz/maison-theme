@@ -13,6 +13,8 @@
       "type": "collection-grid",
       "settings": {
         "sidebar_menu": "colecciones-sidebar",
+        "link_novedades": "shopify://collections/novedades",
+        "link_fin_existencias": "shopify://collections/fin-de-existencias",
         "products_per_page": 24,
         "editorial_after": 6
       }

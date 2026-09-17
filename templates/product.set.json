@@ -38,7 +38,7 @@
     },
     "related_set": {
       "type": "product-related",
-      "settings": { "heading": "Completa la mesa", "product_limit": 5, "source": "same_collection" }
+      "settings": { "heading": "Completa tu mesa", "product_limit": 5, "source": "same_collection" }
     },
     "related_cross": {
       "type": "product-related",

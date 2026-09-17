@@ -15,7 +15,9 @@
       "type": "header",
       "settings": {
         "menu": "main-menu",
-        "nav_left_limit": 4
+        "menu_right": "menu-derecha",
+        "nav_left_limit": 4,
+        "logo_width_override": 0
       }
     },
     "mega-menu": {
@@ -25,6 +27,7 @@
           "type": "column",
           "settings": {
             "heading": "Producto",
+            "menu": "",
             "items": "Platos | | /collections/platos\nVajillas | | /collections/vajillas\nJuegos de té / café / desayuno | | /collections/juegos-te\nCafeteras y teteras | | /collections/cafeteras-teteras\nFuentes | | /collections/fuentes\nBandejas | | /collections/bandejas\nMugs | | /collections/mugs"
           }
         },
@@ -32,14 +35,16 @@
           "type": "column",
           "settings": {
             "heading": "Colecciones",
-            "items": "Aurora | Cap. 01 | /collections/aurora\nOchavada | Cap. 02 | /collections/ochavada\nDecoración | Cap. 03 | /collections/decoracion\nNuevo | | /collections/novedades\n!Fin de existencias | | /collections/fin-de-existencias"
+            "menu": "",
+            "items": "Nuevo | | /collections/novedades\n!Fin de existencias | | /collections/fin-de-existencias\nAurora | Cap. 01 | /collections/aurora\nOchavada | Cap. 02 | /collections/ochavada\nDecoración | Cap. 03 | /collections/decoracion"
           }
         },
         "col-3": {
           "type": "column",
           "settings": {
             "heading": "Editorial",
-            "items": "Nuestras mesas | | /pages/nuestras-mesas\nViste tu mesa | | /pages/viste-tu-mesa\nArtesanía | | /pages/artesania\nIdentifica tu sello | | /pages/identifica-tu-sello"
+            "menu": "",
+            "items": "Ambientes | | /pages/nuestras-mesas\nViste tu mesa | | /pages/viste-tu-mesa\nArtesanía | | /pages/artesania\nIdentifica tu sello | | /pages/identifica-tu-sello"
           }
         },
         "card-1": {

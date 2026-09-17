@@ -1,10 +1,9 @@
 {%- comment -%}
   Storefront facets for the collection sidebar (Fase B).
 
-  Renders whatever the Search & Discovery app exposes in `collection.filters` — nothing
-  is hardcoded, so a filter the client adds in the admin shows up here without a code
-  change, and a store with the app off renders nothing at all (the sidebar keeps only
-  `collection-nav`'s chapter tree).
+  Renders whatever the Search & Discovery app exposes in `collection.filters`. Forma and
+  Color keep their complete placeholder lists visible at count 0 until catalog data exists;
+  real values replace the matching placeholders automatically.
 
   The <form method="get"> IS the feature: with JS off it navigates normally and Shopify
   filters server-side. `collection-grid`'s JS upgrades it to an in-place re-render via
@@ -17,7 +16,15 @@
   type Shopify may add is skipped rather than rendered wrong.
 {%- endcomment -%}
 
-{%- if collection.filters.size > 0 -%}
+{%- liquid
+  assign placeholder_shape_label = 'sections.collection.filter_shape' | t
+  assign placeholder_color_label = 'sections.collection.filter_color' | t
+  assign placeholder_shapes = 'sections.collection.filter_shape_values' | t | split: '|'
+  assign placeholder_colors = 'sections.collection.filter_color_values' | t | split: '|'
+  assign has_shape_filter = false
+  assign has_color_filter = false
+-%}
+
   <form method="get" class="side-filters" data-filters>
     <div class="side-filters-head">
       <span class="side-filters-title">{{ 'sections.collection.filters' | t }}</span>
@@ -28,7 +35,28 @@
 
     <div class="side-accordion">
       {%- for filter in collection.filters -%}
+        {%- comment -%} «Tipo de producto» vive en el árbol de navegación (collection-nav), no aquí. {%- endcomment -%}
+        {%- if filter.param_name == 'filter.p.product_type' -%}{%- continue -%}{%- endif -%}
         {%- liquid
+          assign filter_param = filter.param_name | downcase
+          assign filter_label = filter.label | downcase | strip
+          assign shape_label = placeholder_shape_label | downcase | strip
+          assign color_label = placeholder_color_label | downcase | strip
+          assign placeholder_values = nil
+          if filter_param contains 'custom.forma' or filter_label == shape_label
+            assign has_shape_filter = true
+            assign placeholder_values = placeholder_shapes
+          elsif filter_param contains 'custom.color' or filter_label == color_label
+            assign has_color_filter = true
+            assign placeholder_values = placeholder_colors
+          endif
+          capture rendered_values
+            echo '|'
+            for value in filter.values
+              echo value.label | downcase | strip
+              echo '|'
+            endfor
+          endcapture
           assign is_open = false
           if filter.active_values.size > 0
             assign is_open = true
@@ -67,6 +95,23 @@
                     <span class="facet-label">{{ value.label | escape }}</span>
                     <span class="facet-count" aria-hidden="true">{{ value.count }}</span>
                   </label>
+                {%- endfor -%}
+                {%- for placeholder_value in placeholder_values -%}
+                  {%- liquid
+                    assign placeholder_key = placeholder_value | downcase | strip
+                    capture placeholder_token
+                      echo '|'
+                      echo placeholder_key
+                      echo '|'
+                    endcapture
+                  -%}
+                  {%- unless rendered_values contains placeholder_token -%}
+                    <label class="facet is-dead">
+                      <input type="checkbox" disabled>
+                      <span class="facet-label">{{ placeholder_value | escape }}</span>
+                      <span class="facet-count" aria-hidden="true">0</span>
+                    </label>
+                  {%- endunless -%}
                 {%- endfor -%}
 
               {%- when 'price_range' -%}
@@ -110,6 +155,34 @@
           </div></div>
         </div>
       {%- endfor -%}
+
+      {%- unless has_shape_filter -%}
+        <div class="side-section">
+          <button class="side-section-head" type="button" data-side-toggle aria-expanded="false">
+            <span class="side-main-link">{{ placeholder_shape_label }}</span>
+            <span class="side-toggle" aria-hidden="true"></span>
+          </button>
+          <div class="side-panel"><div>
+            {%- for value in placeholder_shapes -%}
+              <label class="facet is-dead"><input type="checkbox" disabled><span class="facet-label">{{ value | escape }}</span><span class="facet-count" aria-hidden="true">0</span></label>
+            {%- endfor -%}
+          </div></div>
+        </div>
+      {%- endunless -%}
+
+      {%- unless has_color_filter -%}
+        <div class="side-section">
+          <button class="side-section-head" type="button" data-side-toggle aria-expanded="false">
+            <span class="side-main-link">{{ placeholder_color_label }}</span>
+            <span class="side-toggle" aria-hidden="true"></span>
+          </button>
+          <div class="side-panel"><div>
+            {%- for value in placeholder_colors -%}
+              <label class="facet is-dead"><input type="checkbox" disabled><span class="facet-label">{{ value | escape }}</span><span class="facet-count" aria-hidden="true">0</span></label>
+            {%- endfor -%}
+          </div></div>
+        </div>
+      {%- endunless -%}
     </div>
 
     {%- comment -%}
@@ -118,4 +191,3 @@
     {%- endcomment -%}
     <button class="ghost-btn side-filters-apply" type="submit">{{ 'sections.collection.filter_apply' | t }}</button>
   </form>
-{%- endif -%}

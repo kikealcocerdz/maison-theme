@@ -34,7 +34,7 @@
           "type": "column",
           "settings": {
             "heading": "Editorial",
-            "items": "Artesanía | /pages/artesania\nCalidad | /pages/artesania#calidad\nHeritage 1841 | /pages/heritage-1841"
+            "items": "Artesanía | /pages/artesania\nCalidad | /pages/artesania#calidad\nHeritage 1842 | /pages/heritage-1841"
           }
         },
         "col-3": {
@@ -55,7 +55,7 @@
       "type": "help-bubble",
       "settings": {
         "heading": "La Cartuja de Sevilla",
-        "whatsapp_number": "+34 600 000 000",
+        "whatsapp_number": "+34 667 408 544",
         "hours_label": "Lunes a viernes, 7:00–15:00",
         "open_days": "1,2,3,4,5",
         "open_time": "07:00",

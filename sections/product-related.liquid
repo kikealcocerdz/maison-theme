@@ -21,17 +21,58 @@
     mismo decorado (sets y vajilla incluidos); en «te puede interesar», la misma
     pieza en otros decorados.
   endcomment
-  assign skip_handles = 'all,frontpage,novedades,fin-de-existencias,nuevo' | split: ','
-  assign own_collection = blank
-  for c in product.collections
-    if own_collection == blank
-      unless skip_handles contains c.handle
-        assign own_collection = c
-      endunless
-    endif
-  endfor
+  capture own_handle
+    render 'own-collection-handle', product: product
+  endcapture
+  assign own_handle = own_handle | strip
+  assign own_collection = collections[own_handle]
+  assign type_handle = product.type | handleize
   if own_collection == blank
     assign own_collection = product.collections.first
+  endif
+
+  comment
+    «Te puede interesar» = la MISMA pieza en otros decorados (plato llano, no plato
+    hondo). La pieza es el título sin el decorado, y el decorado es el sufijo que el
+    título comparte con sus hermanos de colección: «Plato Llano Flor Lis Azul» vs
+    «Sopera Flor Lis Azul» → «Plato Llano». Se mira el mínimo sobre varios hermanos
+    para que un parecido casual no alargue el sufijo.
+  endcomment
+  assign piece_prefix = blank
+  if section.settings.source == 'same_type' and own_collection != blank
+    assign words = product.title | split: ' '
+    assign suffix_len = 99
+    assign compared = 0
+    for sibling in own_collection.products
+      if compared >= 6
+        break
+      endif
+      if sibling.id == current_id
+        continue
+      endif
+      assign compared = compared | plus: 1
+      assign owords = sibling.title | split: ' '
+      assign k = 0
+      for i in (1..words.size)
+        if i > owords.size
+          break
+        endif
+        assign a = words.size | minus: i
+        assign b = owords.size | minus: i
+        if words[a] == owords[b]
+          assign k = k | plus: 1
+        else
+          break
+        endif
+      endfor
+      if k < suffix_len
+        assign suffix_len = k
+      endif
+    endfor
+    if suffix_len > 0 and suffix_len < words.size
+      assign keep = words.size | minus: suffix_len
+      assign piece_prefix = words | slice: 0, keep | join: ' ' | handleize
+    endif
   endif
 
   assign exclude_own = false
@@ -42,7 +83,6 @@
       Las colecciones por tipo de producto (platos, vajillas, azucareros…) son las
       del menú lateral. Sin colección para ese tipo, se cae a la de siempre.
     endcomment
-    assign type_handle = product.type | handleize
     assign type_col = collections[type_handle]
     if type_col != blank and type_col.products.size > 0
       assign list = type_col.products
@@ -72,7 +112,12 @@
   endif
 -%}
 <section class="product-related reveal" data-section-id="{{ section.id }}"{% if rec_url != blank %} data-recommendations="{{ rec_url | escape }}"{% endif %}>
-  {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
+  <div class="product-related__head">
+    {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
+    {%- if section.settings.show_collection_cta and own_collection != blank -%}
+      <a class="cta" href="{{ own_collection.url }}">{{ 'sections.product.discover_collection' | t }}</a>
+    {%- endif -%}
+  </div>
   <div class="related-grid">
     {%- if auto -%}
       {%- comment -%}
@@ -90,6 +135,13 @@
           {%- endfor -%}
           {%- if in_own -%}{%- continue -%}{%- endif -%}
         {%- endif -%}
+        {%- if exclude_own and product.tags contains 'fin-de-existencias' -%}{%- continue -%}{%- endif -%}
+        {%- if piece_prefix != blank -%}
+          {%- assign cand = product.title | handleize | append: '-' -%}
+          {%- assign head = cand | slice: 0, piece_prefix.size | append: '-' -%}
+          {%- assign want = piece_prefix | append: '-' -%}
+          {%- unless head == want -%}{%- continue -%}{%- endunless -%}
+        {%- endif -%}
         {%- assign shown = shown | plus: 1 -%}
         {%- liquid
           assign r_img1 = product.featured_image | image_url: width: 720
@@ -97,9 +149,9 @@
           assign r_h = product.featured_image.height | default: 1250
           assign r_price = product.price | money
           assign r_meta = product.collections.first.title | default: product.type
-          assign r_new = 0
+          assign r_new = false
           if product.tags contains 'novedad' or product.tags contains 'new'
-            assign r_new = 1
+            assign r_new = true
           endif
         -%}
         {% render 'related-card', product: product, scope: section.id,
@@ -127,7 +179,8 @@
 {% stylesheet %}
 .product-related { width: var(--content); margin: 0 auto; padding: 0 0 10vh; }
 .product-related + .product-related { padding-top: 2vh; }
-.product-related h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 3vw, 48px); line-height: 1; margin: 0 0 34px; color: var(--ink); }
+.product-related__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 32px; margin: 0 0 34px; }
+.product-related h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 3vw, 48px); line-height: 1; margin: 0; color: var(--ink); }
 .product-related .related-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
 .product-related .related-grid .product-info { grid-template-columns: 1fr; gap: 6px; margin-top: 13px; }
 .product-related .related-grid .price { text-align: left; }
@@ -153,8 +206,8 @@
   .product-related .related-grid {
     display: grid !important; grid-auto-flow: column !important;
     grid-template-columns: none !important; grid-auto-columns: 62vw !important;
-    gap: 14px !important; overflow-x: auto !important;
-    scroll-snap-type: x proximity; overscroll-behavior-inline: contain;
+    gap: 14px !important; overflow-x: auto !important; overflow-y: hidden !important;
+    scroll-snap-type: x proximity; scroll-padding-inline: 14px; overscroll-behavior-inline: contain;
     scrollbar-width: none; margin: 0 -14px !important; padding: 0 14px 6px !important;
   }
   .product-related .related-grid::-webkit-scrollbar { display: none; }
@@ -264,7 +317,8 @@
       ]
     },
     { "type": "collection", "id": "collection", "label": "Collection (auto-fill / recommendations fallback)" },
-    { "type": "range", "id": "product_limit", "label": "Products shown", "min": 3, "max": 6, "step": 1, "default": 5 }
+    { "type": "range", "id": "product_limit", "label": "Products shown", "min": 3, "max": 6, "step": 1, "default": 5 },
+    { "type": "checkbox", "id": "show_collection_cta", "label": "Show «Discover the collection» link next to the heading", "default": false }
   ],
   "blocks": [
     {

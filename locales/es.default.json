@@ -163,6 +163,10 @@
       "filter_clear": "Limpiar",
       "filter_apply": "Aplicar filtros",
       "filter_remove": "Quitar {{ name }}",
+      "filter_shape": "Forma",
+      "filter_shape_values": "Aurora|Ochavada|Imperio|Viena",
+      "filter_color": "Color",
+      "filter_color_values": "Azul|Rosa|Amarillo|Negro|Verde|Blanco|Multicolor",
       "price_from": "Desde",
       "price_to": "Hasta",
       "view_toggle": "Cambiar vista",
@@ -172,11 +176,14 @@
       "sort_new": "Novedad",
       "sort_high": "Precio - alto a bajo",
       "sort_low": "Precio - bajo a alto",
+      "sort_az": "Nombre - A a Z",
+      "sort_za": "Nombre - Z a A",
       "no_results": "No encontramos piezas con esos filtros.",
       "no_results_body": "Prueba a quitar alguno o a ampliar el rango de precio. También puedes empezar de nuevo desde el catálogo.",
       "no_results_clear": "Quitar los filtros",
       "show_results": "Mostrar resultados",
       "quick_label": "Accesos",
+      "quick_all": "Todos los productos",
       "quick_new": "Novedades",
       "quick_last_units": "Fin de existencias",
       "more_filters": "Filtros",
@@ -211,6 +218,9 @@
       "social_label": "Redes sociales"
     },
     "header": {
+      "pill_new": "Descubrir novedades",
+      "pill_sale": "Últimas piezas",
+      "back": "Volver",
       "menu": "Menú",
       "search": "Buscar"
     },
@@ -259,7 +269,7 @@
       "hotspot": "Ver pieza",
       "view_product": "Ver producto {{ index }}",
       "add_piece": "Añadir pieza",
-      "add_set": "Añadir vajilla · {{ pieces }} p."
+      "add_set": "Añadir vajilla · {{ pieces }} piezas"
     },
     "help": {
       "open": "¿Hablamos? Escríbenos por WhatsApp",

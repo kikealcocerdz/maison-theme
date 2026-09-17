@@ -13,6 +13,14 @@
   assign menu = linklists[section.settings.sidebar_menu]
   assign url_new = section.settings.link_novedades | default: '/collections/novedades'
   assign url_end = section.settings.link_fin_existencias | default: '/collections/fin-de-existencias'
+  # «Tipo de producto»: el grupo del menú se pinta con la faceta de Shopify (completa y
+  # alfabética) en vez de con sus hijos del linklist; la faceta se omite en collection-filters.
+  assign type_filter = nil
+  for f in collection.filters
+    if f.param_name == 'filter.p.product_type'
+      assign type_filter = f
+    endif
+  endfor
 -%}
 
 <aside class="sidebar">
@@ -41,6 +49,8 @@
           <a class="fchip{% if current_sort == 'created-descending' %} is-on{% endif %}" href="{{ collection.url }}?sort_by=created-descending{{ sort_query }}">{{ 'sections.collection.sort_new' | t }}</a>
           <a class="fchip{% if current_sort == 'price-ascending' %} is-on{% endif %}" href="{{ collection.url }}?sort_by=price-ascending{{ sort_query }}">{{ 'sections.collection.sort_low' | t }}</a>
           <a class="fchip{% if current_sort == 'price-descending' %} is-on{% endif %}" href="{{ collection.url }}?sort_by=price-descending{{ sort_query }}">{{ 'sections.collection.sort_high' | t }}</a>
+          <a class="fchip{% if current_sort == 'title-ascending' %} is-on{% endif %}" href="{{ collection.url }}?sort_by=title-ascending{{ sort_query }}">{{ 'sections.collection.sort_az' | t }}</a>
+          <a class="fchip{% if current_sort == 'title-descending' %} is-on{% endif %}" href="{{ collection.url }}?sort_by=title-descending{{ sort_query }}">{{ 'sections.collection.sort_za' | t }}</a>
         </div>
       </section>
     {%- endif -%}
@@ -58,6 +68,7 @@
     {%- endcomment -%}
     <div class="sidebar__nav">
     <nav class="side-quick" aria-label="{{ 'sections.collection.quick_label' | t }}">
+      <a class="side-quick__link" href="{{ routes.all_products_collection_url }}">{{ 'sections.collection.quick_all' | t }}</a>
       <a class="side-quick__link" href="{{ url_new }}">{{ 'sections.collection.quick_new' | t }}</a>
       <a class="side-quick__link side-quick__link--end" href="{{ url_end }}">{{ 'sections.collection.quick_last_units' | t }}</a>
     </nav>
@@ -70,15 +81,30 @@
           if parent.current or parent.child_active
             assign is_open = true
           endif
+          assign parent_key = parent.title | downcase | strip
+          assign is_type_group = false
+          if parent_key == 'tipo de producto' and type_filter != nil
+            assign is_type_group = true
+            if type_filter.active_values.size > 0
+              assign is_open = true
+            endif
+          endif
         -%}
         <div class="side-section{% if is_open %} is-open{% endif %}">
           <div class="side-section-head">
             <a class="side-main-link{% if parent.current %} active{% endif %}" href="{{ parent.url }}">{{ parent.title | escape }}</a>
-            {%- if parent.links.size > 0 -%}
+            {%- if parent.links.size > 0 or is_type_group -%}
               <button class="side-toggle" type="button" aria-expanded="{{ is_open }}" aria-label="{{ 'sections.collection.toggle' | t: name: parent.title }}"></button>
             {%- endif -%}
           </div>
-          {%- if parent.links.size > 0 -%}
+          {%- if is_type_group -%}
+            <div class="side-panel"><div>
+              {%- for value in type_filter.values -%}
+                {%- if value.count == 0 and value.active == false -%}{%- continue -%}{%- endif -%}
+                <a class="{% if value.active %}active{% endif %}" data-facet-link href="{% if value.active %}{{ value.url_to_remove }}{% else %}{{ value.url_to_add }}{% endif %}">{{ value.label | escape }}</a>
+              {%- endfor -%}
+            </div></div>
+          {%- elsif parent.links.size > 0 -%}
             <div class="side-panel"><div>
               {%- for child in parent.links -%}
                 <a class="{% if child.current %}active{% endif %}" href="{{ child.url }}">{{ child.title | escape }}</a>
@@ -121,11 +147,9 @@
       Puerta de escritorio al cajón de filtros adicionales. En móvil la puerta es el
       botón «Filtrar» de la barra de herramientas, así que aquí se oculta.
     {%- endcomment -%}
-    {%- if collection.filters.size > 0 -%}
-      <button class="more-filters" type="button" data-filters-open aria-expanded="false">
-        <span aria-hidden="true">+</span> {{ 'sections.collection.more_filters' | t }}
-      </button>
-    {%- endif -%}
+    <button class="more-filters" type="button" data-filters-open aria-expanded="false">
+      <span aria-hidden="true">+</span> {{ 'sections.collection.more_filters' | t }}
+    </button>
   </div>
 
   {%- comment -%}

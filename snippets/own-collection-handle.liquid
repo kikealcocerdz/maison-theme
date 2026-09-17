@@ -1,0 +1,21 @@
+{%- comment -%}
+  Handle de la colección «propia» (el decorado) de un producto. Cajones de sastre y
+  categorías por tipo de pieza no cuentan; entre las que quedan gana la más pequeña,
+  por ejemplo «Flor de Lis Azul» antes que la familia genérica «Flor Lis».
+  El orden de `product.collections` no es de fiar. Se usa desde product-detail y
+  product-related: `capture` + `collections[handle]`.
+{%- endcomment -%}
+{%- liquid
+  assign skip_handles = 'all,frontpage,novedades,fin-de-existencias,nuevo,emblemas,aurora,ochavada,vajillas-completas,sets-regalo,vajillas,juegos-cafe,juegos-te,juegos-boles,platos,bowls,jarras-teteras,tazas,fuentes,bandejas,soperas,mugs,decoracion,arte-y-coleccion,objetos-decorativos,bano,gifts' | split: ','
+  assign type_handle = product.type | handleize
+  assign own_collection = blank
+  for c in product.collections
+    if skip_handles contains c.handle or c.handle == type_handle
+      continue
+    endif
+    if own_collection == blank or c.all_products_count < own_collection.all_products_count
+      assign own_collection = c
+    endif
+  endfor
+  echo own_collection.handle
+-%}

@@ -43,18 +43,20 @@
         </div>
 
       {%- when 'feature_card' -%}
-        <div class="mega-card" {{ block.shopify_attributes }}>
+        {%- comment -%} Tarjeta con foto a sangre, degradado y texto abajo; si hay enlace, toda la tarjeta es el enlace. {%- endcomment -%}
+        {%- if block.settings.link != blank -%}<a class="mega-card" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>{%- else -%}<div class="mega-card" {{ block.shopify_attributes }}>{%- endif -%}
           {%- if block.settings.image != blank -%}
-            {% render 'image-responsive', image: block.settings.image, alt: block.settings.image.alt, sizes: '(max-width: 1100px) 100vw, 25vw' %}
+            {% render 'image-responsive', image: block.settings.image, alt: '', sizes: '(max-width: 1050px) 100vw, 25vw' %}
           {%- else -%}
             {%- comment -%} Demo fallback (shipped in /assets) until an image is set. {%- endcomment -%}
-            <img src="{{ 'craft.webp' | asset_url }}" alt="{{ block.settings.text | escape }}" width="1450" height="1800" loading="lazy" decoding="async">
+            <img src="{{ 'menu-heritage-menu.webp' | asset_url }}" alt="" width="1536" height="1024" loading="lazy" decoding="async">
           {%- endif -%}
-          <p>{{ block.settings.text | escape }}</p>
-          {%- if block.settings.link != blank -%}
-            <a class="cta" href="{{ block.settings.link }}">{{ block.settings.link_label | default: 'Descubrir' | escape }} <span aria-hidden="true">→</span></a>
-          {%- endif -%}
-        </div>
+          <span class="mega-card__copy">
+            <small>{{ shop.name }}</small>
+            <strong>{{ block.settings.text | escape }}</strong>
+            {%- if block.settings.link != blank -%}<em>{{ block.settings.link_label | default: 'Descubrir' | escape }} →</em>{%- endif -%}
+          </span>
+        {%- if block.settings.link != blank -%}</a>{%- else -%}</div>{%- endif -%}
 
       {%- endcase -%}
     {%- endfor -%}
@@ -90,17 +92,17 @@
 .mega-inner {
   width: var(--content-wide);
   margin: 0 auto;
-  padding: 42px 0 46px;
+  padding: 35px 0 38px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(280px, 1.1fr);
-  gap: 42px;
-  align-items: start;
+  grid-template-columns: 1fr 1.06fr 1.05fr 1.18fr;
+  gap: 28px 38px;
+  align-items: stretch;
 }
 
 /* Filete vertical entre columnas; la última de texto no lo lleva. */
 .mega-inner > div:not(.mega-card) {
-  border-right: 0.5px solid rgba(15, 26, 46, 0.10);
-  padding-right: 30px;
+  border-right: 0.5px solid var(--rule);
+  padding-right: 27px;
 }
 
 .mega-inner > div:not(.mega-card):last-child,
@@ -108,44 +110,37 @@
 
 .mega h3 {
   font-family: var(--serif);
-  font-size: clamp(22px, 1.7vw, 28px);
+  font-size: 25px;
   font-weight: 400;
   line-height: 1;
-  margin: 0 0 18px;
+  letter-spacing: -0.01em;
+  margin: 0 0 13px;
 }
 
 .mega ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  gap: 0;
 }
 
 .mega li {
-  border-top: 0.5px solid rgba(15, 26, 46, 0.10);
+  border-bottom: 0.5px solid rgba(15, 26, 46, 0.12);
   margin: 0;
   padding: 0;
 }
 
-.mega li:last-child { border-bottom: 0.5px solid rgba(15, 26, 46, 0.10); }
-
 .mega-row {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  padding: 9px 0;
-  color: var(--ink-soft);
-  font-size: 13px;
-  line-height: 1.35;
-  letter-spacing: 0.055em;
-  transition: color 280ms var(--ease);
-}
-
-.mega-row > span {
-  transition: transform 380ms var(--ease);
+  gap: 12px;
+  min-height: 28px;
+  padding: 6px 0;
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.25;
+  letter-spacing: 0.035em;
+  transition: padding 240ms var(--ease), color 240ms var(--ease);
 }
 
 /* Rótulos largos ("Negro Vistas by ASH Yellow") mandan sobre la meta. */
@@ -153,120 +148,117 @@
 
 .mega-row > span:last-child:not(:first-child) {
   flex: 0 0 auto;
-  font-size: 11px;
-  letter-spacing: 0.12em;
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
   color: var(--muted);
 }
 
-/* Punto de marca que entra por la izquierda al pasar por encima. */
-.mega-row::before {
-  content: "";
-  position: absolute;
-  left: -12px;
-  top: 50%;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--brand);
+/* Flecha que entra por la derecha al pasar por encima. */
+a.mega-row::after {
+  content: "→";
+  font-size: 11px;
   opacity: 0;
-  transform: translate(-6px, -50%) scale(0.6);
-  transition: opacity 300ms var(--ease), transform 380ms var(--ease);
+  transform: translateX(-5px);
+  transition: opacity 240ms var(--ease), transform 240ms var(--ease);
 }
 
-a.mega-row:hover > span:first-child,
-a.mega-row:focus-visible > span:first-child,
-.mega-row.is-current > span:first-child { transform: translateX(6px); }
+a.mega-row:hover,
+a.mega-row:focus-visible,
+.mega-row.is-current { padding-left: 6px; color: var(--brand); }
 
-a.mega-row:hover::before,
-a.mega-row:focus-visible::before,
-.mega-row.is-current::before { opacity: 1; transform: translate(0, -50%) scale(1); }
+a.mega-row:hover::after,
+a.mega-row:focus-visible::after,
+.mega-row.is-current::after { opacity: 1; transform: none; }
 
+.mega-row--flag { color: var(--accent-1); }
+
+/* Tarjeta con foto: imagen a sangre, degradado y texto abajo a la izquierda. */
 .mega-card {
-  align-self: start;
-  background: var(--ink-faint-20);
-  padding: 12px;
+  position: relative;
+  display: block;
+  min-height: 220px;
   overflow: hidden;
+  background: #d7d3cd;
+  isolation: isolate;
+  color: var(--paper);
 }
 
 .mega-card img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 160px;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.mega-card p {
-  font-family: var(--serif);
-  font-size: 23px;
-  line-height: 1.02;
-  margin: 15px 0 13px;
-  max-width: 15ch;
-  color: var(--ink);
+.mega-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(15, 26, 46, 0.01) 30%, rgba(15, 26, 46, 0.78) 100%);
 }
 
-.mega-card .cta { font-size: 12px; letter-spacing: 0.17em; }
-.mega-row--flag > span:first-child { color: var(--accent-1); }
+.mega-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 0 solid rgba(255, 255, 255, 0.45);
+  transition: border-width 350ms var(--ease);
+}
+
+a.mega-card:hover::before { border-width: 6px; }
+
+.mega-card__copy {
+  position: absolute;
+  z-index: 2;
+  left: 17px;
+  right: 17px;
+  bottom: 16px;
+}
+
+.mega-card__copy small {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 8px;
+  line-height: 1.3;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.mega-card__copy strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.02;
+  font-weight: 400;
+}
+
+.mega-card__copy em {
+  display: inline-block;
+  margin-top: 11px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.75);
+  font-style: normal;
+  font-size: 8.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .mega-row,
-  .mega-row > span,
-  .mega-row::before { transition: none; }
+  a.mega-row::after,
+  .mega-card::before { transition: none; }
 }
 
-@media (max-width: 1000px) {
-  .mega-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .mega-inner > div:not(.mega-card) { border-right: 0; padding-right: 0; }
-}
-
-/* v96: el mega móvil pasa a 2 columnas (antes 1) para no obligar a un scroll eterno,
-   con safe-area arriba y abajo y scroll contenido dentro del panel. */
-@media (max-width: 780px) {
-  .mega {
-    top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
-    max-height: calc(100dvh - var(--header-h) - env(safe-area-inset-top, 0px));
-    overflow-y: auto;
-    overscroll-behavior: contain;
-  }
-
-  .mega-inner {
-    width: calc(100vw - 30px);
-    padding: 24px 0 calc(26px + env(safe-area-inset-bottom, 0px));
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 26px 18px;
-  }
-
-  .mega-inner > div { min-width: 0; }
-
-  .mega h3 {
-    font-size: 22px;
-    margin-bottom: 13px;
-  }
-
-  .mega ul { gap: 7px; }
-
-  .mega li a {
-    font-size: 9px;
-    line-height: 1.35;
-    letter-spacing: 0.045em;
-    padding: 7px 0;
-    align-items: flex-start;
-  }
-
-  .mega-card { padding: 10px; height: 100%; display: flex; flex-direction: column; }
-  .mega-card img { flex: 1 1 auto; height: auto; min-height: 150px; aspect-ratio: 3 / 4; object-fit: cover; }
-
-  .mega-card p {
-    font-size: 18px;
-    margin: 12px 0 10px;
-  }
-
-  .mega-card .cta { font-size: 8px; }
-}
-
-@media (max-width: 420px) {
-  .mega-inner { gap: 22px 14px; }
-  .mega h3 { font-size: 20px; }
+/* Por debajo de 1050px manda el cajón móvil (snippets/mobile-drawer). */
+@media (max-width: 1050px) {
+  .mega { display: none; }
 }
 {% endstylesheet %}
 

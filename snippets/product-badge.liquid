@@ -2,10 +2,13 @@
   Badge de la esquina de cualquier tarjeta de producto.
 
   Una sola etiqueta por tarjeta, por prioridad: el estado más urgente para el
-  comprador manda. "Set" (vajillas y juegos: plantilla product.set) queda al
-  final porque es información de formato, no de disponibilidad.
+  comprador manda. "Set" queda al final porque es información de formato, no
+  de disponibilidad.
 
-    Agotado → Última unidad → Últimas unidades → Novedad → Éxito en ventas
+  "Novedad" y "Set" salen sólo por etiqueta de producto (tags `novedad`/`new`
+  y `set`); sin etiqueta no hay badge. La plantilla product.set no pinta "Set".
+
+    Agotado → -X% (compare_at_price) → Última unidad → Últimas unidades → Novedad → Éxito en ventas
     → Muy solicitado → Set
 
   Accepts:
@@ -28,6 +31,9 @@
 -%}
 {%- if product != blank and product.available == false -%}
   <span class="badge badge--out">{{ 'sections.collection.badge_sold_out' | t }}</span>
+{%- elsif product != blank and product.compare_at_price > product.price -%}
+  {%- assign pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+  <span class="badge badge--sale">-{{ pct }}%</span>
 {%- elsif tracked and qty == 1 -%}
   <span class="badge badge--stock">{{ 'sections.collection.badge_last_unit' | t }}</span>
 {%- elsif tracked and qty > 1 and qty <= low_stock -%}
@@ -38,6 +44,6 @@
   <span class="badge badge--demand">{{ 'sections.collection.badge_bestseller' | t }}</span>
 {%- elsif product.tags contains 'muy-solicitado' -%}
   <span class="badge badge--demand">{{ 'sections.collection.badge_popular' | t }}</span>
-{%- elsif product.template_suffix == 'set' -%}
+{%- elsif product.tags contains 'set' -%}
   <span class="badge badge--set">{{ 'sections.collection.badge_set' | t }}</span>
 {%- endif -%}

@@ -1,277 +1,197 @@
-# FINAL-TIENDA — estado y pendientes para la puesta en marcha
+# FINAL-TIENDA — qué falta para salir a producción
 
-Handoff entre agentes. Lee esto **antes** de tocar `sections/collection-grid.liquid`,
-`sections/product-related.liquid` o `sections/viste-tu-mesa.liquid`.
-El contrato general del theme sigue siendo `CLAUDE.md`; esto solo cubre lo que queda abierto.
+Auditoría del 2026-09-16 sobre `la-cartuja-de-sevilla.myshopify.com`: Admin GraphQL (lectura,
+CLI Connector) + Admin UI en navegador + estado del repo. El contenido anterior de este archivo
+(handoff de agosto/septiembre) está en el historial de git; lo que sigue vigente se ha integrado.
 
-Brief de cliente del 2026-09-09 troceado por área y propietario en
-`docs/cambios-2026-09-09/00-INDICE.md` — contexto sin implementar.
+Leyenda: **[cliente]** lo tiene que hacer o decidir el cliente · **[admin]** lo hace el agente con
+un script en `scripts/admin/` · **[theme]** código del repo · **[manual]** Admin UI, sin API.
 
-Última actualización: 2026-09-08 - auditoría web de 12 puntos, además de las sesiones
-`theme-90` (facetas / sort), venta cruzada + sets y `copy-artesania` (§6).
+## 0 · Información que falta
 
-## 0 · Auditoría web de lanzamiento (2026-09-08)
+Datos que tiene que aportar el cliente.
 
-Implementado en la rama `auditoria-web-12-puntos`, partiendo del árbol publicado y sin
-descartar los cambios locales anteriores:
+### A · Para cobrar (Shopify Payments + PayPal) — lo mete el cliente en el panel
+- Razón social, CIF/NIF, dirección fiscal completa y **entidad que factura** (¿DORINDA o LA
+  CARTUJA DE SEVILLA?). Es la misma que va en las políticas.
+- Persona representante: nombre, DNI, fecha de nacimiento (KYC de Shopify Payments).
+- IBAN de la cuenta donde se reciben los pagos.
+- Cuenta PayPal Business (correo) si se quiere PayPal.
+- Tarjeta para el plan de Shopify (facturación mensual).
+- Acceso al buzón `info@lacartujadesevilla.com` para verificar el remitente.
+- Dirección física de la tienda/almacén (calle, CP, ciudad) y teléfono de atención.
 
-| Área | Commit | Resultado |
-|---|---|---|
-| Carrito | `e2dcce4` + `0be4e31` | Página completa, formulario nativo, resumen y estado vacío |
-| Acordeones PDP | `8e12fb5` | `custom.dimensiones` / `custom.detalles`; la fila se oculta si no hay dato |
-| Orden de colección | `4f74426` | Enlaces `sort_by` de servidor; filtros y paginación conservados |
-| Oaxaca | `3ccfb91` | Los seis handles ya estaban en `index.json`; conectados también en Nuestras mesas |
-| Historia | `7828d3c` | Home y ambos PDP apuntan a `/pages/heritage-1841` |
-| Búsqueda | `5ce58c4` | Productos con la tarjeta y rejilla del PLP; páginas/artículos separados |
-| Encuadre de producto | `fc88dcc` | `contain` y fondo `--paper` en PLP, búsqueda, relacionados y home |
-| Sellos, texto completo | `9b8a1ea` | Acción visible que abre el modal existente del sello activo |
-| Acciones de Nuestras mesas | `d88894c` | Literales de compra traducidos mediante locales ES/EN |
+### B · Para entregar (envíos e inventario)
+- Transportista definitivo (DHL app, otro, o tarifas planas) y **tarifa por zona**: Península,
+  Baleares, Canarias/Ceuta/Melilla, UE, resto. Umbral de envío gratis (hoy 150 €).
+- Si se envía fuera de la UE de verdad; si no, se desactivan esos mercados.
+- Peso aproximado por tipo de pieza (plato llano, taza, sopera, vajilla 42/56…): una tabla, no
+  producto a producto.
+- Decisión de inventario: ¿control de stock sí o no? Si sí, **Excel SKU → unidades**.
+- Plazos de entrega y condiciones de devolución (días, quién paga el retorno, roturas).
 
-Comprobado con `shopify theme check`: 0 errores y 7 avisos `RemoteAsset` preexistentes.
-En `theme dev`, búsqueda, sort/paginación, metafield real de PDP, handles Oaxaca y acción
-de Sellos renderizan sin `Translation missing`.
+### C · Textos legales
+- Las 6 políticas revisadas o el visto bueno a las actuales: devoluciones, privacidad, términos,
+  envío, contacto, aviso legal. Con la entidad de A.
+- Título y meta descripción de la portada (≤70 / ≤320 caracteres) e imagen para redes (1200×628).
 
-Sigue pendiente:
+### D · Catálogo: precios
+- PVP de los 10 a 0,00 €: Áurea, Lapicero, Bolsa, Camiseta, Libro, Bandeja conmemorativa,
+  Vela aromática 202 Rosa / Ceilán / Edén / Negro Vistas.
+- Confirmar los ya asumidos: mugs nuevos 29,95 · vaciabolsillos Abanico 46,95 · Blanco 37,95
+  (vs «Bandeja Cartuja Blanca» 28,95).
+- ¿Se vende «Envoltorio de regalo»? Precio o se retira.
 
-1. Traducción y revisión humana de los 80 periodos y descripciones históricas de
-   `assets/sellos.js`. No publicar una traducción automática sin validación de archivo.
-2. Translate & Adapt para los settings de `page.identifica-tu-sello`: heading
-   “Discover the history behind your tableware mark”; intro “Find the mark on the base of
-   your piece and discover when it was used and what it reveals about its origin”;
-   `HOY` → `TODAY`; archive kicker “Chronological archive”; archive heading
-   “The marks through time”.
-3. Confirmar si `viste-tu-mesa.liquid` debe seguir deliberadamente solo en español.
-4. Crear y completar `custom.dimensiones` / `custom.detalles` en todo el catálogo.
-5. Crear en el admin la redirección `/pages/historia` → `/pages/heritage-1841`.
+### E · Catálogo: fotos
+- Producto (sustituyen «Próximamente»): Lapicero, Jabonera, Algodonera, Conjunto de baño,
+  Bandeja conmemorativa. Y una foto de «Envoltorio de regalo» si se vende.
+- Colección (46, formato apaisado, misma luz): Novedades, Fin de existencias, Sets para regalo,
+  Vajillas completas, Juegos de café, Juegos de té, Juegos de boles, Arte y colección, Objetos
+  decorativos, Baño, Gifts, Áurea, Georgica, Edén, Vistas A. Stewart, Negro Vistas ASH Blue /
+  Yellow, Ochavada Blanca, Oaxaca, y una por tipo de pieza (Azucareros, Bajoplatos, Bandejas,
+  Boles, Bomboneras, Cabezas frenológicas, Cafeteras, Champaneras, Ensaladeras, Floreros,
+  Fuentes, Jarros, Juegos, Lecheras, Mugs, Aguamaniles, Platillos, Platos, Salseras, Servicios,
+  Soperas, Tazas, Teteras, Vajillas). Si no hay tiempo, indicar qué producto usar de portada.
+
+### F · Catálogo: textos
+- Descripción (o plantilla por tipo que aprobar): 44 tazas (café / consomé / desayuno con
+  platillo), 42 juegos (boles y mini boles) y las 19 novedades (Áurea, Lapicero, Caja 6
+  posavasos, Vaciabolsillos, Tarro de botica, Hoja de parra, Mancerina, Cepillero, Bolsa,
+  Camiseta, Libro, Jabonera, Algodonera, Conjunto de baño, Bandeja conmemorativa, 4 velas).
+- Descripción corta (2 líneas) de 35 colecciones: las de tipo de pieza + Flor de Lis, Vajillas
+  completas, Arte y colección, Objetos decorativos, Baño, Gifts, Áurea, Georgica, Edén.
+
+### G · Catálogo: datos de ficha
+- SKU de las 29 piezas nuevas (novedades, 9 mugs, 4 velas, envoltorio).
+- Medidas de 166 productos, por tipo: 47 tazas, 42 juegos, 11 vajillas, 10 platos, 10 mugs,
+  6 cafeteras, 4 lecheras / fuentes / salseras / velas, 2 soperas / teteras / platillos y las
+  novedades. Con una tabla «tipo → medidas» se cubre casi todo.
+- Decorado de las 30 piezas que no lo llevan en el título: blancos (bajoplato, boles,
+  bombonera, champanera, plato pan, taza desayuno, juegos boles), Bandeja Vistas (7), Florero
+  Alhambra (4), Jarro Cartuja (4), Palangana Cartuja (4), Cabeza frenológica. ¿Qué valor va
+  en el filtro «Decorado»?
+- Visto bueno para archivar los 27 «Mug Letra A–Z» sueltos (ya existe «Mug con letra»).
+- Código arancelario (HS) y origen para las 123 variantes nuevas, o permiso para copiar el de
+  las piezas migradas.
+
+### H · Idiomas y marketing
+- Traducción al inglés revisada de los 80 sellos de «Identifica tu sello» (o dejarlos solo en
+  español) y de los textos de esa página.
+- ¿«Viste tu mesa» solo en español? Sí/no.
+- Accesos: Google Search Console, GA4, Meta Business (si se quieren).
+- ¿Descuento de bienvenida por newsletter? Porcentaje y condiciones.
+- Sitemap o listado de URL de la web antigua (o dejar que lo rastreemos antes de apagarla).
 
 ---
 
-## 1 · Bloqueado por el cliente (admin de Shopify, no es código)
+## 1 · Bloqueantes — sin esto no se vende
 
-Nada de esto se puede escribir ni verificar hasta que estén hechos. **No empieces las
-facetas sin (1)**: `collection.filters` viene vacío, la UI no pinta nada y no hay forma de
-comprobar si funciona.
-
-| # | Qué | Para qué | Quién |
+| # | Qué | Estado hoy | Quién |
 |---|---|---|---|
-| 1 | Activar filtros en la app **Search & Discovery** | Sin esto `collection.filters` es una lista vacía y toda la Fase B es código no verificable | Cliente |
-| 2 | Poner el orden por defecto de la colección `sets-regalo` a **«Precio: de menor a mayor»** | Es lo que sustituye al respaldo cliente de `budget_mode`. Ver §3 | Cliente |
-| 3 | Asignar **productos complementarios** por producto en Search & Discovery | Sin esto `intent=complementary` («Completa la mesa») devuelve vacío y la fila cae al grid de colección. Activar la app (§1.1) **no** basta: hay que rellenarlo producto a producto | Cliente |
-| 4 | Emitir un **token de Admin API** (`shpat_…`) con `read_products` + `write_products` | Único camino para barrer «Calcomanía» / «Vidriado» del catálogo. La CLI de Shopify **no** puede. Ver §2 «Barrido de copy» | Cliente |
-| 5 | Confirmar el **handle** de la colección de sets | La plantilla es `templates/collection.sets-regalo.json` y Shopify la enlaza por handle. Si la colección se crea con otro handle, la plantilla no se aplica y hay que renombrar el archivo a `collection.<handle>.json` | Cliente → agente |
+| 1 | **Plan de pago** | Plan «Custom · Tienda en desarrollo» (`partnerDevelopment: true`). Sin plan no se quita la contraseña ni se cobra de verdad | [cliente] Configuración → Plan |
+| 2 | **Pagos** | Shopify Payments sin completar; PayPal sin activar; aviso «solo pagos de prueba». Apple Pay / Google Pay vienen con Shopify Payments | [cliente] Configuración → Pagos. Hace falta datos fiscales + cuenta bancaria de la entidad |
+| 3 | **Dominio** | Solo `la-cartuja-de-sevilla.myshopify.com`. `lacartujadesevilla.com` sigue sirviendo la web antigua (PrestaShop) | [cliente] conectar dominio + DNS; decidir día del cambio (corte de la web antigua) |
+| 4 | **Email remitente sin verificar** | `info@lacartujadesevilla.com` → «No verificado». Sin esto los correos de pedido salen desde `no-reply@shopify` o no salen | [cliente] Configuración → Notificaciones → Reenviar verificación (llega al buzón de info@) |
+| 5 | **Contraseña de escaparate** | Activada. Se quita al pasar a plan de pago | [cliente] tras el plan |
+| 6 | **Envíos: perfil en la sucursal equivocada** | El perfil general solo cubre «Shop location» (la genérica); «Almacén Sevilla» existe pero no tiene tarifas. Si el stock se asigna al almacén, nadie podrá pagar | [manual] Envío y entrega → Perfil general → añadir Almacén Sevilla (o borrar «Shop location») |
+| 7 | **Envíos: tarifas provisionales** | Península 6,99 € (<150 €) / gratis (≥150 €); Baleares 9,99 «(provisional)»; Canarias-Ceuta-Melilla 14,99 «(provisional)»; UE 8,99; Internacional 12,99. DHL Commerce conectado pero **desactivado** en todas las zonas. Entrega local y recogida en tienda desactivadas | [cliente] confirmar tarifas y transportista (DHL app o tarifas planas). Vajillas 42/56 piezas a 6,99 € es probable pérdida |
+| 8 | **Inventario: nada se controla** | Las 594 variantes están `tracked: false` con cantidad 0 (una ya en −1 por el pedido de prueba). Se vende todo siempre, sin límite. Lote 20 (10 uds) no aplica a variantes sin seguimiento | [cliente] decidir: (a) seguir sin control (riesgo de vender sin stock) o (b) activar seguimiento + carga de stock real → [admin] script: `inventoryItemUpdate tracked:true` + `inventorySetQuantities` desde su ERP/Excel, en Almacén Sevilla |
+| 9 | **Peso 0 en los 493 productos** | Sin peso no hay tarifas por transportista (DHL) ni etiquetas; con tarifas planas funciona pero mal | [cliente] tabla peso por tipo → [admin] `inventoryItemUpdate measurement.weight` |
+| 10 | **Dirección de la tienda** | General → «Dirección de la tienda: España» (incompleta). Aparece en facturas, correos y como origen de envío | [cliente] Configuración → General |
+| 11 | **Políticas legales nativas** | El footer enlaza `/policies/shipping-policy` y `/policies/refund-policy` (nativas). Contenido no verificable por API (falta scope `read_legal_policies`). «Reglas de devolución: no hay reglas establecidas». Entidad responsable sin confirmar (DORINDA vs LA CARTUJA DE SEVILLA) | [cliente] revisar las 6 políticas en Configuración → Políticas y fijar entidad, plazos de devolución, gastos |
+| 12 | **Pedido de prueba** | Hay 1 pedido (de prueba) que ya ha descontado stock | [manual] archivar/cancelar antes de abrir; no dejar pedidos de prueba en informes |
+
+Impuestos: Shopify Tax activo, «precios con impuestos incluidos» ✓, IVA UE por región ✓. Revisar
+solo con la gestoría: Canarias/Ceuta/Melilla (IGIC/IPSI, no IVA) y ventas UE por encima del umbral
+OSS. [cliente]
 
 ---
 
-## 2 · Pendiente de implementar
+## 2 · Catálogo (Admin) — visible al comprador
 
-### Facetas de colección (Fase B) — ~1 día · BLOQUEADO por §1.1
+Cifras del 2026-09-16: 520 productos (493 activos, 27 borrador), 594 variantes, 67 colecciones,
+12 páginas.
 
-En `sections/collection-grid.liquid` + `snippets/collection-nav.liquid` + locales.
+| # | Qué | Cuántos | Quién |
+|---|---|---|---|
+| 1 | **Precio 0,00 €** activos y a la venta | 10: `aurea`, `lapicero`, `bolsa`, `camiseta`, `libro`, `bandeja-conmemorativa`, 4 `vela-aromatica-*` | [cliente] PVP → [admin] `productVariantsBulkUpdate`. Mientras no haya precio: pasar a borrador |
+| 2 | **Foto «Próximamente»** | 5: lapicero, jabonera, algodonera, conjunto-de-bano, bandeja-conmemorativa | [cliente] fotos → [admin] lote tipo 13 |
+| 3 | **Sin descripción** | 105 (juegos de boles, tazas café/consomé/desayuno, platillos…) | [cliente] texto o plantilla por tipo → [admin] `productUpdate` masivo con plantilla «{Tipo} de loza {decorado}…» si el cliente la aprueba |
+| 4 | **Sin SKU** | 29 (novedades lotes 09–18 y los 9 mugs) | [cliente] referencias → [admin] |
+| 5 | **Sin EAN** | 478 (solo los 52 de fin de existencias lo tienen) | opcional; necesario para Google Shopping / marketplaces |
+| 6 | **Sin `custom.dimensiones`** | 166 (la ficha oculta la fila; no rompe) | [cliente] medidas → [admin] `metafieldsSet` |
+| 7 | **Sin `custom.decorado`** | 60 (blancos, Vistas, Alhambra, Cartuja, novedades) — no salen en el filtro «Decorado» | [admin] rellenable desde el título en la mayoría; el resto [cliente] |
+| 8 | **Sin código HS / país de origen** | 123 variantes (las nuevas). Aduanas para envíos fuera de la UE | [admin] copiar HS + `ES` de las piezas migradas si el cliente confirma |
+| 9 | **27 «Mug Letra X» en borrador** | Ya sustituidos por `mug-con-letra` (27 variantes). Decidir archivar | [cliente] ok → [admin] `productUpdate status: ARCHIVED` |
+| 10 | **Colecciones sin imagen** | 46 de 67 (todas las de tipo, decoración nuevas, `all`, `novedades`, `fin-de-existencias`, `sets-regalo`) — la rejilla de colecciones y el mega-menú usan fallbacks del theme | [cliente] fotos → [admin] `collectionUpdate image` |
+| 11 | **Colecciones sin descripción** | 35 (SEO + cabecera de PLP vacía) | [cliente] o textos cortos propuestos por el agente para aprobar |
+| 12 | **`sets-regalo` sin plantilla** | La colección existe (53 productos) pero `templateSuffix: null` → `templates/collection.sets-regalo.json` (modo presupuesto, precio ascendente) **no se aplica**. Orden por defecto sin confirmar | [admin] `collectionUpdate templateSuffix: "sets-regalo", sortOrder: PRICE_ASC` — 1 mutación |
+| 13 | **`envoltorio-de-regalo`** activo sin foto ni SKU | 1 | [cliente] ¿se vende? si no, borrador |
+| 14 | Vendor con dos grafías | «La Cartuja de Sevilla» ×492, «LA CARTUJA DE SEVILLA» ×1 | [admin] trivial |
 
-1. `<form>` GET con `{% for filter in collection.filters %}`. Cubrir `filter.type == 'list'`
-   (checkboxes con `filter_value.count`, `.active`, `.url_to_remove`) y `'price_range'`
-   (inputs `min` / `max`).
-2. Colocarlo en el sidebar — `collection-nav.liquid` ya es la columna izquierda, no rehagas
-   el layout. El bloque demo de `href="#"` de la línea ~63 se queda como fallback cuando
-   `collection.filters == empty`.
-3. Chips de activos + «limpiar»: `filter.active_values` y `collection.url`, preservando
-   `?sort_by=`.
-4. **Re-render sin recarga: reusa el fetch de «Cargar más»** (Section Rendering API con
-   `&section_id=`, ya escrito en el `{% javascript %}` de la sección) + `history.replaceState`.
-   No escribas un segundo fetcher.
-5. Drawer móvil: reusa el patrón de acordeón que ya tiene `collection-nav`.
-6. i18n: claves nuevas en `locales/es.default.json` **y** `en.json`, deep-merge
-   (CLAUDE.md §6), bajo `sections.collection.*`.
+Precios ya asumidos por el agente y **pendientes de confirmar**: mugs nuevos 29,95; vaciabolsillos
+Abanico 46,95; Blanco 37,95 vs «Bandeja Cartuja Blanca» 28,95 (memoria `project-pendientes`).
 
-Ya está hecho y **no hay que rehacerlo**: el helper `sort_filter_query` (arriba del todo de
-la sección) captura los `filter.*` activos y se inyecta en las URLs de ordenación. Cuando
-se activen los filtros empieza a emitir solo. Las opciones de orden son enlaces nativos a
-Shopify, por lo que ordenan la colección completa y `paginate.next.url` conserva el criterio.
-
-### Barrido de copy en el catálogo — BLOQUEADO por §1.4
-
-El cliente pidió tres correcciones de copy (2026-09-05). Las del **tema** están hechas y
-publicadas en live (§6). Falta lo que vive en el **admin** y el tema no controla:
-descripciones de producto, metafields, y páginas/blogs creados desde el admin.
-
-Palabras a barrer: `Calcomanía` → `Decorado`, `Vidriado` → `Esmaltado`.
-(«Made in Spain» ya no aplica: era una textura, no texto. Ver §6.)
-
-**La CLI de Shopify no sirve para esto — no la busques.** Comprobado con `@shopify/cli 3.86.0`:
-los únicos topics son `app`, `auth`, `config`, `hydrogen`, `theme`. No existe `shopify api`
-ni `shopify store`, no hay «Admin CLI», y el token que la CLI guarda tiene scope de temas.
-
-El camino es la **Admin GraphQL API**:
-
-1. Admin → Settings → Apps and sales channels → Develop apps → Create an app → Admin API
-   scopes `read_products` + `write_products` (+ `read_metaobjects` / `write_metaobjects` si
-   el copy vive en metaobjects) → Install → copiar `shpat_…`.
-2. El token **no va al repo ni pegado en un chat**: a `~/.shopify-cartuja-token`, `chmod 600`.
-3. Query paginada de `products` buscando las dos palabras en `title`, `descriptionHtml` y
-   metafields → enseñar el antes/después → aplicar con `productUpdate` en lote.
-4. Revocar el token al terminar (Uninstall en la misma pantalla).
-
-Lectura sin token: no hay. `https://la-cartuja-de-sevilla.myshopify.com/products.json`
-devuelve **302** — la tienda está con contraseña de escaparate. Con esa contraseña se pueden
-*localizar* los productos afectados, pero no editarlos.
-
-### Otros huecos conocidos
-
-- **Selector de variante en «Viste tu mesa»**: hoy se asume
-  `selected_or_first_available_variant`. Vale porque el catálogo de vajilla es mono-variante.
-  Si entra producto multi-variante, hay que revisarlo (~4 h). No es urgente.
-- **`intent=complementary`** en `product-related` necesita el metafield de Search & Discovery
-  configurado por producto. Si no, la API devuelve vacío y la fila cae al grid de colección
-  (comportamiento correcto, pero no es la venta cruzada que se pidió).
-- **La venta cruzada nunca se ha ejecutado contra Shopify.** `b6aa0d2` pasa `theme check` y
-  el JS es válido, pero la llamada a `/recommendations/products` no se ha visto responder ni
-  una vez: la verificación en verde de §4 cubre orden, facetas y «Viste tu mesa», no esto.
-  Pendiente, en cuanto §1.3 esté hecho (~15 min):
-  1. `shopify theme push --development --store=la-cartuja-de-sevilla`.
-  2. Abrir un PDP → pestaña Red → debe verse
-     `GET /recommendations/products?section_id=related_cross&product_id=…&intent=related` con 200,
-     y las tarjetas de «Te puede interesar» deben cambiar respecto al primer render.
-  3. Caso vacío: «Completa la mesa» con `intent=complementary` sin configurar → la fila se
-     queda con el grid de colección, nunca vacía.
-  4. Con JS desactivado: las dos filas siguen pintando el grid de colección.
-  5. `shopify theme pull --development --path /tmp/x` y comprobar que `product.json`,
-     `product.set.json` y `collection.sets-regalo.json` han aterrizado — Shopify rechaza JSON
-     malo en silencio y `theme check` no lo detecta (CLAUDE.md §2).
-- **`/collections/sets-regalo` tampoco se ha visto en un navegador.** Falta confirmar precio
-  en serif, orden ascendente y que «Cargar más» lo conserva. Depende de que la colección
-  exista (§1.2 / §1.4).
+Search & Discovery: filtros activos (Disponibilidad, Precio, Tipo, Forma, Decorado) ✓.
+Productos complementarios («Completa la mesa») sin rellenar → la fila cae al grid de colección.
 
 ---
 
-## 3 · Contratos que NO puedes romper
+## 3 · SEO, migración de la web antigua y marketing
 
-### `budget_mode` / respaldo local en `collection-grid.liquid`
-
-- `budget_mode` pone `.collection-page--budget` (precio serif) + `data-default-sort="low"`
-  en el root. Es lo que ordena «Sets para regalo» por precio ascendente **en la página
-  cargada**. Requisito explícito de la feature, no cosmética.
-- **Una plantilla JSON no puede fijar `?sort_by=`.** Se elige por handle/suffix, y `sort_by`
-  es un parámetro de la petición. Quien ocupa el sitio del respaldo cliente es el orden por
-  defecto de la colección en el admin (§1.2 → `collection.default_sort_by`).
-- La ordenación del menú es de servidor. `applySort()` ya no responde a esas opciones: queda
-  exclusivamente como respaldo de la primera visita a `sets-regalo` mientras §1.2 no esté
-  confirmado. `data-default-sort` solo se emite si no hay un `sort_by` explícito, para no pisar
-  la elección del usuario. No borres ese respaldo hasta confirmar §1.2.
-- La parte visual de `budget_mode` se queda pase lo que pase.
-- Alternativa si el cliente no quiere depender del admin: un setting `force_sort` que pinte
-  el parámetro en los enlaces internos cuando `collection.sort_by != 'price-ascending'`.
-  No cubre la primera visita limpia a `/collections/sets-regalo`. **No recomendado.**
-
-### `product-related.liquid`
-
-El primer render es **siempre** el grid de colección (SSR, crawler-safe); el fetch a la
-Product Recommendations API lo sustituye solo si vuelve con productos. No inviertas ese
-orden ni dejes que la fila pueda quedar vacía.
-
-### `viste-tu-mesa.liquid`
-
-- Copy en español hardcodeado a propósito (es un port 1:1 del mockup). No metas claves de
-  locale solo para esta sección.
-- `window.__VT_COLLECTIONS` emite `vid` **y** `av`. Cualquier cosa que construya un payload
-  de carrito debe filtrar por los dos: un solo agotado hace que `/cart/add.js` rechace el
-  lote entero.
-- Todo lo que se inyecte en HTML desde el catálogo pasa por el `esc()` que ya existe.
+| # | Qué | Estado | Quién |
+|---|---|---|---|
+| 1 | **Título y meta descripción de la home** | Vacíos (Tienda online → Preferencias). Imagen para redes sociales sin subir | [cliente] textos → [manual] |
+| 2 | **Redirecciones desde PrestaShop** | Hay 67 redirects (handles antiguos de vajillas 42/56 P). **Ninguna** desde las URL de `lacartujadesevilla.com` (`/630-fin-de-existencias`, `/xx-producto.html`…). El día del cambio de DNS, todo el posicionamiento antiguo dará 404 | [admin] crawl del sitemap antiguo antes de apagarlo → mapa URL vieja → handle nuevo → `urlRedirectCreate` (scope `write_url_redirects` pendiente de aprobar) |
+| 3 | `/pages/historia` → `/pages/heritage-1841` | No existe (comprobado por API) | [admin] con el mismo lote de redirects |
+| 4 | **Google Search Console / GA4 / Meta Pixel** | No comprobado (la página de Preferencias no deja bajar por el iframe). Search Console solo tiene sentido con el dominio final | [cliente] accesos → [manual] |
+| 5 | **Inglés** | `en` publicado. Faltan: los 80 sellos de `assets/sellos.js` (solo ES), settings de `page.identifica-tu-sello`, y decidir si «Viste tu mesa» se queda solo en ES | [cliente] traducción revisada → [admin] `translationsRegister` |
+| 6 | **Descuentos / código de bienvenida** | No verificable (falta `read_discounts`). El formulario de newsletter del footer existe; no hay automatización de bienvenida | [cliente] decidir → [manual] Shopify Email / Flow |
+| 7 | Mercados | 7 activos (España, Canarias-Ceuta-Melilla, UE, Reino Unido, Chile, Golfo y Asia, Norteamérica y Oceanía) con 16 monedas. Coherente con las zonas de envío. Si no se va a enviar fuera de la UE, desactivar mercados para no prometer lo que no se cumple | [cliente] |
 
 ---
 
-## 4 · Verificación
+## 4 · Theme y repo
 
-```bash
-shopify theme check                                   # 0 errores. 7 warnings RemoteAsset preexistentes
-shopify theme dev --store=la-cartuja-de-sevilla       # http://127.0.0.1:9292
-```
-
-Comprobado el 2026-09-05 y en verde:
-
-- `/collections/emblemas` → 3 enlaces de orden, sin «Translation missing».
-- `?sort_by=price-ascending` → precios ascendentes reales + `aria-current` en la opción activa.
-- `paginate.next.url` conserva el parámetro → `?page=2&sort_by=price-ascending`.
-- `/pages/viste-tu-mesa` → 36 `vid` / 36 `av` emparejados en `__VT_COLLECTIONS`.
-
-Cuando toques la Fase B, además:
-
-- `/collections/<handle>?filter.p.product_type=X` → checkboxes marcados y chips de activos.
-  (El Liquid ya respeta ese parámetro **hoy**, antes de tener UI.)
-- «Cargar más» conserva filtro y orden.
-- Sin JS: el `<form>` GET sigue navegando.
-- **Regresión obligatoria**: `/collections/sets-regalo` sigue en modo presupuesto y ordenada
-  por precio ascendente después de «Cargar más».
-
-### Check del carrito de «Viste tu mesa»
-
-Hay 5 aserciones que ejecutan el código **real** del bundle compilado (todo disponible / uno
-agotado / sin variante / todo agotado / escapado del título). Vive fuera del repo — el theme
-es vanilla sin infra de tests — en el scratchpad de la sesión que lo escribió. Si lo
-necesitas, se reconstruye en 5 min: extrae por regex `var prods = c.products.map(...)`,
-`var cartItems = ...` y `var addBtn = ...` de
-`http://127.0.0.1:9292/cdn/shop/t/7/compiled_assets/scripts.js`, mételos en un `new Function`
-con stubs de `esc` y `resolve`, y comprueba los 5 casos.
+- **Tema live**: «Maison — live 2026-09-09» `#203447337`. También: «Maison — WhatsApp + popup
+  (review)» `#202722443`, «Theme Cartuja - EAD» `#198652100`, «Horizon» (stock). Borrar los que
+  sobren antes de entregar.
+- **Repo divergido**: rama `auditoria-web-12-puntos` = 45 commits por delante de `origin/main` y
+  **37 por detrás** (`main` lleva la burbuja de ayuda, QA checklist…). 92 archivos sin commitear
+  en el árbol de trabajo. Hay que reconciliar (decisión humana: qué entra), commitear, y que
+  **el tema live salga de un commit**, no del árbol sucio. Hoy no se puede afirmar qué commit
+  está publicado.
+- Antes del push final: `shopify theme check` (0 errores, solo `RemoteAsset`), `theme pull` +
+  `diff -rq` contra el repo para detectar deriva del editor, y comprobar que locales/JSON
+  aterrizan (Shopify rechaza JSON malo en silencio).
+- Theme editor tras publicar: Header / Mega menu → `main-menu` + `menu-derecha`; Collection grid
+  → `colecciones-sidebar`. Verificar que el live los tiene seleccionados (si no, pinta el demo).
+- Pendientes de verificación en navegador con datos reales: `/collections/sets-regalo` en modo
+  presupuesto (bloqueado por §2.12), `/recommendations/products` respondiendo en PDP, checkout
+  completo con pago de prueba, correos de pedido en español.
+- Checkout: perfil «Configuración de La Cartuja de Sevilla» publicado ✓; contacto por email ✓;
+  cuentas de cliente nuevas (`shopify.com/…/account`) ✓; crédito en tienda activado (¿se quiere?).
+- `assets/artesania-plate.glb` (2,8 MB) sin referencias: borrar.
 
 ---
 
-## 5 · Estado del repo
+## 5 · Orden propuesto
 
-⚠️ El árbol viene con ~50 archivos modificados y varios sin trackear de trabajo anterior
-(`viste-tu-mesa.liquid`, `viste-pack.liquid`, `page.viste-tu-mesa.json` y sus assets **nunca
-se han commiteado**). Esos cambios siguen **sin commitear**: decidir qué entra en cada commit
-es del humano, no tuyo. No hagas `git add -A`.
+1. [cliente] Plan de pago → Shopify Payments + PayPal → verificar email remitente → dirección
+   completa → políticas. (Todo en Admin, 1–2 h con los datos a mano.)
+2. [cliente] Decidir inventario (controlar o no), tarifas de envío definitivas, transportista,
+   mercados fuera de la UE.
+3. [admin] Lote 23: `sets-regalo` template + orden; vendor; archivar Mug Letra; HS/origen.
+4. [cliente]→[admin] PVP de los 10 a 0 €, fotos de los 5 «Próximamente», SKUs, pesos,
+   descripciones (o plantilla aprobada), dimensiones/decorado que falten.
+5. [admin] Redirects: crawl de la web antigua + `/pages/historia`; pedir scope
+   `write_url_redirects`.
+6. [theme] Reconciliar ramas, commit, `theme check`, push a un tema nuevo, QA con pago de
+   prueba en móvil y escritorio, publicar.
+7. [cliente] Dominio: conectar `lacartujadesevilla.com`, esperar SSL, quitar contraseña, apagar
+   PrestaShop. Search Console + sitemap el mismo día.
+8. Borrar pedido de prueba y temas sobrantes.
 
-⚠️ **El tema live ya contiene todo ese trabajo sin commitear.** El 2026-09-05 se hizo
-`theme push` a `Theme Cartuja - EAD` #198652100949 (§6); antes de empujar, `theme pull` +
-`diff -rq` daba el tema publicado **idéntico** al árbol de trabajo salvo los 4 archivos de esa
-sesión. O sea: live ≡ working tree, no ≡ `main`. Un `git checkout` de esos ~50 archivos
-perdería lo que hay publicado.
-
-⚠️ **`main` está divergida y este trabajo NO vive en `main`.** El trabajo va en la rama
-`feat/venta-cruzada-sets` (= HEAD local, ya empujada a origin). Base común con `origin/main`:
-`8a8eb51`. A día 2026-09-05 `origin/main` lleva **25 commits** que esta rama no tiene
-(páginas legales, contacto, sellos, pasadas de móvil v96/v98/v99, envíos y devoluciones) y
-esta rama lleva **4** que `main` no tiene. `origin/main` **no contiene este archivo**.
-
-Antes de reconciliar: el árbol tiene ~50 archivos sucios, así que un `rebase` fallará de
-entrada. Y `main` no es lo que está publicado — lo publicado es el árbol de trabajo (arriba).
-Reconciliar es decisión humana, no la tome un agente por su cuenta.
-
-Últimos commits relevantes:
-
-- `43260c6` — copy de Artesanía + sello del plato (§6). 4 archivos añadidos a mano.
-- `a49e2e5` — plantilla «Sets para regalo» + `budget_mode`
-- `b6aa0d2` — venta cruzada con la Product Recommendations API
-
----
-
-## 6 · Correcciones de copy de Artesanía (hecho, 2026-09-05)
-
-Commit `43260c6`, **publicado en el tema live** `Theme Cartuja - EAD` #198652100949.
-
-| Petición | Dónde estaba | Qué se hizo |
-|---|---|---|
-| «Calcomanía» → «decorado» | `templates/page.artesania.json`, bloque `phase-5`, `label` (columna derecha de Artesanía) | `"Decorado · 800°C"` |
-| | `assets/artesania-plate.js`, comentarios | cambiados también: el `.js` se sirve público |
-| «Vidriado» → «Esmaltado» | `page.artesania.json` `phase-6` (`title` + `label`) y `badge3_text` — este último en el template **y** como default del schema en `sections/artesania.liquid` | `El <em>esmaltado</em>`, `Esmaltado · 1.050°C`, «…decoración y esmaltado…» |
-| Sello del plato sin «Made in Spain» | **no era HTML**: es la textura del reverso del plato 3D, un JPEG en base64 dentro de `assets/artesania-textures.js` (`window.__resources.plateBack`) | Borradas del propio JPEG las dos líneas impresas bajo el ancla («Colores Inalterables» / «MADE IN SPAIN») con `ffmpeg -vf delogo=x=366:y=524:w=178:h=50`. Queda LA CARTUJA / ancla / SEVILLA 1841. 43 KB → 25 KB |
-
-Notas para quien venga detrás:
-
-- Las 4 apariciones de «MADE IN SPAIN» en `assets/sellos.js` son **descripciones históricas**
-  del archivo de sellos (`/pages/identifica-tu-sello`, sellos nº 52, 53, 55 y 56). No se tocan.
-- Los comentarios de `artesania-plate.js` que dicen «vidriado» describen el render del
-  material, no son copy. Se dejaron a propósito.
-- **Antes de cualquier push a live, comprueba la deriva del editor**: `theme pull` a un temporal
-  + `diff -rq` contra el repo. `page.artesania.json` lleva la cabecera «auto-generated / may be
-  updated by the Shopify admin theme editor», así que el admin puede haber pisado valores.
-  En esta sesión no había deriva.
-- Gotcha de la CLI (cuesta 20 min descubrirlo): `shopify theme pull --path <dir>` **falla en
-  silencio** si el directorio no existe — dice «Theme download complete» y no escribe nada.
-  `mkdir -p` primero. Y `--only` se ignora: no filtra, directamente no descarga.
-- Push a live no interactivo: `shopify theme push --store=… --theme=<id> --live --allow-live
-  --force`. Sin los flags se queda esperando una confirmación que nunca llega.
-- Verificación post-push (hecha, en verde): `theme pull` de vuelta → 0 ocurrencias de
-  `calcoman|vidriad` en `templates/ sections/ config/ locales/`, y la textura `plateBack`
-  reconstruida da 25.350 bytes / md5 `491e7315be8f5e819276c71aa4128dea`, idéntica al JPEG limpio.
-- `assets/artesania-plate.glb` (2,8 MB) **no lo referencia nadie**. Candidato a borrar.
+Lo que un agente **no** puede hacer por API en esta tienda: pagos, plan, dominio, verificación de
+correo, políticas (sin scope), descuentos (sin scope), Search & Discovery (sin API), Shopify
+Email/Flow. Lo demás va por `scripts/admin/` con ensayo → `--apply` → informe.

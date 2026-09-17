@@ -99,7 +99,7 @@ main {
   }
 
   /* El hero y el story de la home van a sangre; el resto respira 14px. */
-  .home-page main > section:not(.editorial-hero):not(.story-scroll) {
+  .home-page main > .shopify-section > section:not(.editorial-hero):not(.story-scroll) {
     padding-left: 14px;
     padding-right: 14px;
   }

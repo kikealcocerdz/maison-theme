@@ -1,0 +1,32 @@
+{%- comment -%}
+  Devuelve el nombre del asset (`assets/menu-*.webp`) que ilustra una entrada del
+  menú, o nada si no tiene foto. Lo usan nav-item (tarjetas del desplegable) y
+  mobile-drawer (carrusel y Legado). ponytail: mapa por rótulo hasta que el menú
+  traiga imagen propia (metaobjeto o linklist con imagen).
+
+  Accepts:
+    title — rótulo del enlace tal cual viene del admin
+{%- endcomment -%}
+{%- liquid
+  assign slug = title | downcase | strip
+  case slug
+    when 'vajilla', 'vajillas'
+      echo 'menu-vajilla.webp'
+    when 'juego de café', 'juego de cafe'
+      echo 'menu-juego-cafe.webp'
+    when 'juego de té', 'juego de te'
+      echo 'menu-juego-te.webp'
+    when 'nuevo', 'novedades'
+      echo 'menu-nuevo.webp'
+    when 'fin de existencias'
+      echo 'menu-fin-existencias.webp'
+    when 'heritage 1842', 'heritage 1841'
+      echo 'menu-heritage-1842.webp'
+    when 'artesanía', 'artesania', 'objetos artísticos'
+      echo 'menu-artesania.webp'
+    when 'sellos', 'identifica tu sello'
+      echo 'menu-sellos.webp'
+    when 'decoración', 'decoracion'
+      echo 'menu-decoracion.webp'
+  endcase
+-%}

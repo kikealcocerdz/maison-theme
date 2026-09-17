@@ -21,7 +21,7 @@
   assign c_h = img_h | default: 1250
 -%}
 <article class="product reveal{% if product.template_suffix == 'set' %} set-product{% endif %}{% if extra %} extra-product is-hidden{% endif %}"
-  data-type="{{ data_type | default: '' }}" data-price="{{ data_price | default: 0 }}" data-new="{{ data_new | default: 0 }}">
+  data-type="{{ data_type | default: '' }}" data-price="{{ data_price | default: 0 }}" data-new="{% if data_new == true or data_new == 1 %}1{% else %}0{% endif %}">
   <div class="product-media">
     <a class="product-cover" href="{{ c_url }}" aria-label="{{ c_title | escape }}"></a>
     {% render 'product-badge', product: product, badge_new: badge %}
@@ -40,7 +40,7 @@
   </div>
   <div class="product-info">
     <h3><a href="{{ c_url }}">{{ c_title | escape }}</a></h3>
-    {%- if price != blank -%}<span class="price">{{ price }}</span>{%- endif -%}
+    {%- if product != blank and product.compare_at_price > product.price -%}<span class="price"><s>{{ product.compare_at_price | money }}</s> {{ product.price | money }}</span>{%- elsif price != blank -%}<span class="price">{{ price }}</span>{%- endif -%}
     {%- if meta != blank -%}<p>{{ meta | escape }}</p>{%- endif -%}
   </div>
 </article>

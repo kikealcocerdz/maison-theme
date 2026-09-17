@@ -157,7 +157,7 @@
 /* Native scroll-snap track: the finger drags the slide itself, with momentum,
    trackpad and keyboard for free. Arrows/dots/hotspots just scrollTo() into it. */
 .scene-product-inner {
-  width: 100%; min-width: 0; display: flex; overflow-x: auto;
+  width: 100%; min-width: 0; display: flex; overflow-x: auto; overflow-y: hidden;
   scroll-snap-type: x mandatory; scroll-behavior: smooth;
   overscroll-behavior-x: contain; scrollbar-width: none;
 }

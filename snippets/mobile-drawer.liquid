@@ -1,0 +1,119 @@
+{%- comment -%}
+  Cajón de navegación por debajo de 1050px, calcado del módulo de menú del cliente:
+  una vista principal con las entradas de los dos menús y una vista por entrada con
+  hijos. Dentro de cada vista: los hijos con foto (snippets/menu-card-image) como
+  enlace-visual arriba y carrusel de tarjetas abajo; los hijos con rama, en acordeón
+  (el primero abierto). Una vista que sólo tiene tarjetas (Legado) las pinta a
+  cuadrícula: la primera a todo el ancho y el resto por parejas.
+
+  Se pinta desde sections/header.liquid, fuera del <header> (su backdrop-filter
+  encerraría un fixed). El JS que la mueve vive en la cabecera.
+
+  Accepts:
+    menu, menu_right — los dos linklists de la cabecera
+{%- endcomment -%}
+
+<aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <div class="mobile-head">
+    <button type="button" class="mobile-back" data-drawer-back aria-label="{{ 'sections.header.back' | t }}" hidden>‹</button>
+    <div class="mobile-head-title" data-drawer-title data-root-title="{{ 'sections.header.menu' | t }}">{{ 'sections.header.menu' | t }}</div>
+    <button type="button" data-drawer-close aria-label="{{ 'general.accessibility.close' | t }}">×</button>
+  </div>
+
+  <section class="mobile-view is-active" data-mobile-view="main">
+    <ul class="mobile-main-list">
+      {%- for link in menu.links -%}
+        {%- if link.links.size > 0 -%}
+          <li><button type="button" data-mobile-open="l{{ forloop.index }}">{{ link.title }}</button></li>
+        {%- else -%}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- for link in menu_right.links -%}
+        {%- if link.links.size > 0 -%}
+          <li><button type="button" data-mobile-open="r{{ forloop.index }}">{{ link.title }}</button></li>
+        {%- else -%}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if menu.links.size == 0 and menu_right.links.size == 0 -%}
+        {%- comment -%} Demo nav (shown until a navigation menu is selected). {%- endcomment -%}
+        <li><a href="{{ routes.collections_url }}">Colecciones</a></li>
+        <li><a href="/pages/nuestras-mesas">Ambientes</a></li>
+        <li><a href="/pages/artesania">Artesanía</a></li>
+      {%- endif -%}
+    </ul>
+  </section>
+
+  {%- assign sides = 'l,r' | split: ',' -%}
+  {%- for side in sides -%}
+    {%- if side == 'l' -%}{%- assign links = menu.links -%}{%- else -%}{%- assign links = menu_right.links -%}{%- endif -%}
+    {%- for link in links -%}
+      {%- if link.links.size == 0 -%}{%- continue -%}{%- endif -%}
+      {%- assign cards = 0 -%}
+      {%- assign branches = 0 -%}
+      {%- for child in link.links -%}
+        {%- if child.links.size > 0 -%}
+          {%- assign branches = branches | plus: 1 -%}
+        {%- else -%}
+          {%- capture card_image -%}{% render 'menu-card-image', title: child.title %}{%- endcapture -%}
+          {%- if card_image != blank -%}{%- assign cards = cards | plus: 1 -%}{%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <section class="mobile-view" data-mobile-view="{{ side }}{{ forloop.index }}" data-title="{{ link.title | escape }}">
+        <div class="mobile-content">
+          {%- if branches > 0 -%}
+            {%- for child in link.links -%}
+              {%- if child.links.size > 0 -%}{%- continue -%}{%- endif -%}
+              {%- capture card_image -%}{% render 'menu-card-image', title: child.title %}{%- endcapture -%}
+              {%- if card_image != blank -%}
+                <a class="mobile-visual-link" href="{{ child.url }}">{{ child.title }}</a>
+              {%- endif -%}
+            {%- endfor -%}
+
+            {%- assign first_branch = true -%}
+            {%- for child in link.links -%}
+              {%- if child.links.size == 0 -%}{%- continue -%}{%- endif -%}
+              <div class="mobile-accordion{% if first_branch %} is-open{% endif %}">
+                <button type="button" class="accordion-toggle" aria-expanded="{{ first_branch }}">{{ child.title }}</button>
+                <div class="accordion-body"><div class="accordion-inner">
+                  <ul class="mobile-links">
+                    {%- for grandchild in child.links -%}
+                      <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
+                    {%- endfor -%}
+                  </ul>
+                </div></div>
+              </div>
+              {%- assign first_branch = false -%}
+            {%- endfor -%}
+
+          {%- endif -%}
+
+          {%- comment -%} Hijos sueltos sin foto: lista simple, para no perderlos. {%- endcomment -%}
+          {%- capture plain -%}
+            {%- for child in link.links -%}
+              {%- if child.links.size > 0 -%}{%- continue -%}{%- endif -%}
+              {%- capture card_image -%}{% render 'menu-card-image', title: child.title %}{%- endcapture -%}
+              {%- if card_image == blank -%}<li><a href="{{ child.url }}">{{ child.title }}</a></li>{%- endif -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+          {%- if plain contains '<li>' -%}<ul class="mobile-links mobile-links--loose">{{ plain }}</ul>{%- endif -%}
+          {%- if cards > 0 -%}
+            <div class="{% if branches > 0 %}mobile-rail{% else %}mobile-legacy{% endif %}">
+              {%- for child in link.links -%}
+                {%- if child.links.size > 0 -%}{%- continue -%}{%- endif -%}
+                {%- capture card_image -%}{% render 'menu-card-image', title: child.title %}{%- endcapture -%}
+                {%- if card_image == blank -%}{%- continue -%}{%- endif -%}
+                <a class="mobile-card" href="{{ child.url }}">
+                  <img class="mobile-card-image" src="{{ card_image | asset_url }}" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+                  <span class="mobile-card-label">{{ child.title }}</span>
+                </a>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </section>
+    {%- endfor -%}
+  {%- endfor -%}
+</aside>

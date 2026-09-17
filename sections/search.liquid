@@ -46,9 +46,9 @@
                   assign image_width = result_image.width | default: 1000
                   assign image_height = result_image.height | default: 1250
                   assign result_price = result.price | money
-                  assign result_new = 0
+                  assign result_new = false
                   if result.tags contains 'novedad' or result.tags contains 'new'
-                    assign result_new = 1
+                    assign result_new = true
                   endif
                 -%}
                 {% render 'collection-card', product: result, scope: section.id,

@@ -53,6 +53,9 @@
 
   if has_product
     assign price = product.price | money
+    if product.compare_at_price > product.price
+      assign price = product.compare_at_price | money | prepend: '<s>' | append: '</s> ' | append: price
+    endif
   else
     assign price = section.settings.demo_price
   endif
@@ -119,6 +122,19 @@
 {%- liquid
   assign crumb_collection = product.collections.first
   assign chapter = crumb_collection.metafields.custom.chapter
+
+  comment
+    Decorado propio de la pieza para «Descubre la colección» (misma regla que
+    product-related, ver snippets/own-collection-handle).
+  endcomment
+  capture own_handle
+    render 'own-collection-handle', product: product
+  endcapture
+  assign own_handle = own_handle | strip
+  assign own_collection = collections[own_handle]
+  if own_collection == blank
+    assign own_collection = crumb_collection
+  endif
 -%}
 {%- capture breadcrumbs_html -%}
   <div class="product-breadcrumbs">
@@ -415,11 +431,31 @@
   </section>
 
   {%- if is_set -%}
-    <section class="product-set-pack" aria-label="{{ 'sections.product.pack_intro' | t | strip_html | escape }}">
-      <div class="product-set-pack-intro">
-        <p>{{ 'sections.product.pack_intro' | t }}</p>
-        <span data-bundle-label>{{ current_label | escape }}</span>
-      </div>
+    {%- comment -%}
+      «Tu pack contiene» al estilo atelier del mock Ceilán: vista grande a la izquierda,
+      rejilla de piezas a la derecha; pasar el cursor / enfocar / pulsar una pieza la
+      lleva a la vista grande. Cada pack sigue en su `.product-set-includes-list`
+      (`data-pack-for`) y el selector de piezas de arriba conmuta cuál se ve.
+    {%- endcomment -%}
+    <section class="product-set-pack" id="tu-pack" aria-label="{{ 'sections.product.pack_intro' | t | strip_html | escape }}" data-pack-atelier data-unit-one="{{ 'sections.product.pack_unit.one' | t | escape }}" data-unit-other="{{ 'sections.product.pack_unit.other' | t | escape }}">
+      <header class="product-set-pack-head">
+        <div>
+          {%- if kicker != blank -%}<p class="product-set-pack-kicker">{{ kicker | escape }}</p>{%- endif -%}
+          <h2>{{ 'sections.product.pack_intro' | t }}</h2>
+        </div>
+        {%- if own_collection != blank -%}
+          <a class="ghost-btn" href="{{ own_collection.url }}">{{ 'sections.product.discover_collection' | t }}</a>
+        {%- endif -%}
+      </header>
+      <div class="product-set-pack-layout">
+        <figure class="product-set-pack-preview">
+          <img alt="" width="900" height="900" data-pack-image>
+          <figcaption aria-live="polite" aria-atomic="true">
+            <a class="product-set-pack-preview-name" href="#" data-pack-name></a>
+            <span class="product-set-pack-preview-qty" data-pack-qty></span>
+          </figcaption>
+        </figure>
+        <div class="product-set-pack-grids">
       {%- if has_product and pieces_idx >= 0 -%}
         {%- for v in product.variants -%}
           {%- if color_idx < 0 or v.options[color_idx] == current_color -%}
@@ -428,19 +464,13 @@
               <div class="product-set-includes-list{% if v.id == current_variant.id %} is-visible{% endif %}" data-pack-for="{{ v.id }}">
                 {%- for item in items -%}
                   {%- assign ip = item.producto.value -%}
-                  <article class="product-set-include-card">
-                    <a class="product-set-include-link" href="{{ ip.url | default: '#' }}">
-                    <div class="product-set-include-thumb">
-                      {%- if ip.featured_image -%}
-                        <img src="{{ ip.featured_image | image_url: width: 480, height: 480, crop: 'center' }}" alt="{{ ip.title | escape }}" width="480" height="480" loading="lazy" decoding="async">
-                      {%- endif -%}
-                    </div>
-                    <div class="product-set-include-copy">
-                      <strong>{{ ip.title | escape }}</strong>
-                      <span>x {{ item.cantidad.value }}</span>
-                    </div>
-                    </a>
-                  </article>
+                      <a class="product-set-include-card" href="{{ ip.url | default: '#' }}" aria-current="false" data-pack-piece data-src="{{ ip.featured_image | image_url: width: 900 }}" data-url="{{ ip.url | default: '#' }}" data-name="{{ ip.title | escape }}" data-qty="{{ item.cantidad.value }}">
+                        {%- if ip.featured_image -%}
+                          <img src="{{ ip.featured_image | image_url: width: 480 }}" alt="" width="{{ ip.featured_image.width }}" height="{{ ip.featured_image.height }}" loading="lazy" decoding="async">
+                        {%- endif -%}
+                        <span class="product-set-include-name">{{ ip.title | escape }}</span>
+                        <span class="product-set-include-qty">× {{ item.cantidad.value }}</span>
+                      </a>
                 {%- endfor -%}
               </div>
             {%- endif -%}
@@ -456,23 +486,20 @@
             {%- for raw in raw_items -%}
               {%- assign bits = raw | strip | split: ':' -%}
               {%- assign ip = all_products[bits[0]] -%}
-              <article class="product-set-include-card">
-                <a class="product-set-include-link" href="{{ ip.url | default: '#' }}">
-                <div class="product-set-include-thumb">
+                <a class="product-set-include-card" href="{{ ip.url | default: '#' }}" aria-current="false" data-pack-piece data-src="{{ ip.featured_image | image_url: width: 900 }}" data-url="{{ ip.url | default: '#' }}" data-name="{{ ip.title | default: bits[0] | escape }}" data-qty="{{ bits[1] | strip | default: 1 }}">
                   {%- if ip.featured_image -%}
-                    <img src="{{ ip.featured_image | image_url: width: 480, height: 480, crop: 'center' }}" alt="{{ ip.title | escape }}" width="480" height="480" loading="lazy" decoding="async">
+                    <img src="{{ ip.featured_image | image_url: width: 480 }}" alt="" width="{{ ip.featured_image.width }}" height="{{ ip.featured_image.height }}" loading="lazy" decoding="async">
                   {%- endif -%}
-                </div>
-                <div class="product-set-include-copy">
-                  <strong>{{ ip.title | default: bits[0] | escape }}</strong>
-                  <span>x {{ bits[1] | strip | default: 1 }}</span>
-                </div>
+                  <span class="product-set-include-name">{{ ip.title | default: bits[0] | escape }}</span>
+                  <span class="product-set-include-qty">× {{ bits[1] | strip | default: 1 }}</span>
                 </a>
-              </article>
             {%- endfor -%}
           </div>
         {%- endfor -%}
       {%- endif -%}
+        </div>
+      </div>
+      <p class="product-set-pack-note"><span>{{ 'sections.product.pack_hint' | t }}</span><strong data-bundle-label>{{ current_label | escape }}</strong></p>
     </section>
     </div>{%- comment -%} /.product-set-above-fold {%- endcomment -%}
   {%- endif -%}
@@ -682,20 +709,30 @@
 .bundle-option.is-active { background: #08286b; border-color: #08286b; color: #fff; box-shadow: 0 10px 26px rgba(8, 40, 107, .16); }
 .bundle-option[disabled] { opacity: .4; cursor: default; transform: none; }
 
-.product-set-pack { width: var(--content); margin: 18px auto 88px; padding: 34px 0 10px; border-top: .5px solid var(--rule); }
-.product-set-pack-intro { text-align: center; margin: 0 auto 26px; }
-.product-set-pack-intro p { margin: 0; font: 400 clamp(18px, 1.45vw, 25px)/1.15 var(--serif); color: var(--ink); }
-.product-set-pack-intro span { display: block; margin-top: 8px; font: 400 9px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.product-set-includes-list { display: none; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 14px; }
+.product-set-pack { width: var(--content); margin: 18px auto 88px; padding: 30px 0 0; border-top: .5px solid var(--rule); color: #08286b; }
+.product-set-pack-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin: 0 0 20px; }
+.product-set-pack-kicker { margin: 0 0 6px; font: 500 10px/1.4 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.product-set-pack-head h2 { margin: 0; font: 400 clamp(26px, 2.4vw, 36px)/1.1 var(--serif); letter-spacing: -.02em; color: var(--ink); }
+.product-set-pack-layout { display: grid; grid-template-columns: minmax(220px, .9fr) minmax(0, 2.5fr); gap: 24px; }
+.product-set-pack-preview { margin: 0; min-width: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 16px 20px; background: #f4f5f7; border-radius: 4px; }
+.product-set-pack-preview img { display: block; width: 100%; height: 220px; object-fit: contain; mix-blend-mode: multiply; }
+.product-set-pack-preview img:not([src]) { visibility: hidden; }
+.product-set-pack-preview figcaption { width: 100%; padding-top: 10px; text-align: center; }
+.product-set-pack-preview-name { display: block; font: 400 26px/1.1 var(--serif); color: var(--ink); }
+.product-set-pack-preview-qty { display: block; margin-top: 7px; font: 400 12px/1.5 var(--sans); color: var(--muted); }
+.product-set-includes-list { display: none; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; align-content: start; }
 .product-set-includes-list.is-visible { display: grid; }
-.product-set-include-link { display: block; color: inherit; }
-.product-set-include-card { min-width: 0; padding: 12px; border: .5px solid rgba(15, 26, 46, .12); border-radius: 12px; background: #f7f8f9; transition: transform 300ms var(--ease), background 300ms var(--ease), border-color 300ms var(--ease); }
-.product-set-include-card:hover { transform: translateY(-4px); background: var(--paper); border-color: rgba(8, 40, 107, .22); }
-.product-set-include-thumb { width: 100%; aspect-ratio: 1 / 1; border-radius: 8px; background: var(--paper); margin-bottom: 11px; display: grid; place-items: center; overflow: hidden; }
-.product-set-include-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.product-set-include-copy { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 8px; }
-.product-set-include-copy strong { font: 400 11.5px/1.35 var(--sans); color: var(--ink); }
-.product-set-include-copy span { font: 500 11px/1 var(--sans); color: #08286b; white-space: nowrap; }
+.product-set-include-card { appearance: none; position: relative; min-width: 0; display: flex; flex-direction: column; align-items: center; padding: 12px 8px 10px; background: var(--paper); color: #08286b; border: 1px solid var(--rule); border-radius: 4px; cursor: pointer; text-align: center; transition: background 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease); }
+.product-set-include-card:hover, .product-set-include-card[aria-current="true"] { border-color: #08286b; background: #f4f6fa; }
+.product-set-include-card[aria-current="true"] { box-shadow: inset 0 0 0 1px #08286b; }
+.product-set-include-card img { display: block; width: 100%; height: 91px; object-fit: contain; mix-blend-mode: multiply; margin-bottom: 8px; transition: transform 180ms var(--ease); }
+.product-set-include-card:hover img { transform: scale(1.05); }
+.product-set-include-name { min-height: 35px; display: flex; align-items: center; justify-content: center; font: 400 12px/1.35 var(--sans); }
+.product-set-include-qty { position: absolute; top: 7px; right: 7px; min-width: 30px; padding: 4px 6px; background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; font: 500 11px/1 var(--sans); }
+.product-set-pack-note { display: flex; justify-content: space-between; gap: 16px; margin: 13px 0 0; font: 400 11px/1.6 var(--sans); color: var(--muted); }
+.product-set-pack-note strong { font-weight: 500; color: #08286b; }
+.product-set-pack a:focus-visible { outline: 2px solid #08286b; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .product-set-pack * { transition: none !important; } }
 
 @media (max-width: 1180px) {
   .product-set-breadcrumb-bar { width: calc(100vw - 32px); padding: 18px 0 4px; }
@@ -708,9 +745,18 @@
   .piece-color-row, .piece-dimension-row { grid-template-columns: 1fr; gap: 8px; }
   .color-options { justify-content: flex-start; }
   .piece-dimension-row strong { text-align: left; }
-  .product-set-pack { width: calc(100vw - 32px); margin-top: 8px; padding-top: 30px; }
-  .product-set-includes-list.is-visible { display: flex; overflow-x: auto; gap: 12px; padding-bottom: 12px; scroll-snap-type: x proximity; }
-  .product-set-include-card { flex: 0 0 168px; scroll-snap-align: start; }
+  .product-set-pack { width: calc(100vw - 32px); margin-top: 8px; }
+  .product-set-pack-layout { grid-template-columns: 210px minmax(0, 1fr); gap: 14px; }
+}
+@media (max-width: 760px) {
+  .product-set-pack-head { align-items: flex-start; flex-wrap: wrap; gap: 14px; }
+  .product-set-pack-layout { grid-template-columns: 1fr; }
+  .product-set-pack-preview { flex-direction: row; padding: 14px; gap: 14px; }
+  .product-set-pack-preview img { width: 44%; height: 150px; }
+  .product-set-pack-preview figcaption { width: 56%; text-align: left; }
+  .product-set-includes-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .product-set-include-card img { height: 105px; }
+  .product-set-pack-note { flex-direction: column; gap: 3px; }
 }
 @media (max-width: 700px) {
   .product-set-price-row { grid-template-columns: 1fr; gap: 12px; }
@@ -723,8 +769,6 @@
   .product-page--set .product-title-panel h1 { font-size: 40px; }
   .product-set-gallery .product-main-media { height: 62vh; }
   .product-set-pack { width: calc(100vw - 24px); margin-bottom: 62px; }
-  .product-set-pack-intro { margin-bottom: 20px; }
-  .product-set-include-card { flex-basis: 148px; }
 }
 
 /* ==========================================================================
@@ -832,7 +876,9 @@
   .product-page .product-title-sticky,
   .product-page .product-info-sticky { position: relative !important; top: auto !important; transform: none !important; height: auto !important; min-height: 0 !important; }
 
-  .product-page .product-title-panel { order: 1 !important; }
+  .product-page .product-title-panel { order: 1 !important; padding-top: 0 !important; }
+  /* 72px de panel + 46px del sticky dejaban ~120px en blanco bajo el breadcrumb. */
+  .product-page .product-set-title { padding-top: 18px !important; }
   .product-page .product-gallery-panel { order: 2 !important; }
   .product-page .product-info-panel { order: 3 !important; }
 
@@ -1071,6 +1117,38 @@
       barObs.observe(buyBlock);
     }
 
+    // Pack atelier: hover / focus / click a piece → big preview
+    var atelier = root.querySelector('[data-pack-atelier]');
+    var selectPack = function () {};
+    if (atelier) {
+      var pImg = atelier.querySelector('[data-pack-image]');
+      var pName = atelier.querySelector('[data-pack-name]');
+      var pQty = atelier.querySelector('[data-pack-qty]');
+      var pieces = [].slice.call(atelier.querySelectorAll('[data-pack-piece]'));
+      var selectPiece = function (btn) {
+        if (!btn) return;
+        pieces.forEach(function (b) { b.setAttribute('aria-current', b === btn ? 'true' : 'false'); });
+        var name = btn.getAttribute('data-name');
+        if (pImg) { pImg.src = btn.getAttribute('data-src'); pImg.alt = name; }
+        if (pName) { pName.textContent = name; pName.href = btn.getAttribute('data-url') || '#'; }
+        var q = Number(btn.getAttribute('data-qty')) || 1;
+        if (pQty) pQty.textContent = q + ' ' + atelier.getAttribute(q === 1 ? 'data-unit-one' : 'data-unit-other');
+      };
+      // On pack switch keep the same piece if the new pack has it, else the first one
+      selectPack = function () {
+        var cur = atelier.querySelector('[data-pack-piece][aria-current="true"]');
+        var visible = [].slice.call(atelier.querySelectorAll('.product-set-includes-list.is-visible [data-pack-piece]'));
+        var same = cur && visible.filter(function (b) { return b.getAttribute('data-name') === cur.getAttribute('data-name'); })[0];
+        selectPiece(same || visible[0]);
+      };
+      pieces.forEach(function (btn) {
+        btn.addEventListener('click', function () { selectPiece(btn); });
+        btn.addEventListener('focus', function () { selectPiece(btn); });
+        btn.addEventListener('pointerenter', function (e) { if (e.pointerType !== 'touch') selectPiece(btn); });
+      });
+      selectPack();
+    }
+
     // Set layout: the piece-count buttons are a variant switcher + pack-rail toggle
     var options = [].slice.call(root.querySelectorAll('.bundle-option'));
     if (options.length) {
@@ -1085,6 +1163,7 @@
           var key = btn.getAttribute('data-pack-key');
           options.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
           packs.forEach(function (p) { p.classList.toggle('is-visible', p.getAttribute('data-pack-for') === key); });
+          selectPack();
           if (priceEl) priceEl.textContent = btn.getAttribute('data-price');
           if (stickyPrice) stickyPrice.textContent = btn.getAttribute('data-price');
           labelEls.forEach(function (el) { el.textContent = btn.getAttribute('data-label'); });

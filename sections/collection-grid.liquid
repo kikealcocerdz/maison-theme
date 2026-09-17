@@ -91,17 +91,15 @@
       <div class="toolbar">
         {%- comment -%}
           Mobile-only door to the sidebar: below 780px `.sidebar` is display:none, so
-          without this the facets would be unreachable on a phone. Hidden when the store
-          exposes no filters — the chapter tree alone doesn't warrant a drawer.
+          without this the facets would be unreachable on a phone. Always visible because
+          Forma and Color keep their zero-count placeholders before catalog completion.
         {%- endcomment -%}
-        {%- if collection.filters.size > 0 -%}
-          <button class="filters-open" type="button" data-filters-open aria-expanded="false">
-            {{ 'sections.collection.filters_open' | t }}
-            {%- assign active_count = 0 -%}
-            {%- for filter in collection.filters -%}{%- assign active_count = active_count | plus: filter.active_values.size -%}{%- endfor -%}
-            {%- if active_count > 0 -%}<span class="filters-open-count">{{ active_count }}</span>{%- endif -%}
-          </button>
-        {%- endif -%}
+        <button class="filters-open" type="button" data-filters-open aria-expanded="false">
+          {{ 'sections.collection.filters_open' | t }}
+          {%- assign active_count = 0 -%}
+          {%- for filter in collection.filters -%}{%- assign active_count = active_count | plus: filter.active_values.size -%}{%- endfor -%}
+          {%- if active_count > 0 -%}<span class="filters-open-count">{{ active_count }}</span>{%- endif -%}
+        </button>
         <div class="view-toggle" aria-label="{{ 'sections.collection.view_toggle' | t }}">
           <button class="view-btn active" type="button" data-view="grid" aria-label="{{ 'sections.collection.view_grid' | t }}"><span class="view-icon grid"><i></i><i></i><i></i></span></button>
           <button class="view-btn" type="button" data-view="list" aria-label="{{ 'sections.collection.view_list' | t }}"><span class="view-icon list"><i></i><i></i><i></i></span></button>
@@ -112,6 +110,8 @@
             <a href="{{ collection.url }}?sort_by=created-descending{{ sort_filter_query }}"{% if current_sort == 'created-descending' %} aria-current="true"{% endif %}>{{ 'sections.collection.sort_new' | t }}</a>
             <a href="{{ collection.url }}?sort_by=price-descending{{ sort_filter_query }}"{% if current_sort == 'price-descending' %} aria-current="true"{% endif %}>{{ 'sections.collection.sort_high' | t }}</a>
             <a href="{{ collection.url }}?sort_by=price-ascending{{ sort_filter_query }}"{% if current_sort == 'price-ascending' %} aria-current="true"{% endif %}>{{ 'sections.collection.sort_low' | t }}</a>
+            <a href="{{ collection.url }}?sort_by=title-ascending{{ sort_filter_query }}"{% if current_sort == 'title-ascending' %} aria-current="true"{% endif %}>{{ 'sections.collection.sort_az' | t }}</a>
+            <a href="{{ collection.url }}?sort_by=title-descending{{ sort_filter_query }}"{% if current_sort == 'title-descending' %} aria-current="true"{% endif %}>{{ 'sections.collection.sort_za' | t }}</a>
           </div>
         </div>
       </div>
@@ -174,9 +174,9 @@
                 assign p_w = product.featured_image.width | default: 1000
                 assign p_h = product.featured_image.height | default: 1250
                 assign p_price = product.price | money
-                assign p_new = 0
+                assign p_new = false
                 if product.tags contains 'novedad' or product.tags contains 'new'
-                  assign p_new = 1
+                  assign p_new = true
                 endif
               -%}
               {% render 'collection-card', product: product, scope: section.id,
@@ -695,7 +695,7 @@
   .collection-page.filters-drawer-open .side-panel > div > .facet-price,
   .collection-page.filters-drawer-open .side-panel > div > .facet-range { grid-column: 1 / -1; }
   .collection-page.filters-drawer-open .facet {
-    display: flex; align-items: center; gap: 11px; min-height: 48px; padding: 0 14px;
+    display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 10px;
     border: .5px solid var(--rule); text-transform: none; letter-spacing: .01em;
     font-size: 13px; color: var(--ink);
     transition: border-color 200ms var(--ease);
@@ -974,7 +974,7 @@
       // Chips, "clear" and the sidebar's clear link are ordinary <a href> — intercept
       // them so they take the same in-place path instead of a full reload.
       root.addEventListener('click', function (e) {
-        var a = e.target.closest('.facet-chip, .facet-chips-clear, [data-filters-clear]');
+        var a = e.target.closest('.facet-chip, .facet-chips-clear, [data-filters-clear], [data-facet-link]');
         if (a && a.getAttribute('href')) { e.preventDefault(); go(a.getAttribute('href')); return; }
 
         if (e.target.closest('[data-filters-open]')) {

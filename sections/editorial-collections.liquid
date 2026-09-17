@@ -60,9 +60,12 @@
   .editorial-collections { padding-left: 14px !important; padding-right: 14px !important; }
 
   .editorial-collections__grid {
+    width: auto !important;
     display: flex !important;
     gap: 10px !important;
     overflow-x: auto !important;
+    /* overflow-x:auto arrastra overflow-y:auto; los 18px de alto sobrante atrapaban el scroll vertical del dedo/rueda. */
+    overflow-y: hidden !important;
     scroll-snap-type: x mandatory !important;
     scrollbar-width: none !important;
     padding-bottom: 8px !important;
@@ -86,6 +89,8 @@
     text-align: center !important;
   }
   .editorial-collections__item .block-chapter-card { text-align: center !important; }
+  /* Alto fijo + aspect-ratio deja la foto más estrecha que la tarjeta: centrarla. */
+  .editorial-collections__item .block-chapter-card__media { margin-inline: auto !important; }
   .editorial-collections__item .block-chapter-card__paragraph { margin-inline: auto !important; }
 
   /* svh, no dvh: dvh se recalcula al plegarse la barra del navegador y las

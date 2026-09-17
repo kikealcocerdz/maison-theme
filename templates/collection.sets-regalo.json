@@ -13,6 +13,8 @@
       "type": "collection-grid",
       "settings": {
         "sidebar_menu": "colecciones-sidebar",
+        "link_novedades": "shopify://collections/novedades",
+        "link_fin_existencias": "shopify://collections/fin-de-existencias",
         "kicker": "Regalo",
         "title": "Sets para regalo",
         "intro_copy": "<p>Conjuntos listos para regalar, ordenados de menor a mayor precio. Elige por presupuesto y nosotros nos ocupamos del resto.</p>",
