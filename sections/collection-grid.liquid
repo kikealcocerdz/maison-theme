@@ -310,7 +310,7 @@
 .collection-page .more-filters:hover { border-color: var(--ink); }
 
 /* Cajón de filtros adicionales en escritorio: entra por la izquierda, sobre fondo
-   oscuro para que se distinga del lateral normal. El árbol se oculta dentro — el
+   blanco y texto azul corporativo. El árbol se oculta dentro — el
    cajón lleva «únicamente los filtros adicionales». */
 @media (min-width: 781px) {
   .collection-page .side-filters { display: none; }
@@ -319,7 +319,7 @@
     position: fixed; inset: 0 auto 0 0; z-index: 120;
     width: min(420px, 92vw); margin: 0; max-height: none;
     display: flex; flex-direction: column; overflow: hidden;
-    background: #12171F; color: #EDEFF3;
+    background: var(--paper); color: var(--ink);
     animation: facets-left-in 280ms var(--ease);
   }
   @keyframes facets-left-in { from { transform: translateX(-100%); } to { transform: none; } }
@@ -340,7 +340,7 @@
 
   .collection-page.filters-drawer-open .filters-bar {
     display: flex; align-items: center; justify-content: space-between; gap: 16px;
-    flex: 0 0 auto; padding: 20px 24px; border-bottom: .5px solid rgba(255, 255, 255, .14);
+    flex: 0 0 auto; padding: 20px 24px; border-bottom: .5px solid var(--rule);
   }
   .collection-page.filters-drawer-open .filters-close {
     display: grid; place-items: center; width: 30px; height: 30px; color: inherit;
@@ -348,25 +348,24 @@
   }
   .collection-page.filters-drawer-open .filters-bar__title { color: inherit; }
 
-  /* Sobre fondo oscuro las reglas claras del lateral no se ven. */
   .collection-page.filters-drawer-open .side-section,
-  .collection-page.filters-drawer-open .side-accordion { border-color: rgba(255, 255, 255, .14); }
+  .collection-page.filters-drawer-open .side-accordion { border-color: var(--rule); }
   .collection-page.filters-drawer-open .side-main-link,
   .collection-page.filters-drawer-open .facet,
   .collection-page.filters-drawer-open .side-toggle { color: inherit; opacity: 1; }
   .collection-page.filters-drawer-open .facet:hover { color: inherit; opacity: .74; }
   .collection-page.filters-drawer-open .facet-count { color: inherit; opacity: .55; }
-  .collection-page.filters-drawer-open .facet input { accent-color: #EDEFF3; }
+  .collection-page.filters-drawer-open .facet input { accent-color: var(--ink); }
   .collection-page.filters-drawer-open .facet-price input,
-  .collection-page.filters-drawer-open .facet-range__track { border-color: rgba(255, 255, 255, .26); background-color: transparent; }
+  .collection-page.filters-drawer-open .facet-range__track { border-color: var(--rule); background-color: transparent; }
   .collection-page.filters-drawer-open .facet-price input { color: inherit; }
-  .collection-page.filters-drawer-open .facet-range__track { background: rgba(255, 255, 255, .26); }
-  .collection-page.filters-drawer-open .facet-range__fill { background: #EDEFF3; }
+  .collection-page.filters-drawer-open .facet-range__track { background: var(--rule); }
+  .collection-page.filters-drawer-open .facet-range__fill { background: var(--ink); }
   .collection-page.filters-drawer-open .facet-price-sep { color: inherit; opacity: .6; }
 
   .collection-page.filters-drawer-open .filters-foot {
     display: flex; align-items: center; gap: 16px; flex: 0 0 auto;
-    padding: 16px 24px; border-top: .5px solid rgba(255, 255, 255, .14);
+    padding: 16px 24px; border-top: .5px solid var(--rule);
   }
   .collection-page.filters-drawer-open .filters-reset {
     flex: 0 0 auto; font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
@@ -375,7 +374,7 @@
   .collection-page.filters-drawer-open .filters-reset:hover { opacity: 1; }
   .collection-page.filters-drawer-open .filters-apply {
     display: flex; align-items: center; justify-content: center; gap: 10px;
-    flex: 1 1 auto; min-height: 48px; background: #EDEFF3; color: #12171F;
+    flex: 1 1 auto; min-height: 48px; background: var(--ink); color: var(--paper);
     font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
   }
   .collection-page.filters-drawer-open .filters-apply__count {
