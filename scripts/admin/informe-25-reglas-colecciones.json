@@ -1,0 +1,465 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "flor-de-lis-azul ANTES",
+      "resultado": {
+        "id": "gid://shopify/Collection/675574874453",
+        "handle": "flor-de-lis-azul",
+        "title": "Flor de Lis Azul",
+        "productsCount": {
+          "count": 2
+        },
+        "ruleSet": {
+          "appliedDisjunctively": false,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Flor Lis Azul"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "flor-de-lis-azul: + ['Flor de Lis Azul']",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/675574874453",
+          "handle": "flor-de-lis-azul",
+          "productsCount": {
+            "count": 2
+          },
+          "ruleSet": {
+            "appliedDisjunctively": true,
+            "rules": [
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Flor Lis Azul"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Flor de Lis Azul"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "flor-de-lis-rosa ANTES",
+      "resultado": {
+        "id": "gid://shopify/Collection/675574907221",
+        "handle": "flor-de-lis-rosa",
+        "title": "Flor de Lis Rosa",
+        "productsCount": {
+          "count": 1
+        },
+        "ruleSet": {
+          "appliedDisjunctively": false,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Flor Lis Rosa"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "flor-de-lis-rosa: + ['Flor de Lis Rosa']",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/675574907221",
+          "handle": "flor-de-lis-rosa",
+          "productsCount": {
+            "count": 1
+          },
+          "ruleSet": {
+            "appliedDisjunctively": true,
+            "rules": [
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Flor Lis Rosa"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Flor de Lis Rosa"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "flor-lis ANTES",
+      "resultado": {
+        "id": "gid://shopify/Collection/674484814165",
+        "handle": "flor-lis",
+        "title": "Flor Lis",
+        "productsCount": {
+          "count": 4
+        },
+        "ruleSet": {
+          "appliedDisjunctively": false,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Flor Lis"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "flor-lis: + ['Flor de Lis']",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/674484814165",
+          "handle": "flor-lis",
+          "productsCount": {
+            "count": 4
+          },
+          "ruleSet": {
+            "appliedDisjunctively": true,
+            "rules": [
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Flor Lis"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Flor de Lis"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "ceilan ANTES",
+      "resultado": {
+        "id": "gid://shopify/Collection/674484846933",
+        "handle": "ceilan",
+        "title": "Ceilán",
+        "productsCount": {
+          "count": 0
+        },
+        "ruleSet": {
+          "appliedDisjunctively": false,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Ceilan"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "ceilan: + ['Ceilán']",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/674484846933",
+          "handle": "ceilan",
+          "productsCount": {
+            "count": 0
+          },
+          "ruleSet": {
+            "appliedDisjunctively": true,
+            "rules": [
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Ceilan"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Ceilán"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "juegos-cafe ANTES",
+      "resultado": {
+        "id": "gid://shopify/Collection/679848968533",
+        "handle": "juegos-cafe",
+        "title": "Juegos de café",
+        "productsCount": {
+          "count": 0
+        },
+        "ruleSet": {
+          "appliedDisjunctively": false,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Juego Cafe"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "juegos-cafe: + ['Juego Café']",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/679848968533",
+          "handle": "juegos-cafe",
+          "productsCount": {
+            "count": 0
+          },
+          "ruleSet": {
+            "appliedDisjunctively": true,
+            "rules": [
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Juego Cafe"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Juego Café"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "juegos-te ANTES",
+      "resultado": {
+        "id": "gid://shopify/Collection/679849001301",
+        "handle": "juegos-te",
+        "title": "Juegos de té",
+        "productsCount": {
+          "count": 0
+        },
+        "ruleSet": {
+          "appliedDisjunctively": false,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Juego Te"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "juegos-te: + ['Juego Té']",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/679849001301",
+          "handle": "juegos-te",
+          "productsCount": {
+            "count": 0
+          },
+          "ruleSet": {
+            "appliedDisjunctively": true,
+            "rules": [
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Juego Te"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Juego Té"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "ochavada-blanca ANTES",
+      "resultado": {
+        "id": "gid://shopify/Collection/679848935765",
+        "handle": "ochavada-blanca",
+        "title": "Ochavada Blanca",
+        "productsCount": {
+          "count": 27
+        },
+        "ruleSet": {
+          "appliedDisjunctively": false,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Ochavado Blanco"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "ochavada-blanca: + ['Ochavada Blanca']",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/679848935765",
+          "handle": "ochavada-blanca",
+          "productsCount": {
+            "count": 27
+          },
+          "ruleSet": {
+            "appliedDisjunctively": true,
+            "rules": [
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Ochavado Blanco"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Ochavada Blanca"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "aurora ANTES",
+      "resultado": {
+        "id": "gid://shopify/Collection/674484650325",
+        "handle": "aurora",
+        "title": "Aurora",
+        "productsCount": {
+          "count": 145
+        },
+        "ruleSet": {
+          "appliedDisjunctively": true,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Aurora"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "202 Rosa"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Bellavista"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Ceilan"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Flor Lis"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Viejo Molino"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Oaxaca"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "aurora: + ['Flor de Lis', 'Ceilán']",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/674484650325",
+          "handle": "aurora",
+          "productsCount": {
+            "count": 145
+          },
+          "ruleSet": {
+            "appliedDisjunctively": true,
+            "rules": [
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Aurora"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "202 Rosa"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Bellavista"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Ceilan"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Flor Lis"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Viejo Molino"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Oaxaca"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Flor de Lis"
+              },
+              {
+                "column": "TITLE",
+                "relation": "CONTAINS",
+                "condition": "Ceilán"
+              }
+            ]
+          }
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

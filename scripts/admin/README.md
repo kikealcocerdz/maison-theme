@@ -78,3 +78,4 @@ y `menu-derecha`; en **Collection grid**, el menú del lateral.
   «con platillo» en el título son Consomé y Desayuno, y el menú nuevo las mantiene.
 - Las fotos IA: la principal del mug unificado y las segundas imágenes del hover.
 | `24_pagina_trabaja.py` | Página «Trabaja con nosotros» con plantilla `page.trabaja` | Borrar la página en Admin |
+| `25_reglas_colecciones.py` | Añade la grafía real (Flor de Lis, Ceilán, Juego Café/Té…) a las reglas de colección | Restaurar el ruleSet del informe |
