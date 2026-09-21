@@ -41,7 +41,7 @@
           "type": "column",
           "settings": {
             "heading": "Atención",
-            "items": "Contacto | /pages/contacto\nEnvíos y devoluciones | /pages/envios-devoluciones\nPrivacidad | /pages/politica-privacidad\nCondiciones | /pages/terminos-condiciones"
+            "items": "Contacto | /pages/contacto\nTrabaja con nosotros | /pages/trabaja-con-nosotros\nEnvíos y devoluciones | /pages/envios-devoluciones\nPrivacidad | /pages/politica-privacidad\nCondiciones | /pages/terminos-condiciones"
           }
         }
       },

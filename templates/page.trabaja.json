@@ -1,0 +1,43 @@
+{
+  "sections": {
+    "main": {
+      "type": "contact-form",
+      "settings": {
+        "kicker": "Trabaja con nosotros",
+        "title": "Únete al taller",
+        "intro": "La Cartuja de Sevilla busca personas que quieran formar parte de una fábrica de loza con casi dos siglos de historia. Si quieres trabajar con nosotros, envíanos tu currículum.",
+        "hero_alt": "Taller de La Cartuja de Sevilla",
+        "hero_caption_small": "Sevilla · 1841",
+        "hero_caption": "Heritage crafted for modern living",
+        "show_form": false,
+        "privacy_url": "/pages/politica-privacidad",
+        "card_kicker": "Recursos humanos",
+        "card_title": "Envíanos tu currículum",
+        "card_text": "Escríbenos a RRHH@lacartujadesevilla.com con tu currículum adjunto y una breve presentación. Leemos todas las candidaturas.",
+        "card_link_label": "Enviar currículum",
+        "card_link": "mailto:RRHH@lacartujadesevilla.com?subject=Candidatura%20-%20Trabaja%20con%20nosotros"
+      },
+      "blocks": {
+        "email": {
+          "type": "detail",
+          "settings": {
+            "label": "Currículum",
+            "value": "RRHH@lacartujadesevilla.com",
+            "link": "mailto:RRHH@lacartujadesevilla.com?subject=Candidatura%20-%20Trabaja%20con%20nosotros",
+            "note": "<p>Adjunta tu CV en PDF y cuéntanos en qué área te gustaría trabajar</p>"
+          }
+        },
+        "direccion": {
+          "type": "detail",
+          "settings": {
+            "label": "Fábrica",
+            "value": "La Cartuja de Sevilla",
+            "note": "<p>Ctra. Nacional 630, km. 805<br>41909 Salteras · Sevilla · España</p>"
+          }
+        }
+      },
+      "block_order": ["email", "direccion"]
+    }
+  },
+  "order": ["main"]
+}

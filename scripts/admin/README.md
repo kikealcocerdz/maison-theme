@@ -77,3 +77,4 @@ y `menu-derecha`; en **Collection grid**, el menú del lateral.
 - Cuál es exactamente el «Taza sin platillo» que hay que eliminar: las 21 tazas sin
   «con platillo» en el título son Consomé y Desayuno, y el menú nuevo las mantiene.
 - Las fotos IA: la principal del mug unificado y las segundas imágenes del hover.
+| `24_pagina_trabaja.py` | Página «Trabaja con nosotros» con plantilla `page.trabaja` | Borrar la página en Admin |

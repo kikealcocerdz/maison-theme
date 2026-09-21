@@ -53,6 +53,8 @@
     </div>
   </section>
 
+  {%- comment -%} «Trabaja con nosotros» reutiliza la página sin formulario: el CV va por mailto. {%- endcomment -%}
+  {%- if section.settings.show_form -%}
   <section class="contact-form-section">
     <div class="contact-form-intro">
       {%- if section.settings.form_kicker != blank -%}<span class="contact-kicker">{{ section.settings.form_kicker | escape }}</span>{%- endif -%}
@@ -128,6 +130,7 @@
       </div>
     {%- endform -%}
   </section>
+  {%- endif -%}
 </main>
 
 {% stylesheet %}
@@ -592,6 +595,7 @@
     { "type": "text", "id": "hero_caption_small", "label": "Pie (línea pequeña)", "default": "Sevilla · 1841" },
     { "type": "text", "id": "hero_caption", "label": "Pie (titular)", "default": "Heritage crafted for modern living" },
     { "type": "header", "content": "Formulario" },
+    { "type": "checkbox", "id": "show_form", "label": "Mostrar formulario", "default": true },
     { "type": "text", "id": "form_kicker", "label": "Antetítulo", "default": "Escríbenos" },
     { "type": "text", "id": "form_title", "label": "Título", "default": "¿En qué podemos ayudarte?" },
     { "type": "textarea", "id": "form_intro", "label": "Entradilla", "default": "Completa el formulario y déjanos la información necesaria para poder ayudarte desde el primer mensaje." },
