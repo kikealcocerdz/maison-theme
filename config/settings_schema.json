@@ -58,7 +58,7 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "Display serif (EB Garamond), navigation serif (Ibarra Real Nova), and sans (Montserrat) are loaded from Google Fonts to match the brand. Edit them in snippets/css-variables.liquid."
+        "content": "Serif (Ibarra Real Nova) and sans (Montserrat) are loaded from Google Fonts to match the brand. Edit them in snippets/css-variables.liquid."
       },
       {
         "type": "range",
