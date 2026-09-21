@@ -87,10 +87,10 @@ lives in `assets/critical.css` + `assets/theme.css`.
 
 ## 5. Typography — Google Fonts, NOT font_picker
 
-⚠️ **Ibarra Real Nova is not in Shopify's `font_picker` library** (a `font_picker` default of
+⚠️ **EB Garamond is not in Shopify's `font_picker` library** (a `font_picker` default of
 `eb_garamond_n4` is rejected at theme load). So fonts are loaded the way the mockup does:
 - A Google Fonts `<link>` in `layout/theme.liquid` (`<head>`).
-- Families hardcoded in `css-variables.liquid`: `--serif: 'Ibarra Real Nova', Georgia, serif;`
+- Families hardcoded in `css-variables.liquid`: `--serif: 'EB Garamond', Georgia, serif;`
   `--sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;`.
 - This produces 3 expected `RemoteAsset` Theme Check warnings — leave them. (Switch to Shopify
   Fonts only if/when pursuing Theme Store submission, phase 2.)
@@ -197,7 +197,7 @@ uses smaller media than 3-up (`[data-cards-per-row="4"]` overrides).
 - [ ] Richtext → `alt`/`aria-label` piped through `strip_html | escape`.
 - [ ] New UI strings added to es + en locales (deep-merge, not replace).
 - [ ] Schema locale stays valid JSON + same language as storefront default.
-- [ ] No `font_picker` for Ibarra Real Nova/Montserrat (load via Google Fonts).
+- [ ] No `font_picker` for EB Garamond/Montserrat (load via Google Fonts).
 - [ ] Scroll/CSS-var sections: `Math.max(_,1)` guard + reduced-motion + mobile fallback.
 - [ ] After push, verify locale/asset files actually landed (pull + inspect).
 - [ ] Only the 3 Google-Fonts `RemoteAsset` warnings; everything else is 0.
