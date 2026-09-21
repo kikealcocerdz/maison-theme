@@ -54,10 +54,13 @@
     "welcome-popup": {
       "type": "welcome-popup",
       "settings": {
-        "eyebrow": "Bienvenida",
-        "heading": "Regístrate y llévate un 5% en tu primera compra",
-        "text": "<p>Déjanos tu correo para recibir novedades de La Cartuja de Sevilla.</p>",
-        "button_label": "Quiero mi 5%",
+        "heading": "Bienvenido a La Cartuja de Sevilla.",
+        "text": "<p>Regístrate y te descontamos el <strong>5% en tu primera compra.</strong></p>",
+        "button_label": "Obtener descuento",
+        "consent_html": "<p>Acepto recibir novedades y promociones de La Cartuja de Sevilla y he leído la <a href=\"/pages/politica-privacidad\">política de privacidad</a>.</p>",
+        "success_heading": "Ya formas parte de nuestra mesa.",
+        "success_text": "Revisa tu correo: recibirás allí tu descuento de bienvenida.",
+        "skip_label": "Ahora no, seguir descubriendo",
         "delay_seconds": 4,
         "dismiss_days": 30
       }

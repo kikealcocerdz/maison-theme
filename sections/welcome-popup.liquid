@@ -1,3 +1,9 @@
+{%- comment -%}
+  Popup de bienvenida — diseño de Adrián (Downloads/popup_cartuja, 2026-09-21):
+  foto vertical a la izquierda, panel azul a la derecha. El form es el de clientes
+  de Shopify (tag welcome-popup-5); el consentimiento es `required` nativo.
+  Ibarra del diseño → var(--serif) del theme mientras Ibarra esté descartada.
+{%- endcomment -%}
 <dialog
   class="welcome-popup"
   data-welcome-popup
@@ -6,14 +12,20 @@
   aria-labelledby="WelcomePopupTitle-{{ section.id }}"
 >
   <div class="welcome-popup__panel">
-    <button class="welcome-popup__close" type="button" data-welcome-close aria-label="{{ 'general.accessibility.close' | t }}">
-      {% render 'icon-close' %}
-    </button>
+    <div class="welcome-popup__media">
+      {%- if section.settings.image != blank -%}
+        {% render 'image-responsive', image: section.settings.image, alt: section.settings.image.alt, sizes: '(max-width: 760px) 480px, 380px' %}
+      {%- else -%}
+        <img src="{{ 'popup-bienvenida.webp' | asset_url }}" alt="" width="670" height="1200" loading="lazy" decoding="async">
+      {%- endif -%}
+    </div>
 
     <div class="welcome-popup__content">
-      {%- if section.settings.eyebrow != blank -%}
-        <p class="welcome-popup__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-      {%- endif -%}
+      <button class="welcome-popup__close" type="button" data-welcome-close aria-label="{{ 'general.accessibility.close' | t }}">
+        {% render 'icon-close' %}
+      </button>
+
+      <img class="welcome-popup__logo" src="{{ 'logo-white.png' | asset_url }}" alt="{{ shop.name | escape }}" width="88" height="88" loading="lazy" decoding="async">
       <h2 id="WelcomePopupTitle-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
       {%- if section.settings.text != blank -%}
         <div class="welcome-popup__text">{{ section.settings.text }}</div>
@@ -21,84 +33,111 @@
 
       {%- form 'customer', class: 'welcome-popup__form' -%}
         <input type="hidden" name="contact[tags]" value="newsletter,welcome-popup-5">
-        <label for="WelcomePopupEmail-{{ section.id }}">{{ 'general.newsletter.email_label' | t }}</label>
-        <div class="welcome-popup__fields">
-          <input
-            id="WelcomePopupEmail-{{ section.id }}"
-            type="email"
-            name="contact[email]"
-            value="{{ form.email | escape }}"
-            placeholder="{{ 'general.newsletter.placeholder' | t }}"
-            autocomplete="email"
-            required
-          >
-          <button type="submit">{{ section.settings.button_label | escape }}</button>
-        </div>
-
         {%- if form.posted_successfully? -%}
-          <p class="welcome-popup__message" data-welcome-status tabindex="-1">{{ 'general.newsletter.success' | t }}</p>
-        {%- elsif form.errors -%}
-          <p class="welcome-popup__message welcome-popup__message--error" data-welcome-status tabindex="-1">{{ 'general.newsletter.error' | t }}</p>
+          <div class="welcome-popup__success" data-welcome-status tabindex="-1">
+            <strong>{{ section.settings.success_heading | escape }}</strong>
+            <p>{{ section.settings.success_text | escape }}</p>
+          </div>
+        {%- else -%}
+          <label class="welcome-popup__label" for="WelcomePopupEmail-{{ section.id }}">{{ 'general.newsletter.email_label' | t }}</label>
+          <div class="welcome-popup__fields">
+            <input
+              id="WelcomePopupEmail-{{ section.id }}"
+              type="email"
+              name="contact[email]"
+              value="{{ form.email | escape }}"
+              placeholder="{{ 'general.newsletter.placeholder' | t }}"
+              autocomplete="email"
+              required
+            >
+            <button type="submit">{{ section.settings.button_label | escape }}</button>
+          </div>
+          <label class="welcome-popup__legal">
+            <input type="checkbox" name="contact[accepts_marketing]" value="true" required>
+            <span>{{ section.settings.consent_html }}</span>
+          </label>
+          {%- if form.errors -%}
+            <p class="welcome-popup__error" data-welcome-status tabindex="-1">{{ 'general.newsletter.error' | t }}</p>
+          {%- endif -%}
         {%- endif -%}
       {%- endform -%}
+
+      <button class="welcome-popup__skip" type="button" data-welcome-close>{{ section.settings.skip_label | escape }}</button>
     </div>
   </div>
 </dialog>
 
 {% stylesheet %}
+/* Tokens del diseño: azul #0f1f3c, marfil #f7f2e9, rojo #9d2735. */
 .welcome-popup {
-  width: min(620px, calc(100% - 32px)); max-width: none; padding: 0;
-  border: 0; background: transparent; color: var(--ink);
+  --wp-navy: #0f1f3c; --wp-ivory: #f7f2e9; --wp-paper: #fffcf6; --wp-red: #9d2735; --wp-line: rgba(247, 242, 233, .28);
+  width: min(1020px, calc(100% - 56px)); max-width: none; max-height: min(700px, calc(100vh - 56px));
+  padding: 0; border: 1px solid rgba(247, 242, 233, .42); background: var(--wp-navy); color: var(--wp-ivory);
+  box-shadow: 0 34px 110px rgba(0, 0, 0, .42); overflow: hidden;
 }
-.welcome-popup::backdrop { background: rgba(15, 26, 46, .54); }
-.welcome-popup__panel {
-  position: relative; background: var(--paper); border: .5px solid var(--rule);
-  box-shadow: 0 28px 90px rgba(15, 26, 46, .22); padding: clamp(44px, 7vw, 76px);
-}
+.welcome-popup::backdrop { background: rgba(4, 12, 25, .72); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.welcome-popup__panel { display: grid; grid-template-columns: minmax(340px, .72fr) minmax(440px, 1.28fr); max-height: inherit; }
+.welcome-popup__media { position: relative; min-height: 610px; background: #10284f; overflow: hidden; }
+.welcome-popup__media::after { content: ""; position: absolute; inset: 0; box-shadow: inset -26px 0 38px rgba(4, 12, 25, .15); pointer-events: none; }
+.welcome-popup__media img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.welcome-popup__content { position: relative; min-width: 0; display: flex; flex-direction: column; justify-content: center; padding: clamp(48px, 6vw, 76px); }
 .welcome-popup__close {
-  position: absolute; top: 18px; right: 18px; display: grid; place-items: center;
-  width: 44px; height: 44px; color: var(--ink);
+  position: absolute; top: 22px; right: 22px; width: 42px; height: 42px; display: grid; place-items: center;
+  color: var(--wp-ivory); border: 1px solid transparent; border-radius: 50%; transition: border-color .25s ease;
 }
-.welcome-popup__close:focus-visible,
-.welcome-popup__form input:focus-visible,
-.welcome-popup__form button:focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
-.welcome-popup__eyebrow {
-  margin: 0 0 20px; font: 500 10px/1.2 var(--sans);
-  letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
-}
+.welcome-popup__close:hover, .welcome-popup__close:focus-visible { border-color: var(--wp-line); outline: none; }
+.welcome-popup__close svg { width: 19px; height: 19px; }
+.welcome-popup__logo { width: 88px; height: auto; margin: 0 0 38px; }
 .welcome-popup h2 {
-  max-width: 12ch; margin: 0; font: 400 clamp(38px, 5.4vw, 62px)/1 var(--serif);
-  letter-spacing: -.025em; color: var(--ink);
+  max-width: 460px; margin: 0; font-family: var(--serif); font-weight: 400;
+  font-size: clamp(42px, 4.6vw, 63px); letter-spacing: -.035em; line-height: .96; color: inherit;
 }
-.welcome-popup__text { max-width: 46ch; margin-top: 24px; color: var(--ink-soft); font-size: 14px; line-height: 1.7; }
+.welcome-popup__text { max-width: 410px; margin: 26px 0 34px; font-family: var(--serif); font-size: 20px; line-height: 1.45; color: rgba(247, 242, 233, .78); }
 .welcome-popup__text p { margin: 0; }
-.welcome-popup__form { margin-top: 36px; }
-.welcome-popup__form label {
-  display: block; margin-bottom: 10px; font-size: 10px; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--muted);
+.welcome-popup__text strong { color: var(--wp-ivory); font-weight: 500; }
+.welcome-popup__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.welcome-popup__fields { display: flex; align-items: stretch; border-bottom: 1px solid rgba(247, 242, 233, .54); transition: border-color .2s ease; }
+.welcome-popup__fields:focus-within { border-color: var(--wp-ivory); }
+.welcome-popup__fields input {
+  min-width: 0; flex: 1; padding: 16px 10px 16px 0; color: var(--wp-paper); background: transparent; border: 0; border-radius: 0; outline: 0;
+  font: inherit; font-size: 12px; letter-spacing: .05em;
 }
-.welcome-popup__fields { display: grid; grid-template-columns: minmax(0, 1fr) auto; border-bottom: 1px solid var(--ink); }
-.welcome-popup__form input {
-  min-width: 0; padding: 14px 0; border: 0; background: transparent;
-  color: var(--ink); font: 400 14px/1.4 var(--sans);
+.welcome-popup__fields input::placeholder { color: rgba(247, 242, 233, .55); }
+.welcome-popup__fields button {
+  flex: 0 0 auto; min-width: 154px; padding: 0 24px; color: var(--wp-navy); background: var(--wp-ivory); border: 0; cursor: pointer;
+  font: 500 9px/1 var(--sans); letter-spacing: .17em; text-transform: uppercase; transition: background .25s ease, color .25s ease;
 }
-.welcome-popup__form input::placeholder { color: var(--muted); opacity: 1; }
-.welcome-popup__form button {
-  min-height: 48px; padding: 0 2px 0 24px; color: var(--ink); white-space: nowrap;
-  font: 500 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase;
+.welcome-popup__fields button:hover, .welcome-popup__fields button:focus-visible { color: #fff; background: var(--wp-red); outline: none; }
+.welcome-popup__legal { display: flex; align-items: flex-start; gap: 9px; margin-top: 17px; color: rgba(247, 242, 233, .55); font-size: 9px; line-height: 1.55; }
+.welcome-popup__legal input { width: 14px; height: 14px; margin: 1px 0 0; accent-color: var(--wp-red); flex: 0 0 auto; }
+.welcome-popup__legal a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.welcome-popup__error { margin: 8px 0 0; color: #f0b9bd; font-size: 9px; letter-spacing: .02em; }
+.welcome-popup__success { padding: 26px 0 8px; border-top: 1px solid var(--wp-line); }
+.welcome-popup__success strong { display: block; margin-bottom: 7px; font-family: var(--serif); font-size: 27px; font-weight: 400; }
+.welcome-popup__success p { margin: 0; color: rgba(247, 242, 233, .72); font-size: 11px; line-height: 1.6; }
+.welcome-popup__skip {
+  align-self: flex-start; margin-top: 24px; padding: 0 0 4px; color: rgba(247, 242, 233, .57); border-bottom: 1px solid transparent;
+  cursor: pointer; font-size: 9px; letter-spacing: .06em; transition: color .2s ease, border-color .2s ease;
 }
-.welcome-popup__message { margin: 16px 0 0; color: var(--ink); font-size: 12px; line-height: 1.5; }
-.welcome-popup__message--error { color: var(--accent-1); }
+.welcome-popup__skip:hover, .welcome-popup__skip:focus-visible { color: var(--wp-ivory); border-bottom-color: currentColor; outline: none; }
 
-@media (max-width: 560px) {
-  .welcome-popup { width: calc(100% - 20px); max-height: calc(100dvh - 20px); overflow: auto; }
-  .welcome-popup__form input { font-size: 16px; }
-  .welcome-popup__panel { padding: 54px 24px 32px; }
-  .welcome-popup h2 { font-size: clamp(36px, 12vw, 50px); }
-  .welcome-popup__fields { grid-template-columns: 1fr; border-bottom: 0; gap: 12px; }
-  .welcome-popup__form input { border-bottom: 1px solid var(--ink); }
-  .welcome-popup__form button { justify-self: stretch; padding: 0 18px; background: var(--ink); color: var(--paper); }
+@media (max-width: 760px) {
+  .welcome-popup { width: min(480px, calc(100% - 32px)); max-height: calc(100dvh - 32px); overflow-y: auto; }
+  .welcome-popup__panel { display: block; }
+  .welcome-popup__media { min-height: 0; height: clamp(190px, 31vh, 270px); }
+  .welcome-popup__media::after { box-shadow: inset 0 -26px 36px rgba(4, 12, 25, .16); }
+  .welcome-popup__content { display: block; padding: 31px 27px 28px; }
+  .welcome-popup__close { position: fixed; top: 28px; right: 28px; color: #09162c; background: rgba(255, 252, 246, .86); border-color: rgba(9, 22, 44, .12); }
+  .welcome-popup__logo { width: 70px; margin-bottom: 27px; }
+  .welcome-popup h2 { max-width: 360px; font-size: clamp(36px, 11vw, 48px); }
+  .welcome-popup__text { margin: 18px 0 25px; font-size: 17px; }
+  .welcome-popup__fields { display: block; border: 0; }
+  /* 16px: por debajo iOS hace zoom al enfocar el campo. */
+  .welcome-popup__fields input { width: 100%; padding: 15px 14px; border: 1px solid rgba(247, 242, 233, .42); font-size: 16px; }
+  .welcome-popup__fields button { width: 100%; min-height: 48px; margin-top: 10px; }
+  .welcome-popup__skip { margin-top: 18px; }
 }
+@media (prefers-reduced-motion: reduce) { .welcome-popup * { transition: none !important; } }
 {% endstylesheet %}
 
 {% javascript %}
@@ -154,10 +193,14 @@
 {
   "name": "Popup de bienvenida",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Bienvenida" },
-    { "type": "text", "id": "heading", "label": "Título", "default": "Regístrate y llévate un 5% en tu primera compra" },
-    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Déjanos tu correo para recibir novedades de La Cartuja de Sevilla.</p>" },
-    { "type": "text", "id": "button_label", "label": "Botón", "default": "Quiero mi 5%" },
+    { "type": "image_picker", "id": "image", "label": "Imagen vertical", "info": "Sin imagen se usa assets/popup-bienvenida.webp (diseño de Adrián)." },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Bienvenido a La Cartuja de Sevilla." },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Regístrate y te descontamos el <strong>5% en tu primera compra.</strong></p>" },
+    { "type": "text", "id": "button_label", "label": "Botón", "default": "Obtener descuento" },
+    { "type": "richtext", "id": "consent_html", "label": "Consentimiento", "default": "<p>Acepto recibir novedades y promociones de La Cartuja de Sevilla y he leído la <a href=\"/pages/politica-privacidad\">política de privacidad</a>.</p>" },
+    { "type": "text", "id": "success_heading", "label": "Éxito · título", "default": "Ya formas parte de nuestra mesa." },
+    { "type": "text", "id": "success_text", "label": "Éxito · texto", "default": "Revisa tu correo: recibirás allí tu descuento de bienvenida." },
+    { "type": "text", "id": "skip_label", "label": "Enlace para cerrar", "default": "Ahora no, seguir descubriendo" },
     { "type": "range", "id": "delay_seconds", "label": "Retraso al abrir", "min": 0, "max": 20, "step": 1, "unit": "s", "default": 4 },
     { "type": "range", "id": "dismiss_days", "label": "Días antes de volver a mostrar", "min": 1, "max": 90, "step": 1, "unit": "d", "default": 30 }
   ]
