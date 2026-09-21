@@ -79,3 +79,4 @@ y `menu-derecha`; en **Collection grid**, el menú del lateral.
 - Las fotos IA: la principal del mug unificado y las segundas imágenes del hover.
 | `24_pagina_trabaja.py` | Página «Trabaja con nosotros» con plantilla `page.trabaja` | Borrar la página en Admin |
 | `25_reglas_colecciones.py` | Añade la grafía real (Flor de Lis, Ceilán, Juego Café/Té…) a las reglas de colección | Restaurar el ruleSet del informe |
+| `26_erratas_restantes.py` | Erratas restantes del informe 2026-09-18 (Oaxaca/Gastón, tetera, mugs, Flor de Lis, boles, Heritage 1841) | Restaurar desde el informe |
