@@ -115,7 +115,8 @@
             "photo_alt": "Bodegón mediterráneo con piezas Flor de Lis Azul",
             "hotspots": "56|82|Ver plato Flor de Lis Azul\n22|72|Ver fuente Flor de Lis Azul\n56|33|Ver tetera Flor de Lis Azul\n60|55|Ver bol Flor de Lis Azul\n43|57|Ver taza Flor de Lis Azul\n83|76|Ver lechera Flor de Lis Azul",
             "vajilla42": "vajilla-flor-lis-azul",
-            "vajilla56": "vajilla-flor-lis-azul"
+            "vajilla56": "vajilla-flor-lis-azul",
+            "photo": "shopify://shop_images/Bodegon_inicial_Cartuja_mar_natural_sin_flor_web.webp"
           }
         },
         "s2p1": {
@@ -282,7 +283,8 @@
             "photo_alt": "Bodegón Bellavista con vajilla, flores y piezas de servicio",
             "hotspots": "32|64|Ver plato Bellavista\n50|50|Ver sopera Bellavista\n52|21|Ver fuente Bellavista\n22|46|Ver tetera Bellavista\n67|73|Ver ensaladera Bellavista",
             "vajilla42": "vajilla-bellavista",
-            "vajilla56": "vajilla-bellavista"
+            "vajilla56": "vajilla-bellavista",
+            "photo": "shopify://shop_images/Bellavista_estudio_azul_marino_flores_web.webp"
           }
         },
         "s4p1": {
