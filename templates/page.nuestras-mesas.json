@@ -25,7 +25,7 @@
             "type_slug": "oaxaca",
             "demo_photo": "mesa_aurora_oaxaca.webp",
             "photo_alt": "Mesa Aurora Oaxaca con platos y universo selvático ilustrado",
-            "hotspots": "50|71|Ver plato Oaxaca azul\n37|49|Ver plato Oaxaca amarillo\n21|70|Ver plato Oaxaca rosa\n49|28|Ver plato Oaxaca negro\n68|49|Ver plato Oaxaca verde\n80|70|Ver plato Oaxaca celeste"
+            "hotspots": "50|71|Ver plato Oaxaca azul\n39|48|Ver plato Oaxaca amarillo\n30|68|Ver plato Oaxaca rosa\n49|28|Ver plato Oaxaca negro\n61|48|Ver plato Oaxaca verde\n70|68|Ver plato Oaxaca celeste"
           }
         },
         "s1p1": {
@@ -354,7 +354,7 @@
             "type_slug": "negro",
             "demo_photo": "mesa_ochavada_negro_vistas.webp",
             "photo_alt": "Mesa Ochavada Negro Vistas con servicio de té y piezas de mesa",
-            "hotspots": "21|58|Ver plato Negro Vistas\n75|62|Ver fuente Negro Vistas\n18|75|Ver sopera Negro Vistas\n48|76|Ver tetera Negro Vistas\n60|68|Ver bol Negro Vistas\n84|86|Ver taza Negro Vistas\n63|32|Ver cafetera Negro Vistas\n8|86|Ver taza de café Negro Vistas",
+            "hotspots": "21|58|Ver plato Negro Vistas\n75|62|Ver fuente Negro Vistas\n18|75|Ver sopera Negro Vistas\n48|76|Ver tetera Negro Vistas\n60|68|Ver bol Negro Vistas\n84|86|Ver taza Negro Vistas\n58|32|Ver cafetera Negro Vistas\n22|86|Ver taza de café Negro Vistas",
             "vajilla42": "vajilla-negro-vistas",
             "vajilla56": "vajilla-negro-vistas"
           }
