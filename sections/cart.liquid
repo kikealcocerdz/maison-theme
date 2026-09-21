@@ -79,9 +79,14 @@
     El aviso de «deshacer» vive fuera de la rama de la cesta llena: quitar la última
     pieza deja la cesta vacía y ahí es justo donde hace falta poder recuperarla.
   {%- endcomment -%}
-  <p class="cart-page__undo" data-cart-undo hidden>
+  {%- comment -%} En cesta vacía el deshacer es la acción principal, no un enlace discreto. {%- endcomment -%}
+  <p class="cart-page__undo{% if cart.item_count == 0 %} cart-page__undo--empty{% endif %}" data-cart-undo hidden>
     <span>{{ 'sections.cart.removed' | t }}</span>
-    <button class="cart-page__quiet-link" type="button" data-cart-undo-button>{{ 'sections.cart.undo' | t }}</button>
+    {%- if cart.item_count == 0 -%}
+      <button class="cart-page__cta" type="button" data-cart-undo-button>{{ 'sections.cart.recover_last' | t }}</button>
+    {%- else -%}
+      <button class="cart-page__quiet-link" type="button" data-cart-undo-button>{{ 'sections.cart.undo' | t }}</button>
+    {%- endif -%}
   </p>
 
   {%- if cart.item_count == 0 -%}
@@ -515,6 +520,8 @@
   font-size: 12px;
   letter-spacing: .06em;
 }
+.cart-page__undo--empty { justify-content: center; margin-top: 40px; font-size: 13px; }
+.cart-page__undo--empty .cart-page__cta { width: max-content; min-width: 260px; }
 .cart-page__line-actions {
   display: flex;
   align-items: center;

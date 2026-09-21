@@ -140,6 +140,7 @@
       "gift_remove": "Remove the gift wrapping",
       "removed": "You removed a piece from your cart.",
       "undo": "Undo",
+      "recover_last": "Bring back the last piece",
       "empty_body": "You have not reserved a piece yet. Our tables are composed slowly: begin with a collection.",
       "empty_cta": "See the collections",
       "paybar_total": "Total · {{ count }} pieces",
