@@ -43,6 +43,12 @@
           assign shape_label = placeholder_shape_label | downcase | strip
           assign color_label = placeholder_color_label | downcase | strip
           assign placeholder_values = nil
+          # El decorado se vende como «Colección» (brief 2026-09-18); el nombre del
+          # metafield sigue siendo Decorado para no tocar datos.
+          assign shown_label = filter.label
+          if filter_param contains 'custom.decorado'
+            assign shown_label = 'sections.collection.filter_collection' | t
+          endif
           if filter_param contains 'custom.forma' or filter_label == shape_label
             assign has_shape_filter = true
             assign placeholder_values = placeholder_shapes
@@ -72,7 +78,7 @@
             decorativo, que ya sólo pinta las dos rayas.
           {%- endcomment -%}
           <button class="side-section-head" type="button" data-side-toggle aria-expanded="{{ is_open }}">
-            <span class="side-main-link">{{ filter.label | escape }}</span>
+            <span class="side-main-link">{{ shown_label | escape }}</span>
             <span class="side-toggle" aria-hidden="true"></span>
           </button>
           <div class="side-panel"><div>
