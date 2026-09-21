@@ -419,16 +419,6 @@
                     "title": "Bellavista",
                     "type": "COLLECTION",
                     "url": "/collections/bellavista"
-                  },
-                  {
-                    "title": "Aurora Blanco",
-                    "type": "COLLECTION",
-                    "url": "/collections/aurora-blanca"
-                  },
-                  {
-                    "title": "Ochavado Blanco",
-                    "type": "COLLECTION",
-                    "url": "/collections/ochavada-blanca"
                   }
                 ]
               },
@@ -461,6 +451,23 @@
                     "title": "Edén",
                     "type": "COLLECTION",
                     "url": "/collections/eden"
+                  }
+                ]
+              },
+              {
+                "title": "Blancas",
+                "type": "HTTP",
+                "url": "/collections",
+                "items": [
+                  {
+                    "title": "Aurora Blanco",
+                    "type": "COLLECTION",
+                    "url": "/collections/aurora-blanca"
+                  },
+                  {
+                    "title": "Ochavada Blanca",
+                    "type": "COLLECTION",
+                    "url": "/collections/ochavada-blanca"
                   }
                 ]
               }
@@ -844,11 +851,11 @@
                   "url": "/collections",
                   "items": [
                     {
-                      "title": "Aurora Blanco",
+                      "title": "Aurora Blanca",
                       "url": "/collections/aurora-blanca"
                     },
                     {
-                      "title": "Ochavado Blanco",
+                      "title": "Ochavada Blanca",
                       "url": "/collections/ochavada-blanca"
                     }
                   ]
@@ -1318,12 +1325,12 @@
                 "url": "/collections",
                 "items": [
                   {
-                    "title": "Aurora Blanco",
+                    "title": "Aurora Blanca",
                     "type": "COLLECTION",
                     "url": "/collections/aurora-blanca"
                   },
                   {
-                    "title": "Ochavado Blanco",
+                    "title": "Ochavada Blanca",
                     "type": "COLLECTION",
                     "url": "/collections/ochavada-blanca"
                   }

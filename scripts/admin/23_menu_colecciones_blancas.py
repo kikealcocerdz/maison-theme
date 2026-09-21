@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Lote 23 · mueve Aurora/Ochavado del grupo Clásicas a Blancas.
+"""Lote 23 · mueve Aurora/Ochavada del grupo Clásicas a Blancas (relanzado 2026-09-21: «Ochavada Blanca»).
 
     python3 23_menu_colecciones_blancas.py          # ensayo
     python3 23_menu_colecciones_blancas.py --apply
@@ -25,7 +25,7 @@ def arbol_actualizado(base):
     arbol = copy.deepcopy(base.MAIN)
     colecciones = next(nodo for nodo in arbol if nodo[0] == "Colecciones")[2]
     clasicas = next(nodo for nodo in colecciones if nodo[0] == "Clásicas")[2]
-    titulos_blancos = {"Aurora Blanco", "Ochavado Blanco"}
+    titulos_blancos = {"Aurora Blanca", "Ochavada Blanca"}
     blancos = [nodo for nodo in clasicas if nodo[0] in titulos_blancos]
     clasicas[:] = [nodo for nodo in clasicas if nodo[0] not in titulos_blancos]
     assert {nodo[0] for nodo in blancos} == titulos_blancos
