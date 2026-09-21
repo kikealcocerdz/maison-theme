@@ -227,6 +227,21 @@
             {%- if opt.values.size < 2 -%}{%- continue -%}{%- endif -%}
             <div class="piece-option-row">
               <span>{{ opt.name | escape }}</span>
+              {%- if opt.values.size > 8 -%}
+                {%- comment -%}
+                  Muchos valores (las 27 letras del mug): desplegable nativo. El form
+                  navega a `?variant=` sin JS con el botón; con JS, al cambiar.
+                {%- endcomment -%}
+                <form class="piece-option-select" method="get" action="{{ product.url }}" data-option-select>
+                  <select name="variant" aria-label="{{ opt.name | escape }}">
+                    {%- for value in opt.values -%}
+                      {%- assign vname = value.name | default: value -%}
+                      <option value="{{ value.variant.id }}"{% if vname == current_variant.options[opt_idx] %} selected{% endif %}{% unless value.variant.id %} disabled{% endunless %}>{{ vname | escape }}</option>
+                    {%- endfor -%}
+                  </select>
+                  <noscript><button class="ghost-btn" type="submit">{{ 'sections.product.pieces_selector' | t }}</button></noscript>
+                </form>
+              {%- else -%}
               <div class="piece-option-values" role="group" aria-label="{{ opt.name | escape }}">
                 {%- for value in opt.values -%}
                   {%- assign vname = value.name | default: value -%}
@@ -239,6 +254,7 @@
                   {%- endif -%}
                 {%- endfor -%}
               </div>
+              {%- endif -%}
             </div>
           {%- endfor -%}
         {%- endif -%}
@@ -687,9 +703,17 @@
 .piece-option:hover { border-color: var(--ink); color: var(--ink); }
 .piece-option.is-active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 .piece-option.is-dead { opacity: .35; }
+.piece-option-select { display: flex; justify-content: flex-end; gap: 8px; }
+.piece-option-select select {
+  min-height: 38px; padding: 0 36px 0 12px; border: .5px solid var(--rule); border-radius: 0;
+  background: var(--paper) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%230F1A2E' stroke-width='1.2'/></svg>") no-repeat right 12px center;
+  font: inherit; font-size: 13px; color: var(--ink); appearance: none; -webkit-appearance: none; cursor: pointer;
+}
+.piece-option-select select:focus-visible { outline: 1px solid var(--ink); outline-offset: 2px; }
 @media (max-width: 1180px) {
   .piece-option-row { grid-template-columns: 1fr; gap: 8px; }
-  .piece-option-values { justify-content: flex-start; }
+  .piece-option-values, .piece-option-select { justify-content: flex-start; }
+  .piece-option-select select { width: 100%; }
 }
 
 /* La medida fija se lee de primeras: tinta, no gris. */
@@ -1066,6 +1090,13 @@
   function init(root) {
     if (!root || root.dataset.init) return;
     root.dataset.init = '1';
+
+    // Desplegable de opciones (letra del mug): cambiar = ir a esa variante.
+    root.querySelectorAll('[data-option-select] select').forEach(function (select) {
+      select.addEventListener('change', function () {
+        if (select.value) window.location.href = select.form.action + '?variant=' + select.value;
+      });
+    });
 
     // Gallery carousel
     var gallery = root.querySelector('[data-product-gallery] .product-main-media');
