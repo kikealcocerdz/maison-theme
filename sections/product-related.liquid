@@ -237,7 +237,13 @@
 /* v96 / v98 — mismas proporciones de tarjeta que el listado en móvil. */
 @media (max-width: 780px) {
   .product-related { width: calc(100vw - 28px) !important; }
-  .product-related .related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 28px 10px !important; }
+  /* Brief 2026-09-18: en móvil las dos filas son carruseles horizontales. */
+  .product-related .related-grid {
+    display: flex !important; gap: 10px !important; overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: none; margin: 0 -14px; padding: 0 14px; -webkit-overflow-scrolling: touch;
+  }
+  .product-related .related-grid::-webkit-scrollbar { display: none; }
+  .product-related .related-grid .product { flex: 0 0 min(58vw, 240px); scroll-snap-align: start; }
   .product-related .product-media { aspect-ratio: 4 / 5 !important; }
   .product-related .product-info { margin-top: 9px !important; gap: 4px 8px !important; font-size: 10px !important; }
   .product-related .product-info h3 { font-size: 10px !important; line-height: 1.32 !important; }

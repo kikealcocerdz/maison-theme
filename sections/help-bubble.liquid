@@ -193,6 +193,8 @@
   }
   .help-body { flex: 1 1 auto; }
   .help-head { padding: calc(16px + env(safe-area-inset-top, 0px)) 18px 14px; }
+  /* 16px: por debajo iOS hace zoom al enfocar el campo. */
+  .help-field textarea { font-size: 16px; }
   .help-bubble.is-open .help-fab { display: none; }
 }
 
