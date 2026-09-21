@@ -50,7 +50,7 @@
           "type": "phase",
           "settings": {
             "number": "01",
-            "title": "La <em>materia</em>",
+            "title": "La materia prima",
             "label": "Barbotina",
             "description": "Todo empieza en barro líquido: cuarzo, caolín, feldespato, sílice, arcilla y arena. La fórmula magistral de la casa, depurada hasta quedar sin aire."
           }
@@ -68,7 +68,7 @@
           "type": "phase",
           "settings": {
             "number": "03",
-            "title": "El <em>bizcocho</em>",
+            "title": "El bizcocho",
             "label": "Primera cocción · 1.150°C",
             "description": "Tras secar y repasar en crudo, dieciséis horas de horno la transforman en bizcocho: blanca, dura, porosa. Ya es loza, lista para recibir su identidad."
           }
@@ -77,7 +77,7 @@
           "type": "phase",
           "settings": {
             "number": "04",
-            "title": "Sellar",
+            "title": "El sellado",
             "label": "El sello, a mano",
             "description": "Una primera clasificación decide qué piezas continúan. Las elegidas reciben el sello de La Cartuja por serigrafía artesanal, una a una."
           }
@@ -95,7 +95,7 @@
           "type": "phase",
           "settings": {
             "number": "06",
-            "title": "El <em>esmaltado</em>",
+            "title": "El esmaltado",
             "label": "Esmaltado · 1.050°C",
             "description": "Bañada en barniz pieza a pieza, una tercera cocción convierte ese polvo en cristal. Brillo, transparencia y un color protegido para siempre."
           }
