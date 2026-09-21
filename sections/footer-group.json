@@ -34,7 +34,7 @@
           "type": "column",
           "settings": {
             "heading": "Editorial",
-            "items": "Artesanía | /pages/artesania\nCalidad | /pages/artesania#calidad\nHeritage 1842 | /pages/heritage-1841"
+            "items": "Artesanía | /pages/artesania\nCalidad | /pages/artesania#calidad\nHeritage 1841 | /pages/heritage-1841"
           }
         },
         "col-3": {
