@@ -32,6 +32,36 @@
   endif
 
   comment
+    Reglas por tipo (brief 2026-09-18 §8). Mugs: «Completa tu mesa» no tiene
+    sentido (no hay mesa) → la fila de colección no se pinta y «Te puede interesar»
+    mezcla mugs de letra y decorados. Juegos: café ↔ té / desayuno, así que no se
+    exige la misma pieza. Piezas con forma (platos…): sólo se sugieren otros
+    decorados de la misma forma.
+  endcomment
+  assign type_key = product.type | downcase
+  assign is_mug = false
+  if type_key == 'mug'
+    assign is_mug = true
+  endif
+  assign any_piece = false
+  if is_mug or type_key == 'juego' or type_key == 'vajilla'
+    assign any_piece = true
+  endif
+  assign own_forma = product.metafields.custom.forma.value | default: blank
+
+  comment
+    Recomendaciones a mano: los campos de Search & Discovery del producto
+    (complementarios → «Completa tu mesa», relacionados → «Te puede interesar»)
+    mandan sobre cualquier regla cuando el cliente los rellena.
+  endcomment
+  assign manual = blank
+  if section.settings.source == 'same_collection'
+    assign manual = product.metafields['shopify--discovery--product_recommendation'].complementary_products.value
+  elsif section.settings.source == 'same_type'
+    assign manual = product.metafields['shopify--discovery--product_recommendation'].related_products.value
+  endif
+
+  comment
     «Te puede interesar» = la MISMA pieza en otros decorados (plato llano, no plato
     hondo). La pieza es el título sin el decorado, y el decorado es el sufijo que el
     título comparte con sus hermanos de colección: «Plato Llano Flor Lis Azul» vs
@@ -39,7 +69,7 @@
     para que un parecido casual no alargue el sufijo.
   endcomment
   assign piece_prefix = blank
-  if section.settings.source == 'same_type' and own_collection != blank
+  if section.settings.source == 'same_type' and own_collection != blank and any_piece == false
     assign words = product.title | split: ' '
     assign suffix_len = 99
     assign compared = 0
@@ -87,11 +117,24 @@
     if type_col != blank and type_col.products.size > 0
       assign list = type_col.products
       assign exclude_own = true
+      if is_mug
+        assign exclude_own = false
+      endif
     endif
+  endif
+  if manual != blank and manual.size > 0
+    assign list = manual
+    assign exclude_own = false
+    assign piece_prefix = blank
+    assign own_forma = blank
   endif
   if list == blank or list.size == 0
     assign list = own_collection.products
     assign exclude_own = false
+  endif
+  assign skip_row = false
+  if is_mug and section.settings.source == 'same_collection' and manual == blank
+    assign skip_row = true
   endif
 
   # `recommendations.performed` is only true inside the /recommendations/products render,
@@ -111,6 +154,7 @@
     assign auto = true
   endif
 -%}
+{%- unless skip_row -%}
 <section class="product-related reveal" data-section-id="{{ section.id }}"{% if rec_url != blank %} data-recommendations="{{ rec_url | escape }}"{% endif %}>
   <div class="product-related__head">
     {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
@@ -136,6 +180,7 @@
           {%- if in_own -%}{%- continue -%}{%- endif -%}
         {%- endif -%}
         {%- if exclude_own and product.tags contains 'fin-de-existencias' -%}{%- continue -%}{%- endif -%}
+        {%- if exclude_own and own_forma != blank and product.metafields.custom.forma.value != own_forma -%}{%- continue -%}{%- endif -%}
         {%- if piece_prefix != blank -%}
           {%- assign cand = product.title | handleize | append: '-' -%}
           {%- assign head = cand | slice: 0, piece_prefix.size | append: '-' -%}
@@ -175,6 +220,7 @@
     {%- endif -%}
   </div>
 </section>
+{%- endunless -%}
 
 {% stylesheet %}
 .product-related { width: var(--content); margin: 0 auto; padding: 0 0 10vh; }
