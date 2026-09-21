@@ -54,8 +54,7 @@
   </section>
 
   {%- comment -%} «Trabaja con nosotros» reutiliza la página sin formulario: el CV va por mailto. {%- endcomment -%}
-  {%- if section.settings.show_form -%}
-  <section class="contact-form-section">
+  <section class="contact-form-section{% unless section.settings.show_form %} contact-form-section--solo{% endunless %}">
     <div class="contact-form-intro">
       {%- if section.settings.form_kicker != blank -%}<span class="contact-kicker">{{ section.settings.form_kicker | escape }}</span>{%- endif -%}
       <h2>{{ section.settings.form_title | escape }}</h2>
@@ -73,6 +72,7 @@
       {%- endif -%}
     </div>
 
+    {%- if section.settings.show_form -%}
     {%- form 'contact', class: 'contact-form' -%}
       {%- if form.posted_successfully? -%}
         <p class="contact-form__message contact-form__message--success">{{ 'sections.contact.success' | t }}</p>
@@ -129,8 +129,8 @@
         <button type="submit">{{ 'sections.contact.submit' | t }} <span aria-hidden="true">→</span></button>
       </div>
     {%- endform -%}
+    {%- endif -%}
   </section>
-  {%- endif -%}
 </main>
 
 {% stylesheet %}
@@ -308,6 +308,9 @@
   background: #eceff3;
   align-items: stretch;
 }
+
+.contact-form-section--solo { grid-template-columns: 1fr; }
+.contact-form-section--solo .contact-form-intro { max-width: 760px; margin: 0 auto; }
 
 .contact-form-intro {
   background: var(--brand);

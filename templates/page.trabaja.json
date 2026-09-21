@@ -15,7 +15,10 @@
         "card_title": "Envíanos tu currículum",
         "card_text": "Escríbenos a RRHH@lacartujadesevilla.com con tu currículum adjunto y una breve presentación. Leemos todas las candidaturas.",
         "card_link_label": "Enviar currículum",
-        "card_link": "mailto:RRHH@lacartujadesevilla.com?subject=Candidatura%20-%20Trabaja%20con%20nosotros"
+        "card_link": "mailto:RRHH@lacartujadesevilla.com?subject=Candidatura%20-%20Trabaja%20con%20nosotros",
+        "form_kicker": "Candidaturas",
+        "form_title": "Cuéntanos quién eres",
+        "form_intro": "Buscamos manos y miradas para el taller, la decoración, la tienda y la oficina. Envíanos tu currículum y te responderemos."
       },
       "blocks": {
         "email": {
@@ -36,8 +39,13 @@
           }
         }
       },
-      "block_order": ["email", "direccion"]
+      "block_order": [
+        "email",
+        "direccion"
+      ]
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
