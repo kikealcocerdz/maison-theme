@@ -536,7 +536,7 @@
 
 {%- comment -%} Fullscreen gallery lightbox {%- endcomment -%}
 <div class="product-lightbox" id="productLightbox" aria-hidden="true">
-  <button class="lightbox-close" type="button" aria-label="{{ 'sections.product.close' | t }}">×</button>
+  <button class="lightbox-close" type="button" aria-label="{{ 'sections.product.close' | t }}">{% render 'icon-close' %}</button>
   <aside class="lightbox-thumbs" aria-label="{{ 'sections.product.thumbs' | t }}">
     {%- if has_product -%}
       {%- for image in product.images limit: 6 -%}
@@ -623,7 +623,8 @@
 /* Fullscreen lightbox */
 .product-lightbox { position: fixed; inset: 0; background: var(--paper); z-index: 300; display: grid; grid-template-columns: 128px minmax(0, 1fr); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 320ms var(--ease), visibility 0s linear 320ms; }
 .product-lightbox.is-open { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity 320ms var(--ease), visibility 0s linear 0s; }
-.lightbox-close { position: fixed; top: 24px; right: 34px; z-index: 310; font-family: var(--serif); font-size: 40px; line-height: 1; color: var(--ink); }
+.lightbox-close { position: fixed; top: 18px; right: 24px; z-index: 310; width: 44px; height: 44px; display: grid; place-items: center; color: var(--ink); }
+.lightbox-close svg { width: 22px; height: 22px; }
 .lightbox-thumbs { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center; border-right: .5px solid var(--rule); background: var(--paper); z-index: 305; }
 .lightbox-thumbs button { width: 74px; height: 92px; border: .5px solid transparent; background: var(--ink-faint-20); padding: 5px; opacity: .55; transition: opacity 220ms var(--ease), border-color 220ms var(--ease), transform 220ms var(--ease); }
 .lightbox-thumbs button.active { opacity: 1; border-color: var(--ink); transform: translateX(5px); }

@@ -91,7 +91,8 @@
 .welcome-popup__message--error { color: var(--accent-1); }
 
 @media (max-width: 560px) {
-  .welcome-popup { width: calc(100% - 20px); }
+  .welcome-popup { width: calc(100% - 20px); max-height: calc(100dvh - 20px); overflow: auto; }
+  .welcome-popup__form input { font-size: 16px; }
   .welcome-popup__panel { padding: 54px 24px 32px; }
   .welcome-popup h2 { font-size: clamp(36px, 12vw, 50px); }
   .welcome-popup__fields { grid-template-columns: 1fr; border-bottom: 0; gap: 12px; }

@@ -113,7 +113,7 @@
   font-weight: 400; margin: 0 0 16px;
 }
 .scene-redesign .scene-copy p {
-  font-size: 12px; line-height: 1.85; color: var(--ink-soft); max-width: 580px; margin: 0 auto;
+  font-size: 15px; line-height: 1.65; color: var(--ink-soft); max-width: 580px; margin: 0 auto;
 }
 .scene-interactive {
   display: grid; grid-template-columns: 1.08fr 0.92fr;
@@ -255,7 +255,8 @@
    producto debajo dentro de un módulo estable.
    ========================================================================== */
 @media(max-width:760px) {
-  .scene-redesign { padding-left:14px!important;padding-right:14px!important }
+  /* Menos aire vertical entre secciones en móvil (brief 2026-09-18). */
+  .scene-redesign { padding:56px 14px 72px!important }
   .scene-layout { display:block!important;width:100%!important }
   .scene-copy { text-align:left!important;margin-bottom:18px!important }
   /* Filas en fracciones, no en dvh: con min-height/max-height activos las filas fijas
