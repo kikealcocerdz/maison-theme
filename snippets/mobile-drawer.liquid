@@ -29,6 +29,25 @@
           <li><a href="{{ link.url }}">{{ link.title }}</a></li>
         {%- endif -%}
       {%- endfor -%}
+    </ul>
+
+    {%- comment -%}
+      La tarjeta Heritage del megamenú, debajo de Colecciones (último del menú
+      izquierdo) y estirada hasta el bloque editorial. ponytail: texto y enlace fijos
+      como en header-group.json; pasar a ajustes si el cliente quiere editarla.
+    {%- endcomment -%}
+    {%- if menu_right.links.size > 0 -%}
+      <a class="mega-card mobile-heritage" href="/pages/heritage-1841">
+        <img src="{{ 'menu-heritage-menu.webp' | asset_url }}" alt="" width="1536" height="1024" loading="lazy" decoding="async">
+        <span class="mega-card__copy">
+          <small>{{ shop.name }}</small>
+          <strong>Heritage crafted for modern living</strong>
+          <em>Descubrir historia →</em>
+        </span>
+      </a>
+    {%- endif -%}
+
+    <ul class="mobile-main-list mobile-main-list--editorial">
       {%- for link in menu_right.links -%}
         {%- if link.links.size > 0 -%}
           <li><button type="button" data-mobile-open="r{{ forloop.index }}">{{ link.title }}</button></li>

@@ -605,6 +605,12 @@
 @keyframes mobile-view-in { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
 
 .mobile-main-list { list-style: none; margin: 0; padding: 20px 14px 28px; }
+/* Vista principal: menú, tarjeta Heritage que ocupa el hueco y el bloque editorial al pie. */
+.mobile-view[data-mobile-view="main"].is-active { display: flex; flex-direction: column; }
+.mobile-view[data-mobile-view="main"] .mobile-main-list:first-child { padding-bottom: 18px; }
+.mobile-main-list--editorial { padding-top: 6px; }
+.mobile-main-list--editorial:empty { display: none; }
+.mobile-heritage { flex: 1 0 200px; margin: 0 14px; max-height: 420px; }
 .mobile-main-list li { border-bottom: 0.5px solid rgba(15, 26, 46, 0.13); }
 .mobile-main-list a,
 .mobile-main-list button {
@@ -677,15 +683,30 @@
 
 .skip-link:focus { left: 16px; top: 16px; }
 
-/* Entre 1050 y 1280px la barra sigue siendo de escritorio pero el hueco no da
-   para cinco entradas a 11px: baja medio punto y cierra el tracking. */
+/* Aire fijo junto al logo: con el menú a 13px/600 «Colecciones» se montaba encima
+   entre 1050 y 1350px. */
+@media (min-width: 1051px) {
+  .nav-left { padding-right: 24px; }
+  .nav-right { padding-left: 24px; }
+}
+
+/* Entre 1050 y 1440px la barra sigue siendo de escritorio pero el hueco es justo:
+   baja el tamaño y cierra el tracking antes que pisar el logo. */
 @media (min-width: 1051px) and (max-width: 1280px) {
   .nav-left,
-  .nav-right { gap: 16px; font-size: 10.5px; letter-spacing: 0.16em; }
+  .nav-right { gap: 12px; font-size: 10.5px; letter-spacing: 0.16em; }
   .nav-left > a,
   .nav-left .nav-item__link,
   .nav-right > a:not(.search-link):not(.account-link):not(.header-cart),
-  .nav-right .nav-item__link { font-size: 12px; }
+  .nav-right .nav-item__link { font-size: 11px; letter-spacing: 0.1em; }
+}
+@media (min-width: 1281px) and (max-width: 1440px) {
+  .nav-left,
+  .nav-right { gap: clamp(16px, 1.4vw, 38px); }
+  .nav-left > a,
+  .nav-left .nav-item__link,
+  .nav-right > a:not(.search-link):not(.account-link):not(.header-cart),
+  .nav-right .nav-item__link { letter-spacing: 0.12em; }
 }
 
 @media (max-width: 1050px) {
