@@ -198,10 +198,12 @@
   .help-bubble.is-open .help-fab { display: none; }
 }
 
-/* En la ficha de producto el botón de compra queda pegado abajo: la burbuja sube
+/* En la ficha de producto y en la cesta el botón de compra queda pegado abajo: la burbuja sube
    por encima para no solaparlo. */
 @media (max-width: 760px) {
   body.template-product .help-bubble { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+  /* Cesta: por encima de la barra fija «Total · Ir al pago» (~136px). */
+  body.template-cart:has(.cart-page__paybar) .help-bubble { bottom: calc(150px + env(safe-area-inset-bottom, 0px)); }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1191,6 +1191,16 @@
       var labelEls = [].slice.call(root.querySelectorAll('[data-bundle-label]'));
       var stickyPrice = root.querySelector('[data-sticky-price]');
       var packs = [].slice.call(root.querySelectorAll('[data-pack-for]'));
+      // La descripción del producto nombra un solo pack («Vajilla completa de 42 piezas»):
+      // el número sigue al pack elegido.
+      var descEls = [].slice.call(root.querySelectorAll('.product-short, .product-description'));
+      var setDescCount = function (label) {
+        var n = (label || '').match(/\d+/);
+        if (!n) return;
+        descEls.forEach(function (el) { el.innerHTML = el.innerHTML.replace(/\b\d+(\s+piezas)\b/gi, n[0] + '$1'); });
+      };
+      var activeOpt = root.querySelector('.bundle-option.is-active');
+      if (activeOpt) setDescCount(activeOpt.getAttribute('data-label'));
       options.forEach(function (btn) {
         btn.addEventListener('click', function () {
           if (btn.disabled) return;
@@ -1201,6 +1211,7 @@
           if (priceEl) priceEl.textContent = btn.getAttribute('data-price');
           if (stickyPrice) stickyPrice.textContent = btn.getAttribute('data-price');
           labelEls.forEach(function (el) { el.textContent = btn.getAttribute('data-label'); });
+          setDescCount(btn.getAttribute('data-label'));
           var vid = btn.getAttribute('data-variant-id');
           if (variantInput && vid) {
             variantInput.value = vid;

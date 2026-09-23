@@ -143,7 +143,10 @@
       "recover_last": "Recuperar la última pieza",
       "empty_body": "Aún no ha reservado ninguna pieza. Nuestras mesas se componen despacio: empiece por una colección.",
       "empty_cta": "Ver las colecciones",
-      "paybar_total": "Total · {{ count }} piezas",
+      "paybar_total": {
+        "one": "Total · 1 pieza",
+        "other": "Total · {{ count }} piezas"
+      },
       "count_words": "ninguna,Una,Dos,Tres,Cuatro,Cinco,Seis,Siete,Ocho,Nueve,Diez,Once,Doce",
       "count_line": {
         "one": "{{ n }} pieza reservada",

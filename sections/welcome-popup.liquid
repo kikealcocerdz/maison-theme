@@ -189,7 +189,8 @@
       document.addEventListener('keydown', function (event) { if (event.key === 'Escape' && !popup.hidden) close(); });
 
       if (status || (window.Shopify && Shopify.designMode)) open();
-      else if (!dismissed()) window.setTimeout(open, delay);
+      // En la cesta no: taparía la barra de pago en móvil.
+      else if (!dismissed() && !document.body.classList.contains('template-cart')) window.setTimeout(open, delay);
     });
   }
 

@@ -464,11 +464,20 @@
         nav.querySelector('.wz-mobile-prev').addEventListener('click', function () {
           mobileWizardIndex = Math.max(0, mobileWizardIndex - 1);
           renderWizard();
-          var wizard = document.getElementById('wizard');
-          if (wizard) wizard.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+          scrollToMobileStep();
         });
       }
       renderWizard();
+    }
+
+    // Móvil: la vista previa es sticky y tapaba el título de la pregunta. Se deja la
+    // pregunta actual justo debajo de ella en vez de subir al inicio de la sección.
+    function scrollToMobileStep() {
+      var step = $('.wz-step.is-mobile-current', panel);
+      var preview = $('.wz-preview--redesign');
+      if (!step) return;
+      var offset = preview ? (parseFloat(getComputedStyle(preview).top) || 0) + preview.offsetHeight + 10 : 80;
+      window.scrollTo({ top: step.getBoundingClientRect().top + window.scrollY - offset, behavior: scrollBehavior });
     }
 
     function firstUnansweredIndex() {
@@ -642,10 +651,7 @@
         if (nextStep && !isMobileWizard()) {
           window.setTimeout(function () { nextStep.scrollIntoView({ behavior: scrollBehavior, block: window.innerWidth <= 1180 ? 'center' : 'nearest' }); }, 160);
         }
-        if (isMobileWizard()) {
-          var wizardSection = document.getElementById('wizard');
-          if (wizardSection) window.setTimeout(function () { wizardSection.scrollIntoView({ behavior: scrollBehavior, block: 'start' }); }, 100);
-        }
+        if (isMobileWizard()) window.setTimeout(scrollToMobileStep, 100);
         if (nextIdx >= totalSteps) window.setTimeout(buildResult, 320);
       });
     }

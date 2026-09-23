@@ -143,7 +143,10 @@
       "recover_last": "Bring back the last piece",
       "empty_body": "You have not reserved a piece yet. Our tables are composed slowly: begin with a collection.",
       "empty_cta": "See the collections",
-      "paybar_total": "Total · {{ count }} pieces",
+      "paybar_total": {
+        "one": "Total · 1 piece",
+        "other": "Total · {{ count }} pieces"
+      },
       "count_words": "no,One,Two,Three,Four,Five,Six,Seven,Eight,Nine,Ten,Eleven,Twelve",
       "count_line": {
         "one": "{{ n }} piece reserved",
