@@ -80,3 +80,6 @@ y `menu-derecha`; en **Collection grid**, el menú del lateral.
 | `24_pagina_trabaja.py` | Página «Trabaja con nosotros» con plantilla `page.trabaja` | Borrar la página en Admin |
 | `25_reglas_colecciones.py` | Añade la grafía real (Flor de Lis, Ceilán, Juego Café/Té…) a las reglas de colección | Restaurar el ruleSet del informe |
 | `26_erratas_restantes.py` | Erratas restantes del informe 2026-09-18 (Oaxaca/Gastón, tetera, mugs, Flor de Lis, boles, Heritage 1841) | Restaurar desde el informe |
+| `28_fotos_principales.py` | Foto de «PNG productos la cartuja/» como primera foto de cada producto (no borra las que había) | `productDeleteMedia` de las creadas (ids en el informe) |
+| `29_fotos_gif_a_original.py` | Cambia las 38 fotos del lote 28 que eran GIF/PSD con extensión .webp por el JPG/PNG de `Originales/` | `productDeleteMedia` de las creadas (informe) |
+| `30_fotos_principales_falsos_iguales.py` | 14 productos donde el lote 28 tomó una foto antigua de agosto por la nueva (mismo nombre): sube la nueva y la pone primera | `productDeleteMedia` de las creadas (informe) |
