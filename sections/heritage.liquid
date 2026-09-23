@@ -69,7 +69,7 @@
     <div class="hero-copy">
       <div>
         {%- if section.settings.hero_eyebrow != blank -%}<p class="eyebrow">{{ section.settings.hero_eyebrow | escape }}</p>{%- endif -%}
-        <h1>{{ section.settings.hero_title | escape }}{% if section.settings.hero_title_2 != blank %}<br>{{ section.settings.hero_title_2 | escape }}{% endif %}</h1>
+        <h1>{{ section.settings.hero_title | escape }}{% if section.settings.hero_title_2 != blank %} <br>{{ section.settings.hero_title_2 | escape }}{% endif %}</h1>
         {%- if section.settings.hero_intro != blank -%}<p>{{ section.settings.hero_intro }}</p>{%- endif -%}
       </div>
     </div>
