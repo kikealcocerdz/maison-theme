@@ -1,0 +1,958 @@
+{
+  "modo": "ensayo",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "sin foto anterior (no se tocan)",
+      "resultado": []
+    }
+  ],
+  "planificado": [
+    {
+      "paso": "quitar foto nueva de «Azucarero 202 Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387594637653",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935422615893"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Azucarero Aurora Blanca»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387594703189",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934936994133"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Azucarero Bellavista»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387594735957",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935425335637"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Azucarero Ceilán»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387594768725",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934938992981"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Azucarero N. Vistas Amarillo A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387594932565",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934939517269"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Azucarero N. Vistas Azul A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387594965333",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934941024597"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Azucarero Negro Vistas»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387594998101",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934941745493"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Azucarero Ochavado Blanco»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387595063637",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934942630229"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Azucarero Viejo Molino»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387595129173",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935427563861"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bandeja Pastas 202 Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387595522389",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935433429333"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bandeja Pastas Aurora Blanca»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387595587925",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934952460629"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bandeja Pastas Bellavista»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387595620693",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934953476437"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bandeja Pastas N. Vistas Amarillo A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387595784533",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934954557781"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bandeja Pastas N. Vistas Azul A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387595817301",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934955704661"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bandeja Pastas Negro Vistas»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387595850069",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934956196181"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bandeja Pastas Ochavado Blanco»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387595882837",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934956786005"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bandeja Pastas Viejo Molino»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387595915605",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935438442837"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bandeja Vistas Cibeles Azul»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387595948373",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934958031189"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bandeja Vistas Cibeles Negro»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596013909",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934959046997"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bandeja Vistas Maestranza Azul»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596046677",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934959571285"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bandeja Vistas Plaza España Azul»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596112213",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934960259413"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bandeja Vistas Plaza España Negra»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596144981",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934961078613"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bandeja Vistas Sevilla Azul»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596177749",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934961471829"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bandeja Vistas Sevilla Negro»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596243285",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934962323797"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Grande 202 Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596276053",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935441424725"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Grande Bellavista»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596308821",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935442932053"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Grande Ceilán»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596374357",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934965403989"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Grande N. Vistas Amarillo A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596472661",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934966255957"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Grande N. Vistas Azul A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596505429",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934967206229"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Grande Negro Vistas»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596538197",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934968549717"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Grande Viejo Molino»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596570965",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935444865365"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Mini 202 Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596603733",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935446176085"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Mini Bellavista»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596636501",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935447388501"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Mini Ceilán»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596702037",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935449190741"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Mini N. Vistas Amarillo A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596800341",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934973989205"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Mini N. Vistas Azul A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596833109",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934974841173"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Mini Negro Vistas»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596865877",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934975693141"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Mini Viejo Molino»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596898645",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935450534229"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Peq. N. Vistas Azul A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596931413",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934977036629"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Pequeño 202 Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596964181",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935452205397"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Pequeño Bellavista»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387596996949",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935453614421"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Pequeño Ceilán»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387597095253",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935454957909"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Pequeño N. Vistas Amarillo A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387597193557",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934992994645"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Pequeño Negro Vistas»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387597226325",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58934994665813"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Bol Pequeño Viejo Molino»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387597259093",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935456301397"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Cafetera 202 Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387597422933",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935459381589"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Cafetera Aurora Blanca»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387597455701",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935460757845"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Cafetera Bellavista»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387597488469",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935462363477"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Cafetera Ceilán»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387597521237",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935464100181"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Cafetera Flor de Lis Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387597586773",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935005544789"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Cafetera N. Vistas Amarillo A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387597619541",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935465574741"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Cafetera N. Vistas Azul A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387597652309",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935467114837"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Cafetera Negro Vistas»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387597685077",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935009345877"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Cafetera Ochavado Blanco»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387597717845",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935009968469"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Cafetera Viejo Molino»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387597750613",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935468654933"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Café Con Platillo 202 Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607187797",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935310614869"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Café Con Platillo Aurora Blanca»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607220565",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935311532373"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Café Con Platillo Bellavista»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607253333",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935312777557"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Café Con Platillo Ceilán»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607286101",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935313760597"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Café Con Platillo Flor de Lis Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607351637",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935315104085"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Café Con Platillo Negro Vistas»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607449941",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935316250965"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Café Con Platillo Ochavado Blanco»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607482709",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935317463381"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Café Con Platillo Viejo Molino»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607515477",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935318053205"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé 202 Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607548245",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935319298389"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé Aurora Blanca»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607581013",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935320346965"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé Bellavista»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607613781",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935321330005"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé Ceilán»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608006997",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935323066709"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé Con Platillo 202 Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607646549",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935324901717"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé Con Platillo Aurora Blanca»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607679317",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935326081365"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé Con Platillo Bellavista»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607712085",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935327064405"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé Con Platillo Ceilán»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607744853",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935328473429"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé Con Platillo Flor de Lis Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607810389",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935329718613"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé Con Platillo Negro Vistas»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607908693",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935331062101"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé Con Platillo Ochavado Blanco»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607941461",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935332045141"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé Con Platillo Viejo Molino»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387607974229",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935333323093"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé Flor de Lis Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608072533",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935334666581"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé N. Vistas Amarillo A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608105301",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935475700053"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé N. Vistas Azul A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608138069",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935477797205"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé Negro Vistas»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608170837",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935338565973"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé Ochavado Blanco»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608203605",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935479238997"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Consomé Viejo Molino»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608236373",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935341744469"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno 202 Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608269141",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935342596437"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno Bellavista»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608301909",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935344398677"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno Ceilán»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608727893",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935345676629"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno Con Platillo 202 Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608367445",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935346921813"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno Con Platillo Aurora Blanca»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608400213",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935349018965"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno Con Platillo Bellavista»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608432981",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935350067541"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno Con Platillo Ceilán»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608465749",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935351673173"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno Con Platillo Flor de Lis Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608531285",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935352262997"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno Con Platillo Negro Vistas»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608629589",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935353475413"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno Con Platillo Ochavado Blanco»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608662357",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935354491221"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno Con Platillo Viejo Molino»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608695125",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935355638101"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno Flor de Lis Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608793429",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935356490069"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno N. Vistas Amarillo A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608826197",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935480942933"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno N. Vistas Azul A. Stewart»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608858965",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935482548565"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno Negro Vistas»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608891733",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935484154197"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Desayuno Viejo Molino»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608924501",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935361995093"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Té Con Platillo 202 Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608957269",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935364682069"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Té Con Platillo Aurora Blanca»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387608990037",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935366746453"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Té Con Platillo Bellavista»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387609022805",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935369138517"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Té Con Platillo Ceilán»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387609055573",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935371071829"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Té Con Platillo Flor de Lis Rosa»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387609121109",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935372841301"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Té Con Platillo Negro Vistas»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387609219413",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935486611797"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Té Con Platillo Viejo Molino»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387609284949",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935377461589"
+        ]
+      }
+    },
+    {
+      "paso": "quitar foto nueva de «Taza Té Con Platillo ochavado Blanco»",
+      "variables": {
+        "productId": "gid://shopify/Product/11387609252181",
+        "mediaIds": [
+          "gid://shopify/MediaImage/58935488184661"
+        ]
+      }
+    }
+  ],
+  "fallido": []
+}
