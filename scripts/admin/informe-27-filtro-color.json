@@ -1,7 +1,16 @@
 {
-  "modo": "ensayo",
+  "modo": "aplicado",
   "tienda": "la-cartuja-de-sevilla.myshopify.com",
   "ejecutado": [
+    {
+      "paso": "definición custom.color",
+      "resultado": {
+        "createdDefinition": {
+          "id": "gid://shopify/MetafieldDefinition/503382704469"
+        },
+        "userErrors": []
+      }
+    },
     {
       "paso": "sin color",
       "resultado": [
@@ -54,3462 +63,1576 @@
         "Mug Eden",
         "Vela aromática Edén"
       ]
-    }
-  ],
-  "planificado": [
-    {
-      "paso": "definición custom.color",
-      "variables": {
-        "d": {
-          "name": "Color",
-          "namespace": "custom",
-          "key": "color",
-          "ownerType": "PRODUCT",
-          "type": "single_line_text_field",
-          "description": "Color principal (filtro de colecciones)",
-          "access": {
-            "storefront": "PUBLIC_READ"
-          }
-        }
-      }
     },
     {
       "paso": "color 1–25 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387594637653",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275822592341"
           },
           {
-            "ownerId": "gid://shopify/Product/11387594703189",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275822625109"
           },
           {
-            "ownerId": "gid://shopify/Product/11387594735957",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275822657877"
           },
           {
-            "ownerId": "gid://shopify/Product/11387594768725",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275822690645"
           },
           {
-            "ownerId": "gid://shopify/Product/11387594834261",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275822723413"
           },
           {
-            "ownerId": "gid://shopify/Product/11387594899797",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275822756181"
           },
           {
-            "ownerId": "gid://shopify/Product/11387594932565",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275822788949"
           },
           {
-            "ownerId": "gid://shopify/Product/11387594965333",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275822821717"
           },
           {
-            "ownerId": "gid://shopify/Product/11387594998101",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275822854485"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595063637",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275822887253"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595129173",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275822920021"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595161941",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275822952789"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595194709",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275822985557"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595227477",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275823018325"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595260245",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275823051093"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595293013",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275823083861"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595358549",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275823116629"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595391317",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275823149397"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595424085",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275823182165"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595456853",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275823214933"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595489621",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275823247701"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595522389",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275823280469"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595587925",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275823313237"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595620693",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275823346005"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595653461",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275823378773"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 26–50 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387595686229",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275824427349"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595718997",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275824460117"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595784533",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275824492885"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595817301",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275824525653"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595850069",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275824558421"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595882837",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275824591189"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595915605",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275824623957"
           },
           {
-            "ownerId": "gid://shopify/Product/11387595948373",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275824656725"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596013909",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275824689493"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596046677",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275824722261"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596112213",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275824755029"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596144981",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275824787797"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596177749",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275824820565"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596243285",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275824853333"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596276053",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275824886101"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596308821",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275824918869"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596341589",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275824951637"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596374357",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275824984405"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596407125",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275825017173"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596439893",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275825049941"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596472661",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275825082709"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596505429",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275825115477"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596538197",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275825148245"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596570965",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275825181013"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596603733",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275825213781"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 51–75 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387596636501",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275826164053"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596669269",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275826196821"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596702037",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275826229589"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596734805",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275826262357"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596767573",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275826295125"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596800341",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275826327893"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596833109",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275826360661"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596865877",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275826393429"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596898645",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275826426197"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596931413",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275826458965"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596964181",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275826491733"
           },
           {
-            "ownerId": "gid://shopify/Product/11387596996949",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275826524501"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597062485",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275826557269"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597095253",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275826590037"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597128021",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275826622805"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597160789",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275826655573"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597193557",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275826688341"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597226325",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275826721109"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597259093",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275826753877"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597291861",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275826786645"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597324629",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275826819413"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597357397",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275826852181"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597422933",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275826884949"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597455701",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275826917717"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597488469",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275826950485"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 76–100 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387597521237",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275827835221"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597554005",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275827867989"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597586773",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275827900757"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597619541",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275827933525"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597652309",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275827966293"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597685077",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275827999061"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597717845",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275828031829"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597750613",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275828064597"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597816149",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275828097365"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597848917",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275828130133"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597881685",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275828162901"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597914453",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275828195669"
           },
           {
-            "ownerId": "gid://shopify/Product/11387597947221",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275828228437"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598012757",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275828261205"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598045525",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275828293973"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598078293",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275828326741"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598111061",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275828359509"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598143829",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275828392277"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598176597",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275828425045"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598209365",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275828457813"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598242133",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275828490581"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598274901",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275828523349"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598307669",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275828556117"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598340437",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275828588885"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598373205",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275828621653"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 101–125 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387598405973",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275829539157"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598438741",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275829571925"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598471509",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275829604693"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598504277",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275829637461"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598537045",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275829670229"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598569813",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275829702997"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598602581",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275829735765"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598635349",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275829768533"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598668117",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275829801301"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598700885",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275829834069"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598733653",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275829866837"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598766421",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275829899605"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598799189",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275829932373"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598831957",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275829965141"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598864725",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275829997909"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598897493",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275830030677"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598930261",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275830063445"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598963029",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275830096213"
           },
           {
-            "ownerId": "gid://shopify/Product/11387598995797",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275830128981"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599028565",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275830161749"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599061333",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275830194517"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599094101",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275830227285"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599126869",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275830260053"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599159637",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275830292821"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599192405",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275830325589"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 126–150 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387599225173",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275831996757"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599257941",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275832029525"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599290709",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275832062293"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599323477",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275832095061"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599356245",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275832127829"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599389013",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275832160597"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599421781",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275832193365"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599454549",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275832226133"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599487317",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275832258901"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599520085",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275832291669"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599552853",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275832324437"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599585621",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275832357205"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599618389",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275832389973"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599651157",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275832422741"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599683925",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275832455509"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599716693",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275832488277"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599749461",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275832521045"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599814997",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275832553813"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599847765",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275832586581"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599880533",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275832619349"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599913301",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275832652117"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599946069",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275832684885"
           },
           {
-            "ownerId": "gid://shopify/Product/11387599978837",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275832717653"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600011605",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275832750421"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600044373",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275832783189"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 151–175 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387600077141",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275838615893"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600109909",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275838648661"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600142677",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275838681429"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600175445",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275838714197"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600208213",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275838746965"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600273749",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275838779733"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600306517",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275838812501"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600339285",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275838845269"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600372053",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275838878037"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600437589",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275838910805"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600470357",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275838943573"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600503125",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275838976341"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600535893",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275839009109"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600568661",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275839041877"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600634197",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275839074645"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600666965",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275839107413"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600699733",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275839140181"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600732501",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275839172949"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600765269",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275839205717"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600798037",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275839238485"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600830805",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275839271253"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600863573",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275839304021"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600896341",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275839336789"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600929109",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275839369557"
           },
           {
-            "ownerId": "gid://shopify/Product/11387600961877",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275839402325"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 176–200 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387600994645",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275840057685"
           },
           {
-            "ownerId": "gid://shopify/Product/11387601027413",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275840090453"
           },
           {
-            "ownerId": "gid://shopify/Product/11387601060181",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275840123221"
           },
           {
-            "ownerId": "gid://shopify/Product/11387601092949",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275840155989"
           },
           {
-            "ownerId": "gid://shopify/Product/11387601125717",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275840188757"
           },
           {
-            "ownerId": "gid://shopify/Product/11387602141525",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275840221525"
           },
           {
-            "ownerId": "gid://shopify/Product/11387602174293",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275840254293"
           },
           {
-            "ownerId": "gid://shopify/Product/11387602207061",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275840287061"
           },
           {
-            "ownerId": "gid://shopify/Product/11387602239829",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275840319829"
           },
           {
-            "ownerId": "gid://shopify/Product/11387602272597",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275840352597"
           },
           {
-            "ownerId": "gid://shopify/Product/11387602305365",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275840385365"
           },
           {
-            "ownerId": "gid://shopify/Product/11387602338133",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275840418133"
           },
           {
-            "ownerId": "gid://shopify/Product/11387602370901",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275840450901"
           },
           {
-            "ownerId": "gid://shopify/Product/11387602403669",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275840483669"
           },
           {
-            "ownerId": "gid://shopify/Product/11387602436437",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275840516437"
           },
           {
-            "ownerId": "gid://shopify/Product/11387602469205",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275840549205"
           },
           {
-            "ownerId": "gid://shopify/Product/11387602501973",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275840581973"
           },
           {
-            "ownerId": "gid://shopify/Product/11387603452245",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275840614741"
           },
           {
-            "ownerId": "gid://shopify/Product/11387603517781",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275840647509"
           },
           {
-            "ownerId": "gid://shopify/Product/11387603550549",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275840680277"
           },
           {
-            "ownerId": "gid://shopify/Product/11387603583317",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275840713045"
           },
           {
-            "ownerId": "gid://shopify/Product/11387603616085",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275840745813"
           },
           {
-            "ownerId": "gid://shopify/Product/11387603648853",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275840778581"
           },
           {
-            "ownerId": "gid://shopify/Product/11387603681621",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275840811349"
           },
           {
-            "ownerId": "gid://shopify/Product/11387603714389",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275840844117"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 201–225 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387603747157",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275841728853"
           },
           {
-            "ownerId": "gid://shopify/Product/11387603779925",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275841761621"
           },
           {
-            "ownerId": "gid://shopify/Product/11387603812693",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275841794389"
           },
           {
-            "ownerId": "gid://shopify/Product/11387603845461",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275841827157"
           },
           {
-            "ownerId": "gid://shopify/Product/11387603878229",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275841859925"
           },
           {
-            "ownerId": "gid://shopify/Product/11387603910997",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275841892693"
           },
           {
-            "ownerId": "gid://shopify/Product/11387603943765",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275841925461"
           },
           {
-            "ownerId": "gid://shopify/Product/11387603976533",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275841958229"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604009301",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275841990997"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604042069",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275842023765"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604074837",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275842056533"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604107605",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275842089301"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604140373",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275842122069"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604173141",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275842154837"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604205909",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275842187605"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604238677",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275842220373"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604271445",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275842253141"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604304213",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275842285909"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604336981",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275842318677"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604369749",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275842351445"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604402517",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275842384213"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604435285",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275842416981"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604468053",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275842449749"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604500821",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275842482517"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604533589",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275842515285"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 226–250 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387604566357",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275843563861"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604599125",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275843596629"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604631893",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275843629397"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604664661",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275843662165"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604697429",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275843694933"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604730197",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275843727701"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604762965",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275843760469"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604795733",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275843793237"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604828501",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275843826005"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604861269",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275843858773"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604894037",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275843891541"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604926805",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275843924309"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604959573",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275843957077"
           },
           {
-            "ownerId": "gid://shopify/Product/11387604992341",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275843989845"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605025109",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275844022613"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605057877",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275844055381"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605090645",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275844088149"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605123413",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275844120917"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605156181",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275844153685"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605188949",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275844186453"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605221717",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275844219221"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605254485",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275844251989"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605320021",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275844284757"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605352789",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275844317525"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605385557",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275844350293"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 251–275 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387605418325",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275845071189"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605451093",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275845103957"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605483861",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275845136725"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605516629",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275845169493"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605549397",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275845202261"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605582165",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275845235029"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605614933",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275845267797"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605647701",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275845300565"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605680469",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275845333333"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605713237",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275845366101"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605746005",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275845398869"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605778773",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275845431637"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605811541",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275845464405"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605844309",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275845497173"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605877077",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275845529941"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605909845",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275845562709"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605942613",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275845595477"
           },
           {
-            "ownerId": "gid://shopify/Product/11387605975381",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275845628245"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606040917",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275845661013"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606073685",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275845693781"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606106453",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275845726549"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606139221",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275845759317"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606171989",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275845792085"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606237525",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275845824853"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606270293",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275845857621"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 276–300 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387606303061",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275846938965"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606335829",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275846971733"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606368597",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275847004501"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606401365",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275847037269"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606434133",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275847070037"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606466901",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275847102805"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606499669",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275847135573"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606532437",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275847168341"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606565205",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275847201109"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606597973",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275847233877"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606630741",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275847266645"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606663509",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275847299413"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606696277",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275847332181"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606729045",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275847364949"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606761813",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275847397717"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606794581",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275847430485"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606827349",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275847463253"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606860117",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275847496021"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606892885",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275847528789"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606925653",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275847561557"
           },
           {
-            "ownerId": "gid://shopify/Product/11387606958421",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275847594325"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607023957",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275847627093"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607056725",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275847659861"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607089493",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275847692629"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607122261",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275847725397"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 301–325 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387607155029",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275853721941"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607187797",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275853754709"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607220565",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275853787477"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607253333",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275853820245"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607286101",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275853853013"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607318869",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275853885781"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607351637",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275853918549"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607384405",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275853951317"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607417173",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275853984085"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607449941",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275854016853"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607482709",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275854049621"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607515477",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275854082389"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607548245",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275854115157"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607581013",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275854147925"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607613781",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275854180693"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607646549",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275854213461"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607679317",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275854246229"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607712085",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275854278997"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607744853",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275854311765"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607777621",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275854344533"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607810389",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275854377301"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607843157",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275854410069"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607875925",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275854442837"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607908693",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275854475605"
           },
           {
-            "ownerId": "gid://shopify/Product/11387607941461",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275854508373"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 326–350 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387607974229",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275855229269"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608006997",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275855262037"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608039765",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275855294805"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608072533",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275855327573"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608105301",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275855360341"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608138069",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275855393109"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608170837",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275855425877"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608203605",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275855458645"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608236373",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275855491413"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608269141",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275855524181"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608301909",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275855556949"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608334677",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275855589717"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608367445",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275855622485"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608400213",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275855655253"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608432981",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275855688021"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608465749",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275855720789"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608498517",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275855753557"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608531285",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275855786325"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608564053",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275855819093"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608596821",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275855851861"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608629589",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275855884629"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608662357",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275855917397"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608695125",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275855950165"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608727893",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275855982933"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608760661",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275856015701"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 351–375 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387608793429",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275856736597"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608826197",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275856769365"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608858965",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275856802133"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608891733",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275856834901"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608924501",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275856867669"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608957269",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275856900437"
           },
           {
-            "ownerId": "gid://shopify/Product/11387608990037",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275856933205"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609022805",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275856965973"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609055573",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275856998741"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609088341",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275857031509"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609121109",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275857064277"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609153877",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275857097045"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609186645",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275857129813"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609219413",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275857162581"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609252181",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275857195349"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609284949",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275857228117"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609317717",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275857260885"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609350485",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275857293653"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609383253",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275857326421"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609416021",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275857359189"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609448789",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275857391957"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609481557",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275857424725"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609514325",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275857457493"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609547093",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275857490261"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609579861",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275857523029"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 376–400 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387609612629",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275858112853"
           },
           {
-            "ownerId": "gid://shopify/Product/11387609645397",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275858145621"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610431829",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275858178389"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610464597",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275858211157"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610497365",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275858243925"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610530133",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275858276693"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610562901",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275858309461"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610595669",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275858342229"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610628437",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275858374997"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610661205",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275858407765"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610693973",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275858440533"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610726741",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275858473301"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610759509",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275858506069"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610792277",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275858538837"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610825045",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275858571605"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610857813",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275858604373"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610890581",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275858637141"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610923349",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275858669909"
           },
           {
-            "ownerId": "gid://shopify/Product/11387610988885",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275858702677"
           },
           {
-            "ownerId": "gid://shopify/Product/11387611021653",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275858735445"
           },
           {
-            "ownerId": "gid://shopify/Product/11387611054421",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275858768213"
           },
           {
-            "ownerId": "gid://shopify/Product/11387611119957",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275858800981"
           },
           {
-            "ownerId": "gid://shopify/Product/11387611152725",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275858833749"
           },
           {
-            "ownerId": "gid://shopify/Product/11387611185493",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275858866517"
           },
           {
-            "ownerId": "gid://shopify/Product/11387611218261",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275858899285"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 401–425 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11387611251029",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275859521877"
           },
           {
-            "ownerId": "gid://shopify/Product/11387611283797",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275859554645"
           },
           {
-            "ownerId": "gid://shopify/Product/11387611316565",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275859587413"
           },
           {
-            "ownerId": "gid://shopify/Product/11387611349333",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275859620181"
           },
           {
-            "ownerId": "gid://shopify/Product/11387611414869",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275859652949"
           },
           {
-            "ownerId": "gid://shopify/Product/11387611447637",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275859685717"
           },
           {
-            "ownerId": "gid://shopify/Product/11387611480405",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275859718485"
           },
           {
-            "ownerId": "gid://shopify/Product/11387611513173",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275859751253"
           },
           {
-            "ownerId": "gid://shopify/Product/11387611545941",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Blanco"
+            "id": "gid://shopify/Metafield/76275859784021"
           },
           {
-            "ownerId": "gid://shopify/Product/11387611578709",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275859816789"
           },
           {
-            "ownerId": "gid://shopify/Product/11602296963413",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275859849557"
           },
           {
-            "ownerId": "gid://shopify/Product/11602298437973",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rojo"
+            "id": "gid://shopify/Metafield/76275859882325"
           },
           {
-            "ownerId": "gid://shopify/Product/11602298667349",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rojo"
+            "id": "gid://shopify/Metafield/76275859915093"
           },
           {
-            "ownerId": "gid://shopify/Product/11602298929493",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275859947861"
           },
           {
-            "ownerId": "gid://shopify/Product/11602299158869",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275859980629"
           },
           {
-            "ownerId": "gid://shopify/Product/11602299453781",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275860013397"
           },
           {
-            "ownerId": "gid://shopify/Product/11602299715925",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275860046165"
           },
           {
-            "ownerId": "gid://shopify/Product/11602300010837",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275860078933"
           },
           {
-            "ownerId": "gid://shopify/Product/11602300305749",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275860111701"
           },
           {
-            "ownerId": "gid://shopify/Product/11602300567893",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275860144469"
           },
           {
-            "ownerId": "gid://shopify/Product/11602300797269",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275860177237"
           },
           {
-            "ownerId": "gid://shopify/Product/11602301059413",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275860210005"
           },
           {
-            "ownerId": "gid://shopify/Product/11602301256021",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275860242773"
           },
           {
-            "ownerId": "gid://shopify/Product/11602301485397",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275860275541"
           },
           {
-            "ownerId": "gid://shopify/Product/11602301780309",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275860308309"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 426–450 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11602302140757",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275860898133"
           },
           {
-            "ownerId": "gid://shopify/Product/11602302402901",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275860930901"
           },
           {
-            "ownerId": "gid://shopify/Product/11602302632277",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rojo"
+            "id": "gid://shopify/Metafield/76275860963669"
           },
           {
-            "ownerId": "gid://shopify/Product/11602302894421",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rojo"
+            "id": "gid://shopify/Metafield/76275860996437"
           },
           {
-            "ownerId": "gid://shopify/Product/11602303222101",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rojo"
+            "id": "gid://shopify/Metafield/76275861029205"
           },
           {
-            "ownerId": "gid://shopify/Product/11602303451477",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rojo"
+            "id": "gid://shopify/Metafield/76275861061973"
           },
           {
-            "ownerId": "gid://shopify/Product/11602303680853",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275861094741"
           },
           {
-            "ownerId": "gid://shopify/Product/11602303942997",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275861127509"
           },
           {
-            "ownerId": "gid://shopify/Product/11602304172373",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275861160277"
           },
           {
-            "ownerId": "gid://shopify/Product/11602304434517",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275861193045"
           },
           {
-            "ownerId": "gid://shopify/Product/11602304696661",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275861225813"
           },
           {
-            "ownerId": "gid://shopify/Product/11602304926037",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275861258581"
           },
           {
-            "ownerId": "gid://shopify/Product/11602305188181",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275861291349"
           },
           {
-            "ownerId": "gid://shopify/Product/11602305450325",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275861324117"
           },
           {
-            "ownerId": "gid://shopify/Product/11602305712469",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275861356885"
           },
           {
-            "ownerId": "gid://shopify/Product/11602305941845",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275861389653"
           },
           {
-            "ownerId": "gid://shopify/Product/11602306302293",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275861422421"
           },
           {
-            "ownerId": "gid://shopify/Product/11602306629973",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275861455189"
           },
           {
-            "ownerId": "gid://shopify/Product/11602306924885",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275861487957"
           },
           {
-            "ownerId": "gid://shopify/Product/11602307318101",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275861520725"
           },
           {
-            "ownerId": "gid://shopify/Product/11602315149653",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275861553493"
           },
           {
-            "ownerId": "gid://shopify/Product/11602315346261",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275861586261"
           },
           {
-            "ownerId": "gid://shopify/Product/11602315608405",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275861619029"
           },
           {
-            "ownerId": "gid://shopify/Product/11602315936085",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275861651797"
           },
           {
-            "ownerId": "gid://shopify/Product/11602316099925",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275861684565"
           }
-        ]
+        ],
+        "userErrors": []
       }
     },
     {
       "paso": "color 451–472 de 472",
-      "variables": {
-        "m": [
+      "resultado": {
+        "metafields": [
           {
-            "ownerId": "gid://shopify/Product/11602316329301",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275862733141"
           },
           {
-            "ownerId": "gid://shopify/Product/11602316624213",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rojo"
+            "id": "gid://shopify/Metafield/76275862765909"
           },
           {
-            "ownerId": "gid://shopify/Product/11602316886357",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275862798677"
           },
           {
-            "ownerId": "gid://shopify/Product/11602317115733",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275862831445"
           },
           {
-            "ownerId": "gid://shopify/Product/11602317345109",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275862864213"
           },
           {
-            "ownerId": "gid://shopify/Product/11602317705557",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275862896981"
           },
           {
-            "ownerId": "gid://shopify/Product/11602317967701",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275862929749"
           },
           {
-            "ownerId": "gid://shopify/Product/11602318262613",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275862962517"
           },
           {
-            "ownerId": "gid://shopify/Product/11602318491989",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275862995285"
           },
           {
-            "ownerId": "gid://shopify/Product/11602318819669",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275863028053"
           },
           {
-            "ownerId": "gid://shopify/Product/11602319049045",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275863060821"
           },
           {
-            "ownerId": "gid://shopify/Product/11602319376725",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Verde"
+            "id": "gid://shopify/Metafield/76275863093589"
           },
           {
-            "ownerId": "gid://shopify/Product/11609148260693",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275863126357"
           },
           {
-            "ownerId": "gid://shopify/Product/11609148293461",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275863159125"
           },
           {
-            "ownerId": "gid://shopify/Product/11609148358997",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275863191893"
           },
           {
-            "ownerId": "gid://shopify/Product/11609148391765",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Multicolor"
+            "id": "gid://shopify/Metafield/76275863224661"
           },
           {
-            "ownerId": "gid://shopify/Product/11609148424533",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Marrón"
+            "id": "gid://shopify/Metafield/76275863257429"
           },
           {
-            "ownerId": "gid://shopify/Product/11609148457301",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275863290197"
           },
           {
-            "ownerId": "gid://shopify/Product/11609148522837",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Amarillo"
+            "id": "gid://shopify/Metafield/76275863322965"
           },
           {
-            "ownerId": "gid://shopify/Product/11609274417493",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Rosa"
+            "id": "gid://shopify/Metafield/76275863355733"
           },
           {
-            "ownerId": "gid://shopify/Product/11609274974549",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Azul"
+            "id": "gid://shopify/Metafield/76275863388501"
           },
           {
-            "ownerId": "gid://shopify/Product/11609275892053",
-            "namespace": "custom",
-            "key": "color",
-            "type": "single_line_text_field",
-            "value": "Negro"
+            "id": "gid://shopify/Metafield/76275863421269"
           }
-        ]
+        ],
+        "userErrors": []
       }
     }
   ],
+  "planificado": [],
   "fallido": []
 }
