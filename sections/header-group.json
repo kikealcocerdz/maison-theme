@@ -23,20 +23,20 @@
     "mega-menu": {
       "type": "mega-menu",
       "blocks": {
+        "col-2": {
+          "type": "column",
+          "settings": {
+            "heading": "Colecciones",
+            "menu": "",
+            "items": "Nuevo || /collections/fin-de-existencias\nAurora | Cap. 01 | /collections/aurora\nOchavada | Cap. 02 | /collections/ochavada\nDecoración | Cap. 03 | /collections/decoracion  | /collections/novedades\n!Fin de existencias |"
+          }
+        },
         "col-1": {
           "type": "column",
           "settings": {
             "heading": "Producto",
             "menu": "",
             "items": "Platos | | /collections/platos\nVajillas | | /collections/vajillas\nJuegos de té / café / desayuno | | /collections/juegos-te\nCafeteras y teteras | | /collections/cafeteras-teteras\nFuentes | | /collections/fuentes\nBandejas | | /collections/bandejas\nMugs | | /collections/mugs"
-          }
-        },
-        "col-2": {
-          "type": "column",
-          "settings": {
-            "heading": "Colecciones",
-            "menu": "",
-            "items": "Nuevo | | /collections/novedades\n!Fin de existencias | | /collections/fin-de-existencias\nAurora | Cap. 01 | /collections/aurora\nOchavada | Cap. 02 | /collections/ochavada\nDecoración | Cap. 03 | /collections/decoracion"
           }
         },
         "col-3": {
@@ -57,8 +57,8 @@
         }
       },
       "block_order": [
-        "col-1",
         "col-2",
+        "col-1",
         "col-3",
         "card-1"
       ],
