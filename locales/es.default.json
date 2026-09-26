@@ -115,6 +115,10 @@
     }
   },
   "sections": {
+    "hero": {
+      "play_music": "Activar música",
+      "pause_music": "Pausar música"
+    },
     "cart": {
       "empty": "Tu cesta está vacía.",
       "subtotal": "Subtotal",
