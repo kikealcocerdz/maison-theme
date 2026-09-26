@@ -41,14 +41,20 @@
         Música del banner: nunca suena sola (el navegador tampoco lo dejaría); sólo con
         el botón, entra con un fundido suave y se repite en bucle.
       {%- endcomment -%}
-      {%- if section.settings.audio_url != blank -%}
+      {%- liquid
+        assign hero_audio_src = section.settings.audio_url
+        if hero_audio_src == blank and section.settings.demo_audio != blank
+          assign hero_audio_src = section.settings.demo_audio | asset_url
+        endif
+      -%}
+      {%- if hero_audio_src != blank -%}
         <button class="editorial-hero__sound" type="button" data-hero-sound aria-pressed="false"
           data-label-play="{{ 'sections.hero.play_music' | t | escape }}" data-label-pause="{{ 'sections.hero.pause_music' | t | escape }}"
           aria-label="{{ 'sections.hero.play_music' | t | escape }}">
           <span class="editorial-hero__sound-bars" aria-hidden="true"><i></i><i></i><i></i></span>
           <span class="editorial-hero__sound-label">{{ section.settings.audio_label | default: 'Música' | escape }}</span>
         </button>
-        <audio data-hero-audio src="{{ section.settings.audio_url }}" preload="none" loop></audio>
+        <audio data-hero-audio src="{{ hero_audio_src }}" preload="none" loop></audio>
       {%- endif -%}
 
       <div class="editorial-hero__progress" aria-hidden="true"><span></span></div>
@@ -309,14 +315,14 @@
     btn.dataset.init = '1';
     const audio = btn.parentElement.querySelector('[data-hero-audio]');
     if (!audio) return;
-    const TARGET = 0.35;
+    const TARGET = 0.12; // muy bajito: acompaña, no se impone
     let fade;
     function ramp(to, done) {
       clearInterval(fade);
       fade = setInterval(() => {
-        const next = audio.volume + (to > audio.volume ? 0.05 : -0.05);
+        const next = audio.volume + (to > audio.volume ? 0.01 : -0.01);
         audio.volume = Math.min(1, Math.max(0, next));
-        if (Math.abs(audio.volume - to) < 0.051) { audio.volume = to; clearInterval(fade); if (done) done(); }
+        if (Math.abs(audio.volume - to) < 0.011) { audio.volume = to; clearInterval(fade); if (done) done(); }
       }, 60);
     }
     function set(on) {
@@ -354,6 +360,7 @@
     { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>La Cartuja de Sevilla presenta El Renacer: una colección que reúne memoria, oficio y mesa contemporánea desde 1841.</p>" },
     { "type": "header", "content": "Música" },
     { "type": "url", "id": "audio_url", "label": "Pista de audio (MP3)", "info": "Sube el MP3 a Contenido → Archivos y pega aquí su enlace. Sin pista no aparece el botón. Nunca suena sola." },
+    { "type": "text", "id": "demo_audio", "label": "Pista por defecto (archivo en /assets)", "info": "Se usa si no hay pista. «Spanish Guitar Serenade Loop» de Sonican (Pixabay, licencia libre).", "default": "hero-guitarra-serenata.mp3" },
     { "type": "text", "id": "audio_label", "label": "Texto del botón", "default": "Música" }
   ],
   "presets": [{ "name": "Editorial hero" }]
