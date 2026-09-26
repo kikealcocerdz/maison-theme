@@ -59,6 +59,9 @@
     "results_for_html": "{{ count }} results found for {{ terms }}"
   },
   "general": {
+    "favorites": {
+      "label": "Favourites"
+    },
     "account": {
       "label": "Account"
     },

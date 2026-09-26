@@ -59,6 +59,9 @@
     "results_for_html": "{{ count }} resultados para {{ terms }}"
   },
   "general": {
+    "favorites": {
+      "label": "Favoritos"
+    },
     "account": {
       "label": "Cuenta"
     },

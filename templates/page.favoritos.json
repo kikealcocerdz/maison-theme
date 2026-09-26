@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "favorites",
+      "settings": {
+        "kicker": "Tu selección",
+        "heading": "Tus favoritos",
+        "intro": "<p>Las piezas que has marcado con el corazón. Se guardan en este navegador.</p>",
+        "empty_text": "Todavía no has guardado ninguna pieza. Pulsa el corazón en cualquier producto para tenerlo aquí.",
+        "cta_label": "Ver las colecciones",
+        "cta_link": "shopify://collections/all"
+      }
+    }
+  },
+  "order": ["main"]
+}

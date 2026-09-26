@@ -57,6 +57,7 @@
         <a href="/pages/heritage-1841">Legado</a>
       {%- endif -%}
       <button type="button" class="search-link" id="searchToggle" aria-label="{{ 'general.search.label' | t }}" aria-expanded="false" aria-controls="searchPanel">{% render 'icon-search' %}</button>
+      <a href="/pages/favoritos" class="account-link fav-link" aria-label="{{ 'general.favorites.label' | t }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.1c0 5.2-8.8 10.3-8.8 10.3S3.2 13.3 3.2 8.1A4.5 4.5 0 0 1 12 6.6a4.5 4.5 0 0 1 8.8 1.5Z"/></svg></a>
       <a href="{{ routes.account_url }}" class="account-link" aria-label="{{ 'general.account.label' | t }}">{% render 'icon-account' %}</a>
       <a href="{{ routes.cart_url }}" class="header-cart" data-cart-toggle aria-label="{{ 'general.cart.label' | t }}">
         {{ 'general.cart.label' | t | default: 'Cesta' }} (<span data-cart-count-badge>{{ cart.item_count }}</span>)
