@@ -7,9 +7,10 @@
   Follows §9 scroll-driven pattern (self-contained rAF IIFE writing CSS custom
   props, Math.max guards, reduced-motion + mobile static fallbacks, re-init on
   shopify:section:load) and the global `.reveal` → `.is-visible` IntersectionObserver
-  in assets/theme.js. The 3D plate ships as three injected assets (three.min.js +
-  artesania-textures.js then artesania-plate.js — `window.LCPlate.setProgress(0..1)`
-  drives material-morph + decal-swap + fall-with-spin) loaded on IntersectionObserver
+  in assets/theme.js. The 3D plate ships as injected assets (three.min.js r147 →
+  three-gltf-loader.js → artesania-plate.js, which loads Adrián's
+  artesania-plato-202-rosa.glb; `window.LCPlate.setProgress(0..1)` drives the
+  clay→white→decorated transition + fall-with-spin) loaded on IntersectionObserver
   approach to dodge AssetSizeJavaScript; if WebGL/Three is unavailable, or under
   reduced-motion, a static <img.plate-fallback> is shown instead.
 
@@ -23,7 +24,7 @@
   assign plate_fallback = 'artesania-inline-optimized.webp'
 -%}
 
-<main class="artesania-page" data-section-id="{{ section.id }}" data-three-src="{{ 'three.min.js' | asset_url }}" data-textures-src="{{ 'artesania-textures.js' | asset_url }}" data-plate-src="{{ 'artesania-plate.js' | asset_url }}">
+<main class="artesania-page" data-section-id="{{ section.id }}" data-three-src="{{ 'three.min.js' | asset_url }}" data-loader-src="{{ 'three-gltf-loader.js' | asset_url }}" data-model-src="{{ 'artesania-plato-202-rosa.glb' | asset_url }}" data-plate-src="{{ 'artesania-plate.js' | asset_url }}">
 
   {%- comment -%} ============ 1 · HERO ============ {%- endcomment -%}
   <section class="ap-hero" data-ap-hero data-header-variant="light">
@@ -866,7 +867,7 @@
     /* ---- lazy-load the Three.js plate when proceso nears viewport ----
        Ships as injected assets (three + textures then plate) to dodge
        theme-check AssetSizeJavaScript / ParserBlockingJavaScript. Under
-       reduced-motion we skip the ~899KB entirely and show the static plate. */
+       reduced-motion we skip the ~2 MB entirely and show the static plate. */
     var procesoEl = root.querySelector('[data-ap-proceso]');
     var plateFb = root.querySelector('.plate-fallback');
     var booted = false;
@@ -879,7 +880,9 @@
     }
     function bootPlate() {
       if (booted) return; booted = true;
-      Promise.all([loadScript(root.dataset.threeSrc), loadScript(root.dataset.texturesSrc)])
+      window.LCPlateModel = root.dataset.modelSrc;
+      loadScript(root.dataset.threeSrc)
+        .then(function () { return loadScript(root.dataset.loaderSrc); })
         .then(function () { return loadScript(root.dataset.plateSrc); })
         .catch(function () { if (plateFb) plateFb.classList.add('show'); });
     }
