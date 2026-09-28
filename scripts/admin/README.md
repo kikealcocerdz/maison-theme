@@ -84,3 +84,4 @@ y `menu-derecha`; en **Collection grid**, el menú del lateral.
 | `29_fotos_gif_a_original.py` | Cambia las 38 fotos del lote 28 que eran GIF/PSD con extensión .webp por el JPG/PNG de `Originales/` | `productDeleteMedia` de las creadas (informe) |
 | `30_fotos_principales_falsos_iguales.py` | 14 productos donde el lote 28 tomó una foto antigua de agosto por la nueva (mismo nombre): sube la nueva y la pone primera | `productDeleteMedia` de las creadas (informe) |
 | `35_fotos_carpeta_primera.py` | Rehace 28+29+30 tras la revisión visual del 2026-09-28: foto de la carpeta como primera en los 347 productos que la tienen (salvo `azucarero-202-rosa`); sube las 104 que quitó el lote 31 | `productDeleteMedia` de las creadas (informe) |
+| `36_revertir_lote_35.py` | **No aplicado.** Por si Adrián vuelve a rechazarlas: borra solo las 104 fotos que subió el lote 35 y cada producto vuelve a su foto anterior | Relanzar el lote 35 |
