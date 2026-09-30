@@ -279,7 +279,11 @@
 
       <div class="cart-page__paybar">
         <div class="cart-page__paybar-line">
-          <span class="cart-page__paybar-label">{{ 'sections.cart.paybar_total' | t: count: piece_count }}</span>
+          <span class="cart-page__paybar-label">
+            {{- 'sections.cart.paybar_total' | t: count: piece_count -}}
+            {%- comment -%} v101: el total suma el envío; sin esta línea parecía un error de precio. {%- endcomment -%}
+            {%- if shipping > 0 -%}<small class="cart-page__paybar-ship">{{ 'sections.cart.shipping' | t }} {{ shipping | money }}</small>{%- endif -%}
+          </span>
           <span class="cart-page__paybar-value">{{ order_total | money }}</span>
         </div>
         <button class="cart-page__cta" type="submit" name="checkout">{{ 'cart.checkout' | t }}</button>
@@ -532,7 +536,7 @@
   padding-top: 22px;
 }
 .cart-page__quiet-link {
-  padding-bottom: 3px;
+  padding: 0 0 3px; /* v101: el padding lateral del <button> descuadraba «Actualizar» */
   border-bottom: .5px solid transparent;
   background: transparent;
   color: var(--muted);
@@ -765,6 +769,7 @@
     letter-spacing: .22em;
     text-transform: uppercase;
   }
+  .cart-page__paybar-ship { display: block; margin-top: 5px; font-size: 10px; letter-spacing: .12em; }
   .cart-page__paybar-value {
     font-family: var(--serif);
     font-size: 24px;

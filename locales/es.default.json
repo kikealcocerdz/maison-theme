@@ -116,8 +116,8 @@
   },
   "sections": {
     "hero": {
-      "play_music": "Activar música",
-      "pause_music": "Pausar música"
+      "unmute": "Activar sonido",
+      "mute": "Silenciar"
     },
     "cart": {
       "empty": "Tu cesta está vacía.",
@@ -258,7 +258,7 @@
       "pieces": "Piezas",
       "pieces_selector": "Selecciona el número de piezas",
       "pack_intro": "Tu pack contiene:",
-      "pack_hint": "Pasa el cursor o selecciona una pieza para verla en detalle.",
+      "pack_hint": "Selecciona una pieza para verla en detalle.",
       "pack_unit": { "one": "unidad incluida", "other": "unidades incluidas" },
       "discover_collection": "Descubre la colección"
     },

@@ -52,9 +52,11 @@
   assign description = product.description | default: section.settings.demo_description
 
   if has_product
-    assign price = product.price | money
-    if product.compare_at_price > product.price
-      assign price = product.compare_at_price | money | prepend: '<s>' | append: '</s> ' | append: price
+    # Precio de la variante elegida (?variant=): con tamaños distintos, product.price es el mínimo
+    assign pv = product.selected_or_first_available_variant
+    assign price = pv.price | money
+    if pv.compare_at_price > pv.price
+      assign price = pv.compare_at_price | money | prepend: '<s>' | append: '</s> ' | append: price
     endif
   else
     assign price = section.settings.demo_price
@@ -266,7 +268,18 @@
             <div class="color-options">
               {%- for value in product.options_with_values[color_idx].values -%}
                 {%- assign vname = value.name | default: value -%}
-                {%- assign swatch = value.swatch.color | default: section.settings.demo_swatch | default: '#6f8797' -%}
+                {%- comment -%} Sin swatch en la opción, el nombre manda (mismos hex que el lote 27 de admin). {%- endcomment -%}
+                {%- assign vkey = vname | downcase -%}
+                {%- case vkey -%}
+                  {%- when 'azul' -%}{%- assign named = '#2C4A7C' -%}
+                  {%- when 'rosa' -%}{%- assign named = '#C98A93' -%}
+                  {%- when 'negro' -%}{%- assign named = '#1F2124' -%}
+                  {%- when 'verde' -%}{%- assign named = '#4A6B52' -%}
+                  {%- when 'amarillo' -%}{%- assign named = '#D9B04A' -%}
+                  {%- when 'blanco' -%}{%- assign named = '#F4F1EA' -%}
+                  {%- else -%}{%- assign named = blank -%}
+                {%- endcase -%}
+                {%- assign swatch = value.swatch.color | default: named | default: section.settings.demo_swatch | default: '#6f8797' -%}
                 <button class="color-dot{% if vname == current_color %} active{% endif %}" type="button" aria-label="{{ vname | escape }}" style="--swatch: {{ swatch }}"{% if value.variant.id %} data-color-url="{{ product.url }}?variant={{ value.variant.id }}"{% endif %}></button>
               {%- endfor -%}
             </div>
@@ -649,7 +662,7 @@
   .product-detail { width: calc(100vw - 24px); }
   .product-title-panel h1 { font-size: 42px; }
   .product-main-media { height: 64vh; }
-  .product-gallery-arrow { width: 30px; height: 30px; }
+  .product-gallery-arrow { width: 34px; height: 34px; }
   .add-to-bag { height: 52px; }
   .product-buy-block { border-top: .5px solid var(--rule); padding: 16px 0 18px; background: var(--paper); }
   .product-lightbox { grid-template-columns: 72px 1fr; }

@@ -573,11 +573,11 @@
      chapter tree both, rather than duplicating either into a second markup tree. */
   .collection-page .filters-open {
     display: inline-flex !important; align-items: center; gap: 7px; height: 42px; padding: 0 13px;
-    border: .5px solid var(--rule); font-size: 8px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink);
+    border: .5px solid var(--rule); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink);
   }
   .collection-page .filters-open-count {
     display: inline-grid; place-items: center; min-width: 15px; height: 15px; padding: 0 4px;
-    background: var(--ink); color: var(--paper); font-size: 8px; border-radius: 999px;
+    background: var(--ink); color: var(--paper); font-size: 9px; border-radius: 999px;
   }
   /* Cajón de filtros a pantalla completa (mockup `filtros movil`). La barra y el pie
      quedan fijos y sólo el centro rueda, así "Mostrar resultados" siempre está a mano. */
@@ -731,7 +731,7 @@
 
   .collection-page .view-toggle { gap: 6px !important; }
   .collection-page .view-btn { width: 40px !important; height: 40px !important; }
-  .collection-page .sort-btn { height: 42px !important; min-width: 105px !important; padding: 0 11px !important; font-size: 8px !important; }
+  .collection-page .sort-btn { height: 42px !important; min-width: 105px !important; padding: 0 11px !important; font-size: 10px !important; }
 
   .collection-page .products { width: 100% !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 28px 10px !important; }
   .collection-page .products.is-list { grid-template-columns: 1fr !important; }
@@ -742,10 +742,10 @@
   .collection-page .product-media img { max-width: 100% !important; }
   .collection-page .product-info { margin-top: 9px !important; gap: 4px 8px !important; font-size: 10px !important; }
   .collection-page .product-info h3 { font-size: 10px !important; line-height: 1.32 !important; }
-  .collection-page .product-info p { font-size: 8px !important; line-height: 1.35 !important; }
+  .collection-page .product-info p { font-size: 10px !important; line-height: 1.35 !important; }
   .collection-page .price { font-size: 10px !important; }
   .collection-page .fav { width: 32px !important; height: 32px !important; right: 6px !important; top: 5px !important; }
-  .collection-page .badge { font-size: 7px !important; padding: 5px 7px !important; top: 7px !important; left: 7px !important; }
+  .collection-page .badge { font-size: 9px !important; padding: 5px 7px !important; top: 7px !important; left: 7px !important; }
 
   .collection-page .editorial-insert { width: 100% !important; max-width: 100% !important; margin: 34px 0 16px !important; overflow: hidden !important; }
   .collection-page .editorial-insert img { width: 100% !important; max-width: 100% !important; height: 58vw !important; }
@@ -756,8 +756,8 @@
   .collection-page .collection-intro { display: flex !important; flex-direction: column !important; gap: 16px !important; margin: 0 0 28px !important; }
   .collection-page .collection-intro > div,
   .collection-page .collection-intro > p { width: 100% !important; max-width: 100% !important; }
-  .collection-page .breadcrumbs { font-size: 8.5px !important; line-height: 1.5 !important; margin-bottom: 18px !important; white-space: normal !important; }
-  .collection-page .collection-kicker { font-size: 9px !important; margin-bottom: 12px !important; }
+  .collection-page .breadcrumbs { font-size: 10px !important; line-height: 1.5 !important; margin-bottom: 18px !important; white-space: normal !important; }
+  .collection-page .collection-kicker { font-size: 10px !important; margin-bottom: 12px !important; }
   .collection-page .collection-intro h1 { font-size: clamp(44px, 14vw, 62px) !important; line-height: 0.94 !important; overflow-wrap: anywhere; }
   .collection-page .collection-intro p { font-size: 11.5px !important; line-height: 1.65 !important; margin: 0 !important; color: var(--ink-soft) !important; overflow-wrap: anywhere; }
   .collection-page .toolbar { margin: 0 0 22px !important; padding: 0 !important; gap: 12px !important; }
@@ -766,16 +766,16 @@
   .collection-page .product-media { overflow: hidden !important; }
   .collection-page .product-media img.main { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center !important; }
   .collection-page .product-info { display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; gap: 3px 7px !important; padding-top: 8px !important; }
-  .collection-page .product-info h3 { font-size: 9.2px !important; overflow-wrap: anywhere !important; }
+  .collection-page .product-info h3 { font-size: 11px !important; overflow-wrap: anywhere !important; }
   .collection-page .product-info p { grid-column: 1 !important; margin: 0 !important; }
-  .collection-page .product-info .price { font-size: 9px !important; grid-column: 2 !important; grid-row: 1 !important; white-space: nowrap !important; }
+  .collection-page .product-info .price { font-size: 11px !important; grid-column: 2 !important; grid-row: 1 !important; white-space: nowrap !important; }
   .collection-page .editorial-insert { grid-column: 1 / -1 !important; margin: 0 !important; }
   .collection-page .editorial-insert img { height: auto !important; object-fit: cover !important; }
 }
 
 @media (max-width: 420px) {
   .collection-page .products { gap: 24px 8px !important; }
-  .collection-page .product-info h3 { font-size: 9.5px !important; }
+  .collection-page .product-info h3 { font-size: 11px !important; }
 }
 
 /* En táctil no hay hover: la segunda foto de la tarjeta nunca debe aparecer. */

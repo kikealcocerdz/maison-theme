@@ -104,3 +104,27 @@ main {
     padding-right: 14px;
   }
 }
+
+/* v101 — iOS: Safari hace zoom al enfocar un campo con letra < 16px. En móvil
+   todos los campos van a 16px; !important porque cada sección fija su tamaño. */
+@media (max-width: 760px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+  select,
+  textarea { font-size: 16px !important; }
+}
+
+/* v101 — Área táctil de 44px sin cambiar el círculo visible de 32–34px
+   (favorito y añadir de las tarjetas, flechas de la galería del producto). */
+@media (pointer: coarse) {
+  .quick-add button { position: relative; }
+  .fav::after,
+  .quick-add button::after,
+  .product-gallery-arrow::after { content: ""; position: absolute; inset: -7px; border-radius: 50%; }
+}
+
+/* v101 — Tarjeta con precio rebajado: los dos precios (nowrap) dejaban el título
+   a una palabra por línea. En móvil el precio baja debajo del título. */
+@media (max-width: 760px) {
+  .product-info:has(.price s) { grid-template-columns: minmax(0, 1fr) !important; }
+  .product-info:has(.price s) .price { grid-column: 1 !important; grid-row: auto !important; text-align: left !important; }
+}

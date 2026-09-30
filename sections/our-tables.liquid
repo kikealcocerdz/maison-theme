@@ -276,7 +276,7 @@
   .table-filter { flex:0 0 auto!important;min-height:38px!important;padding:0 15px!important;border-radius:999px!important;background:#fff!important;border:1px solid rgba(15,26,46,.10)!important;scroll-snap-align:start!important;color:var(--ink-soft,#445066)!important }
   .table-filter:after { display:none!important }
   .table-filter.active { background:var(--ink,#0f1a2e)!important;color:#fff!important;border-color:var(--ink,#0f1a2e)!important }
-  .table-filter span { font-size:8.5px!important;letter-spacing:.12em!important }
+  .table-filter span { font-size:9px!important;letter-spacing:.12em!important }
   .table-scenes-list { width:calc(100% - 28px)!important;margin:0 auto 70px!important;gap:28px!important }
   /* svh, no dvh: dvh se recalcula al plegarse la barra del navegador y la escena
      (y con ella la foto) daba un salto en cada scroll. */
@@ -288,9 +288,13 @@
   .table-scene-product h2 { font-size:22px!important;margin:0 0 4px!important }
   .table-product-note { display:none!important }
   .table-product-lines { margin:9px 0 5px!important }
+  /* v101: las rayas miden 1px de alto; el padding con background-clip da 45px
+     táctiles sin cambiar la raya ni el alto de la fila (margen negativo). */
+  .table-product-lines button { box-sizing:content-box!important;padding:22px 3px!important;margin:-22px -3px!important;background-clip:content-box!important }
+  .table-prod-arrow { min-width:44px!important;min-height:44px!important }
   .table-shop-scene .table-scene-actions { display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important;margin-top:6px!important }
   .table-shop-scene .table-scene-actions .table-add-piece { grid-column:1/-1!important }
-  .table-shop-scene .table-scene-actions .ghost-btn { width:100%!important;min-width:0!important;min-height:35px!important;padding:0 7px!important;font-size:7.5px!important;letter-spacing:.08em!important }
+  .table-shop-scene .table-scene-actions .ghost-btn { width:100%!important;min-width:0!important;min-height:35px!important;padding:0 7px!important;font-size:9px!important;letter-spacing:.08em!important }
   .tables-page-body .table-filters { position:relative!important;
     z-index:4!important;
     scroll-behavior:smooth!important;

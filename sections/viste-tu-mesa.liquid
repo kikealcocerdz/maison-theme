@@ -51,6 +51,11 @@
   assign form_bases = 'woodLight,woodDark,stone,graphite' | split: ','
   assign form_textiles = 'linenWhite,linenBeige,pattern,dark' | split: ','
   assign vt_recs = 'aurora-blanca,ochavada-blanca,bellavista,202-rosa,ceilan,viejo-molino,oaxaca,negro-vistas,negro-vistas-ash-blue,negro-vistas-ash-yellow,flor-de-lis-azul,flor-de-lis-rosa' | split: ','
+  # Combinar vajillas en el laboratorio: decorado|nombre|piezas con recorte cenital
+  # (assets/vt-pz-<decorado>-<pieza>.webp). Flor de Lis Azul es la de las capas
+  # originales vt-lab-*. Una pieza que falta aquí se sustituye en el JS.
+  assign lab_decors = 'flor-de-lis-azul|Flor de Lis Azul|bajoplato llano hondo pan,flor-de-lis-rosa|Flor de Lis Rosa|llano hondo pan,202-rosa|202 Rosa|bajoplato llano hondo pan,aurora-blanca|Aurora Blanca|llano hondo,bellavista|Bellavista|bajoplato llano hondo pan,ceilan|Ceilán|bajoplato llano hondo pan,viejo-molino|Viejo Molino|bajoplato llano hondo pan,oaxaca|Oaxaca|llano hondo,ochavada-blanca|Ochavada Blanca|llano hondo,negro-vistas|Negro Vistas|bajoplato llano hondo pan,negro-vistas-ash-blue|Negro Vistas · A. Stewart azul|bajoplato llano hondo pan,negro-vistas-ash-yellow|Negro Vistas · A. Stewart amarillo|bajoplato llano hondo pan' | split: ','
+  assign lab_mix_layers = 'bajoplato|Bajo plato,protagonista|Plato protagonista,bol|Hondo o bol,auxiliar|Platillo de pan' | split: ','
 -%}
 
 <div class="vt-page" data-section-id="{{ section.id }}">
@@ -139,6 +144,26 @@
         <div class="lab-quick-actions" aria-label="Acciones rápidas del laboratorio">
           <button type="button" data-lab-preset="clean">Mesa limpia</button>
           <button type="button" data-lab-preset="full">Mesa completa</button>
+        </div>
+        <div class="lab-mix">
+          <div class="lab-mix__head">
+            <b>Combina vajillas</b>
+            <label class="lab-mix__all"><span>Toda la mesa</span>
+              <select data-lab-all>
+                <option value="">Combinada</option>
+                {%- for d in lab_decors -%}{%- assign dp = d | split: '|' -%}<option value="{{ dp[0] }}"{% if forloop.first %} selected{% endif %}>{{ dp[1] }}</option>{%- endfor -%}
+              </select>
+            </label>
+          </div>
+          {%- for l in lab_mix_layers -%}
+            {%- assign lp = l | split: '|' -%}
+            <label class="lab-mix__row"><span>{{ lp[1] }}</span>
+              <select data-lab-decor="{{ lp[0] }}">
+                {%- for d in lab_decors -%}{%- assign dp = d | split: '|' -%}<option value="{{ dp[0] }}"{% if forloop.first %} selected{% endif %}>{{ dp[1] }}</option>{%- endfor -%}
+              </select>
+            </label>
+          {%- endfor -%}
+          <p class="lab-mix__note" data-lab-note aria-live="polite">Si una vajilla no tiene esa pieza, se muestra la de la vajilla del plato protagonista.</p>
         </div>
         <button aria-pressed="true" class="lab-toggle" data-exclusive="textil" data-layer="individual" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-base-textil.webp' | asset_url }}" alt="" width="1600" height="1593" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Individual redondo</b><small>Textura ligera bajo el servicio</small></span><span class="lab-switch"></span></button>
         <button aria-pressed="false" class="lab-toggle" data-exclusive="textil" data-layer="mantel" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-mantel-bordado.webp' | asset_url }}" alt="" width="1594" height="1600" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Mantel bordado</b><small>Cubre la madera con lino y cenefa</small></span><span class="lab-switch"></span></button>
@@ -285,6 +310,27 @@
           "viste-tu-mesa/formulario/04-textil/{{ s }}/{{ o }}/{{ t }}.webp":"{{ tex_asset | asset_url }}",
         {%- endfor -%}
       {%- endfor -%}
+    {%- endfor -%}
+  };
+  window.__VT_PIECES = {
+    {%- for d in lab_decors -%}
+      {%- assign dp = d | split: '|' -%}
+      {%- assign pieces = dp[2] | split: ' ' -%}
+      {{ dp[0] | json }}: { "name": {{ dp[1] | json }}, "pieces": {
+        {%- for pz in pieces -%}
+          {%- if forloop.parentloop.first -%}
+            {%- case pz -%}
+              {%- when 'bajoplato' -%}{%- assign pz_asset = 'vt-lab-bajoplato.webp' -%}
+              {%- when 'llano' -%}{%- assign pz_asset = 'vt-lab-plato-protagonista.webp' -%}
+              {%- when 'hondo' -%}{%- assign pz_asset = 'vt-lab-hondo-bol.webp' -%}
+              {%- else -%}{%- assign pz_asset = 'vt-lab-platillo-pan.webp' -%}
+            {%- endcase -%}
+          {%- else -%}
+            {%- assign pz_asset = 'vt-pz-' | append: dp[0] | append: '-' | append: pz | append: '.webp' -%}
+          {%- endif -%}
+          {{ pz | json }}: {{ pz_asset | asset_url | json }},
+        {%- endfor -%}
+      } },
     {%- endfor -%}
   };
   {%- comment -%}
@@ -438,6 +484,22 @@
 .vt-page .lab-toggle[aria-pressed="true"] .lab-switch:after { transform: translateX(26px); }
 @keyframes lab-pop { 0% { transform: scale(.95); } 55% { transform: scale(1.035); } 100% { transform: scale(1); } }
 @keyframes lab-orbit { to { transform: rotate(360deg); } }
+/* Combinar vajillas. Los recortes vt-pz-* van ajustados al borde de la pieza;
+   --fit reproduce el hueco que deja cada capa original vt-lab-* para que la
+   pieza ocupe lo mismo en la mesa sea cual sea el decorado. */
+.vt-page .lab-bajoplato { --fit: .637; }
+.vt-page .lab-protagonista { --fit: .476; }
+.vt-page .lab-bol { --fit: .74; }
+.vt-page .lab-auxiliar { --fit: 1; }
+.vt-page .lab-layer.is-custom img { width: calc(var(--fit) * 100%); height: calc(var(--fit) * 100%); }
+.vt-page .lab-layer.on.is-missing { opacity: 0; }
+.vt-page .lab-mix { display: grid; gap: 8px; margin: 4px 0 8px; padding: 16px 18px; border: .5px solid rgba(15, 26, 46, .12); border-radius: 24px; background: rgba(255, 255, 255, .58); }
+.vt-page .lab-mix__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+.vt-page .lab-mix__head b { font-family: var(--serif); font-weight: 400; font-size: 20px; }
+.vt-page .lab-mix__all, .vt-page .lab-mix__row { display: grid; grid-template-columns: 1fr minmax(0, 1.4fr); align-items: center; gap: 12px; font-size: 12px; color: var(--ink-soft); }
+.vt-page .lab-mix__all { grid-template-columns: auto minmax(0, 1fr); font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--ink); }
+.vt-page .lab-mix select { width: 100%; min-height: 40px; padding: 0 12px; border: .5px solid rgba(15, 26, 46, .18); border-radius: 999px; background: #fff; font: inherit; font-size: 12px; letter-spacing: normal; text-transform: none; color: var(--ink); }
+.vt-page .lab-mix__note { margin: 4px 0 0; font-size: 11.5px; line-height: 1.45; color: var(--muted); }
 
 /* ===================== 4 · WIZARD ===================== */
 .vt-page .wizard { width: var(--content); margin: 0 auto; }
@@ -788,7 +850,7 @@
   .wz-preview--redesign { position:sticky!important;top:calc(var(--header-h,64px) + 7px)!important;z-index:14!important;background:#fff!important;border-radius:22px!important;box-shadow:0 16px 44px rgba(15,26,46,.12)!important;padding:7px!important }
   .wz-preview__top { padding:3px 5px 7px!important }
   .wz-preview--redesign .wz-stage { aspect-ratio:16/8.6!important;min-height:0!important;max-height:34dvh!important;border-radius:17px!important }
-  .wz-caption { padding:8px 10px!important;font-size:8px!important;border-radius:0 0 17px 17px!important }
+  .wz-caption { padding:8px 10px!important;font-size:9px!important;border-radius:0 0 17px 17px!important }
   .wz-live-summary { display:none!important }
   .wz-builder { padding:14px!important;border-radius:22px!important;box-shadow:none!important }
   .wz-builder__head { margin-bottom:9px!important }
@@ -804,21 +866,21 @@
   .wz-opt-media,.wz-check { display:none!important }
   .wz-opt-copy { gap:2px!important;align-items:center!important }
   .wz-opt-copy b { font-size:10.5px!important }
-  .wz-opt-copy small { font-size:8.8px!important;line-height:1.25!important }
+  .wz-opt-copy small { font-size:9px!important;line-height:1.25!important }
   .wz-step__head { margin-bottom:3px!important }
-  .wz-step__chosen { font-size:7px!important }
+  .wz-step__chosen { font-size:9px!important }
   .wz-mobile-nav { display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;margin-top:10px!important;padding-top:10px!important;border-top:1px solid rgba(15,26,46,.10)!important }
-  .wz-mobile-prev { border:0!important;background:transparent!important;color:var(--ink,#0f1a2e)!important;font-size:8.5px!important;letter-spacing:.08em!important;text-transform:uppercase!important;padding:8px 0!important }
+  .wz-mobile-prev { border:0!important;background:transparent!important;color:var(--ink,#0f1a2e)!important;font-size:9px!important;letter-spacing:.08em!important;text-transform:uppercase!important;padding:8px 0!important }
   .wz-mobile-prev:disabled { opacity:.25!important }
-  .wz-mobile-step { font-size:8px!important;letter-spacing:.12em!important;text-transform:uppercase!important;color:var(--muted,#7a8190)!important }
+  .wz-mobile-step { font-size:9px!important;letter-spacing:.12em!important;text-transform:uppercase!important;color:var(--muted,#7a8190)!important }
   .result-card--editorial { grid-template-columns:1fr!important;padding:12px!important;border-radius:22px!important }
   .result-card--editorial .result-ambient { aspect-ratio:3/4!important;border-radius:17px!important }
   .result-card--editorial .result-ambient>img { object-fit:contain!important }
   .result-card--editorial .result-body { padding:16px 6px 6px!important }
   .result-card--editorial .result-products { grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important }
   .result-card--editorial .result-product { padding:6px!important;border-radius:12px!important }
-  .result-card--editorial .result-product b { font-size:8px!important }
-  .result-card--editorial .result-product small { font-size:7.5px!important }
+  .result-card--editorial .result-product b { font-size:9px!important }
+  .result-card--editorial .result-product small { font-size:9px!important }
 }
 @media(min-width:761px) {
   .wz-mobile-nav { display:none!important }
@@ -857,7 +919,7 @@
   .vt-page .vt-hero__inner { width:calc(100% - 32px)!important;
     padding:0 0 4.2dvh!important;
     margin:0 auto!important; }
-  .vt-page .vt-hero .eyebrow { font-size:7.5px!important;margin-bottom:8px!important }
+  .vt-page .vt-hero .eyebrow { font-size:9px!important;margin-bottom:8px!important }
   .vt-page .vt-hero h1 { font-size:clamp(31px,8.7vw,40px)!important;
     line-height:.98!important;
     max-width:10.5ch!important;
@@ -871,7 +933,7 @@
     gap:7px!important; }
   .vt-page .vt-hero__ctas .ghost-btn { min-height:36px!important;
     padding:0 8px!important;
-    font-size:6.8px!important;
+    font-size:9px!important;
     letter-spacing:.08em!important; }
   .vt-page .vt-section { padding-top:58px!important;padding-bottom:58px!important }
   .vt-page .section-head { margin-bottom:26px!important }
@@ -900,7 +962,7 @@
   .vt-page .tube-nav { width: 100% !important; margin-bottom: 12px !important; gap: 5px !important; padding: 5px !important; border-radius: 999px !important; }
   .vt-page .tube-item { min-height: 40px !important; padding: 0 12px !important; border-radius: 999px !important; }
   .vt-page .tube-item span { display: none !important; }
-  .vt-page .tube-item b { font-size: 8px !important; letter-spacing: 0.08em !important; }
+  .vt-page .tube-item b { font-size: 9px !important; letter-spacing: 0.08em !important; }
   .vt-page #lab { padding-top: 46px !important; padding-bottom: 46px !important; }
   .vt-page #lab > .section-head { margin-bottom: 20px !important; }
   .vt-page .lab { display: grid !important; grid-template-columns: 1fr !important; gap: 12px !important; height: auto !important; }
@@ -927,6 +989,13 @@
     min-height: 0 !important;
     margin: 0 auto 26px !important;
   }
+
+  /* v101 — La mesa sticky (z-index 12) tapaba los controles al hacer scroll y el
+     panel «Combina vajillas» caía en una de las 2 columnas: una palabra por línea
+     y selects de 1–53px. La mesa vuelve a fluir y el panel ocupa el ancho,
+     después de los interruptores. */
+  .vt-page .lab-stage { position: relative !important; top: auto !important; }
+  .vt-page .lab-mix { grid-column: 1 / -1; order: 1; }
 
   .vt-page .wz-preview--redesign .wz-stage {
     aspect-ratio: 4 / 3 !important;

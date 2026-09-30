@@ -36,7 +36,7 @@
         <img class="logo" src="{{ logo_dark | image_url: width: 200 }}" alt="{{ logo_alt | escape }}" width="{{ logo_width }}" height="auto" loading="eager" fetchpriority="high">
       {%- else -%}
         {%- comment -%} Demo logo (shown until a logo is uploaded in theme settings). {%- endcomment -%}
-        <img class="logo" src="{{ 'logo-navy.png' | asset_url }}" alt="{{ logo_alt | escape }}" width="119" height="124" loading="eager" fetchpriority="high">
+        <img class="logo" src="{{ 'logo-navy.png' | asset_url }}" alt="{{ logo_alt | escape }}" width="220" height="344" loading="eager" fetchpriority="high">
       {%- endif -%}
     </a>
 
@@ -221,6 +221,9 @@
   transition: opacity 180ms var(--ease) 0s, visibility 0s linear 0s;
 }
 
+/* Con el menú hamburguesa abierto no se despliega ningún submenú al pasar por la barra. */
+.menu-open .nav-drop { opacity: 0 !important; visibility: hidden !important; }
+
 /* Banda a sangre en papel; las columnas (y tarjetas) se reparten el ancho del
    shell a partes iguales. */
 .nav-drop__inner {
@@ -304,7 +307,7 @@
   margin-top: 9px;
   padding: 8px 11px;
   background: var(--ink-faint-20);
-  font-size: 8.5px;
+  font-size: 9px;
   line-height: 1;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -757,7 +760,7 @@
   }
 
   .nav-right > a:last-child {
-    font-size: 9px;
+    font-size: 11px; /* v101: 9px no se leía */
     letter-spacing: 0.08em;
     white-space: nowrap;
   }
@@ -769,7 +772,15 @@
     align-items: center;
   }
 
-  .search-link { width: 40px; height: 40px; }
+  .search-link { width: 44px; height: 44px; justify-content: center; }
+
+  .site-header.light.scrolled { background: rgba(15, 26, 46, 0.78); }
+
+  /* v101: hamburguesa (24px), cesta (42px) y lupa/cerrar del panel a 44px. */
+  .menu-trigger { min-width: 44px; }
+  .nav-right > a:last-child { display: inline-flex; align-items: center; min-height: 44px; }
+  .search-panel__submit,
+  .search-panel__close { width: 44px; height: 44px; flex: 0 0 44px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -912,6 +923,7 @@
     if (body.classList.contains('search-open')) closeSearch();
   });
 
+  const mobileQuery = window.matchMedia('(max-width: 780px)');
   function updateHeaderState() {
     const scrollY = window.scrollY;
     const scrolled = scrollY > 40;
@@ -924,7 +936,10 @@
     });
 
     header.classList.toggle('light', lightVariant);
-    header.classList.toggle('scrolled', scrolled && !lightVariant);
+    /* v101: en móvil el hero hace scroll normal por debajo de la barra: sin fondo,
+       su texto y el botón de sonido se montaban sobre menú y logo. En escritorio el
+       hero es sticky y la barra sigue transparente. */
+    header.classList.toggle('scrolled', scrolled && (!lightVariant || mobileQuery.matches));
   }
 
   window.addEventListener('scroll', updateHeaderState, { passive: true });

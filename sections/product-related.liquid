@@ -114,6 +114,24 @@
       del menú lateral. Sin colección para ese tipo, se cae a la de siempre.
     endcomment
     assign type_col = collections[type_handle]
+    comment
+      Sin colección para el tipo (velas, floreros…): la del producto que más piezas
+      de su tipo reúne. La primera colección cualquiera trae 50 productos al azar y
+      la fila salía vacía (vela aromática, 2026-09-29).
+    endcomment
+    if type_col == blank or type_col.products.size == 0
+      assign best = 1
+      for c in product.collections
+        if c.handle == 'all' or c.handle == 'frontpage' or c.handle == own_collection.handle
+          continue
+        endif
+        assign same_type = c.products | where: 'type', product.type | size
+        if same_type > best
+          assign best = same_type
+          assign type_col = c
+        endif
+      endfor
+    endif
     if type_col != blank and type_col.products.size > 0
       assign list = type_col.products
       assign exclude_own = true
@@ -135,6 +153,15 @@
   assign skip_row = false
   if is_mug and section.settings.source == 'same_collection' and manual == blank
     assign skip_row = true
+  endif
+  comment
+    Decoración (cliente 2026-09-28): sólo «Te puede interesar», nunca «Completa tu mesa».
+  endcomment
+  if section.settings.source == 'same_collection'
+    assign decor_handles = product.collections | map: 'handle'
+    if decor_handles contains 'decoracion'
+      assign skip_row = true
+    endif
   endif
 
   # `recommendations.performed` is only true inside the /recommendations/products render,
@@ -247,7 +274,7 @@
   .product-related .product-media { aspect-ratio: 4 / 5 !important; }
   .product-related .product-info { margin-top: 9px !important; gap: 4px 8px !important; font-size: 10px !important; }
   .product-related .product-info h3 { font-size: 10px !important; line-height: 1.32 !important; }
-  .product-related .product-info p { font-size: 8px !important; line-height: 1.35 !important; }
+  .product-related .product-info p { font-size: 9px !important; line-height: 1.35 !important; }
   .product-related .price { font-size: 10px !important; }
   .product-related .fav { width: 32px !important; height: 32px !important; right: 6px !important; top: 5px !important; }
 }

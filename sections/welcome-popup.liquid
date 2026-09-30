@@ -1,9 +1,11 @@
 {%- comment -%}
   Popup de bienvenida — diseño lateral de Adrián (Downloads/popup_cartuja_lateral,
   2026-09-21): tarjeta fija abajo a la derecha, foto a sangre con velo, no bloquea
-  la página (no es modal). Cerrado una vez, no vuelve a salir en ninguna página
-  (localStorage sin caducidad; petición del cliente). El form es el de clientes de
+  la página (no es modal). Cerrado (a mano o solo), no vuelve a salir en 30 min
+  (marca de tiempo en localStorage). El form es el de clientes de
   Shopify (tag welcome-popup-5); consentimiento `required` nativo.
+  2026-09-29: se retira sola a los 10 s si nadie la toca (vuelve en la próxima visita)
+  y titulares en Ibarra Real Nova, como la nueva entrega del popup con el logo nuevo.
 {%- endcomment -%}
 <aside
   class="welcome-popup"
@@ -26,7 +28,7 @@
   </button>
 
   <div class="welcome-popup__inner">
-    <img class="welcome-popup__logo" src="{{ 'logo-white.png' | asset_url }}" alt="{{ shop.name | escape }}" width="70" height="73" loading="lazy" decoding="async">
+    <img class="welcome-popup__logo" src="{{ 'logo-white.png' | asset_url }}" alt="{{ shop.name | escape }}" width="70" height="109" loading="lazy" decoding="async">
     <h2 id="WelcomePopupTitle-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
     {%- if section.settings.text != blank -%}
       <div class="welcome-popup__text">{{ section.settings.text }}</div>
@@ -64,6 +66,7 @@
     <button class="welcome-popup__skip" type="button" data-welcome-close>{{ section.settings.skip_label | escape }}</button>
   </div>
 </aside>
+<button class="welcome-popup-reopen" type="button" data-welcome-reopen aria-label="{{ section.settings.button_label | escape }}" title="{{ section.settings.button_label | escape }}"><span aria-hidden="true">5%</span></button>
 
 {% stylesheet %}
 /* Tokens del diseño: azul #07152b, marfil #f7f2e9, rojo #9d2735. */
@@ -77,6 +80,26 @@
   transition: opacity .42s ease, transform .5s cubic-bezier(.22, 1, .36, 1);
 }
 .welcome-popup[hidden] { display: none; }
+/* Esquina para volver a abrirlo: solo con el popup cerrado; no en la cesta. */
+.welcome-popup-reopen {
+  position: fixed; left: 0; bottom: 0; z-index: 60; width: 54px; height: 54px; padding: 0; border: 0;
+  background: none; cursor: pointer; opacity: .88; transition: opacity .2s ease;
+  filter: drop-shadow(0 0 .6px rgba(247, 242, 233, .9));
+}
+.welcome-popup-reopen::before { content: ''; position: absolute; inset: 0; background: #07152b; clip-path: polygon(0 0, 0 100%, 100% 100%); }
+.welcome-popup-reopen span {
+  position: absolute; left: 7px; bottom: 7px; font-family: var(--serif); font-size: 14px; font-style: italic;
+  line-height: 1; letter-spacing: .02em; color: #f7f2e9; transition: transform .25s ease;
+}
+.welcome-popup-reopen:hover, .welcome-popup-reopen:focus-visible { opacity: 1; }
+.welcome-popup-reopen:hover span { transform: translate(1px, -1px); }
+.welcome-popup:not([hidden]) + .welcome-popup-reopen, body.template-cart .welcome-popup-reopen { display: none; }
+@media (max-width: 680px) {
+  /* 38 px: no roza el botón «Sonido» del hero (left 16px, bottom 18px). */
+  .welcome-popup-reopen { width: 38px; height: 38px; }
+  .welcome-popup-reopen span { left: 4px; bottom: 5px; font-size: 11px; }
+  body.template-product .welcome-popup-reopen { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+}
 .welcome-popup.is-open { opacity: 1; transform: none; }
 .welcome-popup__image, .welcome-popup__veil { position: absolute; inset: 0; }
 .welcome-popup__image { width: 100%; height: 100%; display: block; object-fit: cover; }
@@ -100,8 +123,10 @@
 }
 .welcome-popup__close:hover, .welcome-popup__close:focus-visible { background: rgba(7, 21, 43, .72); outline: none; }
 .welcome-popup__close svg { width: 17px; height: 17px; }
+/* Titulares del popup en Ibarra Real Nova (entrega 2026-09-29); la fuente se pide
+   sólo cuando el popup va a abrirse (ver JS), con EB Garamond de respaldo. */
 .welcome-popup h2 {
-  max-width: 300px; margin: 0 auto; font-family: var(--serif); font-weight: 400;
+  max-width: 300px; margin: 0 auto; font-family: 'Ibarra Real Nova', var(--serif); font-weight: 400;
   font-size: clamp(30px, 3vw, 35px); line-height: .95; text-align: center; color: inherit;
   text-shadow: 0 2px 18px rgba(0, 0, 0, .22);
 }
@@ -122,19 +147,19 @@
   transition: color .2s ease, background .2s ease, border-color .2s ease;
 }
 .welcome-popup__submit:hover, .welcome-popup__submit:focus-visible { color: #fff; background: var(--wp-red); border-color: var(--wp-red); outline: none; }
-.welcome-popup__legal { display: flex; align-items: flex-start; gap: 8px; margin-top: 12px; color: rgba(247, 242, 233, .72); font-size: 8px; line-height: 1.45; }
+.welcome-popup__legal { display: flex; align-items: flex-start; gap: 8px; margin-top: 12px; color: rgba(247, 242, 233, .72); font-size: 9px; line-height: 1.45; }
 .welcome-popup__legal input { width: 13px; height: 13px; margin: 0; flex: 0 0 auto; accent-color: var(--wp-red); }
 .welcome-popup__legal a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
-.welcome-popup__error { margin: 6px 0 0; color: #ffd0d4; font-size: 8px; line-height: 1.35; }
+.welcome-popup__error { margin: 6px 0 0; color: #ffd0d4; font-size: 9px; line-height: 1.35; }
 .welcome-popup__success {
   padding: 20px 18px; text-align: center; background: rgba(7, 21, 43, .72); border: 1px solid rgba(247, 242, 233, .32);
   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
 }
-.welcome-popup__success strong { display: block; margin-bottom: 6px; font-family: var(--serif); font-size: 25px; font-weight: 400; }
+.welcome-popup__success strong { display: block; margin-bottom: 6px; font-family: 'Ibarra Real Nova', var(--serif); font-size: 25px; font-weight: 400; }
 .welcome-popup__success p { margin: 0; color: rgba(247, 242, 233, .82); font-size: 10px; line-height: 1.55; }
 .welcome-popup__skip {
   align-self: center; margin: 7px auto 0; padding: 3px 0; color: rgba(247, 242, 233, .68); border-bottom: 1px solid transparent;
-  cursor: pointer; font-size: 8px; letter-spacing: .04em; transition: color .2s ease, border-color .2s ease;
+  cursor: pointer; font-size: 9px; letter-spacing: .04em; transition: color .2s ease, border-color .2s ease;
 }
 .welcome-popup__skip:hover, .welcome-popup__skip:focus-visible { color: #fff; border-bottom-color: currentColor; outline: none; }
 
@@ -144,7 +169,7 @@
   .welcome-popup__logo { top: 30px; width: 62px; }
   .welcome-popup h2 { font-size: 35px; }
   .welcome-popup__text { margin: 13px auto 18px; font-size: 12px; }
-  .welcome-popup__legal { font-size: 7.5px; }
+  .welcome-popup__legal { font-size: 9px; }
 }
 @media (max-height: 650px) {
   .welcome-popup { height: 100dvh; }
@@ -169,28 +194,49 @@
       var status = popup.querySelector('[data-welcome-status]');
       var delay = (Number(popup.dataset.delay) || 0) * 1000;
 
-      // Cerrado una vez = no vuelve a salir en ninguna página (sin caducidad).
+      // Cerrado = no vuelve a salir en 30 min, en ninguna página.
+      var ttl = 30 * 60 * 1000;
       function dismissed() {
-        try { return !!localStorage.getItem(key); } catch (error) { return false; }
+        try { return Date.now() - Number(localStorage.getItem(key) || 0) < ttl; } catch (error) { return false; }
       }
-      function open() {
+      function loadFont() {
+        if (document.getElementById('welcome-popup-font')) return;
+        var link = document.createElement('link');
+        link.id = 'welcome-popup-font';
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@400&display=swap';
+        document.head.appendChild(link);
+      }
+      // Se retira sola a los 10 s (petición del cliente), salvo que el visitante
+      // la esté usando: pasar el ratón, tocarla o entrar en el formulario lo cancela.
+      var autoClose;
+      function stopAutoClose() { clearTimeout(autoClose); }
+      ['pointerenter', 'focusin', 'touchstart'].forEach(function (type) {
+        popup.addEventListener(type, stopAutoClose, { passive: true });
+      });
+      function open(manual) {
         if (!popup.isConnected) return;
         popup.hidden = false;
         requestAnimationFrame(function () { popup.classList.add('is-open'); });
-        if (status) status.focus();
+        if (status) { status.focus(); return; }
+        if (manual === true) return;
+        if (!(window.Shopify && Shopify.designMode)) autoClose = window.setTimeout(close, 10000);
       }
       function close() {
+        stopAutoClose();
         try { localStorage.setItem(key, String(Date.now())); } catch (error) {}
         popup.classList.remove('is-open');
         popup.hidden = true;
       }
 
+      var reopen = popup.parentElement.querySelector('[data-welcome-reopen]');
+      if (reopen) reopen.addEventListener('click', function () { stopAutoClose(); loadFont(); open(true); });
       popup.querySelectorAll('[data-welcome-close]').forEach(function (b) { b.addEventListener('click', close); });
       document.addEventListener('keydown', function (event) { if (event.key === 'Escape' && !popup.hidden) close(); });
 
-      if (status || (window.Shopify && Shopify.designMode)) open();
+      if (status || (window.Shopify && Shopify.designMode)) { loadFont(); open(); }
       // En la cesta no: taparía la barra de pago en móvil.
-      else if (!dismissed() && !document.body.classList.contains('template-cart')) window.setTimeout(open, delay);
+      else if (!dismissed() && !document.body.classList.contains('template-cart')) { loadFont(); window.setTimeout(open, delay); }
     });
   }
 
@@ -216,7 +262,7 @@
     { "type": "text", "id": "success_text", "label": "Éxito · texto", "default": "Revisa tu correo: recibirás allí tu descuento de bienvenida." },
     { "type": "text", "id": "skip_label", "label": "Enlace para cerrar", "default": "Ahora no, seguir descubriendo" },
     { "type": "range", "id": "delay_seconds", "label": "Retraso al abrir", "min": 0, "max": 20, "step": 1, "unit": "s", "default": 4 },
-    { "type": "paragraph", "content": "Una vez cerrado no vuelve a aparecer en ninguna página (petición del cliente)." }
+    { "type": "paragraph", "content": "Se retira sola a los 10 s si nadie la toca. Cerrada a mano no vuelve a aparecer en ninguna página (petición del cliente)." }
   ]
 }
 {% endschema %}

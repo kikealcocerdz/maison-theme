@@ -116,8 +116,8 @@
   },
   "sections": {
     "hero": {
-      "play_music": "Play music",
-      "pause_music": "Pause music"
+      "unmute": "Turn sound on",
+      "mute": "Mute"
     },
     "cart": {
       "empty": "Your cart is empty.",
@@ -258,7 +258,7 @@
       "pieces": "Pieces",
       "pieces_selector": "Select the number of pieces",
       "pack_intro": "Your set includes:",
-      "pack_hint": "Hover or select a piece to see it in detail.",
+      "pack_hint": "Select a piece to see it in detail.",
       "pack_unit": { "one": "unit included", "other": "units included" },
       "discover_collection": "Discover the collection"
     },
