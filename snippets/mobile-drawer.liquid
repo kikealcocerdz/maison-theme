@@ -48,6 +48,12 @@
     {%- endif -%}
 
     <ul class="mobile-main-list mobile-main-list--editorial">
+      {%- comment -%}
+        v101: en escritorio «Quiénes somos» vive en el pie y en la cabecera no hay
+        cuenta ni favoritos por debajo de 620px: desde el móvil no se llegaba a
+        ninguno. Títulos de la propia página (se traducen en Admin).
+      {%- endcomment -%}
+      <li><a href="{{ pages['quienes-somos'].url | default: '/pages/quienes-somos' }}">{{ pages['quienes-somos'].title | default: 'Quiénes somos' }}</a></li>
       {%- for link in menu_right.links -%}
         {%- if link.links.size > 0 -%}
           <li><button type="button" data-mobile-open="r{{ forloop.index }}">{{ link.title }}</button></li>
@@ -62,6 +68,12 @@
         <li><a href="/pages/artesania">Artesanía</a></li>
       {%- endif -%}
     </ul>
+
+    <nav class="mobile-utility" aria-label="{{ 'general.account.label' | t }}">
+      <a href="{{ pages.contacto.url | default: '/pages/contacto' }}">{{ pages.contacto.title | default: 'Contacto' }}</a>
+      <a href="/pages/favoritos">{{ 'general.favorites.label' | t }}</a>
+      <a href="{{ routes.account_url }}">{{ 'general.account.label' | t }}</a>
+    </nav>
   </section>
 
   {%- assign sides = 'l,r' | split: ',' -%}

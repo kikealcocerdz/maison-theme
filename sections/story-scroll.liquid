@@ -168,7 +168,9 @@
    ========================================================================== */
 @media (max-width: 760px) {
   .story-scroll {
-    height: 190svh !important;
+    /* v101: con 190svh el texto aparecía tarde y se iba enseguida; ahora se queda
+       ~un viewport entero legible antes de soltar la sección. */
+    height: 250svh !important;
     min-height: 0 !important;
     padding: 0 !important;
     overflow: clip !important;
@@ -199,11 +201,14 @@
 
   function initStory(root) {
     root.dataset.init = '1';
+    const sticky = root.querySelector('.story-scroll__sticky');
     const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
     function update() {
       const rect = root.getBoundingClientRect();
-      const max = Math.max(root.offsetHeight - window.innerHeight, 1);
+      /* v101: el alto del bloque fijo, no window.innerHeight: en iOS innerHeight cambia
+         al plegarse la barra de Safari y el progreso daba saltos a mitad de scroll. */
+      const max = Math.max(root.offsetHeight - (sticky ? sticky.offsetHeight : window.innerHeight), 1);
       const raw = clamp(-rect.top / max, 0, 1);
       const textOpacity = clamp((raw - 0.20) / 0.18, 0, 1);
       const dim = clamp((raw - 0.18) / 0.24, 0, 0.72);
