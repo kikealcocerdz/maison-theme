@@ -509,28 +509,6 @@
 .collection-page .side-sort { display: none; }
 .collection-page .sidebar__scroll { display: contents; }
 
-/* Escritorio ancho (cliente 2026-10-02: «el filtro tiene que ser fijo para filtrar
-   mientras scrolleo»): tres columnas. Izquierda = Explorar colecciones (navega),
-   centro = productos, derecha = Filtrar esta colección (recorta). Las dos laterales
-   son sticky. `.sidebar` pasa a display:contents para que el árbol y el formulario de
-   filtros, que viven en el mismo <aside> por el cajón móvil, ocupen cada uno su columna.
-   Entre 781 y 1000px sigue el botón «Filtrar» con el cajón por la derecha. */
-@media (min-width: 1001px) {
-  .collection-page .shop-layout { grid-template-columns: minmax(180px, 210px) minmax(0, 1fr) minmax(200px, 230px); }
-  .collection-page .sidebar { display: contents; }
-  .collection-page .shop-main { grid-column: 2; grid-row: 1; }
-  .collection-page .sidebar__nav,
-  .collection-page .side-filters {
-    grid-row: 1; margin-top: 205px; position: sticky; top: calc(var(--header-h) + 22px);
-    max-height: calc(100vh - var(--header-h) - 44px);
-    overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin;
-  }
-  .collection-page .sidebar__nav { grid-column: 1; }
-  .collection-page .side-filters { grid-column: 3; display: block; }
-  .collection-page .side-filters-head { display: flex; }
-  .collection-page .toolbar .filters-open { display: none; }
-}
-
 /* Doble slider de precio (snippets/collection-filters.liquid). Se revela sólo con JS. */
 .collection-page .facet-range { position: relative; height: 34px; display: flex; align-items: center; margin: 4px 0 2px; }
 .collection-page .facet-range__track { position: absolute; left: 0; right: 0; height: 2px; background: var(--rule); }
