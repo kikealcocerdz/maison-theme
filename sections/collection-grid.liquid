@@ -112,6 +112,8 @@
         {%- if intro_copy_text != blank -%}<p>{{ intro_copy_text }}</p>{%- endif -%}
       </section>
 
+      {%- unless is_fin -%}{% render 'collection-siblings' %}{%- endunless -%}
+
       <div class="toolbar">
         {%- comment -%}
           Mobile-only door to the sidebar: below 780px `.sidebar` is display:none, so
@@ -360,8 +362,8 @@
 }
 .collection-page .more-filters:hover { background: var(--ink); color: var(--paper); }
 
-/* Títulos y pestañas del cajón móvil: ocultos salvo dentro del cajón en móvil (ver @media 780). */
-.collection-page .drawer-heading, .collection-page .drawer-tabs { display: none; }
+/* Títulos del cajón móvil y fila de colecciones: solo en móvil (ver @media 780). */
+.collection-page .drawer-heading, .collection-page .collection-siblings { display: none; }
 
 /* Cajón de filtros en escritorio (2026-10-02, propuesta «navegar / filtrar»): se abre
    con «Filtrar» junto a «Ordenar» y entra por la DERECHA; la columna izquierda queda
@@ -735,19 +737,17 @@
      cerrados salvo el que se toca (cliente 2026-10-02: «sale todo abierto»). */
   .collection-page .side-panel { grid-template-rows: 0fr; }
 
-  /* Pestañas Filtrar | Colecciones: cada una enseña solo su bloque. */
-  .collection-page.filters-drawer-open .drawer-tabs {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 14px 20px 4px;
+  /* El cajón móvil solo filtra (cliente 2026-10-02): navegar entre colecciones va en
+     la fila de chips de la página (snippets/collection-siblings). */
+  .collection-page.filters-drawer-open .sidebar__nav { display: none; }
+
+  /* Fila de colecciones hermanas bajo el título (reusa las pastillas .deco-chip). */
+  .collection-page .collection-siblings {
+    display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+    margin: -8px -14px 20px; padding: 0 14px 2px;
   }
-  .collection-page .drawer-tabs button {
-    min-height: 46px; border: .5px solid var(--ink); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink);
-  }
-  .collection-page .drawer-tabs button[aria-selected="true"] { background: var(--ink); color: var(--paper); }
-  .collection-page.filters-drawer-open:not(.drawer-explore) .sidebar__nav { display: none; }
-  .collection-page.drawer-explore .side-sort,
-  .collection-page.drawer-explore .side-filters,
-  .collection-page.drawer-explore .sidebar__scroll > .drawer-heading { display: none !important; }
-  .collection-page.drawer-explore .drawer-heading--explore { margin-top: 0 !important; border-top: 0 !important; }
+  .collection-page .collection-siblings::-webkit-scrollbar { display: none; }
+  .collection-page .collection-siblings__all { color: var(--muted); border-style: dashed; }
 
   /* Títulos «Filtrar esta colección» / «Explorar colecciones» (snippets/collection-nav). */
   .collection-page.filters-drawer-open .drawer-heading {
@@ -1022,17 +1022,6 @@
         var q = qs.toString();
         return location.pathname + (q ? '?' + q : '');
       }
-
-      // Pestañas del cajón móvil (snippets/collection-nav): Filtrar | Colecciones.
-      root.querySelectorAll('[data-drawer-tab]').forEach(function (tab) {
-        tab.addEventListener('click', function () {
-          var explore = tab.dataset.drawerTab === 'explore';
-          root.classList.toggle('drawer-explore', explore);
-          root.querySelectorAll('[data-drawer-tab]').forEach(function (t) {
-            t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
-          });
-        });
-      });
 
       // Dos puertas al mismo cajón: «Filtrar» en la barra (móvil) y «+ Filtros» en
       // el lateral (escritorio). Ambas llevan data-filters-open, así que el aria hay

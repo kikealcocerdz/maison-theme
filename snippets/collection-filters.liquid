@@ -35,6 +35,15 @@
 
     <div class="side-accordion">
       {%- for filter in collection.filters -%}
+        {%- comment -%}
+          «Colección» dentro de una colección de un solo decorado (Ceilán…) solo ofrece esa
+          misma: parecía que no había más (cliente 2026-10-02). Se oculta si tiene una
+          opción o ninguna; en colecciones mezcladas (Platos…) sigue sirviendo.
+        {%- endcomment -%}
+        {%- if filter.param_name contains 'custom.decorado' and filter.active_values.size == 0 -%}
+          {%- assign live_values = filter.values | where: 'count' | size -%}
+          {%- if live_values < 2 -%}{%- continue -%}{%- endif -%}
+        {%- endif -%}
         {%- liquid
           assign filter_param = filter.param_name | downcase
           assign filter_label = filter.label | downcase | strip

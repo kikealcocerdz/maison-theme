@@ -1,0 +1,38 @@
+{%- comment -%}
+  Móvil: navegación entre colecciones dentro de la propia página (cliente 2026-10-02:
+  «en móvil no hay manera de navegar entre colecciones salvo el menú de arriba»).
+  Fila de chips deslizable bajo el título, sacada del mismo menú de la barra lateral
+  (`section.settings.sidebar_menu`, Admin › colecciones-sidebar):
+  - si la colección actual está en un grupo (Aurora, Ochavada…), el grupo entero
+    (el propio grupo + sus colecciones), con la actual marcada;
+  - si no, los grupos de primer nivel.
+  Siempre acaba en «Todas las colecciones». En escritorio no se pinta: allí está la
+  columna «Explorar colecciones».
+{%- endcomment -%}
+{%- liquid
+  assign menu = linklists[section.settings.sidebar_menu]
+  assign group = nil
+  if menu != blank
+    for parent in menu.links
+      if parent.current or parent.child_active
+        assign group = parent
+        break
+      endif
+    endfor
+  endif
+-%}
+{%- if menu != blank and menu.links.size > 0 -%}
+  <nav class="collection-siblings" aria-label="{{ 'sections.collection.drawer_explore' | t }}">
+    {%- if group != nil and group.links.size > 0 -%}
+      <a class="deco-chip{% if group.current %} is-active{% endif %}" href="{{ group.url }}"{% if group.current %} aria-current="page"{% endif %}>{{ group.title | escape }}</a>
+      {%- for child in group.links -%}
+        <a class="deco-chip{% if child.current %} is-active{% endif %}" href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title | escape }}</a>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for parent in menu.links -%}
+        <a class="deco-chip" href="{{ parent.url }}">{{ parent.title | escape }}</a>
+      {%- endfor -%}
+    {%- endif -%}
+    <a class="deco-chip collection-siblings__all" href="{{ routes.collections_url }}">{{ 'sections.collection.siblings_all' | t }}</a>
+  </nav>
+{%- endif -%}

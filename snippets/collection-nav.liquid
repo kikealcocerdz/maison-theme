@@ -32,14 +32,6 @@
 
   <div class="sidebar__scroll">
     {%- comment -%}
-      Cajón móvil: dos pestañas para no mezclar nunca lo que filtra (te quedas en la
-      colección) con lo que navega (te lleva a otra). Solo existen visualmente en móvil.
-    {%- endcomment -%}
-    <div class="drawer-tabs" role="tablist">
-      <button type="button" role="tab" aria-selected="true" data-drawer-tab="filter">{{ 'sections.collection.filters_open' | t }}</button>
-      <button type="button" role="tab" aria-selected="false" data-drawer-tab="explore">{{ 'sections.collection.drawer_tab_explore' | t }}</button>
-    </div>
-    {%- comment -%}
       "Ordenar por" vive en la barra de herramientas en escritorio. En el cajón se
       repite como chips porque es lo primero que se toca en un móvil; son los mismos
       enlaces de servidor, así que ordena Shopify y la paginación conserva el criterio.
