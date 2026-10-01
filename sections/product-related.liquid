@@ -157,11 +157,22 @@
   comment
     Decoración (cliente 2026-09-28): sólo «Te puede interesar», nunca «Completa tu mesa».
   endcomment
-  if section.settings.source == 'same_collection'
-    assign decor_handles = product.collections | map: 'handle'
-    if decor_handles contains 'decoracion'
-      assign skip_row = true
-    endif
+  assign decor_handles = product.collections | map: 'handle'
+  assign is_decor = false
+  if decor_handles contains 'decoracion'
+    assign is_decor = true
+  endif
+  if section.settings.source == 'same_collection' and is_decor
+    assign skip_row = true
+  endif
+  comment
+    Piezas de Decoración casi nunca tienen «la misma pieza en otro decorado», así
+    que la fila salía vacía (cliente 2026-10-01): si la primera pasada no pinta
+    nada, se rellena con otras piezas de Decoración.
+  endcomment
+  assign fallback_list = blank
+  if is_decor and section.settings.source == 'same_type' and manual == blank
+    assign fallback_list = collections['decoracion'].products
   endif
 
   # `recommendations.performed` is only true inside the /recommendations/products render,
@@ -196,6 +207,14 @@
         en «te puede interesar») dentro de un `limit` dejaba huecos en la fila.
       {%- endcomment -%}
       {%- assign shown = 0 -%}
+      {%- for pass in (1..2) -%}
+      {%- if pass == 2 -%}
+        {%- if shown > 0 or fallback_list == blank -%}{%- break -%}{%- endif -%}
+        {%- assign list = fallback_list -%}
+        {%- assign exclude_own = false -%}
+        {%- assign piece_prefix = blank -%}
+        {%- assign own_forma = blank -%}
+      {%- endif -%}
       {%- for product in list -%}
         {%- if shown >= limit -%}{%- break -%}{%- endif -%}
         {%- if product.id == current_id -%}{%- continue -%}{%- endif -%}
@@ -230,6 +249,7 @@
           card_url: product.url, title: product.title, price: r_price, meta: r_meta,
           img1: r_img1, img_w: r_w, img_h: r_h,
           badge: r_new, data_price: product.price, data_new: r_new %}
+      {%- endfor -%}
       {%- endfor -%}
     {%- else -%}
       {%- for block in section.blocks -%}
