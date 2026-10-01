@@ -5,6 +5,7 @@
   (marca de tiempo en localStorage). El form es el de clientes de
   Shopify (tag welcome-popup-5); consentimiento `required` nativo.
   2026-09-29: se retira sola a los 10 s si nadie la toca (vuelve en la próxima visita)
+  2026-10-01: en escritorio el hover pausa (no cancela) el cierre; en móvil, más pequeña.
   y titulares en Ibarra Real Nova, como la nueva entrega del popup con el logo nuevo.
 {%- endcomment -%}
 <aside
@@ -163,12 +164,15 @@
 }
 .welcome-popup__skip:hover, .welcome-popup__skip:focus-visible { color: #fff; border-bottom-color: currentColor; outline: none; }
 
+/* Móvil: tarjeta flotante más pequeña (cliente 2026-10-01: «aparece demasiado grande»). */
 @media (max-width: 600px) {
-  .welcome-popup { width: min(356px, 100vw); height: min(610px, 100dvh); }
-  .welcome-popup__inner { padding: 36px 25px 23px; }
-  .welcome-popup__logo { top: 30px; width: 62px; }
-  .welcome-popup h2 { font-size: 35px; }
-  .welcome-popup__text { margin: 13px auto 18px; font-size: 12px; }
+  .welcome-popup { right: 12px; bottom: 12px; width: min(300px, calc(100vw - 24px)); height: min(500px, calc(100dvh - 24px)); }
+  .welcome-popup__inner { padding: 24px 20px 16px; }
+  .welcome-popup__logo { top: 22px; width: 46px; }
+  .welcome-popup__close { top: 10px; right: 10px; width: 32px; height: 32px; }
+  .welcome-popup h2 { font-size: 28px; }
+  .welcome-popup__text { margin: 10px auto 14px; font-size: 11.5px; }
+  .welcome-popup__form input[type="email"], .welcome-popup__submit { min-height: 42px; }
   .welcome-popup__legal { font-size: 9px; }
 }
 @media (max-height: 650px) {
@@ -208,19 +212,27 @@
         document.head.appendChild(link);
       }
       // Se retira sola a los 10 s (petición del cliente), salvo que el visitante
-      // la esté usando: pasar el ratón, tocarla o entrar en el formulario lo cancela.
-      var autoClose;
+      // la esté usando: tocarla o entrar en el formulario lo cancela. En escritorio el
+      // ratón encima solo la pausa: al salir vuelve a contar (antes la cancelaba para
+      // siempre con solo cruzarla, y en escritorio no se iba nunca).
+      var autoClose, used = false;
       function stopAutoClose() { clearTimeout(autoClose); }
-      ['pointerenter', 'focusin', 'touchstart'].forEach(function (type) {
-        popup.addEventListener(type, stopAutoClose, { passive: true });
+      function startAutoClose() {
+        stopAutoClose();
+        if (!used && !popup.hidden && !(window.Shopify && Shopify.designMode)) autoClose = window.setTimeout(close, 10000);
+      }
+      ['focusin', 'touchstart'].forEach(function (type) {
+        popup.addEventListener(type, function () { used = true; stopAutoClose(); }, { passive: true });
       });
+      popup.addEventListener('pointerenter', function (event) { if (event.pointerType === 'mouse') stopAutoClose(); });
+      popup.addEventListener('pointerleave', function (event) { if (event.pointerType === 'mouse' && !popup.contains(document.activeElement)) startAutoClose(); });
       function open(manual) {
         if (!popup.isConnected) return;
         popup.hidden = false;
         requestAnimationFrame(function () { popup.classList.add('is-open'); });
         if (status) { status.focus(); return; }
-        if (manual === true) return;
-        if (!(window.Shopify && Shopify.designMode)) autoClose = window.setTimeout(close, 10000);
+        if (manual === true) { used = true; return; }
+        startAutoClose();
       }
       function close() {
         stopAutoClose();
