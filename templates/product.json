@@ -15,7 +15,7 @@
       "blocks": {
         "a1": { "type": "accordion", "settings": { "label": "Dimensiones", "source_metafield": "custom.dimensiones", "content": "" } },
         "a2": { "type": "accordion", "settings": { "label": "Detalles", "source_metafield": "custom.detalles", "content": "", "show_description": false } },
-        "a3": { "type": "accordion", "settings": { "label": "Cuidados", "content": "<p>Lavar preferiblemente a mano o en programa delicado. Evitar cambios bruscos de temperatura, golpes térmicos y productos abrasivos.</p>" } },
+        "a3": { "type": "accordion", "settings": { "label": "Cuidados", "source_metafield": "custom.cuidados", "content": "<p>Aptas para lavavajillas y para el uso diario. Piezas resistentes y versátiles, pensadas para disfrutar de la mesa cada día.</p>" } },
         "a4": { "type": "accordion", "settings": { "label": "Envío y devoluciones", "content": "<p>Envío protegido para piezas cerámicas. Envío gratuito en pedidos superiores a 150 € en la Península.</p><p>Plazo de entrega: 7 días hábiles si la pieza está en stock; entre 15 y 21 días hábiles si está en producción.</p><p>Dispones de 14 días naturales desde la recepción para solicitar la devolución o un cambio. Consulta la <a href=\"/pages/envios-devoluciones\">política de envíos y devoluciones</a>.</p>" } }
       },
       "block_order": ["a1", "a2", "a3", "a4"]

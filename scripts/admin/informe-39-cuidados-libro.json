@@ -1,0 +1,30 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "definición custom.cuidados",
+      "resultado": {
+        "createdDefinition": {
+          "id": "gid://shopify/MetafieldDefinition/510077665621"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "cuidados de «Libro»",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76704856211797",
+            "key": "cuidados",
+            "value": "Apto para lavavajillas y para el uso diario."
+          }
+        ],
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}
