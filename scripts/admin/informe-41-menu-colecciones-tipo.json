@@ -1,0 +1,730 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "main-menu ANTES",
+      "resultado": {
+        "id": "gid://shopify/Menu/321835762005",
+        "handle": "main-menu",
+        "title": "Main menu",
+        "items": [
+          {
+            "id": "gid://shopify/MenuItem/836981883221",
+            "title": "Mesa",
+            "type": "COLLECTION",
+            "url": "/collections/vajilla",
+            "resourceId": "gid://shopify/Collection/681692430677",
+            "tags": [],
+            "items": [
+              {
+                "id": "gid://shopify/MenuItem/836981915989",
+                "title": "Vajilla",
+                "type": "COLLECTION",
+                "url": "/collections/vajilla",
+                "resourceId": "gid://shopify/Collection/681692430677",
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/836981948757",
+                "title": "Plato",
+                "type": "COLLECTION",
+                "url": "/collections/plato",
+                "resourceId": "gid://shopify/Collection/681692234069",
+                "tags": [],
+                "items": [
+                  {
+                    "id": "gid://shopify/MenuItem/836981981525",
+                    "title": "Bajoplato",
+                    "type": "COLLECTION",
+                    "url": "/collections/bajoplato",
+                    "resourceId": "gid://shopify/Collection/681691644245",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982014293",
+                    "title": "Plato llano",
+                    "type": "COLLECTION",
+                    "url": "/collections/platos-llanos",
+                    "resourceId": "gid://shopify/Collection/683684364629",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982047061",
+                    "title": "Plato hondo",
+                    "type": "COLLECTION",
+                    "url": "/collections/platos-hondos",
+                    "resourceId": "gid://shopify/Collection/683684397397",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982079829",
+                    "title": "Plato postre",
+                    "type": "COLLECTION",
+                    "url": "/collections/platos-postre",
+                    "resourceId": "gid://shopify/Collection/683684430165",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982112597",
+                    "title": "Plato pan",
+                    "type": "COLLECTION",
+                    "url": "/collections/platos-pan",
+                    "resourceId": "gid://shopify/Collection/683684462933",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982145365",
+                    "title": "Platillo de consomé",
+                    "type": "COLLECTION",
+                    "url": "/collections/platillos-consome",
+                    "resourceId": "gid://shopify/Collection/683684561237",
+                    "tags": []
+                  }
+                ]
+              },
+              {
+                "id": "gid://shopify/MenuItem/836982178133",
+                "title": "Bol y taza de consomé",
+                "type": "COLLECTION",
+                "url": "/collections/boles-tazas-consome",
+                "resourceId": "gid://shopify/Collection/683684725077",
+                "tags": [],
+                "items": [
+                  {
+                    "id": "gid://shopify/MenuItem/836982210901",
+                    "title": "Bol grande",
+                    "type": "COLLECTION",
+                    "url": "/collections/boles-grandes",
+                    "resourceId": "gid://shopify/Collection/683684626773",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982243669",
+                    "title": "Bol pequeño",
+                    "type": "COLLECTION",
+                    "url": "/collections/boles-pequenos",
+                    "resourceId": "gid://shopify/Collection/683684659541",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982276437",
+                    "title": "Bol mini",
+                    "type": "COLLECTION",
+                    "url": "/collections/boles-mini",
+                    "resourceId": "gid://shopify/Collection/683684692309",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982309205",
+                    "title": "Taza de consomé",
+                    "type": "COLLECTION",
+                    "url": "/collections/tazas-consome",
+                    "resourceId": "gid://shopify/Collection/683684757845",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982341973",
+                    "title": "Taza de consomé con platillo",
+                    "type": "COLLECTION",
+                    "url": "/collections/tazas-consome-platillo",
+                    "resourceId": "gid://shopify/Collection/683684790613",
+                    "tags": []
+                  }
+                ]
+              },
+              {
+                "id": "gid://shopify/MenuItem/836982374741",
+                "title": "Servir",
+                "type": "COLLECTION",
+                "url": "/collections/servir",
+                "resourceId": "gid://shopify/Collection/683685019989",
+                "tags": [],
+                "items": [
+                  {
+                    "id": "gid://shopify/MenuItem/836982407509",
+                    "title": "Fuente y ensaladera",
+                    "type": "COLLECTION",
+                    "url": "/collections/fuentes-ensaladeras",
+                    "resourceId": "gid://shopify/Collection/683684987221",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982440277",
+                    "title": "Sopera",
+                    "type": "COLLECTION",
+                    "url": "/collections/sopera",
+                    "resourceId": "gid://shopify/Collection/681692332373",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982473045",
+                    "title": "Salsera",
+                    "type": "COLLECTION",
+                    "url": "/collections/salsera",
+                    "resourceId": "gid://shopify/Collection/681692266837",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982505813",
+                    "title": "Cubitera",
+                    "type": "COLLECTION",
+                    "url": "/collections/champanera",
+                    "resourceId": "gid://shopify/Collection/681691840853",
+                    "tags": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/MenuItem/836982538581",
+            "title": "Café & Té",
+            "type": "COLLECTION",
+            "url": "/collections/cafe-te",
+            "resourceId": "gid://shopify/Collection/683685052757",
+            "tags": [],
+            "items": [
+              {
+                "id": "gid://shopify/MenuItem/836982571349",
+                "title": "Juego de Café",
+                "type": "COLLECTION",
+                "url": "/collections/juegos-cafe",
+                "resourceId": "gid://shopify/Collection/679848968533",
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/836982604117",
+                "title": "Juego de Té",
+                "type": "COLLECTION",
+                "url": "/collections/juegos-te",
+                "resourceId": "gid://shopify/Collection/679849001301",
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/836982636885",
+                "title": "Tazas",
+                "type": "COLLECTION",
+                "url": "/collections/taza",
+                "resourceId": "gid://shopify/Collection/681692365141",
+                "tags": [],
+                "items": [
+                  {
+                    "id": "gid://shopify/MenuItem/836982669653",
+                    "title": "Mug",
+                    "type": "COLLECTION",
+                    "url": "/collections/mug",
+                    "resourceId": "gid://shopify/Collection/681692135765",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982702421",
+                    "title": "Taza de café con platillo",
+                    "type": "COLLECTION",
+                    "url": "/collections/tazas-cafe-platillo",
+                    "resourceId": "gid://shopify/Collection/683684823381",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982735189",
+                    "title": "Taza de té con platillo",
+                    "type": "COLLECTION",
+                    "url": "/collections/tazas-te-platillo",
+                    "resourceId": "gid://shopify/Collection/683684856149",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982767957",
+                    "title": "Taza de desayuno con platillo",
+                    "type": "COLLECTION",
+                    "url": "/collections/tazas-desayuno-platillo",
+                    "resourceId": "gid://shopify/Collection/683684921685",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982800725",
+                    "title": "Taza de desayuno",
+                    "type": "COLLECTION",
+                    "url": "/collections/tazas-desayuno",
+                    "resourceId": "gid://shopify/Collection/683684888917",
+                    "tags": []
+                  }
+                ]
+              },
+              {
+                "id": "gid://shopify/MenuItem/836982833493",
+                "title": "Servicio",
+                "type": "COLLECTION",
+                "url": "/collections/servicio-cafe-te",
+                "resourceId": "gid://shopify/Collection/683685085525",
+                "tags": [],
+                "items": [
+                  {
+                    "id": "gid://shopify/MenuItem/836982866261",
+                    "title": "Azucarero",
+                    "type": "COLLECTION",
+                    "url": "/collections/azucarero",
+                    "resourceId": "gid://shopify/Collection/681691611477",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982899029",
+                    "title": "Bandeja de pastas",
+                    "type": "COLLECTION",
+                    "url": "/collections/bandejas-pastas",
+                    "resourceId": "gid://shopify/Collection/683684954453",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982931797",
+                    "title": "Bombonera",
+                    "type": "COLLECTION",
+                    "url": "/collections/bombonera",
+                    "resourceId": "gid://shopify/Collection/681691742549",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982964565",
+                    "title": "Cafetera",
+                    "type": "COLLECTION",
+                    "url": "/collections/cafetera",
+                    "resourceId": "gid://shopify/Collection/681691808085",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836982997333",
+                    "title": "Lechera",
+                    "type": "COLLECTION",
+                    "url": "/collections/lechera",
+                    "resourceId": "gid://shopify/Collection/681692102997",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983030101",
+                    "title": "Tetera",
+                    "type": "COLLECTION",
+                    "url": "/collections/tetera",
+                    "resourceId": "gid://shopify/Collection/681692397909",
+                    "tags": []
+                  }
+                ]
+              },
+              {
+                "id": "gid://shopify/MenuItem/836983062869",
+                "title": "Platos",
+                "type": "COLLECTION",
+                "url": "/collections/platos-cafe-te",
+                "resourceId": "gid://shopify/Collection/683685118293",
+                "tags": [],
+                "items": [
+                  {
+                    "id": "gid://shopify/MenuItem/836983095637",
+                    "title": "Plato de pastas",
+                    "type": "COLLECTION",
+                    "url": "/collections/platos-pastas",
+                    "resourceId": "gid://shopify/Collection/683684528469",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983128405",
+                    "title": "Platillo de desayuno",
+                    "type": "COLLECTION",
+                    "url": "/collections/platillos-desayuno",
+                    "resourceId": "gid://shopify/Collection/683684594005",
+                    "tags": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/MenuItem/836983161173",
+            "title": "Decoración",
+            "type": "COLLECTION",
+            "url": "/collections/decoracion",
+            "resourceId": "gid://shopify/Collection/674485141845",
+            "tags": [],
+            "items": [
+              {
+                "id": "gid://shopify/MenuItem/836983193941",
+                "title": "Arte y colección",
+                "type": "COLLECTION",
+                "url": "/collections/arte-y-coleccion",
+                "resourceId": "gid://shopify/Collection/681863709013",
+                "tags": [],
+                "items": [
+                  {
+                    "id": "gid://shopify/MenuItem/836983226709",
+                    "title": "Aguamanil",
+                    "type": "COLLECTION",
+                    "url": "/collections/aguamaniles",
+                    "resourceId": "gid://shopify/Collection/683685151061",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983259477",
+                    "title": "Cabeza frenológica",
+                    "type": "PRODUCT",
+                    "url": "/products/cabeza-frenologica",
+                    "resourceId": "gid://shopify/Product/11387597390165",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983292245",
+                    "title": "Floreros · Tibores · Jarrones",
+                    "type": "COLLECTION",
+                    "url": "/collections/florero",
+                    "resourceId": "gid://shopify/Collection/681691906389",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983325013",
+                    "title": "Tarros de botica",
+                    "type": "PRODUCT",
+                    "url": "/products/tarro-de-botica",
+                    "resourceId": "gid://shopify/Product/11609036554581",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983357781",
+                    "title": "Mancerina",
+                    "type": "PRODUCT",
+                    "url": "/products/mancerina",
+                    "resourceId": "gid://shopify/Product/11609045565781",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983390549",
+                    "title": "Caja 6 posavasos",
+                    "type": "PRODUCT",
+                    "url": "/products/caja-6-posavasos",
+                    "resourceId": "gid://shopify/Product/11602289525077",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983423317",
+                    "title": "Hoja de parra",
+                    "type": "PRODUCT",
+                    "url": "/products/hoja-de-parra",
+                    "resourceId": "gid://shopify/Product/11609045238101",
+                    "tags": []
+                  }
+                ]
+              },
+              {
+                "id": "gid://shopify/MenuItem/836983456085",
+                "title": "Objetos decorativos",
+                "type": "COLLECTION",
+                "url": "/collections/objetos-decorativos",
+                "resourceId": "gid://shopify/Collection/681863741781",
+                "tags": [],
+                "items": [
+                  {
+                    "id": "gid://shopify/MenuItem/836983488853",
+                    "title": "Vela aromática",
+                    "type": "COLLECTION",
+                    "url": "/collections/velas",
+                    "resourceId": "gid://shopify/Collection/683685183829",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983587157",
+                    "title": "Bandeja Vistas",
+                    "type": "COLLECTION",
+                    "url": "/collections/bandejas-vistas",
+                    "resourceId": "gid://shopify/Collection/683685216597",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983619925",
+                    "title": "Bandeja conmemorativa",
+                    "type": "PRODUCT",
+                    "url": "/products/bandeja-conmemorativa",
+                    "resourceId": "gid://shopify/Product/11609080365397",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983652693",
+                    "title": "Vaciabolsillo",
+                    "type": "PRODUCT",
+                    "url": "/products/vaciabolsillos",
+                    "resourceId": "gid://shopify/Product/11602289656149",
+                    "tags": []
+                  }
+                ]
+              },
+              {
+                "id": "gid://shopify/MenuItem/836983685461",
+                "title": "Baño",
+                "type": "COLLECTION",
+                "url": "/collections/bano",
+                "resourceId": "gid://shopify/Collection/681863774549",
+                "tags": [],
+                "items": [
+                  {
+                    "id": "gid://shopify/MenuItem/836983718229",
+                    "title": "Conjunto de baño",
+                    "type": "PRODUCT",
+                    "url": "/products/conjunto-de-bano",
+                    "resourceId": "gid://shopify/Product/11609080332629",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983750997",
+                    "title": "Cepillero",
+                    "type": "PRODUCT",
+                    "url": "/products/cepillero",
+                    "resourceId": "gid://shopify/Product/11609046679893",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983783765",
+                    "title": "Jabonera",
+                    "type": "PRODUCT",
+                    "url": "/products/jabonera",
+                    "resourceId": "gid://shopify/Product/11609080234325",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983816533",
+                    "title": "Algodonera",
+                    "type": "PRODUCT",
+                    "url": "/products/algodonera",
+                    "resourceId": "gid://shopify/Product/11609080267093",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983849301",
+                    "title": "Aguamanil",
+                    "type": "COLLECTION",
+                    "url": "/collections/aguamaniles",
+                    "resourceId": "gid://shopify/Collection/683685151061",
+                    "tags": []
+                  }
+                ]
+              },
+              {
+                "id": "gid://shopify/MenuItem/836983882069",
+                "title": "Gifts",
+                "type": "COLLECTION",
+                "url": "/collections/gifts",
+                "resourceId": "gid://shopify/Collection/681863840085",
+                "tags": [],
+                "items": [
+                  {
+                    "id": "gid://shopify/MenuItem/836983914837",
+                    "title": "Libro",
+                    "type": "PRODUCT",
+                    "url": "/products/libro",
+                    "resourceId": "gid://shopify/Product/11609047630165",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983947605",
+                    "title": "Camiseta",
+                    "type": "PRODUCT",
+                    "url": "/products/camiseta",
+                    "resourceId": "gid://shopify/Product/11609047302485",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836983980373",
+                    "title": "Bolsa",
+                    "type": "PRODUCT",
+                    "url": "/products/bolsa",
+                    "resourceId": "gid://shopify/Product/11609046942037",
+                    "tags": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/MenuItem/836984013141",
+            "title": "Colecciones",
+            "type": "HTTP",
+            "url": "/collections",
+            "resourceId": null,
+            "tags": [],
+            "items": [
+              {
+                "id": "gid://shopify/MenuItem/836984045909",
+                "title": "Nuevo",
+                "type": "COLLECTION",
+                "url": "/collections/novedades",
+                "resourceId": "gid://shopify/Collection/681646981461",
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/836984078677",
+                "title": "Fin de existencias",
+                "type": "COLLECTION",
+                "url": "/collections/fin-de-existencias",
+                "resourceId": "gid://shopify/Collection/681647014229",
+                "tags": [],
+                "items": []
+              },
+              {
+                "id": "gid://shopify/MenuItem/836984111445",
+                "title": "Clásicas",
+                "type": "HTTP",
+                "url": "/collections",
+                "resourceId": null,
+                "tags": [],
+                "items": [
+                  {
+                    "id": "gid://shopify/MenuItem/836984144213",
+                    "title": "202 Rosa",
+                    "type": "COLLECTION",
+                    "url": "/collections/202-rosa",
+                    "resourceId": "gid://shopify/Collection/674484912469",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836984176981",
+                    "title": "Negro Vistas",
+                    "type": "COLLECTION",
+                    "url": "/collections/negro-vistas",
+                    "resourceId": "gid://shopify/Collection/674484748629",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836984209749",
+                    "title": "Ceilán",
+                    "type": "COLLECTION",
+                    "url": "/collections/ceilan",
+                    "resourceId": "gid://shopify/Collection/674484846933",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836984242517",
+                    "title": "Flor de Lis Azul",
+                    "type": "COLLECTION",
+                    "url": "/collections/flor-de-lis-azul",
+                    "resourceId": "gid://shopify/Collection/675574874453",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836984275285",
+                    "title": "Flor de Lis Rosa",
+                    "type": "COLLECTION",
+                    "url": "/collections/flor-de-lis-rosa",
+                    "resourceId": "gid://shopify/Collection/675574907221",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836984308053",
+                    "title": "Viejo Molino",
+                    "type": "COLLECTION",
+                    "url": "/collections/viejo-molino",
+                    "resourceId": "gid://shopify/Collection/674484715861",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836984340821",
+                    "title": "Bellavista",
+                    "type": "COLLECTION",
+                    "url": "/collections/bellavista",
+                    "resourceId": "gid://shopify/Collection/674484879701",
+                    "tags": []
+                  }
+                ]
+              },
+              {
+                "id": "gid://shopify/MenuItem/836984373589",
+                "title": "Contemporáneas",
+                "type": "HTTP",
+                "url": "/collections",
+                "resourceId": null,
+                "tags": [],
+                "items": [
+                  {
+                    "id": "gid://shopify/MenuItem/836984406357",
+                    "title": "Áurea",
+                    "type": "COLLECTION",
+                    "url": "/collections/aurea",
+                    "resourceId": "gid://shopify/Collection/681864233301",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836984439125",
+                    "title": "Aaron Stewart",
+                    "type": "COLLECTION",
+                    "url": "/collections/vistas-stewart",
+                    "resourceId": "gid://shopify/Collection/674484781397",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836984471893",
+                    "title": "Oaxaca",
+                    "type": "COLLECTION",
+                    "url": "/collections/oaxaca",
+                    "resourceId": "gid://shopify/Collection/679848804693",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836984504661",
+                    "title": "Georgica",
+                    "type": "COLLECTION",
+                    "url": "/collections/georgica",
+                    "resourceId": "gid://shopify/Collection/681864266069",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836984537429",
+                    "title": "Edén",
+                    "type": "COLLECTION",
+                    "url": "/collections/eden",
+                    "resourceId": "gid://shopify/Collection/681864298837",
+                    "tags": []
+                  }
+                ]
+              },
+              {
+                "id": "gid://shopify/MenuItem/836984570197",
+                "title": "Blancas",
+                "type": "HTTP",
+                "url": "/collections",
+                "resourceId": null,
+                "tags": [],
+                "items": [
+                  {
+                    "id": "gid://shopify/MenuItem/836984602965",
+                    "title": "Aurora Blanca",
+                    "type": "COLLECTION",
+                    "url": "/collections/aurora-blanca",
+                    "resourceId": "gid://shopify/Collection/675574841685",
+                    "tags": []
+                  },
+                  {
+                    "id": "gid://shopify/MenuItem/836984635733",
+                    "title": "Ochavada Blanca",
+                    "type": "COLLECTION",
+                    "url": "/collections/ochavada-blanca",
+                    "resourceId": "gid://shopify/Collection/679848935765",
+                    "tags": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paso": "reescribir main-menu",
+      "resultado": {
+        "menu": {
+          "handle": "main-menu"
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}
