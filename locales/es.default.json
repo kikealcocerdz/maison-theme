@@ -203,6 +203,7 @@
       "drawer_filter_hint": "Te quedas aquí, con menos piezas.",
       "drawer_explore": "Explorar colecciones",
       "drawer_explore_hint": "Te lleva a otra colección.",
+      "drawer_tab_explore": "Colecciones",
       "filter_clear_all": "Quitar todos los filtros",
       "load_more": "Cargar más",
       "showing": "Mostrando {{ shown }} de {{ total }}",

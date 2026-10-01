@@ -355,23 +355,44 @@
 }
 .collection-page .more-filters:hover { border-color: var(--ink); }
 
-/* Títulos del cajón móvil: ocultos salvo dentro del cajón en móvil (ver @media 780). */
-.collection-page .drawer-heading { display: none; }
+/* Títulos y pestañas del cajón móvil: ocultos salvo dentro del cajón en móvil (ver @media 780). */
+.collection-page .drawer-heading, .collection-page .drawer-tabs { display: none; }
 
-/* Cajón de filtros adicionales en escritorio: entra por la izquierda, sobre fondo
-   blanco y texto azul corporativo. El árbol se oculta dentro — el
-   cajón lleva «únicamente los filtros adicionales». */
+/* Cajón de filtros en escritorio (2026-10-02, propuesta «navegar / filtrar»): se abre
+   con «Filtrar» junto a «Ordenar» y entra por la DERECHA; la columna izquierda queda
+   solo para navegar, con su título «Explorar colecciones». El árbol se oculta dentro
+   del cajón. */
 @media (min-width: 781px) {
   .collection-page .side-filters { display: none; }
+  .collection-page .more-filters { display: none; }
+  .collection-page .sidebar__nav > .drawer-heading--explore {
+    display: block; padding: 0 0 12px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
+  }
+  .collection-page .sidebar__nav > .drawer-heading--explore b { font: inherit; color: inherit; }
+  .collection-page .sidebar__nav > .drawer-heading--explore span { display: none; }
+  .collection-page .toolbar { gap: 10px; }
+  .collection-page .toolbar .filters-open {
+    display: inline-flex; order: 1; margin-left: auto; align-items: center; gap: 8px; height: 40px; padding: 0 16px;
+    border: .5px solid var(--rule); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+  }
+  .collection-page .toolbar .filters-open:hover { border-color: var(--ink); }
+  .collection-page .toolbar .filters-open-count {
+    display: inline-grid; place-items: center; min-width: 15px; height: 15px; padding: 0 4px;
+    background: var(--ink); color: var(--paper); font-size: 9px; border-radius: 999px;
+  }
+  .collection-page .toolbar .sort-wrap { order: 2; }
+  .collection-page.filters-drawer-open .sidebar__scroll > .drawer-heading { display: flex; flex-direction: column; gap: 4px; padding: 14px 0 6px; }
+  .collection-page.filters-drawer-open .sidebar__scroll > .drawer-heading b { font-family: var(--serif); font-weight: 400; font-size: 24px; color: var(--ink); }
+  .collection-page.filters-drawer-open .sidebar__scroll > .drawer-heading span { font-size: 12px; color: var(--muted); }
 
   .collection-page.filters-drawer-open .sidebar {
-    position: fixed; inset: 0 auto 0 0; z-index: 120;
+    position: fixed; inset: 0 0 0 auto; z-index: 120;
     width: min(420px, 92vw); margin: 0; max-height: none;
     display: flex; flex-direction: column; overflow: hidden;
     background: var(--paper); color: var(--ink);
-    animation: facets-left-in 280ms var(--ease);
+    animation: facets-right-in 280ms var(--ease);
   }
-  @keyframes facets-left-in { from { transform: translateX(-100%); } to { transform: none; } }
+  @keyframes facets-right-in { from { transform: translateX(100%); } to { transform: none; } }
   .collection-page.filters-drawer-open::after {
     content: ''; position: fixed; inset: 0; z-index: 115; background: rgba(15, 26, 46, .34);
   }
@@ -717,6 +738,24 @@
   }
   .collection-page .fchip.is-on { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 
+  /* La regla de tablet (≤1000px) abre todos los desplegables; en el cajón móvil,
+     cerrados salvo el que se toca (cliente 2026-10-02: «sale todo abierto»). */
+  .collection-page .side-panel { grid-template-rows: 0fr; }
+
+  /* Pestañas Filtrar | Colecciones: cada una enseña solo su bloque. */
+  .collection-page.filters-drawer-open .drawer-tabs {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 14px 20px 4px;
+  }
+  .collection-page .drawer-tabs button {
+    min-height: 46px; border: .5px solid var(--ink); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink);
+  }
+  .collection-page .drawer-tabs button[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+  .collection-page.filters-drawer-open:not(.drawer-explore) .sidebar__nav { display: none; }
+  .collection-page.drawer-explore .side-sort,
+  .collection-page.drawer-explore .side-filters,
+  .collection-page.drawer-explore .sidebar__scroll > .drawer-heading { display: none !important; }
+  .collection-page.drawer-explore .drawer-heading--explore { margin-top: 0 !important; border-top: 0 !important; }
+
   /* Títulos «Filtrar esta colección» / «Explorar colecciones» (snippets/collection-nav). */
   .collection-page.filters-drawer-open .drawer-heading {
     display: flex; flex-direction: column; gap: 4px; padding: 22px 20px 10px;
@@ -990,6 +1029,17 @@
         var q = qs.toString();
         return location.pathname + (q ? '?' + q : '');
       }
+
+      // Pestañas del cajón móvil (snippets/collection-nav): Filtrar | Colecciones.
+      root.querySelectorAll('[data-drawer-tab]').forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          var explore = tab.dataset.drawerTab === 'explore';
+          root.classList.toggle('drawer-explore', explore);
+          root.querySelectorAll('[data-drawer-tab]').forEach(function (t) {
+            t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+          });
+        });
+      });
 
       // Dos puertas al mismo cajón: «Filtrar» en la barra (móvil) y «+ Filtros» en
       // el lateral (escritorio). Ambas llevan data-filters-open, así que el aria hay
