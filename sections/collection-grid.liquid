@@ -45,6 +45,30 @@
   endif
 
   assign current_sort = collection.sort_by | default: collection.default_sort_by
+
+  # v101 — Fin de existencias mezcla decorados de muchas colecciones y con el orden
+  # por defecto salía «como aleatorio». Aquí: accesos rápidos por colección y, si
+  # el cliente no ha elegido orden, la rejilla agrupada por colección. La colección
+  # es el metafield custom.decorado (el mismo del filtro «Colección»).
+  # ponytail: se activa por URL con el ajuste link_fin_existencias; pasar a un ajuste
+  # propio si otra colección lo necesita.
+  assign deco_filter = nil
+  for filter in collection.filters
+    if filter.param_name contains 'custom.decorado'
+      assign deco_filter = filter
+    endif
+  endfor
+  assign is_fin = false
+  if collection.url != blank and collection.url == section.settings.link_fin_existencias
+    assign is_fin = true
+  endif
+  assign group_by_deco = false
+  if is_fin and deco_filter and collection.sort_by == blank
+    assign group_by_deco = true
+    assign has_editorial = false
+    # Agrupar sólo tiene sentido con todo en una página.
+    assign per_page = 250
+  endif
 -%}
 
 {%- capture sort_filter_query -%}
@@ -165,27 +189,49 @@
         </div>
       {%- endif -%}
 
+      {%- if is_fin and deco_filter -%}
+        <nav class="deco-chips" aria-label="{{ 'sections.collection.filter_collection' | t }}">
+          <a class="deco-chip{% if deco_filter.active_values.size == 0 %} is-active{% endif %}" href="{{ deco_filter.url_to_remove }}">{{ 'sections.collection.filter_all' | t }}</a>
+          {%- for value in deco_filter.values -%}
+            {%- if value.count == 0 and value.active == false -%}{%- continue -%}{%- endif -%}
+            <a class="deco-chip{% if value.active %} is-active{% endif %}" href="{% if value.active %}{{ value.url_to_remove }}{% else %}{{ value.url_to_add }}{% endif %}">{{ value.label | escape }} <span>{{ value.count }}</span></a>
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}
+
       <div class="products" id="productGrid" data-editorial-after="{{ editorial_after }}">
         {%- if has_products -%}
           {%- paginate collection.products by per_page -%}
+            {%- if group_by_deco -%}
+              {%- comment -%} Grupos en el orden del filtro; lo que no case con ninguno va al final. {%- endcomment -%}
+              {%- assign placed = '|' -%}
+              {%- for value in deco_filter.values -%}
+                {%- if value.count == 0 -%}{%- continue -%}{%- endif -%}
+                {%- assign group_count = 0 -%}
+                {%- for product in collection.products -%}
+                  {%- assign d = product.metafields.custom.decorado | metafield_text | strip -%}
+                  {%- if d == value.label -%}{%- assign group_count = group_count | plus: 1 -%}{%- endif -%}
+                {%- endfor -%}
+                {%- if group_count == 0 -%}{%- continue -%}{%- endif -%}
+                <h2 class="deco-group">{{ value.label | escape }} <span>{{ group_count }}</span></h2>
+                {%- for product in collection.products -%}
+                  {%- assign d = product.metafields.custom.decorado | metafield_text | strip -%}
+                  {%- if d != value.label -%}{%- continue -%}{%- endif -%}
+                  {%- assign placed = placed | append: product.id | append: '|' -%}
+                  {% render 'collection-grid-card', product: product, scope: section.id %}
+                {%- endfor -%}
+              {%- endfor -%}
+              {%- for product in collection.products -%}
+                {%- capture pid_token -%}|{{ product.id }}|{%- endcapture -%}
+                {%- if placed contains pid_token -%}{%- continue -%}{%- endif -%}
+                {% render 'collection-grid-card', product: product, scope: section.id %}
+              {%- endfor -%}
+            {%- else -%}
             {%- for product in collection.products -%}
-              {%- liquid
-                assign p_img1 = product.featured_image | image_url: width: 720
-                assign p_w = product.featured_image.width | default: 1000
-                assign p_h = product.featured_image.height | default: 1250
-                assign p_price = product.price | money
-                assign p_new = false
-                if product.tags contains 'novedad' or product.tags contains 'new'
-                  assign p_new = true
-                endif
-              -%}
-              {% render 'collection-card', product: product, scope: section.id,
-                card_url: product.url, title: product.title,
-                price: p_price, meta: product.type,
-                img1: p_img1, img_w: p_w, img_h: p_h,
-                badge: p_new, data_price: product.price, data_new: p_new, data_type: product.type %}
+              {% render 'collection-grid-card', product: product, scope: section.id %}
               {%- if forloop.index == editorial_after and has_editorial -%}{% render 'collection-editorial-insert', ed_picker: ed_picker, ed_asset: ed_asset, ed_text: ed_text %}{%- endif -%}
             {%- endfor -%}
+            {%- endif -%}
 
             {%- if paginate.pages > 1 -%}
               {%- assign shown = paginate.current_offset | plus: collection.products.size -%}
@@ -668,6 +714,8 @@
   }
   .collection-page .fchip.is-on { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 
+  /* «Tipo de producto» ya está en el árbol del cajón móvil: sin duplicarlo. */
+  .collection-page .side-filters .side-section--type { display: none; }
   /* El panel de facetas pierde la caja: en el cajón cada faceta es una sección propia. */
   .collection-page.filters-drawer-open .side-filters {
     margin: 0; padding: 0; background: transparent; border: 0;
@@ -782,6 +830,20 @@
 @media (hover: none) and (pointer: coarse) {
   .product:hover .product-media img.main { opacity: 1 !important; transform: none !important; }
   .product:hover .product-media img.hover { opacity: 0 !important; transform: none !important; }
+}
+/* v101 — Fin de existencias: accesos rápidos por colección + rejilla agrupada. */
+.collection-page .deco-chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 0 0 26px; padding-bottom: 2px; }
+.collection-page .deco-chips::-webkit-scrollbar { display: none; }
+.collection-page .deco-chip { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 16px; border: .5px solid var(--rule); border-radius: 999px; font-size: 12px; letter-spacing: .06em; color: var(--ink); white-space: nowrap; transition: background 220ms var(--ease), color 220ms var(--ease); }
+.collection-page .deco-chip span { color: var(--muted); font-size: 11px; }
+.collection-page .deco-chip.is-active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.collection-page .deco-chip.is-active span { color: rgba(255, 255, 255, .7); }
+.collection-page .deco-group { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 10px; margin: 26px 0 0; padding-top: 22px; border-top: .5px solid var(--rule); font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 2.4vw, 34px); line-height: 1.1; }
+.collection-page .deco-group:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.collection-page .deco-group span { font-family: var(--sans); font-size: 11px; letter-spacing: .14em; color: var(--muted); }
+@media (max-width: 760px) {
+  .collection-page .deco-chips { margin: 0 -14px 20px; padding: 0 14px 2px; }
+  .collection-page .deco-group { font-size: 24px; margin-top: 14px; padding-top: 18px; }
 }
 {% endstylesheet %}
 
