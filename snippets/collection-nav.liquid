@@ -13,14 +13,8 @@
   assign menu = linklists[section.settings.sidebar_menu]
   assign url_new = section.settings.link_novedades | default: '/collections/novedades'
   assign url_end = section.settings.link_fin_existencias | default: '/collections/fin-de-existencias'
-  # «Tipo de producto»: el grupo del menú se pinta con la faceta de Shopify (completa y
-  # alfabética) en vez de con sus hijos del linklist; la faceta se omite en collection-filters.
-  assign type_filter = nil
-  for f in collection.filters
-    if f.param_name == 'filter.p.product_type'
-      assign type_filter = f
-    endif
-  endfor
+  # Regla (2026-10-02): el árbol solo NAVEGA (enlaces del menú a colecciones); lo que
+  # recorta la colección actual, «Tipo de producto» incluido, vive en collection-filters.
 -%}
 
 <aside class="sidebar">
@@ -60,6 +54,11 @@
       so whatever sits at the bottom is the hardest thing to reach. Renders nothing when
       the Search & Discovery app exposes no filters.
     {%- endcomment -%}
+    {%- comment -%}
+      Cajón móvil: dos bloques con título para que se vea qué filtra (te quedas en la
+      colección) y qué navega (te lleva a otra). Solo se muestran dentro del cajón móvil.
+    {%- endcomment -%}
+    <div class="drawer-heading"><b>{{ 'sections.collection.drawer_filter' | t }}</b><span>{{ 'sections.collection.drawer_filter_hint' | t }}</span></div>
     {% render 'collection-filters' %}
 
     {%- comment -%}
@@ -67,6 +66,7 @@
       la navegación y se destaca en otro color, como en el menú.
     {%- endcomment -%}
     <div class="sidebar__nav">
+    <div class="drawer-heading drawer-heading--explore"><b>{{ 'sections.collection.drawer_explore' | t }}</b><span>{{ 'sections.collection.drawer_explore_hint' | t }}</span></div>
     <nav class="side-quick" aria-label="{{ 'sections.collection.quick_label' | t }}">
       <a class="side-quick__link" href="{{ routes.all_products_collection_url }}">{{ 'sections.collection.quick_all' | t }}</a>
       <a class="side-quick__link" href="{{ url_new }}">{{ 'sections.collection.quick_new' | t }}</a>
@@ -80,30 +80,15 @@
           if parent.current or parent.child_active
             assign is_open = true
           endif
-          assign parent_key = parent.title | downcase | strip
-          assign is_type_group = false
-          if parent_key == 'tipo de producto' and type_filter != nil
-            assign is_type_group = true
-            if type_filter.active_values.size > 0
-              assign is_open = true
-            endif
-          endif
         -%}
         <div class="side-section{% if is_open %} is-open{% endif %}">
           <div class="side-section-head">
             <a class="side-main-link{% if parent.current %} active{% endif %}" href="{{ parent.url }}">{{ parent.title | escape }}</a>
-            {%- if parent.links.size > 0 or is_type_group -%}
+            {%- if parent.links.size > 0 -%}
               <button class="side-toggle" type="button" aria-expanded="{{ is_open }}" aria-label="{{ 'sections.collection.toggle' | t: name: parent.title }}"></button>
             {%- endif -%}
           </div>
-          {%- if is_type_group -%}
-            <div class="side-panel"><div>
-              {%- for value in type_filter.values -%}
-                {%- if value.count == 0 and value.active == false -%}{%- continue -%}{%- endif -%}
-                <a class="{% if value.active %}active{% endif %}" data-facet-link href="{% if value.active %}{{ value.url_to_remove }}{% else %}{{ value.url_to_add }}{% endif %}">{{ value.label | escape }}</a>
-              {%- endfor -%}
-            </div></div>
-          {%- elsif parent.links.size > 0 -%}
+          {%- if parent.links.size > 0 -%}
             <div class="side-panel"><div>
               {%- for child in parent.links -%}
                 <a class="{% if child.current %}active{% endif %}" href="{{ child.url }}">{{ child.title | escape }}</a>

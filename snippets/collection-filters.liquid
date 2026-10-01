@@ -35,11 +35,6 @@
 
     <div class="side-accordion">
       {%- for filter in collection.filters -%}
-        {%- comment -%}
-          «Tipo de producto» también vive en el árbol (collection-nav). Cliente 2026-10-01:
-          debe estar en «+ Filtros» de escritorio, donde el árbol se oculta; en el cajón
-          móvil el árbol sí se ve, así que allí esta faceta se oculta (CSS de collection-grid).
-        {%- endcomment -%}
         {%- liquid
           assign filter_param = filter.param_name | downcase
           assign filter_label = filter.label | downcase | strip
@@ -74,7 +69,7 @@
             assign is_open = true
           endif
         -%}
-        <div class="side-section{% if is_open %} is-open{% endif %}{% if filter.param_name == 'filter.p.product_type' %} side-section--type{% endif %}">
+        <div class="side-section{% if is_open %} is-open{% endif %}">
           {%- comment -%}
             La cabecera entera es el botón: pulsar el rótulo («Disponibilidad»,
             «Precio»…) abre el panel, no sólo el «+». El «+» pasa a ser un span

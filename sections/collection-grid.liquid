@@ -355,6 +355,9 @@
 }
 .collection-page .more-filters:hover { border-color: var(--ink); }
 
+/* Títulos del cajón móvil: ocultos salvo dentro del cajón en móvil (ver @media 780). */
+.collection-page .drawer-heading { display: none; }
+
 /* Cajón de filtros adicionales en escritorio: entra por la izquierda, sobre fondo
    blanco y texto azul corporativo. El árbol se oculta dentro — el
    cajón lleva «únicamente los filtros adicionales». */
@@ -714,8 +717,13 @@
   }
   .collection-page .fchip.is-on { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 
-  /* «Tipo de producto» ya está en el árbol del cajón móvil: sin duplicarlo. */
-  .collection-page .side-filters .side-section--type { display: none; }
+  /* Títulos «Filtrar esta colección» / «Explorar colecciones» (snippets/collection-nav). */
+  .collection-page.filters-drawer-open .drawer-heading {
+    display: flex; flex-direction: column; gap: 4px; padding: 22px 20px 10px;
+  }
+  .collection-page .drawer-heading b { font-family: var(--serif); font-weight: 400; font-size: 22px; color: var(--ink); }
+  .collection-page .drawer-heading span { font-size: 12px; color: var(--muted); }
+  .collection-page.filters-drawer-open .drawer-heading--explore { margin-top: 18px; border-top: .5px solid var(--rule); }
   /* El panel de facetas pierde la caja: en el cajón cada faceta es una sección propia. */
   .collection-page.filters-drawer-open .side-filters {
     margin: 0; padding: 0; background: transparent; border: 0;
