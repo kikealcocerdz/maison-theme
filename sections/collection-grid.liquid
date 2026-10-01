@@ -349,11 +349,16 @@
 .collection-page .sidebar__nav .side-accordion { border-top: 0; }
 .collection-page .more-filters {
   display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px;
-  margin-top: 20px; padding: 0 14px; border: .5px solid var(--rule);
+  margin: 0 0 26px; padding: 0 14px; border: .5px solid var(--ink);
   font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink);
-  transition: border-color 200ms var(--ease);
+  transition: background 200ms var(--ease), color 200ms var(--ease);
 }
-.collection-page .more-filters:hover { border-color: var(--ink); }
+.collection-page .more-filters::after { content: '→'; margin-left: auto; font-size: 13px; letter-spacing: 0; }
+.collection-page .more-filters .filters-open-count {
+  display: inline-grid; place-items: center; min-width: 15px; height: 15px; padding: 0 4px;
+  background: var(--ink); color: var(--paper); font-size: 9px; border-radius: 999px;
+}
+.collection-page .more-filters:hover { background: var(--ink); color: var(--paper); }
 
 /* Títulos y pestañas del cajón móvil: ocultos salvo dentro del cajón en móvil (ver @media 780). */
 .collection-page .drawer-heading, .collection-page .drawer-tabs { display: none; }
@@ -364,23 +369,11 @@
    del cajón. */
 @media (min-width: 781px) {
   .collection-page .side-filters { display: none; }
-  .collection-page .more-filters { display: none; }
   .collection-page .sidebar__nav > .drawer-heading--explore {
     display: block; padding: 0 0 12px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
   }
   .collection-page .sidebar__nav > .drawer-heading--explore b { font: inherit; color: inherit; }
   .collection-page .sidebar__nav > .drawer-heading--explore span { display: none; }
-  .collection-page .toolbar { gap: 10px; }
-  .collection-page .toolbar .filters-open {
-    display: inline-flex; order: 1; margin-left: auto; align-items: center; gap: 8px; height: 40px; padding: 0 16px;
-    border: .5px solid var(--rule); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
-  }
-  .collection-page .toolbar .filters-open:hover { border-color: var(--ink); }
-  .collection-page .toolbar .filters-open-count {
-    display: inline-grid; place-items: center; min-width: 15px; height: 15px; padding: 0 4px;
-    background: var(--ink); color: var(--paper); font-size: 9px; border-radius: 999px;
-  }
-  .collection-page .toolbar .sort-wrap { order: 2; }
   .collection-page.filters-drawer-open .sidebar__scroll > .drawer-heading { display: flex; flex-direction: column; gap: 4px; padding: 14px 0 6px; }
   .collection-page.filters-drawer-open .sidebar__scroll > .drawer-heading b { font-family: var(--serif); font-weight: 400; font-size: 24px; color: var(--ink); }
   .collection-page.filters-drawer-open .sidebar__scroll > .drawer-heading span { font-size: 12px; color: var(--muted); }

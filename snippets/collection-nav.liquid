@@ -74,6 +74,17 @@
       la navegación y se destaca en otro color, como en el menú.
     {%- endcomment -%}
     <div class="sidebar__nav">
+    {%- comment -%}
+      Puerta de escritorio al cajón de filtros (cliente 2026-10-02): arriba de la columna
+      izquierda, que es sticky, así se puede filtrar sin volver arriba; el cajón entra por
+      la derecha. En móvil la puerta es «Filtrar» de la barra de herramientas.
+    {%- endcomment -%}
+    {%- assign active_count = 0 -%}
+    {%- for filter in collection.filters -%}{%- assign active_count = active_count | plus: filter.active_values.size -%}{%- endfor -%}
+    <button class="more-filters" type="button" data-filters-open aria-expanded="false">
+      {{ 'sections.collection.filters_open' | t }}
+      {%- if active_count > 0 -%}<span class="filters-open-count">{{ active_count }}</span>{%- endif -%}
+    </button>
     <div class="drawer-heading drawer-heading--explore"><b>{{ 'sections.collection.drawer_explore' | t }}</b><span>{{ 'sections.collection.drawer_explore_hint' | t }}</span></div>
     <nav class="side-quick" aria-label="{{ 'sections.collection.quick_label' | t }}">
       <a class="side-quick__link" href="{{ routes.all_products_collection_url }}">{{ 'sections.collection.quick_all' | t }}</a>
@@ -138,13 +149,6 @@
     </nav>
     </div>
 
-    {%- comment -%}
-      Puerta de escritorio al cajón de filtros adicionales. En móvil la puerta es el
-      botón «Filtrar» de la barra de herramientas, así que aquí se oculta.
-    {%- endcomment -%}
-    <button class="more-filters" type="button" data-filters-open aria-expanded="false">
-      <span aria-hidden="true">+</span> {{ 'sections.collection.more_filters' | t }}
-    </button>
   </div>
 
   {%- comment -%}
