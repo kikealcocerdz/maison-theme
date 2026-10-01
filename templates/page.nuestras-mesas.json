@@ -280,8 +280,8 @@
             "reverse": true,
             "type_slug": "bellavista",
             "demo_photo": "mesa_bellavista_nuevo.webp",
-            "photo_alt": "Bodegón Bellavista con vajilla, flores y piezas de servicio",
-            "hotspots": "32|64|Ver plato Bellavista\n50|50|Ver sopera Bellavista\n52|21|Ver fuente Bellavista\n22|46|Ver tetera Bellavista\n67|73|Ver ensaladera Bellavista",
+            "photo_alt": "Servicio de té Bellavista sobre fondo azul marino con tulipanes",
+            "hotspots": "19|62|Ver azucarero Bellavista\n35|42|Ver fuente Bellavista\n62|50|Ver tetera Bellavista\n46|71|Ver taza de té Bellavista\n81|69|Ver lechera Bellavista",
             "vajilla42": "vajilla-bellavista",
             "vajilla56": "vajilla-bellavista",
             "photo": "shopify://shop_images/Bellavista_estudio_azul_marino_flores_web.webp"
@@ -291,12 +291,11 @@
           "type": "product",
           "settings": {
             "scene_id": "bellavista",
-            "product": "plato-llano-bellavista",
-            "demo_image": "bellavista_plato.png",
+            "product": "azucarero-bellavista",
             "meta_line": "Aurora Collection · Bellavista",
-            "note": "Una composición clásica y equilibrada para mesas elegantes sin rigidez.",
-            "demo_title": "Plato Bellavista",
-            "demo_price": "89 €",
+            "note": "El cesto de flores de Bellavista en la pieza pequeña del servicio de té.",
+            "demo_title": "Azucarero Bellavista",
+            "demo_price": "",
             "demo_url": "/collections/bellavista"
           }
         },
@@ -304,21 +303,7 @@
           "type": "product",
           "settings": {
             "scene_id": "bellavista",
-            "product": "sopera-bellavista",
-            "demo_image": "bellavista_sopera.png",
-            "meta_line": "Aurora Collection · Bellavista",
-            "note": "La pieza central que ordena el servicio y aporta presencia a la escena.",
-            "demo_title": "Sopera Bellavista",
-            "demo_price": "230 €",
-            "demo_url": "/collections/bellavista"
-          }
-        },
-        "s4p3": {
-          "type": "product",
-          "settings": {
-            "scene_id": "bellavista",
             "product": "fuente-gra-bellavista",
-            "demo_image": "bellavista_fuente.png",
             "meta_line": "Aurora Collection · Bellavista",
             "note": "Servicio, proporción y memoria para construir una mesa completa por capas.",
             "demo_title": "Fuente grande Bellavista",
@@ -326,7 +311,7 @@
             "demo_url": "/collections/bellavista"
           }
         },
-        "s4p4": {
+        "s4p3": {
           "type": "product",
           "settings": {
             "scene_id": "bellavista",
@@ -338,15 +323,27 @@
             "demo_url": "/collections/bellavista"
           }
         },
+        "s4p4": {
+          "type": "product",
+          "settings": {
+            "scene_id": "bellavista",
+            "product": "taza-te-con-platillo-bellavista",
+            "meta_line": "Aurora Collection · Bellavista",
+            "note": "El gesto pequeño del servicio: té con el ramillete de Bellavista.",
+            "demo_title": "Taza de té Bellavista",
+            "demo_price": "",
+            "demo_url": "/collections/bellavista"
+          }
+        },
         "s4p5": {
           "type": "product",
           "settings": {
             "scene_id": "bellavista",
-            "product": "ensaladera-bellavista",
+            "product": "lechera-bellavista",
             "meta_line": "Aurora Collection · Bellavista",
-            "note": "Una pieza auxiliar que eleva el detalle sin ocupar el protagonismo.",
-            "demo_title": "Ensaladera Bellavista",
-            "demo_price": "78 €",
+            "note": "La pieza auxiliar del desayuno, a juego con tetera y azucarero.",
+            "demo_title": "Lechera Bellavista",
+            "demo_price": "",
             "demo_url": "/collections/bellavista"
           }
         },
