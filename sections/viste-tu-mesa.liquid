@@ -55,7 +55,7 @@
   # (assets/vt-pz-<decorado>-<pieza>.webp). Flor de Lis Azul es la de las capas
   # originales vt-lab-*. Una pieza que falta aquí se sustituye en el JS.
   assign lab_decors = 'flor-de-lis-azul|Flor de Lis Azul|bajoplato llano hondo pan,flor-de-lis-rosa|Flor de Lis Rosa|llano hondo pan,202-rosa|202 Rosa|bajoplato llano hondo pan,aurora-blanca|Aurora Blanca|llano hondo,bellavista|Bellavista|bajoplato llano hondo pan,ceilan|Ceilán|bajoplato llano hondo pan,viejo-molino|Viejo Molino|bajoplato llano hondo pan,oaxaca|Oaxaca|llano hondo,ochavada-blanca|Ochavada Blanca|llano hondo,negro-vistas|Negro Vistas|bajoplato llano hondo pan,negro-vistas-ash-blue|Negro Vistas · A. Stewart azul|bajoplato llano hondo pan,negro-vistas-ash-yellow|Negro Vistas · A. Stewart amarillo|bajoplato llano hondo pan' | split: ','
-  assign lab_mix_layers = 'bajoplato|Bajo plato,protagonista|Plato protagonista,bol|Hondo o bol,auxiliar|Platillo de pan' | split: ','
+  assign lab_mix_layers = 'bajoplato|Bajoplato|bajoplato,protagonista|Plato llano|llano' | split: ','
 -%}
 
 <div class="vt-page" data-section-id="{{ section.id }}">
@@ -120,31 +120,21 @@
     <div class="section-head reveal">
       <span class="eyebrow">Laboratorio visual</span>
       <h2>Una mesa se compone <em>capa a capa</em></h2>
-      <p>Activa y desactiva cada elemento para entender cómo se construye una mesa. Empieza por la base y añade solo lo que tu menú necesita.</p>
+      <p>Sobre el mantel, el bajoplato marca el sitio y el plato llano da el carácter. Prueba vajillas y combínalas a tu gusto.</p>
     </div>
     <div class="lab reveal">
-      <div aria-hidden="true" class="lab-stage">
+      <div aria-hidden="true" class="lab-stage has-mantel">
         <div class="lab-table"><img src="{{ 'vt-lab-mesa-madera.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
-        <div class="lab-layer lab-individual on"><img src="{{ 'vt-lab-base-textil.webp' | asset_url }}" alt="" width="1600" height="1593" decoding="async"></div>
-        <div class="lab-layer lab-mantel"><img src="{{ 'vt-lab-mantel-bordado.webp' | asset_url }}" alt="" width="1594" height="1600" decoding="async"></div>
+        <div class="lab-layer lab-mantel on"><img src="{{ 'vt-lab-mantel-bordado.webp' | asset_url }}" alt="" width="1594" height="1600" decoding="async"></div>
         <div class="lab-layer lab-tenedor on"><img src="{{ 'vt-lab-tenedor-plata.webp' | asset_url }}" alt="" width="231" height="1100" decoding="async"></div>
         <div class="lab-layer lab-cuchillo on"><img src="{{ 'vt-lab-cuchillo-plata.webp' | asset_url }}" alt="" width="226" height="1100" decoding="async"></div>
         <div class="lab-layer lab-bajoplato on"><img src="{{ 'vt-lab-bajoplato.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
-        <div class="lab-layer lab-stack"><img src="{{ 'vt-lab-plato-bajoplato.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
         <div class="lab-layer lab-protagonista on"><img src="{{ 'vt-lab-plato-protagonista.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
-        <div class="lab-layer lab-bol"><img src="{{ 'vt-lab-hondo-bol.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
-        <div class="lab-layer lab-auxiliar"><img src="{{ 'vt-lab-platillo-pan.webp' | asset_url }}" alt="" width="1080" height="1080" decoding="async"></div>
-        <div class="lab-layer lab-servilleta"><img src="{{ 'vt-lab-servilleta-bordada.webp' | asset_url }}" alt="" width="581" height="1200" decoding="async"></div>
-        <div class="lab-layer lab-centro"><img src="{{ 'vt-lab-centro-bajo-florero.webp' | asset_url }}" alt="" width="1200" height="1200" decoding="async"></div>
-        <div class="lab-status"><span id="labCount">4 capas activas</span></div>
+        <div class="lab-layer lab-servilleta on"><img src="{{ 'vt-lab-servilleta-bordada.webp' | asset_url }}" alt="" width="581" height="1200" decoding="async"></div>
       </div>
       <div class="lab-controls">
         <h3>Construye tu mesa</h3>
-        <p>Activa o retira cada pieza libremente. La madera queda siempre debajo y la composición se actualiza con una transición suave.</p>
-        <div class="lab-quick-actions" aria-label="Acciones rápidas del laboratorio">
-          <button type="button" data-lab-preset="clean">Mesa limpia</button>
-          <button type="button" data-lab-preset="full">Mesa completa</button>
-        </div>
+        <p>Mantel, servilletas y cubiertos ya están puestos. Elige la vajilla del bajoplato y del plato llano y mira cómo combinan.</p>
         <div class="lab-mix">
           <div class="lab-mix__head">
             <b>Combina vajillas</b>
@@ -159,21 +149,13 @@
             {%- assign lp = l | split: '|' -%}
             <label class="lab-mix__row"><span>{{ lp[1] }}</span>
               <select data-lab-decor="{{ lp[0] }}">
-                {%- for d in lab_decors -%}{%- assign dp = d | split: '|' -%}<option value="{{ dp[0] }}"{% if forloop.first %} selected{% endif %}>{{ dp[1] }}</option>{%- endfor -%}
+                {%- comment -%} Solo las vajillas que tienen esa pieza: elegir una sin ella no mostraba nada. {%- endcomment -%}
+                {%- for d in lab_decors -%}{%- assign dp = d | split: '|' -%}{%- assign dpz = dp[2] | split: ' ' -%}{%- if dpz contains lp[2] -%}<option value="{{ dp[0] }}"{% if forloop.first %} selected{% endif %}>{{ dp[1] }}</option>{%- endif -%}{%- endfor -%}
               </select>
             </label>
           {%- endfor -%}
-          <p class="lab-mix__note" data-lab-note aria-live="polite">Si una vajilla no tiene esa pieza, se muestra la de la vajilla del plato protagonista.</p>
+          <p class="lab-mix__note" data-lab-note aria-live="polite">No todas las vajillas tienen bajoplato: en «Toda la mesa», si falta, se mantiene el que hubiera.</p>
         </div>
-        <button aria-pressed="true" class="lab-toggle" data-exclusive="textil" data-layer="individual" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-base-textil.webp' | asset_url }}" alt="" width="1600" height="1593" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Individual redondo</b><small>Textura ligera bajo el servicio</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="false" class="lab-toggle" data-exclusive="textil" data-layer="mantel" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-mantel-bordado.webp' | asset_url }}" alt="" width="1594" height="1600" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Mantel bordado</b><small>Cubre la madera con lino y cenefa</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="true" class="lab-toggle" data-layer="cuberteria" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-cuberteria-plata.webp' | asset_url }}" alt="" width="900" height="900" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Cubertería de plata</b><small>Tenedor a la izquierda y cuchillo a la derecha</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="true" class="lab-toggle" data-layer="bajoplato" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-bajoplato.webp' | asset_url }}" alt="" width="1500" height="1500" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Bajo plato</b><small>Marca el sitio y da profundidad</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="true" class="lab-toggle" data-layer="protagonista" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-plato-protagonista.webp' | asset_url }}" alt="" width="1500" height="1500" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Plato protagonista</b><small>La pieza central de la composición</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="false" class="lab-toggle" data-layer="bol" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-hondo-bol.webp' | asset_url }}" alt="" width="1500" height="1500" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Hondo o bol</b><small>Para sopas, cremas o ensaladas</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="false" class="lab-toggle" data-layer="auxiliar" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-platillo-pan.webp' | asset_url }}" alt="" width="1080" height="1080" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Platillo de pan</b><small>Pequeño plato de apoyo a la izquierda del servicio</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="false" class="lab-toggle" data-layer="servilleta" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-servilleta-bordada.webp' | asset_url }}" alt="" width="581" height="1200" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Servilleta bordada</b><small>A la derecha de la cubertería</small></span><span class="lab-switch"></span></button>
-        <button aria-pressed="false" class="lab-toggle" data-layer="centro" type="button"><span class="lab-thumb"><img src="{{ 'vt-lab-centro-bajo-florero.webp' | asset_url }}" alt="" width="1200" height="1200" loading="lazy" decoding="async"></span><span class="lab-toggle__label"><b>Centro bajo</b><small>Florero bajo o pieza decorativa que no interrumpe la conversación</small></span><span class="lab-switch"></span></button>
       </div>
     </div>
   </section>
@@ -441,7 +423,8 @@
 .vt-page .lab-cuchillo { width: 10%; height: 58%; left: 79%; top: 55%; z-index: 4; }
 .vt-page .lab-tenedor img, .vt-page .lab-cuchillo img { filter: drop-shadow(0 10px 15px rgba(15, 26, 46, .20)); }
 .vt-page .lab-bajoplato { width: 78%; height: 78%; z-index: 4; }
-.vt-page .lab-protagonista { width: 60%; height: 60%; z-index: 5; }
+/* 2026-10-01: plato llano al tamaño que tenía el hondo (48% × .74 ≈ 36% visible). */
+.vt-page .lab-protagonista { width: 75%; height: 75%; z-index: 5; }
 .vt-page .lab-stack { width: 78%; height: 78%; z-index: 5; }
 .vt-page .lab-stack img { filter: drop-shadow(0 20px 34px rgba(15, 26, 46, .20)); }
 .vt-page .lab-stage.has-stack .lab-bajoplato.on, .vt-page .lab-stage.has-stack .lab-protagonista.on { opacity: 0; transform: translate(-50%, -50%) scale(.96); }
