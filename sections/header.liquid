@@ -615,8 +615,9 @@
 .mobile-main-list { list-style: none; margin: 0; padding: 20px 14px 28px; }
 /* Vista principal: menú, bloque editorial y utilidades al pie (sin tarjeta Heritage desde 2026-10-02). */
 .mobile-view[data-mobile-view="main"].is-active { display: flex; flex-direction: column; }
-.mobile-view[data-mobile-view="main"] .mobile-main-list:first-child { padding-bottom: 18px; }
-.mobile-main-list--editorial { padding-top: 6px; }
+/* Las dos listas se leen como una sola (cliente 2026-10-02: sobraba aire entre Decoración y Viste tu mesa). */
+.mobile-view[data-mobile-view="main"] .mobile-main-list:first-child { padding-bottom: 0; }
+.mobile-main-list--editorial { padding-top: 0; }
 .mobile-main-list--editorial:empty { display: none; }
 .mobile-view[data-mobile-view="main"] .mobile-utility { margin-top: auto; }
 .mobile-main-list li { border-bottom: 0.5px solid rgba(15, 26, 46, 0.13); }
@@ -656,6 +657,7 @@
   border-bottom: 0.5px solid rgba(15, 26, 46, 0.15); font-size: 12px; font-weight: 400;
 }
 .mobile-visual-link::after { content: "›"; font-size: 19px; }
+.mobile-visual-link--parent { font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
 
 .mobile-rail {
   display: flex; align-items: flex-start; gap: 14px; margin: 30px -15px 0; padding: 0 15px 18px;

@@ -76,8 +76,8 @@
       }
     }
 
-    /* 2026-10-01: mantel, servilletas y cubiertos fijos; solo bajoplato + plato
-       llano, sin interruptores ni presets (petición del cliente). */
+    /* 2026-10-01: mantel, servilletas y cubiertos fijos; bajoplato + plato llano
+       (+ plato de pan desde 2026-10-02), sin interruptores ni presets (petición del cliente). */
     function updateLabStack() {}
 
     /* ---------- Combinar vajillas ----------
@@ -86,8 +86,8 @@
        vajilla elegida no lo tiene, y lo avisa. */
     var PIECES = window.__VT_PIECES || {};
     var DEFAULT_DECOR = 'flor-de-lis-azul'; // la de las capas originales vt-lab-*
-    var LAYER_PIECE = { bajoplato: 'bajoplato', protagonista: 'llano' };
-    var PIECE_NAME = { bajoplato: 'bajoplato', llano: 'plato llano' };
+    var LAYER_PIECE = { bajoplato: 'bajoplato', protagonista: 'llano', auxiliar: 'pan' };
+    var PIECE_NAME = { bajoplato: 'bajoplato', llano: 'plato llano', pan: 'plato de pan' };
     var mixSelects = $$('[data-lab-decor]');
     var mixAll = $('[data-lab-all]');
     var mixNote = $('[data-lab-note]');

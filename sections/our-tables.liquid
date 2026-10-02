@@ -382,8 +382,6 @@
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         startX = e.clientX; startY = e.clientY;
         tracking = true; dragged = false;
-        /* Capturar el puntero para seguir recibiendo eventos si sale del slot. */
-        if (slot.setPointerCapture) { try { slot.setPointerCapture(e.pointerId); } catch (err) {} }
       });
 
       slot.addEventListener('pointermove', function (e) {
@@ -392,7 +390,12 @@
         var dy = e.clientY - startY;
         /* Gesto más vertical que horizontal: es scroll, no cambio de pieza. */
         if (!dragged && Math.abs(dy) > Math.abs(dx)) { tracking = false; return; }
-        if (Math.abs(dx) > 8) dragged = true;
+        if (!dragged && Math.abs(dx) > 8) {
+          dragged = true;
+          /* Capturar el puntero sólo al empezar el arrastre: capturarlo en pointerdown
+             manda el clic del ratón al slot y los botones «Añadir» no envían su form. */
+          if (slot.setPointerCapture) { try { slot.setPointerCapture(e.pointerId); } catch (err) {} }
+        }
       });
 
       slot.addEventListener('pointerup', function (e) {

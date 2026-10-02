@@ -1,0 +1,450 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387597062485",
+        "handle": "bol-pequeno-blanco",
+        "title": "Bol Pequeño Blanco",
+        "tags": [],
+        "decorado": null
+      }
+    },
+    {
+      "paso": "etiqueta aurora-blanca → bol-pequeno-blanco",
+      "resultado": {
+        "node": {
+          "id": "gid://shopify/Product/11387597062485"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "decorado → bol-pequeno-blanco",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "decorado"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387597324629",
+        "handle": "bombonera-blanco",
+        "title": "Bombonera Blanco",
+        "tags": [],
+        "decorado": null
+      }
+    },
+    {
+      "paso": "etiqueta aurora-blanca → bombonera-blanco",
+      "resultado": {
+        "node": {
+          "id": "gid://shopify/Product/11387597324629"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "decorado → bombonera-blanco",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "decorado"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387595227477",
+        "handle": "bajoplato-blanco",
+        "title": "Bajoplato Blanco",
+        "tags": [],
+        "decorado": null
+      }
+    },
+    {
+      "paso": "etiqueta aurora-blanca → bajoplato-blanco",
+      "resultado": {
+        "node": {
+          "id": "gid://shopify/Product/11387595227477"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "decorado → bajoplato-blanco",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "decorado"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387605254485",
+        "handle": "plato-pan-blanco",
+        "title": "Plato Pan Blanco",
+        "tags": [],
+        "decorado": null
+      }
+    },
+    {
+      "paso": "etiqueta aurora-blanca → plato-pan-blanco",
+      "resultado": {
+        "node": {
+          "id": "gid://shopify/Product/11387605254485"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "decorado → plato-pan-blanco",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "decorado"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387596669269",
+        "handle": "bol-mini-blanco",
+        "title": "Bol Mini Blanco",
+        "tags": [],
+        "decorado": null
+      }
+    },
+    {
+      "paso": "etiqueta aurora-blanca → bol-mini-blanco",
+      "resultado": {
+        "node": {
+          "id": "gid://shopify/Product/11387596669269"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "decorado → bol-mini-blanco",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "decorado"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387608334677",
+        "handle": "taza-desayuno-blanco",
+        "title": "Taza Desayuno Blanco",
+        "tags": [],
+        "decorado": null
+      }
+    },
+    {
+      "paso": "etiqueta aurora-blanca → taza-desayuno-blanco",
+      "resultado": {
+        "node": {
+          "id": "gid://shopify/Product/11387608334677"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "decorado → taza-desayuno-blanco",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "decorado"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387597848917",
+        "handle": "champanera-blanco",
+        "title": "Champanera Blanco",
+        "tags": [],
+        "decorado": null
+      }
+    },
+    {
+      "paso": "etiqueta aurora-blanca → champanera-blanco",
+      "resultado": {
+        "node": {
+          "id": "gid://shopify/Product/11387597848917"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "decorado → champanera-blanco",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "decorado"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387596341589",
+        "handle": "bol-grande-blanco",
+        "title": "Bol Grande Blanco",
+        "tags": [],
+        "decorado": null
+      }
+    },
+    {
+      "paso": "etiqueta aurora-blanca → bol-grande-blanco",
+      "resultado": {
+        "node": {
+          "id": "gid://shopify/Product/11387596341589"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "decorado → bol-grande-blanco",
+      "resultado": {
+        "metafields": [
+          {
+            "key": "decorado"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "ANTES",
+      "resultado": {
+        "id": "gid://shopify/Collection/675574841685",
+        "handle": "aurora-blanca",
+        "title": "Aurora Blanca",
+        "productsCount": {
+          "count": 27
+        },
+        "ruleSet": {
+          "appliedDisjunctively": true,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Aurora Blanca"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Aurora Blanco"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "regla TAG=aurora-blanca en aurora-blanca",
+      "resultado": {
+        "collection": {
+          "handle": "aurora-blanca"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "ANTES",
+      "resultado": {
+        "id": "gid://shopify/Collection/674484650325",
+        "handle": "aurora",
+        "title": "Aurora",
+        "productsCount": {
+          "count": 247
+        },
+        "ruleSet": {
+          "appliedDisjunctively": true,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Aurora"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "202 Rosa"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Bellavista"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Ceilan"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Flor Lis"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Viejo Molino"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Oaxaca"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Flor de Lis"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Ceilán"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "regla TAG=aurora-blanca en aurora",
+      "resultado": {
+        "collection": {
+          "handle": "aurora"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "DESPUÉS",
+      "resultado": {
+        "id": "gid://shopify/Collection/675574841685",
+        "handle": "aurora-blanca",
+        "title": "Aurora Blanca",
+        "productsCount": {
+          "count": 35
+        },
+        "ruleSet": {
+          "appliedDisjunctively": true,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Aurora Blanca"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Aurora Blanco"
+            },
+            {
+              "column": "TAG",
+              "relation": "EQUALS",
+              "condition": "aurora-blanca"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "DESPUÉS",
+      "resultado": {
+        "id": "gid://shopify/Collection/674484650325",
+        "handle": "aurora",
+        "title": "Aurora",
+        "productsCount": {
+          "count": 255
+        },
+        "ruleSet": {
+          "appliedDisjunctively": true,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Aurora"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "202 Rosa"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Bellavista"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Ceilan"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Flor Lis"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Viejo Molino"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Oaxaca"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Flor de Lis"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Ceilán"
+            },
+            {
+              "column": "TAG",
+              "relation": "EQUALS",
+              "condition": "aurora-blanca"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

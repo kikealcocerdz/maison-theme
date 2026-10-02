@@ -22,14 +22,13 @@
 
   <section class="mobile-view is-active" data-mobile-view="main">
     {%- comment -%}
-      Orden en móvil (cliente 2026-10-02): Colecciones → Mesa → Café & Té → Quiénes
-      somos → el resto. Sólo aquí: el menú del Admin (y la cabecera de escritorio)
-      no cambia. forloop.index se mantiene, así cada botón abre su vista l1…ln.
+      Orden en móvil (cliente 2026-10-02): Colecciones primero y luego el resto del
+      menú izquierdo; «Quiénes somos» encabeza la lista editorial, encima de «Viste tu
+      mesa». Sólo aquí: el menú del Admin (y la cabecera de escritorio) no cambia.
+      forloop.index se mantiene, así cada botón abre su vista l1…ln.
     {%- endcomment -%}
-    {%- capture quienes -%}<li><a href="{{ pages['quienes-somos'].url | default: '/pages/quienes-somos' }}">{{ pages['quienes-somos'].title | default: 'Quiénes somos' }}</a></li>{%- endcapture -%}
     <ul class="mobile-main-list">
       {%- for pasada in (1..2) -%}
-        {%- assign resto = 0 -%}
         {%- for link in menu.links -%}
           {%- liquid
             assign es_colecciones = false
@@ -44,18 +43,14 @@
           {%- else -%}
             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
           {%- endif -%}
-          {%- if pasada == 2 -%}
-            {%- assign resto = resto | plus: 1 -%}
-            {%- if resto == 2 -%}{{ quienes }}{%- endif -%}
-          {%- endif -%}
         {%- endfor -%}
-        {%- if pasada == 2 and resto < 2 -%}{{ quienes }}{%- endif -%}
       {%- endfor -%}
     </ul>
 
     {%- comment -%} Sin tarjeta Heritage con foto (cliente 2026-10-02): ya está en Legado. {%- endcomment -%}
 
     <ul class="mobile-main-list mobile-main-list--editorial">
+      <li><a href="{{ pages['quienes-somos'].url | default: '/pages/quienes-somos' }}">{{ pages['quienes-somos'].title | default: 'Quiénes somos' }}</a></li>
       {%- comment -%}
         v101: en escritorio «Quiénes somos» vive en el pie y en la cabecera no hay
         cuenta ni favoritos por debajo de 620px: desde el móvil no se llegaba a
@@ -118,6 +113,16 @@
 
       <section class="mobile-view" data-mobile-view="{{ side }}{{ forloop.index }}" data-title="{{ link.title | escape }}">
         <div class="mobile-content">
+          {%- comment -%}
+            En móvil el botón del padre sólo abre esta vista: sin este enlace no se llegaba
+            a la página de Decoración, Café & Té o Colecciones (cliente 2026-10-02). Se
+            omite si un hijo ya apunta a la misma URL (Mesa → Vajilla, Legado → Heritage).
+          {%- endcomment -%}
+          {%- assign parent_dup = false -%}
+          {%- for child in link.links -%}{%- if child.url == link.url -%}{%- assign parent_dup = true -%}{%- endif -%}{%- endfor -%}
+          {%- if parent_dup == false and link.url != blank and link.url != '#' -%}
+            <a class="mobile-visual-link mobile-visual-link--parent" href="{{ link.url }}">{{ link.title }}</a>
+          {%- endif -%}
           {%- if branches > 0 -%}
             {%- for child in link.links -%}
               {%- if child.links.size > 0 -%}{%- continue -%}{%- endif -%}

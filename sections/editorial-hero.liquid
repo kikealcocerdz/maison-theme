@@ -352,9 +352,16 @@
     function ramp(to, done) {
       clearInterval(fade);
       fade = setInterval(() => {
-        const next = video.volume + (to > video.volume ? 0.05 : -0.05);
+        const before = video.volume;
+        const next = before + (to > before ? 0.05 : -0.05);
         video.volume = Math.min(1, Math.max(0, next));
-        if (Math.abs(video.volume - to) < 0.051) { video.volume = to; clearInterval(fade); if (done) done(); }
+        // iOS ignora `volume` (sigue en 1): sin esta salida el fundido no acababa
+        // nunca y el vídeo no llegaba a `muted` — el botón no silenciaba en móvil.
+        if (video.volume === before || Math.abs(video.volume - to) < 0.051) {
+          clearInterval(fade);
+          if (video.volume !== before) video.volume = to;
+          if (done) done();
+        }
       }, 40);
     }
     function apply() {

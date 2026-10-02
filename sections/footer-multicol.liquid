@@ -357,12 +357,16 @@
 @media (max-width: 680px) {
   /* v101: el ancla de ayuda y la pestaña del 5% (fijos abajo) tapaban la última
      fila de legales; en la ficha, además, la barra de compra. Hueco para ellos. */
-  .site-footer { padding: 62px 0 calc(96px + env(safe-area-inset-bottom, 0px)); }
+  .site-footer { padding: 34px 0 calc(96px + env(safe-area-inset-bottom, 0px)); }
+  /* Cliente 2026-10-02: sin logotipo en el pie del móvil y pie más bajo. */
+  .footer-logo img { display: none; }
+  .footer-logo p { font-size: 19px; }
+  .footer-grid { row-gap: 22px; }
   body.template-product .site-footer { padding-bottom: calc(180px + env(safe-area-inset-bottom, 0px)); }
 
   .footer-bottom {
     width: calc(100vw - 32px);
-    margin-top: 42px;
+    margin-top: 28px;
     display: grid;
     gap: 12px;
   }
@@ -371,8 +375,8 @@
 
   .footer-legal-links {
     width: calc(100vw - 32px);
-    margin-top: 28px;
-    padding-top: 24px;
+    margin-top: 20px;
+    padding-top: 18px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px 18px;

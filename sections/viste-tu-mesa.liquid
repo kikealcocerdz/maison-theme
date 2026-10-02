@@ -55,7 +55,7 @@
   # (assets/vt-pz-<decorado>-<pieza>.webp). Flor de Lis Azul es la de las capas
   # originales vt-lab-*. Una pieza que falta aquí se sustituye en el JS.
   assign lab_decors = 'flor-de-lis-azul|Flor de Lis Azul|bajoplato llano hondo pan,flor-de-lis-rosa|Flor de Lis Rosa|llano hondo pan,202-rosa|202 Rosa|bajoplato llano hondo pan,aurora-blanca|Aurora Blanca|llano hondo,bellavista|Bellavista|bajoplato llano hondo pan,ceilan|Ceilán|bajoplato llano hondo pan,viejo-molino|Viejo Molino|bajoplato llano hondo pan,oaxaca|Oaxaca|llano hondo,ochavada-blanca|Ochavada Blanca|llano hondo,negro-vistas|Negro Vistas|bajoplato llano hondo pan,negro-vistas-ash-blue|Negro Vistas · A. Stewart azul|bajoplato llano hondo pan,negro-vistas-ash-yellow|Negro Vistas · A. Stewart amarillo|bajoplato llano hondo pan' | split: ','
-  assign lab_mix_layers = 'bajoplato|Bajoplato|bajoplato,protagonista|Plato llano|llano' | split: ','
+  assign lab_mix_layers = 'bajoplato|Bajoplato|bajoplato,protagonista|Plato llano|llano,auxiliar|Plato de pan|pan' | split: ','
 -%}
 
 <div class="vt-page" data-section-id="{{ section.id }}">
@@ -120,7 +120,7 @@
     <div class="section-head reveal">
       <span class="eyebrow">Laboratorio visual</span>
       <h2>Una mesa se compone <em>capa a capa</em></h2>
-      <p>Sobre el mantel, el bajoplato marca el sitio y el plato llano da el carácter. Prueba vajillas y combínalas a tu gusto.</p>
+      <p>Sobre el mantel, el bajoplato marca el sitio, el plato llano da el carácter y el plato de pan acompaña. Prueba vajillas y combínalas a tu gusto.</p>
     </div>
     <div class="lab reveal">
       <div aria-hidden="true" class="lab-stage has-mantel">
@@ -130,11 +130,12 @@
         <div class="lab-layer lab-cuchillo on"><img src="{{ 'vt-lab-cuchillo-plata.webp' | asset_url }}" alt="" width="226" height="1100" decoding="async"></div>
         <div class="lab-layer lab-bajoplato on"><img src="{{ 'vt-lab-bajoplato.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
         <div class="lab-layer lab-protagonista on"><img src="{{ 'vt-lab-plato-protagonista.webp' | asset_url }}" alt="" width="1500" height="1500" decoding="async"></div>
+        <div class="lab-layer lab-auxiliar on"><img src="{{ 'vt-lab-platillo-pan.webp' | asset_url }}" alt="" width="1080" height="1080" decoding="async"></div>
         <div class="lab-layer lab-servilleta on"><img src="{{ 'vt-lab-servilleta-bordada.webp' | asset_url }}" alt="" width="581" height="1200" decoding="async"></div>
       </div>
       <div class="lab-controls">
         <h3>Construye tu mesa</h3>
-        <p>Mantel, servilletas y cubiertos ya están puestos. Elige la vajilla del bajoplato y del plato llano y mira cómo combinan.</p>
+        <p>Mantel, servilletas y cubiertos ya están puestos. Elige la vajilla del bajoplato, del plato llano y del plato de pan y mira cómo combinan.</p>
         <div class="lab-mix">
           <div class="lab-mix__head">
             <b>Combina vajillas</b>
@@ -154,7 +155,7 @@
               </select>
             </label>
           {%- endfor -%}
-          <p class="lab-mix__note" data-lab-note aria-live="polite">No todas las vajillas tienen bajoplato: en «Toda la mesa», si falta, se mantiene el que hubiera.</p>
+          <p class="lab-mix__note" data-lab-note aria-live="polite">No todas las vajillas tienen bajoplato o plato de pan: en «Toda la mesa», si falta, se mantiene el que hubiera.</p>
         </div>
       </div>
     </div>
