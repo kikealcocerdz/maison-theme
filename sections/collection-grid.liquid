@@ -840,7 +840,10 @@
 }
 
 @media (max-width: 760px) {
-  .collection-page { padding-top: calc(var(--header-h) + 24px) !important; overflow-x: hidden !important; }
+  /* clip, no hidden: overflow-x:hidden convierte la página en un contenedor de scroll (overflow-y pasa a
+     auto) y en iOS un toque sobre una tarjeta a mitad del desplazamiento se quedaba con el gesto y
+     bloqueaba el scroll; también rompía la barra sticky. clip recorta igual sin crear scroller. */
+  .collection-page { padding-top: calc(var(--header-h) + 24px) !important; overflow-x: clip !important; }
   .collection-page .collection-intro { display: flex !important; flex-direction: column !important; gap: 16px !important; margin: 0 0 28px !important; }
   .collection-page .collection-intro > div,
   .collection-page .collection-intro > p { width: 100% !important; max-width: 100% !important; }
