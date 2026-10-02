@@ -43,7 +43,8 @@
     preferible a dejar la columna izquierda coja en 438 fichas.
   endcomment
   if short == blank and product.description != blank
-    assign short = product.description | strip_html | truncatewords: 40
+    # los párrafos se separan con un espacio antes de quitar el HTML («España.Medidas» → «España. Medidas»)
+    assign short = product.description | replace: '</p>', '</p> ' | replace: '<br>', ' ' | replace: '<br/>', ' ' | replace: '</li>', '</li> ' | strip_html | strip_newlines | truncatewords: 40
   endif
   if short == blank
     assign short = section.settings.demo_short
@@ -421,6 +422,14 @@
           {%- if has_product -%}
             {%- form 'product', product, class: 'product-buy-block product-set-bundle-footer' -%}
               <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-input>
+              {%- comment -%} Un plazo por pack, encima del precio (como la web antigua); el selector de piezas enseña el suyo. {%- endcomment -%}
+              {%- for v in product.variants -%}
+                {%- assign en_cesta = 0 -%}
+                {%- for item in cart.items -%}{%- if item.variant_id == v.id -%}{%- assign en_cesta = en_cesta | plus: item.quantity -%}{%- endif -%}{%- endfor -%}
+                <div data-plazo-for="{{ v.id }}"{% unless v.id == current_variant.id %} hidden{% endunless %}>
+                  {%- render 'plazo-entrega', variant: v, ficha: true, en_cesta: en_cesta -%}
+                </div>
+              {%- endfor -%}
               <div class="product-set-price-row">
                 {{ bundle_options_html }}
                 <span class="product-price-large" data-bundle-price>{{ price }}</span>
@@ -439,13 +448,28 @@
             </div>
           {%- endif -%}
         {%- elsif has_product -%}
+          {%- liquid
+            # Plazo de la próxima unidad: cuenta las que ya están en la cesta
+            assign en_cesta = 0
+            for item in cart.items
+              if item.variant_id == current_variant.id
+                assign en_cesta = en_cesta | plus: item.quantity
+              endif
+            endfor
+          -%}
+          {%- capture plazo_raw -%}{% render 'plazo-entrega', variant: current_variant, en_cesta: en_cesta, raw: true %}{%- endcapture -%}
+          {%- assign caso_siguiente = plazo_raw | split: '|' | first -%}
+          {%- assign cesta_llena = false -%}
+          {%- if en_cesta > 0 and caso_siguiente == '4' -%}{%- assign cesta_llena = true -%}{%- endif -%}
           {%- form 'product', product, class: 'product-buy-block' -%}
             <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            {%- comment -%} Plazo encima del precio, como la web antigua. {%- endcomment -%}
+            {%- render 'plazo-entrega', variant: current_variant, ficha: true, en_cesta: en_cesta -%}
             <div class="product-price-row">
               <span class="product-price-large">{{ price }}</span>
               <span class="product-price-note">{{ 'sections.product.tax_note' | t }}</span>
             </div>
-            <button class="add-to-bag" type="submit" name="add"{% unless product.available %} disabled{% endunless %}>
+            <button class="add-to-bag" type="submit" name="add"{% unless product.available %} disabled{% endunless %}{% if cesta_llena %} disabled{% endif %}>
               {%- if product.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
             </button>
           {%- endform -%}
@@ -705,6 +729,11 @@
 .piece-color-row, .piece-dimension-row { display: grid; grid-template-columns: 110px 1fr; gap: 24px; padding: 14px 0; border-bottom: .5px solid var(--rule); font-size: 14px; align-items: center; }
 .piece-color-row > span, .piece-dimension-row > span { font-weight: 400; }
 .piece-dimension-row strong { font-weight: 300; text-align: right; color: var(--muted); }
+/* Plazo de entrega (snippets/plazo-entrega) */
+.product-buy-block .plazo { margin: 0 0 14px; display: flex; flex-direction: column; gap: 3px; font: 400 13px/1.45 var(--sans); color: var(--ink); }
+.product-buy-block .plazo small { font-size: 12px; color: var(--muted); }
+.product-buy-block .plazo--4 { color: var(--muted); }
+
 /* Opciones sueltas (letra del mug…): pastillas que enlazan a su variante. */
 .piece-option-row { display: grid; grid-template-columns: 110px 1fr; gap: 24px; padding: 14px 0; border-bottom: .5px solid var(--rule); font-size: 14px; align-items: center; }
 .piece-option-values { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
@@ -1220,6 +1249,7 @@
           var key = btn.getAttribute('data-pack-key');
           options.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
           packs.forEach(function (p) { p.classList.toggle('is-visible', p.getAttribute('data-pack-for') === key); });
+          root.querySelectorAll('[data-plazo-for]').forEach(function (p) { p.hidden = p.getAttribute('data-plazo-for') !== btn.getAttribute('data-variant-id'); });
           selectPack();
           if (priceEl) priceEl.textContent = btn.getAttribute('data-price');
           if (stickyPrice) stickyPrice.textContent = btn.getAttribute('data-price');

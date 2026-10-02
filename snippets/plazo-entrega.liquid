@@ -1,0 +1,69 @@
+{%- comment -%}
+  Plazo de entrega de `qty` unidades de `variant`, a partir del metafield
+  `cartuja.stock` que escribe scripts/stock/sync_stock.py:
+    {"stock": 5, "bizcocho": 12, "fab": true, "tope": 0, "dias": [7, 15, 21], ...}
+
+  Caso según la cantidad (misma regla que el módulo cartujasync de PrestaShop):
+    qty ≤ stock → 1 · qty ≤ stock + bizcocho → 2 · fabricable (y qty ≤ tope si tope > 0) → 3
+    («bajo pedido») · resto → 4. El 4 Shopify no lo deja comprar (política DENY).
+
+  Parámetros:
+    variant   la variante
+    qty       unidades (por defecto 1)
+    raw       true → pinta «caso|días» para cálculos (plazo-pedido)
+    ficha     true en la ficha de producto: avisa «Quedan N con este plazo» y «cesta llena»
+    en_cesta  unidades de esta variante que ya están en la cesta; se suman a qty
+
+  Sin metafield (variante no sincronizada) no pinta nada.
+{%- endcomment -%}
+{%- assign s = variant.metafields.cartuja.stock.value -%}
+{%- if s != blank -%}
+  {%- liquid
+    assign n = qty | default: 1
+    assign en_cesta = en_cesta | default: 0
+    if en_cesta > 0
+      assign n = n | plus: en_cesta
+    endif
+    assign con_bizcocho = s.stock | plus: s.bizcocho
+    if n <= s.stock
+      assign caso = 1
+    elsif n <= con_bizcocho
+      assign caso = 2
+    elsif s.fab and s.tope == 0
+      assign caso = 3
+    elsif s.fab and n <= s.tope
+      assign caso = 3
+    else
+      assign caso = 4
+    endif
+    assign idx = caso | minus: 1
+    assign dias = s.dias[idx]
+  -%}
+  {%- if raw -%}
+    {{- caso }}|{{ dias -}}
+  {%- else -%}
+    <p class="plazo plazo--{{ caso }}" data-plazo-caso="{{ caso }}">
+      {%- case caso -%}
+        {%- when 1 -%}
+          <span>{{ 'plazo.days' | t: days: dias }}</span>
+          {%- comment -%} En la ficha avisa cuando quedan pocas con el plazo corto. {%- endcomment -%}
+          {%- assign quedan = s.stock | minus: en_cesta -%}
+          {%- if ficha and quedan <= 5 -%}
+            <small>{{ 'plazo.left' | t: count: quedan }}</small>
+          {%- endif -%}
+        {%- when 2 -%}
+          <span>{{ 'plazo.days' | t: days: dias }}</span>
+          <small>{{ 'plazo.made_to_order' | t }}</small>
+        {%- when 3 -%}
+          <span>{{ 'plazo.days' | t: days: dias }}</span>
+          <small>{{ 'plazo.on_demand' | t }}</small>
+        {%- else -%}
+          {%- if ficha and en_cesta > 0 -%}
+            <span>{{ 'plazo.cart_full' | t }}</span>
+          {%- else -%}
+            <span>{{ 'plazo.unavailable' | t }}</span>
+          {%- endif -%}
+      {%- endcase -%}
+    </p>
+  {%- endif -%}
+{%- endif -%}

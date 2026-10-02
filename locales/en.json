@@ -265,7 +265,10 @@
       "pieces_selector": "Select the number of pieces",
       "pack_intro": "Your set includes:",
       "pack_hint": "Select a piece to see it in detail.",
-      "pack_unit": { "one": "unit included", "other": "units included" },
+      "pack_unit": {
+        "one": "unit included",
+        "other": "units included"
+      },
       "discover_collection": "Discover the collection"
     },
     "stamps": {
@@ -300,5 +303,18 @@
       "send_form": "Go to the contact form",
       "privacy_html": "When you write to us we process your data to answer your enquiry. See the <a href=\"{{ url }}\">privacy policy</a>."
     }
+  },
+  "plazo": {
+    "days": "Delivery in {{ days }} business days",
+    "left": {
+      "one": "1 left at this lead time",
+      "other": "{{ count }} left at this lead time"
+    },
+    "made_to_order": "Finished at the factory for your order",
+    "unavailable": "Currently unavailable",
+    "cart_full": "Your bag already holds every available unit",
+    "order": "Estimated delivery for your order: up to {{ days }} business days",
+    "attribute": "{{ days }} business days",
+    "on_demand": "Made to order for you"
   }
 }

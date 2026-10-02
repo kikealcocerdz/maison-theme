@@ -1,0 +1,83 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product-detail",
+      "settings": {},
+      "blocks": {
+        "a1": {
+          "type": "accordion",
+          "settings": {
+            "label": "Dimensiones",
+            "source_metafield": "custom.dimensiones",
+            "content": ""
+          }
+        },
+        "a2": {
+          "type": "accordion",
+          "settings": {
+            "label": "Detalles",
+            "source_metafield": "custom.detalles",
+            "content": "",
+            "show_description": false
+          }
+        },
+        "a4": {
+          "type": "accordion",
+          "settings": {
+            "label": "Envío y devoluciones",
+            "content": "<p>Envío protegido para piezas cerámicas. Envío gratuito en pedidos superiores a 150 € en la Península.</p><p>Plazo de entrega: 7 días hábiles si la pieza está en stock; entre 15 y 21 días hábiles si está en producción.</p><p>Dispones de 14 días naturales desde la recepción para solicitar la devolución o un cambio. Consulta la <a href=\"/pages/envios-devoluciones\">política de envíos y devoluciones</a>.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2",
+        "a4"
+      ]
+    },
+    "story": {
+      "type": "product-story",
+      "settings": {
+        "eyebrow": "Bien de Interés Cultural desde 1998",
+        "heading": "No compras una pieza. Entras en una historia",
+        "body": "<p>Desde Sevilla, la loza fina de La Cartuja conserva el pulso de los oficios lentos: moldes, esmaltes, memoria gráfica y una manera de entender la mesa como ritual. El Renacer devuelve ese legado a la vida contemporánea.</p>",
+        "cta_label": "Nuestra historia",
+        "cta_link": "/pages/heritage-1841",
+        "ornament": "1841",
+        "demo_image": "mesa_aurora_editorial.webp"
+      }
+    },
+    "related_set": {
+      "type": "product-related",
+      "settings": {
+        "heading": "Completa tu mesa",
+        "product_limit": 5,
+        "source": "same_collection",
+        "show_collection_cta": true
+      }
+    },
+    "related_cross": {
+      "type": "product-related",
+      "settings": {
+        "heading": "Te puede interesar",
+        "product_limit": 5,
+        "source": "same_type"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "story",
+    "related_set",
+    "related_cross"
+  ]
+}

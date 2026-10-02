@@ -265,7 +265,10 @@
       "pieces_selector": "Selecciona el número de piezas",
       "pack_intro": "Tu pack contiene:",
       "pack_hint": "Selecciona una pieza para verla en detalle.",
-      "pack_unit": { "one": "unidad incluida", "other": "unidades incluidas" },
+      "pack_unit": {
+        "one": "unidad incluida",
+        "other": "unidades incluidas"
+      },
       "discover_collection": "Descubre la colección"
     },
     "stamps": {
@@ -300,5 +303,18 @@
       "send_form": "Ir al formulario de contacto",
       "privacy_html": "Al escribirnos tratamos tus datos para atender tu consulta. Consulta la <a href=\"{{ url }}\">política de privacidad</a>."
     }
+  },
+  "plazo": {
+    "days": "Entrega en {{ days }} días hábiles",
+    "left": {
+      "one": "Queda 1 con este plazo",
+      "other": "Quedan {{ count }} con este plazo"
+    },
+    "made_to_order": "Se termina en fábrica para tu pedido",
+    "unavailable": "No disponible por ahora",
+    "cart_full": "Ya tienes en la cesta todas las unidades disponibles",
+    "order": "Entrega estimada del pedido: hasta {{ days }} días hábiles",
+    "attribute": "{{ days }} días hábiles",
+    "on_demand": "Bajo pedido: la fabricamos para ti"
   }
 }

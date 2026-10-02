@@ -17,6 +17,7 @@
       </button>
     </header>
 
+    <p class="cart-drawer__notice" data-cart-notice role="alert" hidden></p>
     <div class="cart-drawer__body" data-cart-body aria-live="polite"></div>
 
     <div class="cart-drawer__empty" data-cart-empty hidden>
@@ -30,6 +31,7 @@
           <span>{{ 'sections.cart.subtotal' | t | default: 'Subtotal' }}</span>
           <span data-cart-subtotal></span>
         </div>
+        <p class="cart-drawer__plazo" data-cart-plazo hidden></p>
         <p class="cart-drawer__note">{{ 'sections.cart.taxes_note' | t | default: 'Gastos de envío e impuestos calculados en el checkout.' }}</p>
       </div>
       <div class="cart-drawer__actions">
@@ -198,6 +200,12 @@
 }
 .cart-drawer__viewcart:hover { color: var(--ink); background-size: 100% 0.5px; }
 
+/* Plazo de entrega (snippets/plazo-entrega, vía /cart?view=plazos) */
+.cart-line__info .plazo { margin: 4px 0 0; display: flex; flex-wrap: wrap; gap: 2px 8px; font-size: 11px; line-height: 1.45; color: var(--ink); }
+.cart-line__info .plazo small { color: var(--muted); }
+.cart-drawer__plazo { margin: 0; font-size: 12px; line-height: 1.45; color: var(--ink); }
+.cart-drawer__notice { margin: 0; padding: 12px 28px; font-size: 12px; line-height: 1.45; color: var(--ink); background: var(--ink-faint-20); }
+
 /* Author display:flex overrides the UA's [hidden] rule — re-assert it. */
 .cart-drawer [hidden] { display: none !important; }
 
@@ -229,6 +237,8 @@
   var emptyEl = drawer.querySelector('[data-cart-empty]');
   var footEl = drawer.querySelector('[data-cart-foot]');
   var subtotalEl = drawer.querySelector('[data-cart-subtotal]');
+  var plazoEl = drawer.querySelector('[data-cart-plazo]');
+  var noticeEl = drawer.querySelector('[data-cart-notice]');
   var countEls = function () { return document.querySelectorAll('[data-cart-count],[data-cart-count-badge]'); };
   var LB = String.fromCharCode(123), RB = String.fromCharCode(125);
   var moneyFormat = drawer.getAttribute('data-money-format') || ('$' + LB + LB + 'amount' + RB + RB);
@@ -296,6 +306,41 @@
           '</div>' +
         '</div>';
     }).join('');
+    loadPlazos();
+  }
+
+  // Plazos calculados en Liquid (templates/cart.plazos.liquid). El del pedido se guarda
+  // como atributo «Plazo de entrega» para que llegue al pedido aunque se pague desde aquí.
+  function loadPlazos() {
+    fetch('/cart?view=plazos', { headers: { 'Accept': 'application/json' } })
+      .then(function (r) { return r.json(); })
+      .then(function (p) {
+        Object.keys(p.lineas || {}).forEach(function (key) {
+          var info = bodyEl.querySelector('.cart-line[data-line-key="' + key + '"] .cart-line__info');
+          if (info && p.lineas[key]) info.querySelector('.cart-line__title').insertAdjacentHTML('afterend', p.lineas[key]);
+        });
+        plazoEl.textContent = p.pedido || '';
+        plazoEl.hidden = !p.pedido;
+        if (p.atributo !== p.guardado) {
+          fetch('/cart/update.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ attributes: { 'Plazo de entrega': p.atributo } })
+          });
+        }
+      }).catch(function () {});
+  }
+
+  // Shopify responde 422 si se pide más de lo que hay; antes el cajón lo callaba.
+  function notice(msg) {
+    noticeEl.textContent = msg || '';
+    noticeEl.hidden = !msg;
+  }
+  function json(r) {
+    return r.json().then(function (data) {
+      if (!r.ok) throw data;
+      return data;
+    });
   }
 
   function setLoading(on) { drawer.classList.toggle('is-loading', !!on); }
@@ -324,9 +369,13 @@
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ id: key, quantity: qty })
-    }).then(function (r) { return r.json(); }).then(function (cart) {
+    }).then(json).then(function (cart) {
+      notice('');
       render(cart);
-    }).catch(function () {}).then(function () { setLoading(false); });
+    }).catch(function (err) {
+      notice(err && err.description);
+      refresh();
+    }).then(function () { setLoading(false); });
   }
 
   // Delegate clicks inside the drawer.
@@ -369,11 +418,14 @@
       method: 'POST',
       headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
       body: new FormData(form)
-    }).then(function (r) { return r.json(); }).then(function () {
+    }).then(json).then(function () {
+      notice('');
       return refresh();
+    }).catch(function (err) {
+      notice(err && err.description);
     }).then(function () {
       open();
-    }).catch(function () {}).then(function () {
+    }).then(function () {
       if (btn) btn.removeAttribute('disabled');
       setLoading(false);
     });

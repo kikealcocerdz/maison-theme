@@ -133,6 +133,7 @@
                 {%- if item.variant.sku != blank -%}
                   <p class="cart-page__ref">{{ item.variant.sku | escape }}</p>
                 {%- endif -%}
+                {%- render 'plazo-entrega', variant: item.variant, qty: item.quantity -%}
 
                 {%- if item.line_level_discount_allocations.size > 0 -%}
                   <ul class="cart-page__discounts">
@@ -237,6 +238,16 @@
           <span class="cart-page__total-label">{{ 'sections.cart.total' | t }}</span>
           <span class="cart-page__total-value">{{ order_total | money }}</span>
         </div>
+
+        {%- comment -%}
+          Plazo del pedido (el de la línea más lenta). Viaja al pedido como atributo
+          «Plazo de entrega» para que fábrica vea lo que se le prometió al cliente.
+        {%- endcomment -%}
+        {%- capture plazo_pedido -%}{% render 'plazo-pedido' %}{%- endcapture -%}
+        {%- if plazo_pedido != blank -%}
+          <p class="cart-page__plazo">{{ 'plazo.order' | t: days: plazo_pedido }}</p>
+          <input type="hidden" name="attributes[Plazo de entrega]" value="{{ 'plazo.attribute' | t: days: plazo_pedido }}">
+        {%- endif -%}
 
         {%- comment -%}
           Los botones acelerados sólo existen cuando hay un método de pago rápido
@@ -668,6 +679,9 @@
 .cart-page__gift:hover .cart-page__gift-box { background: var(--ink-faint-20); }
 .cart-page__gift.is-on:hover .cart-page__gift-box { background: var(--ink); }
 
+.cart-page__info .plazo { margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 2px 8px; font-size: 12px; line-height: 1.45; color: var(--ink); }
+.cart-page__info .plazo small { color: var(--muted); font-size: 11px; }
+.cart-page__plazo { margin: 0 0 18px; font-size: 13px; line-height: 1.45; color: var(--ink); }
 .cart-page__note {
   margin-top: 24px;
   padding-top: 22px;
