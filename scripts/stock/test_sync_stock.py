@@ -23,12 +23,14 @@ assert s.recipe("", refs, conj) is None
 
 avail = {"a": 5, "b": 1, "c": 0}
 biz = {"a": 10, "b": 0, "c": None}
-assert s.disponibilidad({"a": 1}, avail, biz) == (1, 5, 10, 15)
-assert s.disponibilidad({"a": 1, "b": 1}, avail, biz) == (1, 1, 0, 1)               # manda el más escaso
-assert s.disponibilidad({"a": 6}, avail, biz) == (2, 0, 2, 2)                       # pack de 6: 0 de stock, 2 con bizcocho
-assert s.disponibilidad({"b": 2}, avail, biz) == (4, 0, 0, 0)                       # sin tope, caso 3 no se vende
-assert s.disponibilidad({"c": 1}, avail, biz) == (4, 0, 0, 0)                       # sin línea de bizcocho
+# (caso, stock, bizcocho, inventario, política, fabricable)
+assert s.disponibilidad({"a": 1}, avail, biz) == (1, 5, 10, 15, "CONTINUE", True)
+assert s.disponibilidad({"a": 1, "b": 1}, avail, biz) == (1, 1, 0, 1, "CONTINUE", True)   # manda el más escaso
+assert s.disponibilidad({"a": 6}, avail, biz) == (2, 0, 2, 2, "CONTINUE", True)           # pack de 6: 2 con bizcocho
+assert s.disponibilidad({"b": 2}, avail, biz) == (3, 0, 0, 0, "CONTINUE", True)           # fase 3: bajo pedido sin tope
+assert s.disponibilidad({"c": 1}, avail, biz) == (4, 0, 0, 0, "DENY", False)              # sin línea de bizcocho
+assert s.disponibilidad({"a": 1, "c": 1}, avail, biz) == (4, 0, 0, 0, "DENY", False)      # una pieza no fabricable
 s.TOPE_CASO3 = 20
-assert s.disponibilidad({"b": 2}, avail, biz) == (3, 0, 0, 20)
-assert s.disponibilidad({"c": 1}, avail, biz) == (4, 0, 0, 0)                       # sin bizcocho no hay caso 3
+assert s.disponibilidad({"b": 2}, avail, biz) == (3, 0, 0, 20, "DENY", True)              # con tope: hasta 20
+assert s.disponibilidad({"c": 1}, avail, biz) == (4, 0, 0, 0, "DENY", False)
 print("ok")

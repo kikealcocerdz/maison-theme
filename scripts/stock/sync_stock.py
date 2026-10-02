@@ -16,9 +16,12 @@ Port de la lógica de `cartujasync` (docs/cartujasync-especificacion.docx.md):
                      juego de boles = 6 × bol…); IdForma vacío = la forma del SKU
        pack          `custom.pack` → metaobjects pieza_pack (producto × cantidad)
      y la manda el componente más restrictivo.
-  4. Caso 1 stock · 2 bizcocho · 3 fabricar (hasta TOPE_CASO3) · 4 no disponible.
-     Inventario = máximo pedible, política DENY. El desglose va al metafield
-     `cartuja.stock` de la variante para que el tema pinte el plazo.
+  4. Caso 1 stock (7 días) · 2 bizcocho (15) · 3 fabricar desde cero (21) · 4 no disponible.
+     Como el módulo de PrestaShop: si la pieza es fabricable (tiene línea de bizcocho) se
+     vende aunque no haya stock (política CONTINUE, «bajo pedido»); si no, DENY.
+     Inventario = stock + bizcocho (cifra real). TOPE_CASO3 > 0 limita la fase 3 a ese
+     total (DENY con inventario = tope); 0 = sin tope, igual que la tienda antigua.
+     El desglose va al metafield `cartuja.stock` para que el tema pinte el plazo.
 
 Tag `fin-de-existencias`: no se vuelven a fabricar, así que sólo cuenta el stock
 terminado (sin bizcocho ni fabricación: caso 1 o 4). Los que no están en el Excel no
@@ -54,9 +57,9 @@ MASTER = "MASTER PRODUCCION.xlsm"
 INVENTARIOS = "Inventarios_NOBORRAR.xlsm"
 FIN_TAG = "fin-de-existencias"
 NAVISION_TAG = "navision"
-TOPE_CASO3 = 0      # ponytail: 0 = el caso 3 no se vende hasta que el cliente fije el tope
+TOPE_CASO3 = 0      # 0 = sin tope (como CARTUJASYNC_DELIVERY3_MAX_QTY en PrestaShop); N = máx. unidades en fase 3
 MAX_AGE_H = 36      # Excel más viejo → aborta sin escribir (se actualiza a diario a media mañana)
-DIAS = {1: 7, 2: 15, 3: 22}
+DIAS = {1: 7, 2: 15, 3: 21}     # 21: lo que mostraba la tienda antigua y dicen las políticas («15–21»)
 
 
 # ---- entorno ------------------------------------------------------------------
@@ -233,7 +236,8 @@ def recipe(sku, refs, conjuntos, nivel=0):
 
 
 def disponibilidad(rec, avail, biz):
-    """Receta → (caso, stock_packs, bizcocho_packs, pedible). El componente más restrictivo manda."""
+    """Receta → (caso, stock_packs, bizcocho_packs, inventario, política, fabricable).
+    El componente más restrictivo manda."""
     stock = min(avail[r] // q for r, q in rec.items())
     total = min((avail[r] + (biz[r] or 0)) // q for r, q in rec.items())
     fabricable = all(biz[r] is not None for r in rec)  # todas las piezas tienen línea de bizcocho
@@ -241,12 +245,14 @@ def disponibilidad(rec, avail, biz):
         caso = 1
     elif total >= 1:
         caso = 2
-    elif fabricable and TOPE_CASO3 > 0:
+    elif fabricable:
         caso = 3
     else:
         caso = 4
-    pedible = max(total, TOPE_CASO3 if fabricable else 0)
-    return caso, stock, total - stock, pedible
+    if fabricable and TOPE_CASO3 == 0:
+        return caso, stock, total - stock, total, "CONTINUE", True      # bajo pedido sin límite
+    inventario = max(total, TOPE_CASO3) if fabricable else total
+    return caso, stock, total - stock, inventario, "DENY", fabricable
 
 
 def main():
@@ -337,12 +343,13 @@ def main():
         if not rec:
             continue
         # fin de existencias: no se fabrican más → ni bizcocho ni fabricación
-        caso, stock, bizc, pedible = disponibilidad(rec, avail, {r: None for r in rec} if v["id"] in fin else biz)
+        caso, stock, bizc, pedible, politica, fab = disponibilidad(rec, avail, {r: None for r in rec} if v["id"] in fin else biz)
         resumen[caso] += 1
         levels = {l["location"]["id"]: l["quantities"][0]["quantity"] for l in v["inventoryItem"]["inventoryLevels"]["nodes"]}
-        # lo lee snippets/plazo-entrega.liquid: caso según cantidad = stock → bizcocho → tope (0 = sin caso 3)
-        meta = json.dumps({"caso": caso, "stock": stock, "bizcocho": bizc,
-                           "tope": pedible if pedible > stock + bizc else 0,
+        # lo lee snippets/plazo-entrega.liquid: caso según cantidad = stock → bizcocho → fabricable
+        # (fab) hasta el tope (0 = sin tope)
+        meta = json.dumps({"caso": caso, "stock": stock, "bizcocho": bizc, "fab": fab,
+                           "tope": TOPE_CASO3 if fab else 0,
                            "dias": [DIAS[1], DIAS[2], DIAS[3]], "excel": updated.isoformat()}, separators=(",", ":"))
         old_meta = json.loads(v["stock"]["value"]) if v["stock"] else {}
         c = {
@@ -352,19 +359,19 @@ def main():
             "otras": {k: n for k, n in levels.items() if k != loc and n},   # stock en otras ubicaciones → a 0
             "activar": loc not in levels,
             "tracked": not v["inventoryItem"]["tracked"],
-            "deny": v["inventoryPolicy"] != "DENY",
+            "politica": politica if v["inventoryPolicy"] != politica else None,
             "meta": meta if {k: x for k, x in old_meta.items() if k != "excel"} != {k: x for k, x in json.loads(meta).items() if k != "excel"} else None,
         }
-        if c["antes"] != pedible or c["otras"] or c["activar"] or c["tracked"] or c["deny"] or c["meta"]:
+        if c["antes"] != pedible or c["otras"] or c["activar"] or c["tracked"] or c["politica"] or c["meta"]:
             cambios.append(c)
 
     print("Variantes: %d · con receta %d (de ellas %s: %d) · sin receta %d · %s fuera del Excel (manual): %d"
           % (len(variants), len(recetas), FIN_TAG, len(fin), len(sin_receta), FIN_TAG, len(excluidas)))
     print("Casos: " + " · ".join("%d→%d" % kv for kv in resumen.items()))
     print("Pedidos web sin tag %r (60 días): %d" % (NAVISION_TAG, len(pedidos)))   # sin números: el log del workflow es público
-    print("Cambios: %d (cantidad %d · activar en %s %d · tracked %d · DENY %d · metafield %d · otras ubic. %d)" % (
+    print("Cambios: %d (cantidad %d · activar en %s %d · tracked %d · política %d · metafield %d · otras ubic. %d)" % (
         len(cambios), sum(c["antes"] != c["despues"] for c in cambios), LOCATION, sum(c["activar"] for c in cambios),
-        sum(c["tracked"] for c in cambios), sum(c["deny"] for c in cambios), sum(bool(c["meta"]) for c in cambios),
+        sum(c["tracked"] for c in cambios), sum(bool(c["politica"]) for c in cambios), sum(bool(c["meta"]) for c in cambios),
         sum(bool(c["otras"]) for c in cambios)))
 
     fallos = aplicar(shop, loc, cambios) if args.apply else 0
@@ -395,8 +402,8 @@ def aplicar(shop, loc, cambios):
         if c["activar"]:
             check(shop.gql(M_ACTIVATE, {"item": c["item"], "loc": loc, "key": str(uuid.uuid4())}), "inventoryActivate", c["sku"])
             c["antes"] = 0
-        if c["deny"]:
-            check(shop.gql(M_VARIANTS, {"pid": c["pid"], "v": [{"id": c["id"], "inventoryPolicy": "DENY"}]}),
+        if c["politica"]:
+            check(shop.gql(M_VARIANTS, {"pid": c["pid"], "v": [{"id": c["id"], "inventoryPolicy": c["politica"]}]}),
                   "productVariantsBulkUpdate", c["sku"])
         if c["meta"]:
             check(shop.gql(M_META, {"m": [{"ownerId": c["id"], "namespace": "cartuja", "key": "stock", "type": "json",
