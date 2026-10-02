@@ -333,6 +333,8 @@
             <span>{{ 'sections.product.pieces' | t }}</span>
             <strong data-bundle-label>{{ current_label | escape }}</strong>
           </div>
+          {%- comment -%} Atajo a «Tu pack contiene» (cliente 2026-10-02). {%- endcomment -%}
+          <a class="pack-anchor" href="#tu-pack" data-pack-anchor>{{ 'sections.product.pack_link' | t }}</a>
         {%- endif -%}
 
         {%- comment -%}
@@ -600,7 +602,7 @@
 
 {% stylesheet %}
 .product-page { padding-top: var(--header-h); background: var(--paper); color: var(--ink); }
-.product-detail { width: var(--content); margin: 0 auto; display: grid; grid-template-columns: minmax(220px, 25%) minmax(420px, 44%) minmax(280px, 31%); gap: min(4vw, 70px); align-items: start; padding-bottom: 6vh; }
+.product-detail { width: var(--content); margin: 0 auto; display: grid; grid-template-columns: minmax(220px, 25%) minmax(420px, 30%) minmax(280px, 31%); gap: min(4vw, 70px); align-items: start; padding-bottom: 6vh; }
 
 .product-title-panel, .product-info-panel { display: flex; justify-content:center; height: 100%; }
 .product-title-sticky { position: relative; top: auto; padding-top: 24vh; }
@@ -729,6 +731,10 @@
 .piece-color-row, .piece-dimension-row { display: grid; grid-template-columns: 110px 1fr; gap: 24px; padding: 14px 0; border-bottom: .5px solid var(--rule); font-size: 14px; align-items: center; }
 .piece-color-row > span, .piece-dimension-row > span { font-weight: 400; }
 .piece-dimension-row strong { font-weight: 300; text-align: right; color: var(--muted); }
+/* Atajo «Tu pack contiene →» bajo el número de piezas. */
+.pack-anchor { display: inline-block; margin: 2px 0 14px; font: 400 12px/1.5 var(--sans); letter-spacing: .06em; color: var(--ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: .5px; }
+#tu-pack { scroll-margin-top: calc(var(--header-h) + 16px); }
+
 /* Plazo de entrega (snippets/plazo-entrega) */
 .product-buy-block .plazo { margin: 0 0 14px; display: flex; flex-direction: column; gap: 3px; font: 400 13px/1.45 var(--sans); color: var(--ink); }
 .product-buy-block .plazo small { font-size: 12px; color: var(--muted); }
@@ -1295,6 +1301,17 @@
         });
       });
     }
+
+    // «Tu pack contiene →»: baja con suavidad (respeta reducir movimiento).
+    root.querySelectorAll('[data-pack-anchor]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var target = document.getElementById('tu-pack');
+        if (!target) return;
+        e.preventDefault();
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      });
+    });
 
     // Colour swatches jump to that colour's variant
     root.querySelectorAll('.color-dot[data-color-url]').forEach(function (dot) {

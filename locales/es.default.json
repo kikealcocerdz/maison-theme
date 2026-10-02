@@ -269,7 +269,8 @@
         "one": "unidad incluida",
         "other": "unidades incluidas"
       },
-      "discover_collection": "Descubre la colección"
+      "discover_collection": "Descubre la colección",
+      "pack_link": "Tu pack contiene →"
     },
     "stamps": {
       "seal": "Sello",

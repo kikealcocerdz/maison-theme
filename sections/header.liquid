@@ -13,6 +13,8 @@
         {% render 'icon-hamburger' %}
         <span>{{ 'sections.header.menu' | t }}</span>
       </button>
+      {%- comment -%} Móvil (cliente 2026-10-02): ☰ · lupa a la izquierda; la de la derecha se oculta. {%- endcomment -%}
+      <button type="button" class="search-link search-link--mobile" data-search-toggle aria-label="{{ 'general.search.label' | t }}" aria-expanded="false" aria-controls="searchPanel">{% render 'icon-search' %}</button>
       {%- if menu.links.size > 0 -%}
         {%- comment -%}
           Con menú propio a la derecha, el de la izquierda se pinta entero; si no,
@@ -60,7 +62,9 @@
       <a href="/pages/favoritos" class="account-link fav-link" aria-label="{{ 'general.favorites.label' | t }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.1c0 5.2-8.8 10.3-8.8 10.3S3.2 13.3 3.2 8.1A4.5 4.5 0 0 1 12 6.6a4.5 4.5 0 0 1 8.8 1.5Z"/></svg></a>
       <a href="{{ routes.account_url }}" class="account-link" aria-label="{{ 'general.account.label' | t }}">{% render 'icon-account' %}</a>
       <a href="{{ routes.cart_url }}" class="header-cart" data-cart-toggle aria-label="{{ 'general.cart.label' | t }}">
-        {{ 'general.cart.label' | t | default: 'Cesta' }} (<span data-cart-count-badge>{{ cart.item_count }}</span>)
+        <span class="header-cart__text">{{ 'general.cart.label' | t | default: 'Cesta' }} (<span data-cart-count-badge>{{ cart.item_count }}</span>)</span>
+        {%- comment -%} Móvil: icono de carrito con contador en vez del texto «Cesta». {%- endcomment -%}
+        <span class="header-cart__icon" aria-hidden="true">{% render 'icon-cart' %}<span class="header-cart__count" data-cart-count-badge{% if cart.item_count == 0 %} data-empty{% endif %}>{{ cart.item_count }}</span></span>
       </a>
     </div>
   </nav>
@@ -609,12 +613,12 @@
 @keyframes mobile-view-in { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
 
 .mobile-main-list { list-style: none; margin: 0; padding: 20px 14px 28px; }
-/* Vista principal: menú, tarjeta Heritage que ocupa el hueco y el bloque editorial al pie. */
+/* Vista principal: menú, bloque editorial y utilidades al pie (sin tarjeta Heritage desde 2026-10-02). */
 .mobile-view[data-mobile-view="main"].is-active { display: flex; flex-direction: column; }
 .mobile-view[data-mobile-view="main"] .mobile-main-list:first-child { padding-bottom: 18px; }
 .mobile-main-list--editorial { padding-top: 6px; }
 .mobile-main-list--editorial:empty { display: none; }
-.mobile-heritage { flex: 1 0 200px; margin: 0 14px; max-height: 420px; }
+.mobile-view[data-mobile-view="main"] .mobile-utility { margin-top: auto; }
 .mobile-main-list li { border-bottom: 0.5px solid rgba(15, 26, 46, 0.13); }
 .mobile-main-list a,
 .mobile-main-list button {
@@ -736,7 +740,6 @@
   .menu-trigger { padding: 0; border-color: transparent !important; }
   .menu-trigger > span:last-child { display: none; }
   .nav-right { gap: 9px; }
-  .account-link { display: none; }
   .search-link { width: 24px; }
   .mobile-head { height: 58px; }
   .mobile-view { height: calc(100dvh - 58px); }
@@ -788,6 +791,28 @@
   .nav-right > a:last-child { display: inline-flex; align-items: center; min-height: 44px; }
   .search-panel__submit,
   .search-panel__close { width: 44px; height: 44px; flex: 0 0 44px; }
+}
+
+/* Iconos de cabecera en móvil (cliente 2026-10-02): ☰ · lupa — logo — usuario · ♡ · carrito. */
+.search-link--mobile,
+.header-cart__icon { display: none; }
+@media (max-width: 1050px) {
+  .nav-left .search-link--mobile { display: inline-flex; width: 36px; height: 44px; }
+  .nav-right > .search-link { display: none; }
+  .nav-right .account-link { display: inline-flex; width: 30px; height: 44px; }
+  .nav-right .account-link svg { width: 17px; height: 17px; }
+  .nav-right .account-link:not(.fav-link) { order: 1; }
+  .nav-right .fav-link { order: 2; }
+  .nav-right .header-cart { order: 3; }
+  .header-cart__text { display: none; }
+  .header-cart__icon { display: inline-flex; position: relative; align-items: center; justify-content: center; width: 30px; height: 44px; }
+  .header-cart__icon svg { width: 19px; height: 19px; }
+  .header-cart__count {
+    position: absolute; top: 6px; right: -4px; min-width: 15px; height: 15px; padding: 0 3px;
+    border-radius: 8px; background: var(--ink); color: var(--paper);
+    font-size: 9px; line-height: 15px; letter-spacing: 0; text-align: center;
+  }
+  .header-cart__count[data-empty] { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -862,9 +887,11 @@
 
   const searchToggle = document.getElementById('searchToggle');
   const searchPanel = document.getElementById('searchPanel');
+  // Dos botones: el de la derecha (escritorio) y el de la izquierda (móvil).
+  const searchToggles = [searchToggle, ...document.querySelectorAll('[data-search-toggle]')].filter(Boolean);
   const closeSearch = () => {
     body.classList.remove('search-open');
-    if (searchToggle) searchToggle.setAttribute('aria-expanded', 'false');
+    searchToggles.forEach((t) => t.setAttribute('aria-expanded', 'false'));
   };
   if (searchToggle && searchPanel) {
     const input = searchPanel.querySelector('input');
@@ -906,18 +933,18 @@
       closeSearch();
     });
 
-    searchToggle.addEventListener('click', (e) => {
+    searchToggles.forEach((toggle) => toggle.addEventListener('click', (e) => {
       e.stopPropagation();
       const open = body.classList.toggle('search-open');
-      searchToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      searchToggles.forEach((t) => t.setAttribute('aria-expanded', open ? 'true' : 'false'));
       if (open) {
         body.classList.remove('menu-open');
         if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
         setTimeout(() => input && input.focus(), 60);
       }
-    });
+    }));
     document.addEventListener('click', (e) => {
-      if (body.classList.contains('search-open') && !searchPanel.contains(e.target) && !searchToggle.contains(e.target)) {
+      if (body.classList.contains('search-open') && !searchPanel.contains(e.target) && !searchToggles.some((t) => t.contains(e.target))) {
         closeSearch();
       }
     });

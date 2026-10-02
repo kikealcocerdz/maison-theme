@@ -3,7 +3,7 @@
   una vista principal con las entradas de los dos menús y una vista por entrada con
   hijos. Dentro de cada vista: los hijos con foto (snippets/menu-card-image) como
   enlace-visual arriba y carrusel de tarjetas abajo; los hijos con rama, en acordeón
-  (el primero abierto). Una vista que sólo tiene tarjetas (Legado) las pinta a
+  (todos cerrados). Una vista que sólo tiene tarjetas (Legado) las pinta a
   cuadrícula: la primera a todo el ancho y el resto por parejas.
 
   Se pinta desde sections/header.liquid, fuera del <header> (su backdrop-filter
@@ -21,31 +21,39 @@
   </div>
 
   <section class="mobile-view is-active" data-mobile-view="main">
+    {%- comment -%}
+      Orden en móvil (cliente 2026-10-02): Colecciones → Mesa → Café & Té → Quiénes
+      somos → el resto. Sólo aquí: el menú del Admin (y la cabecera de escritorio)
+      no cambia. forloop.index se mantiene, así cada botón abre su vista l1…ln.
+    {%- endcomment -%}
+    {%- capture quienes -%}<li><a href="{{ pages['quienes-somos'].url | default: '/pages/quienes-somos' }}">{{ pages['quienes-somos'].title | default: 'Quiénes somos' }}</a></li>{%- endcapture -%}
     <ul class="mobile-main-list">
-      {%- for link in menu.links -%}
-        {%- if link.links.size > 0 -%}
-          <li><button type="button" data-mobile-open="l{{ forloop.index }}">{{ link.title }}</button></li>
-        {%- else -%}
-          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-        {%- endif -%}
+      {%- for pasada in (1..2) -%}
+        {%- assign resto = 0 -%}
+        {%- for link in menu.links -%}
+          {%- liquid
+            assign es_colecciones = false
+            if link.url == routes.collections_url
+              assign es_colecciones = true
+            endif
+          -%}
+          {%- if pasada == 1 and es_colecciones == false -%}{%- continue -%}{%- endif -%}
+          {%- if pasada == 2 and es_colecciones -%}{%- continue -%}{%- endif -%}
+          {%- if link.links.size > 0 -%}
+            <li><button type="button" data-mobile-open="l{{ forloop.index }}">{{ link.title }}</button></li>
+          {%- else -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endif -%}
+          {%- if pasada == 2 -%}
+            {%- assign resto = resto | plus: 1 -%}
+            {%- if resto == 2 -%}{{ quienes }}{%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if pasada == 2 and resto < 2 -%}{{ quienes }}{%- endif -%}
       {%- endfor -%}
     </ul>
 
-    {%- comment -%}
-      La tarjeta Heritage del megamenú, debajo de Colecciones (último del menú
-      izquierdo) y estirada hasta el bloque editorial. ponytail: texto y enlace fijos
-      como en header-group.json; pasar a ajustes si el cliente quiere editarla.
-    {%- endcomment -%}
-    {%- if menu_right.links.size > 0 -%}
-      <a class="mega-card mobile-heritage" href="/pages/heritage-1841">
-        <img src="{{ 'menu-heritage-menu.webp' | asset_url }}" alt="" width="1536" height="1024" loading="lazy" decoding="async">
-        <span class="mega-card__copy">
-          <small>{{ shop.name }}</small>
-          <strong>Heritage crafted for modern living</strong>
-          <em>Descubrir historia →</em>
-        </span>
-      </a>
-    {%- endif -%}
+    {%- comment -%} Sin tarjeta Heritage con foto (cliente 2026-10-02): ya está en Legado. {%- endcomment -%}
 
     <ul class="mobile-main-list mobile-main-list--editorial">
       {%- comment -%}
@@ -53,7 +61,6 @@
         cuenta ni favoritos por debajo de 620px: desde el móvil no se llegaba a
         ninguno. Títulos de la propia página (se traducen en Admin).
       {%- endcomment -%}
-      <li><a href="{{ pages['quienes-somos'].url | default: '/pages/quienes-somos' }}">{{ pages['quienes-somos'].title | default: 'Quiénes somos' }}</a></li>
       {%- for link in menu_right.links -%}
         {%- if link.links.size > 0 -%}
           <li><button type="button" data-mobile-open="r{{ forloop.index }}">{{ link.title }}</button></li>
@@ -120,11 +127,11 @@
               {%- endif -%}
             {%- endfor -%}
 
-            {%- assign first_branch = true -%}
             {%- for child in link.links -%}
               {%- if child.links.size == 0 -%}{%- continue -%}{%- endif -%}
-              <div class="mobile-accordion{% if first_branch %} is-open{% endif %}">
-                <button type="button" class="accordion-toggle" aria-expanded="{{ first_branch }}">{{ child.title }}</button>
+              {%- comment -%} Todos cerrados al abrir (cliente 2026-10-02: «Mesa → Plato» salía abierto). {%- endcomment -%}
+              <div class="mobile-accordion">
+                <button type="button" class="accordion-toggle" aria-expanded="false">{{ child.title }}</button>
                 <div class="accordion-body"><div class="accordion-inner">
                   <ul class="mobile-links">
                     {%- for grandchild in child.links -%}
@@ -133,7 +140,6 @@
                   </ul>
                 </div></div>
               </div>
-              {%- assign first_branch = false -%}
             {%- endfor -%}
 
           {%- endif -%}

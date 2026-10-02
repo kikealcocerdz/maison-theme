@@ -269,7 +269,8 @@
         "one": "unit included",
         "other": "units included"
       },
-      "discover_collection": "Discover the collection"
+      "discover_collection": "Discover the collection",
+      "pack_link": "Your set includes →"
     },
     "stamps": {
       "seal": "Stamp",
