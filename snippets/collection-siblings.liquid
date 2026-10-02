@@ -24,9 +24,20 @@
 {%- if menu != blank and menu.links.size > 0 -%}
   <nav class="collection-siblings" aria-label="{{ 'sections.collection.drawer_explore' | t }}">
     {%- if group != nil and group.links.size > 0 -%}
+      {%- comment -%}
+        La colección activa va la primera (cliente 2026-10-02): en móvil la fila se
+        desliza y la marcada quedaba fuera de pantalla. Después el grupo y el resto.
+      {%- endcomment -%}
+      {%- for child in group.links -%}
+        {%- if child.current -%}
+          <a class="deco-chip is-active" href="{{ child.url }}" aria-current="page">{{ child.title | escape }}</a>
+        {%- endif -%}
+      {%- endfor -%}
       <a class="deco-chip{% if group.current %} is-active{% endif %}" href="{{ group.url }}"{% if group.current %} aria-current="page"{% endif %}>{{ group.title | escape }}</a>
       {%- for child in group.links -%}
-        <a class="deco-chip{% if child.current %} is-active{% endif %}" href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title | escape }}</a>
+        {%- unless child.current -%}
+          <a class="deco-chip" href="{{ child.url }}">{{ child.title | escape }}</a>
+        {%- endunless -%}
       {%- endfor -%}
     {%- else -%}
       {%- for parent in menu.links -%}

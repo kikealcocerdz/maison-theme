@@ -627,6 +627,10 @@
 /* v101: fila de utilidades al pie del cajón (contacto, favoritos, cuenta). */
 .mobile-utility { display: flex; flex-wrap: wrap; gap: 0 22px; padding: 4px 14px calc(26px + env(safe-area-inset-bottom, 0px)); }
 .mobile-utility a { display: inline-flex; align-items: center; min-height: 44px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+.mobile-language { display: inline-flex; align-items: center; gap: 8px; margin: 0; }
+.mobile-language__option { min-height: 44px; padding: 0; border: 0; background: none; font: inherit; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); cursor: pointer; }
+.mobile-language__option.is-active { color: var(--ink); text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: .5px; }
+.mobile-language__sep { color: var(--muted); font-size: 12px; }
 
 .mobile-content { padding: 22px 15px 38px; }
 .mobile-accordion { border-bottom: 0.5px solid rgba(15, 26, 46, 0.15); }

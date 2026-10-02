@@ -73,6 +73,23 @@
       <a href="{{ pages.contacto.url | default: '/pages/contacto' }}">{{ pages.contacto.title | default: 'Contacto' }}</a>
       <a href="/pages/favoritos">{{ 'general.favorites.label' | t }}</a>
       <a href="{{ routes.account_url }}">{{ 'general.account.label' | t }}</a>
+      {%- comment -%}
+        Idioma también en móvil (cliente 2026-10-02): en el pie quedaba demasiado abajo.
+        Mismo formulario nativo que el pie (footer-multicol): funciona sin JS.
+      {%- endcomment -%}
+      {%- if localization.available_languages.size > 1 -%}
+        {%- form 'localization', class: 'mobile-language' -%}
+          <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+          {%- for lang in localization.available_languages -%}
+            <button
+              class="mobile-language__option{% if lang.iso_code == localization.language.iso_code %} is-active{% endif %}"
+              type="submit" name="locale_code" value="{{ lang.iso_code }}" lang="{{ lang.iso_code }}"
+              {% if lang.iso_code == localization.language.iso_code %}aria-current="true"{% endif %}
+            >{{ lang.endonym_name | capitalize }}</button>
+            {%- unless forloop.last -%}<span class="mobile-language__sep" aria-hidden="true">·</span>{%- endunless -%}
+          {%- endfor -%}
+        {%- endform -%}
+      {%- endif -%}
     </nav>
   </section>
 
