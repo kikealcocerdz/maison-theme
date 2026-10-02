@@ -1,7 +1,687 @@
 {
-  "modo": "ensayo",
-  "tienda": "la-cartuja-de-sevilla.myshopify.com",
-  "ejecutado": [],
-  "planificado": [],
-  "fallido": []
+ "modo": "aplicado",
+ "fecha": "2026-10-02",
+ "tanda": "2ª (-segunda.webp, SwissTransfer 01a0fcc7)",
+ "nota": "Reconstruido tras el --apply (226 mutaciones, 0 fallidas). Deshacer: productDeleteMedia(productId=id, mediaIds=[media_subida]).",
+ "ejecutado": [
+  {
+   "producto": "bandeja-vistas-cibeles-azul",
+   "id": "gid://shopify/Product/11387595948373",
+   "media_subida": "gid://shopify/MediaImage/59237753651541",
+   "fichero": "Decoración/Decoración/Bandeja/Web/bandeja-vistas-cibeles-azul-segunda.webp"
+  },
+  {
+   "producto": "bandeja-vistas-cibeles-negro",
+   "id": "gid://shopify/Product/11387596013909",
+   "media_subida": "gid://shopify/MediaImage/59237754634581",
+   "fichero": "Decoración/Decoración/Bandeja/Web/bandeja-vistas-cibeles-negro-segunda.webp"
+  },
+  {
+   "producto": "bandeja-vistas-maestranza-azul",
+   "id": "gid://shopify/Product/11387596046677",
+   "media_subida": "gid://shopify/MediaImage/59237758992725",
+   "fichero": "Decoración/Decoración/Bandeja/Web/bandeja-vistas-maestranza-azul-segunda.webp"
+  },
+  {
+   "producto": "bandeja-vistas-plaza-espana-azul",
+   "id": "gid://shopify/Product/11387596112213",
+   "media_subida": "gid://shopify/MediaImage/59237760237909",
+   "fichero": "Decoración/Decoración/Bandeja/Web/bandeja-vistas-plaza-espana-azul-segunda.webp"
+  },
+  {
+   "producto": "bandeja-vistas-plaza-espana-negra",
+   "id": "gid://shopify/Product/11387596144981",
+   "media_subida": "gid://shopify/MediaImage/59237760729429",
+   "fichero": "Decoración/Decoración/Bandeja/Web/bandeja-vistas-plaza-espana-negra-segunda.webp"
+  },
+  {
+   "producto": "bandeja-vistas-sevilla-azul",
+   "id": "gid://shopify/Product/11387596177749",
+   "media_subida": "gid://shopify/MediaImage/59237764170069",
+   "fichero": "Decoración/Decoración/Bandeja/Web/bandeja-vistas-sevilla-azul-segunda.webp"
+  },
+  {
+   "producto": "bandeja-vistas-sevilla-negro",
+   "id": "gid://shopify/Product/11387596243285",
+   "media_subida": "gid://shopify/MediaImage/59237765841237",
+   "fichero": "Decoración/Decoración/Bandeja/Web/bandeja-vistas-sevilla-negro-segunda.webp"
+  },
+  {
+   "producto": "cabeza-frenologica",
+   "id": "gid://shopify/Product/11387597390165",
+   "media_subida": "gid://shopify/MediaImage/59237766725973",
+   "fichero": "Decoración/Decoración/Cabeza/Web/cabeza-frenologica-segunda.webp"
+  },
+  {
+   "producto": "florero-alhambra-pequeno-azul",
+   "id": "gid://shopify/Product/11387598307669",
+   "media_subida": "gid://shopify/MediaImage/59237768954197",
+   "fichero": "Decoración/Decoración/Florero/Web/florero-alhambra-pequeno-azul-segunda.webp"
+  },
+  {
+   "producto": "florero-alhambra-pequeno-negro",
+   "id": "gid://shopify/Product/11387598340437",
+   "media_subida": "gid://shopify/MediaImage/59237770559829",
+   "fichero": "Decoración/Decoración/Florero/Web/florero-alhambra-pequeno-negro-segunda.webp"
+  },
+  {
+   "producto": "florero-alhambra-pequeno-rosa",
+   "id": "gid://shopify/Product/11387598373205",
+   "media_subida": "gid://shopify/MediaImage/59237770887509",
+   "fichero": "Decoración/Decoración/Florero/Web/florero-alhambra-pequeno-rosa-segunda.webp"
+  },
+  {
+   "producto": "florero-alhambra-pequeno-verde",
+   "id": "gid://shopify/Product/11387598405973",
+   "media_subida": "gid://shopify/MediaImage/59237773738325",
+   "fichero": "Decoración/Decoración/Florero/Web/florero-alhambra-pequeno-verde-segunda.webp"
+  },
+  {
+   "producto": "jarro-cartuja-azul",
+   "id": "gid://shopify/Product/11387600306517",
+   "media_subida": "gid://shopify/MediaImage/59237775868245",
+   "fichero": "Decoración/Decoración/Jarro/Web/jarro-cartuja-azul-segunda.webp"
+  },
+  {
+   "producto": "jarro-cartuja-negro",
+   "id": "gid://shopify/Product/11387600339285",
+   "media_subida": "gid://shopify/MediaImage/59237776851285",
+   "fichero": "Decoración/Decoración/Jarro/Web/jarro-cartuja-negro-segunda.webp"
+  },
+  {
+   "producto": "jarro-cartuja-rosa",
+   "id": "gid://shopify/Product/11387600372053",
+   "media_subida": "gid://shopify/MediaImage/59237779603797",
+   "fichero": "Decoración/Decoración/Jarro/Web/jarro-cartuja-rosa-segunda.webp"
+  },
+  {
+   "producto": "jarro-cartuja-verde",
+   "id": "gid://shopify/Product/11387600437589",
+   "media_subida": "gid://shopify/MediaImage/59237781668181",
+   "fichero": "Decoración/Decoración/Jarro/Web/jarro-cartuja-verde-segunda.webp"
+  },
+  {
+   "producto": "palangana-cartuja-azul",
+   "id": "gid://shopify/Product/11387603517781",
+   "media_subida": "gid://shopify/MediaImage/59237782290773",
+   "fichero": "Decoración/Decoración/Palangana/Web/palangana-cartuja-azul-segunda.webp"
+  },
+  {
+   "producto": "palangana-cartuja-negro",
+   "id": "gid://shopify/Product/11387603550549",
+   "media_subida": "gid://shopify/MediaImage/59237784781141",
+   "fichero": "Decoración/Decoración/Palangana/Web/palangana-cartuja-negro-segunda.webp"
+  },
+  {
+   "producto": "palangana-cartuja-rosa",
+   "id": "gid://shopify/Product/11387603583317",
+   "media_subida": "gid://shopify/MediaImage/59237786386773",
+   "fichero": "Decoración/Decoración/Palangana/Web/palangana-cartuja-rosa-segunda.webp"
+  },
+  {
+   "producto": "palangana-cartuja-verde",
+   "id": "gid://shopify/Product/11387603616085",
+   "media_subida": "gid://shopify/MediaImage/59237787631957",
+   "fichero": "Decoración/Decoración/Palangana/Web/palangana-cartuja-verde-segunda.webp"
+  },
+  {
+   "producto": "azucarero-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387594932565",
+   "media_subida": "gid://shopify/MediaImage/59237790056789",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Azucarero/Web/azucarero-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "bajoplato-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387595391317",
+   "media_subida": "gid://shopify/MediaImage/59237791400277",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Bajoplato/Web/bajoplato-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "bandeja-pastas-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387595784533",
+   "media_subida": "gid://shopify/MediaImage/59237793956181",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Bandeja/Web/bandeja-pastas-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "bol-grande-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387596472661",
+   "media_subida": "gid://shopify/MediaImage/59237796741461",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Bol/Web/bol-grande-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "bol-mini-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387596800341",
+   "media_subida": "gid://shopify/MediaImage/59237797757269",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Bol/Web/bol-mini-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "bol-pequeno-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387597193557",
+   "media_subida": "gid://shopify/MediaImage/59237800182101",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Bol/Web/bol-pequeno-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "cafetera-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387597619541",
+   "media_subida": "gid://shopify/MediaImage/59237800706389",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Cafetera/Web/cafetera-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "ensaladera-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387598143829",
+   "media_subida": "gid://shopify/MediaImage/59237803196757",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Ensaladera/Web/ensaladera-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "fuente-gra-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387598635349",
+   "media_subida": "gid://shopify/MediaImage/59237805556053",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Fuente/Web/fuente-gra-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "fuente-med-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387598995797",
+   "media_subida": "gid://shopify/MediaImage/59237806244181",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Fuente/Web/fuente-med-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "fuente-mini-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387599356245",
+   "media_subida": "gid://shopify/MediaImage/59237808832853",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Fuente/Web/fuente-mini-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "fuente-peq-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387599716693",
+   "media_subida": "gid://shopify/MediaImage/59237810667861",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Fuente/Web/fuente-peq-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "fuente-red-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387600109909",
+   "media_subida": "gid://shopify/MediaImage/59237812339029",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Fuente/Web/fuente-red-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "lechera-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387602338133",
+   "media_subida": "gid://shopify/MediaImage/59237813944661",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Lechera/Web/lechera-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "platillo-consome-desayuno-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387603845461",
+   "media_subida": "gid://shopify/MediaImage/59237814403413",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Platillo/Web/platillo-consome-desayuno-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "plato-hondo-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387604205909",
+   "media_subida": "gid://shopify/MediaImage/59237816205653",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Plato/Web/plato-hondo-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "plato-llano-28-cm-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387604599125",
+   "media_subida": "gid://shopify/MediaImage/59237818007893",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Plato/Web/plato-llano-28-cm-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "plato-llano-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387604959573",
+   "media_subida": "gid://shopify/MediaImage/59237819416917",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Plato/Web/plato-llano-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "plato-pan-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387605418325",
+   "media_subida": "gid://shopify/MediaImage/59237820072277",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Plato/Web/plato-pan-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "plato-pastas-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387605746005",
+   "media_subida": "gid://shopify/MediaImage/59237822726485",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Plato/Web/plato-pastas-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "plato-postre-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387606139221",
+   "media_subida": "gid://shopify/MediaImage/59237823807829",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Plato/Web/plato-postre-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "salsera-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387606630741",
+   "media_subida": "gid://shopify/MediaImage/59237824364885",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Salsera/Web/salsera-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "sopera-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387607023957",
+   "media_subida": "gid://shopify/MediaImage/59237826330965",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Sopera/Web/sopera-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "taza-cafe-con-platillo-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387607384405",
+   "media_subida": "gid://shopify/MediaImage/59237828002133",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Taza/Web/taza-cafe-con-platillo-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "taza-consome-con-platillo-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387607843157",
+   "media_subida": "gid://shopify/MediaImage/59237830459733",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Taza/Web/taza-consome-con-platillo-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "taza-consome-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387608105301",
+   "media_subida": "gid://shopify/MediaImage/59237831213397",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Taza/Web/taza-consome-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "taza-desayuno-con-platillo-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387608564053",
+   "media_subida": "gid://shopify/MediaImage/59237832458581",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Taza/Web/taza-desayuno-con-platillo-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "taza-desayuno-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387608826197",
+   "media_subida": "gid://shopify/MediaImage/59237833933141",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Taza/Web/taza-desayuno-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "taza-te-con-platillo-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387609153877",
+   "media_subida": "gid://shopify/MediaImage/59237835080021",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Taza/Web/taza-te-con-platillo-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "tetera-n-vistas-amarillo-a-stewart",
+   "id": "gid://shopify/Product/11387609514325",
+   "media_subida": "gid://shopify/MediaImage/59237837177173",
+   "fichero": "Ochavada-N.-Vistas-A.S-Amarillo/Negro Vistas ASH Yellow/Tetera/Web/tetera-n-vistas-amarillo-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "azucarero-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387594965333",
+   "media_subida": "gid://shopify/MediaImage/59237838192981",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Azucarero/Web/azucarero-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "bajoplato-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387595424085",
+   "media_subida": "gid://shopify/MediaImage/59237838455125",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Bajoplato/Web/bajoplato-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "bandeja-pastas-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387595817301",
+   "media_subida": "gid://shopify/MediaImage/59237839929685",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Bandeja/Web/bandeja-pastas-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "bol-grande-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387596505429",
+   "media_subida": "gid://shopify/MediaImage/59237840814421",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Bol/Web/bol-grande-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "bol-mini-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387596833109",
+   "media_subida": "gid://shopify/MediaImage/59237841502549",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Bol/Web/bol-mini-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "bol-peq-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387596931413",
+   "media_subida": "gid://shopify/MediaImage/59237843108181",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Bol/Web/bol-peq-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "cafetera-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387597652309",
+   "media_subida": "gid://shopify/MediaImage/59237843796309",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Cafetera/Web/cafetera-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "ensaladera-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387598176597",
+   "media_subida": "gid://shopify/MediaImage/59237844386133",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Ensaladera/Web/ensaladera-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "fuente-gra-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387598766421",
+   "media_subida": "gid://shopify/MediaImage/59237846810965",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Fuente/Web/fuente-gra-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "fuente-med-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387599028565",
+   "media_subida": "gid://shopify/MediaImage/59237848023381",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Fuente/Web/fuente-med-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "fuente-mini-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387599389013",
+   "media_subida": "gid://shopify/MediaImage/59237848645973",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Fuente/Web/fuente-mini-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "fuente-peq-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387599749461",
+   "media_subida": "gid://shopify/MediaImage/59237851234645",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Fuente/Web/fuente-peq-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "fuente-red-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387600142677",
+   "media_subida": "gid://shopify/MediaImage/59237852578133",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Fuente/Web/fuente-red-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "lechera-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387602370901",
+   "media_subida": "gid://shopify/MediaImage/59237853692245",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Lechera/Web/lechera-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "platillo-consome-desayuno-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387603878229",
+   "media_subida": "gid://shopify/MediaImage/59237854380373",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Platillo/Web/platillo-consome-desayuno-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "plato-hondo-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387604238677",
+   "media_subida": "gid://shopify/MediaImage/59237855002965",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Plato/Web/plato-hondo-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "plato-llano-28-cm-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387604631893",
+   "media_subida": "gid://shopify/MediaImage/59237856182613",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Plato/Web/plato-llano-28-cm-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "plato-llano-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387604992341",
+   "media_subida": "gid://shopify/MediaImage/59237857722709",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Plato/Web/plato-llano-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "plato-pan-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387605451093",
+   "media_subida": "gid://shopify/MediaImage/59237858967893",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Plato/Web/plato-pan-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "plato-pastas-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387605778773",
+   "media_subida": "gid://shopify/MediaImage/59237859328341",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Plato/Web/plato-pastas-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "plato-postre-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387606171989",
+   "media_subida": "gid://shopify/MediaImage/59237859885397",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Plato/Web/plato-postre-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "salsera-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387606663509",
+   "media_subida": "gid://shopify/MediaImage/59237860606293",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Salsera/Web/salsera-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "sopera-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387607056725",
+   "media_subida": "gid://shopify/MediaImage/59237862408533",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Sopera/Web/sopera-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "taza-cafe-con-platillo-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387607417173",
+   "media_subida": "gid://shopify/MediaImage/59237863326037",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Taza/Web/taza-cafe-con-platillo-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "taza-consome-con-platillo-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387607875925",
+   "media_subida": "gid://shopify/MediaImage/59237863817557",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Taza/Web/taza-consome-con-platillo-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "taza-consome-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387608138069",
+   "media_subida": "gid://shopify/MediaImage/59237864669525",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Taza/Web/taza-consome-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "taza-desayuno-con-platillo-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387608596821",
+   "media_subida": "gid://shopify/MediaImage/59237865259349",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Taza/Web/taza-desayuno-con-platillo-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "taza-desayuno-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387608858965",
+   "media_subida": "gid://shopify/MediaImage/59237866897749",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Taza/Web/taza-desayuno-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "taza-te-con-platillo-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387609186645",
+   "media_subida": "gid://shopify/MediaImage/59237867389269",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Taza/Web/taza-te-con-platillo-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "tetera-n-vistas-azul-a-stewart",
+   "id": "gid://shopify/Product/11387609547093",
+   "media_subida": "gid://shopify/MediaImage/59237867979093",
+   "fichero": "Ochavada-N.-Vistas-A.S-Azul/Negro Vistas ASH Blue/Tetera/Web/tetera-n-vistas-azul-a-stewart-segunda.webp"
+  },
+  {
+   "producto": "azucarero-negro-vistas",
+   "id": "gid://shopify/Product/11387594998101",
+   "media_subida": "gid://shopify/MediaImage/59237868994901",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Azucarero/Web/azucarero-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "bajoplato-negro-vistas",
+   "id": "gid://shopify/Product/11387595456853",
+   "media_subida": "gid://shopify/MediaImage/59237869977941",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Bajoplato/Web/bajoplato-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "bandeja-pastas-negro-vistas",
+   "id": "gid://shopify/Product/11387595850069",
+   "media_subida": "gid://shopify/MediaImage/59237870797141",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Bandeja/Web/bandeja-pastas-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "bol-grande-negro-vistas",
+   "id": "gid://shopify/Product/11387596538197",
+   "media_subida": "gid://shopify/MediaImage/59237872795989",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Bol/Web/bol-grande-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "bol-mini-negro-vistas",
+   "id": "gid://shopify/Product/11387596865877",
+   "media_subida": "gid://shopify/MediaImage/59237875319125",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Bol/Web/bol-mini-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "bol-pequeno-negro-vistas",
+   "id": "gid://shopify/Product/11387597226325",
+   "media_subida": "gid://shopify/MediaImage/59237876334933",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Bol/Web/bol-pequeno-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "bombonera-negro-vistas",
+   "id": "gid://shopify/Product/11387597357397",
+   "media_subida": "gid://shopify/MediaImage/59237877088597",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Bombonera/Web/bombonera-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "cafetera-negro-vistas",
+   "id": "gid://shopify/Product/11387597685077",
+   "media_subida": "gid://shopify/MediaImage/59237877416277",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Cafetera/Web/cafetera-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "champanera-negro-vistas",
+   "id": "gid://shopify/Product/11387597881685",
+   "media_subida": "gid://shopify/MediaImage/59237877678421",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Champanera/Web/champanera-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "ensaladera-negro-vistas",
+   "id": "gid://shopify/Product/11387598209365",
+   "media_subida": "gid://shopify/MediaImage/59237877973333",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Ensaladera/Web/ensaladera-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "fuente-gra-negro-vistas",
+   "id": "gid://shopify/Product/11387598668117",
+   "media_subida": "gid://shopify/MediaImage/59237879284053",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Fuente/Web/fuente-gra-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "fuente-med-negro-vistas",
+   "id": "gid://shopify/Product/11387599061333",
+   "media_subida": "gid://shopify/MediaImage/59237881610581",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Fuente/Web/fuente-med-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "fuente-mini-negro-vistas",
+   "id": "gid://shopify/Product/11387599421781",
+   "media_subida": "gid://shopify/MediaImage/59237882364245",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Fuente/Web/fuente-mini-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "fuente-peq-negro-vistas",
+   "id": "gid://shopify/Product/11387599814997",
+   "media_subida": "gid://shopify/MediaImage/59237882757461",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Fuente/Web/fuente-peq-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "fuente-red-negro-vistas",
+   "id": "gid://shopify/Product/11387600175445",
+   "media_subida": "gid://shopify/MediaImage/59237883248981",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Fuente/Web/fuente-red-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "lechera-negro-vistas",
+   "id": "gid://shopify/Product/11387602403669",
+   "media_subida": "gid://shopify/MediaImage/59237883937109",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Lechera/Web/lechera-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "platillo-consome-desayuno-negro-vistas",
+   "id": "gid://shopify/Product/11387603910997",
+   "media_subida": "gid://shopify/MediaImage/59237885215061",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Platillo/Web/platillo-consome-desayuno-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "plato-hondo-negro-vistas",
+   "id": "gid://shopify/Product/11387604271445",
+   "media_subida": "gid://shopify/MediaImage/59237887213909",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Plato/Web/plato-hondo-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "plato-llano-28-cm-negro-vistas",
+   "id": "gid://shopify/Product/11387604664661",
+   "media_subida": "gid://shopify/MediaImage/59237887639893",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Plato/Web/plato-llano-28-cm-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "plato-llano-negro-vistas",
+   "id": "gid://shopify/Product/11387605025109",
+   "media_subida": "gid://shopify/MediaImage/59237888786773",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Plato/Web/plato-llano-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "plato-pan-negro-vistas",
+   "id": "gid://shopify/Product/11387605483861",
+   "media_subida": "gid://shopify/MediaImage/59237889704277",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Plato/Web/plato-pan-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "plato-pastas-negro-vistas",
+   "id": "gid://shopify/Product/11387605811541",
+   "media_subida": "gid://shopify/MediaImage/59237890294101",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Plato/Web/plato-pastas-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "plato-postre-negro-vistas",
+   "id": "gid://shopify/Product/11387606237525",
+   "media_subida": "gid://shopify/MediaImage/59237891801429",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Plato/Web/plato-postre-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "salsera-negro-vistas",
+   "id": "gid://shopify/Product/11387606696277",
+   "media_subida": "gid://shopify/MediaImage/59237893374293",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Salsera/Web/salsera-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "sopera-negro-vistas",
+   "id": "gid://shopify/Product/11387607089493",
+   "media_subida": "gid://shopify/MediaImage/59237894095189",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Sopera/Web/sopera-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "taza-cafe-con-platillo-negro-vistas",
+   "id": "gid://shopify/Product/11387607449941",
+   "media_subida": "gid://shopify/MediaImage/59237894521173",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Taza/Web/taza-cafe-con-platillo-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "taza-consome-con-platillo-negro-vistas",
+   "id": "gid://shopify/Product/11387607908693",
+   "media_subida": "gid://shopify/MediaImage/59237895143765",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Taza/Web/taza-consome-con-platillo-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "taza-consome-negro-vistas",
+   "id": "gid://shopify/Product/11387608170837",
+   "media_subida": "gid://shopify/MediaImage/59237897765205",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Taza/Web/taza-consome-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "taza-desayuno-con-platillo-negro-vistas",
+   "id": "gid://shopify/Product/11387608629589",
+   "media_subida": "gid://shopify/MediaImage/59237898256725",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Taza/Web/taza-desayuno-con-platillo-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "taza-desayuno-negro-vistas",
+   "id": "gid://shopify/Product/11387608891733",
+   "media_subida": "gid://shopify/MediaImage/59237898748245",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Taza/Web/taza-desayuno-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "taza-te-con-platillo-negro-vistas",
+   "id": "gid://shopify/Product/11387609219413",
+   "media_subida": "gid://shopify/MediaImage/59237899403605",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Taza/Web/taza-te-con-platillo-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "tetera-negro-vistas",
+   "id": "gid://shopify/Product/11387609579861",
+   "media_subida": "gid://shopify/MediaImage/59237900190037",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Tetera/Web/tetera-negro-vistas-segunda.webp"
+  },
+  {
+   "producto": "vela-aromatica-negro-vistas",
+   "id": "gid://shopify/Product/11609275892053",
+   "media_subida": "gid://shopify/MediaImage/59237902156117",
+   "fichero": "Ochavada-Negro-Vistas/Negro Vistas/Vela/Web/vela-aromatica-negro-vistas-segunda.webp"
+  }
+ ],
+ "fallido": []
 }

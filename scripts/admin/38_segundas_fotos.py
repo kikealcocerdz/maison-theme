@@ -3,7 +3,7 @@
 
 Fuente: SwissTransfer del cliente 2026-10-01, copiada en `gropius/Segunda fotografia/`
 (una carpeta por colección; se usan solo los `.webp` de `Web/`, 1440×1800; `4K/` no).
-Fichero `<pieza>-<decorado>-02.webp` -> producto con las mismas palabras en el handle (cruce
+Fichero `<pieza>-<decorado>-02.webp` (2ª tanda, 2026-10-02: `-segunda.webp`) -> producto con las mismas palabras en el handle (cruce
 del lote 28, sin el «02»).
 
 Por producto: si la foto ya está en la posición 2, nada; si está en otra, se mueve a la 2;
@@ -29,7 +29,7 @@ CARPETA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../../Seg
 def ficheros():
     for d, _, fs in os.walk(CARPETA):
         if "/Web" in d:
-            yield from (os.path.join(d, f) for f in fs if f.endswith("-02.webp"))
+            yield from (os.path.join(d, f) for f in fs if f.endswith(("-02.webp", "-segunda.webp")))
 
 
 def main():
@@ -52,7 +52,7 @@ def main():
     cuenta = {"ya segunda": 0, "mover": 0, "subir": 0, "sin producto": 0, "sin foto principal": 0}
     sin = []
     for f in sorted(ficheros()):
-        hit = por_palabras.get(L28.palabras(re.sub(r"-02$", "", os.path.splitext(os.path.basename(f))[0])))
+        hit = por_palabras.get(L28.palabras(re.sub(r"-(02|segunda)$", "", os.path.splitext(os.path.basename(f))[0])))
         if not hit or len(hit) > 1:
             cuenta["sin producto"] += 1
             sin.append(os.path.relpath(f, CARPETA))
