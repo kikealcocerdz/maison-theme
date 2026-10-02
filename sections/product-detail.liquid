@@ -611,7 +611,7 @@
 .product-short { font-size: 14px; line-height: 1.7; color: var(--muted); max-width: 340px; margin: 22px 0 0; }
 
 .product-gallery-panel { display: flex; align-items: center; justify-content: center; padding: 28px 0 38px; }
-.product-main-media { position: relative; width: 100%; height: min(76vh, 780px); background: var(--product-bg); display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: zoom-in; }
+.product-main-media { position: relative; width: 100%; height: min(76vh, 780px); background: var(--product-bg); display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: zoom-in; touch-action: pan-y pinch-zoom; }
 .product-main-media .product-gallery-slide { position: absolute; opacity: 0; transform: translateX(100%); transition: transform 620ms var(--ease-long), opacity 380ms var(--ease); will-change: transform, opacity; }
 .product-main-media .product-gallery-slide.is-active { opacity: 1; transform: translateX(0); z-index: 1; }
 .product-main-media .product-gallery-slide.is-prev { opacity: 0; transform: translateX(-100%); }
@@ -1149,17 +1149,49 @@
       var slides = [].slice.call(gallery.querySelectorAll('.product-gallery-slide'));
       var lines = [].slice.call(gallery.querySelectorAll('.product-gallery-lines span'));
       var index = 0;
-      var show = function (n) {
+      // back = la nueva foto entra por la izquierda y la anterior sale por la derecha.
+      var show = function (n, back) {
         var old = index;
         index = (n + slides.length) % slides.length;
-        slides.forEach(function (s, i) { s.classList.remove('is-active', 'is-prev'); if (i === index) s.classList.add('is-active'); else if (i === old) s.classList.add('is-prev'); });
+        if (index === old) return;
+        if (back) {
+          // Coloca la entrante a la izquierda sin animar; la transición arranca desde ahí.
+          var el = slides[index];
+          el.style.transition = 'none'; el.style.transform = 'translateX(-100%)';
+          void el.offsetWidth;
+          el.style.transition = ''; el.style.transform = '';
+        }
+        slides.forEach(function (s, i) {
+          s.classList.remove('is-active', 'is-prev');
+          if (i === index) s.classList.add('is-active');
+          else if (i === old && !back) s.classList.add('is-prev');   // hacia atrás sale por la derecha (posición por defecto)
+        });
         lines.forEach(function (l, i) { l.classList.toggle('active', i === index); });
       };
       var gp = gallery.querySelector('.product-gallery-arrow.prev');
       var gn = gallery.querySelector('.product-gallery-arrow.next');
-      if (gp) gp.addEventListener('click', function (e) { e.stopPropagation(); show(index - 1); });
+      if (gp) gp.addEventListener('click', function (e) { e.stopPropagation(); show(index - 1, true); });
       if (gn) gn.addEventListener('click', function (e) { e.stopPropagation(); show(index + 1); });
-      lines.forEach(function (line, i) { line.addEventListener('click', function () { show(i); }); });
+      lines.forEach(function (line, i) { line.addEventListener('click', function () { show(i, i < index); }); });
+
+      // Deslizar en táctil (cliente 2026-10-02). Sólo cuenta un gesto claramente
+      // horizontal (≥40 px y más ancho que alto): el vertical sigue siendo scroll de página.
+      var tx = 0, ty = 0, swiped = false;
+      gallery.addEventListener('touchstart', function (e) {
+        tx = e.touches[0].clientX; ty = e.touches[0].clientY; swiped = false;
+      }, { passive: true });
+      gallery.addEventListener('touchend', function (e) {
+        if (slides.length < 2) return;
+        var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+          swiped = true;
+          show(dx < 0 ? index + 1 : index - 1, dx > 0);
+        }
+      }, { passive: true });
+      // El toque que cierra un deslizamiento no abre el zoom (initLightbox escucha el click).
+      gallery.addEventListener('click', function (e) {
+        if (swiped) { e.preventDefault(); e.stopPropagation(); swiped = false; }
+      }, true);
     }
 
     // Favourite (visual)
