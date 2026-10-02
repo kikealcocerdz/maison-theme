@@ -1,0 +1,19 @@
+{
+  "modo": "ensayo",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "pendientes",
+      "resultado": {
+        "ONLINE_STORE_THEME": {
+          "42 P. | 1.138,95 € | plato-llano-ceilan:12, plato-hondo-ceilan:12, plato-postre-ceilan:12, bol-grande-ceilan:2, fuente-red-ceilan:1, sopera-ceilan:1, salsera-ceilan:1, ensaladera-ceilan:1\n56 P. | 1.506,95 € | plato-llano-ceilan:12, plato-hondo-ceilan:12, plato-postre-ceilan:12, plato-pan-ceilan:12, fuente-red-ceilan:1, fuente-gra-ceilan:2, sopera-ceilan:1, salsera-ceilan:1, ensaladera-ceilan:3": 1
+        },
+        "ONLINE_STORE_THEME_JSON_TEMPLATE": {
+          "42 P. | 1.138,95 € | plato-llano-ceilan:12, plato-hondo-ceilan:12, plato-postre-ceilan:12, bol-grande-ceilan:2, fuente-red-ceilan:1, sopera-ceilan:1, salsera-ceilan:1, ensaladera-ceilan:1\n56 P. | 1.506,95 € | plato-llano-ceilan:12, plato-hondo-ceilan:12, plato-postre-ceilan:12, plato-pan-ceilan:12, fuente-red-ceilan:1, fuente-gra-ceilan:2, sopera-ceilan:1, salsera-ceilan:1, ensaladera-ceilan:3": 1
+        }
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

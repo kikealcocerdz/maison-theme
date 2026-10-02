@@ -1,0 +1,52 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11609047630165",
+        "handle": "libro",
+        "title": "Libro",
+        "templateSuffix": null,
+        "cuidados": {
+          "type": "multi_line_text_field",
+          "value": "Apto para lavavajillas y para el uso diario."
+        }
+      }
+    },
+    {
+      "paso": "plantilla sin-cuidados",
+      "resultado": {
+        "product": {
+          "handle": "libro",
+          "templateSuffix": "sin-cuidados"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "borrar custom.cuidados",
+      "resultado": {
+        "deletedMetafields": [
+          {
+            "key": "cuidados"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "DESPUÉS",
+      "resultado": {
+        "id": "gid://shopify/Product/11609047630165",
+        "handle": "libro",
+        "title": "Libro",
+        "templateSuffix": "sin-cuidados",
+        "cuidados": null
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

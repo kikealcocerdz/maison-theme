@@ -1,0 +1,56 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "ANTES",
+      "resultado": [
+        {
+          "id": "gid://shopify/Product/11602289033557",
+          "handle": "aurea",
+          "title": "Áurea",
+          "status": "ACTIVE",
+          "variants": {
+            "nodes": [
+              {
+                "sku": null,
+                "price": "0.00"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "paso": "borrador aurea",
+      "resultado": {
+        "product": {
+          "handle": "aurea",
+          "status": "DRAFT"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "DESPUÉS",
+      "resultado": [
+        {
+          "id": "gid://shopify/Product/11602289033557",
+          "handle": "aurea",
+          "title": "Áurea",
+          "status": "DRAFT",
+          "variants": {
+            "nodes": [
+              {
+                "sku": null,
+                "price": "0.00"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}
