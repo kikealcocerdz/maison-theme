@@ -818,7 +818,7 @@
   .guide-panel h3 { font-size:34px!important;color:#fff!important;margin:0 0 8px!important }
   .guide-panel p { font-size:12px!important;line-height:1.55!important;color:rgba(255,255,255,.88)!important;max-width:44ch!important }
   .guide-media-label { display:none!important }
-  .lab-stage { position:sticky!important;top:calc(var(--header-h,64px) + 8px)!important;z-index:12!important;width:100%!important;height:42dvh!important;min-height:310px!important;max-height:390px!important;border-radius:24px!important;box-shadow:0 18px 44px rgba(15,26,46,.10)!important }
+  .lab-stage { position:sticky!important;top:calc(var(--header-h,64px) + 8px)!important;z-index:12!important;width:100%!important;height:42svh!important;min-height:310px!important;max-height:390px!important;border-radius:24px!important;box-shadow:0 18px 44px rgba(15,26,46,.10)!important }
   .lab-controls { display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;padding:0!important }
   .lab-controls h3,.lab-controls>p { grid-column:1/-1!important;margin:0!important }
   .lab-controls h3 { font-size:27px!important;margin-top:4px!important }
@@ -833,7 +833,7 @@
   .lab-toggle[aria-pressed="true"] .lab-switch:after { transform:translateX(9px)!important }
   .wz-preview--redesign { position:sticky!important;top:calc(var(--header-h,64px) + 7px)!important;z-index:14!important;background:#fff!important;border-radius:22px!important;box-shadow:0 16px 44px rgba(15,26,46,.12)!important;padding:7px!important }
   .wz-preview__top { padding:3px 5px 7px!important }
-  .wz-preview--redesign .wz-stage { aspect-ratio:16/8.6!important;min-height:0!important;max-height:34dvh!important;border-radius:17px!important }
+  .wz-preview--redesign .wz-stage { aspect-ratio:16/8.6!important;min-height:0!important;max-height:34svh!important;border-radius:17px!important }
   .wz-caption { padding:8px 10px!important;font-size:9px!important;border-radius:0 0 17px 17px!important }
   .wz-live-summary { display:none!important }
   .wz-builder { padding:14px!important;border-radius:22px!important;box-shadow:none!important }
@@ -894,14 +894,14 @@
   top:7%!important; }
 .vt-page .lab-centro img { object-fit:contain!important }
 @media(max-width:760px) {
-  .vt-page .vt-hero { height:62dvh!important;
+  .vt-page .vt-hero { height:62svh!important;
     min-height:430px!important;
     max-height:610px!important;
     align-items:flex-end!important; }
   .vt-page .vt-hero__media:after { background:linear-gradient(180deg,rgba(7,18,36,.38) 0%,rgba(7,18,36,.35) 36%,rgba(7,18,36,.82) 100%)!important; }
   .vt-page .vt-hero__media img { filter:saturate(.9) brightness(.78)!important }
   .vt-page .vt-hero__inner { width:calc(100% - 32px)!important;
-    padding:0 0 4.2dvh!important;
+    padding:0 0 4.2svh!important;
     margin:0 auto!important; }
   .vt-page .vt-hero .eyebrow { font-size:9px!important;margin-bottom:8px!important }
   .vt-page .vt-hero h1 { font-size:clamp(31px,8.7vw,40px)!important;
@@ -931,7 +931,7 @@
   .vt-page .wz-step-card.is-mobile-current.is-complete>p { margin-bottom:4px!important }
   .vt-page .wz-panel .wz-step-card.is-mobile-current { padding:17px 15px 18px!important }
   .vt-page .wz-preview--redesign { margin-bottom:4px!important }
-  .vt-page .wz-preview--redesign .wz-stage { max-height:30dvh!important }
+  .vt-page .wz-preview--redesign .wz-stage { max-height:30svh!important }
   .vt-page .result-card--editorial { margin-bottom:18px!important }
   .vt-page .wizard-grid--redesign { gap:22px!important }
   .vt-page .wz-preview--redesign { margin-bottom:0!important }
@@ -966,7 +966,7 @@
        desliza en horizontal. */
 @media (max-width: 760px) {
   .vt-page .lab-stage {
-    width: min(86vw, 42dvh) !important;
+    width: min(86vw, 42svh) !important;
     height: auto !important;
     aspect-ratio: 1 / 1 !important;
     max-height: none !important;
@@ -983,7 +983,7 @@
 
   .vt-page .wz-preview--redesign .wz-stage {
     aspect-ratio: 4 / 3 !important;
-    max-height: 38dvh !important;
+    max-height: 38svh !important;
   }
 
   .vt-page .result-tabs,
@@ -1006,6 +1006,27 @@
     font-size: 9.5px;
   }
   .vt-page .result-summary span { flex: 0 0 auto; }
+}
+/* 2026-10-05 · cliente: en «Cinco gestos» la foto ocupaba casi toda la pantalla y el
+   texto iba encima; al cambiar de paso no se leía entero. Foto más baja y texto debajo,
+   para que pestañas + foto + texto quepan en una pantalla. */
+@media (max-width: 760px) {
+  .vt-page .guide-visual { min-height: 0 !important; height: 34svh !important; max-height: 300px !important; }
+  .vt-page .guide-copy-wrap {
+    position: static !important; padding: 16px 18px 20px !important;
+    background: none !important; color: var(--ink) !important; pointer-events: auto !important;
+  }
+  .vt-page .guide-panel, .vt-page .guide-panel h3 { color: var(--ink) !important; }
+  .vt-page .guide-panel h3 { font-size: 26px !important; }
+  .vt-page .guide-panel p { color: var(--ink-soft) !important; font-size: 13px !important; line-height: 1.6 !important; }
+
+  /* Asesor («Vista en directo»): aspect-ratio + max-height hacían que la foto encogiera de
+     ancho (hueco a la derecha) y cambiara de tamaño al subir, cuando vuelve la barra del
+     navegador. Ancho completo y alto fijo. */
+  .vt-page .wz-preview--redesign .wz-stage {
+    width: 100% !important; aspect-ratio: auto !important;
+    height: 34svh !important; min-height: 220px !important; max-height: 320px !important;
+  }
 }
 {% endstylesheet %}
 

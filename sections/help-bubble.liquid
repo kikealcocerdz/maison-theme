@@ -196,6 +196,13 @@
   /* 16px: por debajo iOS hace zoom al enfocar el campo. */
   .help-field textarea { font-size: 16px; }
   .help-bubble.is-open .help-fab { display: none; }
+  /* 2026-10-05 · cliente: con el teclado abierto el panel no dejaba ver la X. Mientras
+     se escribe sólo quedan cabecera (con la X), mensaje y enviar. */
+  .help-bubble.is-typing .help-greeting,
+  .help-bubble.is-typing .help-faq,
+  .help-bubble.is-typing .help-legal { display: none; }
+  .help-head { flex: 0 0 auto; }
+  .help-close { width: 44px; height: 44px; margin: -12px -12px 0 0; display: grid; place-items: center; }
 }
 
 /* En la ficha de producto y en la cesta el botón de compra queda pegado abajo: la burbuja sube
@@ -281,6 +288,7 @@
 
     function setOpen(on) {
       root.classList.toggle('is-open', on);
+      if (!on) root.classList.remove('is-typing'); // no en blur: al reaparecer el saludo, «Enviar» se movía bajo el dedo
       panel.hidden = !on;
       fab.setAttribute('aria-expanded', on ? 'true' : 'false');
       fit();
@@ -288,6 +296,10 @@
       if (on && box && !window.matchMedia('(pointer: coarse)').matches) box.focus();
       if (on && closeBtn && window.matchMedia('(pointer: coarse)').matches) closeBtn.focus({ preventScroll: true });
       if (!on) fab.focus();
+    }
+
+    if (box) {
+      box.addEventListener('focus', function () { root.classList.add('is-typing'); fit(); });
     }
 
     fab.addEventListener('click', function () { setOpen(panel.hidden); });

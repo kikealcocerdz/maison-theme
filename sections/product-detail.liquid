@@ -598,6 +598,17 @@
       {%- endfor -%}
     {%- endif -%}
   </div>
+  {%- liquid
+    if has_product
+      assign lb_count = product.images.size | at_most: 6
+    else
+      assign lb_count = demo_imgs.size
+    endif
+  -%}
+  {%- comment -%} Móvil: puntos de posición; la galería se desliza en horizontal. {%- endcomment -%}
+  {%- if lb_count > 1 -%}
+    <div class="lightbox-dots" aria-hidden="true">{%- for i in (1..lb_count) -%}<span{% if forloop.first %} class="active"{% endif %}></span>{%- endfor -%}</div>
+  {%- endif -%}
 </div>
 
 {% stylesheet %}
@@ -931,7 +942,26 @@
   .product-lightbox { grid-template-columns: 1fr !important; }
   .product-lightbox .lightbox-thumbs { display: none !important; }
   .product-lightbox .lightbox-scroll figure img { width: 94vw !important; height: 88dvh !important; object-fit: contain !important; }
+
+  /* 2026-10-05 · cliente: a pantalla completa no se intuía que había más fotos (una
+     por pantalla, scroll vertical). Ahora se desliza en horizontal, con puntos. */
+  .product-lightbox .lightbox-scroll {
+    display: flex; height: 100svh; overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory; overscroll-behavior: contain; scrollbar-width: none;
+  }
+  .product-lightbox .lightbox-scroll::-webkit-scrollbar { display: none; }
+  .product-lightbox .lightbox-scroll figure { flex: 0 0 100%; height: 100%; scroll-snap-align: center; }
+  .product-lightbox .lightbox-scroll figure img { height: 80svh !important; }
+  .lightbox-dots {
+    position: fixed; left: 0; right: 0; bottom: calc(26px + env(safe-area-inset-bottom, 0px)); z-index: 310;
+    display: flex; justify-content: center; gap: 8px; pointer-events: none;
+  }
+  .lightbox-dots span { width: 6px; height: 6px; border-radius: 50%; background: rgba(15, 26, 46, .22); transition: background 220ms var(--ease); }
+  .lightbox-dots span.active { background: var(--ink); }
 }
+.lightbox-dots { display: none; }
+.product-lightbox.is-open .lightbox-dots { display: flex; }
+@media (min-width: 781px) { .product-lightbox.is-open .lightbox-dots { display: none; } }
 
 @media (max-width: 760px) {
   .product-page { overflow-x: hidden !important; }
@@ -1134,6 +1164,34 @@
   .product-page .product-related .related-grid::-webkit-scrollbar { display: none; }
   .product-page .product-related .related-grid > * { scroll-snap-align: start; }
 }
+
+/* 2026-10-05 · cliente (móvil):
+   - Fuera las migas (INICIO / COLECCIONES…): la foto sube casi al borde y, debajo,
+     asoma el nombre invitando a bajar (referencia: Zalando).
+   - El bloque de compra llevaba fondo blanco puro + sombra de la capa v96 (cuando era
+     sticky); sobre el papel crema se veía como un rectángulo blanco encima del precio. */
+@media (max-width: 760px) {
+  .product-page .product-breadcrumb-bar,
+  .product-page .product-set-breadcrumb-bar { display: none !important; }
+  .product-page .product-detail { padding-top: 0 !important; }
+  .product-page .product-gallery-panel { padding-top: 0 !important; }
+  .product-page .product-main-media { aspect-ratio: auto !important; height: calc(100svh - var(--header-h) - 190px) !important; max-height: 600px !important; min-height: 380px !important; }
+  .product-page .product-buy-block { background: transparent !important; box-shadow: none !important; }
+
+  /* Vajillas/juegos con el mismo orden que la pieza suelta (la buena, según el cliente):
+     foto → título → compra (piezas, precio, añadir) → detalles. */
+  .product-page.product-page--set .product-gallery-panel { order: 1 !important; }
+  .product-page.product-page--set .product-title-panel { order: 2 !important; }
+  .product-page.product-page--set .product-info-panel { order: 3 !important; }
+  .product-page.product-page--set .product-set-title { padding: 10px 2px 14px !important; }
+  .product-page.product-page--set .product-info-sticky { display: flex !important; flex-direction: column !important; }
+  .product-page.product-page--set .product-buy-block {
+    order: 1 !important; position: static !important;
+    margin: 0 0 8px !important; padding: 0 0 24px !important;
+    border-top: 0 !important; border-bottom: .5px solid var(--rule) !important;
+  }
+  .product-page.product-page--set .product-set-info-core { order: 2 !important; }
+}
 {% endstylesheet %}
 
 {% javascript %}
@@ -1327,11 +1385,12 @@
     var scroller = lightbox.querySelector('.lightbox-scroll');
     var figures = [].slice.call(lightbox.querySelectorAll('figure'));
     var thumbs = [].slice.call(lightbox.querySelectorAll('.lightbox-thumbs button'));
+    var dots = [].slice.call(lightbox.querySelectorAll('.lightbox-dots span'));
     var openAt = function (i) {
       lightbox.classList.add('is-open');
       lightbox.setAttribute('aria-hidden', 'false');
       document.documentElement.style.overflow = 'hidden';
-      requestAnimationFrame(function () { if (figures[i]) figures[i].scrollIntoView({ block: 'start' }); });
+      requestAnimationFrame(function () { if (figures[i]) figures[i].scrollIntoView({ block: 'start', inline: 'start' }); });
     };
     var close = function () {
       lightbox.classList.remove('is-open');
@@ -1350,7 +1409,7 @@
     thumbs.forEach(function (btn) { btn.addEventListener('click', function () { var idx = Number(btn.dataset.target || 0); if (figures[idx]) figures[idx].scrollIntoView({ behavior: 'smooth', block: 'start' }); }); });
     if (scroller) {
       var obs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) { if (entry.isIntersecting) { var idx = Number(entry.target.dataset.index || 0); thumbs.forEach(function (t, i) { t.classList.toggle('active', i === idx); }); } });
+        entries.forEach(function (entry) { if (entry.isIntersecting) { var idx = Number(entry.target.dataset.index || 0); [thumbs, dots].forEach(function (set) { set.forEach(function (t, i) { t.classList.toggle('active', i === idx); }); }); } });
       }, { root: scroller, threshold: .6 });
       figures.forEach(function (f) { obs.observe(f); });
     }

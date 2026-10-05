@@ -380,10 +380,13 @@
       btn.setAttribute('aria-pressed', wanted ? 'true' : 'false');
       btn.setAttribute('aria-label', wanted ? btn.dataset.labelPause : btn.dataset.labelPlay);
       if (wanted) { video.volume = 0; video.muted = false; }
+      // 2026-10-05 · cliente: en móvil pulsar no silenciaba. El silencio va síncrono dentro
+      // del toque, sin depender del fundido (que en iOS no hace nada con `volume`).
+      else { clearInterval(fade); video.muted = true; }
       apply();
     });
     new IntersectionObserver((entries) => {
-      inView = entries[0].isIntersecting;
+      inView = entries[entries.length - 1].isIntersecting;
       apply();
     }).observe(hero);
     document.addEventListener('visibilitychange', apply);
