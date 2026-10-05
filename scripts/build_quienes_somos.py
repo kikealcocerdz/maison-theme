@@ -79,6 +79,9 @@ body = re.sub(r"<img [^>]*>", lambda m: dims(m.group(0)), body)
 body = re.sub(r'src="assets/([^"]+)"', lambda m: "src=\"{{ 'qs-" + m.group(1) + "' | asset_url }}\"", body)
 body = body.replace('<section class="hero">', '<section class="hero" data-header-variant="light">')
 assert 'assets/' not in body
+# Flechas como SVG fino: los caracteres ←/→/↗ salían como emoji en iPhone (cliente 2026-10-05).
+_svg = lambda d: f'<svg class="qs-arrow" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.25" vector-effect="non-scaling-stroke" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="{d}"/></svg>'
+body = body.replace('>←<', '>' + _svg("M20 12H4M10 6l-6 6 6 6") + '<').replace('>→<', '>' + _svg("M4 12h16M14 6l6 6-6 6") + '<').replace('↗', _svg("M7 17 17 7M9 7h8v8"))
 section = """{%- comment -%}
   Quiénes somos: entrega cerrada del cliente (cartuja-quienes-somos v9, 2026-09-29),
   integrada tal cual. Estilos en assets/quienes-somos.css (todo bajo .qs) y lógica en
@@ -93,6 +96,9 @@ section = """{%- comment -%}
 <script src="{{ 'quienes-somos.js' | asset_url }}" defer></script>
 
 {% stylesheet %}
+/* 2026-10-05 · cliente: ←, → y ↗ eran caracteres de texto (en iPhone ↗ sale como emoji).
+   Ahora son SVG de trazo fino; miden 1em, así que heredan el font-size que ya tenían. */
+.qs .qs-arrow { display: inline-block; vertical-align: middle; }
 /* El hero arranca bajo la cabecera fija del theme (la entrega traía la suya). */
 .qs .hero-copy { padding-top: calc(var(--header-h) + 56px); }
 /* 2026-10-05 · cliente: en móvil Propósito / Misión / Visión dejaba un hueco blanco enorme.
