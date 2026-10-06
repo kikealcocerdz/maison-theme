@@ -124,8 +124,11 @@
             <a class="mobile-visual-link mobile-visual-link--parent" href="{{ link.url }}">{{ link.title }}</a>
           {%- endif -%}
           {%- if branches > 0 -%}
+            {%- comment -%} «Fin de existencias» va la última, tras los desplegables (cliente 2026-10-06). {%- endcomment -%}
+            {%- assign fin_link = nil -%}
             {%- for child in link.links -%}
               {%- if child.links.size > 0 -%}{%- continue -%}{%- endif -%}
+              {%- if child.url contains 'fin-de-existencias' -%}{%- assign fin_link = child -%}{%- continue -%}{%- endif -%}
               {%- capture card_image -%}{% render 'menu-card-image', title: child.title %}{%- endcapture -%}
               {%- if card_image != blank -%}
                 <a class="mobile-visual-link" href="{{ child.url }}">{{ child.title }}</a>
@@ -147,6 +150,9 @@
               </div>
             {%- endfor -%}
 
+            {%- if fin_link -%}
+              <a class="mobile-visual-link" href="{{ fin_link.url }}">{{ fin_link.title }}</a>
+            {%- endif -%}
           {%- endif -%}
 
           {%- comment -%} Hijos sueltos sin foto: lista simple, para no perderlos. {%- endcomment -%}
