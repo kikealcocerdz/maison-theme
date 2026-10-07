@@ -195,7 +195,7 @@ Q_VARIANTS = """query($c: String) { productVariants(first: 250, after: $c) { pag
 } } }"""
 Q_NODES = "query($ids: [ID!]!) { nodes(ids: $ids) { ... on Metaobject { id fields { key value } } } }"
 Q_ORDERS = """query($c: String, $q: String) { orders(first: 100, after: $c, query: $q) { pageInfo { hasNextPage endCursor } nodes {
-  name lineItems(first: 100) { nodes { quantity variant { id } } }
+  name lineItems(first: 100) { nodes { currentQuantity variant { id } } }
 } } }"""
 Q_LOCATIONS = "{ locations(first: 20) { nodes { id name } } }"
 
@@ -332,7 +332,7 @@ def main():
         for li in o["lineItems"]["nodes"]:
             rec = li["variant"] and (recetas.get(li["variant"]["id"]) or receta_variante(by_id.get(li["variant"]["id"], {"pack": None, "sku": ""}))[0])
             for r, n in (rec or {}).items():
-                web[r] = web.get(r, 0) + n * li["quantity"]
+                web[r] = web.get(r, 0) + n * li["currentQuantity"]   # sin lo reembolsado o quitado
 
     avail = {r: max(0, d["stock"] - d["pendiente"] - web.get(r, 0)) for r, d in refs.items()}
     biz = {r: biz_by_piece.get((d["forma"], d["pieza"])) for r, d in refs.items()}
