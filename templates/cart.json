@@ -12,7 +12,8 @@
     "main": {
       "type": "cart",
       "settings": {
-        "gift_wrap_product": "envoltorio-de-regalo"
+        "gift_wrap_product": "envoltorio-de-regalo",
+        "shipping_flat_rate": 7.5
       }
     },
     "suggested": {
