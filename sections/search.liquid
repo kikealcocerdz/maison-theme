@@ -39,7 +39,7 @@
         {%- if has_product_results -%}
           <div class="search-page__products products">
             {%- for result in search.results -%}
-              {%- if result.object_type == 'product' -%}
+              {%- if result.object_type == 'product' and result.type != 'Servicios' -%}
                 {%- liquid
                   assign result_image = result.featured_image
                   assign image_url = result_image | image_url: width: 720

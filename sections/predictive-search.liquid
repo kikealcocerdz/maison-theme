@@ -3,6 +3,7 @@
   {%- if products.size > 0 -%}
     <ul class="predictive-search__list" role="listbox" aria-label="{{ 'general.search.label' | t }}">
       {%- for product in products -%}
+        {%- if product.type == 'Servicios' -%}{%- continue -%}{%- endif -%}
         <li class="predictive-search__item" role="option">
           <a class="predictive-search__link" href="{{ product.url }}" tabindex="-1">
             <span class="predictive-search__media">
