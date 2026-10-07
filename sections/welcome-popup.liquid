@@ -248,7 +248,15 @@
 
       if (status || (window.Shopify && Shopify.designMode)) { loadFont(); open(); }
       // En la cesta no: taparía la barra de pago en móvil.
-      else if (!dismissed() && !document.body.classList.contains('template-cart')) { loadFont(); window.setTimeout(open, delay); }
+      else if (!dismissed() && !document.body.classList.contains('template-cart')) { loadFont(); window.setTimeout(autoOpen, delay); }
+
+      // No encima del menú móvil, el mega-menú ni la cesta abiertos: espera a que se cierren.
+      function autoOpen() {
+        var busy = document.body.classList.contains('menu-open') ||
+          document.querySelector('#mobileDrawer.is-open, #cartDrawer[aria-hidden="false"]');
+        if (busy) { window.setTimeout(autoOpen, 1500); return; }
+        open();
+      }
     });
   }
 

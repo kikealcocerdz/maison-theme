@@ -5,6 +5,8 @@
 
   Accepts: product, scope
 {%- endcomment -%}
+{%- comment -%} «Servicios» (envoltorio de regalo) se vende solo desde la cesta: fuera de la rejilla. {%- endcomment -%}
+{%- unless product.type == 'Servicios' -%}
 {%- liquid
   assign p_img1 = product.featured_image | image_url: width: 720
   assign p_w = product.featured_image.width | default: 1000
@@ -20,3 +22,4 @@
   price: p_price, meta: product.type,
   img1: p_img1, img_w: p_w, img_h: p_h,
   badge: p_new, data_price: product.price, data_new: p_new, data_type: product.type %}
+{%- endunless -%}
