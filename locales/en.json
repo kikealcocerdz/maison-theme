@@ -47,9 +47,13 @@
     "use_at_checkout": "Use this gift card at checkout"
   },
   "password": {
-    "title": "This shop is private",
+    "title": "Our new table is almost ready",
+    "kicker": "Since 1841 · Seville",
+    "intro": "We are preparing the new La Cartuja de Sevilla shop. If you have the password, step inside.",
     "password": "Password",
-    "enter": "Enter"
+    "enter": "Enter",
+    "error": "Incorrect password. Please try again.",
+    "owner": "Are you the store owner? Log in"
   },
   "search": {
     "title": "Search",

@@ -47,9 +47,13 @@
     "use_at_checkout": "Utiliza esta tarjeta de regalo en el pago"
   },
   "password": {
-    "title": "Esta tienda es privada",
+    "title": "Muy pronto, nuestra nueva mesa",
+    "kicker": "Desde 1841 · Sevilla",
+    "intro": "Estamos preparando la nueva tienda de La Cartuja de Sevilla. Si tienes la contraseña, entra a verla.",
     "password": "Contraseña",
-    "enter": "Entrar"
+    "enter": "Entrar",
+    "error": "Contraseña incorrecta. Inténtalo de nuevo.",
+    "owner": "¿Eres el propietario? Inicia sesión"
   },
   "search": {
     "title": "Buscar",
