@@ -27,7 +27,7 @@
           "settings": {
             "heading": "Editorial",
             "menu": "",
-            "items": "Artesanía | /pages/artesania\nCalidad | /pages/artesania#calidad\nHeritage 1841 | /pages/heritage-1841"
+            "items": "Quiénes somos | /pages/quienes-somos\nViste tu mesa | /pages/viste-tu-mesa\nAmbientes | /pages/nuestras-mesas\nHeritage 1841 | /pages/heritage-1841\nArtesanía | /pages/artesania\nIdentifica tu sello | /pages/identifica-tu-sello"
           }
         },
         "col-3": {

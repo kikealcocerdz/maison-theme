@@ -1,5 +1,5 @@
 # Stock de fábrica → Shopify cada 30 min (scripts/stock/sync_stock.py).
-# Excel viejo (>36 h), FTP caído o escrituras con error → ejecución en rojo y no
+# Excel viejo (>36 h) → pasada en verde sin tocar nada. FTP caído o escrituras con error → en rojo y no
 # se toca nada más; la siguiente pasada lo vuelve a intentar.
 # ponytail: en repos públicos GitHub apaga los cron tras 60 días sin actividad en el
 # repo; si el repo se queda quieto, reactivarlo en Actions o mover esto a un repo propio.

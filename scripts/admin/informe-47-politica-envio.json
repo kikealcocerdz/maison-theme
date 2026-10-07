@@ -1,0 +1,21 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "antes",
+      "resultado": "<p><strong>Envíos Nacionales</strong></p><p>En la Península: envío gratuito en pedidos superiores a 150 €.</p><p>En la Península, el envío estándar tiene un coste de 6,99 €. Para Baleares, Canarias, Ceuta y Melilla, los gastos de envío se calculan automáticamente en el carrito según el destino.</p><p>Los envíos a Canarias, Ceuta y Melilla no incluyen IVA. En estos destinos pueden aplicarse además gastos de aduanas, DUA de importación, IGIC (Canarias) o IPSI (Ceuta y Melilla), que correrán a cargo del cliente.</p><p>Si necesitas una fecha de entrega concreta, contáctanos y haremos todo lo posible por adaptarnos.</p><p><strong>Envíos Internacionales</strong></p><p>Los gastos de transporte se calculan automáticamente en el carrito según peso, volumen y destino del pedido.</p><p>Además del coste de transporte, el cliente deberá asumir en destino los siguientes conceptos:</p><ul><li>Aranceles y derechos de aduana.</li><li>IVA o impuesto equivalente del país de destino.</li><li>Gastos de despacho de aduana (DUA de importación).</li><li>Cualquier otro impuesto o tasa local.</li></ul><p>Estos gastos no están incluidos en el precio mostrado en la web ni en el coste del transporte, y son gestionados directamente por la aduana del país receptor.</p><p>Para destinos especiales o pedidos de gran volumen, podemos prepararte un presupuesto personalizado. Escríbenos a <a href=\"mailto:pedidos@lacartujadesevilla.com\">pedidos@lacartujadesevilla.com</a> y te lo enviaremos con gusto.</p><p><strong>Plazos de Entrega</strong></p><ul><li>Si el producto está en stock: 7 días hábiles.</li><li>Si el producto está en producción: entre 15 y 21 días hábiles.</li></ul><p>Al tratarse de piezas artesanales fabricadas a mano, cada pedido requiere un tiempo de elaboración. Nuestro compromiso es entregar tu pedido en un máximo de 21 días hábiles desde la confirmación del pago.</p>"
+    },
+    {
+      "paso": "política envíos",
+      "resultado": {
+        "shopPolicy": {
+          "type": "SHIPPING_POLICY"
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

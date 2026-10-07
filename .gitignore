@@ -17,3 +17,6 @@ release
 *.zip
 
 __pycache__/
+
+# informes del sync de stock: llevan cifras de fábrica y el repo es público
+scripts/stock/informe-*.json

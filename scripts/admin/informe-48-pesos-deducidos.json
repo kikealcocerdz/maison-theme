@@ -1,0 +1,223 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "plan",
+      "resultado": [
+        {
+          "id": "gid://shopify/ProductVariant/54233211830613",
+          "producto": "gid://shopify/Product/11387610431829",
+          "sku": "010100021",
+          "handle": "juego-cafe-202-rosa",
+          "kg": 3.2,
+          "origen": "suma pack: 1×azucarero-202-rosa, 1×cafetera-202-rosa, 1×lechera-202-rosa, 6×taza-cafe-con-platillo-202-rosa"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233211863381",
+          "producto": "gid://shopify/Product/11387610464597",
+          "sku": "010010021",
+          "handle": "juego-cafe-aurora-blanca",
+          "kg": 3.2,
+          "origen": "suma pack: 1×azucarero-aurora-blanca, 1×cafetera-aurora-blanca, 1×lechera-aurora-blanca, 6×taza-cafe-con-platillo-aurora-blanca"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233211896149",
+          "producto": "gid://shopify/Product/11387610497365",
+          "sku": "010160021",
+          "handle": "juego-cafe-bellavista",
+          "kg": 3.2,
+          "origen": "suma pack: 1×azucarero-bellavista, 1×cafetera-bellavista, 1×lechera-bellavista, 6×taza-cafe-con-platillo-bellavista"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233211928917",
+          "producto": "gid://shopify/Product/11387610530133",
+          "sku": "010150021",
+          "handle": "juego-cafe-ceilan",
+          "kg": 3.2,
+          "origen": "suma pack: 1×azucarero-ceilan, 1×cafetera-ceilan, 1×lechera-ceilan, 6×taza-cafe-con-platillo-ceilan"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233211961685",
+          "producto": "gid://shopify/Product/11387610562901",
+          "sku": "010110021",
+          "handle": "juego-cafe-flor-lis-azul",
+          "kg": 3.2,
+          "origen": "suma pack: 1×azucarero-flor-lis-azul, 1×cafetera-flor-lis-azul, 1×lechera-flor-lis-azul, 6×taza-cafe-con-platillo-flor-lis-azul"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233211994453",
+          "producto": "gid://shopify/Product/11387610595669",
+          "sku": "010130021",
+          "handle": "juego-cafe-flor-lis-rosa",
+          "kg": 3.2,
+          "origen": "suma pack: 6×taza-cafe-con-platillo-flor-lis-rosa, 1×azucarero-flor-lis-rosa, 1×lechera-flor-lis-rosa, 1×cafetera-flor-lis-rosa"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212027221",
+          "producto": "gid://shopify/Product/11387610628437",
+          "sku": "02A200021",
+          "handle": "juego-cafe-n-vistas-amarillo-a-stewart",
+          "kg": 3.4,
+          "origen": "suma pack: 1×azucarero-n-vistas-amarillo-a-stewart, 1×cafetera-n-vistas-amarillo-a-stewart, 1×lechera-n-vistas-amarillo-a-stewart, 6×taza-cafe-con-platillo-n-vistas-amarillo-a-stewart"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212059989",
+          "producto": "gid://shopify/Product/11387610661205",
+          "sku": "02B200021",
+          "handle": "juego-cafe-n-vistas-azul-a-stewart",
+          "kg": 3.4,
+          "origen": "suma pack: 1×azucarero-n-vistas-azul-a-stewart, 1×cafetera-n-vistas-azul-a-stewart, 1×lechera-n-vistas-azul-a-stewart, 6×taza-cafe-con-platillo-n-vistas-azul-a-stewart"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212092757",
+          "producto": "gid://shopify/Product/11387610693973",
+          "sku": "020200021",
+          "handle": "juego-cafe-negro-vistas",
+          "kg": 3.4,
+          "origen": "suma pack: 1×azucarero-negro-vistas, 1×cafetera-negro-vistas, 1×lechera-negro-vistas, 6×taza-cafe-con-platillo-negro-vistas"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212125525",
+          "producto": "gid://shopify/Product/11387610726741",
+          "sku": "020010021",
+          "handle": "juego-cafe-ochavado-blanco",
+          "kg": 3.4,
+          "origen": "suma pack: 1×azucarero-ochavado-blanco, 1×cafetera-ochavado-blanco, 1×lechera-ochavado-blanco, 6×taza-cafe-con-platillo-ochavado-blanco"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212158293",
+          "producto": "gid://shopify/Product/11387610759509",
+          "sku": "010120021",
+          "handle": "juego-cafe-viejo-molino",
+          "kg": 3.2,
+          "origen": "suma pack: 1×azucarero-viejo-molino, 1×cafetera-viejo-molino, 1×lechera-viejo-molino, 6×taza-cafe-con-platillo-viejo-molino"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944824557909",
+          "producto": "gid://shopify/Product/11602304172373",
+          "sku": "010180100",
+          "handle": "azucarero-escenas",
+          "kg": 0.4,
+          "origen": "mediana forma 01 pieza 0100 (7 decorados: [0.4])"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944827736405",
+          "producto": "gid://shopify/Product/11602305188181",
+          "sku": "010180320",
+          "handle": "plato-hondo-escenas",
+          "kg": 0.56,
+          "origen": "mediana forma 01 pieza 0320 (9 decorados: [0.56, 0.6])"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944870138197",
+          "producto": "gid://shopify/Product/11602316886357",
+          "sku": "020220100",
+          "handle": "azucarero-yedra",
+          "kg": 0.5,
+          "origen": "mediana forma 02 pieza 0100 (4 decorados: [0.5])"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944871448917",
+          "producto": "gid://shopify/Product/11602317345109",
+          "sku": "020220140",
+          "handle": "bandeja-pastas-yedra",
+          "kg": 0.6,
+          "origen": "mediana forma 02 pieza 0140 (4 decorados: [0.6])"
+        }
+      ]
+    },
+    {
+      "paso": "peso 010100021",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 010010021",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 010160021",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 010150021",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 010110021",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 010130021",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 02A200021",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 02B200021",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 020200021",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 020010021",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 010120021",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 010180100",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 010180320",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 020220100",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 020220140",
+      "resultado": {
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

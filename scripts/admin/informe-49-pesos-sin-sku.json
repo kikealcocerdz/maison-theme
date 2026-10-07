@@ -1,0 +1,490 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "plan",
+      "resultado": [
+        {
+          "id": "gid://shopify/ProductVariant/54944772718933",
+          "handle": "caja-6-posavasos",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.8,
+          "origen": "estimado: 6 posavasos de loza + caja"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966798680405",
+          "handle": "tarro-de-botica",
+          "opciones": [
+            "Azul",
+            "Pequeño"
+          ],
+          "kg": 0.5,
+          "origen": "estimado: tarro Pequeño"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966798713173",
+          "handle": "tarro-de-botica",
+          "opciones": [
+            "Azul",
+            "Mediano"
+          ],
+          "kg": 0.8,
+          "origen": "estimado: tarro Mediano"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966798745941",
+          "handle": "tarro-de-botica",
+          "opciones": [
+            "Azul",
+            "Grande"
+          ],
+          "kg": 1.2,
+          "origen": "estimado: tarro Grande"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966798778709",
+          "handle": "tarro-de-botica",
+          "opciones": [
+            "Negro",
+            "Pequeño"
+          ],
+          "kg": 0.5,
+          "origen": "estimado: tarro Pequeño"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966798811477",
+          "handle": "tarro-de-botica",
+          "opciones": [
+            "Negro",
+            "Mediano"
+          ],
+          "kg": 0.8,
+          "origen": "estimado: tarro Mediano"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966798844245",
+          "handle": "tarro-de-botica",
+          "opciones": [
+            "Negro",
+            "Grande"
+          ],
+          "kg": 1.2,
+          "origen": "estimado: tarro Grande"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966798877013",
+          "handle": "tarro-de-botica",
+          "opciones": [
+            "Rosa",
+            "Pequeño"
+          ],
+          "kg": 0.5,
+          "origen": "estimado: tarro Pequeño"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966798909781",
+          "handle": "tarro-de-botica",
+          "opciones": [
+            "Rosa",
+            "Mediano"
+          ],
+          "kg": 0.8,
+          "origen": "estimado: tarro Mediano"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966798942549",
+          "handle": "tarro-de-botica",
+          "opciones": [
+            "Rosa",
+            "Grande"
+          ],
+          "kg": 1.2,
+          "origen": "estimado: tarro Grande"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966798975317",
+          "handle": "tarro-de-botica",
+          "opciones": [
+            "Verde",
+            "Pequeño"
+          ],
+          "kg": 0.5,
+          "origen": "estimado: tarro Pequeño"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966799008085",
+          "handle": "tarro-de-botica",
+          "opciones": [
+            "Verde",
+            "Mediano"
+          ],
+          "kg": 0.8,
+          "origen": "estimado: tarro Mediano"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966799040853",
+          "handle": "tarro-de-botica",
+          "opciones": [
+            "Verde",
+            "Grande"
+          ],
+          "kg": 1.2,
+          "origen": "estimado: tarro Grande"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966823649621",
+          "handle": "vaciabolsillos",
+          "opciones": [
+            "Blanco"
+          ],
+          "kg": 0.5,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966823682389",
+          "handle": "vaciabolsillos",
+          "opciones": [
+            "Fábrica Cartuja"
+          ],
+          "kg": 0.5,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966826893653",
+          "handle": "hoja-de-parra",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.6,
+          "origen": "estimado: como bandeja de pastas"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966827614549",
+          "handle": "mancerina",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 3.7,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966830268757",
+          "handle": "cepillero",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.4,
+          "origen": "estimado: como un mug"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966830793045",
+          "handle": "bolsa",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.2,
+          "origen": "estimado: bolsa de tela"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966831677781",
+          "handle": "camiseta",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.1,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966832169301",
+          "handle": "libro",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.66,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966938141013",
+          "handle": "vaciabolsillos",
+          "opciones": [
+            "Abanico Azul"
+          ],
+          "kg": 0.5,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966938173781",
+          "handle": "vaciabolsillos",
+          "opciones": [
+            "Abanico Ocre"
+          ],
+          "kg": 0.5,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54966938206549",
+          "handle": "vaciabolsillos",
+          "opciones": [
+            "Abanico Rojo"
+          ],
+          "kg": 0.5,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54967282499925",
+          "handle": "mug-flor-lis-azul",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.4,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54967282729301",
+          "handle": "mug-flor-lis-rosa",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.4,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54967282991445",
+          "handle": "mug-ceilan",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.4,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54967283024213",
+          "handle": "mug-bellavista",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.4,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54967283253589",
+          "handle": "mug-viejo-molino",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.4,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54967283286357",
+          "handle": "mug-n-vistas-azul-a-stewart",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.4,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54967284105557",
+          "handle": "mug-n-vistas-amarillo-a-stewart",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.4,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54967284171093",
+          "handle": "mug-georgica",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.4,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54967284203861",
+          "handle": "mug-eden",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.4,
+          "origen": "PS"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54967613358421",
+          "handle": "vela-aromatica-202-rosa",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.6,
+          "origen": "estimado: portavela de loza con tapa + cera"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54967614996821",
+          "handle": "vela-aromatica-ceilan",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.6,
+          "origen": "estimado: portavela de loza con tapa + cera"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54967616045397",
+          "handle": "vela-aromatica-eden",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.6,
+          "origen": "estimado: portavela de loza con tapa + cera"
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54967617061205",
+          "handle": "vela-aromatica-negro-vistas",
+          "opciones": [
+            "Default Title"
+          ],
+          "kg": 0.6,
+          "origen": "estimado: portavela de loza con tapa + cera"
+        }
+      ]
+    },
+    {
+      "paso": "peso 11602289525077",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609036554581",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11602289656149",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609045238101",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609045565781",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609046679893",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609046942037",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609047302485",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609047630165",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609148260693",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609148293461",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609148358997",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609148391765",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609148424533",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609148457301",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609148522837",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609148588373",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609148621141",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609274417493",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609274974549",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609275400533",
+      "resultado": {
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "peso 11609275892053",
+      "resultado": {
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

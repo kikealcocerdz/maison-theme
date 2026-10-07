@@ -1,0 +1,4908 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "antes",
+      "resultado": [
+        {
+          "id": "gid://shopify/ProductVariant/54233192825173",
+          "sku": "010100100",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233192890709",
+          "sku": "010010100",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233193021781",
+          "sku": "010160100",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233193054549",
+          "sku": "010150100",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233193120085",
+          "sku": "010110100",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233193251157",
+          "sku": "010130100",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233193283925",
+          "sku": "02A200100",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233193316693",
+          "sku": "02B200100",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233193349461",
+          "sku": "020200100",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233193414997",
+          "sku": "020010100",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233193480533",
+          "sku": "010120100",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233193513301",
+          "sku": "070100380",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233193546069",
+          "sku": "070160380",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233193578837",
+          "sku": "070010380",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233193611605",
+          "sku": "070150380",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233194430805",
+          "sku": "070110380",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233194496341",
+          "sku": "070130380",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233194529109",
+          "sku": "07A200380",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233194561877",
+          "sku": "07B200380",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233194594645",
+          "sku": "070200380",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233194627413",
+          "sku": "070120380",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233194660181",
+          "sku": "010100140",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233195282773",
+          "sku": "010010140",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233195315541",
+          "sku": "010160140",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233195348309",
+          "sku": "010150140",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233195381077",
+          "sku": "010110140",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233195413845",
+          "sku": "010130140",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233195905365",
+          "sku": "02A200140",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233195938133",
+          "sku": "02B200140",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233195970901",
+          "sku": "020200140",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196003669",
+          "sku": "020010140",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196036437",
+          "sku": "010120140",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196069205",
+          "sku": "027920210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196134741",
+          "sku": "027940210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196167509",
+          "sku": "02A920210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196233045",
+          "sku": "029920210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196265813",
+          "sku": "029940210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196298581",
+          "sku": "021920210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196560725",
+          "sku": "021940210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196593493",
+          "sku": "070100190",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196626261",
+          "sku": "070160190",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196659029",
+          "sku": "070010190",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196691797",
+          "sku": "070150190",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196724565",
+          "sku": "070110190",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196757333",
+          "sku": "070130190",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196790101",
+          "sku": "07A200190",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196822869",
+          "sku": "07B200190",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196855637",
+          "sku": "070200190",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196888405",
+          "sku": "070120190",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196921173",
+          "sku": "070100535",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196953941",
+          "sku": "070160535",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233196986709",
+          "sku": "070010535",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197019477",
+          "sku": "070150535",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197052245",
+          "sku": "070110535",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197085013",
+          "sku": "070130535",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197117781",
+          "sku": "07A200535",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197150549",
+          "sku": "07B200535",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197183317",
+          "sku": "070200535",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197216085",
+          "sku": "070120535",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197248853",
+          "sku": "07B200191",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197281621",
+          "sku": "070100191",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197314389",
+          "sku": "070160191",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197576533",
+          "sku": "070010191",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197609301",
+          "sku": "070150191",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197642069",
+          "sku": "070110191",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197674837",
+          "sku": "070130191",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197707605",
+          "sku": "07A200191",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197740373",
+          "sku": "070200191",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197773141",
+          "sku": "070120191",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197805909",
+          "sku": "070100550",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197838677",
+          "sku": "070010550",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197871445",
+          "sku": "070200550",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197904213",
+          "sku": "090960630",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.1
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197936981",
+          "sku": "010100120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233197969749",
+          "sku": "010010120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198002517",
+          "sku": "010160120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198035285",
+          "sku": "010150120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198068053",
+          "sku": "010110120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198100821",
+          "sku": "010130120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198133589",
+          "sku": "02A200120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198166357",
+          "sku": "02B200120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198199125",
+          "sku": "020200120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198231893",
+          "sku": "020010120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198264661",
+          "sku": "010120120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198461269",
+          "sku": "070100603",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198494037",
+          "sku": "070010603",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198526805",
+          "sku": "070200603",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198559573",
+          "sku": "010100180",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198592341",
+          "sku": "010010180",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198657877",
+          "sku": "010160180",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198690645",
+          "sku": "010150180",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198723413",
+          "sku": "010110180",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198756181",
+          "sku": "010130180",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198788949",
+          "sku": "02A200180",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198821717",
+          "sku": "02B200180",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198854485",
+          "sku": "020200180",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.8
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198887253",
+          "sku": "020010180",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198920021",
+          "sku": "010120180",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198952789",
+          "sku": "090920661",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233198985557",
+          "sku": "090940661",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199018325",
+          "sku": "090910661",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199051093",
+          "sku": "090930661",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199083861",
+          "sku": "010100220",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199116629",
+          "sku": "010010220",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199149397",
+          "sku": "010160220",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199182165",
+          "sku": "010150220",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199214933",
+          "sku": "010110220",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199247701",
+          "sku": "010130220",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199280469",
+          "sku": "02A200220",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199313237",
+          "sku": "020200220",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199346005",
+          "sku": "020010220",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199378773",
+          "sku": "010120220",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199411541",
+          "sku": "02B200220",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199444309",
+          "sku": "010100210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199477077",
+          "sku": "010010210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199509845",
+          "sku": "010160210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199542613",
+          "sku": "010150210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199575381",
+          "sku": "010110210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199608149",
+          "sku": "010130210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199640917",
+          "sku": "02A200210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199673685",
+          "sku": "02B200210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199706453",
+          "sku": "020200210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199739221",
+          "sku": "020010210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199771989",
+          "sku": "010120210",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199804757",
+          "sku": "010010150",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.28
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199837525",
+          "sku": "010100150",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.28
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199870293",
+          "sku": "010160150",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.28
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199903061",
+          "sku": "010150150",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.28
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199935829",
+          "sku": "010110150",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.28
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233199968597",
+          "sku": "010130150",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.28
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200001365",
+          "sku": "02A200150",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200034133",
+          "sku": "02B200150",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200066901",
+          "sku": "020200150",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200099669",
+          "sku": "020010150",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200132437",
+          "sku": "010120150",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.28
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200165205",
+          "sku": "010100200",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200197973",
+          "sku": "010010200",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200230741",
+          "sku": "010160200",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200263509",
+          "sku": "010150200",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200296277",
+          "sku": "010110200",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200329045",
+          "sku": "010130200",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200361813",
+          "sku": "02A200200",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200394581",
+          "sku": "02B200200",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200591189",
+          "sku": "020200200",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200623957",
+          "sku": "020010200",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200656725",
+          "sku": "010120200",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200689493",
+          "sku": "010100230",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200722261",
+          "sku": "010010230",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200755029",
+          "sku": "010160230",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200787797",
+          "sku": "010150230",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200820565",
+          "sku": "010110230",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200853333",
+          "sku": "010130230",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200886101",
+          "sku": "02A200230",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200918869",
+          "sku": "02B200230",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200951637",
+          "sku": "020200230",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233200984405",
+          "sku": "020010230",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201049941",
+          "sku": "010120230",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201082709",
+          "sku": "090920601",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.1
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201115477",
+          "sku": "090940601",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.1
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201148245",
+          "sku": "090910601",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.1
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201213781",
+          "sku": "090930601",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.1
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201246549",
+          "sku": "070100052",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201279317",
+          "sku": "070160052",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201312085",
+          "sku": "070010052",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201344853",
+          "sku": "070150052",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201410389",
+          "sku": "070110052",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201443157",
+          "sku": "070130052",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201475925",
+          "sku": "07A200052",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201508693",
+          "sku": "07B200052",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201541461",
+          "sku": "070200052",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201574229",
+          "sku": "070120052",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201606997",
+          "sku": "070100057",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201639765",
+          "sku": "070160057",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201672533",
+          "sku": "070010057",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201705301",
+          "sku": "070150057",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201738069",
+          "sku": "070110057",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201770837",
+          "sku": "070130057",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201803605",
+          "sku": "07A200057",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201836373",
+          "sku": "07B200057",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201869141",
+          "sku": "070200057",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233201901909",
+          "sku": "070120057",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233202950485",
+          "sku": "010100110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233202983253",
+          "sku": "010010110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203016021",
+          "sku": "010160110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203048789",
+          "sku": "010150110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203081557",
+          "sku": "010110110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203114325",
+          "sku": "010130110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203147093",
+          "sku": "02A200110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203179861",
+          "sku": "02B200110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203212629",
+          "sku": "020200110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203245397",
+          "sku": "020010110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203278165",
+          "sku": "010120110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203310933",
+          "sku": "070100472",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203343701",
+          "sku": "0700A0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203376469",
+          "sku": "0700B0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203409237",
+          "sku": "0700C0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203442005",
+          "sku": "0700D0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203474773",
+          "sku": "0700E0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203507541",
+          "sku": "0700F0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203573077",
+          "sku": "0700G0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203605845",
+          "sku": "0700H0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203638613",
+          "sku": "0700I0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203671381",
+          "sku": "0700J0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203704149",
+          "sku": "0700K0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203736917",
+          "sku": "0700L0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203769685",
+          "sku": "0700M0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203802453",
+          "sku": "0700N0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203835221",
+          "sku": "0700Ñ0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203867989",
+          "sku": "0700O0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203900757",
+          "sku": "0700P0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203933525",
+          "sku": "0700Q0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203966293",
+          "sku": "0700R0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233203999061",
+          "sku": "0700S0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204031829",
+          "sku": "0700T0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204064597",
+          "sku": "0700U0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204097365",
+          "sku": "0700V0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204130133",
+          "sku": "0700W0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204162901",
+          "sku": "0700X0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204195669",
+          "sku": "0700Y0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204228437",
+          "sku": "0700Z0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204261205",
+          "sku": "070200472",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204326741",
+          "sku": "090920602",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.95
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204359509",
+          "sku": "090940602",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.95
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204392277",
+          "sku": "090910602",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.95
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204425045",
+          "sku": "090930602",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.95
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204457813",
+          "sku": "010100340",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204490581",
+          "sku": "010010340",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204523349",
+          "sku": "010160340",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204556117",
+          "sku": "010150340",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204588885",
+          "sku": "010110340",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204621653",
+          "sku": "010130340",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204654421",
+          "sku": "02A200340",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204687189",
+          "sku": "02B200340",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204719957",
+          "sku": "020200340",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204752725",
+          "sku": "020010340",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204785493",
+          "sku": "010120340",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204818261",
+          "sku": "010100320",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.56
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204851029",
+          "sku": "010010320",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.56
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204883797",
+          "sku": "010160320",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.56
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204916565",
+          "sku": "010150320",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.56
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204949333",
+          "sku": "010110320",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.56
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233204982101",
+          "sku": "010130320",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.56
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205014869",
+          "sku": "02A200320",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205047637",
+          "sku": "02B200320",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205080405",
+          "sku": "020200320",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205113173",
+          "sku": "01C190320",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.56
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205145941",
+          "sku": "020010320",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205178709",
+          "sku": "010120320",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.56
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205211477",
+          "sku": "010100330",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205244245",
+          "sku": "010010335",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205277013",
+          "sku": "010160335",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205309781",
+          "sku": "010150335",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205342549",
+          "sku": "010110335",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205375317",
+          "sku": "010130335",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205408085",
+          "sku": "02A200335",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.8
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205440853",
+          "sku": "02B200335",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.8
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205473621",
+          "sku": "020200335",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.8
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205506389",
+          "sku": "020010335",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.8
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205539157",
+          "sku": "010120335",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205571925",
+          "sku": "010100335",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205604693",
+          "sku": "010010330",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205637461",
+          "sku": "010160330",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205670229",
+          "sku": "010150330",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205702997",
+          "sku": "010110330",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205735765",
+          "sku": "010130330",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205768533",
+          "sku": "02A200330",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205801301",
+          "sku": "02B200330",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205834069",
+          "sku": "020200330",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205866837",
+          "sku": "01B190330",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205899605",
+          "sku": "01A190330",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205932373",
+          "sku": "020010330",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205965141",
+          "sku": "010120330",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233205997909",
+          "sku": "070100370",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206030677",
+          "sku": "070160370",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206063445",
+          "sku": "070010370",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206128981",
+          "sku": "070150370",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206161749",
+          "sku": "070110370",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206194517",
+          "sku": "070130370",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206227285",
+          "sku": "07A200370",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206260053",
+          "sku": "07B200370",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206391125",
+          "sku": "070200370",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206423893",
+          "sku": "070120370",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206456661",
+          "sku": "010100300",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206489429",
+          "sku": "010010300",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206522197",
+          "sku": "010160300",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206554965",
+          "sku": "010150300",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206587733",
+          "sku": "010110300",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206620501",
+          "sku": "010130300",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206653269",
+          "sku": "02A200300",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206686037",
+          "sku": "02B200300",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206718805",
+          "sku": "020200300",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206751573",
+          "sku": "020010300",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206784341",
+          "sku": "010120300",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206817109",
+          "sku": "010100310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206849877",
+          "sku": "010010310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206882645",
+          "sku": "010160310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206948181",
+          "sku": "010150310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233206980949",
+          "sku": "010110310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207013717",
+          "sku": "010130310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207046485",
+          "sku": "02A200310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207079253",
+          "sku": "02B200310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207275861",
+          "sku": "020200310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207308629",
+          "sku": "01D190310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207341397",
+          "sku": "01F190310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207439701",
+          "sku": "01E190310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207472469",
+          "sku": "020010310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207505237",
+          "sku": "010120310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207538005",
+          "sku": "010100160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207570773",
+          "sku": "010010160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207603541",
+          "sku": "010160160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207636309",
+          "sku": "010150160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207669077",
+          "sku": "010110160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207701845",
+          "sku": "010130160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207734613",
+          "sku": "02A200160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207767381",
+          "sku": "02B200160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207800149",
+          "sku": "020200160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207832917",
+          "sku": "020010160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207865685",
+          "sku": "010120160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207898453",
+          "sku": "010100170",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207931221",
+          "sku": "010010170",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207963989",
+          "sku": "010160170",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233207996757",
+          "sku": "010150170",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208029525",
+          "sku": "010110170",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208062293",
+          "sku": "010130170",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208127829",
+          "sku": "02A200170",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208160597",
+          "sku": "02B200170",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208193365",
+          "sku": "020200170",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208226133",
+          "sku": "020010170",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208258901",
+          "sku": "010120170",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208291669",
+          "sku": "010100460",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208324437",
+          "sku": "010010460",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208357205",
+          "sku": "010160460",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208389973",
+          "sku": "010150460",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208422741",
+          "sku": "010110460",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208619349",
+          "sku": "010130460",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208652117",
+          "sku": "02A200460",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208750421",
+          "sku": "02B200460",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208783189",
+          "sku": "020200460",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208815957",
+          "sku": "020010460",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208848725",
+          "sku": "010120460",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208881493",
+          "sku": "010100441",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233208914261",
+          "sku": "010010441",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209012565",
+          "sku": "010160441",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209045333",
+          "sku": "010100440",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209078101",
+          "sku": "010010440",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209110869",
+          "sku": "010160440",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209143637",
+          "sku": "010150440",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209176405",
+          "sku": "010110440",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209209173",
+          "sku": "010130440",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209241941",
+          "sku": "02A200440",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209274709",
+          "sku": "02B200440",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209307477",
+          "sku": "020200440",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209340245",
+          "sku": "020010440",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209373013",
+          "sku": "010120440",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209405781",
+          "sku": "010150441",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209438549",
+          "sku": "010110441",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209471317",
+          "sku": "010130441",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209504085",
+          "sku": "02A200441",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.35
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209536853",
+          "sku": "02B200441",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.35
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209569621",
+          "sku": "020200441",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.35
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209602389",
+          "sku": "020010441",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.35
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209635157",
+          "sku": "010120441",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.25
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209667925",
+          "sku": "070100431",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209700693",
+          "sku": "070160431",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209733461",
+          "sku": "070010431",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209766229",
+          "sku": "010100430",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209798997",
+          "sku": "010010430",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209831765",
+          "sku": "010160430",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209864533",
+          "sku": "010150430",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209897301",
+          "sku": "010110430",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209930069",
+          "sku": "010130430",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209962837",
+          "sku": "02A200430",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233209995605",
+          "sku": "02B200430",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210028373",
+          "sku": "020200430",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210061141",
+          "sku": "020010430",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210093909",
+          "sku": "010120430",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210126677",
+          "sku": "070150431",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210159445",
+          "sku": "070110431",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210192213",
+          "sku": "070130431",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210224981",
+          "sku": "07A200431",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210257749",
+          "sku": "07B200431",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210290517",
+          "sku": "070200431",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210323285",
+          "sku": "070120431",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210356053",
+          "sku": "010100450",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210388821",
+          "sku": "010010450",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210421589",
+          "sku": "010160450",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210454357",
+          "sku": "010150450",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210487125",
+          "sku": "010110450",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210519893",
+          "sku": "010130450",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210552661",
+          "sku": "02A200450",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210585429",
+          "sku": "02B200450",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210618197",
+          "sku": "020200450",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210650965",
+          "sku": "020010450",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210683733",
+          "sku": "010120450",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210716501",
+          "sku": "010100130",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210749269",
+          "sku": "010010130",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210782037",
+          "sku": "010160130",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210814805",
+          "sku": "010150130",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210847573",
+          "sku": "010110130",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210880341",
+          "sku": "010130130",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210913109",
+          "sku": "02A200130",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210945877",
+          "sku": "02B200130",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233210978645",
+          "sku": "020200130",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233211011413",
+          "sku": "020010130",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233211044181",
+          "sku": "010120130",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212191061",
+          "sku": "010100032",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 6.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212223829",
+          "sku": "010010032",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 6.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212256597",
+          "sku": "010160032",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 6.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212289365",
+          "sku": "010150032",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 6.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212322133",
+          "sku": "010110032",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 6.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212453205",
+          "sku": "010130032",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 6.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212485973",
+          "sku": "02A200032",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 6.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212518741",
+          "sku": "02B200032",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 6.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212584277",
+          "sku": "020200032",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 6.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212617045",
+          "sku": "020010032",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 6.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212649813",
+          "sku": "010120032",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 6.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212715349",
+          "sku": "010100015",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 27.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212748117",
+          "sku": "010010015",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 27.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212780885",
+          "sku": "010160015",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 27.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212813653",
+          "sku": "010150015",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 27.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212846421",
+          "sku": "010110015",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 27.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233212977493",
+          "sku": "010130015",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 27.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233213010261",
+          "sku": "02B200015",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 27.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233213043029",
+          "sku": "02A200015",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 27.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233213075797",
+          "sku": "020200015",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 27.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233213108565",
+          "sku": "020010015",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 27.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54233213141333",
+          "sku": "010120015",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 27.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54737048404309",
+          "sku": "010150014",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 37.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54737592615253",
+          "sku": "010100014",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 37.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54737592811861",
+          "sku": "010010014",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 37.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54737602838869",
+          "sku": "010160014",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 37.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54737734631765",
+          "sku": "010110014",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 37.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54737749868885",
+          "sku": "010130014",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 37.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54737750065493",
+          "sku": "02A200014",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 37.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54737767727445",
+          "sku": "02B200014",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 37.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54737913053525",
+          "sku": "020200014",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 37.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54737935171925",
+          "sku": "020010014",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 37.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54737954046293",
+          "sku": "010120014",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 37.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54737995235669",
+          "sku": "010100031",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738107695445",
+          "sku": "010010031",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738118869333",
+          "sku": "010160031",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738119098709",
+          "sku": "010150031",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738151539029",
+          "sku": "010110031",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738268750165",
+          "sku": "010130031",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738275762517",
+          "sku": "02A200031",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738275959125",
+          "sku": "02B200031",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738330321237",
+          "sku": "020200031",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738431279445",
+          "sku": "020010031",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738432688469",
+          "sku": "010120031",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738432950613",
+          "sku": "010100020",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738489868629",
+          "sku": "010010020",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738584174933",
+          "sku": "010160020",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738591482197",
+          "sku": "010150020",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738592465237",
+          "sku": "010110020",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738592858453",
+          "sku": "010130020",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738665177429",
+          "sku": "02A200020",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738748309845",
+          "sku": "02B200020",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738750406997",
+          "sku": "020200020",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738750832981",
+          "sku": "020010020",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 8.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54738822201685",
+          "sku": "010120020",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 6.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931793740117",
+          "sku": "0700A0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931793772885",
+          "sku": "0700B0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931793805653",
+          "sku": "0700C0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931793838421",
+          "sku": "0700D0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931793871189",
+          "sku": "0700E0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931793903957",
+          "sku": "0700F0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931793936725",
+          "sku": "0700G0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931793969493",
+          "sku": "0700H0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794002261",
+          "sku": "0700I0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794035029",
+          "sku": "0700J0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794067797",
+          "sku": "0700K0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794100565",
+          "sku": "0700L0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794133333",
+          "sku": "0700M0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794166101",
+          "sku": "0700N0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794198869",
+          "sku": "0700O0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794231637",
+          "sku": "0700P0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794264405",
+          "sku": "0700Q0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794297173",
+          "sku": "0700R0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794329941",
+          "sku": "0700S0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794362709",
+          "sku": "0700T0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794395477",
+          "sku": "0700U0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794428245",
+          "sku": "0700V0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794461013",
+          "sku": "0700W0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794493781",
+          "sku": "0700X0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794526549",
+          "sku": "0700Y0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794559317",
+          "sku": "0700Z0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54931794592085",
+          "sku": "0700Ñ0471",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944798310741",
+          "sku": "020220340",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944805683541",
+          "sku": "02R010180",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944806371669",
+          "sku": "02R010170",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 2.0
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944807125333",
+          "sku": "020220130",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944807846229",
+          "sku": "020220450",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944808796501",
+          "sku": "020220460",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944809550165",
+          "sku": "01P160110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944810336597",
+          "sku": "01P160120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944812171605",
+          "sku": "01P160220",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944812925269",
+          "sku": "01P160310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944813646165",
+          "sku": "01P150110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944814825813",
+          "sku": "01P150120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944815743317",
+          "sku": "01P150150",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944816529749",
+          "sku": "01P150160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944817316181",
+          "sku": "01P150220",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944818266453",
+          "sku": "01P150320",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944819183957",
+          "sku": "01P150330",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.8
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944819904853",
+          "sku": "030320150",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944820658517",
+          "sku": "030320170",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.1
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944821641557",
+          "sku": "030320310",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944822362453",
+          "sku": "030320330",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.8
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944823083349",
+          "sku": "020250120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944823837013",
+          "sku": "020250160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944825114965",
+          "sku": "010180110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944826261845",
+          "sku": "010180120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944826982741",
+          "sku": "010180160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944829047125",
+          "sku": "02Z330120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944830423381",
+          "sku": "02Z330130",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944830783829",
+          "sku": "02Z330320",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944831832405",
+          "sku": "02Z330340",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944832815445",
+          "sku": "020230110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.5
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944833601877",
+          "sku": "020230120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944834650453",
+          "sku": "020230130",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.9
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944860864853",
+          "sku": "020230160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944862568789",
+          "sku": "020230170",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 3.1
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944863093077",
+          "sku": "020230300",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944864207189",
+          "sku": "020230320",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.6
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944864862549",
+          "sku": "020230340",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944865583445",
+          "sku": "020230441",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944869450069",
+          "sku": "02R010160",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944870760789",
+          "sku": "070220380",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.3
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944872300885",
+          "sku": "020220120",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.7
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944873283925",
+          "sku": "020220230",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 1.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944874234197",
+          "sku": "020220110",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.4
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944874955093",
+          "sku": "070220370",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944875970901",
+          "sku": "020220300",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.2
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944876691797",
+          "sku": "020220441",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.35
+        },
+        {
+          "id": "gid://shopify/ProductVariant/54944877510997",
+          "sku": "070220431",
+          "antes": {
+            "value": 0,
+            "unit": "KILOGRAMS"
+          },
+          "kg": 0.3
+        }
+      ]
+    },
+    {
+      "paso": "sin_peso",
+      "resultado": [
+        {
+          "sku": "010100021",
+          "handle": "juego-cafe-202-rosa",
+          "status": "ACTIVE"
+        },
+        {
+          "sku": "010010021",
+          "handle": "juego-cafe-aurora-blanca",
+          "status": "ACTIVE"
+        },
+        {
+          "sku": "010160021",
+          "handle": "juego-cafe-bellavista",
+          "status": "ACTIVE"
+        },
+        {
+          "sku": "010150021",
+          "handle": "juego-cafe-ceilan",
+          "status": "ACTIVE"
+        },
+        {
+          "sku": "010110021",
+          "handle": "juego-cafe-flor-lis-azul",
+          "status": "ACTIVE"
+        },
+        {
+          "sku": "010130021",
+          "handle": "juego-cafe-flor-lis-rosa",
+          "status": "ACTIVE"
+        },
+        {
+          "sku": "02A200021",
+          "handle": "juego-cafe-n-vistas-amarillo-a-stewart",
+          "status": "ACTIVE"
+        },
+        {
+          "sku": "02B200021",
+          "handle": "juego-cafe-n-vistas-azul-a-stewart",
+          "status": "ACTIVE"
+        },
+        {
+          "sku": "020200021",
+          "handle": "juego-cafe-negro-vistas",
+          "status": "ACTIVE"
+        },
+        {
+          "sku": "020010021",
+          "handle": "juego-cafe-ochavado-blanco",
+          "status": "ACTIVE"
+        },
+        {
+          "sku": "010120021",
+          "handle": "juego-cafe-viejo-molino",
+          "status": "ACTIVE"
+        },
+        {
+          "sku": "010180100",
+          "handle": "azucarero-escenas",
+          "status": "ACTIVE"
+        },
+        {
+          "sku": "010180320",
+          "handle": "plato-hondo-escenas",
+          "status": "ACTIVE"
+        },
+        {
+          "sku": "020220100",
+          "handle": "azucarero-yedra",
+          "status": "ACTIVE"
+        },
+        {
+          "sku": "020220140",
+          "handle": "bandeja-pastas-yedra",
+          "status": "ACTIVE"
+        }
+      ]
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

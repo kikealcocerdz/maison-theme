@@ -28,7 +28,7 @@
           "settings": {
             "heading": "Colecciones",
             "menu": "",
-            "items": "Nuevo || /collections/fin-de-existencias\nAurora | Cap. 01 | /collections/aurora\nOchavada | Cap. 02 | /collections/ochavada\nDecoración | Cap. 03 | /collections/decoracion  | /collections/novedades\n!Fin de existencias |"
+            "items": "Nuevo || /collections/fin-de-existencias\nAurora | Cap. 01 | /collections/aurora\nOchavada | Cap. 02 | /collections/ochavada\nDecoración | Cap. 03 | /collections/decoracion  | /collections/novedades\n!Fin de existencias | | /collections/fin-de-existencias"
           }
         },
         "col-1": {
@@ -44,7 +44,7 @@
           "settings": {
             "heading": "Editorial",
             "menu": "",
-            "items": "Ambientes | | /pages/nuestras-mesas\nViste tu mesa | | /pages/viste-tu-mesa\nArtesanía | | /pages/artesania\nIdentifica tu sello | | /pages/identifica-tu-sello"
+            "items": "Quiénes somos | | /pages/quienes-somos\nViste tu mesa | | /pages/viste-tu-mesa\nAmbientes | | /pages/nuestras-mesas\nHeritage 1841 | | /pages/heritage-1841\nArtesanía | | /pages/artesania\nIdentifica tu sello | | /pages/identifica-tu-sello"
           }
         },
         "card-1": {

@@ -1,0 +1,22 @@
+{%- comment -%}
+  Una tarjeta de la rejilla de colección a partir de un producto real: calcula
+  imagen, precio y «Novedad» y delega en collection-card. Sale de
+  collection-grid para usarla también en la vista agrupada por colección.
+
+  Accepts: product, scope
+{%- endcomment -%}
+{%- liquid
+  assign p_img1 = product.featured_image | image_url: width: 720
+  assign p_w = product.featured_image.width | default: 1000
+  assign p_h = product.featured_image.height | default: 1250
+  assign p_price = product.price | money
+  assign p_new = false
+  if product.tags contains 'novedad' or product.tags contains 'new'
+    assign p_new = true
+  endif
+-%}
+{% render 'collection-card', product: product, scope: scope,
+  card_url: product.url, title: product.title,
+  price: p_price, meta: product.type,
+  img1: p_img1, img_w: p_w, img_h: p_h,
+  badge: p_new, data_price: product.price, data_new: p_new, data_type: product.type %}

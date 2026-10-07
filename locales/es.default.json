@@ -175,6 +175,7 @@
       "filter_apply": "Aplicar filtros",
       "filter_remove": "Quitar {{ name }}",
       "filter_collection": "Colección",
+      "filter_all": "Todas",
       "filter_shape": "Forma",
       "filter_shape_values": "Aurora|Ochavada|Imperio|Viena",
       "filter_color": "Color",
