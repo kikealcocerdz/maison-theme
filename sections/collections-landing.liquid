@@ -6,7 +6,8 @@
 {%- endcomment -%}
 <div class="collections-landing" data-section-id="{{ section.id }}">
   <section class="collections-stage collections-stage-v26">
-    <div class="collections-strip" data-collections-strip>
+    {%- assign chapters = section.blocks | where: 'type', 'chapter' -%}
+    <div class="collections-strip" data-collections-strip style="--cards: {{ chapters.size | at_least: 1 }};">
       <div class="collections-copy reveal">
         {%- if section.settings.breadcrumb != blank -%}
           <div class="breadcrumbs"><a href="{{ routes.root_url }}">{{ 'sections.collection.home' | t }}</a> / {{ section.settings.breadcrumb | escape }}</div>
@@ -84,6 +85,29 @@
   .collections-landing .landing-card { flex-basis: 250px; width: 250px; min-width: 250px; }
   .collections-landing .landing-card .image-frame { height: 56vh; min-height: 360px; }
   .collections-landing .collections-arrows-v26 { display: none; }
+}
+/* Móvil: la introducción arriba (fija al desplazar) y las colecciones debajo en un
+   carril horizontal con la siguiente asomando; antes el texto ocupaba la primera
+   pantalla y la primera colección apenas se veía. */
+@media (max-width: 680px) {
+  .collections-landing .collections-strip {
+    display: grid;
+    grid-template-columns: repeat(var(--cards), min(76vw, 300px));
+    grid-template-rows: auto auto;
+    gap: 26px 14px;
+    padding: 24px 16px 56px;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 16px;
+  }
+  .collections-landing .collections-copy {
+    grid-column: 1 / -1; grid-row: 1;
+    position: sticky; left: 0;
+    width: calc(100vw - 32px); min-width: 0; max-width: none; margin: 0;
+  }
+  .collections-landing .collections-copy h1 { font-size: 32px; }
+  .collections-landing .landing-card { grid-row: 2; width: auto; min-width: 0; scroll-snap-align: start; }
+  .collections-landing .landing-card .image-frame { height: auto; aspect-ratio: 3 / 4; min-height: 0; }
+  .collections-landing .landing-card h2 { font-size: 26px; }
 }
 {% endstylesheet %}
 

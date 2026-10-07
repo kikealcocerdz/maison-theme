@@ -1,0 +1,19 @@
+{%- layout none -%}
+{%- comment -%}
+  /cart?view=plazos — el cajón de la cesta se pinta desde /cart.js, que no trae
+  metafields. Esta vista le da el plazo ya calculado en Liquid (mismo snippet que la
+  ficha y la página de cesta), por clave de línea, más el del pedido.
+{%- endcomment -%}
+{%- capture plazo_pedido -%}{% render 'plazo-pedido' %}{%- endcapture -%}
+{%- assign pedido = '' -%}
+{%- assign atributo = '' -%}
+{%- if plazo_pedido != blank -%}
+  {%- capture pedido -%}{{ 'plazo.order' | t: days: plazo_pedido }}{%- endcapture -%}
+  {%- capture atributo -%}{{ 'plazo.attribute' | t: days: plazo_pedido }}{%- endcapture -%}
+{%- endif -%}
+{"lineas":{
+{%- for item in cart.items -%}
+  {%- capture html -%}{% render 'plazo-entrega', variant: item.variant, qty: item.quantity %}{%- endcapture -%}
+  {{- item.key | json }}:{{ html | strip | json }}{% unless forloop.last %},{% endunless %}
+{%- endfor -%}
+},"pedido":{{ pedido | json }},"atributo":{{ atributo | json }},"guardado":{{ cart.attributes['Plazo de entrega'] | default: '' | json }}}

@@ -76,70 +76,77 @@
       }
     }
 
-    function updateLabStack() {
-      var labStage = $('.lab-stage');
-      var protagonista = $('.lab-protagonista');
-      var bajoplato = $('.lab-bajoplato');
-      var hasStack = !!(protagonista && bajoplato && protagonista.classList.contains('on') && bajoplato.classList.contains('on'));
-      if (labStage) {
-        labStage.classList.toggle('has-stack', hasStack);
-        var mantel = $('.lab-mantel');
-        labStage.classList.toggle('has-mantel', !!(mantel && mantel.classList.contains('on')));
-      }
-      var active = $$('.lab-toggle').filter(function (btn) { return btn.getAttribute('aria-pressed') === 'true'; }).length;
-      var counter = $('#labCount');
-      if (counter) counter.textContent = active === 1 ? '1 capa activa' : active + ' capas activas';
-    }
+    /* 2026-10-01: mantel, servilletas y cubiertos fijos; bajoplato + plato llano
+       (+ plato de pan desde 2026-10-02), sin interruptores ni presets (petición del cliente). */
+    function updateLabStack() {}
 
-    /* Un toggle puede gobernar más de una capa (cubertería = tenedor + cuchillo). */
-    function labLayersFor(toggle) {
-      if (toggle.dataset.layer === 'cuberteria') {
-        return [$('.lab-tenedor'), $('.lab-cuchillo')].filter(Boolean);
-      }
-      var layer = $('.lab-' + toggle.dataset.layer);
-      return layer ? [layer] : [];
-    }
+    /* ---------- Combinar vajillas ----------
+       Cada capa de loza lleva su decorado. Cada selector solo ofrece las vajillas
+       que tienen esa pieza; «Toda la mesa» deja el bajoplato como estaba si la
+       vajilla elegida no lo tiene, y lo avisa. */
+    var PIECES = window.__VT_PIECES || {};
+    var DEFAULT_DECOR = 'flor-de-lis-azul'; // la de las capas originales vt-lab-*
+    var LAYER_PIECE = { bajoplato: 'bajoplato', protagonista: 'llano', auxiliar: 'pan' };
+    var PIECE_NAME = { bajoplato: 'bajoplato', llano: 'plato llano', pan: 'plato de pan' };
+    var mixSelects = $$('[data-lab-decor]');
+    var mixAll = $('[data-lab-all]');
+    var mixNote = $('[data-lab-note]');
+    var mixNoteDefault = mixNote ? mixNote.textContent : '';
+    var decorName = function (d) { return PIECES[d] ? PIECES[d].name : d; };
+    var pieceSrc = function (d, piece) { return PIECES[d] && PIECES[d].pieces[piece]; };
 
-    function setLabToggle(toggle, next) {
-      toggle.setAttribute('aria-pressed', next ? 'true' : 'false');
-      labLayersFor(toggle).forEach(function (layer) {
-        layer.classList.toggle('on', next);
-      });
-    }
-
-    $$('.lab-toggle').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var on = btn.getAttribute('aria-pressed') === 'true';
-        var next = !on;
-
-        // data-exclusive="textil": individual y mantel se excluyen entre sí.
-        if (next && btn.dataset.exclusive) {
-          $$('.lab-toggle[data-exclusive="' + btn.dataset.exclusive + '"]').forEach(function (other) {
-            if (other !== btn) setLabToggle(other, false);
-          });
+    function applyMix() {
+      var principalSel = $('[data-lab-decor="protagonista"]');
+      var principal = principalSel ? principalSel.value : DEFAULT_DECOR;
+      var notes = [];
+      mixSelects.forEach(function (sel) {
+        var name = sel.dataset.labDecor;
+        var piece = LAYER_PIECE[name];
+        var layer = $('.lab-' + name);
+        var img = layer && layer.querySelector('img');
+        if (!img) return;
+        var want = sel.value;
+        var use = pieceSrc(want, piece) ? want : principal;
+        var src = pieceSrc(use, piece);
+        if (!src) {
+          layer.classList.add('is-missing');
+          notes.push(decorName(want) + ' no tiene ' + PIECE_NAME[piece] + ' para el montaje: retiramos la capa.');
+          return;
         }
+        if (use !== want) notes.push(decorName(want) + ' no tiene ' + PIECE_NAME[piece] + ' para el montaje: mostramos el de ' + decorName(use) + '.');
+        layer.classList.remove('is-missing');
+        layer.classList.toggle('is-custom', use !== DEFAULT_DECOR);
+        if (img.getAttribute('src') !== src) img.setAttribute('src', src);
+      });
+      if (mixNote) mixNote.textContent = notes.length ? notes.join(' ') : mixNoteDefault;
+      if (mixAll) {
+        var first = mixSelects[0] ? mixSelects[0].value : '';
+        mixAll.value = mixSelects.every(function (s) { return s.value === first; }) ? first : '';
+      }
+      updateLabStack();
+    }
 
-        setLabToggle(btn, next);
-        updateLabStack();
-        var layers = labLayersFor(btn);
-        pulseLab(layers[0] || $('.lab-stage'));
+    mixSelects.forEach(function (sel) {
+      sel.addEventListener('change', function () {
+        applyMix();
+        pulseLab($('.lab-' + sel.dataset.labDecor));
       });
     });
-
-    $$('.lab-quick-actions [data-lab-preset]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var full = btn.dataset.labPreset === 'full';
-        $$('.lab-toggle').forEach(function (toggle) {
-          var next = full;
-          if (full && toggle.dataset.layer === 'individual') next = false;
-          if (full && toggle.dataset.layer === 'mantel') next = true;
-          setLabToggle(toggle, next);
+    if (mixAll) {
+      mixAll.addEventListener('change', function () {
+        if (!mixAll.value) return applyMix(); // «Combinada» no cambia nada
+        var kept = [];
+        mixSelects.forEach(function (sel) {
+          if (sel.querySelector('option[value="' + mixAll.value + '"]')) sel.value = mixAll.value;
+          else kept.push(PIECE_NAME[LAYER_PIECE[sel.dataset.labDecor]]);
         });
-        updateLabStack();
+        applyMix();
+        if (kept.length && mixNote) mixNote.textContent = decorName(mixAll.value) + ' no tiene ' + kept.join(' ni ') + ': mantenemos el de ' + decorName(mixSelects[0].value) + '.';
         pulseLab($('.lab-stage'));
       });
-    });
-    updateLabStack();
+    }
+    // Al volver atrás el navegador puede restaurar los select: aplicar lo que haya.
+    if (mixSelects.length) applyMix(); else updateLabStack();
 
     /* ============================================================
        WIZARD + PREVIEW (data ported verbatim from the mockup v59)
@@ -464,11 +471,20 @@
         nav.querySelector('.wz-mobile-prev').addEventListener('click', function () {
           mobileWizardIndex = Math.max(0, mobileWizardIndex - 1);
           renderWizard();
-          var wizard = document.getElementById('wizard');
-          if (wizard) wizard.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+          scrollToMobileStep();
         });
       }
       renderWizard();
+    }
+
+    // Móvil: la vista previa es sticky y tapaba el título de la pregunta. Se deja la
+    // pregunta actual justo debajo de ella en vez de subir al inicio de la sección.
+    function scrollToMobileStep() {
+      var step = $('.wz-step.is-mobile-current', panel);
+      var preview = $('.wz-preview--redesign');
+      if (!step) return;
+      var offset = preview ? (parseFloat(getComputedStyle(preview).top) || 0) + preview.offsetHeight + 10 : 80;
+      window.scrollTo({ top: step.getBoundingClientRect().top + window.scrollY - offset, behavior: scrollBehavior });
     }
 
     function firstUnansweredIndex() {
@@ -642,10 +658,7 @@
         if (nextStep && !isMobileWizard()) {
           window.setTimeout(function () { nextStep.scrollIntoView({ behavior: scrollBehavior, block: window.innerWidth <= 1180 ? 'center' : 'nearest' }); }, 160);
         }
-        if (isMobileWizard()) {
-          var wizardSection = document.getElementById('wizard');
-          if (wizardSection) window.setTimeout(function () { wizardSection.scrollIntoView({ behavior: scrollBehavior, block: 'start' }); }, 100);
-        }
+        if (isMobileWizard()) window.setTimeout(scrollToMobileStep, 100);
         if (nextIdx >= totalSteps) window.setTimeout(buildResult, 320);
       });
     }

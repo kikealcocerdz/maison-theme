@@ -1,0 +1,36 @@
+{
+  "_fuente": "Admin PrestaShop lacartujadesevilla.com/iadmin, leído 2026-10-06 (Transporte > Transportistas / Preferencias / Advanced Shipping cost / Países). Importes SIN IVA tal cual en PS salvo nota.",
+  "preferencias": {"gastos_manipulacion": 75.0, "envio_gratis_desde": 0, "transportista_defecto": "MRW", "nota": "MRW, DHL WW y DHL UE tienen shipping_handling=1 (sumarían 75 € por pedido)"},
+  "reglas_advanced_shipping": [
+    {"nombre": "Envío Gratis (Península)", "condicion": "pedido >= 150 € IVA incl", "efecto": "envío 0"},
+    {"nombre": "Kg extra Canarias", "formula": "shipping + 1.92*(weight-10)", "desde_kg": 10},
+    {"nombre": "Kg extra Baleares", "formula": "shipping + 1.53*(weight-10)", "desde_kg": 10}
+  ],
+  "MRW": {"id": 500, "iva": "ES 21%", "fuera_de_rango": "coste más alto", "rangos_kg": [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10]],
+    "Peninsula": [6.198347,6.198347,6.198347,6.198347,6.198347,6.198347,6.198347,6.198347,6.198347,6.198347],
+    "Portugal": [6.198347,6.198347,6.198347,6.198347,6.198347,6.966942,6.966942,6.966942,6.966942,6.966942],
+    "Balears": [10.77686,10.77686,10.77686,12.041322,13.305785,14.570248,15.834711,17.099174,18.363636,19.628099],
+    "Canarias, Ceuta y Melilla": [24.77686,24.77686,24.77686,25.53719,27.123967,28.710744,30.297521,31.884298,33.471074,35.057851]},
+  "DHL_EXPRESS_Worldwide": {"id": 496, "iva": "ES 21%", "fuera_de_rango": "desactivar", "rangos_kg": [[0,10],[10,20],[20,30],[30,40],[40,50],[50,60],[60,70]],
+    "DHL Zona 1": [63.55,82.15,96.55,109.15,121.75,134.35,146.95],
+    "DHL Zona 2": [67.57,86.97,102.17,116.47,130.77,145.07,159.37],
+    "DHL Zona 3": [74.25,95.65,112.45,128.25,144.05,159.85,175.65],
+    "DHL Zona 4": [82.75,106.35,124.75,142.15,159.55,176.95,194.35],
+    "DHL Zona 6": [86.84,111.04,129.84,148.94,168.04,187.14,206.24],
+    "DHL Zona 7": [92.23,118.63,139.23,170.73,202.23,233.73,265.23],
+    "DHL Zona 8": [103.58,132.58,155.18,182.68,210.18,237.68,265.18],
+    "DHL Zona 9": [112.3,155.1,185.5,216.1,246.7,277.3,307.9],
+    "DHL Zona 10": [126.59,173.99,212.59,250.09,287.59,325.09,362.59],
+    "DHL Zona 11": [130.64,180.24,220.84,260.24,299.64,339.04,378.44]},
+  "DHL_Express_UE": {"id": 499, "iva": "ninguna", "fuera_de_rango": "coste más alto", "rangos_kg": [[0,10],[10,20],[20,30],[30,40],[40,50],[50,60],[60,70],[70,80],[80,90],[90,100]],
+    "DHL EU Zona 2": [111.75,140.17,162.76,184.1,205.44,226.78,248.13,281.26,314.4,347.53],
+    "DHL EU Zona 3": [121.02,152.21,177.02,200.45,223.87,247.29,270.71,307.04,343.37,379.69],
+    "DHL EU Zona 4": [132.82,167.06,194.09,219.73,245.38,271.02,296.66,336.59,376.53,416.46]},
+  "paises_activos_por_zona": {
+    "Peninsula": ["ES"], "Portugal": ["PT"],
+    "DHL EU Zona 2": ["FR","IT","MC"], "DHL EU Zona 3": ["DE","BE","LU","NL"],
+    "DHL EU Zona 4": ["AT","BG","CY","HR","CZ","DK","SK","SI","EE","FI","GR","HU","IE","LV","LT","MT","PL","RO","SE"],
+    "DHL Zona 2": ["VA"], "DHL Zona 3": ["GB"], "DHL Zona 6": ["CH"], "DHL Zona 7": ["US","CA"],
+    "DHL Zona 8": ["SA","AE"], "DHL Zona 9": ["CL"], "DHL Zona 10": ["AU"]},
+  "_nota_paises": "Mapeado por prefijo telefónico de la lista de países activos. Transportistas antiguos Clearis (429-441) DESACTIVADOS."
+}

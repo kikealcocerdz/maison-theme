@@ -45,6 +45,30 @@
   endif
 
   assign current_sort = collection.sort_by | default: collection.default_sort_by
+
+  # v101 — Fin de existencias mezcla decorados de muchas colecciones y con el orden
+  # por defecto salía «como aleatorio». Aquí: accesos rápidos por colección y, si
+  # el cliente no ha elegido orden, la rejilla agrupada por colección. La colección
+  # es el metafield custom.decorado (el mismo del filtro «Colección»).
+  # ponytail: se activa por URL con el ajuste link_fin_existencias; pasar a un ajuste
+  # propio si otra colección lo necesita.
+  assign deco_filter = nil
+  for filter in collection.filters
+    if filter.param_name contains 'custom.decorado'
+      assign deco_filter = filter
+    endif
+  endfor
+  assign is_fin = false
+  if collection.url != blank and collection.url == section.settings.link_fin_existencias
+    assign is_fin = true
+  endif
+  assign group_by_deco = false
+  if is_fin and deco_filter and collection.sort_by == blank
+    assign group_by_deco = true
+    assign has_editorial = false
+    # Agrupar sólo tiene sentido con todo en una página.
+    assign per_page = 250
+  endif
 -%}
 
 {%- capture sort_filter_query -%}
@@ -87,6 +111,8 @@
         {%- assign intro_copy_text = intro_copy | strip_html | strip -%}
         {%- if intro_copy_text != blank -%}<p>{{ intro_copy_text }}</p>{%- endif -%}
       </section>
+
+      {%- unless is_fin -%}{% render 'collection-siblings' %}{%- endunless -%}
 
       <div class="toolbar">
         {%- comment -%}
@@ -165,27 +191,49 @@
         </div>
       {%- endif -%}
 
+      {%- if is_fin and deco_filter -%}
+        <nav class="deco-chips" aria-label="{{ 'sections.collection.filter_collection' | t }}">
+          <a class="deco-chip{% if deco_filter.active_values.size == 0 %} is-active{% endif %}" href="{{ deco_filter.url_to_remove }}">{{ 'sections.collection.filter_all' | t }}</a>
+          {%- for value in deco_filter.values -%}
+            {%- if value.count == 0 and value.active == false -%}{%- continue -%}{%- endif -%}
+            <a class="deco-chip{% if value.active %} is-active{% endif %}" href="{% if value.active %}{{ value.url_to_remove }}{% else %}{{ value.url_to_add }}{% endif %}">{{ value.label | escape }} <span>{{ value.count }}</span></a>
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}
+
       <div class="products" id="productGrid" data-editorial-after="{{ editorial_after }}">
         {%- if has_products -%}
           {%- paginate collection.products by per_page -%}
+            {%- if group_by_deco -%}
+              {%- comment -%} Grupos en el orden del filtro; lo que no case con ninguno va al final. {%- endcomment -%}
+              {%- assign placed = '|' -%}
+              {%- for value in deco_filter.values -%}
+                {%- if value.count == 0 -%}{%- continue -%}{%- endif -%}
+                {%- assign group_count = 0 -%}
+                {%- for product in collection.products -%}
+                  {%- assign d = product.metafields.custom.decorado | metafield_text | strip -%}
+                  {%- if d == value.label -%}{%- assign group_count = group_count | plus: 1 -%}{%- endif -%}
+                {%- endfor -%}
+                {%- if group_count == 0 -%}{%- continue -%}{%- endif -%}
+                <h2 class="deco-group">{{ value.label | escape }} <span>{{ group_count }}</span></h2>
+                {%- for product in collection.products -%}
+                  {%- assign d = product.metafields.custom.decorado | metafield_text | strip -%}
+                  {%- if d != value.label -%}{%- continue -%}{%- endif -%}
+                  {%- assign placed = placed | append: product.id | append: '|' -%}
+                  {% render 'collection-grid-card', product: product, scope: section.id %}
+                {%- endfor -%}
+              {%- endfor -%}
+              {%- for product in collection.products -%}
+                {%- capture pid_token -%}|{{ product.id }}|{%- endcapture -%}
+                {%- if placed contains pid_token -%}{%- continue -%}{%- endif -%}
+                {% render 'collection-grid-card', product: product, scope: section.id %}
+              {%- endfor -%}
+            {%- else -%}
             {%- for product in collection.products -%}
-              {%- liquid
-                assign p_img1 = product.featured_image | image_url: width: 720
-                assign p_w = product.featured_image.width | default: 1000
-                assign p_h = product.featured_image.height | default: 1250
-                assign p_price = product.price | money
-                assign p_new = false
-                if product.tags contains 'novedad' or product.tags contains 'new'
-                  assign p_new = true
-                endif
-              -%}
-              {% render 'collection-card', product: product, scope: section.id,
-                card_url: product.url, title: product.title,
-                price: p_price, meta: product.type,
-                img1: p_img1, img_w: p_w, img_h: p_h,
-                badge: p_new, data_price: product.price, data_new: p_new, data_type: product.type %}
+              {% render 'collection-grid-card', product: product, scope: section.id %}
               {%- if forloop.index == editorial_after and has_editorial -%}{% render 'collection-editorial-insert', ed_picker: ed_picker, ed_asset: ed_asset, ed_text: ed_text %}{%- endif -%}
             {%- endfor -%}
+            {%- endif -%}
 
             {%- if paginate.pages > 1 -%}
               {%- assign shown = paginate.current_offset | plus: collection.products.size -%}
@@ -303,26 +351,43 @@
 .collection-page .sidebar__nav .side-accordion { border-top: 0; }
 .collection-page .more-filters {
   display: flex; align-items: center; gap: 8px; width: 100%; min-height: 44px;
-  margin-top: 20px; padding: 0 14px; border: .5px solid var(--rule);
+  margin: 0 0 26px; padding: 0 14px; border: .5px solid var(--ink);
   font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink);
-  transition: border-color 200ms var(--ease);
+  transition: background 200ms var(--ease), color 200ms var(--ease);
 }
-.collection-page .more-filters:hover { border-color: var(--ink); }
+.collection-page .more-filters::after { content: '→'; margin-left: auto; font-size: 13px; letter-spacing: 0; }
+.collection-page .more-filters .filters-open-count {
+  display: inline-grid; place-items: center; min-width: 15px; height: 15px; padding: 0 4px;
+  background: var(--ink); color: var(--paper); font-size: 9px; border-radius: 999px;
+}
+.collection-page .more-filters:hover { background: var(--ink); color: var(--paper); }
 
-/* Cajón de filtros adicionales en escritorio: entra por la izquierda, sobre fondo
-   oscuro para que se distinga del lateral normal. El árbol se oculta dentro — el
-   cajón lleva «únicamente los filtros adicionales». */
+/* Títulos del cajón móvil y fila de colecciones: solo en móvil (ver @media 780). */
+.collection-page .drawer-heading, .collection-page .collection-siblings { display: none; }
+
+/* Cajón de filtros en escritorio (2026-10-02, propuesta «navegar / filtrar»): se abre
+   con «Filtrar» junto a «Ordenar» y entra por la DERECHA; la columna izquierda queda
+   solo para navegar, con su título «Explorar colecciones». El árbol se oculta dentro
+   del cajón. */
 @media (min-width: 781px) {
   .collection-page .side-filters { display: none; }
+  .collection-page .sidebar__nav > .drawer-heading--explore {
+    display: block; padding: 0 0 12px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
+  }
+  .collection-page .sidebar__nav > .drawer-heading--explore b { font: inherit; color: inherit; }
+  .collection-page .sidebar__nav > .drawer-heading--explore span { display: none; }
+  .collection-page.filters-drawer-open .sidebar__scroll > .drawer-heading { display: flex; flex-direction: column; gap: 4px; padding: 14px 0 6px; }
+  .collection-page.filters-drawer-open .sidebar__scroll > .drawer-heading b { font-family: var(--serif); font-weight: 400; font-size: 24px; color: var(--ink); }
+  .collection-page.filters-drawer-open .sidebar__scroll > .drawer-heading span { font-size: 12px; color: var(--muted); }
 
   .collection-page.filters-drawer-open .sidebar {
-    position: fixed; inset: 0 auto 0 0; z-index: 120;
+    position: fixed; inset: 0 0 0 auto; z-index: 120;
     width: min(420px, 92vw); margin: 0; max-height: none;
     display: flex; flex-direction: column; overflow: hidden;
-    background: #12171F; color: #EDEFF3;
-    animation: facets-left-in 280ms var(--ease);
+    background: var(--paper); color: var(--ink);
+    animation: facets-right-in 280ms var(--ease);
   }
-  @keyframes facets-left-in { from { transform: translateX(-100%); } to { transform: none; } }
+  @keyframes facets-right-in { from { transform: translateX(100%); } to { transform: none; } }
   .collection-page.filters-drawer-open::after {
     content: ''; position: fixed; inset: 0; z-index: 115; background: rgba(15, 26, 46, .34);
   }
@@ -340,7 +405,7 @@
 
   .collection-page.filters-drawer-open .filters-bar {
     display: flex; align-items: center; justify-content: space-between; gap: 16px;
-    flex: 0 0 auto; padding: 20px 24px; border-bottom: .5px solid rgba(255, 255, 255, .14);
+    flex: 0 0 auto; padding: 20px 24px; border-bottom: .5px solid var(--rule);
   }
   .collection-page.filters-drawer-open .filters-close {
     display: grid; place-items: center; width: 30px; height: 30px; color: inherit;
@@ -348,25 +413,24 @@
   }
   .collection-page.filters-drawer-open .filters-bar__title { color: inherit; }
 
-  /* Sobre fondo oscuro las reglas claras del lateral no se ven. */
   .collection-page.filters-drawer-open .side-section,
-  .collection-page.filters-drawer-open .side-accordion { border-color: rgba(255, 255, 255, .14); }
+  .collection-page.filters-drawer-open .side-accordion { border-color: var(--rule); }
   .collection-page.filters-drawer-open .side-main-link,
   .collection-page.filters-drawer-open .facet,
   .collection-page.filters-drawer-open .side-toggle { color: inherit; opacity: 1; }
   .collection-page.filters-drawer-open .facet:hover { color: inherit; opacity: .74; }
   .collection-page.filters-drawer-open .facet-count { color: inherit; opacity: .55; }
-  .collection-page.filters-drawer-open .facet input { accent-color: #EDEFF3; }
+  .collection-page.filters-drawer-open .facet input { accent-color: var(--ink); }
   .collection-page.filters-drawer-open .facet-price input,
-  .collection-page.filters-drawer-open .facet-range__track { border-color: rgba(255, 255, 255, .26); background-color: transparent; }
+  .collection-page.filters-drawer-open .facet-range__track { border-color: var(--rule); background-color: transparent; }
   .collection-page.filters-drawer-open .facet-price input { color: inherit; }
-  .collection-page.filters-drawer-open .facet-range__track { background: rgba(255, 255, 255, .26); }
-  .collection-page.filters-drawer-open .facet-range__fill { background: #EDEFF3; }
+  .collection-page.filters-drawer-open .facet-range__track { background: var(--rule); }
+  .collection-page.filters-drawer-open .facet-range__fill { background: var(--ink); }
   .collection-page.filters-drawer-open .facet-price-sep { color: inherit; opacity: .6; }
 
   .collection-page.filters-drawer-open .filters-foot {
     display: flex; align-items: center; gap: 16px; flex: 0 0 auto;
-    padding: 16px 24px; border-top: .5px solid rgba(255, 255, 255, .14);
+    padding: 16px 24px; border-top: .5px solid var(--rule);
   }
   .collection-page.filters-drawer-open .filters-reset {
     flex: 0 0 auto; font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
@@ -375,7 +439,7 @@
   .collection-page.filters-drawer-open .filters-reset:hover { opacity: 1; }
   .collection-page.filters-drawer-open .filters-apply {
     display: flex; align-items: center; justify-content: center; gap: 10px;
-    flex: 1 1 auto; min-height: 48px; background: #EDEFF3; color: #12171F;
+    flex: 1 1 auto; min-height: 48px; background: var(--ink); color: var(--paper);
     font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
   }
   .collection-page.filters-drawer-open .filters-apply__count {
@@ -574,20 +638,17 @@
      chapter tree both, rather than duplicating either into a second markup tree. */
   .collection-page .filters-open {
     display: inline-flex !important; align-items: center; gap: 7px; height: 42px; padding: 0 13px;
-    border: .5px solid var(--rule); font-size: 8px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink);
+    border: .5px solid var(--rule); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink);
   }
   .collection-page .filters-open-count {
     display: inline-grid; place-items: center; min-width: 15px; height: 15px; padding: 0 4px;
-    background: var(--ink); color: var(--paper); font-size: 8px; border-radius: 999px;
+    background: var(--ink); color: var(--paper); font-size: 9px; border-radius: 999px;
   }
   /* Cajón de filtros a pantalla completa (mockup `filtros movil`). La barra y el pie
      quedan fijos y sólo el centro rueda, así "Mostrar resultados" siempre está a mano. */
-  /* El cajon es fijo a pantalla completa y tiene que quedar por encima de la
-     cabecera fija (z 90) y de la burbuja de ayuda (z 70): con z 60 la cabecera
-     tapaba la barra superior y el aspa caia justo debajo de la hamburguesa, asi
-     que el cajon no se podia cerrar. Mismo escalon que el cajon de la cesta. */
+  /* El cajón queda por encima de la cabecera móvil (z 130) y de la ayuda (z 70). */
   .collection-page.filters-drawer-open .sidebar {
-    display: flex !important; flex-direction: column; position: fixed; inset: 0; z-index: 120;
+    display: flex !important; flex-direction: column; position: fixed; inset: 0; z-index: 160;
     width: 100%; max-height: none; margin: 0 !important; padding: 0;
     background: var(--paper); overflow: hidden; overscroll-behavior: contain;
     animation: facets-in 260ms var(--ease);
@@ -598,7 +659,7 @@
       border-left: .5px solid var(--rule); box-shadow: -20px 0 60px rgba(15, 26, 46, .16);
     }
     .collection-page.filters-drawer-open::after {
-      content: ''; position: fixed; inset: 0; z-index: 115; background: rgba(15, 26, 46, .3);
+      content: ''; position: fixed; inset: 0; z-index: 155; background: rgba(15, 26, 46, .3);
     }
   }
   @keyframes facets-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
@@ -672,6 +733,29 @@
   }
   .collection-page .fchip.is-on { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 
+  /* La regla de tablet (≤1000px) abre todos los desplegables; en el cajón móvil,
+     cerrados salvo el que se toca (cliente 2026-10-02: «sale todo abierto»). */
+  .collection-page .side-panel { grid-template-rows: 0fr; }
+
+  /* El cajón móvil solo filtra (cliente 2026-10-02): navegar entre colecciones va en
+     la fila de chips de la página (snippets/collection-siblings). */
+  .collection-page.filters-drawer-open .sidebar__nav { display: none; }
+
+  /* Fila de colecciones hermanas bajo el título (reusa las pastillas .deco-chip). */
+  .collection-page .collection-siblings {
+    display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+    margin: -8px -14px 20px; padding: 0 14px 2px;
+  }
+  .collection-page .collection-siblings::-webkit-scrollbar { display: none; }
+  .collection-page .collection-siblings__all { color: var(--muted); border-style: dashed; }
+
+  /* Títulos «Filtrar esta colección» / «Explorar colecciones» (snippets/collection-nav). */
+  .collection-page.filters-drawer-open .drawer-heading {
+    display: flex; flex-direction: column; gap: 4px; padding: 22px 20px 10px;
+  }
+  .collection-page .drawer-heading b { font-family: var(--serif); font-weight: 400; font-size: 22px; color: var(--ink); }
+  .collection-page .drawer-heading span { font-size: 12px; color: var(--muted); }
+  .collection-page.filters-drawer-open .drawer-heading--explore { margin-top: 18px; border-top: .5px solid var(--rule); }
   /* El panel de facetas pierde la caja: en el cajón cada faceta es una sección propia. */
   .collection-page.filters-drawer-open .side-filters {
     margin: 0; padding: 0; background: transparent; border: 0;
@@ -735,7 +819,7 @@
 
   .collection-page .view-toggle { gap: 6px !important; }
   .collection-page .view-btn { width: 40px !important; height: 40px !important; }
-  .collection-page .sort-btn { height: 42px !important; min-width: 105px !important; padding: 0 11px !important; font-size: 8px !important; }
+  .collection-page .sort-btn { height: 42px !important; min-width: 105px !important; padding: 0 11px !important; font-size: 10px !important; }
 
   .collection-page .products { width: 100% !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 28px 10px !important; }
   .collection-page .products.is-list { grid-template-columns: 1fr !important; }
@@ -746,46 +830,64 @@
   .collection-page .product-media img { max-width: 100% !important; }
   .collection-page .product-info { margin-top: 9px !important; gap: 4px 8px !important; font-size: 10px !important; }
   .collection-page .product-info h3 { font-size: 10px !important; line-height: 1.32 !important; }
-  .collection-page .product-info p { font-size: 8px !important; line-height: 1.35 !important; }
+  .collection-page .product-info p { font-size: 10px !important; line-height: 1.35 !important; }
   .collection-page .price { font-size: 10px !important; }
   .collection-page .fav { width: 32px !important; height: 32px !important; right: 6px !important; top: 5px !important; }
-  .collection-page .badge { font-size: 7px !important; padding: 5px 7px !important; top: 7px !important; left: 7px !important; }
+  .collection-page .badge { font-size: 9px !important; padding: 5px 7px !important; top: 7px !important; left: 7px !important; }
 
   .collection-page .editorial-insert { width: 100% !important; max-width: 100% !important; margin: 34px 0 16px !important; overflow: hidden !important; }
   .collection-page .editorial-insert img { width: 100% !important; max-width: 100% !important; height: 58vw !important; }
 }
 
 @media (max-width: 760px) {
-  .collection-page { padding-top: calc(var(--header-h) + 24px) !important; overflow-x: hidden !important; }
+  /* clip, no hidden: overflow-x:hidden convierte la página en un contenedor de scroll (overflow-y pasa a
+     auto) y en iOS un toque sobre una tarjeta a mitad del desplazamiento se quedaba con el gesto y
+     bloqueaba el scroll; también rompía la barra sticky. clip recorta igual sin crear scroller. */
+  .collection-page { padding-top: calc(var(--header-h) + 24px) !important; overflow-x: clip !important; }
   .collection-page .collection-intro { display: flex !important; flex-direction: column !important; gap: 16px !important; margin: 0 0 28px !important; }
   .collection-page .collection-intro > div,
   .collection-page .collection-intro > p { width: 100% !important; max-width: 100% !important; }
-  .collection-page .breadcrumbs { font-size: 8.5px !important; line-height: 1.5 !important; margin-bottom: 18px !important; white-space: normal !important; }
-  .collection-page .collection-kicker { font-size: 9px !important; margin-bottom: 12px !important; }
+  .collection-page .breadcrumbs { font-size: 10px !important; line-height: 1.5 !important; margin-bottom: 18px !important; white-space: normal !important; }
+  .collection-page .collection-kicker { font-size: 10px !important; margin-bottom: 12px !important; }
   .collection-page .collection-intro h1 { font-size: clamp(44px, 14vw, 62px) !important; line-height: 0.94 !important; overflow-wrap: anywhere; }
   .collection-page .collection-intro p { font-size: 11.5px !important; line-height: 1.65 !important; margin: 0 !important; color: var(--ink-soft) !important; overflow-wrap: anywhere; }
-  .collection-page .toolbar { margin: 0 0 22px !important; padding: 0 !important; gap: 12px !important; }
+  /* 2026-10-05 · cliente: la línea gris (border-bottom de la barra sticky) iba pegada a Filtrar/Ordenar. */
+  .collection-page .toolbar { margin: 0 0 22px !important; padding: 8px 0 14px !important; gap: 12px !important; }
   .collection-page .sort-btn { padding: 0 14px !important; }
 
   .collection-page .product-media { overflow: hidden !important; }
   .collection-page .product-media img.main { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center !important; }
   .collection-page .product-info { display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; gap: 3px 7px !important; padding-top: 8px !important; }
-  .collection-page .product-info h3 { font-size: 9.2px !important; overflow-wrap: anywhere !important; }
+  .collection-page .product-info h3 { font-size: 11px !important; overflow-wrap: anywhere !important; }
   .collection-page .product-info p { grid-column: 1 !important; margin: 0 !important; }
-  .collection-page .product-info .price { font-size: 9px !important; grid-column: 2 !important; grid-row: 1 !important; white-space: nowrap !important; }
+  .collection-page .product-info .price { font-size: 11px !important; grid-column: 2 !important; grid-row: 1 !important; white-space: nowrap !important; }
   .collection-page .editorial-insert { grid-column: 1 / -1 !important; margin: 0 !important; }
   .collection-page .editorial-insert img { height: auto !important; object-fit: cover !important; }
 }
 
 @media (max-width: 420px) {
   .collection-page .products { gap: 24px 8px !important; }
-  .collection-page .product-info h3 { font-size: 9.5px !important; }
+  .collection-page .product-info h3 { font-size: 11px !important; }
 }
 
 /* En táctil no hay hover: la segunda foto de la tarjeta nunca debe aparecer. */
 @media (hover: none) and (pointer: coarse) {
   .product:hover .product-media img.main { opacity: 1 !important; transform: none !important; }
   .product:hover .product-media img.hover { opacity: 0 !important; transform: none !important; }
+}
+/* v101 — Fin de existencias: accesos rápidos por colección + rejilla agrupada. */
+.collection-page .deco-chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 0 0 26px; padding-bottom: 2px; }
+.collection-page .deco-chips::-webkit-scrollbar { display: none; }
+.collection-page .deco-chip { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 16px; border: .5px solid var(--rule); border-radius: 999px; font-size: 12px; letter-spacing: .06em; color: var(--ink); white-space: nowrap; transition: background 220ms var(--ease), color 220ms var(--ease); }
+.collection-page .deco-chip span { color: var(--muted); font-size: 11px; }
+.collection-page .deco-chip.is-active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.collection-page .deco-chip.is-active span { color: rgba(255, 255, 255, .7); }
+.collection-page .deco-group { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 10px; margin: 26px 0 0; padding-top: 22px; border-top: .5px solid var(--rule); font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 2.4vw, 34px); line-height: 1.1; }
+.collection-page .deco-group:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.collection-page .deco-group span { font-family: var(--sans); font-size: 11px; letter-spacing: .14em; color: var(--muted); }
+@media (max-width: 760px) {
+  .collection-page .deco-chips { margin: 0 -14px 20px; padding: 0 14px 2px; }
+  .collection-page .deco-group { font-size: 24px; margin-top: 14px; padding-top: 18px; }
 }
 {% endstylesheet %}
 

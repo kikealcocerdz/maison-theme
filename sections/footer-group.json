@@ -13,20 +13,12 @@
   "sections": {
     "footer-multicol": {
       "type": "footer-multicol",
-      "settings": {
-        "tagline": "Heritage crafted for modern living",
-        "tagline_bottom": "© La Cartuja de Sevilla",
-        "social_instagram": "https://www.instagram.com/cartujadesevilla/",
-        "social_facebook": "https://www.facebook.com/lacartujadesevillapickman/",
-        "social_tiktok": "https://www.tiktok.com/@lacartujadesevilla",
-        "social_linkedin": "https://www.linkedin.com/company/la-cartuja-de-sevilla",
-        "legal_items": "Aviso legal | /pages/aviso-legal\nPolítica de privacidad | /pages/politica-privacidad\nPolítica de cookies | /pages/politica-de-cookies\nTérminos y condiciones | /pages/terminos-condiciones"
-      },
       "blocks": {
         "col-1": {
           "type": "column",
           "settings": {
             "heading": "Colecciones",
+            "menu": "",
             "items": "Aurora | /collections/aurora\nOchavada | /collections/ochavada\nDecoración | /collections/decoracion\nNuevo | /collections/novedades"
           }
         },
@@ -34,14 +26,16 @@
           "type": "column",
           "settings": {
             "heading": "Editorial",
-            "items": "Artesanía | /pages/artesania\nCalidad | /pages/artesania#calidad\nHeritage 1842 | /pages/heritage-1841"
+            "menu": "",
+            "items": "Quiénes somos | /pages/quienes-somos\nViste tu mesa | /pages/viste-tu-mesa\nAmbientes | /pages/nuestras-mesas\nHeritage 1841 | /pages/heritage-1841\nArtesanía | /pages/artesania\nIdentifica tu sello | /pages/identifica-tu-sello"
           }
         },
         "col-3": {
           "type": "column",
           "settings": {
             "heading": "Atención",
-            "items": "Contacto | /pages/contacto\nEnvíos y devoluciones | /pages/envios-devoluciones\nPrivacidad | /pages/politica-privacidad\nCondiciones | /pages/terminos-condiciones"
+            "menu": "",
+            "items": "Contacto | /pages/contacto\nTrabaja con nosotros | /pages/trabaja-con-nosotros\nEnvíos y devoluciones | /pages/envios-devoluciones\nPrivacidad | /pages/politica-privacidad\nCondiciones | /pages/terminos-condiciones"
           }
         }
       },
@@ -49,23 +43,34 @@
         "col-1",
         "col-2",
         "col-3"
-      ]
+      ],
+      "settings": {
+        "logo_alt": "",
+        "tagline": "Heritage Crafted for Modern Living",
+        "tagline_bottom": "© La Cartuja de Sevilla",
+        "social_instagram": "https://www.instagram.com/cartujadesevilla/",
+        "social_facebook": "https://www.facebook.com/lacartujadesevillapickman/",
+        "social_tiktok": "https://www.tiktok.com/@lacartujadesevilla",
+        "social_linkedin": "https://www.linkedin.com/company/la-cartuja-de-sevilla",
+        "legal_menu": "",
+        "legal_items": "Aviso legal | /pages/aviso-legal\nPolítica de privacidad | /pages/politica-privacidad\nPolítica de cookies | /pages/politica-de-cookies\nTérminos y condiciones | /pages/terminos-condiciones"
+      }
+    },
+    "welcome-popup": {
+      "type": "welcome-popup",
+      "settings": {
+        "heading": "Bienvenido a La Cartuja de Sevilla.",
+        "text": "<p>Regístrate y te descontamos el <strong>5% en tu primera compra.</strong></p>",
+        "button_label": "Obtener descuento",
+        "consent_html": "<p>Acepto recibir novedades y promociones de La Cartuja de Sevilla y he leído la <a href=\"/pages/politica-privacidad\">política de privacidad</a>.</p>",
+        "success_heading": "Ya formas parte de nuestra mesa.",
+        "success_text": "Revisa tu correo: recibirás allí tu descuento de bienvenida.",
+        "skip_label": "Ahora no, seguir descubriendo",
+        "delay_seconds": 4
+      }
     },
     "help-bubble": {
       "type": "help-bubble",
-      "settings": {
-        "heading": "La Cartuja de Sevilla",
-        "whatsapp_number": "+34 667 408 544",
-        "hours_label": "Lunes a viernes, 7:00–15:00",
-        "open_days": "1,2,3,4,5",
-        "open_time": "07:00",
-        "close_time": "15:00",
-        "timezone": "Europe/Madrid",
-        "greeting": "Gracias por escribir a La Cartuja de Sevilla. Atendemos de lunes a viernes, de 7:00 a 15:00. Cuéntanos tu consulta (pedido, disponibilidad o tienda) y te respondemos en ese horario.",
-        "greeting_closed": "Ahora mismo estamos fuera de horario. Atendemos de lunes a viernes, de 7:00 a 15:00. Escríbenos y te responderemos el siguiente día laborable.",
-        "privacy_url": "/pages/politica-privacidad",
-        "contact_url": "/pages/contacto"
-      },
       "blocks": {
         "faq-1": {
           "type": "faq",
@@ -101,11 +106,25 @@
         "faq-2",
         "faq-3",
         "faq-4"
-      ]
+      ],
+      "settings": {
+        "heading": "La Cartuja de Sevilla",
+        "whatsapp_number": "+34 667 408 544",
+        "hours_label": "Lunes a viernes, 7:00–15:00",
+        "open_days": "1,2,3,4,5",
+        "open_time": "07:00",
+        "close_time": "15:00",
+        "timezone": "Europe/Madrid",
+        "greeting": "Gracias por escribir a La Cartuja de Sevilla. Atendemos de lunes a viernes, de 7:00 a 15:00. Cuéntanos tu consulta (pedido, disponibilidad o tienda) y te respondemos en ese horario.",
+        "greeting_closed": "Ahora mismo estamos fuera de horario. Atendemos de lunes a viernes, de 7:00 a 15:00. Escríbenos y te responderemos el siguiente día laborable.",
+        "privacy_url": "/pages/politica-privacidad",
+        "contact_url": "/pages/contacto"
+      }
     }
   },
   "order": [
     "footer-multicol",
+    "welcome-popup",
     "help-bubble"
   ]
 }

@@ -1,0 +1,1638 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "definición custom.color",
+      "resultado": {
+        "createdDefinition": {
+          "id": "gid://shopify/MetafieldDefinition/503382704469"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "sin color",
+      "resultado": [
+        "Cabeza Frenologica",
+        "Mug Letra A",
+        "Mug Letra B",
+        "Mug Letra C",
+        "Mug Letra D",
+        "Mug Letra E",
+        "Mug Letra F",
+        "Mug Letra G",
+        "Mug Letra H",
+        "Mug Letra I",
+        "Mug Letra J",
+        "Mug Letra K",
+        "Mug Letra L",
+        "Mug Letra M",
+        "Mug Letra N",
+        "Mug Letra Ñ",
+        "Mug Letra O",
+        "Mug Letra P",
+        "Mug Letra Q",
+        "Mug Letra R",
+        "Mug Letra S",
+        "Mug Letra T",
+        "Mug Letra U",
+        "Mug Letra V",
+        "Mug Letra W",
+        "Mug Letra X",
+        "Mug Letra Y",
+        "Mug Letra Z",
+        "Envoltorio de regalo",
+        "Mug con letra",
+        "Áurea",
+        "Lapicero",
+        "Caja con 6 posavasos",
+        "Vaciabolsillos",
+        "Tarro de botica",
+        "Hoja de parra",
+        "Mancerina",
+        "Cepillero",
+        "Bolsa",
+        "Camiseta",
+        "Libro",
+        "Jabonera",
+        "Algodonera",
+        "Conjunto de baño",
+        "Bandeja conmemorativa",
+        "Mug Georgica",
+        "Mug Eden",
+        "Vela aromática Edén"
+      ]
+    },
+    {
+      "paso": "color 1–25 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275822592341"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275822625109"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275822657877"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275822690645"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275822723413"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275822756181"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275822788949"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275822821717"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275822854485"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275822887253"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275822920021"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275822952789"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275822985557"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275823018325"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275823051093"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275823083861"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275823116629"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275823149397"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275823182165"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275823214933"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275823247701"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275823280469"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275823313237"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275823346005"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275823378773"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 26–50 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275824427349"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824460117"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824492885"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824525653"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824558421"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824591189"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824623957"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824656725"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824689493"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824722261"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824755029"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824787797"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824820565"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824853333"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824886101"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824918869"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824951637"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275824984405"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275825017173"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275825049941"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275825082709"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275825115477"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275825148245"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275825181013"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275825213781"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 51–75 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275826164053"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826196821"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826229589"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826262357"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826295125"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826327893"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826360661"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826393429"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826426197"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826458965"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826491733"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826524501"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826557269"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826590037"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826622805"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826655573"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826688341"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826721109"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826753877"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826786645"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826819413"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826852181"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826884949"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826917717"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275826950485"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 76–100 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275827835221"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275827867989"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275827900757"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275827933525"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275827966293"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275827999061"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828031829"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828064597"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828097365"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828130133"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828162901"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828195669"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828228437"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828261205"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828293973"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828326741"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828359509"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828392277"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828425045"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828457813"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828490581"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828523349"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828556117"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828588885"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275828621653"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 101–125 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275829539157"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275829571925"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275829604693"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275829637461"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275829670229"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275829702997"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275829735765"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275829768533"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275829801301"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275829834069"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275829866837"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275829899605"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275829932373"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275829965141"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275829997909"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275830030677"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275830063445"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275830096213"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275830128981"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275830161749"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275830194517"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275830227285"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275830260053"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275830292821"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275830325589"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 126–150 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275831996757"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832029525"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832062293"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832095061"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832127829"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832160597"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832193365"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832226133"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832258901"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832291669"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832324437"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832357205"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832389973"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832422741"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832455509"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832488277"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832521045"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832553813"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832586581"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832619349"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832652117"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832684885"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832717653"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832750421"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275832783189"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 151–175 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275838615893"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275838648661"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275838681429"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275838714197"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275838746965"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275838779733"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275838812501"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275838845269"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275838878037"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275838910805"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275838943573"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275838976341"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275839009109"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275839041877"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275839074645"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275839107413"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275839140181"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275839172949"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275839205717"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275839238485"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275839271253"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275839304021"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275839336789"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275839369557"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275839402325"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 176–200 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275840057685"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840090453"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840123221"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840155989"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840188757"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840221525"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840254293"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840287061"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840319829"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840352597"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840385365"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840418133"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840450901"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840483669"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840516437"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840549205"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840581973"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840614741"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840647509"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840680277"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840713045"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840745813"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840778581"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840811349"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275840844117"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 201–225 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275841728853"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275841761621"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275841794389"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275841827157"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275841859925"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275841892693"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275841925461"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275841958229"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275841990997"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842023765"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842056533"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842089301"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842122069"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842154837"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842187605"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842220373"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842253141"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842285909"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842318677"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842351445"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842384213"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842416981"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842449749"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842482517"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275842515285"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 226–250 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275843563861"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275843596629"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275843629397"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275843662165"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275843694933"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275843727701"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275843760469"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275843793237"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275843826005"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275843858773"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275843891541"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275843924309"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275843957077"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275843989845"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275844022613"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275844055381"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275844088149"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275844120917"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275844153685"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275844186453"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275844219221"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275844251989"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275844284757"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275844317525"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275844350293"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 251–275 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275845071189"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845103957"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845136725"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845169493"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845202261"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845235029"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845267797"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845300565"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845333333"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845366101"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845398869"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845431637"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845464405"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845497173"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845529941"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845562709"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845595477"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845628245"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845661013"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845693781"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845726549"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845759317"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845792085"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845824853"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275845857621"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 276–300 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275846938965"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275846971733"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847004501"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847037269"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847070037"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847102805"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847135573"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847168341"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847201109"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847233877"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847266645"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847299413"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847332181"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847364949"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847397717"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847430485"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847463253"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847496021"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847528789"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847561557"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847594325"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847627093"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847659861"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847692629"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275847725397"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 301–325 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275853721941"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275853754709"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275853787477"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275853820245"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275853853013"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275853885781"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275853918549"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275853951317"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275853984085"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854016853"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854049621"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854082389"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854115157"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854147925"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854180693"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854213461"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854246229"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854278997"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854311765"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854344533"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854377301"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854410069"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854442837"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854475605"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275854508373"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 326–350 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275855229269"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855262037"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855294805"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855327573"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855360341"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855393109"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855425877"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855458645"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855491413"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855524181"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855556949"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855589717"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855622485"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855655253"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855688021"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855720789"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855753557"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855786325"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855819093"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855851861"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855884629"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855917397"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855950165"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275855982933"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275856015701"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 351–375 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275856736597"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275856769365"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275856802133"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275856834901"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275856867669"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275856900437"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275856933205"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275856965973"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275856998741"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857031509"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857064277"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857097045"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857129813"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857162581"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857195349"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857228117"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857260885"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857293653"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857326421"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857359189"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857391957"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857424725"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857457493"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857490261"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275857523029"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 376–400 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275858112853"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858145621"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858178389"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858211157"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858243925"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858276693"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858309461"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858342229"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858374997"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858407765"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858440533"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858473301"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858506069"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858538837"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858571605"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858604373"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858637141"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858669909"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858702677"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858735445"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858768213"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858800981"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858833749"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858866517"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275858899285"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 401–425 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275859521877"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275859554645"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275859587413"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275859620181"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275859652949"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275859685717"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275859718485"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275859751253"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275859784021"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275859816789"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275859849557"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275859882325"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275859915093"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275859947861"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275859980629"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275860013397"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275860046165"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275860078933"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275860111701"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275860144469"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275860177237"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275860210005"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275860242773"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275860275541"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275860308309"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 426–450 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275860898133"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275860930901"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275860963669"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275860996437"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861029205"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861061973"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861094741"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861127509"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861160277"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861193045"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861225813"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861258581"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861291349"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861324117"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861356885"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861389653"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861422421"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861455189"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861487957"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861520725"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861553493"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861586261"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861619029"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861651797"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275861684565"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "color 451–472 de 472",
+      "resultado": {
+        "metafields": [
+          {
+            "id": "gid://shopify/Metafield/76275862733141"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275862765909"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275862798677"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275862831445"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275862864213"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275862896981"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275862929749"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275862962517"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275862995285"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275863028053"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275863060821"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275863093589"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275863126357"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275863159125"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275863191893"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275863224661"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275863257429"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275863290197"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275863322965"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275863355733"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275863388501"
+          },
+          {
+            "id": "gid://shopify/Metafield/76275863421269"
+          }
+        ],
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

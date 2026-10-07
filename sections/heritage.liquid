@@ -1,5 +1,5 @@
 {%- comment -%}
-  Heritage 1842 — long-form scroll narrative (faithful port of the LIVE mockup's
+  Heritage 1841 — long-form scroll narrative (faithful port of the LIVE mockup's
   heritage.css / heritage.js, jun 2026 redesign). The page is now organised as 9
   *milestones* (territorio → renacer) grouped into tonal blocks, each with a
   bespoke editorial composition (.comp-*) and click-driven photo carousels, plus
@@ -28,7 +28,7 @@
   # Solo estas tres las resuelve resolve() en los datos de milestones; el resto del
   # mapa era herencia de la migracion a heritage2026-opt-*.webp y emitia 33 asset_url
   # muertos en cada render.
-  assign asset_files = 'collection-aurora.webp,mesa_bodegon_lujo_el_renacer.webp,gifts-decor-vertical.webp' | split: ','
+  assign asset_files = 'collection-aurora.webp,mesa_bodegon_lujo_el_renacer.webp,renacer-bicicleta.webp' | split: ','
   comment
     The 50 real heritage-2026 photos now ship as `heritage2026-opt-<NAME>.webp`. The
     JS milestone data builds logical paths `assets/heritage-2026/opt-<NAME>.webp`, so
@@ -69,7 +69,7 @@
     <div class="hero-copy">
       <div>
         {%- if section.settings.hero_eyebrow != blank -%}<p class="eyebrow">{{ section.settings.hero_eyebrow | escape }}</p>{%- endif -%}
-        <h1>{{ section.settings.hero_title | escape }}{% if section.settings.hero_title_2 != blank %}<br>{{ section.settings.hero_title_2 | escape }}{% endif %}</h1>
+        <h1>{{ section.settings.hero_title | escape }}{% if section.settings.hero_title_2 != blank %} <br>{{ section.settings.hero_title_2 | escape }}{% endif %}</h1>
         {%- if section.settings.hero_intro != blank -%}<p>{{ section.settings.hero_intro }}</p>{%- endif -%}
       </div>
     </div>
@@ -438,7 +438,7 @@
     flex-direction:column!important;
     align-items:center!important;
     gap:10px!important; }
-  .heritage-page-body .era-meta .kicker { font-size:8px!important;text-align:center!important }
+  .heritage-page-body .era-meta .kicker { font-size:9px!important;text-align:center!important }
   .heritage-page-body .era-meta>div>p:last-child { font-size:9px!important;
     line-height:1.35!important;
     letter-spacing:.08em!important;
@@ -475,7 +475,7 @@
     align-items:center!important;
     justify-content:center!important;
     gap:22px!important; }
-  .heritage-page-body .mobile-era-carousel .ccount { font-size:8px!important }
+  .heritage-page-body .mobile-era-carousel .ccount { font-size:9px!important }
   .heritage-page-body .mobile-era-carousel .carrows { display:flex!important;gap:8px!important }
   .heritage-page-body .mobile-era-carousel .cbtn { width:40px!important;height:40px!important;border:1px solid currentColor!important;border-radius:999px!important; }
   .heritage-page-body .mobile-era-note { margin:26px auto 0!important;
@@ -484,12 +484,17 @@
     font-size:12px!important;
     line-height:1.65!important; }
   .heritage-page-body .mobile-era-note .note-cap { margin-bottom:11px!important;
-    font-size:8px!important;
+    font-size:9px!important;
     letter-spacing:.16em!important;
     text-transform:uppercase!important;
     opacity:.65!important; }
   .heritage-page-body .mobile-era-note p { margin:0 0 10px!important }
   .heritage-page-body .heritage-finale { padding:64px 16px!important;min-height:70dvh!important }
+  /* v101: el padding:120px de la versión tablet (≤980px) seguía activo y dejaba
+     ~376px en blanco entre épocas. */
+  .heritage-page-body .era-stage { padding:0!important }
+  .heritage-page-body .era,
+  .heritage-page-body .era.era-long { padding:56px 20px 56px!important }
   .heritage-page-body .finale-panel { text-align:center!important;margin:0 auto!important }
 }
 
@@ -563,12 +568,12 @@
 
 {% schema %}
 {
-  "name": "Heritage 1842",
+  "name": "Heritage 1841",
   "settings": [
     { "type": "header", "content": "Hero" },
     { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "La Cartuja de Sevilla · 1841" },
     { "type": "text", "id": "hero_title", "label": "Title line 1", "default": "Heritage" },
-    { "type": "text", "id": "hero_title_2", "label": "Title line 2", "default": "1842" },
+    { "type": "text", "id": "hero_title_2", "label": "Title line 2", "default": "1841" },
     { "type": "richtext", "id": "hero_intro", "label": "Intro" },
     { "type": "video", "id": "hero_video", "label": "Hero video (looping)" },
     { "type": "image_picker", "id": "hero_image", "label": "Hero image (fallback if no video)" },
@@ -586,6 +591,6 @@
     { "type": "image_picker", "id": "finale_image", "label": "Finale image" },
     { "type": "text", "id": "finale_demo_image", "label": "Finale demo image (asset filename)" }
   ],
-  "presets": [{ "name": "Heritage 1842" }]
+  "presets": [{ "name": "Heritage 1841" }]
 }
 {% endschema %}

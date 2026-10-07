@@ -7,9 +7,10 @@
   Follows §9 scroll-driven pattern (self-contained rAF IIFE writing CSS custom
   props, Math.max guards, reduced-motion + mobile static fallbacks, re-init on
   shopify:section:load) and the global `.reveal` → `.is-visible` IntersectionObserver
-  in assets/theme.js. The 3D plate ships as three injected assets (three.min.js +
-  artesania-textures.js then artesania-plate.js — `window.LCPlate.setProgress(0..1)`
-  drives material-morph + decal-swap + fall-with-spin) loaded on IntersectionObserver
+  in assets/theme.js. The 3D plate ships as injected assets (three.min.js r147 →
+  three-gltf-loader.js → artesania-plate.js, which loads Adrián's
+  artesania-plato-202-rosa.glb; `window.LCPlate.setProgress(0..1)` drives the
+  clay→white→decorated transition + fall-with-spin) loaded on IntersectionObserver
   approach to dodge AssetSizeJavaScript; if WebGL/Three is unavailable, or under
   reduced-motion, a static <img.plate-fallback> is shown instead.
 
@@ -23,7 +24,7 @@
   assign plate_fallback = 'artesania-inline-optimized.webp'
 -%}
 
-<main class="artesania-page" data-section-id="{{ section.id }}" data-three-src="{{ 'three.min.js' | asset_url }}" data-textures-src="{{ 'artesania-textures.js' | asset_url }}" data-plate-src="{{ 'artesania-plate.js' | asset_url }}">
+<main class="artesania-page" data-section-id="{{ section.id }}" data-three-src="{{ 'three.min.js' | asset_url }}" data-loader-src="{{ 'three-gltf-loader.js' | asset_url }}" data-model-src="{{ 'artesania-plato-202-rosa.glb' | asset_url }}" data-plate-src="{{ 'artesania-plate.js' | asset_url }}">
 
   {%- comment -%} ============ 1 · HERO ============ {%- endcomment -%}
   <section class="ap-hero" data-ap-hero data-header-variant="light">
@@ -499,13 +500,13 @@
   font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 5vw, 82px);
   line-height: 1; margin: 16px 0 0; color: #fff;
 }
-.artesania-page .ap-proc-title em { font-style: italic; }
+.artesania-page .ap-proc-title em { font-style: normal; }
 .artesania-page .ap-proc-stage-label {
   font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: #fff;
   font-weight: 600; margin: 0 0 16px; display: block;
 }
 .artesania-page .ap-proc-desc {
-  font-size: 14px; line-height: 1.85; color: rgba(255,255,255,.74); margin: 0;
+  font-size: clamp(16px, 1.15vw, 19px); line-height: 1.7; color: rgba(255,255,255,.82); margin: 0;
 }
 .artesania-page .ap-proc-desc em { font-style: italic; }
 /* las dos columnas comparten un único bloque animado por fase */
@@ -713,6 +714,13 @@
     transform: none !important; margin-top: 10px;
   }
   .artesania-page .ap-intro__overlay { opacity: 1; pointer-events: auto; }
+  /* v101: antetítulo + título + play de 78px y huecos de 30px no cabían en el
+     16:9 del móvil (~200px): se cortaban arriba y abajo. */
+  .artesania-page .ap-intro__overlay { gap: 10px; padding: 12px; }
+  .artesania-page .ap-intro__overlay-heading { font-size: 24px; }
+  .artesania-page .ap-play { width: 54px; height: 54px; }
+  /* v101: ~150px en blanco entre «Suscribir» y el footer. */
+  .artesania-page .ap-news { padding-bottom: 48px; }
 
   .artesania-page .ap-hero__copy { padding-bottom: 8vh; }
   .artesania-page .ap-hero__title { font-size: 46px; }
@@ -778,7 +786,7 @@
   }
 
   .artesania-page .ap-hero__eyebrow {
-    font-size: 8px !important;
+    font-size: 9px !important;
     line-height: 1.45 !important;
     max-width: 100% !important;
     letter-spacing: 0.20em !important;
@@ -813,7 +821,9 @@
     width: 100% !important;
     /* 9dvh se quedaba por debajo de la cabecera fija en pantallas de 640px:
        el rotulo de la fase caia justo encima de "Menu". */
-    padding: calc(var(--header-h) + 10px) 16px 0 !important;
+    /* v101: 16px laterales y 10px bajo la cabecera dejaban el texto pegado a los
+       bordes mientras el plato flotaba con ~220px vacíos debajo. */
+    padding: calc(var(--header-h) + 36px) 28px 0 !important;
     align-content: start !important;
   }
   .artesania-page .ap-proc-side--r { width: 100% !important; max-width: 100% !important; }
@@ -821,10 +831,13 @@
   .artesania-page .ap-phase p { font-size: 12px !important; line-height: 1.58 !important; }
 
   /* El plato queda menos suelto: crece y el texto de arriba y abajo se le acerca. */
-  .artesania-page #plate-canvas { width: min(82vw, 340px) !important; height: min(82vw, 340px) !important; }
+  .artesania-page #plate-canvas { width: min(96vw, 400px) !important; height: min(96vw, 400px) !important; }
+  /* v101: el plato baja al hueco entre el texto y la barra de progreso. */
+  .artesania-page .ap-plate-wrap { padding-top: 72px; }
   .artesania-page .plate-fallback { width: min(78vw, 320px) !important; }
 
-  .artesania-page .ap-proceso__final { bottom: 2.6dvh !important; width: calc(100% - 32px) !important; }
+  /* v101: a 2.6dvh el titular de cierre caía encima de la barra de progreso. */
+  .artesania-page .ap-proceso__final { bottom: max(48px, 9svh) !important; width: calc(100% - 56px) !important; }
   .artesania-page .ap-proceso__final-heading { font-size: clamp(27px, 7.7vw, 36px) !important; }
 
   .artesania-page .ap-cols__grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 22px 10px !important; }
@@ -866,7 +879,7 @@
     /* ---- lazy-load the Three.js plate when proceso nears viewport ----
        Ships as injected assets (three + textures then plate) to dodge
        theme-check AssetSizeJavaScript / ParserBlockingJavaScript. Under
-       reduced-motion we skip the ~899KB entirely and show the static plate. */
+       reduced-motion we skip the ~2 MB entirely and show the static plate. */
     var procesoEl = root.querySelector('[data-ap-proceso]');
     var plateFb = root.querySelector('.plate-fallback');
     var booted = false;
@@ -879,7 +892,9 @@
     }
     function bootPlate() {
       if (booted) return; booted = true;
-      Promise.all([loadScript(root.dataset.threeSrc), loadScript(root.dataset.texturesSrc)])
+      window.LCPlateModel = root.dataset.modelSrc;
+      loadScript(root.dataset.threeSrc)
+        .then(function () { return loadScript(root.dataset.loaderSrc); })
         .then(function () { return loadScript(root.dataset.plateSrc); })
         .catch(function () { if (plateFb) plateFb.classList.add('show'); });
     }

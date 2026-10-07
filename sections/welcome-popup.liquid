@@ -1,0 +1,280 @@
+{%- comment -%}
+  Popup de bienvenida — diseño lateral de Adrián (Downloads/popup_cartuja_lateral,
+  2026-09-21): tarjeta fija abajo a la derecha, foto a sangre con velo, no bloquea
+  la página (no es modal). Cerrado (a mano o solo), no vuelve a salir en 30 min
+  (marca de tiempo en localStorage). El form es el de clientes de
+  Shopify (tag welcome-popup-5); consentimiento `required` nativo.
+  2026-09-29: se retira sola a los 10 s si nadie la toca (vuelve en la próxima visita)
+  2026-10-01: en escritorio el hover pausa (no cancela) el cierre; en móvil, más pequeña.
+  y titulares en Ibarra Real Nova, como la nueva entrega del popup con el logo nuevo.
+{%- endcomment -%}
+<aside
+  class="welcome-popup"
+  data-welcome-popup
+  data-delay="{{ section.settings.delay_seconds }}"
+  role="dialog"
+  aria-modal="false"
+  aria-labelledby="WelcomePopupTitle-{{ section.id }}"
+  hidden
+>
+  {%- if section.settings.image != blank -%}
+    {% render 'image-responsive', image: section.settings.image, alt: '', sizes: '390px', class: 'welcome-popup__image' %}
+  {%- else -%}
+    <img class="welcome-popup__image" src="{{ 'popup-bienvenida.webp' | asset_url }}" alt="" width="670" height="1200" loading="lazy" decoding="async">
+  {%- endif -%}
+  <div class="welcome-popup__veil" aria-hidden="true"></div>
+
+  <button class="welcome-popup__close" type="button" data-welcome-close aria-label="{{ 'general.accessibility.close' | t }}">
+    {% render 'icon-close' %}
+  </button>
+
+  <div class="welcome-popup__inner">
+    <img class="welcome-popup__logo" src="{{ 'logo-white.png' | asset_url }}" alt="{{ shop.name | escape }}" width="70" height="109" loading="lazy" decoding="async">
+    <h2 id="WelcomePopupTitle-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+    {%- if section.settings.text != blank -%}
+      <div class="welcome-popup__text">{{ section.settings.text }}</div>
+    {%- endif -%}
+
+    {%- form 'customer', class: 'welcome-popup__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter,welcome-popup-5">
+      {%- if form.posted_successfully? -%}
+        <div class="welcome-popup__success" data-welcome-status tabindex="-1">
+          <strong>{{ section.settings.success_heading | escape }}</strong>
+          <p>{{ section.settings.success_text | escape }}</p>
+        </div>
+      {%- else -%}
+        <label class="welcome-popup__label" for="WelcomePopupEmail-{{ section.id }}">{{ 'general.newsletter.email_label' | t }}</label>
+        <input
+          id="WelcomePopupEmail-{{ section.id }}"
+          type="email"
+          name="contact[email]"
+          value="{{ form.email | escape }}"
+          placeholder="{{ 'general.newsletter.placeholder' | t }}"
+          autocomplete="email"
+          required
+        >
+        <button class="welcome-popup__submit" type="submit">{{ section.settings.button_label | escape }}</button>
+        <label class="welcome-popup__legal">
+          <input type="checkbox" name="contact[accepts_marketing]" value="true" required>
+          <span>{{ section.settings.consent_html }}</span>
+        </label>
+        {%- if form.errors -%}
+          <p class="welcome-popup__error" data-welcome-status tabindex="-1">{{ 'general.newsletter.error' | t }}</p>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endform -%}
+
+    <button class="welcome-popup__skip" type="button" data-welcome-close>{{ section.settings.skip_label | escape }}</button>
+  </div>
+</aside>
+<button class="welcome-popup-reopen" type="button" data-welcome-reopen aria-label="{{ section.settings.button_label | escape }}" title="{{ section.settings.button_label | escape }}"><span aria-hidden="true">5%</span></button>
+
+{% stylesheet %}
+/* Tokens del diseño: azul #07152b, marfil #f7f2e9, rojo #9d2735. */
+.welcome-popup {
+  --wp-navy: #0f1f3c; --wp-deep: #07152b; --wp-ivory: #f7f2e9; --wp-red: #9d2735;
+  position: fixed; right: 0; bottom: 0; z-index: 180;
+  width: min(390px, 100vw); height: min(650px, 100dvh); overflow: hidden;
+  color: var(--wp-ivory); background: var(--wp-deep); border: 1px solid rgba(247, 242, 233, .34);
+  box-shadow: 0 22px 68px rgba(0, 0, 0, .28);
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .42s ease, transform .5s cubic-bezier(.22, 1, .36, 1);
+}
+.welcome-popup[hidden] { display: none; }
+/* Esquina para volver a abrirlo: solo con el popup cerrado; no en la cesta. */
+.welcome-popup-reopen {
+  position: fixed; left: 0; bottom: 0; z-index: 60; width: 54px; height: 54px; padding: 0; border: 0;
+  background: none; cursor: pointer; opacity: .88; transition: opacity .2s ease;
+  filter: drop-shadow(0 0 .6px rgba(247, 242, 233, .9));
+}
+.welcome-popup-reopen::before { content: ''; position: absolute; inset: 0; background: #07152b; clip-path: polygon(0 0, 0 100%, 100% 100%); }
+.welcome-popup-reopen span {
+  position: absolute; left: 7px; bottom: 7px; font-family: var(--serif); font-size: 14px; font-style: italic;
+  line-height: 1; letter-spacing: .02em; color: #f7f2e9; transition: transform .25s ease;
+}
+.welcome-popup-reopen:hover, .welcome-popup-reopen:focus-visible { opacity: 1; }
+.welcome-popup-reopen:hover span { transform: translate(1px, -1px); }
+.welcome-popup:not([hidden]) + .welcome-popup-reopen, body.template-cart .welcome-popup-reopen { display: none; }
+@media (max-width: 680px) {
+  /* 38 px: no roza el botón «Sonido» del hero (left 16px, bottom 18px). */
+  .welcome-popup-reopen { width: 38px; height: 38px; }
+  .welcome-popup-reopen span { left: 4px; bottom: 5px; font-size: 11px; }
+  body.template-product .welcome-popup-reopen { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+}
+.welcome-popup.is-open { opacity: 1; transform: none; }
+.welcome-popup__image, .welcome-popup__veil { position: absolute; inset: 0; }
+.welcome-popup__image { width: 100%; height: 100%; display: block; object-fit: cover; }
+.welcome-popup__veil {
+  background:
+    linear-gradient(180deg, rgba(4, 14, 32, .14) 0%, rgba(4, 14, 32, .08) 20%, rgba(4, 14, 32, .54) 47%, rgba(4, 14, 32, .94) 72%, rgba(4, 14, 32, .99) 100%),
+    linear-gradient(90deg, rgba(4, 14, 32, .2), transparent 52%, rgba(4, 14, 32, .16));
+}
+.welcome-popup__inner {
+  position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 42px 36px 30px;
+}
+.welcome-popup__logo {
+  position: absolute; top: 38px; left: 50%; transform: translateX(-50%);
+  width: 70px; height: auto; filter: drop-shadow(0 2px 10px rgba(3, 10, 24, .22));
+}
+.welcome-popup__close {
+  position: absolute; z-index: 2; top: 16px; right: 16px; width: 38px; height: 38px; display: grid; place-items: center;
+  color: var(--wp-ivory); background: rgba(7, 21, 43, .22); border: 1px solid rgba(247, 242, 233, .38); border-radius: 50%;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: background .2s ease;
+}
+.welcome-popup__close:hover, .welcome-popup__close:focus-visible { background: rgba(7, 21, 43, .72); outline: none; }
+.welcome-popup__close svg { width: 17px; height: 17px; }
+/* Titulares del popup en Ibarra Real Nova (entrega 2026-09-29); la fuente se pide
+   sólo cuando el popup va a abrirse (ver JS), con EB Garamond de respaldo. */
+.welcome-popup h2 {
+  max-width: 300px; margin: 0 auto; font-family: 'Ibarra Real Nova', var(--serif); font-weight: 400;
+  font-size: clamp(30px, 3vw, 35px); line-height: .95; text-align: center; color: inherit;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .22);
+}
+.welcome-popup__text { max-width: 305px; margin: 16px auto 22px; font-size: 13px; line-height: 1.55; text-align: center; color: rgba(247, 242, 233, .9); }
+.welcome-popup__text p { margin: 0; }
+.welcome-popup__text strong { color: #fff; font-weight: 500; }
+.welcome-popup__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.welcome-popup__form input[type="email"] {
+  width: 100%; min-height: 48px; padding: 0 16px; color: var(--wp-navy); background: rgba(255, 253, 248, .98);
+  border: 1px solid rgba(255, 255, 255, .76); border-radius: 0; outline: 0; font: inherit; font-size: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .1);
+}
+.welcome-popup__form input[type="email"]:focus { border-color: #fff; box-shadow: 0 0 0 2px rgba(255, 255, 255, .22); }
+.welcome-popup__form input[type="email"]::placeholder { color: rgba(15, 31, 60, .58); }
+.welcome-popup__submit {
+  width: 100%; min-height: 48px; margin-top: 10px; padding: 0 18px; color: var(--wp-navy); background: var(--wp-ivory);
+  border: 1px solid var(--wp-ivory); cursor: pointer; font: 500 9px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase;
+  transition: color .2s ease, background .2s ease, border-color .2s ease;
+}
+.welcome-popup__submit:hover, .welcome-popup__submit:focus-visible { color: #fff; background: var(--wp-red); border-color: var(--wp-red); outline: none; }
+.welcome-popup__legal { display: flex; align-items: flex-start; gap: 8px; margin-top: 12px; color: rgba(247, 242, 233, .72); font-size: 9px; line-height: 1.45; }
+.welcome-popup__legal input { width: 13px; height: 13px; margin: 0; flex: 0 0 auto; accent-color: var(--wp-red); }
+.welcome-popup__legal a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.welcome-popup__error { margin: 6px 0 0; color: #ffd0d4; font-size: 9px; line-height: 1.35; }
+.welcome-popup__success {
+  padding: 20px 18px; text-align: center; background: rgba(7, 21, 43, .72); border: 1px solid rgba(247, 242, 233, .32);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+.welcome-popup__success strong { display: block; margin-bottom: 6px; font-family: 'Ibarra Real Nova', var(--serif); font-size: 25px; font-weight: 400; }
+.welcome-popup__success p { margin: 0; color: rgba(247, 242, 233, .82); font-size: 10px; line-height: 1.55; }
+.welcome-popup__skip {
+  align-self: center; margin: 7px auto 0; padding: 3px 0; color: rgba(247, 242, 233, .68); border-bottom: 1px solid transparent;
+  cursor: pointer; font-size: 9px; letter-spacing: .04em; transition: color .2s ease, border-color .2s ease;
+}
+.welcome-popup__skip:hover, .welcome-popup__skip:focus-visible { color: #fff; border-bottom-color: currentColor; outline: none; }
+
+/* Móvil: tarjeta flotante más pequeña (cliente 2026-10-01: «aparece demasiado grande»). */
+@media (max-width: 600px) {
+  .welcome-popup { right: 12px; bottom: 12px; width: min(300px, calc(100vw - 24px)); height: min(500px, calc(100dvh - 24px)); }
+  .welcome-popup__inner { padding: 24px 20px 16px; }
+  .welcome-popup__logo { top: 22px; width: 46px; }
+  .welcome-popup__close { top: 10px; right: 10px; width: 32px; height: 32px; }
+  .welcome-popup h2 { font-size: 28px; }
+  .welcome-popup__text { margin: 10px auto 14px; font-size: 11.5px; }
+  .welcome-popup__form input[type="email"], .welcome-popup__submit { min-height: 42px; }
+  .welcome-popup__legal { font-size: 9px; }
+}
+@media (max-height: 650px) {
+  .welcome-popup { height: 100dvh; }
+  .welcome-popup__inner { padding-top: 28px; padding-bottom: 18px; }
+  .welcome-popup__logo { top: 23px; width: 56px; }
+  .welcome-popup h2 { font-size: 31px; }
+  .welcome-popup__text { margin: 10px auto 14px; }
+  .welcome-popup__form input[type="email"], .welcome-popup__submit { min-height: 43px; }
+  .welcome-popup__legal { margin-top: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { .welcome-popup { transition: none; } }
+{% endstylesheet %}
+
+{% javascript %}
+(function () {
+  var key = 'cartuja-welcome-popup-dismissed';
+
+  function init(root) {
+    root.querySelectorAll('[data-welcome-popup]').forEach(function (popup) {
+      if (popup.dataset.ready) return;
+      popup.dataset.ready = 'true';
+      var status = popup.querySelector('[data-welcome-status]');
+      var delay = (Number(popup.dataset.delay) || 0) * 1000;
+
+      // Cerrado = no vuelve a salir en 30 min, en ninguna página.
+      var ttl = 30 * 60 * 1000;
+      function dismissed() {
+        try { return Date.now() - Number(localStorage.getItem(key) || 0) < ttl; } catch (error) { return false; }
+      }
+      function loadFont() {
+        if (document.getElementById('welcome-popup-font')) return;
+        var link = document.createElement('link');
+        link.id = 'welcome-popup-font';
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@400&display=swap';
+        document.head.appendChild(link);
+      }
+      // Se retira sola a los 10 s (petición del cliente), salvo que el visitante
+      // la esté usando: tocarla o entrar en el formulario lo cancela. En escritorio el
+      // ratón encima solo la pausa: al salir vuelve a contar (antes la cancelaba para
+      // siempre con solo cruzarla, y en escritorio no se iba nunca).
+      var autoClose, used = false;
+      function stopAutoClose() { clearTimeout(autoClose); }
+      function startAutoClose() {
+        stopAutoClose();
+        if (!used && !popup.hidden && !(window.Shopify && Shopify.designMode)) autoClose = window.setTimeout(close, 10000);
+      }
+      ['focusin', 'touchstart'].forEach(function (type) {
+        popup.addEventListener(type, function () { used = true; stopAutoClose(); }, { passive: true });
+      });
+      popup.addEventListener('pointerenter', function (event) { if (event.pointerType === 'mouse') stopAutoClose(); });
+      popup.addEventListener('pointerleave', function (event) { if (event.pointerType === 'mouse' && !popup.contains(document.activeElement)) startAutoClose(); });
+      function open(manual) {
+        if (!popup.isConnected) return;
+        popup.hidden = false;
+        requestAnimationFrame(function () { popup.classList.add('is-open'); });
+        if (status) { status.focus(); return; }
+        if (manual === true) { used = true; return; }
+        startAutoClose();
+      }
+      function close() {
+        stopAutoClose();
+        try { localStorage.setItem(key, String(Date.now())); } catch (error) {}
+        popup.classList.remove('is-open');
+        popup.hidden = true;
+      }
+
+      var reopen = popup.parentElement.querySelector('[data-welcome-reopen]');
+      if (reopen) reopen.addEventListener('click', function () { stopAutoClose(); loadFont(); open(true); });
+      popup.querySelectorAll('[data-welcome-close]').forEach(function (b) { b.addEventListener('click', close); });
+      document.addEventListener('keydown', function (event) { if (event.key === 'Escape' && !popup.hidden) close(); });
+
+      if (status || (window.Shopify && Shopify.designMode)) { loadFont(); open(); }
+      // En la cesta no: taparía la barra de pago en móvil.
+      else if (!dismissed() && !document.body.classList.contains('template-cart')) { loadFont(); window.setTimeout(open, delay); }
+    });
+  }
+
+  init(document);
+  document.addEventListener('shopify:section:load', function (event) { init(event.target); });
+  document.addEventListener('shopify:section:select', function (event) {
+    var popup = event.target.querySelector('[data-welcome-popup]');
+    if (popup && popup.hidden) { popup.hidden = false; popup.classList.add('is-open'); }
+  });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Popup de bienvenida",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagen vertical", "info": "Sin imagen se usa assets/popup-bienvenida.webp (diseño de Adrián)." },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Bienvenido a La Cartuja de Sevilla." },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Regístrate y te descontamos el <strong>5% en tu primera compra.</strong></p>" },
+    { "type": "text", "id": "button_label", "label": "Botón", "default": "Obtener descuento" },
+    { "type": "richtext", "id": "consent_html", "label": "Consentimiento", "default": "<p>Acepto recibir novedades y promociones de La Cartuja de Sevilla y he leído la <a href=\"/pages/politica-privacidad\">política de privacidad</a>.</p>" },
+    { "type": "text", "id": "success_heading", "label": "Éxito · título", "default": "Ya formas parte de nuestra mesa." },
+    { "type": "text", "id": "success_text", "label": "Éxito · texto", "default": "Revisa tu correo: recibirás allí tu descuento de bienvenida." },
+    { "type": "text", "id": "skip_label", "label": "Enlace para cerrar", "default": "Ahora no, seguir descubriendo" },
+    { "type": "range", "id": "delay_seconds", "label": "Retraso al abrir", "min": 0, "max": 20, "step": 1, "unit": "s", "default": 4 },
+    { "type": "paragraph", "content": "Se retira sola a los 10 s si nadie la toca. Cerrada a mano no vuelve a aparecer en ninguna página (petición del cliente)." }
+  ]
+}
+{% endschema %}

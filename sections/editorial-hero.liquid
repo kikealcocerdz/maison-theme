@@ -1,4 +1,4 @@
-<section class="editorial-hero" id="editorialHero-{{ section.id }}" data-section-id="{{ section.id }}" data-header-variant="light" aria-label="{{ section.settings.heading | strip_html | escape | default: 'Hero' }}">
+<section class="editorial-hero" id="editorialHero-{{ section.id }}" data-section-id="{{ section.id }}" data-header-variant="light"{% if section.settings.light_frames != blank %} data-light-frames="{{ section.settings.light_frames | escape }}"{% endif %} aria-label="{{ section.settings.heading | strip_html | escape | default: 'Hero' }}">
   {%- liquid
     assign hero_video_src = ''
     if section.settings.video != blank
@@ -36,6 +36,19 @@
         {%- comment -%} richtext ya envuelve en <p>: anidarlo dejaba un <p> vacío suelto. {%- endcomment -%}
         {%- if section.settings.subheading != blank -%}<p>{{ section.settings.subheading | remove: '<p>' | remove: '</p>' }}</p>{%- endif -%}
       </div>
+
+      {%- comment -%}
+        Sonido del propio vídeo: arranca siempre en silencio (el navegador no deja otra
+        cosa) y sólo suena si se pulsa el botón, y sólo mientras el hero está en pantalla.
+      {%- endcomment -%}
+      {%- if hero_video_src != blank and section.settings.video_sound -%}
+        <button class="editorial-hero__sound" type="button" data-hero-sound aria-pressed="false"
+          data-label-play="{{ 'sections.hero.unmute' | t | escape }}" data-label-pause="{{ 'sections.hero.mute' | t | escape }}"
+          aria-label="{{ 'sections.hero.unmute' | t | escape }}">
+          <span class="editorial-hero__sound-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="editorial-hero__sound-label">{{ section.settings.sound_label | default: 'Sonido' | escape }}</span>
+        </button>
+      {%- endif -%}
 
       <div class="editorial-hero__progress" aria-hidden="true"><span></span></div>
       <div class="editorial-hero__scroll-cue" aria-label="{{ 'general.accessibility.scroll_down' | t }}"><span></span></div>
@@ -139,6 +152,38 @@
   width: calc(var(--hero-progress, 0) * 100%);
 }
 
+.editorial-hero__sound {
+  position: absolute; left: 4vw; bottom: 26px; z-index: 9;
+  display: inline-flex; align-items: center; gap: 10px;
+  height: 36px; padding: 0 16px 0 14px;
+  border: 0.5px solid rgba(255, 255, 255, 0.72); border-radius: 999px;
+  background: rgba(15, 26, 46, 0.18); color: var(--paper);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer;
+  transition: background 260ms var(--ease);
+}
+.editorial-hero__sound:hover, .editorial-hero__sound:focus-visible { background: rgba(15, 26, 46, 0.42); }
+.editorial-hero__sound-bars { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; }
+.editorial-hero__sound-bars i { display: block; width: 2px; height: 4px; background: currentColor; }
+.editorial-hero__sound[aria-pressed="true"] .editorial-hero__sound-bars i { animation: heroSoundBar 900ms ease-in-out infinite alternate; }
+.editorial-hero__sound[aria-pressed="true"] .editorial-hero__sound-bars i:nth-child(2) { animation-delay: -300ms; }
+.editorial-hero__sound[aria-pressed="true"] .editorial-hero__sound-bars i:nth-child(3) { animation-delay: -600ms; }
+@keyframes heroSoundBar { from { height: 3px; } to { height: 12px; } }
+@media (max-width: 680px) { .editorial-hero__sound { left: 16px; bottom: 18px; } }
+
+/* Tramo blanco del vídeo: lo que era blanco pasa a tinta. */
+.editorial-hero__title, .editorial-hero__eyebrow, .editorial-hero__sound, .editorial-hero__scroll-cue {
+  transition: color 600ms var(--ease), border-color 600ms var(--ease), background 600ms var(--ease);
+}
+.editorial-hero.is-light-frame .editorial-hero__title,
+.editorial-hero.is-light-frame .editorial-hero__eyebrow,
+.editorial-hero.is-light-frame .editorial-hero__scroll-cue { color: var(--ink); text-shadow: none; }
+.editorial-hero.is-light-frame .editorial-hero__scroll-cue { border-color: rgba(15, 26, 46, 0.45); }
+.editorial-hero.is-light-frame .editorial-hero__sound { color: var(--ink); border-color: rgba(15, 26, 46, 0.45); background: rgba(255, 255, 255, 0.45); }
+.editorial-hero.is-light-frame .editorial-hero__progress { background: rgba(15, 26, 46, 0.18); }
+.editorial-hero.is-light-frame .editorial-hero__progress span { background: var(--ink); }
+@media (prefers-reduced-motion: reduce) { .editorial-hero__sound-bars i { animation: none !important; height: 8px; } }
+
 .editorial-hero__scroll-cue {
   position: absolute; right: 4vw; bottom: 26px; z-index: 8;
   width: 26px; height: 42px;
@@ -211,7 +256,8 @@
     opacity: 1 !important;
     transform: translate3d(-50%, 0, 0) !important;
     width: calc(100vw - 42px) !important;
-    bottom: calc(42px + env(safe-area-inset-bottom, 0px)) !important;
+    /* v101: a 42px la última línea del subtítulo quedaba bajo «Sonido» y el ancla de ayuda. */
+    bottom: calc(92px + env(safe-area-inset-bottom, 0px)) !important;
   }
 
   .editorial-hero__title h1 { font-size: clamp(42px, 12.4vw, 64px) !important; line-height: 0.98 !important; }
@@ -268,6 +314,85 @@
   document.addEventListener('shopify:section:load', (e) => {
     e.target.querySelectorAll('.editorial-hero:not([data-init])').forEach(initHero);
   });
+
+  // Tramos del vídeo con fondo blanco: el hero deja de pedir cabecera clara y pasa a
+  // tinta oscura (título, botón, progreso) para que nada blanco quede sobre blanco.
+  function initInk(hero) {
+    const video = hero.querySelector('video');
+    const spans = (hero.dataset.lightFrames || '').split(',').map((s) => s.split('-').map(Number))
+      .filter((s) => s.length === 2 && s.every((n) => !isNaN(n)));
+    if (!video || !spans.length) return;
+    let light = false;
+    video.addEventListener('timeupdate', () => {
+      const t = video.currentTime;
+      const now = spans.some(([a, b]) => t >= a && t < b);
+      if (now === light) return;
+      light = now;
+      hero.classList.toggle('is-light-frame', light);
+      if (light) hero.removeAttribute('data-header-variant');
+      else hero.setAttribute('data-header-variant', 'light');
+      window.dispatchEvent(new Event('scroll')); // la cabecera recalcula su tinta
+    });
+  }
+  document.querySelectorAll('.editorial-hero[data-light-frames]').forEach(initInk);
+
+  // Sonido del vídeo: el botón lo activa y sólo suena con el hero en pantalla.
+  // Al bajar de la sección el vídeo se pausa (y calla); al volver sigue, y con
+  // sonido si el visitante lo había activado. Fundidos para que no entre de golpe.
+  function initSound(btn) {
+    if (btn.dataset.init) return;
+    btn.dataset.init = '1';
+    const hero = btn.closest('.editorial-hero');
+    const video = hero && hero.querySelector('video');
+    if (!video) return;
+    let wanted = false; // lo que eligió el visitante
+    let inView = true;
+    let fade;
+    // ponytail: en iOS `volume` es de sólo lectura; allí el fundido no hace nada y manda `muted`.
+    function ramp(to, done) {
+      clearInterval(fade);
+      fade = setInterval(() => {
+        const before = video.volume;
+        const next = before + (to > before ? 0.05 : -0.05);
+        video.volume = Math.min(1, Math.max(0, next));
+        // iOS ignora `volume` (sigue en 1): sin esta salida el fundido no acababa
+        // nunca y el vídeo no llegaba a `muted` — el botón no silenciaba en móvil.
+        if (video.volume === before || Math.abs(video.volume - to) < 0.051) {
+          clearInterval(fade);
+          if (video.volume !== before) video.volume = to;
+          if (done) done();
+        }
+      }, 40);
+    }
+    function apply() {
+      const on = wanted && inView && !document.hidden;
+      if (on) {
+        video.muted = false;
+        ramp(1);
+      } else if (!video.muted) {
+        ramp(0, () => { video.muted = true; });
+      }
+      if (inView && !document.hidden) video.play().catch(() => {});
+      else video.pause();
+    }
+    btn.addEventListener('click', () => {
+      wanted = !wanted;
+      btn.setAttribute('aria-pressed', wanted ? 'true' : 'false');
+      btn.setAttribute('aria-label', wanted ? btn.dataset.labelPause : btn.dataset.labelPlay);
+      if (wanted) { video.volume = 0; video.muted = false; }
+      // 2026-10-05 · cliente: en móvil pulsar no silenciaba. El silencio va síncrono dentro
+      // del toque, sin depender del fundido (que en iOS no hace nada con `volume`).
+      else { clearInterval(fade); video.muted = true; }
+      apply();
+    });
+    new IntersectionObserver((entries) => {
+      inView = entries[entries.length - 1].isIntersecting;
+      apply();
+    }).observe(hero);
+    document.addEventListener('visibilitychange', apply);
+  }
+  document.querySelectorAll('[data-hero-sound]').forEach(initSound);
+  document.addEventListener('shopify:section:load', (e) => e.target.querySelectorAll('[data-hero-sound]').forEach(initSound));
 })();
 {% endjavascript %}
 
@@ -277,10 +402,14 @@
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Hero image (fallback for video, also LCP)" },
     { "type": "url", "id": "video", "label": "Hero video URL (MP4, optional)" },
-    { "type": "text", "id": "demo_video", "label": "Demo video asset (filename in /assets)", "info": "Used when no Hero video URL is set. Default ships the editorial loop.", "default": "hero-living-heritage-loop.mp4" },
+    { "type": "text", "id": "demo_video", "label": "Demo video asset (filename in /assets)", "info": "Used when no Hero video URL is set. Default ships the brand film with sound.", "default": "hero-cartuja-audio.mp4" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "La Cartuja de Sevilla · 1841" },
     { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p>Heritage crafted for modern living</p>" },
-    { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>La Cartuja de Sevilla presenta El Renacer: una colección que reúne memoria, oficio y mesa contemporánea desde 1841.</p>" }
+    { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>La Cartuja de Sevilla presenta El Renacer: una colección que reúne memoria, oficio y mesa contemporánea desde 1841.</p>" },
+    { "type": "header", "content": "Sonido" },
+    { "type": "checkbox", "id": "video_sound", "label": "El vídeo tiene sonido", "info": "Muestra el botón para activarlo. Nunca suena solo y se calla al bajar de la sección.", "default": true },
+    { "type": "text", "id": "sound_label", "label": "Texto del botón", "default": "Sonido" },
+    { "type": "text", "id": "light_frames", "label": "Tramos claros del vídeo (segundos)", "info": "Donde el vídeo es blanco la cabecera y los textos pasan a tinta oscura. Formato 12.8-22.4, separados por comas. Vacío = siempre en blanco.", "default": "12.8-22.4" }
   ],
   "presets": [{ "name": "Editorial hero" }]
 }

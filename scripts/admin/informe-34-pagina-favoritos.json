@@ -1,0 +1,23 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "página ANTES",
+      "resultado": []
+    },
+    {
+      "paso": "crear página",
+      "resultado": {
+        "page": {
+          "id": "gid://shopify/Page/172556026197",
+          "handle": "favoritos",
+          "templateSuffix": "favoritos"
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

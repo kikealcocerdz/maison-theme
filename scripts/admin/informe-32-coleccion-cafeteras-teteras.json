@@ -1,0 +1,27 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "crear cafeteras-teteras",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/682942955861",
+          "handle": "cafeteras-teteras"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "publicar cafeteras-teteras en Tienda online",
+      "resultado": {
+        "publishable": {
+          "handle": "cafeteras-teteras"
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

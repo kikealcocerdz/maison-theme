@@ -1,0 +1,13 @@
+{%- comment -%}
+  Plazo del pedido = el más largo de sus líneas (plazo-entrega por línea). Pinta el
+  número de días hábiles, o nada si ninguna línea está sincronizada.
+  ponytail: cada línea se calcula sola; dos productos que comparten pieza (azucarero
+  suelto + juego de café) no se descuentan entre sí. Si pasa a importar, cruzar recetas.
+{%- endcomment -%}
+{%- assign max_dias = 0 -%}
+{%- for item in cart.items -%}
+  {%- capture p -%}{% render 'plazo-entrega', variant: item.variant, qty: item.quantity, raw: true %}{%- endcapture -%}
+  {%- assign dias = p | split: '|' | last | plus: 0 -%}
+  {%- if dias > max_dias -%}{%- assign max_dias = dias -%}{%- endif -%}
+{%- endfor -%}
+{%- if max_dias > 0 -%}{{ max_dias }}{%- endif -%}

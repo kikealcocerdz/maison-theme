@@ -225,6 +225,15 @@
 
 .tables-page .scene-hotspot { position: absolute; transform: translate(-50%, -50%); width: 18px; height: 18px; border: .5px solid var(--ink); background: var(--paper); border-radius: 999px; box-shadow: 0 0 0 9px rgba(255, 255, 255, .48); cursor: pointer; animation: tableHotspotPulse 2600ms infinite; }
 .tables-page .scene-hotspot.active { background: var(--ink); }
+/* Área táctil de 44px sin cambiar el punto de 18px (como en la escena de la home). */
+/* Ojo: `.scene-hotspot::before` de la escena de la home (18px, fondo, borde,
+   translate) también aplica aquí; se anula entero o pinta un segundo punto. */
+.tables-page .scene-hotspot::before,
+.tables-page .scene-hotspot:hover::before,
+.tables-page .scene-hotspot.active::before {
+  content: ""; position: absolute; left: -13px; top: -13px; width: 44px; height: 44px;
+  border: 0; border-radius: 999px; background: none; box-shadow: none; transform: none; transition: none;
+}
 @keyframes tableHotspotPulse {
   0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, .5); }
   70% { box-shadow: 0 0 0 14px rgba(255, 255, 255, 0); }
@@ -267,7 +276,7 @@
   .table-filter { flex:0 0 auto!important;min-height:38px!important;padding:0 15px!important;border-radius:999px!important;background:#fff!important;border:1px solid rgba(15,26,46,.10)!important;scroll-snap-align:start!important;color:var(--ink-soft,#445066)!important }
   .table-filter:after { display:none!important }
   .table-filter.active { background:var(--ink,#0f1a2e)!important;color:#fff!important;border-color:var(--ink,#0f1a2e)!important }
-  .table-filter span { font-size:8.5px!important;letter-spacing:.12em!important }
+  .table-filter span { font-size:9px!important;letter-spacing:.12em!important }
   .table-scenes-list { width:calc(100% - 28px)!important;margin:0 auto 70px!important;gap:28px!important }
   /* svh, no dvh: dvh se recalcula al plegarse la barra del navegador y la escena
      (y con ella la foto) daba un salto en cada scroll. */
@@ -279,9 +288,13 @@
   .table-scene-product h2 { font-size:22px!important;margin:0 0 4px!important }
   .table-product-note { display:none!important }
   .table-product-lines { margin:9px 0 5px!important }
+  /* v101: las rayas miden 1px de alto; el padding con background-clip da 45px
+     táctiles sin cambiar la raya ni el alto de la fila (margen negativo). */
+  .table-product-lines button { box-sizing:content-box!important;padding:22px 3px!important;margin:-22px -3px!important;background-clip:content-box!important }
+  .table-prod-arrow { min-width:44px!important;min-height:44px!important }
   .table-shop-scene .table-scene-actions { display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important;margin-top:6px!important }
   .table-shop-scene .table-scene-actions .table-add-piece { grid-column:1/-1!important }
-  .table-shop-scene .table-scene-actions .ghost-btn { width:100%!important;min-width:0!important;min-height:35px!important;padding:0 7px!important;font-size:7.5px!important;letter-spacing:.08em!important }
+  .table-shop-scene .table-scene-actions .ghost-btn { width:100%!important;min-width:0!important;min-height:35px!important;padding:0 7px!important;font-size:9px!important;letter-spacing:.08em!important }
   .tables-page-body .table-filters { position:relative!important;
     z-index:4!important;
     scroll-behavior:smooth!important;
@@ -369,8 +382,6 @@
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         startX = e.clientX; startY = e.clientY;
         tracking = true; dragged = false;
-        /* Capturar el puntero para seguir recibiendo eventos si sale del slot. */
-        if (slot.setPointerCapture) { try { slot.setPointerCapture(e.pointerId); } catch (err) {} }
       });
 
       slot.addEventListener('pointermove', function (e) {
@@ -379,7 +390,12 @@
         var dy = e.clientY - startY;
         /* Gesto más vertical que horizontal: es scroll, no cambio de pieza. */
         if (!dragged && Math.abs(dy) > Math.abs(dx)) { tracking = false; return; }
-        if (Math.abs(dx) > 8) dragged = true;
+        if (!dragged && Math.abs(dx) > 8) {
+          dragged = true;
+          /* Capturar el puntero sólo al empezar el arrastre: capturarlo en pointerdown
+             manda el clic del ratón al slot y los botones «Añadir» no envían su form. */
+          if (slot.setPointerCapture) { try { slot.setPointerCapture(e.pointerId); } catch (err) {} }
+        }
       });
 
       slot.addEventListener('pointerup', function (e) {

@@ -1,0 +1,24 @@
+{%- comment -%}
+  Una tarjeta de producto suelta, igual que en la rejilla de colección. No se usa en
+  plantillas: la pide la página de favoritos por Section Rendering API
+  (`/products/<handle>?section_id=fav-card`), que la pinta en el contexto del producto.
+{%- endcomment -%}
+{%- if product -%}
+  {%- liquid
+    assign p_img1 = product.featured_image | image_url: width: 720
+    assign p_w = product.featured_image.width | default: 1000
+    assign p_h = product.featured_image.height | default: 1250
+    assign p_price = product.price | money
+  -%}
+  {% render 'collection-card', product: product, scope: 'fav',
+    card_url: product.url, title: product.title,
+    price: p_price, meta: product.type,
+    img1: p_img1, img_w: p_w, img_h: p_h %}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Tarjeta de favorito",
+  "settings": []
+}
+{% endschema %}

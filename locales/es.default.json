@@ -59,6 +59,9 @@
     "results_for_html": "{{ count }} resultados para {{ terms }}"
   },
   "general": {
+    "favorites": {
+      "label": "Favoritos"
+    },
     "account": {
       "label": "Cuenta"
     },
@@ -112,6 +115,10 @@
     }
   },
   "sections": {
+    "hero": {
+      "unmute": "Activar sonido",
+      "mute": "Silenciar"
+    },
     "cart": {
       "empty": "Tu cesta está vacía.",
       "subtotal": "Subtotal",
@@ -140,9 +147,13 @@
       "gift_remove": "Quitar el envoltorio de regalo",
       "removed": "Ha retirado una pieza de la cesta.",
       "undo": "Deshacer",
+      "recover_last": "Recuperar la última pieza",
       "empty_body": "Aún no ha reservado ninguna pieza. Nuestras mesas se componen despacio: empiece por una colección.",
       "empty_cta": "Ver las colecciones",
-      "paybar_total": "Total · {{ count }} piezas",
+      "paybar_total": {
+        "one": "Total · 1 pieza",
+        "other": "Total · {{ count }} piezas"
+      },
       "count_words": "ninguna,Una,Dos,Tres,Cuatro,Cinco,Seis,Siete,Ocho,Nueve,Diez,Once,Doce",
       "count_line": {
         "one": "{{ n }} pieza reservada",
@@ -163,6 +174,8 @@
       "filter_clear": "Limpiar",
       "filter_apply": "Aplicar filtros",
       "filter_remove": "Quitar {{ name }}",
+      "filter_collection": "Colección",
+      "filter_all": "Todas",
       "filter_shape": "Forma",
       "filter_shape_values": "Aurora|Ochavada|Imperio|Viena",
       "filter_color": "Color",
@@ -187,6 +200,12 @@
       "quick_new": "Novedades",
       "quick_last_units": "Fin de existencias",
       "more_filters": "Filtros",
+      "drawer_filter": "Filtrar esta colección",
+      "drawer_filter_hint": "Te quedas aquí, con menos piezas.",
+      "drawer_explore": "Explorar colecciones",
+      "drawer_explore_hint": "Te lleva a otra colección.",
+      "drawer_tab_explore": "Colecciones",
+      "siblings_all": "Todas las colecciones",
       "filter_clear_all": "Quitar todos los filtros",
       "load_more": "Cargar más",
       "showing": "Mostrando {{ shown }} de {{ total }}",
@@ -246,9 +265,13 @@
       "pieces": "Piezas",
       "pieces_selector": "Selecciona el número de piezas",
       "pack_intro": "Tu pack contiene:",
-      "pack_hint": "Pasa el cursor o selecciona una pieza para verla en detalle.",
-      "pack_unit": { "one": "unidad incluida", "other": "unidades incluidas" },
-      "discover_collection": "Descubre la colección"
+      "pack_hint": "Selecciona una pieza para verla en detalle.",
+      "pack_unit": {
+        "one": "unidad incluida",
+        "other": "unidades incluidas"
+      },
+      "discover_collection": "Descubre la colección",
+      "pack_link": "Tu pack contiene →"
     },
     "stamps": {
       "seal": "Sello",
@@ -282,5 +305,18 @@
       "send_form": "Ir al formulario de contacto",
       "privacy_html": "Al escribirnos tratamos tus datos para atender tu consulta. Consulta la <a href=\"{{ url }}\">política de privacidad</a>."
     }
+  },
+  "plazo": {
+    "days": "Entrega en {{ days }} días hábiles",
+    "left": {
+      "one": "Queda 1 con este plazo",
+      "other": "Quedan {{ count }} con este plazo"
+    },
+    "made_to_order": "Se termina en fábrica para tu pedido",
+    "unavailable": "No disponible por ahora",
+    "cart_full": "Ya tienes en la cesta todas las unidades disponibles",
+    "order": "Entrega estimada del pedido: hasta {{ days }} días hábiles",
+    "attribute": "{{ days }} días hábiles",
+    "on_demand": "Bajo pedido: la fabricamos para ti"
   }
 }

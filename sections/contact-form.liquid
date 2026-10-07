@@ -53,7 +53,8 @@
     </div>
   </section>
 
-  <section class="contact-form-section">
+  {%- comment -%} «Trabaja con nosotros» reutiliza la página sin formulario: el CV va por mailto. {%- endcomment -%}
+  <section class="contact-form-section{% unless section.settings.show_form %} contact-form-section--solo{% endunless %}">
     <div class="contact-form-intro">
       {%- if section.settings.form_kicker != blank -%}<span class="contact-kicker">{{ section.settings.form_kicker | escape }}</span>{%- endif -%}
       <h2>{{ section.settings.form_title | escape }}</h2>
@@ -71,6 +72,7 @@
       {%- endif -%}
     </div>
 
+    {%- if section.settings.show_form -%}
     {%- form 'contact', class: 'contact-form' -%}
       {%- if form.posted_successfully? -%}
         <p class="contact-form__message contact-form__message--success">{{ 'sections.contact.success' | t }}</p>
@@ -127,6 +129,7 @@
         <button type="submit">{{ 'sections.contact.submit' | t }} <span aria-hidden="true">→</span></button>
       </div>
     {%- endform -%}
+    {%- endif -%}
   </section>
 </main>
 
@@ -305,6 +308,9 @@
   background: #eceff3;
   align-items: stretch;
 }
+
+.contact-form-section--solo { grid-template-columns: 1fr; }
+.contact-form-section--solo .contact-form-intro { max-width: 760px; margin: 0 auto; }
 
 .contact-form-intro {
   background: var(--brand);
@@ -490,7 +496,10 @@
 }
 
 .contact-privacy input {
-  margin-top: 2px;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  margin: 0;
   accent-color: var(--ink);
 }
 
@@ -592,6 +601,7 @@
     { "type": "text", "id": "hero_caption_small", "label": "Pie (línea pequeña)", "default": "Sevilla · 1841" },
     { "type": "text", "id": "hero_caption", "label": "Pie (titular)", "default": "Heritage crafted for modern living" },
     { "type": "header", "content": "Formulario" },
+    { "type": "checkbox", "id": "show_form", "label": "Mostrar formulario", "default": true },
     { "type": "text", "id": "form_kicker", "label": "Antetítulo", "default": "Escríbenos" },
     { "type": "text", "id": "form_title", "label": "Título", "default": "¿En qué podemos ayudarte?" },
     { "type": "textarea", "id": "form_intro", "label": "Entradilla", "default": "Completa el formulario y déjanos la información necesaria para poder ayudarte desde el primer mensaje." },

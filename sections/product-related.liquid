@@ -32,6 +32,36 @@
   endif
 
   comment
+    Reglas por tipo (brief 2026-09-18 §8). Mugs: «Completa tu mesa» no tiene
+    sentido (no hay mesa) → la fila de colección no se pinta y «Te puede interesar»
+    mezcla mugs de letra y decorados. Juegos: café ↔ té / desayuno, así que no se
+    exige la misma pieza. Piezas con forma (platos…): sólo se sugieren otros
+    decorados de la misma forma.
+  endcomment
+  assign type_key = product.type | downcase
+  assign is_mug = false
+  if type_key == 'mug'
+    assign is_mug = true
+  endif
+  assign any_piece = false
+  if is_mug or type_key == 'juego' or type_key == 'vajilla'
+    assign any_piece = true
+  endif
+  assign own_forma = product.metafields.custom.forma.value | default: blank
+
+  comment
+    Recomendaciones a mano: los campos de Search & Discovery del producto
+    (complementarios → «Completa tu mesa», relacionados → «Te puede interesar»)
+    mandan sobre cualquier regla cuando el cliente los rellena.
+  endcomment
+  assign manual = blank
+  if section.settings.source == 'same_collection'
+    assign manual = product.metafields['shopify--discovery--product_recommendation'].complementary_products.value
+  elsif section.settings.source == 'same_type'
+    assign manual = product.metafields['shopify--discovery--product_recommendation'].related_products.value
+  endif
+
+  comment
     «Te puede interesar» = la MISMA pieza en otros decorados (plato llano, no plato
     hondo). La pieza es el título sin el decorado, y el decorado es el sufijo que el
     título comparte con sus hermanos de colección: «Plato Llano Flor Lis Azul» vs
@@ -39,7 +69,7 @@
     para que un parecido casual no alargue el sufijo.
   endcomment
   assign piece_prefix = blank
-  if section.settings.source == 'same_type' and own_collection != blank
+  if section.settings.source == 'same_type' and own_collection != blank and any_piece == false
     assign words = product.title | split: ' '
     assign suffix_len = 99
     assign compared = 0
@@ -84,14 +114,65 @@
       del menú lateral. Sin colección para ese tipo, se cae a la de siempre.
     endcomment
     assign type_col = collections[type_handle]
+    comment
+      Sin colección para el tipo (velas, floreros…): la del producto que más piezas
+      de su tipo reúne. La primera colección cualquiera trae 50 productos al azar y
+      la fila salía vacía (vela aromática, 2026-09-29).
+    endcomment
+    if type_col == blank or type_col.products.size == 0
+      assign best = 1
+      for c in product.collections
+        if c.handle == 'all' or c.handle == 'frontpage' or c.handle == own_collection.handle
+          continue
+        endif
+        assign same_type = c.products | where: 'type', product.type | size
+        if same_type > best
+          assign best = same_type
+          assign type_col = c
+        endif
+      endfor
+    endif
     if type_col != blank and type_col.products.size > 0
       assign list = type_col.products
       assign exclude_own = true
+      if is_mug
+        assign exclude_own = false
+      endif
     endif
+  endif
+  if manual != blank and manual.size > 0
+    assign list = manual
+    assign exclude_own = false
+    assign piece_prefix = blank
+    assign own_forma = blank
   endif
   if list == blank or list.size == 0
     assign list = own_collection.products
     assign exclude_own = false
+  endif
+  assign skip_row = false
+  if is_mug and section.settings.source == 'same_collection' and manual == blank
+    assign skip_row = true
+  endif
+  comment
+    Decoración (cliente 2026-09-28): sólo «Te puede interesar», nunca «Completa tu mesa».
+  endcomment
+  assign decor_handles = product.collections | map: 'handle'
+  assign is_decor = false
+  if decor_handles contains 'decoracion'
+    assign is_decor = true
+  endif
+  if section.settings.source == 'same_collection' and is_decor
+    assign skip_row = true
+  endif
+  comment
+    Piezas de Decoración casi nunca tienen «la misma pieza en otro decorado», así
+    que la fila salía vacía (cliente 2026-10-01): si la primera pasada no pinta
+    nada, se rellena con otras piezas de Decoración.
+  endcomment
+  assign fallback_list = blank
+  if is_decor and section.settings.source == 'same_type' and manual == blank
+    assign fallback_list = collections['decoracion'].products
   endif
 
   # `recommendations.performed` is only true inside the /recommendations/products render,
@@ -111,6 +192,7 @@
     assign auto = true
   endif
 -%}
+{%- unless skip_row -%}
 <section class="product-related reveal" data-section-id="{{ section.id }}"{% if rec_url != blank %} data-recommendations="{{ rec_url | escape }}"{% endif %}>
   <div class="product-related__head">
     {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
@@ -125,6 +207,14 @@
         en «te puede interesar») dentro de un `limit` dejaba huecos en la fila.
       {%- endcomment -%}
       {%- assign shown = 0 -%}
+      {%- for pass in (1..2) -%}
+      {%- if pass == 2 -%}
+        {%- if shown > 0 or fallback_list == blank -%}{%- break -%}{%- endif -%}
+        {%- assign list = fallback_list -%}
+        {%- assign exclude_own = false -%}
+        {%- assign piece_prefix = blank -%}
+        {%- assign own_forma = blank -%}
+      {%- endif -%}
       {%- for product in list -%}
         {%- if shown >= limit -%}{%- break -%}{%- endif -%}
         {%- if product.id == current_id -%}{%- continue -%}{%- endif -%}
@@ -136,6 +226,7 @@
           {%- if in_own -%}{%- continue -%}{%- endif -%}
         {%- endif -%}
         {%- if exclude_own and product.tags contains 'fin-de-existencias' -%}{%- continue -%}{%- endif -%}
+        {%- if exclude_own and own_forma != blank and product.metafields.custom.forma.value != own_forma -%}{%- continue -%}{%- endif -%}
         {%- if piece_prefix != blank -%}
           {%- assign cand = product.title | handleize | append: '-' -%}
           {%- assign head = cand | slice: 0, piece_prefix.size | append: '-' -%}
@@ -159,6 +250,7 @@
           img1: r_img1, img_w: r_w, img_h: r_h,
           badge: r_new, data_price: product.price, data_new: r_new %}
       {%- endfor -%}
+      {%- endfor -%}
     {%- else -%}
       {%- for block in section.blocks -%}
         {%- if block.type == 'product' -%}
@@ -175,6 +267,7 @@
     {%- endif -%}
   </div>
 </section>
+{%- endunless -%}
 
 {% stylesheet %}
 .product-related { width: var(--content); margin: 0 auto; padding: 0 0 10vh; }
@@ -191,11 +284,17 @@
 /* v96 / v98 — mismas proporciones de tarjeta que el listado en móvil. */
 @media (max-width: 780px) {
   .product-related { width: calc(100vw - 28px) !important; }
-  .product-related .related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 28px 10px !important; }
+  /* Brief 2026-09-18: en móvil las dos filas son carruseles horizontales. */
+  .product-related .related-grid {
+    display: flex !important; gap: 10px !important; overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: none; margin: 0 -14px; padding: 0 14px; -webkit-overflow-scrolling: touch;
+  }
+  .product-related .related-grid::-webkit-scrollbar { display: none; }
+  .product-related .related-grid .product { flex: 0 0 min(58vw, 240px); scroll-snap-align: start; }
   .product-related .product-media { aspect-ratio: 4 / 5 !important; }
   .product-related .product-info { margin-top: 9px !important; gap: 4px 8px !important; font-size: 10px !important; }
   .product-related .product-info h3 { font-size: 10px !important; line-height: 1.32 !important; }
-  .product-related .product-info p { font-size: 8px !important; line-height: 1.35 !important; }
+  .product-related .product-info p { font-size: 9px !important; line-height: 1.35 !important; }
   .product-related .price { font-size: 10px !important; }
   .product-related .fav { width: 32px !important; height: 32px !important; right: 6px !important; top: 5px !important; }
 }

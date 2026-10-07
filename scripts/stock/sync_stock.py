@@ -58,7 +58,7 @@ INVENTARIOS = "Inventarios_NOBORRAR.xlsm"
 FIN_TAG = "fin-de-existencias"
 NAVISION_TAG = "navision"
 TOPE_CASO3 = 0      # 0 = sin tope (como CARTUJASYNC_DELIVERY3_MAX_QTY en PrestaShop); N = máx. unidades en fase 3
-MAX_AGE_H = 36      # Excel más viejo → aborta sin escribir (se actualiza a diario a media mañana)
+MAX_AGE_H = 36      # Excel más viejo → salta la pasada sin escribir ni fallar (fábrica no lo sube en fin de semana)
 DIAS = {1: 7, 2: 15, 3: 21}     # 21: lo que mostraba la tienda antigua y dicen las políticas («15–21»)
 
 
@@ -275,7 +275,8 @@ def main():
     print("Excel: %d referencias (+%d de Inventarios) · %d conjuntos · actualizado %s (hace %.1f h; Inventarios %s)"
           % (len(refs), extra, len(conjuntos), updated, age_h, updated_inv))
     if age_h > MAX_AGE_H:
-        sys.exit("✗ El Excel tiene más de %d h: no se toca nada." % MAX_AGE_H)
+        print("· El Excel tiene más de %d h (sin cambios en fábrica): no se toca nada." % MAX_AGE_H)
+        sys.exit(0)
 
     shop = Shopify(env)
     loc = next((l["id"] for l in shop.gql(Q_LOCATIONS)["locations"]["nodes"] if l["name"] == LOCATION), None)

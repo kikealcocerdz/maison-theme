@@ -1,0 +1,288 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "subir foto a «Plato Hondo Bellavista» (plato-hondo-bellavista.webp)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935583179093"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Plato Hondo Bellavista»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/79442b4c-1355-4275-b95b-d811e0be0892"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir foto a «Plato Pan Bellavista» (plato-pan-bellavista.webp)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935583932757"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Plato Pan Bellavista»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/fd4666b2-1071-469d-b0f1-7cce57a518be"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir foto a «Sopera N. Vistas Amarillo A. Stewart» (sopera-n-vistas-amarillo-a-stewart.webp)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935585734997"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Sopera N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/564a3824-d669-4cec-849e-b37ad03e514e"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir foto a «Sopera N. Vistas Azul A. Stewart» (sopera-n-vistas-azul-a-stewart.webp)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935587012949"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Sopera N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/902c9035-0579-44d0-8082-e223f122f7e8"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir foto a «Sopera Negro Vistas» (sopera-negro-vistas.webp)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935588061525"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Sopera Negro Vistas»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/b82179c1-5df0-4b4e-9ca5-113b89fcc954"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir foto a «Sopera Ochavado Blanco» (sopera-ochavado-blanco.webp)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935588815189"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Sopera Ochavado Blanco»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/e7997266-30f0-4cad-944a-8fd1939faf75"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir foto a «Taza Café Con Platillo N. Vistas Amarillo A. Stewart» (taza-cafe-con-platillo-n-vistas-amarillo-a-stewart.webp)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935590256981"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Café Con Platillo N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/77dd540b-1d66-4b17-843d-3f79a382cef5"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir foto a «Taza Café Con Platillo N. Vistas Azul A. Stewart» (taza-cafe-con-platillo-n-vistas-azul-a-stewart.webp)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935591305557"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Café Con Platillo N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/9b79e1ea-d951-4f9b-8628-fdf1fc1fea26"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir foto a «Taza Consomé Con Platillo N. Vistas Amarillo A. Stewart» (taza-consome-con-platillo-n-vistas-amarillo-a-stewart.webp)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935592354133"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Consomé Con Platillo N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/533ebee1-b964-43d1-97cf-0e199f5ea7d5"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir foto a «Taza Consomé Con Platillo N. Vistas Azul A. Stewart» (taza-consome-con-platillo-n-vistas-azul-a-stewart.webp)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935593599317"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Consomé Con Platillo N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/2347e2b0-5b60-41e3-a1d5-adec97669982"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir foto a «Taza Desayuno Con Platillo N. Vistas Amarillo A. Stewart» (taza-desayuno-con-platillo-n-vistas-amarillo-a-stewart.webp)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935595270485"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Desayuno Con Platillo N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/5bc87e4a-7be1-49b6-ba11-55711edac680"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir foto a «Taza Desayuno Con Platillo N. Vistas Azul A. Stewart» (taza-desayuno-con-platillo-n-vistas-azul-a-stewart.webp)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935596351829"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Desayuno Con Platillo N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/6ce07ba6-c6cb-44a0-a0e2-3678df3499ff"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir foto a «Taza Té Con Platillo N. Vistas Amarillo A. Stewart» (taza-te-con-platillo-n-vistas-amarillo-a-stewart.webp)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935597367637"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Té Con Platillo N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/1df3812b-1f1f-449e-9c0d-b8b2b4bf816b"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir foto a «Taza Té Con Platillo N. Vistas Azul A. Stewart» (taza-te-con-platillo-n-vistas-azul-a-stewart.webp)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935598940501"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Té Con Platillo N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/e9d3d292-b18b-44a6-bd48-1f3598a0c1dd"
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

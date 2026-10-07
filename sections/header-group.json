@@ -23,6 +23,14 @@
     "mega-menu": {
       "type": "mega-menu",
       "blocks": {
+        "col-2": {
+          "type": "column",
+          "settings": {
+            "heading": "Colecciones",
+            "menu": "",
+            "items": "Nuevo || /collections/fin-de-existencias\nAurora | Cap. 01 | /collections/aurora\nOchavada | Cap. 02 | /collections/ochavada\nDecoración | Cap. 03 | /collections/decoracion  | /collections/novedades\n!Fin de existencias | | /collections/fin-de-existencias"
+          }
+        },
         "col-1": {
           "type": "column",
           "settings": {
@@ -31,20 +39,12 @@
             "items": "Platos | | /collections/platos\nVajillas | | /collections/vajillas\nJuegos de té / café / desayuno | | /collections/juegos-te\nCafeteras y teteras | | /collections/cafeteras-teteras\nFuentes | | /collections/fuentes\nBandejas | | /collections/bandejas\nMugs | | /collections/mugs"
           }
         },
-        "col-2": {
-          "type": "column",
-          "settings": {
-            "heading": "Colecciones",
-            "menu": "",
-            "items": "Nuevo | | /collections/novedades\n!Fin de existencias | | /collections/fin-de-existencias\nAurora | Cap. 01 | /collections/aurora\nOchavada | Cap. 02 | /collections/ochavada\nDecoración | Cap. 03 | /collections/decoracion"
-          }
-        },
         "col-3": {
           "type": "column",
           "settings": {
             "heading": "Editorial",
             "menu": "",
-            "items": "Ambientes | | /pages/nuestras-mesas\nViste tu mesa | | /pages/viste-tu-mesa\nArtesanía | | /pages/artesania\nIdentifica tu sello | | /pages/identifica-tu-sello"
+            "items": "Quiénes somos | | /pages/quienes-somos\nViste tu mesa | | /pages/viste-tu-mesa\nAmbientes | | /pages/nuestras-mesas\nHeritage 1841 | | /pages/heritage-1841\nArtesanía | | /pages/artesania\nIdentifica tu sello | | /pages/identifica-tu-sello"
           }
         },
         "card-1": {
@@ -57,8 +57,8 @@
         }
       },
       "block_order": [
-        "col-1",
         "col-2",
+        "col-1",
         "col-3",
         "card-1"
       ],

@@ -188,18 +188,29 @@
   /* A pantalla completa: al escribir sale el teclado y, en un panel flotante, la
      mitad del mensaje quedaba tapada. `dvh` sigue a la barra del navegador. */
   .help-panel {
-    position: fixed; inset: 0; width: 100%; height: 100dvh;
+    position: fixed; inset: 0 0 auto; width: 100%; height: 100dvh;
     max-height: none; border: 0; animation: none;
   }
-  .help-body { flex: 1 1 auto; }
+  .help-body { flex: 1 1 auto; min-height: 0; } /* sin min-height el cuerpo no encoge y empuja la cabecera */
   .help-head { padding: calc(16px + env(safe-area-inset-top, 0px)) 18px 14px; }
+  /* 16px: por debajo iOS hace zoom al enfocar el campo. */
+  .help-field textarea { font-size: 16px; }
   .help-bubble.is-open .help-fab { display: none; }
+  /* 2026-10-05 · cliente: con el teclado abierto el panel no dejaba ver la X. Mientras
+     se escribe sólo quedan cabecera (con la X), mensaje y enviar. */
+  .help-bubble.is-typing .help-greeting,
+  .help-bubble.is-typing .help-faq,
+  .help-bubble.is-typing .help-legal { display: none; }
+  .help-head { flex: 0 0 auto; }
+  .help-close { width: 44px; height: 44px; margin: -12px -12px 0 0; display: grid; place-items: center; }
 }
 
-/* En la ficha de producto el botón de compra queda pegado abajo: la burbuja sube
+/* En la ficha de producto y en la cesta el botón de compra queda pegado abajo: la burbuja sube
    por encima para no solaparlo. */
 @media (max-width: 760px) {
   body.template-product .help-bubble { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+  /* Cesta: por encima de la barra fija «Total · Ir al pago» (~136px). */
+  body.template-cart:has(.cart-page__paybar) .help-bubble { bottom: calc(150px + env(safe-area-inset-bottom, 0px)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -263,12 +274,32 @@
     }
 
     // ── Panel ────────────────────────────────────────────────────────────────
+    // Móvil: el panel ocupa la pantalla, pero en iOS el teclado no encoge `100dvh`;
+    // la página sube y la cabecera con la X se salía por arriba. Mientras está
+    // abierto, el panel se ciñe al área visible (visualViewport).
+    var mobile = window.matchMedia('(max-width: 620px)');
+    var vv = window.visualViewport;
+    function fit() {
+      if (!vv || panel.hidden || !mobile.matches) { panel.style.height = ''; panel.style.top = ''; return; }
+      panel.style.height = vv.height + 'px';
+      panel.style.top = vv.offsetTop + 'px';
+    }
+    if (vv) { vv.addEventListener('resize', fit); vv.addEventListener('scroll', fit); }
+
     function setOpen(on) {
       root.classList.toggle('is-open', on);
+      if (!on) root.classList.remove('is-typing'); // no en blur: al reaparecer el saludo, «Enviar» se movía bajo el dedo
       panel.hidden = !on;
       fab.setAttribute('aria-expanded', on ? 'true' : 'false');
-      if (on && box) box.focus();
+      fit();
+      // En táctil no se enfoca el mensaje al abrir: sacaría el teclado de golpe.
+      if (on && box && !window.matchMedia('(pointer: coarse)').matches) box.focus();
+      if (on && closeBtn && window.matchMedia('(pointer: coarse)').matches) closeBtn.focus({ preventScroll: true });
       if (!on) fab.focus();
+    }
+
+    if (box) {
+      box.addEventListener('focus', function () { root.classList.add('is-typing'); fit(); });
     }
 
     fab.addEventListener('click', function () { setOpen(panel.hidden); });

@@ -122,8 +122,8 @@ MAIN = [
             ("Flor de Lis Rosa", (COL, "flor-de-lis-rosa"), []),
             ("Viejo Molino", (COL, "viejo-molino"), []),
             ("Bellavista", (COL, "bellavista"), []),
-            ("Aurora Blanco", (COL, "aurora-blanca"), []),
-            ("Ochavado Blanco", (COL, "ochavada-blanca"), []),
+            ("Aurora Blanca", (COL, "aurora-blanca"), []),
+            ("Ochavada Blanca", (COL, "ochavada-blanca"), []),
         ]),
         ("Contemporáneas", (COL, None), [
             ("Áurea", (COL, "aurea"), []),

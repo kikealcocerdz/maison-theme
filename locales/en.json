@@ -59,6 +59,9 @@
     "results_for_html": "{{ count }} results found for {{ terms }}"
   },
   "general": {
+    "favorites": {
+      "label": "Favourites"
+    },
     "account": {
       "label": "Account"
     },
@@ -112,6 +115,10 @@
     }
   },
   "sections": {
+    "hero": {
+      "unmute": "Turn sound on",
+      "mute": "Mute"
+    },
     "cart": {
       "empty": "Your cart is empty.",
       "subtotal": "Subtotal",
@@ -140,9 +147,13 @@
       "gift_remove": "Remove the gift wrapping",
       "removed": "You removed a piece from your cart.",
       "undo": "Undo",
+      "recover_last": "Bring back the last piece",
       "empty_body": "You have not reserved a piece yet. Our tables are composed slowly: begin with a collection.",
       "empty_cta": "See the collections",
-      "paybar_total": "Total · {{ count }} pieces",
+      "paybar_total": {
+        "one": "Total · 1 piece",
+        "other": "Total · {{ count }} pieces"
+      },
       "count_words": "no,One,Two,Three,Four,Five,Six,Seven,Eight,Nine,Ten,Eleven,Twelve",
       "count_line": {
         "one": "{{ n }} piece reserved",
@@ -163,6 +174,8 @@
       "filter_clear": "Clear",
       "filter_apply": "Apply filters",
       "filter_remove": "Remove {{ name }}",
+      "filter_collection": "Collection",
+      "filter_all": "All",
       "filter_shape": "Shape",
       "filter_shape_values": "Aurora|Ochavada|Imperio|Viena",
       "filter_color": "Colour",
@@ -187,6 +200,12 @@
       "quick_new": "New in",
       "quick_last_units": "Last units",
       "more_filters": "Filters",
+      "drawer_filter": "Filter this collection",
+      "drawer_filter_hint": "Stay here with fewer pieces.",
+      "drawer_explore": "Explore collections",
+      "drawer_explore_hint": "Takes you to another collection.",
+      "drawer_tab_explore": "Collections",
+      "siblings_all": "All collections",
       "filter_clear_all": "Clear all filters",
       "load_more": "Load more",
       "showing": "Showing {{ shown }} of {{ total }}",
@@ -246,9 +265,13 @@
       "pieces": "Pieces",
       "pieces_selector": "Select the number of pieces",
       "pack_intro": "Your set includes:",
-      "pack_hint": "Hover or select a piece to see it in detail.",
-      "pack_unit": { "one": "unit included", "other": "units included" },
-      "discover_collection": "Discover the collection"
+      "pack_hint": "Select a piece to see it in detail.",
+      "pack_unit": {
+        "one": "unit included",
+        "other": "units included"
+      },
+      "discover_collection": "Discover the collection",
+      "pack_link": "Your set includes →"
     },
     "stamps": {
       "seal": "Stamp",
@@ -282,5 +305,18 @@
       "send_form": "Go to the contact form",
       "privacy_html": "When you write to us we process your data to answer your enquiry. See the <a href=\"{{ url }}\">privacy policy</a>."
     }
+  },
+  "plazo": {
+    "days": "Delivery in {{ days }} business days",
+    "left": {
+      "one": "1 left at this lead time",
+      "other": "{{ count }} left at this lead time"
+    },
+    "made_to_order": "Finished at the factory for your order",
+    "unavailable": "Currently unavailable",
+    "cart_full": "Your bag already holds every available unit",
+    "order": "Estimated delivery for your order: up to {{ days }} business days",
+    "attribute": "{{ days }} business days",
+    "on_demand": "Made to order for you"
   }
 }

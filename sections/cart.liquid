@@ -79,9 +79,14 @@
     El aviso de «deshacer» vive fuera de la rama de la cesta llena: quitar la última
     pieza deja la cesta vacía y ahí es justo donde hace falta poder recuperarla.
   {%- endcomment -%}
-  <p class="cart-page__undo" data-cart-undo hidden>
+  {%- comment -%} En cesta vacía el deshacer es la acción principal, no un enlace discreto. {%- endcomment -%}
+  <p class="cart-page__undo{% if cart.item_count == 0 %} cart-page__undo--empty{% endif %}" data-cart-undo hidden>
     <span>{{ 'sections.cart.removed' | t }}</span>
-    <button class="cart-page__quiet-link" type="button" data-cart-undo-button>{{ 'sections.cart.undo' | t }}</button>
+    {%- if cart.item_count == 0 -%}
+      <button class="cart-page__cta" type="button" data-cart-undo-button>{{ 'sections.cart.recover_last' | t }}</button>
+    {%- else -%}
+      <button class="cart-page__quiet-link" type="button" data-cart-undo-button>{{ 'sections.cart.undo' | t }}</button>
+    {%- endif -%}
   </p>
 
   {%- if cart.item_count == 0 -%}
@@ -128,6 +133,7 @@
                 {%- if item.variant.sku != blank -%}
                   <p class="cart-page__ref">{{ item.variant.sku | escape }}</p>
                 {%- endif -%}
+                {%- render 'plazo-entrega', variant: item.variant, qty: item.quantity -%}
 
                 {%- if item.line_level_discount_allocations.size > 0 -%}
                   <ul class="cart-page__discounts">
@@ -234,6 +240,16 @@
         </div>
 
         {%- comment -%}
+          Plazo del pedido (el de la línea más lenta). Viaja al pedido como atributo
+          «Plazo de entrega» para que fábrica vea lo que se le prometió al cliente.
+        {%- endcomment -%}
+        {%- capture plazo_pedido -%}{% render 'plazo-pedido' %}{%- endcapture -%}
+        {%- if plazo_pedido != blank -%}
+          <p class="cart-page__plazo">{{ 'plazo.order' | t: days: plazo_pedido }}</p>
+          <input type="hidden" name="attributes[Plazo de entrega]" value="{{ 'plazo.attribute' | t: days: plazo_pedido }}">
+        {%- endif -%}
+
+        {%- comment -%}
           Los botones acelerados sólo existen cuando hay un método de pago rápido
           activo en el admin; hasta entonces manda el botón nativo.
         {%- endcomment -%}
@@ -274,7 +290,11 @@
 
       <div class="cart-page__paybar">
         <div class="cart-page__paybar-line">
-          <span class="cart-page__paybar-label">{{ 'sections.cart.paybar_total' | t: count: piece_count }}</span>
+          <span class="cart-page__paybar-label">
+            {{- 'sections.cart.paybar_total' | t: count: piece_count -}}
+            {%- comment -%} v101: el total suma el envío; sin esta línea parecía un error de precio. {%- endcomment -%}
+            {%- if shipping > 0 -%}<small class="cart-page__paybar-ship">{{ 'sections.cart.shipping' | t }} {{ shipping | money }}</small>{%- endif -%}
+          </span>
           <span class="cart-page__paybar-value">{{ order_total | money }}</span>
         </div>
         <button class="cart-page__cta" type="submit" name="checkout">{{ 'cart.checkout' | t }}</button>
@@ -515,6 +535,10 @@
   font-size: 12px;
   letter-spacing: .06em;
 }
+/* `display:flex` pisa el [hidden] del navegador: sin esto el aviso salía siempre. */
+.cart-page__undo[hidden] { display: none; }
+.cart-page__undo--empty { justify-content: center; margin: 40px 0 32px; font-size: 13px; }
+.cart-page__undo--empty .cart-page__cta { width: max-content; min-width: 260px; }
 .cart-page__line-actions {
   display: flex;
   align-items: center;
@@ -523,7 +547,7 @@
   padding-top: 22px;
 }
 .cart-page__quiet-link {
-  padding-bottom: 3px;
+  padding: 0 0 3px; /* v101: el padding lateral del <button> descuadraba «Actualizar» */
   border-bottom: .5px solid transparent;
   background: transparent;
   color: var(--muted);
@@ -655,6 +679,9 @@
 .cart-page__gift:hover .cart-page__gift-box { background: var(--ink-faint-20); }
 .cart-page__gift.is-on:hover .cart-page__gift-box { background: var(--ink); }
 
+.cart-page__info .plazo { margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 2px 8px; font-size: 12px; line-height: 1.45; color: var(--ink); }
+.cart-page__info .plazo small { color: var(--muted); font-size: 11px; }
+.cart-page__plazo { margin: 0 0 18px; font-size: 13px; line-height: 1.45; color: var(--ink); }
 .cart-page__note {
   margin-top: 24px;
   padding-top: 22px;
@@ -756,6 +783,7 @@
     letter-spacing: .22em;
     text-transform: uppercase;
   }
+  .cart-page__paybar-ship { display: block; margin-top: 5px; font-size: 10px; letter-spacing: .12em; }
   .cart-page__paybar-value {
     font-family: var(--serif);
     font-size: 24px;

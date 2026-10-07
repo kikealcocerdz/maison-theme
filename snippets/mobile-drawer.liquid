@@ -3,7 +3,7 @@
   una vista principal con las entradas de los dos menús y una vista por entrada con
   hijos. Dentro de cada vista: los hijos con foto (snippets/menu-card-image) como
   enlace-visual arriba y carrusel de tarjetas abajo; los hijos con rama, en acordeón
-  (el primero abierto). Una vista que sólo tiene tarjetas (Legado) las pinta a
+  (todos cerrados). Una vista que sólo tiene tarjetas (Legado) las pinta a
   cuadrícula: la primera a todo el ancho y el resto por parejas.
 
   Se pinta desde sections/header.liquid, fuera del <header> (su backdrop-filter
@@ -17,18 +17,45 @@
   <div class="mobile-head">
     <button type="button" class="mobile-back" data-drawer-back aria-label="{{ 'sections.header.back' | t }}" hidden>‹</button>
     <div class="mobile-head-title" data-drawer-title data-root-title="{{ 'sections.header.menu' | t }}">{{ 'sections.header.menu' | t }}</div>
-    <button type="button" data-drawer-close aria-label="{{ 'general.accessibility.close' | t }}">×</button>
+    <button type="button" data-drawer-close aria-label="{{ 'general.accessibility.close' | t }}">{% render 'icon-close' %}</button>
   </div>
 
   <section class="mobile-view is-active" data-mobile-view="main">
+    {%- comment -%}
+      Orden en móvil (cliente 2026-10-02): Colecciones primero y luego el resto del
+      menú izquierdo; «Quiénes somos» encabeza la lista editorial, encima de «Viste tu
+      mesa». Sólo aquí: el menú del Admin (y la cabecera de escritorio) no cambia.
+      forloop.index se mantiene, así cada botón abre su vista l1…ln.
+    {%- endcomment -%}
     <ul class="mobile-main-list">
-      {%- for link in menu.links -%}
-        {%- if link.links.size > 0 -%}
-          <li><button type="button" data-mobile-open="l{{ forloop.index }}">{{ link.title }}</button></li>
-        {%- else -%}
-          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-        {%- endif -%}
+      {%- for pasada in (1..2) -%}
+        {%- for link in menu.links -%}
+          {%- liquid
+            assign es_colecciones = false
+            if link.url == routes.collections_url
+              assign es_colecciones = true
+            endif
+          -%}
+          {%- if pasada == 1 and es_colecciones == false -%}{%- continue -%}{%- endif -%}
+          {%- if pasada == 2 and es_colecciones -%}{%- continue -%}{%- endif -%}
+          {%- if link.links.size > 0 -%}
+            <li><button type="button" data-mobile-open="l{{ forloop.index }}">{{ link.title }}</button></li>
+          {%- else -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endif -%}
+        {%- endfor -%}
       {%- endfor -%}
+    </ul>
+
+    {%- comment -%} Sin tarjeta Heritage con foto (cliente 2026-10-02): ya está en Legado. {%- endcomment -%}
+
+    <ul class="mobile-main-list mobile-main-list--editorial">
+      <li><a href="{{ pages['quienes-somos'].url | default: '/pages/quienes-somos' }}">{{ pages['quienes-somos'].title | default: 'Quiénes somos' }}</a></li>
+      {%- comment -%}
+        v101: en escritorio «Quiénes somos» vive en el pie y en la cabecera no hay
+        cuenta ni favoritos por debajo de 620px: desde el móvil no se llegaba a
+        ninguno. Títulos de la propia página (se traducen en Admin).
+      {%- endcomment -%}
       {%- for link in menu_right.links -%}
         {%- if link.links.size > 0 -%}
           <li><button type="button" data-mobile-open="r{{ forloop.index }}">{{ link.title }}</button></li>
@@ -43,6 +70,29 @@
         <li><a href="/pages/artesania">Artesanía</a></li>
       {%- endif -%}
     </ul>
+
+    <nav class="mobile-utility" aria-label="{{ 'general.account.label' | t }}">
+      <a href="{{ pages.contacto.url | default: '/pages/contacto' }}">{{ pages.contacto.title | default: 'Contacto' }}</a>
+      <a href="/pages/favoritos">{{ 'general.favorites.label' | t }}</a>
+      <a href="{{ routes.account_url }}">{{ 'general.account.label' | t }}</a>
+      {%- comment -%}
+        Idioma también en móvil (cliente 2026-10-02): en el pie quedaba demasiado abajo.
+        Mismo formulario nativo que el pie (footer-multicol): funciona sin JS.
+      {%- endcomment -%}
+      {%- if localization.available_languages.size > 1 -%}
+        {%- form 'localization', class: 'mobile-language' -%}
+          <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+          {%- for lang in localization.available_languages -%}
+            <button
+              class="mobile-language__option{% if lang.iso_code == localization.language.iso_code %} is-active{% endif %}"
+              type="submit" name="locale_code" value="{{ lang.iso_code }}" lang="{{ lang.iso_code }}"
+              {% if lang.iso_code == localization.language.iso_code %}aria-current="true"{% endif %}
+            >{{ lang.endonym_name | capitalize }}</button>
+            {%- unless forloop.last -%}<span class="mobile-language__sep" aria-hidden="true">·</span>{%- endunless -%}
+          {%- endfor -%}
+        {%- endform -%}
+      {%- endif -%}
+    </nav>
   </section>
 
   {%- assign sides = 'l,r' | split: ',' -%}
@@ -63,20 +113,33 @@
 
       <section class="mobile-view" data-mobile-view="{{ side }}{{ forloop.index }}" data-title="{{ link.title | escape }}">
         <div class="mobile-content">
+          {%- comment -%}
+            En móvil el botón del padre sólo abre esta vista: sin este enlace no se llegaba
+            a la página de Decoración, Café & Té o Colecciones (cliente 2026-10-02). Se
+            omite si un hijo ya apunta a la misma URL (Mesa → Vajilla, Legado → Heritage).
+          {%- endcomment -%}
+          {%- assign parent_dup = false -%}
+          {%- for child in link.links -%}{%- if child.url == link.url -%}{%- assign parent_dup = true -%}{%- endif -%}{%- endfor -%}
+          {%- if parent_dup == false and link.url != blank and link.url != '#' -%}
+            <a class="mobile-visual-link mobile-visual-link--parent" href="{{ link.url }}">{{ link.title }}</a>
+          {%- endif -%}
           {%- if branches > 0 -%}
+            {%- comment -%} «Fin de existencias» va la última, tras los desplegables (cliente 2026-10-06). {%- endcomment -%}
+            {%- assign fin_link = nil -%}
             {%- for child in link.links -%}
               {%- if child.links.size > 0 -%}{%- continue -%}{%- endif -%}
+              {%- if child.url contains 'fin-de-existencias' -%}{%- assign fin_link = child -%}{%- continue -%}{%- endif -%}
               {%- capture card_image -%}{% render 'menu-card-image', title: child.title %}{%- endcapture -%}
               {%- if card_image != blank -%}
                 <a class="mobile-visual-link" href="{{ child.url }}">{{ child.title }}</a>
               {%- endif -%}
             {%- endfor -%}
 
-            {%- assign first_branch = true -%}
             {%- for child in link.links -%}
               {%- if child.links.size == 0 -%}{%- continue -%}{%- endif -%}
-              <div class="mobile-accordion{% if first_branch %} is-open{% endif %}">
-                <button type="button" class="accordion-toggle" aria-expanded="{{ first_branch }}">{{ child.title }}</button>
+              {%- comment -%} Todos cerrados al abrir (cliente 2026-10-02: «Mesa → Plato» salía abierto). {%- endcomment -%}
+              <div class="mobile-accordion">
+                <button type="button" class="accordion-toggle" aria-expanded="false">{{ child.title }}</button>
                 <div class="accordion-body"><div class="accordion-inner">
                   <ul class="mobile-links">
                     {%- for grandchild in child.links -%}
@@ -85,9 +148,11 @@
                   </ul>
                 </div></div>
               </div>
-              {%- assign first_branch = false -%}
             {%- endfor -%}
 
+            {%- if fin_link -%}
+              <a class="mobile-visual-link" href="{{ fin_link.url }}">{{ fin_link.title }}</a>
+            {%- endif -%}
           {%- endif -%}
 
           {%- comment -%} Hijos sueltos sin foto: lista simple, para no perderlos. {%- endcomment -%}

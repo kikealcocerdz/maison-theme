@@ -8,7 +8,7 @@
         <img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ settings.logo_alt | default: shop.name | escape }}" width="88" height="auto" loading="lazy">
       {%- else -%}
         {%- comment -%} Demo logo (shown until a logo is uploaded in theme settings). {%- endcomment -%}
-        <img src="{{ 'logo-navy.png' | asset_url }}" alt="{{ shop.name | escape }}" width="119" height="124" loading="lazy">
+        <img src="{{ 'logo-navy.png' | asset_url }}" alt="{{ shop.name | escape }}" width="220" height="344" loading="lazy">
       {%- endif -%}
       {%- if section.settings.tagline != blank -%}
         <p>{{ section.settings.tagline | newline_to_br }}</p>
@@ -318,13 +318,13 @@
   .footer-logo { grid-column: 1 / -1; }
 
   .footer-grid h4 {
-    font-size: 8px;
+    font-size: 10px; /* v101: 8px → 10px */
     letter-spacing: 0.12em;
     margin-bottom: 12px;
   }
 
   .footer-grid > div:not(.footer-logo) a {
-    font-size: 9.5px;
+    font-size: 12px; /* v101: 9.5px → 12px */
     line-height: 1.35;
     margin-bottom: 9px;
     word-break: normal;
@@ -338,16 +338,35 @@
     gap: 7px;
   }
 
-  .footer-grid .footer-social a { width: 28px; height: 28px; }
-  .footer-grid .footer-social svg { width: 12.5px; height: 12.5px; }
+  .footer-grid .footer-social a { width: 40px; height: 40px; }
+  .footer-grid .footer-social svg { width: 14px; height: 14px; }
+
+  /* v101: objetivos táctiles. Enlaces de 11px de alto → ~27px sin cambiar el ritmo
+     visual (el margen pasa a padding); idioma y legales igual. */
+  .footer-grid > div:not(.footer-logo) a { margin-bottom: 0; padding: 8px 0; }
+  .footer-grid h4 { margin-bottom: 4px; }
+  .footer-language-option::before { content: ""; position: absolute; inset: -13px -4px; }
 }
 
 @media (max-width: 680px) {
-  .site-footer { padding: 62px 0 34px; }
+  /* v101: filas más separadas para que el área táctil (::before) no se pise. */
+  .footer-legal-links { row-gap: 20px; }
+  .footer-legal-links a::before { content: ""; position: absolute; inset: -10px -4px; }
+}
+
+@media (max-width: 680px) {
+  /* v101: el ancla de ayuda y la pestaña del 5% (fijos abajo) tapaban la última
+     fila de legales; en la ficha, además, la barra de compra. Hueco para ellos. */
+  .site-footer { padding: 34px 0 calc(96px + env(safe-area-inset-bottom, 0px)); }
+  /* Cliente 2026-10-02: sin logotipo en el pie del móvil y pie más bajo. */
+  .footer-logo img { display: none; }
+  .footer-logo p { font-size: 19px; }
+  .footer-grid { row-gap: 22px; }
+  body.template-product .site-footer { padding-bottom: calc(180px + env(safe-area-inset-bottom, 0px)); }
 
   .footer-bottom {
     width: calc(100vw - 32px);
-    margin-top: 42px;
+    margin-top: 28px;
     display: grid;
     gap: 12px;
   }
@@ -356,12 +375,12 @@
 
   .footer-legal-links {
     width: calc(100vw - 32px);
-    margin-top: 28px;
-    padding-top: 24px;
+    margin-top: 20px;
+    padding-top: 18px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px 18px;
-    font-size: 8px;
+    font-size: 10px; /* v101: 8px → 10px */
   }
 
   .footer-legal-links a { line-height: 1.5; }
@@ -369,7 +388,7 @@
 
 @media (max-width: 420px) {
   .footer-grid { gap: 24px 10px; }
-  .footer-grid > div:not(.footer-logo) a { font-size: 8.7px; }
+  .footer-grid > div:not(.footer-logo) a { font-size: 11px; } /* v101: 8.7px → 11px */
 }
 {% endstylesheet %}
 

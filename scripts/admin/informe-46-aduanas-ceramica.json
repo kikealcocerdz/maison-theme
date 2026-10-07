@@ -1,0 +1,201 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "ids",
+      "resultado": [
+        "gid://shopify/InventoryItem/56846365000021",
+        "gid://shopify/InventoryItem/56846365032789",
+        "gid://shopify/InventoryItem/56846365065557",
+        "gid://shopify/InventoryItem/56846365098325",
+        "gid://shopify/InventoryItem/56846365131093",
+        "gid://shopify/InventoryItem/56846365163861",
+        "gid://shopify/InventoryItem/56846365196629",
+        "gid://shopify/InventoryItem/56846365229397",
+        "gid://shopify/InventoryItem/56846365262165",
+        "gid://shopify/InventoryItem/56846365294933",
+        "gid://shopify/InventoryItem/56846365327701",
+        "gid://shopify/InventoryItem/56846365360469",
+        "gid://shopify/InventoryItem/56846365393237",
+        "gid://shopify/InventoryItem/56846365426005",
+        "gid://shopify/InventoryItem/56846365458773",
+        "gid://shopify/InventoryItem/56846365491541",
+        "gid://shopify/InventoryItem/56846365524309",
+        "gid://shopify/InventoryItem/56846365557077",
+        "gid://shopify/InventoryItem/56846365589845",
+        "gid://shopify/InventoryItem/56846365622613",
+        "gid://shopify/InventoryItem/56846365655381",
+        "gid://shopify/InventoryItem/56846365688149",
+        "gid://shopify/InventoryItem/56846365720917",
+        "gid://shopify/InventoryItem/56846365753685",
+        "gid://shopify/InventoryItem/56846365786453",
+        "gid://shopify/InventoryItem/56846365819221",
+        "gid://shopify/InventoryItem/56846365851989",
+        "gid://shopify/InventoryItem/56859391000917",
+        "gid://shopify/InventoryItem/56859398373717",
+        "gid://shopify/InventoryItem/56859399061845",
+        "gid://shopify/InventoryItem/56859399815509",
+        "gid://shopify/InventoryItem/56859400536405",
+        "gid://shopify/InventoryItem/56859401486677",
+        "gid://shopify/InventoryItem/56859402240341",
+        "gid://shopify/InventoryItem/56859403026773",
+        "gid://shopify/InventoryItem/56859404861781",
+        "gid://shopify/InventoryItem/56859405615445",
+        "gid://shopify/InventoryItem/56859406336341",
+        "gid://shopify/InventoryItem/56859407515989",
+        "gid://shopify/InventoryItem/56859408433493",
+        "gid://shopify/InventoryItem/56859409219925",
+        "gid://shopify/InventoryItem/56859410006357",
+        "gid://shopify/InventoryItem/56859410956629",
+        "gid://shopify/InventoryItem/56859411874133",
+        "gid://shopify/InventoryItem/56859412595029",
+        "gid://shopify/InventoryItem/56859413348693",
+        "gid://shopify/InventoryItem/56859414331733",
+        "gid://shopify/InventoryItem/56859415052629",
+        "gid://shopify/InventoryItem/56859415773525",
+        "gid://shopify/InventoryItem/56859416527189",
+        "gid://shopify/InventoryItem/56859417248085",
+        "gid://shopify/InventoryItem/56859417805141",
+        "gid://shopify/InventoryItem/56859418755413",
+        "gid://shopify/InventoryItem/56859419476309",
+        "gid://shopify/InventoryItem/56859420229973",
+        "gid://shopify/InventoryItem/56859421540693",
+        "gid://shopify/InventoryItem/56859422916949",
+        "gid://shopify/InventoryItem/56859423277397",
+        "gid://shopify/InventoryItem/56859424325973",
+        "gid://shopify/InventoryItem/56859425309013",
+        "gid://shopify/InventoryItem/56859426095445",
+        "gid://shopify/InventoryItem/56859427144021",
+        "gid://shopify/InventoryItem/56859453358421",
+        "gid://shopify/InventoryItem/56859454865749",
+        "gid://shopify/InventoryItem/56859455586645",
+        "gid://shopify/InventoryItem/56859456700757",
+        "gid://shopify/InventoryItem/56859457356117",
+        "gid://shopify/InventoryItem/56859458077013",
+        "gid://shopify/InventoryItem/56859461943637",
+        "gid://shopify/InventoryItem/56859462631765",
+        "gid://shopify/InventoryItem/56859463254357",
+        "gid://shopify/InventoryItem/56859463942485",
+        "gid://shopify/InventoryItem/56859464794453",
+        "gid://shopify/InventoryItem/56859465777493",
+        "gid://shopify/InventoryItem/56859466727765",
+        "gid://shopify/InventoryItem/56859467448661",
+        "gid://shopify/InventoryItem/56859468267861",
+        "gid://shopify/InventoryItem/56859469185365",
+        "gid://shopify/InventoryItem/56859470004565",
+        "gid://shopify/InventoryItem/56881445044565",
+        "gid://shopify/InventoryItem/56881445077333",
+        "gid://shopify/InventoryItem/56881445110101",
+        "gid://shopify/InventoryItem/56881445142869",
+        "gid://shopify/InventoryItem/56881445175637",
+        "gid://shopify/InventoryItem/56881445208405",
+        "gid://shopify/InventoryItem/56881445241173",
+        "gid://shopify/InventoryItem/56881445273941",
+        "gid://shopify/InventoryItem/56881445306709",
+        "gid://shopify/InventoryItem/56881445339477",
+        "gid://shopify/InventoryItem/56881445372245",
+        "gid://shopify/InventoryItem/56881445405013",
+        "gid://shopify/InventoryItem/56881469784405",
+        "gid://shopify/InventoryItem/56881469817173",
+        "gid://shopify/InventoryItem/56881473749333",
+        "gid://shopify/InventoryItem/56881476403541",
+        "gid://shopify/InventoryItem/56881583980885",
+        "gid://shopify/InventoryItem/56881584013653",
+        "gid://shopify/InventoryItem/56881584046421",
+        "gid://shopify/InventoryItem/56881584243029",
+        "gid://shopify/InventoryItem/56881930568021",
+        "gid://shopify/InventoryItem/56881930600789",
+        "gid://shopify/InventoryItem/56881930862933",
+        "gid://shopify/InventoryItem/56881930895701",
+        "gid://shopify/InventoryItem/56881931125077",
+        "gid://shopify/InventoryItem/56881931157845",
+        "gid://shopify/InventoryItem/56881931977045",
+        "gid://shopify/InventoryItem/56881932042581",
+        "gid://shopify/InventoryItem/56881932075349"
+      ]
+    },
+    {
+      "paso": "sin_tocar",
+      "resultado": [
+        {
+          "sku": null,
+          "titulo": "Envoltorio de regalo",
+          "tipo": "Servicio"
+        },
+        {
+          "sku": null,
+          "titulo": "Áurea",
+          "tipo": "Áurea"
+        },
+        {
+          "sku": null,
+          "titulo": "Lapicero",
+          "tipo": "Lapicero"
+        },
+        {
+          "sku": null,
+          "titulo": "Caja con 6 posavasos",
+          "tipo": "Posavasos"
+        },
+        {
+          "sku": null,
+          "titulo": "Hoja de parra",
+          "tipo": "Decoración"
+        },
+        {
+          "sku": null,
+          "titulo": "Bolsa",
+          "tipo": "Bolsa"
+        },
+        {
+          "sku": null,
+          "titulo": "Camiseta",
+          "tipo": "Camiseta"
+        },
+        {
+          "sku": null,
+          "titulo": "Libro",
+          "tipo": "Libro"
+        },
+        {
+          "sku": null,
+          "titulo": "Jabonera",
+          "tipo": "Jabonera"
+        },
+        {
+          "sku": null,
+          "titulo": "Algodonera",
+          "tipo": "Algodonera"
+        },
+        {
+          "sku": null,
+          "titulo": "Conjunto de baño",
+          "tipo": "Conjunto de baño"
+        },
+        {
+          "sku": null,
+          "titulo": "Vela aromática 202 Rosa",
+          "tipo": "Vela"
+        },
+        {
+          "sku": null,
+          "titulo": "Vela aromática Ceilán",
+          "tipo": "Vela"
+        },
+        {
+          "sku": null,
+          "titulo": "Vela aromática Edén",
+          "tipo": "Vela"
+        },
+        {
+          "sku": null,
+          "titulo": "Vela aromática Negro Vistas",
+          "tipo": "Vela"
+        }
+      ]
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

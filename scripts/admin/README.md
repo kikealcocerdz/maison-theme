@@ -45,6 +45,7 @@ El del menú guarda además el `main-menu` anterior entero, por si hay que recon
 | `03_menu_nuevo.py` | Reescribe `main-menu` y crea `menu-derecha` con el árbol del brief; salta las entradas sin destino y las lista | Reconstruir desde el informe |
 | `04_mug_con_letra.py` | Crea `mug-con-letra` en borrador con 27 variantes (A–Z + Ñ), precio, SKU y foto de cada letra | Borrar el producto |
 | `10_fin_existencias_productos.py` | Da de alta los 52 productos de «Fin de existencias» de la web antigua (`datos-10-fin-existencias.json`): activos, precio rebajado + anterior tachado, SKU/EAN, foto importada, metafields y etiqueta `fin-de-existencias` | Borrar los productos (van en el informe) |
+| `23_menu_colecciones_blancas.py` | Mueve Aurora Blanco y Ochavado Blanco de «Clásicas» al nuevo grupo «Blancas» de `main-menu` | Restaurar `main-menu` desde el bloque ANTES del informe |
 
 ## Lo que estos scripts NO resuelven
 
@@ -76,3 +77,11 @@ y `menu-derecha`; en **Collection grid**, el menú del lateral.
 - Cuál es exactamente el «Taza sin platillo» que hay que eliminar: las 21 tazas sin
   «con platillo» en el título son Consomé y Desayuno, y el menú nuevo las mantiene.
 - Las fotos IA: la principal del mug unificado y las segundas imágenes del hover.
+| `24_pagina_trabaja.py` | Página «Trabaja con nosotros» con plantilla `page.trabaja` | Borrar la página en Admin |
+| `25_reglas_colecciones.py` | Añade la grafía real (Flor de Lis, Ceilán, Juego Café/Té…) a las reglas de colección | Restaurar el ruleSet del informe |
+| `26_erratas_restantes.py` | Erratas restantes del informe 2026-09-18 (Oaxaca/Gastón, tetera, mugs, Flor de Lis, boles, Heritage 1841) | Restaurar desde el informe |
+| `28_fotos_principales.py` | Foto de «PNG productos la cartuja/» como primera foto de cada producto (no borra las que había) | `productDeleteMedia` de las creadas (ids en el informe) |
+| `29_fotos_gif_a_original.py` | Cambia las 38 fotos del lote 28 que eran GIF/PSD con extensión .webp por el JPG/PNG de `Originales/` | `productDeleteMedia` de las creadas (informe) |
+| `30_fotos_principales_falsos_iguales.py` | 14 productos donde el lote 28 tomó una foto antigua de agosto por la nueva (mismo nombre): sube la nueva y la pone primera | `productDeleteMedia` de las creadas (informe) |
+| `35_fotos_carpeta_primera.py` | Rehace 28+29+30 tras la revisión visual del 2026-09-28: foto de la carpeta como primera en los 347 productos que la tienen (salvo `azucarero-202-rosa`); sube las 104 que quitó el lote 31 | `productDeleteMedia` de las creadas (informe) |
+| `36_revertir_lote_35.py` | **No aplicado.** Por si Adrián vuelve a rechazarlas: borra solo las 104 fotos que subió el lote 35 y cada producto vuelve a su foto anterior | Relanzar el lote 35 |

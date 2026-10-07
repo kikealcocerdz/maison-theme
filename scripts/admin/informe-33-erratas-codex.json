@@ -1,0 +1,76 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "plato-postre-oaxaca-celeste-by-gaston-y-daniela ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387606335829",
+        "title": "Plato Postre Celeste by Gastón y Daniela"
+      }
+    },
+    {
+      "paso": "plato-postre-oaxaca-celeste-by-gaston-y-daniela: «Plato Postre Celeste by Gastón y Daniela» → «Plato de Postre Celeste by Gastón y Daniela»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11387606335829",
+          "title": "Plato de Postre Celeste by Gastón y Daniela"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "plato-postre-oaxaca-negro-by-gaston-y-daniela ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387606270293",
+        "title": "Plato Postre Negro by Gastón y Daniela"
+      }
+    },
+    {
+      "paso": "plato-postre-oaxaca-negro-by-gaston-y-daniela: «Plato Postre Negro by Gastón y Daniela» → «Plato de Postre Negro by Gastón y Daniela»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11387606270293",
+          "title": "Plato de Postre Negro by Gastón y Daniela"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "plato-postre-oaxaca-verde-by-gaston-y-daniela ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387606303061",
+        "title": "Plato Postre Verde by Gastón y Daniela"
+      }
+    },
+    {
+      "paso": "plato-postre-oaxaca-verde-by-gaston-y-daniela: «Plato Postre Verde by Gastón y Daniela» → «Plato de Postre Verde by Gastón y Daniela»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11387606303061",
+          "title": "Plato de Postre Verde by Gastón y Daniela"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "taza-te-con-platilloochavado-blanco ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387609252181",
+        "title": "Taza Té Con Platillo ochavado Blanco"
+      }
+    },
+    {
+      "paso": "taza-te-con-platilloochavado-blanco: «Taza Té Con Platillo ochavado Blanco» → «Taza Té Con Platillo Ochavado Blanco»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11387609252181",
+          "title": "Taza Té Con Platillo Ochavado Blanco"
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

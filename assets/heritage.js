@@ -53,7 +53,7 @@
         car3:[A('h08-nueva-carC1'),A('h08-nueva-carC2')]},
 
       {id:'renacer', group:4, label:'El Renacer', year:'2026', title:'EL\nRENACER', kicker:'Presente', heading:'Una casa histórica vuelve a ocupar su lugar', text:'El Renacer propone volver a mirar La Cartuja desde el presente: formas históricas, decorados icónicos y objetos de conversación reinterpretados para la vida contemporánea.', more:'La nueva etapa no parte de cero. Parte de un archivo, una ciudad, una colección histórica reconocida y una manera de entender la mesa como memoria viva.', cap:'Presente, colección y futuro', layout:'renacer',
-        a:'assets/mesa_bodegon_lujo_el_renacer.webp', b:'assets/collection-aurora.webp', c:'assets/gifts-decor-vertical.webp'}
+        a:'assets/mesa_bodegon_lujo_el_renacer.webp', b:'assets/collection-aurora.webp', c:'assets/renacer-bicicleta.webp'}
     ];
 
     var eras = milestones;
@@ -286,6 +286,14 @@
     }
 
     var progressBar = container.querySelector('.heritage-progress-bar');
+    // La navegación lateral se retira al llegar al cierre (antes seguía flotando
+    // sobre el final y el pie). Mismo fundido de salida que el título fantasma.
+    var rail = container.querySelector('.heritage-timeline');
+    var finaleEl = container.querySelector('.heritage-finale');
+    function railPresence() {
+      if (!finaleEl) return 1;
+      return 1 - ease(clamp((innerHeight * 1.02 - finaleEl.getBoundingClientRect().top) / (innerHeight * .45)));
+    }
     function update() {
       var max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
       if (progressBar) progressBar.style.width = (scrollY / max) * 100 + '%';
@@ -301,6 +309,11 @@
       });
       var st = state();
       setTheme(st.active, st.fade, ghostPresence());
+      if (rail) {
+        var rp = railPresence();
+        rail.style.opacity = rp;
+        rail.style.visibility = rp < .02 ? 'hidden' : '';
+      }
       tlLinks.forEach(function (a, i) { a.classList.toggle('active', i === st.timelineIndex); });
     }
     addEventListener('scroll', update, { passive: true });

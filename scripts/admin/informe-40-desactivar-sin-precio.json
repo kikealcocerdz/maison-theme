@@ -1,0 +1,18 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "borrador «Lapicero»",
+      "resultado": {
+        "product": {
+          "handle": "lapicero",
+          "status": "DRAFT"
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

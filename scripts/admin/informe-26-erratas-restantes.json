@@ -1,0 +1,282 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "oaxaca ANTES",
+      "resultado": {
+        "id": "gid://shopify/Collection/679848804693",
+        "title": "Oaxaca by Gastón y Daniela",
+        "descriptionHtml": "<p>Aves exóticas, vegetación tropical y color contemporáneo sobre tradición cerámica.</p>",
+        "ruleSet": {
+          "appliedDisjunctively": false,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Oaxaca"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "oaxaca: + regla «Gastón y Daniela»",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/679848804693",
+          "title": "Oaxaca by Gastón y Daniela"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "plato-hondo-oaxaca-rosa-by-gaston-y-daniela-rosa ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387604304213",
+        "title": "Plato Hondo Oaxaca Rosa by Gastón y Daniela Rosa"
+      }
+    },
+    {
+      "paso": "plato-hondo-oaxaca-rosa-by-gaston-y-daniela-rosa: «Plato Hondo Oaxaca Rosa by Gastón y Daniela Rosa» → «Plato Hondo Rosa by Gastón y Daniela»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11387604304213",
+          "title": "Plato Hondo Rosa by Gastón y Daniela"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "plato-llano-oaxaca-azul-by-gaston-y-daniela ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387605057877",
+        "title": "Plato Llano Oaxaca Azul by Gastón y Daniela"
+      }
+    },
+    {
+      "paso": "plato-llano-oaxaca-azul-by-gaston-y-daniela: «Plato Llano Oaxaca Azul by Gastón y Daniela» → «Plato Llano Azul by Gastón y Daniela»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11387605057877",
+          "title": "Plato Llano Azul by Gastón y Daniela"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "plato-llano-oaxaca-amarillo-by-gaston-y-daniela ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387605090645",
+        "title": "Plato Llano Oaxaca Amarillo by Gastón y Daniela"
+      }
+    },
+    {
+      "paso": "plato-llano-oaxaca-amarillo-by-gaston-y-daniela: «Plato Llano Oaxaca Amarillo by Gastón y Daniela» → «Plato Llano Amarillo by Gastón y Daniela»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11387605090645",
+          "title": "Plato Llano Amarillo by Gastón y Daniela"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "plato-postre-oaxaca-negro-by-gaston-y-daniela ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387606270293",
+        "title": "Plato Postre Oaxaca Negro by Gastón y Daniela"
+      }
+    },
+    {
+      "paso": "plato-postre-oaxaca-negro-by-gaston-y-daniela: «Plato Postre Oaxaca Negro by Gastón y Daniela» → «Plato Postre Negro by Gastón y Daniela»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11387606270293",
+          "title": "Plato Postre Negro by Gastón y Daniela"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "plato-postre-oaxaca-verde-by-gaston-y-daniela ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387606303061",
+        "title": "Plato Postre Oaxaca Verde by Gastón y Daniela"
+      }
+    },
+    {
+      "paso": "plato-postre-oaxaca-verde-by-gaston-y-daniela: «Plato Postre Oaxaca Verde by Gastón y Daniela» → «Plato Postre Verde by Gastón y Daniela»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11387606303061",
+          "title": "Plato Postre Verde by Gastón y Daniela"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "plato-postre-oaxaca-celeste-by-gaston-y-daniela ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387606335829",
+        "title": "Plato Postre Oaxaca Celeste by Gastón y Daniela"
+      }
+    },
+    {
+      "paso": "plato-postre-oaxaca-celeste-by-gaston-y-daniela: «Plato Postre Oaxaca Celeste by Gastón y Daniela» → «Plato Postre Celeste by Gastón y Daniela»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11387606335829",
+          "title": "Plato Postre Celeste by Gastón y Daniela"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "tetera-flor-lis-rosa ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11387609481557",
+        "title": "Tetera Flor Lis de Rosa"
+      }
+    },
+    {
+      "paso": "tetera-flor-lis-rosa: «Tetera Flor Lis de Rosa» → «Tetera Flor de Lis Rosa»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11387609481557",
+          "title": "Tetera Flor de Lis Rosa"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "mug-flor-lis-azul ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11609148260693",
+        "title": "Mug  Flor de Lis Rosa"
+      }
+    },
+    {
+      "paso": "mug-flor-lis-azul: «Mug  Flor de Lis Rosa» → «Mug Flor de Lis Azul»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148260693",
+          "title": "Mug Flor de Lis Azul"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "mug-flor-lis-rosa ANTES",
+      "resultado": {
+        "id": "gid://shopify/Product/11609148293461",
+        "title": "Mug  Flor de Lis Rosa"
+      }
+    },
+    {
+      "paso": "mug-flor-lis-rosa: «Mug  Flor de Lis Rosa» → «Mug Flor de Lis Rosa»",
+      "resultado": {
+        "product": {
+          "id": "gid://shopify/Product/11609148293461",
+          "title": "Mug Flor de Lis Rosa"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "flor-lis ANTES",
+      "resultado": {
+        "id": "gid://shopify/Collection/674484814165",
+        "title": "Flor Lis",
+        "descriptionHtml": "",
+        "ruleSet": {
+          "appliedDisjunctively": true,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Flor Lis"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Flor de Lis"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "flor-lis: título «Flor de Lis»",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/674484814165",
+          "title": "Flor de Lis"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "bowls ANTES",
+      "resultado": {
+        "id": "gid://shopify/Collection/674485010773",
+        "title": "Boles y cuencos",
+        "descriptionHtml": "<p>Selección de bowls de El Renacer, organizada por colección y pensada para construir una mesa completa desde una misma familia o combinando distintas épocas de La Cartuja.</p>",
+        "ruleSet": {
+          "appliedDisjunctively": true,
+          "rules": [
+            {
+              "column": "TYPE",
+              "relation": "EQUALS",
+              "condition": "Bol"
+            },
+            {
+              "column": "TYPE",
+              "relation": "EQUALS",
+              "condition": "Ensaladera"
+            },
+            {
+              "column": "TYPE",
+              "relation": "EQUALS",
+              "condition": "Sopera"
+            },
+            {
+              "column": "TYPE",
+              "relation": "EQUALS",
+              "condition": "Salsera"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "bowls: «bowls» → «boles» en la descripción",
+      "resultado": {
+        "collection": {
+          "id": "gid://shopify/Collection/674485010773",
+          "title": "Boles y cuencos"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "heritage ANTES",
+      "resultado": {
+        "id": "gid://shopify/Page/168197325141",
+        "title": "Heritage 1842"
+      }
+    },
+    {
+      "paso": "heritage-1841: título «Heritage 1841»",
+      "resultado": {
+        "page": {
+          "id": "gid://shopify/Page/168197325141",
+          "title": "Heritage 1841"
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}

@@ -1,0 +1,1092 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "quitar foto GIF/FAILED de «Azucarero 202 Rosa»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934936502613"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Azucarero 202 Rosa» (202-rosa-azucarero.png)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935422615893"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Azucarero 202 Rosa»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/fca3f0b5-942a-486b-8c98-d4e6afe379a8"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Azucarero Bellavista»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934937944405"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Azucarero Bellavista» (azucarero-bellavista.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935425335637"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Azucarero Bellavista»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/7d246e29-d47e-4823-aef4-0fd76a9f8eb2"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Azucarero Viejo Molino»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934943547733"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Azucarero Viejo Molino» (azucarero-viejo-molino.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935427563861"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Azucarero Viejo Molino»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/7cf13af0-0a7c-40e7-884a-29a1d92ef6f7"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Bajoplato 202 Rosa»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934944858453"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Bajoplato 202 Rosa» (bajoplato-202-rosa.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935429726549"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Bajoplato 202 Rosa»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/317c2573-2173-4740-9d45-cbd8f0db7983"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Bandeja Pastas 202 Rosa»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934951706965"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Bandeja Pastas 202 Rosa» (bandeja-pastas-202-rosa.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935433429333"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Bandeja Pastas 202 Rosa»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/7d9b3809-d11e-4f1e-b3f7-82988305cdef"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Bandeja Pastas Viejo Molino»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934957343061"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Bandeja Pastas Viejo Molino» (bandeja-pastas-viejo-molino.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935438442837"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Bandeja Pastas Viejo Molino»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/1f556c6a-eeac-4198-9dbf-7be0b0c1fa29"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Bol Grande 202 Rosa»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934963470677"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Bol Grande 202 Rosa» (bol-grande-202-rosa.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935441424725"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Bol Grande 202 Rosa»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/25cea9cc-0afc-49fa-a166-4364da4e7a6f"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Bol Grande Bellavista»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934964027733"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Bol Grande Bellavista» (bol-grande-bellavista.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935442932053"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Bol Grande Bellavista»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/7beb6abe-6800-45ec-a612-3619e0a6e063"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Bol Grande Viejo Molino»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934969532757"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Bol Grande Viejo Molino» (bol-grande-viejo-molino.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935444865365"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Bol Grande Viejo Molino»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/623e571b-abfd-4e84-a800-59017fa5da5a"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Bol Mini 202 Rosa»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934971072853"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Bol Mini 202 Rosa» (bol-mini-202-rosa.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935446176085"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Bol Mini 202 Rosa»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/01dc035d-2944-4ae7-874a-368673b6ccc4"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Bol Mini Bellavista»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934971990357"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Bol Mini Bellavista» (bol-mini-bellavista.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935447388501"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Bol Mini Bellavista»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/ac422784-5644-4e22-ab1f-5581622cc956"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Bol Mini Ceilán»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934972678485"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Bol Mini Ceilán» (bol-mini-ceilan.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935449190741"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Bol Mini Ceilán»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/fe9ce0b5-ab0e-457b-970d-85743050bba3"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Bol Mini Viejo Molino»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934976414037"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Bol Mini Viejo Molino» (bol-mini-viejo-molino.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935450534229"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Bol Mini Viejo Molino»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/980b284b-b8c2-4052-8671-6c721f29c882"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Bol Pequeño 202 Rosa»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934978249045"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Bol Pequeño 202 Rosa» (bol-pequeno-202-rosa.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935452205397"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Bol Pequeño 202 Rosa»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/6c27418f-84ff-4b42-a328-4cc5c4680003"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Bol Pequeño Bellavista»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934984474965"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Bol Pequeño Bellavista» (bol-pequeno-bellavista.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935453614421"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Bol Pequeño Bellavista»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/ccd9f4a0-7186-478a-81ad-76d3e57c64ac"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Bol Pequeño Ceilán»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934988898645"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Bol Pequeño Ceilán» (bol-pequeno-ceilan.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935454957909"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Bol Pequeño Ceilán»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/d10adb33-e5e0-4656-ac92-ca56d9076939"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Bol Pequeño Viejo Molino»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58934995386709"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Bol Pequeño Viejo Molino» (bol-pequeno-viejo-molino.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935456301397"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Bol Pequeño Viejo Molino»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/9b42ab05-d3ef-464e-a19a-61332ad0097a"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Bombonera 202 Rosa» (bombonera-202-rosa.png)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935457513813"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Bombonera 202 Rosa»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/bcf7a7a1-ece5-4d5a-8bf2-9c4a15fb6c55"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Cafetera 202 Rosa»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935001153877"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Cafetera 202 Rosa» (cafetera-202-rosa.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935459381589"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Cafetera 202 Rosa»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/f28d2762-d41b-43fb-9b02-ce65f9a0bb3b"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Cafetera Aurora Blanca»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935002136917"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Cafetera Aurora Blanca» (cafetera-aurora-blanca.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935460757845"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Cafetera Aurora Blanca»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/0d7cb14c-cab5-4089-bc95-88ce5b9d4f14"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Cafetera Bellavista»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935003316565"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Cafetera Bellavista» (cafetera-bellavista.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935462363477"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Cafetera Bellavista»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/db86ae76-2c6c-4335-b56a-cd3fac60ae82"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Cafetera Ceilán»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935004627285"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Cafetera Ceilán» (cafetera-ceilan.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935464100181"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Cafetera Ceilán»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/d11c71ec-b0e1-4143-b8dc-06ea095dbab5"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Cafetera N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935007150421"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Cafetera N. Vistas Amarillo A. Stewart» (cafetera-n-vistas-amarillo-a-stewart.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935465574741"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Cafetera N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/ea7dde09-efe7-4640-a55d-f5032c44b6de"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Cafetera N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935008067925"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Cafetera N. Vistas Azul A. Stewart» (cafetera-n-vistas-azul-a-stewart.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935467114837"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Cafetera N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/13fa3c8b-279d-4948-8bb6-35ab9783baa2"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Cafetera Viejo Molino»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935011180885"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Cafetera Viejo Molino» (cafetera-viejo-molino.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935468654933"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Cafetera Viejo Molino»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/a6b2c020-ff48-4f4c-bcf8-65e78af4a68b"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Champanera 202 Rosa» (champanera-202-rosa.png)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935471538517"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Champanera 202 Rosa»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/a9b21cd4-1031-4e98-8ba8-7a668d62777d"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Lechera N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935113220437"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Lechera N. Vistas Amarillo A. Stewart» (lechera-n-vistas-amarillo-a-stewart.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935472554325"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Lechera N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/05a181ce-a47d-465b-9378-644c0ffbb534"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Lechera N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935114367317"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Lechera N. Vistas Azul A. Stewart» (lechera-n-vistas-azul-a-stewart.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935474094421"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Lechera N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/9d0bce91-145d-452e-b3c9-dab1dc73e943"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Taza Consomé N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935335682389"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Taza Consomé N. Vistas Amarillo A. Stewart» (taza-consome-n-vistas-amarillo-a-stewart.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935475700053"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Consomé N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/a1bcd8e0-cade-4dba-9f38-d5dc4bbf9185"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Taza Consomé N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935337517397"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Taza Consomé N. Vistas Azul A. Stewart» (taza-consome-n-vistas-azul-a-stewart.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935477797205"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Consomé N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/3bc161a8-8e5b-4cc6-9135-836997b8790f"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Taza Consomé Ochavado Blanco»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935339942229"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Taza Consomé Ochavado Blanco» (taza-consome-ochavado-blanco.png)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935479238997"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Consomé Ochavado Blanco»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/bf47a758-2d95-4130-a046-486141b9f6c6"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Taza Desayuno N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935357833557"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Taza Desayuno N. Vistas Amarillo A. Stewart» (taza-desayuno-n-vistas-amarillo-a-stewart.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935480942933"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Desayuno N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/872f3e64-4bc7-4155-b2c0-72ee415a8824"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Taza Desayuno N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935359078741"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Taza Desayuno N. Vistas Azul A. Stewart» (taza-desayuno-n-vistas-azul-a-stewart.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935482548565"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Desayuno N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/81e8005c-d135-4153-8a4b-b000c718fa51"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Taza Desayuno Negro Vistas»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935360618837"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Taza Desayuno Negro Vistas» (taza-desayuno-negro-vistas.png)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935484154197"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Desayuno Negro Vistas»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/bc8601bb-1131-4298-a4f9-cbf8e6951f10"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Taza Té Con Platillo Negro Vistas»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935375823189"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Taza Té Con Platillo Negro Vistas» (taza-te-con-platillo-negro-vistas.png)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935486611797"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Té Con Platillo Negro Vistas»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/8bafea72-d1eb-49c2-9df6-80707b10a1cb"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Taza Té Con Platillo ochavado Blanco»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935379591509"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Taza Té Con Platillo ochavado Blanco» (taza-te-con-platilloochavado-blanco.png)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935488184661"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Taza Té Con Platillo ochavado Blanco»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/9f56d5c1-4ad0-4cf4-bb80-c9492633d3e5"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Tetera N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935390929237"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Tetera N. Vistas Amarillo A. Stewart» (tetera-n-vistas-amarillo-a-stewart.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935490052437"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Tetera N. Vistas Amarillo A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/0dce90f5-feea-4255-816a-e5b8e1667a75"
+        },
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "quitar foto GIF/FAILED de «Tetera N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935392895317"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "subir original a «Tetera N. Vistas Azul A. Stewart» (tetera-n-vistas-azul-a-stewart.jpg)",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/58935491985749"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "primera foto de «Tetera N. Vistas Azul A. Stewart»",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/119e8283-dd94-4469-9bea-9a0a39dc1b58"
+        },
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}
