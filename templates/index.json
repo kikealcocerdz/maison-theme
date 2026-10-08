@@ -14,15 +14,18 @@
       "settings": {
         "video": "",
         "demo_video": "hero-cartuja-audio.mp4",
-        "eyebrow": "La Cartuja de Sevilla-Pickman · 1841",
+        "eyebrow": "La Cartuja de Sevilla Pickman · 1841",
         "heading": "<p>Heritage Crafted for Modern Living</p>",
-        "subheading": "<p>La Cartuja de Sevilla presenta El Renacer: una colección que reúne memoria, oficio y mesa contemporánea desde 1841</p>"
+        "subheading": "<p>La Cartuja de Sevilla presenta El Renacer: una colección que reúne memoria, oficio y mesa contemporánea desde 1841</p>",
+        "video_sound": true,
+        "sound_label": "Sonido",
+        "light_frames": "12.8-22.4"
       }
     },
     "heritage_stamp": {
       "type": "heritage-stamp",
       "settings": {
-        "kicker": "La Cartuja de Sevilla-Pickman . 1841",
+        "kicker": "La Cartuja de Sevilla Pickman . 1841",
         "heading": "<p>La Colección Histórica del Museo Pickman, antigua fábrica de loza La Cartuja de Sevilla, fue declarada Bien de Interés Cultural por Decreto 158 el 21 de julio de 1998. </p>",
         "bg_number": "1841"
       }
@@ -37,7 +40,7 @@
             "aspect": "portrait",
             "show_price": true,
             "meta_line_override": "Aurora · 202 Rosa",
-            "demo_image": "aurora_202_plato.webp",
+            "demo_image": "",
             "demo_title": "",
             "demo_price": ""
           },
@@ -50,7 +53,7 @@
             "aspect": "portrait",
             "show_price": true,
             "meta_line_override": "Aurora · 202 Rosa",
-            "demo_image": "aurora_202_sopera.png",
+            "demo_image": "",
             "demo_title": "",
             "demo_price": ""
           },
@@ -63,7 +66,7 @@
             "aspect": "portrait",
             "show_price": true,
             "meta_line_override": "Aurora · 202 Rosa",
-            "demo_image": "aurora_202_cafetera.png",
+            "demo_image": "",
             "demo_title": "",
             "demo_price": ""
           },
@@ -76,20 +79,7 @@
             "aspect": "portrait",
             "show_price": true,
             "meta_line_override": "Aurora · Bellavista",
-            "demo_image": "bellavista_plato.png",
-            "demo_title": "",
-            "demo_price": ""
-          },
-          "blocks": {}
-        },
-        "e5": {
-          "type": "product-card",
-          "settings": {
-            "product": "fuente-red-bellavista",
-            "aspect": "portrait",
-            "show_price": true,
-            "meta_line_override": "Aurora · Bellavista",
-            "demo_image": "bellavista_fuente.png",
+            "demo_image": "",
             "demo_title": "",
             "demo_price": ""
           },
@@ -102,7 +92,20 @@
             "aspect": "portrait",
             "show_price": true,
             "meta_line_override": "Aurora · Bellavista",
-            "demo_image": "bellavista_sopera.png",
+            "demo_image": "",
+            "demo_title": "",
+            "demo_price": ""
+          },
+          "blocks": {}
+        },
+        "e5": {
+          "type": "product-card",
+          "settings": {
+            "product": "cafetera-bellavista",
+            "aspect": "portrait",
+            "show_price": true,
+            "meta_line_override": "Aurora · Bellavista",
+            "demo_image": "",
             "demo_title": "",
             "demo_price": ""
           },
@@ -115,7 +118,33 @@
             "aspect": "portrait",
             "show_price": true,
             "meta_line_override": "Ochavada · Negro Vistas",
-            "demo_image": "negro_vistas_plato.png",
+            "demo_image": "",
+            "demo_title": "",
+            "demo_price": ""
+          },
+          "blocks": {}
+        },
+        "product_card_txmeBq": {
+          "type": "product-card",
+          "settings": {
+            "product": "sopera-negro-vistas",
+            "aspect": "portrait",
+            "show_price": true,
+            "meta_line_override": "Ochavada · Negro Vistas",
+            "demo_image": "",
+            "demo_title": "",
+            "demo_price": ""
+          },
+          "blocks": {}
+        },
+        "product_card_FLCYRJ": {
+          "type": "product-card",
+          "settings": {
+            "product": "cafetera-negro-vistas",
+            "aspect": "portrait",
+            "show_price": true,
+            "meta_line_override": "Ochavada · Negro Vistas",
+            "demo_image": "",
             "demo_title": "",
             "demo_price": ""
           },
@@ -127,9 +156,11 @@
         "e2",
         "e3",
         "e4",
-        "e5",
         "e6",
-        "e7"
+        "e5",
+        "e7",
+        "product_card_txmeBq",
+        "product_card_FLCYRJ"
       ],
       "settings": {
         "eyebrow": "Selección de piezas icónicas",
@@ -205,6 +236,7 @@
         "eyebrow": "Primavera · Verano 2026",
         "heading": "El Renacer",
         "description": "<p>Una primera edición para volver a mirar La Cartuja desde el presente: formas históricas, decorados icónicos y objetos de conversación reinterpretados para la vida contemporánea</p>",
+        "image": "shopify://shop_images/El-renacer-web.webp",
         "link": "/collections/aurora",
         "overlay_label": "Ver colección completa",
         "spacing_bottom": 142
@@ -306,7 +338,7 @@
         "description": "<p>Una escena editorial construida alrededor de Oaxaca: color, naturaleza y piezas con carácter para vestir la mesa de una forma más libre y expresiva</p>",
         "cta_label": "Descubre nuestras mesas",
         "cta_link": "/pages/nuestras-mesas",
-        "cta2_label": "Aprende a vestir tu mesa",
+        "cta2_label": "Combina nuestras vajillas",
         "cta2_link": "/pages/viste-tu-mesa",
         "add_label": "Añadir pieza",
         "set_product": "",
