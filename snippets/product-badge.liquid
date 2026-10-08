@@ -8,7 +8,7 @@
   "Novedad" y "Set" salen sólo por etiqueta de producto (tags `novedad`/`new`
   y `set`); sin etiqueta no hay badge. La plantilla product.set no pinta "Set".
 
-    Agotado → -X% (compare_at_price) → Última unidad → Últimas unidades → Novedad → Éxito en ventas
+    Agotado → -X% (compare_at_price) → Última unidad → Últimas unidades (solo Fin de existencias) → Novedad → Éxito en ventas
     → Muy solicitado → Set
 
   Accepts:
@@ -28,15 +28,23 @@
     assign qty = variant.inventory_quantity
   endif
   assign low_stock = 5
+  # 2026-10-08: «Última(s) unidad(es)» solo en Fin de existencias; el resto se sigue fabricando.
+  assign finite = false
+  for c in product.collections
+    if c.handle == 'fin-de-existencias'
+      assign finite = true
+      break
+    endif
+  endfor
 -%}
 {%- if product != blank and product.available == false -%}
   <span class="badge badge--out">{{ 'sections.collection.badge_sold_out' | t }}</span>
 {%- elsif product != blank and product.compare_at_price > product.price -%}
   {%- assign pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
   <span class="badge badge--sale">-{{ pct }}%</span>
-{%- elsif tracked and qty == 1 -%}
+{%- elsif finite and tracked and qty == 1 -%}
   <span class="badge badge--stock">{{ 'sections.collection.badge_last_unit' | t }}</span>
-{%- elsif tracked and qty > 1 and qty <= low_stock -%}
+{%- elsif finite and tracked and qty > 1 and qty <= low_stock -%}
   <span class="badge badge--stock">{{ 'sections.collection.badge_few_left' | t }}</span>
 {%- elsif badge_new -%}
   <span class="badge badge--new">{{ 'sections.collection.badge_new' | t }}</span>
