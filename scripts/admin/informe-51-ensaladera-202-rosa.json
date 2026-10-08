@@ -1,0 +1,87 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "antes",
+      "resultado": {
+        "title": "Ensaladera 202 Rosa",
+        "media": {
+          "nodes": [
+            {
+              "id": "gid://shopify/MediaImage/58935015047509",
+              "alt": "Ensaladera 202 Rosa",
+              "status": "READY",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/001_202_Rosa_ensaladera_202_rosa.webp?v=1790143050"
+              }
+            },
+            {
+              "id": "gid://shopify/MediaImage/59195373093205",
+              "alt": "Ensaladera 202 Rosa",
+              "status": "READY",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/ensaladera-202-rosa-02.webp?v=1790876979"
+              }
+            },
+            {
+              "id": "gid://shopify/MediaImage/58003796197717",
+              "alt": "202 Rosa — La Cartuja de Sevilla",
+              "status": "READY",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/202-rosa-068.webp?v=1787153428"
+              }
+            },
+            {
+              "id": "gid://shopify/MediaImage/58003796230485",
+              "alt": "202 Rosa — La Cartuja de Sevilla",
+              "status": "READY",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/1051/4641/7493/files/202-rosa-069.webp?v=1787153428"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "crear 3 fotos",
+      "resultado": {
+        "media": [
+          {
+            "id": "gid://shopify/MediaImage/59438148387157"
+          },
+          {
+            "id": "gid://shopify/MediaImage/59438148419925"
+          },
+          {
+            "id": "gid://shopify/MediaImage/59438148452693"
+          }
+        ],
+        "mediaUserErrors": []
+      }
+    },
+    {
+      "paso": "quitar jabonera",
+      "resultado": {
+        "deletedMediaIds": [
+          "gid://shopify/MediaImage/58935015047509",
+          "gid://shopify/MediaImage/58003796197717",
+          "gid://shopify/MediaImage/58003796230485"
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "orden",
+      "resultado": {
+        "job": {
+          "id": "gid://shopify/Job/fe1a3ca5-26dd-427e-9dc3-340ab3b671f5"
+        },
+        "mediaUserErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}
