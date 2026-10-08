@@ -1,0 +1,116 @@
+{
+  "modo": "aplicado",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "antes",
+      "resultado": {
+        "id": "gid://shopify/Product/11609274417493",
+        "title": "Vela aromática 202 Rosa",
+        "variants": {
+          "nodes": [
+            {
+              "id": "gid://shopify/ProductVariant/54967613358421",
+              "price": "25.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "Vela aromática 202 Rosa",
+      "resultado": {
+        "productVariants": [
+          {
+            "id": "gid://shopify/ProductVariant/54967613358421",
+            "price": "33.95"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "antes",
+      "resultado": {
+        "id": "gid://shopify/Product/11609274974549",
+        "title": "Vela aromática Ceilán",
+        "variants": {
+          "nodes": [
+            {
+              "id": "gid://shopify/ProductVariant/54967614996821",
+              "price": "25.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "Vela aromática Ceilán",
+      "resultado": {
+        "productVariants": [
+          {
+            "id": "gid://shopify/ProductVariant/54967614996821",
+            "price": "33.95"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "antes",
+      "resultado": {
+        "id": "gid://shopify/Product/11609275400533",
+        "title": "Vela aromática Edén",
+        "variants": {
+          "nodes": [
+            {
+              "id": "gid://shopify/ProductVariant/54967616045397",
+              "price": "25.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "Vela aromática Edén",
+      "resultado": {
+        "productVariants": [
+          {
+            "id": "gid://shopify/ProductVariant/54967616045397",
+            "price": "33.95"
+          }
+        ],
+        "userErrors": []
+      }
+    },
+    {
+      "paso": "antes",
+      "resultado": {
+        "id": "gid://shopify/Product/11609275892053",
+        "title": "Vela aromática Negro Vistas",
+        "variants": {
+          "nodes": [
+            {
+              "id": "gid://shopify/ProductVariant/54967617061205",
+              "price": "25.95"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "Vela aromática Negro Vistas",
+      "resultado": {
+        "productVariants": [
+          {
+            "id": "gid://shopify/ProductVariant/54967617061205",
+            "price": "33.95"
+          }
+        ],
+        "userErrors": []
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}
