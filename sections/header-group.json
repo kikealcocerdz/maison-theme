@@ -28,7 +28,7 @@
           "settings": {
             "heading": "Colecciones",
             "menu": "",
-            "items": "Nuevo || /collections/fin-de-existencias\nAurora | Cap. 01 | /collections/aurora\nOchavada | Cap. 02 | /collections/ochavada\nDecoración | Cap. 03 | /collections/decoracion  | /collections/novedades\n!Fin de existencias | | /collections/fin-de-existencias"
+            "items": "Nuevo || /collections/novedades\nAurora | Cap. 01 | /collections/aurora\nOchavada | Cap. 02 | /collections/ochavada\nDecoración | Cap. 03 | /collections/decoracion  | /collections/novedades\nFin de existencias | | /collections/fin-de-existencias"
           }
         },
         "col-1": {
