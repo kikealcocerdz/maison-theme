@@ -1,0 +1,71 @@
+{
+  "modo": "ensayo",
+  "tienda": "la-cartuja-de-sevilla.myshopify.com",
+  "ejecutado": [
+    {
+      "paso": "antes ochavada",
+      "resultado": {
+        "id": "gid://shopify/Collection/674484683093",
+        "productsCount": {
+          "count": 139
+        },
+        "ruleSet": {
+          "appliedDisjunctively": true,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Ochavado"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Negro Vistas"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Stewart"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Ochavada"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "paso": "antes ochavada-blanca",
+      "resultado": {
+        "id": "gid://shopify/Collection/679848935765",
+        "productsCount": {
+          "count": 28
+        },
+        "ruleSet": {
+          "appliedDisjunctively": true,
+          "rules": [
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Ochavado Blanco"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Ochavada Blanca"
+            },
+            {
+              "column": "TITLE",
+              "relation": "CONTAINS",
+              "condition": "Ochavada Blanco"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "planificado": [],
+  "fallido": []
+}
