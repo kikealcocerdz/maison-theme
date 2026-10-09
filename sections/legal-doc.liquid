@@ -57,6 +57,7 @@
         {%- when 'cookies' -%}{% render 'legal-cookies', part: 'index' %}
         {%- when 'terminos' -%}{% render 'legal-terminos', part: 'index' %}
         {%- when 'envios' -%}{% render 'legal-envios', part: 'index' %}
+        {%- when 'faq' -%}{% render 'legal-faq', part: 'index' %}
       {%- endcase -%}
       {%- if section.settings.source_note != blank -%}
         <div class="legal-source">{{ section.settings.source_note }}</div>
@@ -73,6 +74,7 @@
         {%- when 'cookies' -%}{% render 'legal-cookies', part: 'body' %}
         {%- when 'terminos' -%}{% render 'legal-terminos', part: 'body' %}
         {%- when 'envios' -%}{% render 'legal-envios', part: 'body' %}
+        {%- when 'faq' -%}{% render 'legal-faq', part: 'body' %}
       {%- endcase -%}
     </article>
   </div>
@@ -238,7 +240,8 @@
         { "value": "privacidad", "label": "Política de privacidad" },
         { "value": "cookies", "label": "Política de cookies" },
         { "value": "terminos", "label": "Términos y condiciones" },
-        { "value": "envios", "label": "Envíos y devoluciones" }
+        { "value": "envios", "label": "Envíos y devoluciones" },
+        { "value": "faq", "label": "Preguntas frecuentes" }
       ],
       "default": "privacidad"
     },

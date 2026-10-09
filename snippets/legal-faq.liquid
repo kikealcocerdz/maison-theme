@@ -1,0 +1,61 @@
+{%- comment -%}
+  Preguntas frecuentes. Textos de Isabel (correo a Clearis, 17/06/2026, reenviado el 09/10) + plazos/envío/devolución
+  de la web. Pendiente: «¿Hay venta directa en la fábrica?» — su texto dice que no hay tienda abierta y el pie dice
+  que sí; se añade cuando La Cartuja lo confirme.
+{%- endcomment -%}
+{%- if part == 'index' -%}
+  <div class="legal-index">
+    <a href="#compra">Compra y personalización</a>
+    <a href="#pedidos">Pedidos y envíos</a>
+    <a href="#roturas">Piezas dañadas</a>
+    <a href="#cuidado">Uso y cuidado</a>
+  </div>
+{%- else -%}
+  <section class="legal-section reveal" id="compra">
+    <div class="legal-number">01</div>
+    <h2>Compra y personalización</h2>
+    <h3>¿Se pueden adquirir piezas sueltas?</h3>
+    <p>Sí. La mayoría de las piezas de nuestro catálogo se pueden comprar de forma unitaria. Excepción: las tapas y cuerpos de piezas, así como las tazas de té y café con sus platillos, solo se venden completas.</p>
+    <h3>¿Es posible personalizar las piezas?</h3>
+    <p>Sí, ofrecemos servicio de personalización. Si estás interesado, escríbenos a <a href="mailto:info@lacartujadesevilla.com">info@lacartujadesevilla.com</a> o llámanos al <a href="tel:+34955518974">(+34) 955 518 974</a> y nuestro equipo comercial te preparará un presupuesto a medida.</p>
+  </section>
+  <section class="legal-section reveal" id="pedidos">
+    <div class="legal-number">02</div>
+    <h2>Pedidos y envíos</h2>
+    <h3>¿Cuánto tarda mi pedido?</h3>
+    <p>Si la pieza está en stock, <strong>7 días hábiles</strong>. Si está en producción, <strong>entre 15 y 21 días hábiles</strong>, desde la confirmación del pedido. Al tratarse de piezas artesanales, cada pedido requiere un tiempo de elaboración.</p>
+    <h3>¿Cuánto cuesta el envío?</h3>
+    <p>En la Península es gratuito a partir de 150 € y cuesta 6,99 € por debajo. Para Baleares, Canarias, Ceuta, Melilla y envíos internacionales se calcula en el carrito según el destino. Consulta todos los detalles en <a href="{{ routes.root_url }}pages/envios-devoluciones#envios">Envíos</a>.</p>
+    <h3>¿Puedo devolver o cambiar una pieza?</h3>
+    <p>Dispones de 14 días naturales desde la recepción del pedido. Escríbenos con el número de pedido y las piezas, y te confirmamos los pasos. Los pedidos internacionales son venta final. Más información en <a href="{{ routes.root_url }}pages/envios-devoluciones#devoluciones">Cambios y devoluciones</a>.</p>
+  </section>
+  <section class="legal-section reveal" id="roturas">
+    <div class="legal-number">03</div>
+    <h2>¿Qué debo hacer si recibo alguna pieza rota o dañada?</h2>
+    <p>Si un artículo llega dañado, lo reemplazaremos sin coste alguno para ti. Para procesar tu reclamación, necesitamos que nos envíes tres fotografías dentro de las <strong>48 horas</strong> siguientes a la entrega:</p>
+    <ul>
+      <li>La caja exterior, mostrando cualquier daño visible en el embalaje.</li>
+      <li>El embalaje interior tal como llegó, antes de retirar cualquier material.</li>
+      <li>La pieza rota o dañada, mostrando claramente el daño.</li>
+    </ul>
+    <h3>Importante</h3>
+    <ul>
+      <li>No deseches el embalaje original antes de tomar las fotografías.</li>
+      <li>Las imágenes nos permiten evaluar los daños, presentar la reclamación ante la empresa de transporte y enviarte el reemplazo lo antes posible.</li>
+      <li>No se procesarán reclamaciones presentadas sin las tres fotografías o fuera del plazo de 48 horas.</li>
+    </ul>
+    <p>Una vez verificadas las fotografías con nuestros registros de envío, te enviaremos la pieza de reemplazo en un plazo de 7 a 15 días hábiles.</p>
+  </section>
+  <section class="legal-section reveal" id="cuidado">
+    <div class="legal-number">04</div>
+    <h2>Uso y cuidado</h2>
+    <h3>¿Se pueden lavar las piezas en lavavajillas?</h3>
+    <p>Sí, todas nuestras piezas son aptas para lavavajillas. Para preservar su belleza durante más tiempo, te recomendamos utilizar un programa delicado o corto y evitar detergentes agresivos. De esta forma, tu vajilla mantendrá el brillo y los colores como el primer día.</p>
+    <h3>¿Se pueden usar las piezas en el microondas?</h3>
+    <p>Sí, la mayoría de nuestras piezas son aptas para microondas. Excepción: no se deben introducir en el microondas las piezas que lleven bordes o decoraciones con oro (metal), ya que podrían dañarse o producir chispas.</p>
+    <h3>¿Se pueden introducir las piezas en el horno convencional?</h3>
+    <p>No recomendamos el uso de nuestras piezas en horno convencional. Están diseñadas principalmente para mesa y servicio, no para cocción o calentamiento prolongado a altas temperaturas.</p>
+    <h3>¿Las piezas son resistentes al choque térmico?</h3>
+    <p>Nuestras piezas de loza fina de alta calidad no son resistentes al choque térmico. Aunque es poco frecuente, los cambios bruscos de temperatura (por ejemplo, pasar de caliente a frío o viceversa) pueden provocar fisuras o craquelado en el esmalte. Recomendación: evita colocar piezas calientes directamente sobre superficies frías o introducirlas en agua fría.</p>
+  </section>
+{%- endif -%}

@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main": {
+      "type": "legal-doc",
+      "settings": {
+        "doc": "faq",
+        "kicker": "Atención al cliente · La Cartuja de Sevilla",
+        "title": "Preguntas frecuentes",
+        "intro": "<p>Respuestas a las dudas más habituales sobre nuestras piezas, pedidos y cuidados</p>",
+        "next_label": "Envíos y devoluciones",
+        "next_url": "/pages/envios-devoluciones"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
